@@ -1,6 +1,33 @@
 <?php
 
+use App\models\Adab;
+use App\models\Amaken;
+use App\models\Hotel;
+use App\models\Majara;
+use App\models\Restaurant;
 use Illuminate\Support\Facades\URL;
+
+function getMessages() {
+    return [
+
+        'firstName.required' => 'لطفا نام خود را وارد نمایید',
+        'lastName.required' => 'لطفا نام خانوادگی خود را وارد نمایید',
+        'email.required' => 'لطفا ایمیل مورد نظر خود را وارد نمایید',
+        'phone.required' => 'لطفا شماره همراه خود را وارد نمایید',
+        'username.required' => 'لطفا نام کاربری مورد نظر خود را وارد نمایید',
+        'password.require' => 'لطفا رمزعبور خود را وارد نمایید',
+        'confirm_password.required' => 'لطفا تکرار رمزعبور خود را وارد نمایید',
+
+        'username.unique' => 'نام کاربری مورد نظر در سامانه موجود است',
+        'phone.unique' => 'شماره همراه مورد نظر در سامانه موجود است',
+        'email.unique' => 'ایمیل مورد نظر در سامانه موجود است',
+
+        'username.min' => 'حداقل طول مورد نیاز برای نام کاربری 8 می باشد',
+        'password.min' => 'حداقل طول مورد نیاز برای رمزعبور 8 می باشد',
+        'phone.min' => 'شماره همراه مورد نظر معتبر نمی باشد',
+        'email.min' => 'ایمیل مورد نظر معتبر نمی باشد',
+    ];
+}
 
 function persianNumber($i) {
 
@@ -12,13 +39,69 @@ function persianNumber($i) {
 function getValueInfo($key) {
 
     $values = [
-        "adminLevel" => 1, 'hotel' => 4, 'amaken' => 1, 'majara' => 6, 'adab' => 8, 'restaurant' => 3,
+        "superAdminLevel" => 1, 'adminLevel' => 2, 'userLevel' => 0,
+        'hotel' => 4, 'amaken' => 1, 'majara' => 6, 'adab' => 8, 'restaurant' => 3,
         'hotelMode' => 1, 'aparteman' => 2, 'mehmansara' => 3, 'vila' => 4, 'motel' => 5, 'tafrihi' => 6, 'pansion' => 7,
         'restaurantMode' => 1, 'fastfood' => 2,
-        'bom' => 8
+        'bom' => 8,
+        '5_min' => 1, '10_min' => 2, '15_min' => 3, '30_min' => 4, 'hour' => 5, 'day' => 6, 'week' => 7, 'month' => 8
     ];
 
     return $values[$key];
+
+}
+
+function getPlaceAndFolderName($kindPlaceId, $placeId) {
+
+    switch ($kindPlaceId) {
+        case getValueInfo('hotel'):
+        default:
+            $place = Hotel::whereId($placeId);
+            $folderName = "hotels";
+            break;
+        case getValueInfo('amaken'):
+            $place = Amaken::whereId($placeId);
+            $folderName = "amaken";
+            break;
+        case getValueInfo('restaurant'):
+            $place = Restaurant::whereId($placeId);
+            $folderName = "restaurant";
+            break;
+        case getValueInfo('majara'):
+            $place = Majara::whereId($placeId);
+            $folderName = "majara";
+            break;
+        case getValueInfo('adab'):
+            $place = Adab::whereId($placeId);
+            $folderName = "adab";
+            break;
+    }
+
+    return [$place, $folderName];
+
+}
+
+function getFolderName($kindPlaceId) {
+
+    $folderName = "tmp";
+
+    switch ($kindPlaceId) {
+
+        case getValueInfo('hotel'):
+            $folderName = "hotels";
+            break;
+        case getValueInfo('majara'):
+            $folderName = "majara";
+            break;
+        case getValueInfo('amaken'):
+            $folderName = "amaken";
+            break;
+        case getValueInfo('restaurant'):
+            $folderName = "restaurant";
+            break;
+    }
+
+    return $folderName;
 
 }
 

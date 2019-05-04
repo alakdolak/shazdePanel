@@ -47,7 +47,19 @@
             newElement += '">';
             newElement += '<label>';
             newElement += '<span>' + items[i].label + '</span>';
-            newElement += '<input type="' + items[i].type +'" name="' + items[i].name + '" value="'+ items[i].value +'" maxlength="40" required>';
+            if(items[i].type != "select")
+                newElement += '<input type="' + items[i].type +'" name="' + items[i].name + '" value="'+ items[i].value +'" maxlength="100" required>';
+            else {
+                newElement += '<select name="' + items[i].name + '">';
+                var options = JSON.parse(items[i].options);
+                for(j = 0; j < options.length; j++) {
+                    if(options[j].name == items[i].value)
+                        newElement += '<option selected value="' + options[j].id + '">' + options[j].name + '</option>';
+                    else
+                        newElement += '<option value="' + options[j].id + '">' + options[j].name + '</option>';
+                }
+                newElement += '</select>';
+            }
             newElement += '</label>';
             newElement += '</div>';
         }

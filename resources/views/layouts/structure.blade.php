@@ -130,6 +130,8 @@
                                     <a href="{{route('choosePlace', ['mode' => 'alt'])}}" class="dropdown-item">تصاویر و alt آنها</a>
                                     <a href="{{route('chooseCity', ['mode' => 'seo'])}}" class="dropdown-item">سئو صفحات</a>
                                     <a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
+                                    <a href="{{route('lastActivities')}}" class="dropdown-item">فعالیت های اخیر</a>
+                                    <a href="{{route('posts')}}" class="dropdown-item">مدیریت پست ها</a>
                                 </div>
                             </li>
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-flask"></i> <span class="mini-dn">مدال ها</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
@@ -142,15 +144,15 @@
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('determineRadius')}}" class="dropdown-item">تعیین شعاع مکان های نزدیک</a>
                                     <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
-                                    <a href="contact-client-v.1.html" class="dropdown-item">Contact Client v.1</a>
+                                    <a href="{{route('backup')}}" class="dropdown-item">بک آپ دیتابیس</a>
                                     <a href="project-list.html" class="dropdown-item">Project List</a>
                                     <a href="project-details.html" class="dropdown-item">Project Details</a>
                                 </div>
                             </li>
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-bar-chart-o"></i> <span class="mini-dn">مدیریت کاربران</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown chart-left-menu-std animated flipInX">
-                                    <a href="bar-charts.html" class="dropdown-item">Bar Charts</a>
-                                    <a href="line-charts.html" class="dropdown-item">Line Charts</a>
+                                    <a href="{{route('users')}}" class="dropdown-item">کاربران</a>
+                                    <a href="{{route('register')}}" class="dropdown-item">افزودن ادمین جدید</a>
                                     <a href="area-charts.html" class="dropdown-item">Area Charts</a>
                                     <a href="rounded-chart.html" class="dropdown-item">Rounded Charts</a>
                                     <a href="c3.html" class="dropdown-item">C3 Charts</a>
@@ -158,10 +160,11 @@
                                     <a href="peity.html" class="dropdown-item">Peity Charts</a>
                                 </div>
                             </li>
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">Data Tables</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">مدیریت تبلیغات</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="static-table.html" class="dropdown-item">Static Table</a>
-                                    <a href="data-table.html" class="dropdown-item">Data Table</a>
+                                    <a href="{{route('company')}}" class="dropdown-item">شرکت های تبلیغاتی</a>
+                                    <a href="{{route('section')}}" class="dropdown-item">قسمت های تبلیغاتی</a>
+                                    <a href="{{route('seeAds')}}" class="dropdown-item">تبلیغات</a>
                                 </div>
                             </li>
                         @else

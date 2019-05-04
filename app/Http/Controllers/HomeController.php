@@ -27,8 +27,11 @@ class HomeController extends Controller {
 
             if(Auth::attempt(['username' => $username, 'password' => $password], true)) {
 
+                if(!Auth::user()->status)
+                    return view('login', ['msg' => 'حساب کاربری شما فعال نیست']);
+
                 $level = Auth::user()->level;
-                if($level != getValueInfo('adminLevel')) {
+                if($level != getValueInfo('adminLevel') && $level != getValueInfo('superAdminLevel')) {
                     Auth::logout();
                     Session::flush();
                     return view('login', ['msg' => 'شما اجازه دسترسی به پنل را ندارید']);

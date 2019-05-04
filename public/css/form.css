@@ -7,6 +7,7 @@
 }
 .login-title{
 	padding:30px 15px;
+	direction: rtl;
 }
 .login-title h1{
 	font-size:20px;
@@ -16,12 +17,14 @@
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 	padding:20px;
 }
-.login-input-area input[type="email"], .login-input-area input[type="password"], .login-input-area input[type="text"]{
+.login-input-area input[type="email"], .login-input-area input[type="password"], .login-input-area input[type="text"],
+.login-input-area input[type="tel"]
+{
 	width:100%;
 	height:35px;
-	direction: ltr;
-	padding: 0 0 0 45px;
+	padding: 0 10px 0 45px;
 	margin:10px 0;
+	direction: rtl;
 	border:1px solid #ccc;
 }
 .login-input-area, .login-textarea-area{

@@ -60,7 +60,16 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'adminLevel' => \App\Http\Middleware\AdminLevel::class
+        'adminLevel' => \App\Http\Middleware\AdminLevel::class,
+        'superAdminLevel' => \App\Http\Middleware\SuperAdminLevel::class,
+        'seoAccess' => \App\Http\Middleware\SeoAccess::class,
+        'commentAccess' => \App\Http\Middleware\CommentAccess::class,
+        'postAccess' => \App\Http\Middleware\PostAccess::class,
+        'altAccess' => \App\Http\Middleware\AltAccess::class,
+        'contentAccess' => \App\Http\Middleware\ContentAccess::class,
+        'configAccess' => \App\Http\Middleware\ConfigAccess::class,
+        'offCodeAccess' => \App\Http\Middleware\OffCodeAccess::class,
+        'publicityAccess' => \App\Http\Middleware\PublicityAccess::class,
     ];
 
     /**

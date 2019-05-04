@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\models\ACL;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-include_once __DIR__ . '/../Controllers/Common.php';
-
-class AdminLevel {
+class ConfigAccess
+{
     /**
      * Handle an incoming request.
      *
@@ -17,13 +17,15 @@ class AdminLevel {
      * @return mixed
      */
     public function handle($request, Closure $next) {
+        
+        if(Auth::user()->level != getValueInfo('superAdminLevel')) {
 
-        $level = Auth::user()->level;
+            $acl = ACL::whereUserId(Auth::user()->id)->first();
 
-        if($level == getValueInfo('adminLevel') || $level == getValueInfo('superAdminLevel')) {
-            return $next($request);
+            if ($acl == null || !$acl->config)
+                return Redirect::route('home');
         }
 
-        return Redirect::route('home');
+        return $next($request);
     }
 }

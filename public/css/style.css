@@ -1347,7 +1347,7 @@ ul.comment-action-st li a{
     padding-left: 10px !important;
     padding-right: 5px !important;
     font-size: 14px;
-	text-align:left;
+	text-align:right;
 }
 .custom-datatable-overright table tbody tr td.datatable-ct{
     text-align:center;
@@ -4148,7 +4148,7 @@ ul.breadcome-menu {
     padding-top: 8px;
 }
 .materialdesign .custom-datatable-overright table tbody tr td{
-	padding-left: 0 !important;
+	padding-right: 10px !important;
 }
 .materialdesign .mg-b-15, .materialdesign .materialdesign-alert{
 	margin-bottom:15px;

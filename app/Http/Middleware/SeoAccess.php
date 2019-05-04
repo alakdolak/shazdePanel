@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\models\ACL;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-include_once __DIR__ . '/../Controllers/Common.php';
-
-class AdminLevel {
+class SeoAccess
+{
     /**
      * Handle an incoming request.
      *
@@ -18,12 +18,14 @@ class AdminLevel {
      */
     public function handle($request, Closure $next) {
 
-        $level = Auth::user()->level;
+        if(Auth::user()->level != getValueInfo('superAdminLevel')) {
 
-        if($level == getValueInfo('adminLevel') || $level == getValueInfo('superAdminLevel')) {
-            return $next($request);
+            $acl = ACL::whereUserId(Auth::user()->id)->first();
+
+            if ($acl == null || !$acl->seo)
+                return Redirect::route('home');
         }
 
-        return Redirect::route('home');
+        return $next($request);
     }
 }
