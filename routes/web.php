@@ -125,6 +125,15 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'configAccess']), func
     Route::post('addBackup', ['as' => 'addBackup', 'uses' => 'BackupController@addBackup']);
 
     Route::post('removeBackup', ['as' => 'removeBackup', 'uses' => 'BackupController@removeBackup']);
+
+    Route::get('getImageBackup/{idx}', ['as' => 'getImageBackup', 'uses' => 'BackupController@getImageBackup']);
+    
+    Route::post('imageBackup', ['as' => 'imageBackup', 'uses' => 'BackupController@imageBackup']);
+
+    Route::post('getDonePercentage', ['as' => 'getDonePercentage', 'uses' => 'BackupController@getDonePercentage']);
+
+    Route::post('initialImageBackUp', ['as' => 'initialImageBackUp', 'uses' => 'BackupController@initialImageBackUp']);
+
 });
 
 
@@ -141,6 +150,8 @@ Route::group(array('middleware' => ['auth', 'superAdminLevel']), function () {
     Route::post('toggleStatusUser', ['as' => 'toggleStatusUser', 'uses' => 'UserController@toggleStatusUser']);
 
     Route::post('addAdmin', ['as' => 'addAdmin', 'uses' => 'UserController@addAdmin']);
+
+    Route::post('changePass', ['as' => 'changePass', 'uses' => 'UserController@changePass']);
 
 });
 

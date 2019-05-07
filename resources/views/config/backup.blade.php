@@ -67,7 +67,16 @@
                         </button>
                     </div>
 
-                    <a target="_blank" href="{{route('manualBackup')}}" style="color: white; margin: 20px" class="btn btn-danger">دریافت بک آپ دستی</a>
+                    <a target="_blank" href="{{route('manualBackup')}}" style="color: white; margin: 20px" class="btn btn-danger">دریافت بک آپ دستی از دیتابیس</a>
+                    <span onclick="getBackUp()" style="color: white; margin: 20px" class="btn btn-danger">دریافت بک آپ دستی از تصاویر</span>
+
+                    <div id="percentDiv" class="hidden">
+                        <p>در حال ایجاد بک آپ</p>
+                        <p id="percent"></p>
+                        <div style="margin-top: 20px; text-align: center" id="links">
+                            <p>لینک های دانلود</p>
+                        </div>
+                    </div>
 
                 </center>
             </div>
@@ -77,6 +86,9 @@
     <div class="col-md-2"></div>
 
     <script>
+
+        var percent = 0;
+        var timer;
 
         function deleteBackup(id) {
 
@@ -91,6 +103,51 @@
             $("#row_" + id).remove();
         }
 
+        function getBackUp() {
+
+            $("#percentDiv").removeClass('hidden');
+            $("#percent").empty().append(percent + "%");
+
+            $.ajax({
+                type: 'post',
+                url: '{{route('initialImageBackUp')}}',
+                success: function () {
+
+                    timer = setTimeout(getDonePercentage, 5000);
+
+                    $.ajax({
+                        type: 'post',
+                        url: '{{route('imageBackup')}}'
+                    });
+                }
+            });
+        }
+
+        var counter = 1;
+
+        function getDonePercentage() {
+
+            $.ajax({
+                type: 'post',
+                url: '{{route('getDonePercentage')}}',
+                success: function (response) {
+
+                    response = JSON.parse(response);
+                    percent = parseFloat(response.percent);
+                    if(Number.isNaN(percent))
+                        return;
+                    $("#percent").empty().append(percent + "%");
+                    var url = response.url;
+
+                    if(url != "") {
+                        $("#links").append('<a style="display: block" href="' + response.url + '" download>لینک ' + (counter++) + '</a>');
+                    }
+                    if(percent != 100)
+                        timer = setTimeout(getDonePercentage, 5000);
+                }
+            });
+        }
+        
         function addBackup() {
             createModal('{{route('addBackup')}}',
                     [

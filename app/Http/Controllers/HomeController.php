@@ -78,24 +78,36 @@ class HomeController extends Controller {
             $key2 = str_replace(' ', '', $key2);
 
             switch ($kindPlaceId) {
-                case 1:
+                case getValueInfo('amaken'):
                 default:
                     if (!empty($key2))
                         $tmp = DB::select("SELECT amaken.id, amaken.name as targetName, cities.name as cityName, state.name as stateName from amaken, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(amaken.name, ' ', '') LIKE '%$key%' or replace(amaken.name, ' ', '') LIKE '%$key2%')");
                     else
                         $tmp = DB::select("SELECT amaken.id, amaken.name as targetName, cities.name as cityName, state.name as stateName from amaken, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(amaken.name, ' ', '') LIKE '%$key%'");
                     break;
-                case 3:
+                case getValueInfo('restaurant'):
                     if (!empty($key2))
                         $tmp = DB::select("SELECT restaurant.id, restaurant.name as targetName, cities.name as cityName, state.name as stateName from restaurant, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(restaurant.name, ' ', '') LIKE '%$key%' or replace(restaurant.name, ' ', '') LIKE '%$key2%')");
                     else
                         $tmp = DB::select("SELECT restaurant.id, restaurant.name as targetName, cities.name as cityName, state.name as stateName from restaurant, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(restaurant.name, ' ', '') LIKE '%$key%'");
                     break;
-                case 4:
+                case getValueInfo('hotel'):
                     if (!empty($key2))
                         $tmp = DB::select("SELECT hotels.id, hotels.name as targetName, cities.name as cityName, state.name as stateName from hotels, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(hotels.name, ' ', '') LIKE '%$key%' or replace(hotels.name, ' ', '') LIKE '%$key2%')");
                     else
                         $tmp = DB::select("SELECT hotels.id, hotels.name as targetName, cities.name as cityName, state.name as stateName from hotels, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(hotels.name, ' ', '') LIKE '%$key%'");
+                    break;
+                case getValueInfo('majara'):
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT majara.id, majara.name as targetName, cities.name as cityName, state.name as stateName from majara, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(majara.name, ' ', '') LIKE '%$key%' or replace(majara.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT majara.id, majara.name as targetName, cities.name as cityName, state.name as stateName from majara, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(majara.name, ' ', '') LIKE '%$key%'");
+                    break;
+                case getValueInfo('adab'):
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT adab.id, adab.name as targetName, state.name as stateName from adab, state WHERE state.id = stateId and (replace(adab.name, ' ', '') LIKE '%$key%' or replace(adab.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT adab.id, adab.name as targetName, state.name as stateName from adab, state WHERE state.id = stateId and replace(adab.name, ' ', '') LIKE '%$key%'");
                     break;
             }
 

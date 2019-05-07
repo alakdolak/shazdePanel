@@ -45,6 +45,26 @@ class UserController extends Controller {
         return view('users.users', ['users' => $users]);
     }
 
+    public function changePass() {
+        
+        if(isset($_POST["password"]) && isset($_POST["confirmPass"]) && isset($_POST["userId"])) {
+
+            $pass = makeValidInput($_POST["password"]);
+            $confirm = makeValidInput($_POST["confirmPass"]);
+
+            if($pass == $confirm) {
+                $userId = makeValidInput($_POST["userId"]);
+                $user = User::whereId($userId);
+                if($user != null) {
+                    $user->password = Hash::make($pass);
+                    $user->save();
+                }
+            }
+
+        }
+        
+    }
+    
     public function toggleStatusUser() {
 
         if(isset($_POST["userId"])) {

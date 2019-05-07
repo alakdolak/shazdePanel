@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\models\Backup;
+use App\models\ImageBackUp;
+use FilesystemIterator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use mysqli;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use ZipArchive;
 
 class BackupController extends Controller {
 
@@ -249,6 +255,204 @@ class BackupController extends Controller {
 
         echo $content;
         exit();
+    }
+
+    function scan_dir($path){
+
+        $ite = new RecursiveDirectoryIterator($path);
+        $nbfiles = 0;
+
+        foreach (new RecursiveIteratorIterator($ite) as $filename => $cur) {
+            if($cur->isFile())
+                $nbfiles++;
+        }
+
+        return $nbfiles;
+    }
+
+    public function initialImageBackUp() {
+
+        $DelFilePath = "images.zip";
+        $DelFilePath = __DIR__ ."/../../../../imageBackUps/". $DelFilePath;
+
+        if(file_exists($DelFilePath))
+            unlink ($DelFilePath);
+
+        $oldFiles = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(__DIR__ ."/../../../../imageBackUps"),
+            RecursiveIteratorIterator::LEAVES_ONLY
+        );
+
+        foreach ($oldFiles as $name => $file) {
+            if($file->isFile())
+                unlink($file);
+        }
+
+        $rootPath1 = __DIR__ ."/../../../../ads";
+        $rootPath2 = __DIR__ ."/../../../../_images";
+        $rootPath3 = __DIR__ ."/../../../../defaultPic";
+        $rootPath4 = __DIR__ ."/../../../../badges";
+        $rootPath5 = __DIR__ ."/../../../../userPhoto";
+        $rootPath6 = __DIR__ ."/../../../../userProfile";
+
+        $total = 0;
+
+        $total += $this->scan_dir($rootPath1);
+        $total += $this->scan_dir($rootPath2);
+        $total += $this->scan_dir($rootPath3);
+        $total += $this->scan_dir($rootPath4);
+        $total += $this->scan_dir($rootPath5);
+        $total += $this->scan_dir($rootPath6);
+
+        DB::connection('mysql2')->delete('delete from imageBackUp WHERE 1');
+        
+        $imageBackUp = new ImageBackUp();
+        $imageBackUp->total = $total;
+        $imageBackUp->done = 0;
+        $imageBackUp->save();
+    }
+
+    public function getDonePercentage() {
+
+        $tmp = ImageBackUp::first();
+        if($tmp == null) {
+            echo 0;
+            return;
+        }
+
+        $out = json_encode(['percent' => round($tmp->done * 100 / $tmp->total, 2), 'url' => ($tmp->flag == 0) ? '' : route('getImageBackup', ['idx' => $tmp->flag])]);
+        if($tmp->flag != 0) {
+            $tmp->flag = 0;
+            $tmp->save();
+        }
+
+        echo $out;
+    }
+
+    public function imageBackup() {
+
+        $root = __DIR__ ."/../../../../imageBackUps/";
+        $chunkNo = 1;
+        $fileName = "images.zip";
+
+        $zip = new ZipArchive();
+        if ($zip->open($root . $chunkNo . $fileName, ZipArchive::CREATE) != TRUE) {
+            die ("Could not open archive");
+        }
+
+        $rootPath = [
+            __DIR__ ."/../../../../ads",
+            __DIR__ ."/../../../../_images",
+            __DIR__ ."/../../../../defaultPic",
+            __DIR__ ."/../../../../badges",
+            __DIR__ ."/../../../../userPhoto",
+            __DIR__ ."/../../../../userProfile"
+        ];
+
+        $relativePathes = [
+            "ads",
+            "_images",
+            "defaultPic",
+            "badges",
+            "userPhoto",
+            "userProfile"
+        ];
+
+        $files = [];
+
+        for ($i = 0; $i < count($rootPath); $i++) {
+            $files[$i] = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($rootPath[$i]),
+                RecursiveIteratorIterator::LEAVES_ONLY
+            );
+        }
+
+        $old_counter = 0;
+        $curr_counter = 0;
+        $old_old_counter = 0;
+
+        for ($i = 0; $i < count($rootPath); $i++) {
+
+            foreach ($files[$i] as $name => $file)  {
+                if (!$file->isDir()) {
+                    $filePath = $file->getRealPath();
+                    $filePathTmp = explode('\\', $filePath);
+
+                    $start = false;
+                    $relativePath = "";
+                    for($j = 0; $j < count($filePathTmp); $j++) {
+                        if(!$start && $filePathTmp[$j] != $relativePathes[$i])
+                            continue;
+                        $start = true;
+                        $relativePath .= $filePathTmp[$j] . '/';
+                    }
+
+                    $relativePath = substr($relativePath, 0, strlen($relativePath) - 1);
+
+                    $curr_counter++;
+                    if($old_counter + 100 < $curr_counter) {
+                        $old_counter = $curr_counter;
+                        $tmp = ImageBackUp::first();
+                        $tmp->done = $curr_counter;
+                        $tmp->save();
+                    }
+                    if($old_old_counter + 4000 < $curr_counter) {
+                        $old_old_counter = $curr_counter;
+                        $zip->close();
+
+                        $tmp = ImageBackUp::first();
+                        $tmp->flag = $chunkNo;
+                        $tmp->save();
+
+                        $chunkNo++;
+
+                        $zip = new ZipArchive();
+                        if ($zip->open($root . $chunkNo . $fileName, ZipArchive::CREATE) != TRUE) {
+                            die ("Could not open archive");
+                        }
+
+                    }
+
+                    $zip->addFile($filePath, $relativePath);
+                }
+            }
+
+        }
+
+        $tmp = ImageBackUp::first();
+        $tmp->flag = $chunkNo;
+        $tmp->done = $curr_counter;
+        $tmp->save();
+
+        $zip->close();
+    }
+
+    public function getImageBackup($idx) {
+
+        $DelFilePath = __DIR__ ."/../../../../imageBackUps/" . $idx . "images.zip";
+
+        if (file_exists($DelFilePath)) {
+
+            header("Pragma: public");
+            header("Expires: 0");
+            header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+            header("Cache-Control: private",false);
+            header("Content-Type: application/zip");
+            header("Content-Disposition: attachment; filename=".basename($DelFilePath).";" );
+            header("Content-Transfer-Encoding: binary");
+            header("Content-Length: ".filesize($DelFilePath));
+            $chunkSize = 1024 * 1024;
+            $handle = fopen($DelFilePath, 'rb');
+            while (!feof($handle))  {
+                $buffer = fread($handle, $chunkSize);
+                echo $buffer;
+                ob_flush();
+                flush();
+            }
+            fclose($handle);
+            unlink($DelFilePath);
+            exit();
+        }
     }
 
 }

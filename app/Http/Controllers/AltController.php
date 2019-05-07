@@ -85,7 +85,7 @@ class AltController extends Controller {
             'userPhotos' => $userPhotos, 'acceptance' => $acceptance
         ]);
     }
-    
+
     public function removeMainPic($id, $kindPlaceId) {
 
         if(isset($_POST["idx"])) {

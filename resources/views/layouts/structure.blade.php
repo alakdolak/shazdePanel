@@ -41,7 +41,7 @@
 
         <!-- jvectormap CSS
             ============================================ -->
-        <link rel="stylesheet" href="{{URL::asset('css/jvectormap/jquery-jvectormap-2.0.3.css')}}">
+{{--        <link rel="stylesheet" href="{{URL::asset('css/jvectormap/jquery-jvectormap-2.0.3.css')}}">--}}
 
         <!-- normalize CSS
             ============================================ -->
@@ -211,9 +211,9 @@
             <script src="{{URL::asset('js/counterup/counterup-active.js')}}"></script>
             <!-- jvectormap JS
                 ============================================ -->
-            <script src="{{URL::asset('js/jvectormap/jquery-jvectormap-2.0.2.min.js')}}"></script>
-            <script src="{{URL::asset('js/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
-            <script src="{{URL::asset('js/jvectormap/jvectormap-active.js')}}"></script>
+            {{--<script src="{{URL::asset('js/jvectormap/jquery-jvectormap-2.0.2.min.js')}}"></script>--}}
+            {{--<script src="{{URL::asset('js/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>--}}
+            {{--<script src="{{URL::asset('js/jvectormap/jvectormap-active.js')}}"></script>--}}
             <!-- peity JS
                 ============================================ -->
             <script src="{{URL::asset('js/peity/jquery.peity.min.js')}}"></script>

@@ -151,8 +151,12 @@
                             currIdx = -1;
                             suggestions = response;
 
-                            for (i = 0; i < response.length; i++)
-                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                            for (i = 0; i < response.length; i++) {
+                                if(response[i].cityName !== undefined)
+                                    newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                else
+                                    newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ")'>" + response[i].targetName + " در " + response[i].stateName + "</p>";
+                            }
 
                             $("#result").empty().append(newElement)
                         }
@@ -180,7 +184,10 @@
                         suggestions = response;
 
                         for (i = 0; i < response.length; i++) {
-                            newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                            if(response[i].cityName !== undefined)
+                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                            else
+                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ")'>" + response[i].targetName + " در " + response[i].stateName + "</p>";
                         }
 
                         $("#result").empty().append(newElement)

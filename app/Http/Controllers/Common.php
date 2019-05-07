@@ -44,6 +44,7 @@ function getValueInfo($key) {
         'hotelMode' => 1, 'aparteman' => 2, 'mehmansara' => 3, 'vila' => 4, 'motel' => 5, 'tafrihi' => 6, 'pansion' => 7,
         'restaurantMode' => 1, 'fastfood' => 2,
         'bom' => 8,
+        'ghaza' => 3, 'soghat' => 1,
         '5_min' => 1, '10_min' => 2, '15_min' => 3, '30_min' => 4, 'hour' => 5, 'day' => 6, 'week' => 7, 'month' => 8
     ];
 
@@ -73,10 +74,22 @@ function getPlaceAndFolderName($kindPlaceId, $placeId) {
             break;
         case getValueInfo('adab'):
             $place = Adab::whereId($placeId);
-            $folderName = "adab";
+            $folderName = "adab/";
+
+            if($place != null) {
+
+                switch ($place->category) {
+                    case getValueInfo('ghaza'):
+                        $folderName .= 'ghazamahali';
+                        break;
+                    default:
+                        $folderName .= 'soghat';
+                        break;
+                }
+            }
             break;
     }
-
+    
     return [$place, $folderName];
 
 }
