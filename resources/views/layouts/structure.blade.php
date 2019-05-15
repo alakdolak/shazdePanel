@@ -168,6 +168,12 @@
                                     <a href="{{route('seeAds')}}" class="dropdown-item">تبلیغات</a>
                                 </div>
                             </li>
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">پروفایل کاربری</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                    <a href="{{route('changePass')}}" class="dropdown-item">تغییر رمزعبور</a>
+                                    <a href="{{route('logout')}}" class="dropdown-item">خروج</a>
+                                </div>
+                            </li>
                         @else
                             <li>
                                 <a href="{{route('login')}}" aria-expanded="false"><i class="fa big-icon fa-login"></i> <span class="mini-dn">ورود</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>

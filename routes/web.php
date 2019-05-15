@@ -171,4 +171,8 @@ Route::group(array('middleware' => ['auth']), function () {
 
     Route::get('logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
 
+    Route::get('changePass', ['as' => 'changePass', 'uses' => 'HomeController@changePass']);
+
+    Route::post('doChangePass', ['as' => 'doChangePass', 'uses' => 'HomeController@doChangePass']);
+
 });

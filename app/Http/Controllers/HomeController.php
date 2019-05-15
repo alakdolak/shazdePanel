@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\ConfigModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -113,6 +114,37 @@ class HomeController extends Controller {
 
             echo json_encode($tmp);
         }
+    }
+
+    public function changePass() {
+        return view('changePass');
+    }
+
+    public function doChangePass() {
+
+        if(isset($_POST["newPass"]) && isset($_POST["oldPass"]) && isset($_POST["confirmPass"])) {
+
+            $newPass = makeValidInput($_POST["newPass"]);
+            $oldPass = makeValidInput($_POST["oldPass"]);
+            $confirmPass = makeValidInput($_POST["confirmPass"]);
+
+            if($newPass != $confirmPass) {
+                echo "nok1";
+                return;
+            }
+
+            $user = Auth::user();
+
+            if(!Hash::check($oldPass, $user->password)) {
+                echo "nok2";
+                return;
+            }
+
+            $user->password = Hash::make($newPass);
+            $user->save();
+            echo "ok";
+        }
+
     }
 
 }
