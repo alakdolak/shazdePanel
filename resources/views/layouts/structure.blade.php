@@ -132,6 +132,7 @@
                                     <a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
                                     <a href="{{route('lastActivities')}}" class="dropdown-item">فعالیت های اخیر</a>
                                     <a href="{{route('posts')}}" class="dropdown-item">مدیریت پست ها</a>
+                                    <a href="{{route('uploadMainContent')}}" class="dropdown-item">افزودن محتوا</a>
                                 </div>
                             </li>
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-flask"></i> <span class="mini-dn">مدال ها</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
@@ -144,7 +145,7 @@
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('determineRadius')}}" class="dropdown-item">تعیین شعاع مکان های نزدیک</a>
                                     <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
-                                    <a href="{{route('backup')}}" class="dropdown-item">بک آپ دیتابیس</a>
+                                    <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
                                     <a href="project-list.html" class="dropdown-item">Project List</a>
                                     <a href="project-details.html" class="dropdown-item">Project Details</a>
                                 </div>

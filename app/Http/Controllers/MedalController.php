@@ -137,11 +137,11 @@ class MedalController extends Controller {
                 if($medal == null)
                     return Redirect::route('levels.medals');
 
-                if(file_exists(__DIR__ . '/../../../../badges/' . $medal->pic_1))
-                    unlink(__DIR__ . '/../../../../badges/' . $medal->pic_1);
+                if(file_exists(__DIR__ . '/../../../../assets/badges/' . $medal->pic_1))
+                    unlink(__DIR__ . '/../../../../assets/badges/' . $medal->pic_1);
 
-                if(file_exists(__DIR__ . '/../../../../badges/' . $medal->pic_2))
-                    unlink(__DIR__ . '/../../../../badges/' . $medal->pic_2);
+                if(file_exists(__DIR__ . '/../../../../assets/badges/' . $medal->pic_2))
+                    unlink(__DIR__ . '/../../../../assets/badges/' . $medal->pic_2);
 
                 Medal::destroy($medalId);
             }

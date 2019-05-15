@@ -196,7 +196,7 @@ class BackupController extends Controller {
 
         if(empty($url)) {
             $backup_name = time() . "mybackup_panel.sql";
-            $backup_name = __DIR__ . '/../../../../backups/' . $backup_name;
+            $backup_name = __DIR__ . '/../../../../assets/backups/' . $backup_name;
             $fp = fopen($backup_name, 'w');
             fwrite($fp, $content);
             fclose($fp);

@@ -52,6 +52,40 @@ function getValueInfo($key) {
 
 }
 
+function deleteDir($dirPath) {
+    if (! is_dir($dirPath)) {
+        throw new InvalidArgumentException("$dirPath must be a directory");
+    }
+    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+        $dirPath .= '/';
+    }
+    $files = glob($dirPath . '*', GLOB_MARK);
+    foreach ($files as $file) {
+        if (is_dir($file)) {
+            deleteDir($file);
+        } else {
+            unlink($file);
+        }
+    }
+    rmdir($dirPath);
+}
+
+function recurse_copy($src,$dst) {
+    $dir = opendir($src);
+    @mkdir($dst);
+    while(false !== ( $file = readdir($dir)) ) {
+        if (( $file != '.' ) && ( $file != '..' )) {
+            if ( is_dir($src . '/' . $file) ) {
+                recurse_copy($src . '/' . $file,$dst . '/' . $file);
+            }
+            else {
+                copy($src . '/' . $file,$dst . '/' . $file);
+            }
+        }
+    }
+    closedir($dir);
+}
+
 function getPlaceAndFolderName($kindPlaceId, $placeId) {
 
     switch ($kindPlaceId) {
@@ -124,7 +158,7 @@ function getMainPic($place, $idx, $folderName) {
 
         case 1:
             if ($place->pic_1) {
-                if (file_exists((__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-1.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-1.jpg'))) {
                     return [
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/s-1.jpg',
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/l-1.jpg',
@@ -150,7 +184,7 @@ function getMainPic($place, $idx, $folderName) {
 
         case 2:
             if ($place->pic_2) {
-                if (file_exists((__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-2.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-2.jpg'))) {
                     return [
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/s-2.jpg',
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/l-2.jpg',
@@ -176,7 +210,7 @@ function getMainPic($place, $idx, $folderName) {
 
         case 3:
             if ($place->pic_3) {
-                if (file_exists((__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-3.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-3.jpg'))) {
                     return [
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/s-3.jpg',
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/l-3.jpg',
@@ -202,7 +236,7 @@ function getMainPic($place, $idx, $folderName) {
 
         case 4:
             if ($place->pic_4) {
-                if (file_exists((__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-4.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-4.jpg'))) {
                     return [
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/s-4.jpg',
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/l-4.jpg',
@@ -228,7 +262,7 @@ function getMainPic($place, $idx, $folderName) {
 
         case 5:
             if ($place->pic_5) {
-                if (file_exists((__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-5.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-5.jpg'))) {
                     return [
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/s-5.jpg',
                         URL::asset('_images') . '/' . $folderName . '/' . $place->file . '/l-5.jpg',
@@ -344,20 +378,12 @@ function sendMail($text, $recipient, $subject) {
     }
 }
 
-function uploadCheck($target_file, $name, $section, $limitSize, $ext) {
+function uploadCheck($target_file, $name, $section, $limitSize, $ext, $ext2 = "") {
+
     $err = "";
-    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
 
-    $check = getimagesize($_FILES[$name]["tmp_name"]);
-    $uploadOk = 1;
-
-    if($check === false) {
-        $err .= "فایل ارسالی در قسمت " . $section . " معتبر نمی باشد";
-        $uploadOk = 0;
-    }
-
-
-    if ($uploadOk == 1 && $_FILES[$name]["size"] > $limitSize) {
+    if ($_FILES[$name]["size"] > $limitSize) {
         $limitSize /= 1000000;
         $limitSize .= "MB";
         $err .=  "حداکثر حجم مجاز برای بارگذاری تصویر " .  " <span>" . $limitSize . " </span>" . "می باشد" . "<br />";
@@ -365,8 +391,14 @@ function uploadCheck($target_file, $name, $section, $limitSize, $ext) {
 
     $imageFileType = strtolower($imageFileType);
 
-    if($ext != -1 && $imageFileType != $ext)
-        $err .= "شما تنها فایل های $ext را می توانید در این قسمت آپلود نمایید";
+    if(!empty($ext2)) {
+        if ($ext != -1 && $imageFileType != $ext && $imageFileType != $ext2)
+            $err .= " شما تنها فایل های $ext را می توانید در این قسمت آپلود نمایید";
+    }
+    else {
+        if ($ext != -1 && $imageFileType != $ext)
+            $err .= " شما تنها فایل های $ext را می توانید در این قسمت آپلود نمایید";
+    }
     return $err;
 }
 

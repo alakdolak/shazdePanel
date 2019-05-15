@@ -57,6 +57,10 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), fun
 
     Route::post('doChangePlace', ['as' => 'doChangePlace', 'uses' => 'PlaceController@doChangePlace']);
 
+    Route::get('uploadMainContent', ['as' => 'uploadMainContent', 'uses' => 'PlaceController@uploadMainContent']);
+
+    Route::post('doUploadMainContent', ['as' => 'doUploadMainContent', 'uses' => 'PlaceController@doUploadMainContent']);
+
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'publicityAccess']), function () {

@@ -228,8 +228,8 @@ class PublicityController extends Controller {
                         $err = uploadCheck($targetFile, "pic", "ایجاد تبلیغ جدید", 300000000, -1);
                         if (empty($err)) {
                             $err = upload($targetFile, "pic", "ایجاد تبلیغ جدید");
-                            if(file_exists(__DIR__ . '/../../../../ads/' . $ad->pic))
-                                unlink(__DIR__ . '/../../../../ads/' . $ad->pic);
+                            if(file_exists(__DIR__ . '/../../../../assets/ads/' . $ad->pic))
+                                unlink(__DIR__ . '/../../../../assets/ads/' . $ad->pic);
 
                             $ad->pic = $file["name"];
                         }

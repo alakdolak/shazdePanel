@@ -127,52 +127,52 @@ class AltController extends Controller {
                 case 1:
                     $place->pic_2 = false;
                     $place->alt2 = "";
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-2.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-2.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-2.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-2.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-2.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-2.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-2.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-2.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-2.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-2.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-2.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-2.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-2.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-2.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-2.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-2.jpg');
                     break;
                 case 2:
                     $place->pic_3 = false;
                     $place->alt3 = "";
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-3.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-3.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-3.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-3.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-3.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-3.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-3.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-3.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-3.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-3.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-3.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-3.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-3.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-3.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-3.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-3.jpg');
                     break;
                 case 3:
                     $place->pic_4 = false;
                     $place->alt4 = "";
 
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-4.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-4.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-4.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-4.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-4.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-4.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-4.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-4.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-4.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-4.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-4.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-4.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-4.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-4.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-4.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-4.jpg');
                     break;
                 case 4:
                     $place->pic_5 = false;
                     $place->alt5 = "";
 
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-5.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-5.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-5.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-5.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-5.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-5.jpg');
-                    if(file_exists(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-5.jpg'))
-                        unlink(__DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-5.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-5.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-5.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-5.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-5.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-5.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-5.jpg');
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-5.jpg'))
+                        unlink(__DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-5.jpg');
                     break;
             }
 
@@ -201,16 +201,16 @@ class AltController extends Controller {
             switch ($sizeIdx) {
                 case 0:
                 default:
-                    $prefix = __DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/s-';
+                    $prefix = __DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/s-';
                     break;
                 case 1:
-                    $prefix = __DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/l-';
+                    $prefix = __DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/l-';
                     break;
                 case 2:
-                    $prefix = __DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/t-';
+                    $prefix = __DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/t-';
                     break;
                 case 3:
-                    $prefix = __DIR__ . '/../../../../_images/' . $folderName . '/' . $place->file . '/f-';
+                    $prefix = __DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file . '/f-';
                     break;
             }
 
@@ -290,12 +290,12 @@ class AltController extends Controller {
 
                 $redirect = route('changeAlt', ['id' => $log->placeId, 'kindPlaceId' => $log->kindPlaceId]);
 
-                if(file_exists(__DIR__ . '/../../../../userPhoto/' . getFolderName($log->kindPlaceId) . '/s-' . $log->text)) {
-                    unlink(__DIR__ . '/../../../../userPhoto/' . getFolderName($log->kindPlaceId) . '/s-' . $log->text);
+                if(file_exists(__DIR__ . '/../../../../assets/userPhoto/' . getFolderName($log->kindPlaceId) . '/s-' . $log->text)) {
+                    unlink(__DIR__ . '/../../../../assets/userPhoto/' . getFolderName($log->kindPlaceId) . '/s-' . $log->text);
                 }
 
-                if(file_exists(__DIR__ . '/../../../../userPhoto/' . getFolderName($log->kindPlaceId) . '/l-' . $log->text)) {
-                    unlink(__DIR__ . '/../../../../userPhoto/' . getFolderName($log->kindPlaceId) . '/l-' . $log->text);
+                if(file_exists(__DIR__ . '/../../../../assets/userPhoto/' . getFolderName($log->kindPlaceId) . '/l-' . $log->text)) {
+                    unlink(__DIR__ . '/../../../../assets/userPhoto/' . getFolderName($log->kindPlaceId) . '/l-' . $log->text);
                 }
 
                 $log->delete();
@@ -320,9 +320,9 @@ class AltController extends Controller {
 
             $pic = time() . $_FILES["pic"]["name"];
             if($idx == 0)
-                $prefix = __DIR__ . '/../../../../userPhoto/' . getFolderName($log->kindPlaceId) . '/s-';
+                $prefix = __DIR__ . '/../../../../assets/userPhoto/' . getFolderName($log->kindPlaceId) . '/s-';
             else
-                $prefix = __DIR__ . '/../../../../userPhoto/' . getFolderName($log->kindPlaceId) . '/l-';
+                $prefix = __DIR__ . '/../../../../assets/userPhoto/' . getFolderName($log->kindPlaceId) . '/l-';
 
             $err = uploadCheck($prefix . $pic, "pic", "افزودن عکس جدید", 3000000, -1);
             if(empty($err)) {
