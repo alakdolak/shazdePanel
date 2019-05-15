@@ -16,6 +16,10 @@ class HomeController extends Controller {
     }
 
     public function login() {
+
+        if(Auth::check())
+            return Redirect::route('home');
+
         return view('login', ['msg' => '']);
     }
 

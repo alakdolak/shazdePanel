@@ -15,23 +15,23 @@ use ZipArchive;
 
 class PlaceController extends Controller {
 
-    public function changeContent($city, $mode) {
+    public function changeContent($city, $mode, $wantedKey = "") {
 
         switch ($mode) {
             case getValueInfo("hotel"):
             default:
-                return $this->changeHotelContent($city);
+                return $this->changeHotelContent($city, $wantedKey);
             case getValueInfo('amaken'):
-                return $this->changeAmakenContent($city);
+                return $this->changeAmakenContent($city, $wantedKey);
             case getValueInfo('restaurant'):
-                return $this->changeRestaurantContent($city);
+                return $this->changeRestaurantContent($city, $wantedKey);
             case getValueInfo('majara'):
-                return $this->changeMajaraContent($city);
+                return $this->changeMajaraContent($city, $wantedKey);
 
         }
     }
 
-    private function changeHotelContent($cityId) {
+    private function changeHotelContent($cityId, $wantedKey = "") {
 
         $places = Hotel::whereCityId($cityId)->get();
 
@@ -46,18 +46,20 @@ class PlaceController extends Controller {
             ['name' => 'بوم گردی', 'id' => getValueInfo('bom')]
         ];
 
-        return view('content.changeHotel', ['places' => $places, 'kind_ids' => json_encode($kind_ids)]);
+        return view('content.changeHotel', ['places' => $places, 'kind_ids' => json_encode($kind_ids),
+            'wantedKey' => $wantedKey]);
     }
 
-    private function changeMajaraContent($cityId) {
+    private function changeMajaraContent($cityId, $wantedKey = "") {
 
         $places = Majara::whereCityId($cityId)->get();
 
-        return view('content.changeMajara', ['places' => $places]);
+        return view('content.changeMajara', ['places' => $places,
+            'wantedKey' => $wantedKey]);
 
     }
 
-    private function changeRestaurantContent($cityId) {
+    private function changeRestaurantContent($cityId, $wantedKey = "") {
 
         $places = Restaurant::whereCityId($cityId)->get();
 
@@ -66,7 +68,8 @@ class PlaceController extends Controller {
             ['name' => 'فست فود', 'id' => getValueInfo('fastfood')]
         ];
 
-        return view('content.changeRestaurant', ['places' => $places, 'kind_ids' => json_encode($kind_ids)]);
+        return view('content.changeRestaurant', ['places' => $places, 'kind_ids' => json_encode($kind_ids),
+            'wantedKey' => $wantedKey]);
     }
 
     public function doChangePlace() {
@@ -100,11 +103,12 @@ class PlaceController extends Controller {
         }
     }
 
-    private function changeAmakenContent($cityId) {
+    private function changeAmakenContent($cityId, $wantedKey = "") {
 
         $places = Amaken::whereCityId($cityId)->get();
 
-        return view('content.changeAmaken', ['places' => $places]);
+        return view('content.changeAmaken', ['places' => $places,
+            'wantedKey' => $wantedKey]);
     }
 
     public function choosePlace($mode) {

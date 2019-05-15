@@ -153,7 +153,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain' => 'http://localhost/pro_shazde',
 
     /*
     |--------------------------------------------------------------------------

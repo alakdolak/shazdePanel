@@ -53,7 +53,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), functio
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), function () {
 
-    Route::get('changeContent/{city}/{mode}', ['as' => 'changeContent', 'uses' => 'PlaceController@changeContent']);
+    Route::get('changeContent/{city}/{mode}/{wantedKey?}', ['as' => 'changeContent', 'uses' => 'PlaceController@changeContent']);
 
     Route::post('doChangePlace', ['as' => 'doChangePlace', 'uses' => 'PlaceController@doChangePlace']);
 

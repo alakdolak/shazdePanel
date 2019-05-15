@@ -1173,7 +1173,7 @@
             html = [];
             html.push(
                 '<div class="pull-' + this.options.searchAlign + ' search">',
-                sprintf('<input class="form-control' +
+                sprintf('<input id="searchInTable" class="form-control' +
                     sprintf(' input-%s', this.options.iconSize) +
                     '" type="text" placeholder="جست و جو کنید">',
                     this.options.formatSearch()),
@@ -1181,7 +1181,7 @@
 
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');
-            $search.off('keyup drop blur').on('keyup drop blur', function (event) {
+            $search.off('keyup drop blur change').on('keyup drop blur change', function (event) {
                 if (that.options.searchOnEnterKey && event.keyCode !== 13) {
                     return;
                 }

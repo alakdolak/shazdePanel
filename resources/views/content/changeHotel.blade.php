@@ -178,6 +178,15 @@
 
     <script>
 
+        $(document).ready(function () {
+
+            @if(!empty($wantedKey))
+                setTimeout(function () {
+                    $("#searchInTable").val("ثلاثی").change().focusout();
+                }, 500);
+            @endif
+        });
+
         function handleChangeSelect(id, placeId, mode) {
 
             selectedId = id;
