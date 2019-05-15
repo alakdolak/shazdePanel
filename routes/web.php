@@ -45,7 +45,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'altAccess']), functio
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), function () {
 
-    Route::get('changeSeo/{city}', ['as' => 'changeSeo', 'uses' => 'SeoController@changeSeo']);
+    Route::get('changeSeo/{city}/{wantedKey?}/{selectedMode?}', ['as' => 'changeSeo', 'uses' => 'SeoController@changeSeo']);
 
     Route::post('doChangeSeo', ['as' => 'doChangeSeo', 'uses' => 'SeoController@doChangeSeo']);
 

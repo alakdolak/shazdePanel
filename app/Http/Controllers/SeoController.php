@@ -7,72 +7,91 @@ use App\models\Amaken;
 use App\models\Cities;
 use App\models\Hotel;
 use App\models\Majara;
+use App\models\Place;
 use App\models\Restaurant;
 use Illuminate\Support\Facades\DB;
 
 class SeoController extends Controller {
     
-    public function changeSeo($city) {
+    public function changeSeo($city, $wantedKey = -1, $selectedMode = -1) {
 
         $out = [];
         $counter = 0;
 
-        $places = Hotel::whereCityId($city)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
-            'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
-            'tag13', 'tag14', 'tag15'
-        )->get();
+        if($selectedMode == -1 || $selectedMode == getValueInfo('hotel')) {
 
-        foreach ($places as $place) {
-            $place->kindPlaceId = getValueInfo('hotel');
-            $place->kindPlaceName = 'هتل';
-            $out[$counter++] = $place;
+            $places = Hotel::whereCityId($city)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
+                'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
+                'tag13', 'tag14', 'tag15'
+            )->get();
+
+            foreach ($places as $place) {
+                $place->kindPlaceId = getValueInfo('hotel');
+                $place->kindPlaceName = 'هتل';
+                $out[$counter++] = $place;
+            }
         }
 
-        $places = Amaken::whereCityId($city)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
-            'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
-            'tag13', 'tag14', 'tag15'
-        )->get();
+        if($selectedMode == -1 || $selectedMode == getValueInfo('amaken')) {
 
-        foreach ($places as $place) {
-            $place->kindPlaceId = getValueInfo('amaken');
-            $place->kindPlaceName = 'اماکن';
-            $out[$counter++] = $place;
+            $places = Amaken::whereCityId($city)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
+                'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
+                'tag13', 'tag14', 'tag15'
+            )->get();
+
+            foreach ($places as $place) {
+                $place->kindPlaceId = getValueInfo('amaken');
+                $place->kindPlaceName = 'اماکن';
+                $out[$counter++] = $place;
+            }
         }
 
-        $places = Restaurant::whereCityId($city)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
-            'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
-            'tag13', 'tag14', 'tag15'
-        )->get();
+        if($selectedMode == -1 || $selectedMode == getValueInfo('restaurant')) {
 
-        foreach ($places as $place) {
-            $place->kindPlaceId = getValueInfo('restaurant');
-            $place->kindPlaceName = 'رستوران';
-            $out[$counter++] = $place;
+            $places = Restaurant::whereCityId($city)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
+                'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
+                'tag13', 'tag14', 'tag15'
+            )->get();
+
+            foreach ($places as $place) {
+                $place->kindPlaceId = getValueInfo('restaurant');
+                $place->kindPlaceName = 'رستوران';
+                $out[$counter++] = $place;
+            }
         }
 
-        $places = Adab::whereStateId(Cities::whereId($city)->stateId)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
-            'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
-            'tag13', 'tag14', 'tag15'
-        )->get();
+        if($selectedMode == -1 || $selectedMode == getValueInfo('adab')) {
 
-        foreach ($places as $place) {
-            $place->kindPlaceId = getValueInfo('adab');
-            $place->kindPlaceName = 'آداب';
-            $out[$counter++] = $place;
+            $places = Adab::whereStateId(Cities::whereId($city)->stateId)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
+                'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
+                'tag13', 'tag14', 'tag15'
+            )->get();
+
+            foreach ($places as $place) {
+                $place->kindPlaceId = getValueInfo('adab');
+                $place->kindPlaceName = 'آداب';
+                $out[$counter++] = $place;
+            }
         }
 
-        $places = Majara::whereCityId($city)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
-            'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
-            'tag13', 'tag14', 'tag15'
-        )->get();
+        if($selectedMode == -1 || $selectedMode == getValueInfo('majara')) {
 
-        foreach ($places as $place) {
-            $place->kindPlaceId = getValueInfo('majara');
-            $place->kindPlaceName = 'ماجرا';
-            $out[$counter++] = $place;
+            $places = Majara::whereCityId($city)->select('id', 'name', 'meta', 'keyword', 'h1', 'tag1',
+                'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10', 'tag11', 'tag12',
+                'tag13', 'tag14', 'tag15'
+            )->get();
+
+            foreach ($places as $place) {
+                $place->kindPlaceId = getValueInfo('majara');
+                $place->kindPlaceName = 'ماجرا';
+                $out[$counter++] = $place;
+            }
+
         }
-
-        return view('content.changeSeo', ['places' => $out]);
+        
+        return view('content.changeSeo', ['places' => $out, 'wantedKey' => $wantedKey,
+            'selectedMode' => $selectedMode, 'modes' => Place::all(), 
+            'pageURL' => route('changeSeo', ['city' => $city, 'wantedKey' => $wantedKey])]);
     }
 
     public function doChangeSeo() {

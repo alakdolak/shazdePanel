@@ -142,6 +142,15 @@
 
     <script>
 
+        $(document).ready(function () {
+
+            @if(!empty($wantedKey))
+                setTimeout(function () {
+                $("#searchInTable").val("{{$wantedKey}}").change().focusout();
+            }, 500);
+            @endif
+        });
+
         function handleClick(id, placeId, mode) {
             selectedId = id;
             selectedElem = mode;

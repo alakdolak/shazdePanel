@@ -7,7 +7,7 @@
 
 @section('content')
 
-    <form method="post" action="{{URL::asset('doLogin')}}">
+    <form method="post" action="{{route('doLogin')}}">
 
         {{csrf_field()}}
 

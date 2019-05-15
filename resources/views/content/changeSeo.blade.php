@@ -57,6 +57,20 @@
                                         <option value="all" selected>مود خروجی گرفتن از همه موارد</option>
                                     </select>
                                 </div>
+
+                                <div style="display: inline-block">
+                                    <select class="form-control" onchange="changeMode(this.value)">
+                                        <option value="-1">همه</option>
+                                        @foreach($modes as $mode)
+                                            @if(isset($selectedMode) && $mode->id == $selectedMode)
+                                                <option selected value="{{$mode->id}}">{{$mode->name}}</option>
+                                            @else
+                                                <option value="{{$mode->id}}">{{$mode->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                     <thead>
                                         <tr>
@@ -124,6 +138,20 @@
     </div>
 
     <script>
+
+        function changeMode(val) {
+            document.location.href = '{{$pageURL}}' + "/" + val;
+        }
+
+        $(document).ready(function () {
+
+            @if($wantedKey != -1)
+                setTimeout(function () {
+                $("#searchInTable").val("{{$wantedKey}}").change().focusout();
+            }, 500);
+            @endif
+        });
+
 
         function handleClick(id, placeId, mode) {
             selectedId = id;

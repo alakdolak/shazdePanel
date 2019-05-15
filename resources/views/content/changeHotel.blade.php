@@ -182,7 +182,7 @@
 
             @if(!empty($wantedKey))
                 setTimeout(function () {
-                    $("#searchInTable").val("ثلاثی").change().focusout();
+                    $("#searchInTable").val("{{$wantedKey}}").change().focusout();
                 }, 500);
             @endif
         });

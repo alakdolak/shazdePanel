@@ -16,7 +16,6 @@ class HomeController extends Controller {
     }
 
     public function login() {
-
         if(Auth::check())
             return Redirect::route('home');
 
@@ -36,6 +35,7 @@ class HomeController extends Controller {
                     return view('login', ['msg' => 'حساب کاربری شما فعال نیست']);
 
                 $level = Auth::user()->level;
+
                 if($level != getValueInfo('adminLevel') && $level != getValueInfo('superAdminLevel')) {
                     Auth::logout();
                     Session::flush();
