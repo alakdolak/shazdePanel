@@ -2,6 +2,9 @@
 
 @section('header')
     @parent
+
+    <link href="{{URL::asset('css/select2.css')}}" rel="stylesheet" />
+
     <style>
 
         button {
@@ -28,10 +31,14 @@
         }
     </style>
 
+    <?php
+        $kindPlaceId = getValueInfo('hotel');
+    ?>
+
     <script>
         var selectedElem;
         var selectedId;
-        var selectedKindPlaceId = '{{getValueInfo('hotel')}}';
+        var selectedKindPlaceId = '{{$kindPlaceId}}';
 
     </script>
 
@@ -65,6 +72,7 @@
                                         <th class="hidden" data-checkbox="true" data-field="id"></th>
                                         <th class="hidden" data-checkbox="true" data-field="kindPlaceId"></th>
                                         <th data-field="name" data-editable="true">نام مکان</th>
+                                        <th data-options="{{$cities}}" data-type="select2" data-field="cityId" data-editable="true">شهر</th>
                                         <th class="bigTd" data-field="description" data-editable="true">توضیحات</th>
                                         <th data-field="address" data-editable="true">آدرس</th>
                                         <th data-field="phone" data-editable="true">تلفن</th>
@@ -117,8 +125,9 @@
                                         <tr>
                                             <td></td>
                                             <td class="hidden">{{$place->id}}</td>
-                                            <td class="hidden">{{$place->kindPlaceId}}</td>
+                                            <td class="hidden">{{$kindPlaceId}}</td>
                                             <td>{{$place->name}}</td>
+                                            <td>{{$place->cityId}}</td>
                                             <td class="bigTd">{{$place->description}}</td>
                                             <td>{{$place->address}}</td>
                                             <td>{{$place->phone}}</td>
@@ -179,15 +188,14 @@
     <script>
 
         $(document).ready(function () {
-
-            @if(!empty($wantedKey))
+            @if($wantedKey != -1)
                 setTimeout(function () {
                     $("#searchInTable").val("{{$wantedKey}}").change().focusout();
                 }, 500);
             @endif
         });
 
-        function handleChangeSelect(id, placeId, mode) {
+        function handleChangeSelect(id, placeId, mode, counter) {
 
             selectedId = id;
             selectedElem = mode;
@@ -199,7 +207,7 @@
                     'id': selectedId,
                     'kindPlaceId': selectedKindPlaceId,
                     'mode': selectedElem,
-                    'val': $("#" + selectedElem).val()
+                    'val': $("#" + counter + "_" + selectedElem).val()
                 }
             });
         }

@@ -28,12 +28,10 @@
         }
     </style>
 
-    <?php $kindPlaceId = getValueInfo('restaurant'); ?>
-
     <script>
         var selectedElem;
         var selectedId;
-        var selectedKindPlaceId = '{{$kindPlaceId}}';
+        var selectedKindPlaceId = '{{getValueInfo('adab')}}';
 
     </script>
 
@@ -60,6 +58,21 @@
                                         <option selected value="all">مود خروجی گرفتن از همه موارد</option>
                                     </select>
                                 </div>
+
+                                <div style="display: inline-block">
+                                    <label for="filter">دسته مورد نظر</label>
+                                    <select id="filter" class="form-control" onchange="changeMode(this.value)">
+                                        <option value="-1">همه</option>
+                                        @foreach($modes as $mode)
+                                            @if(isset($selectedMode) && $mode['id'] == $selectedMode)
+                                                <option selected value="{{$mode['id']}}">{{$mode['name']}}</option>
+                                            @else
+                                                <option value="{{$mode['id']}}">{{$mode['name']}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                     <thead>
                                     <tr>
@@ -67,30 +80,25 @@
                                         <th class="hidden" data-checkbox="true" data-field="id"></th>
                                         <th class="hidden" data-checkbox="true" data-field="kindPlaceId"></th>
                                         <th data-field="name" data-editable="true">نام مکان</th>
-                                        <th data-options="{{$cities}}" data-type="select2" data-field="cityId" data-editable="true">شهر</th>
                                         <th class="bigTd" data-field="description" data-editable="true">توضیحات</th>
-                                        <th data-field="address" data-editable="true">آدرس</th>
-                                        <th data-field="phone" data-editable="true">تلفن</th>
-                                        <th data-field="site" data-editable="true">سایت</th>
-                                        <th data-field="C" data-editable="true">مختصات x</th>
-                                        <th data-field="D" data-editable="true">محتصات y</th>
-                                        <th data-options="{{$kind_ids}}" data-type="select" data-field="kind_id" data-editable="true">نوع مکان</th>
-                                        <th data-field="food_irani" data-editable="true">غذای ایرانی</th>
-                                        <th data-field="food_mahali" data-editable="true">غذای محلی</th>
-                                        <th data-field="food_farangi" data-editable="true">غذای فرنگی</th>
-                                        <th data-field="coffeeshop" data-editable="true">کافی شاپ</th>
-                                        <th data-field="tarikhi" data-editable="true">تاریخی</th>
-                                        <th data-field="markaz" data-editable="true">مرکز</th>
-                                        <th data-field="hoome" data-editable="true">حومه</th>
-                                        <th data-field="shologh" data-editable="true">شلوغ</th>
-                                        <th data-field="khalvat" data-editable="true">خلوت</th>
-                                        <th data-field="tabiat" data-editable="true">طبیعت</th>
-                                        <th data-field="kooh" data-editable="true">کوه</th>
-                                        <th data-field="darya" data-editable="true">دریا</th>
-                                        <th data-field="modern" data-editable="true">مدرن</th>
-                                        <th data-field="sonnati" data-editable="true">سنتی</th>
-                                        <th data-field="ghadimi" data-editable="true">قدیمی</th>
-                                        <th data-field="mamooli" data-editable="true">معمولی</th>
+                                        <th data-field="dastoor" data-editable="true">دستور</th>
+                                        <th data-field="mazze" data-editable="true">مزه</th>
+                                        <th data-field="brand_name_1" data-editable="true">برند اول</th>
+                                        <th data-field="des_name_1" data-editable="true">توضیحات برند اول</th>
+                                        <th data-field="brand_name_2" data-editable="true">برند دوم</th>
+                                        <th data-field="des_name_2" data-editable="true">توضیحات برند دوم</th>
+                                        <th data-field="brand_name_3" data-editable="true">برند سوم</th>
+                                        <th data-field="des_name_3" data-editable="true">توضیحات برند سوم</th>
+                                        <th data-field="brand_name_4" data-editable="true">برند چهارم</th>
+                                        <th data-field="des_name_4" data-editable="true">توضیحات برند چهارم</th>
+                                        <th data-field="brand_name_5" data-editable="true">برند پنجم</th>
+                                        <th data-field="des_name_5" data-editable="true">توضیحات برند پنجم</th>
+                                        <th data-field="brand_name_6" data-editable="true">برند ششم</th>
+                                        <th data-field="des_name_6" data-editable="true">توضیحات برند ششم</th>
+                                        <th data-field="brand_name_7" data-editable="true">برند هفتم</th>
+                                        <th data-field="des_name_7" data-editable="true">توضیحات برند هفتم</th>
+                                        <th data-options="{{$categories}}" data-type="select" data-field="category" data-editable="true">دسته</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -98,33 +106,26 @@
                                         <tr>
                                             <td></td>
                                             <td class="hidden">{{$place->id}}</td>
-                                            <td class="hidden">{{$kindPlaceId}}</td>
+                                            <td class="hidden">{{$place->kindPlaceId}}</td>
                                             <td>{{$place->name}}</td>
-                                            <td>{{$place->cityId}}</td>
                                             <td class="bigTd">{{$place->description}}</td>
-                                            <td>{{$place->address}}</td>
-                                            <td>{{$place->phone}}</td>
-                                            <td>{{$place->site}}</td>
-                                            <td>{{$place->C}}</td>
-                                            <td>{{$place->D}}</td>
-                                            <td>{{$place->kind_id}}</td>
-                                            <td>{{$place->food_irani}}</td>
-                                            <td>{{$place->food_mahali}}</td>
-                                            <td>{{$place->food_farangi}}</td>
-                                            <td>{{$place->coffeeshop}}</td>
-                                            <td>{{$place->tarikhi}}</td>
-                                            <td>{{$place->markaz}}</td>
-                                            <td>{{$place->hoome}}</td>
-                                            <td>{{$place->shologh}}</td>
-                                            <td>{{$place->khalvat}}</td>
-                                            <td>{{$place->tabiat}}</td>
-                                            <td>{{$place->kooh}}</td>
-                                            <td>{{$place->darya}}</td>
-
-                                            <td>{{$place->modern}}</td>
-                                            <td>{{$place->sonnati}}</td>
-                                            <td>{{$place->ghadimi}}</td>
-                                            <td>{{$place->mamooli}}</td>
+                                            <td class="bigTd">{{$place->dastoor}}</td>
+                                            <td>{{$place->mazze}}</td>
+                                            <td>{{$place->brand_name_1}}</td>
+                                            <td>{{$place->des_name_1}}</td>
+                                            <td>{{$place->brand_name_2}}</td>
+                                            <td>{{$place->des_name_2}}</td>
+                                            <td>{{$place->brand_name_3}}</td>
+                                            <td>{{$place->des_name_3}}</td>
+                                            <td>{{$place->brand_name_4}}</td>
+                                            <td>{{$place->des_name_4}}</td>
+                                            <td>{{$place->brand_name_5}}</td>
+                                            <td>{{$place->des_name_5}}</td>
+                                            <td>{{$place->brand_name_6}}</td>
+                                            <td>{{$place->des_name_6}}</td>
+                                            <td>{{$place->brand_name_7}}</td>
+                                            <td>{{$place->des_name_7}}</td>
+                                            <td>{{$place->category}}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -139,8 +140,11 @@
 
     <script>
 
-        $(document).ready(function () {
+        function changeMode(val) {
+            document.location.href = '{{$pageURL}}' + "/" + val;
+        }
 
+        $(document).ready(function () {
             @if($wantedKey != -1)
                 setTimeout(function () {
                 $("#searchInTable").val("{{$wantedKey}}").change().focusout();

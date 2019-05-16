@@ -45,7 +45,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'altAccess']), functio
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), function () {
 
-    Route::get('changeSeo/{city}/{wantedKey?}/{selectedMode?}', ['as' => 'changeSeo', 'uses' => 'SeoController@changeSeo']);
+    Route::get('changeSeo/{city}/{mode}/{wantedKey?}/{selectedMode?}', ['as' => 'changeSeo', 'uses' => 'SeoController@changeSeo']);
 
     Route::post('doChangeSeo', ['as' => 'doChangeSeo', 'uses' => 'SeoController@doChangeSeo']);
 
@@ -53,7 +53,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), functio
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), function () {
 
-    Route::get('changeContent/{city}/{mode}/{wantedKey?}', ['as' => 'changeContent', 'uses' => 'PlaceController@changeContent']);
+    Route::get('changeContent/{city}/{mode}/{cityMode}/{wantedKey?}/{filter?}', ['as' => 'changeContent', 'uses' => 'PlaceController@changeContent']);
 
     Route::post('doChangePlace', ['as' => 'doChangePlace', 'uses' => 'PlaceController@doChangePlace']);
 
@@ -168,6 +168,10 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('totalSearch', array('as' => 'totalSearch', 'uses' => 'HomeController@totalSearch'));
 
     Route::post('searchForCity', array('as' => 'searchForCity', 'uses' => 'PlaceController@searchForCity'));
+    
+    Route::post('searchForCityAndState', array('as' => 'searchForCityAndState', 'uses' => 'PlaceController@searchForCityAndState'));
+    
+    Route::post('searchForState', array('as' => 'searchForState', 'uses' => 'PlaceController@searchForState'));
 
     Route::get('logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
 

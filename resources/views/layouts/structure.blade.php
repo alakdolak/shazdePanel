@@ -65,7 +65,7 @@
         <!-- modernizr JS
             ============================================ -->
         <script src="{{URL::asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="{{URL::asset('js/jquery.js')}}"></script>
 
         <style>
             .dropdown-item {

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Adab;
 use App\models\Amaken;
+use App\models\Cities;
 use App\models\Hotel;
 use App\models\Majara;
 use App\models\Place;
 use App\models\Restaurant;
+use App\models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -15,25 +18,66 @@ use ZipArchive;
 
 class PlaceController extends Controller {
 
-    public function changeContent($city, $mode, $wantedKey = "") {
+    public function changeContent($city, $mode, $cityMode, $wantedKey = -1, $filter = -1) {
 
         switch ($mode) {
             case getValueInfo("hotel"):
             default:
-                return $this->changeHotelContent($city, $wantedKey);
+                return $this->changeHotelContent($city, $wantedKey, $cityMode);
             case getValueInfo('amaken'):
-                return $this->changeAmakenContent($city, $wantedKey);
+                return $this->changeAmakenContent($city, $wantedKey, $cityMode);
             case getValueInfo('restaurant'):
-                return $this->changeRestaurantContent($city, $wantedKey);
+                return $this->changeRestaurantContent($city, $wantedKey, $cityMode);
             case getValueInfo('majara'):
-                return $this->changeMajaraContent($city, $wantedKey);
-
+                return $this->changeMajaraContent($city, $wantedKey, $cityMode);
+            case getValueInfo("adab"):
+                return $this->changeAdabContent($city, $wantedKey, $filter);
         }
     }
 
-    private function changeHotelContent($cityId, $wantedKey = "") {
+    private function changeAdabContent($stateId, $wantedKey, $filter) {
 
-        $places = Hotel::whereCityId($cityId)->get();
+        if($filter == -1)
+            $places = Adab::whereStateId($stateId)->get();
+        else
+            $places = Adab::whereStateId($stateId)->whereCategory($filter)->get();
+
+        $categories = [
+            ['name' => 'غذا محلی', 'id' => getValueInfo('ghaza')],
+            ['name' => 'سوغات', 'id' => getValueInfo('soghat')],
+            ['name' => 'صنایع دستی', 'id' => getValueInfo('sanaye')]
+        ];
+
+        return view('content.changeAdab', ['places' => $places, 'wantedKey' => $wantedKey,
+            'categories' => json_encode($categories), 'selectedMode' => $filter, 'modes' => $categories,
+            'pageURL' => route('changeContent', ['city' => $stateId, 'mode' => getValueInfo('adab'), 'cityMode' => 0, 'wantedKey' => $wantedKey])]);
+    }
+
+    private function changeHotelContent($cityId, $wantedKey, $mode) {
+
+        if($mode) {
+            $places = Hotel::whereCityId($cityId)->get();
+        }
+        else {
+            $places = DB::select('select h.* from hotels h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+        }
+
+        $citiesOut = [];
+        $counter = 0;
+
+        $states = State::all();
+
+        foreach ($states as $state) {
+
+            $cities = Cities::whereStateId($state->id)->get();
+            $tmp = [];
+
+            foreach ($cities as $city) {
+                $tmp[count($tmp)] = ['name' => $city->name, 'id' => $city->id];
+            }
+
+            $citiesOut[$counter++] = ['name' => $state->name, 'nodes' => $tmp];
+        }
 
         $kind_ids = [
             ['name' => 'هتل', 'id' => getValueInfo('hotelMode')],
@@ -47,29 +91,70 @@ class PlaceController extends Controller {
         ];
 
         return view('content.changeHotel', ['places' => $places, 'kind_ids' => json_encode($kind_ids),
+            'wantedKey' => $wantedKey, 'cities' => json_encode($citiesOut)
+        ]);
+    }
+
+    private function changeMajaraContent($cityId, $wantedKey, $mode) {
+
+        if($mode)
+            $places = Majara::whereCityId($cityId)->get();
+        else
+            $places = DB::select('select m.* from majara m, cities c WHERE m.cityId = c.id and c.stateId = ' . $cityId);
+
+        $citiesOut = [];
+        $counter = 0;
+
+        $states = State::all();
+
+        foreach ($states as $state) {
+
+            $cities = Cities::whereStateId($state->id)->get();
+            $tmp = [];
+
+            foreach ($cities as $city) {
+                $tmp[count($tmp)] = ['name' => $city->name, 'id' => $city->id];
+            }
+
+            $citiesOut[$counter++] = ['name' => $state->name, 'nodes' => $tmp];
+        }
+
+//        dd($places);
+        return view('content.changeMajara', ['places' => $places, 'cities' => json_encode($citiesOut),
             'wantedKey' => $wantedKey]);
     }
 
-    private function changeMajaraContent($cityId, $wantedKey = "") {
+    private function changeRestaurantContent($cityId, $wantedKey, $mode) {
 
-        $places = Majara::whereCityId($cityId)->get();
-
-        return view('content.changeMajara', ['places' => $places,
-            'wantedKey' => $wantedKey]);
-
-    }
-
-    private function changeRestaurantContent($cityId, $wantedKey = "") {
-
-        $places = Restaurant::whereCityId($cityId)->get();
+        if($mode)
+            $places = Restaurant::whereCityId($cityId)->get();
+        else
+            $places = DB::select('select h.* from restaurant h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
 
         $kind_ids = [
             ['name' => 'رستوران', 'id' => getValueInfo('restaurantMode')],
             ['name' => 'فست فود', 'id' => getValueInfo('fastfood')]
         ];
 
+        $citiesOut = [];
+        $counter = 0;
+
+        $states = State::all();
+
+        foreach ($states as $state) {
+
+            $cities = Cities::whereStateId($state->id)->get();
+            $tmp = [];
+
+            foreach ($cities as $city) {
+                $tmp[count($tmp)] = ['name' => $city->name, 'id' => $city->id];
+            }
+
+            $citiesOut[$counter++] = ['name' => $state->name, 'nodes' => $tmp];
+        }
+
         return view('content.changeRestaurant', ['places' => $places, 'kind_ids' => json_encode($kind_ids),
-            'wantedKey' => $wantedKey]);
+            'wantedKey' => $wantedKey, 'cities' => json_encode($citiesOut)]);
     }
 
     public function doChangePlace() {
@@ -103,11 +188,32 @@ class PlaceController extends Controller {
         }
     }
 
-    private function changeAmakenContent($cityId, $wantedKey = "") {
+    private function changeAmakenContent($cityId, $wantedKey, $mode) {
 
-        $places = Amaken::whereCityId($cityId)->get();
+        if($mode)
+            $places = Amaken::whereCityId($cityId)->get();
+        else {
+            $places = DB::select('select h.* from amaken h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+        }
 
-        return view('content.changeAmaken', ['places' => $places,
+        $citiesOut = [];
+        $counter = 0;
+
+        $states = State::all();
+
+        foreach ($states as $state) {
+
+            $cities = Cities::whereStateId($state->id)->get();
+            $tmp = [];
+
+            foreach ($cities as $city) {
+                $tmp[count($tmp)] = ['name' => $city->name, 'id' => $city->id];
+            }
+
+            $citiesOut[$counter++] = ['name' => $state->name, 'nodes' => $tmp];
+        }
+
+        return view('content.changeAmaken', ['places' => $places, 'cities' => json_encode($citiesOut),
             'wantedKey' => $wantedKey]);
     }
 
@@ -143,6 +249,21 @@ class PlaceController extends Controller {
     public function searchForCity() {
         $key = makeValidInput($_POST["key"]);
         $cities = DB::select("SELECT cities.id, cities.name as cityName, state.name as stateName FROM cities, state WHERE cities.stateId = state.id and  cities.name LIKE '%$key%' ");
+        echo json_encode($cities);
+    }
+
+    public function searchForCityAndState() {
+
+        $key = makeValidInput($_POST["key"]);
+        $cities = DB::select("SELECT 'city' as mode, cities.id, cities.name as cityName, state.name as stateName FROM cities, state WHERE cities.stateId = state.id and  cities.name LIKE '%$key%' ");
+        $states = DB::select("SELECT 'state' as mode, id, name FROM state WHERE name LIKE '%$key%' ");
+
+        echo json_encode(array_merge($cities, $states));
+    }
+
+    public function searchForState() {
+        $key = makeValidInput($_POST["key"]);
+        $cities = DB::select("SELECT id, name FROM state WHERE name LIKE '%$key%' ");
         echo json_encode($cities);
     }
 

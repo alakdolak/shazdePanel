@@ -28,10 +28,12 @@
         }
     </style>
 
+    <?php $kindPlaceId = getValueInfo('majara'); ?>
+
     <script>
         var selectedElem;
         var selectedId;
-        var selectedKindPlaceId = '{{getValueInfo('majara')}}';
+        var selectedKindPlaceId = '{{$kindPlaceId}}';
 
     </script>
 
@@ -65,6 +67,7 @@
                                             <th class="hidden" data-checkbox="true" data-field="id"></th>
                                             <th class="hidden" data-checkbox="true" data-field="kindPlaceId"></th>
                                             <th data-field="name" data-editable="true">نام مکان</th>
+                                            <th data-options="{{$cities}}" data-type="select2" data-field="cityId" data-editable="true">شهر</th>
                                             <th class="bigTd" data-field="description" data-editable="true">توضیحات</th>
                                             <th data-field="C" data-editable="true">مختصات x</th>
                                             <th data-field="D" data-editable="true">محتصات y</th>
@@ -94,8 +97,9 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="hidden">{{$place->id}}</td>
-                                                <td class="hidden">{{$place->kindPlaceId}}</td>
+                                                <td class="hidden">{{$kindPlaceId}}</td>
                                                 <td>{{$place->name}}</td>
+                                                <td>{{$place->cityId}}</td>
                                                 <td class="bigTd">{{$place->description}}</td>
                                                 <td>{{$place->C}}</td>
                                                 <td>{{$place->D}}</td>
@@ -116,7 +120,7 @@
                                                 <td>{{$place->abshar}}</td>
 
                                                 <td>{{$place->darre}}</td>
-                                                <td>{{$place->picnic}}</td>
+                                                <td>{{isset($place->picnic) ? $place->picnic : '3'}}</td>
                                                 <td>{{$place->bekr}}</td>
                                                 <td>{{$place->dasht}}</td>
                                                 <td>{{$place->dastresi}}</td>
@@ -138,12 +142,29 @@
 
         $(document).ready(function () {
 
-            @if(!empty($wantedKey))
+            @if($wantedKey != -1)
                 setTimeout(function () {
                 $("#searchInTable").val("{{$wantedKey}}").change().focusout();
             }, 500);
             @endif
         });
+
+        function handleChangeSelect(id, placeId, mode, counter) {
+
+            selectedId = id;
+            selectedElem = mode;
+
+            $.ajax({
+                type: 'post',
+                url: '{{route('doChangePlace')}}',
+                data: {
+                    'id': selectedId,
+                    'kindPlaceId': selectedKindPlaceId,
+                    'mode': selectedElem,
+                    'val': $("#" + counter + "_" + selectedElem).val()
+                }
+            });
+        }
 
         function handleClick(id, placeId, mode) {
             selectedId = id;

@@ -3,6 +3,8 @@
  * extensions: https://github.com/vitalets/x-editable
  */
 
+var counter = 0;
+
 (function($) {
 
     'use strict';
@@ -33,6 +35,7 @@
     var BootstrapTable = $.fn.bootstrapTable.Constructor,
         _initTable = BootstrapTable.prototype.initTable,
         _initBody = BootstrapTable.prototype.initBody;
+
 
     BootstrapTable.prototype.initTable = function() {
         var that = this;
@@ -84,19 +87,22 @@
                 }
 
                 if (_dont_edit_formatter === false) {
+
                     if("type" in column && column["type"] == "select") {
 
                         var options = column["options"];
 
-                        var newElement = '<select id="' + column.field + '" onchange="handleChangeSelect(' + row['id'] + ', ' + row['kindPlaceId'] + ', \'' + column.field + '\')"' +
+                        var newElement = '<select id="' + counter + '_' + column.field + '" onchange="handleChangeSelect(' + row['id'] + ', ' + row['kindPlaceId'] + ', \'' + column.field + '\', ' + counter +')"' +
                             ' data-name="' + column.field + '"' +
                             ' data-pk="' + row[that.options.idField] + '"' +
                             ' data-value="' + result + '"' +
                              editableDataMarkup.join('') +
                         '>';
 
+                        counter++;
+
                         for(var i = 0; i < options.length; i++) {
-                            if(options[i].id == row[column.field])
+                            if (options[i].id == row[column.field])
                                 newElement += "<option selected value='" + options[i].id + "'>" + options[i].name + "</option>";
                             else
                                 newElement += "<option value='" + options[i].id + "'>" + options[i].name + "</option>";
@@ -107,6 +113,39 @@
                         return [newElement
                         ].join('');
                     }
+
+                    else if("type" in column && column["type"] == "select2") {
+
+                        var options2 = column["options"];
+
+                        var newElement2 = '<select class="js-example-basic-single" id="' + counter + '_' + column.field + '" onchange="handleChangeSelect(' + row['id'] + ', ' + row['kindPlaceId'] + ', \'' + column.field + '\', ' + counter +')"' +
+                            ' data-name="' + column.field + '"' +
+                            ' data-pk="' + row[that.options.idField] + '"' +
+                            ' data-value="' + result + '"' +
+                            editableDataMarkup.join('') +
+                            '>';
+
+                        counter++;
+
+                        for(var ii = 0; ii < options2.length; ii++) {
+
+                            newElement2 += "<optgroup label='" + options2[ii].name + "'>";
+
+                            for(var jj = 0; jj < options2[ii].nodes.length; jj++) {
+                                if (options2[ii].nodes[jj].id == row[column.field])
+                                    newElement2 += "<option selected value='" + options2[ii].nodes[jj].id + "'>" + options2[ii].nodes[jj].name + "</option>";
+                                else
+                                    newElement2 += "<option value='" + options2[ii].nodes[jj].id + "'>" + options2[ii].nodes[jj].name + "</option>";
+                            }
+
+                            newElement2 += "</optgroup>";
+                        }
+
+                        newElement2 += '</select>';
+
+                        return [newElement2].join('');
+                    }
+
                     else {
                         return ['<a style="cursor: pointer" onclick="handleClick(' + row['id'] + ', ' + row['kindPlaceId'] + ', \'' + column.field + '\')"',
                             ' data-name="' + column.field + '"',

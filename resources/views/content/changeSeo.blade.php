@@ -59,7 +59,9 @@
                                 </div>
 
                                 <div style="display: inline-block">
-                                    <select class="form-control" onchange="changeMode(this.value)">
+
+                                    <label for="filter">مکان مورد نظر</label>
+                                    <select id="filter" class="form-control" onchange="changeMode(this.value)">
                                         <option value="-1">همه</option>
                                         @foreach($modes as $mode)
                                             @if(isset($selectedMode) && $mode->id == $selectedMode)
@@ -78,6 +80,9 @@
                                             <th class="hidden" data-checkbox="true" data-field="id"></th>
                                             <th class="hidden" data-checkbox="true" data-field="kindPlaceId"></th>
                                             <th data-field="name" data-editable="false">نام مکان</th>
+                                            @if($showCity)
+                                                <th data-field="cityName" data-editable="false">نام شهر</th>
+                                            @endif
                                             <th data-field="kindPlaceName" data-editable="false">نوع مکان</th>
                                             <th class="bigTd" data-field="meta" data-editable="true">تگ متا</th>
                                             <th data-field="keyword" data-editable="true">تگ کلیداصلی</th>
@@ -106,6 +111,9 @@
                                                 <td class="hidden">{{$place->id}}</td>
                                                 <td class="hidden">{{$place->kindPlaceId}}</td>
                                                 <td>{{$place->name}}</td>
+                                                @if($showCity)
+                                                    <td>{{$place->cityName}}</td>
+                                                @endif
                                                 <td>{{$place->kindPlaceName}}</td>
                                                 <td class="bigTd">{{$place->meta}}</td>
                                                 <td>{{$place->keyword}}</td>
