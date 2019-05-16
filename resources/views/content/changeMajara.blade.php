@@ -85,7 +85,7 @@
                                             <th data-field="sahranavardi" data-editable="true">صحرانوردی</th>
                                             <th data-field="abshar" data-editable="true">آبشار</th>
                                             <th data-field="darre" data-editable="true">دره</th>
-                                            <th data-field="picnic" data-editable="true">پیک نیک</th>
+                                            <th data-field="piknik" data-editable="true">پیک نیک</th>
                                             <th data-field="bekr" data-editable="true">بکر</th>
                                             <th data-field="dasht" data-editable="true">دشت</th>
                                             <th data-field="dastresi" data-editable="true">دسترسی</th>
@@ -120,7 +120,7 @@
                                                 <td>{{$place->abshar}}</td>
 
                                                 <td>{{$place->darre}}</td>
-                                                <td>{{isset($place->picnic) ? $place->picnic : '3'}}</td>
+                                                <td>{{$place->piknik}}</td>
                                                 <td>{{$place->bekr}}</td>
                                                 <td>{{$place->dasht}}</td>
                                                 <td>{{$place->dastresi}}</td>

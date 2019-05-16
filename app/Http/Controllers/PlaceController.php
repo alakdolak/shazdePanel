@@ -119,7 +119,6 @@ class PlaceController extends Controller {
             $citiesOut[$counter++] = ['name' => $state->name, 'nodes' => $tmp];
         }
 
-//        dd($places);
         return view('content.changeMajara', ['places' => $places, 'cities' => json_encode($citiesOut),
             'wantedKey' => $wantedKey]);
     }
