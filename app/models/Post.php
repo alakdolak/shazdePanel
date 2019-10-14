@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property string $description
+ * @property integer $cityId
  * @property integer $placeId
  * @property integer $kindPlaceId
  * @property string $date

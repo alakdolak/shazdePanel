@@ -51,30 +51,6 @@
 
                     <div class="col-xs-12">
 
-                        <div class="col-xs-12 col-md-6">
-                            <label for="color">رنگ عنوان</label>
-                            <input value="{{(isset($post) ? $post->color : '')}}" type="color" id="color">
-                        </div>
-
-                        <div class="col-xs-12 col-md-6">
-                            <label for="title">عنوان پست</label>
-                            <input value="{{(isset($post) ? $post->title : '')}}" type="text" id="title" maxlength="300">
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-12">
-
-                        <div class="col-xs-12 col-md-4">
-                            <label for="backColor">رنگ پشت عنوان پست</label>
-                            <input value="{{(isset($post) ? $post->backColor : '')}}" type="color" id="backColor">
-                        </div>
-
-                        <div class="col-xs-12 col-md-4">
-                            <label for="categoryColor">رنگ عنوان پست</label>
-                            <input value="{{(isset($post) ? $post->categoryColor : '')}}" type="color" id="categoryColor">
-                        </div>
-
                         <div class="col-xs-12 col-md-4">
                             <label for="category">دسته پست</label>
                             <select id="category">
@@ -92,6 +68,37 @@
                             </select>
                         </div>
 
+                        <div class="col-xs-12 col-md-4">
+                            <label for="city">پست مربوط به کدام شهر است</label>
+                            <input value="{{(isset($post) ? $post->city : '')}}" type="text" onkeyup="citySearch(event)" id="city">
+                            <input value="{{(isset($post) ? $post->cityId : '')}}" type="hidden" name="cityId" id="cityId">
+                            <div id="cityResult"></div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-4">
+                            <label for="title">عنوان پست</label>
+                            <input value="{{(isset($post) ? $post->title : '')}}" type="text" id="title" maxlength="300">
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-12" style="padding: 30px 0px">
+
+                        <div class="col-xs-12 col-md-4">
+                            <label for="backColor">رنگ پشت عنوان پست</label>
+                            <input value="{{(isset($post) ? $post->backColor : '')}}" type="color" id="backColor">
+                        </div>
+
+                        <div class="col-xs-12 col-md-4">
+                            <label for="categoryColor">رنگ عنوان پست</label>
+                            <input value="{{(isset($post) ? $post->categoryColor : '')}}" type="color" id="categoryColor">
+                        </div>
+
+
+                        <div class="col-xs-12 col-md-4">
+                            <label for="color">رنگ عنوان</label>
+                            <input value="{{(isset($post) ? $post->color : '')}}" type="color" id="color">
+                        </div>
                     </div>
 
                     <div class="col-xs-12">
@@ -400,6 +407,7 @@
                     'relatedMode': mode,
                     'placeIdOrC': placeIdOrC,
                     'kindPlaceIdOrD': kindPlaceIdOrD,
+                    'cityId': $("#cityId").val(),
                     'id': '{{(isset($post) ? $post->id : '')}}'
                 },
                 success: function (response) {
@@ -415,6 +423,125 @@
                 }
             });
         }
+
+        function citySearch(e) {
+
+            var cityDir = '{{route('searchForCityAndState')}}';
+            var val = $("#city").val();
+            $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
+
+            if (null == val || "" == val || val.length < 2)
+                $("#cityResult").empty();
+            else {
+
+                if (13 == e.keyCode && -1 != currIdx) {
+                    return cityRedirect(suggestions[currIdx].id, suggestions[currIdx].mode);
+                }
+
+                if (13 == e.keyCode && -1 == currIdx && suggestions.length > 0) {
+                    return redirect(suggestions[0].id, suggestions[0].mode);
+                }
+
+                if (40 == e.keyCode) {
+                    if (currIdx + 1 < suggestions.length) {
+                        currIdx++;
+                    }
+                    else {
+                        currIdx = 0;
+                    }
+
+                    if (currIdx >= 0 && currIdx < suggestions.length)
+                        $("#suggest_" + currIdx).css("background-color", "#dcdcdc").css("padding", "10px").css("border-radius", "5px");
+
+                    return;
+                }
+                if (38 == e.keyCode) {
+                    if (currIdx - 1 >= 0) {
+                        currIdx--;
+                    }
+                    else
+                        currIdx = suggestions.length - 1;
+
+                    if (currIdx >= 0 && currIdx < suggestions.length)
+                        $("#suggest_" + currIdx).css("background-color", "#dcdcdc").css("padding", "10px").css("border-radius", "5px");
+                    return;
+                }
+
+                if ("ا" == val[0]) {
+
+                    for (var val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
+
+                    $.ajax({
+                        type: "post",
+                        url: cityDir,
+                        data: {
+                            key: val
+                        },
+                        success: function (response) {
+
+                            var newElement = "";
+
+                            if (response.length == 0) {
+                                newElement = "موردی یافت نشد";
+                                return;
+                            }
+
+                            response = JSON.parse(response);
+
+                            currIdx = -1;
+                            suggestions = response;
+
+                            for (i = 0; i < response.length; i++) {
+
+                                if (response[i].mode == 'city') {
+                                    var name = response[i].cityName + " در " + response[i].stateName ;
+                                    newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='cityRedirect(\"" + name + "\", " + response[i].id + ")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                }
+
+                            }
+
+                            $("#cityResult").empty().append(newElement)
+                        }
+                    })
+                }
+                else $.ajax({
+                    type: "post",
+                    url: cityDir,
+                    data: {
+                        key: val
+                    },
+                    success: function (response) {
+
+                        var newElement = "";
+
+                        if (response.length == 0) {
+                            newElement = "موردی یافت نشد";
+                            return;
+                        }
+
+                        response = JSON.parse(response);
+                        currIdx = -1;
+                        suggestions = response;
+
+                        for (i = 0; i < response.length; i++) {
+                            if (response[i].mode == 'city') {
+                                var name = response[i].cityName + " در " + response[i].stateName ;
+                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='cityRedirect(\"" + name + "\", " + response[i].id + ")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                            }
+                        }
+
+                        $("#cityResult").empty().append(newElement)
+                    }
+                })
+            }
+        }
+        function cityRedirect(_name, _id){
+            document.getElementById('city').value = _name;
+            document.getElementById('cityId').value = _id;
+
+            $("#cityResult").empty();
+        }
+
 
     </script>
 

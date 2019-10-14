@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\models\AdminLog;
 use App\models\ConfigModel;
-use App\models\Place;
-use App\models\SpecialAdvice;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -45,7 +42,7 @@ class HomeController extends Controller {
                     Session::flush();
                     return view('login', ['msg' => 'شما اجازه دسترسی به پنل را ندارید']);
                 }
-
+                
                 $tmp = new AdminLog();
                 $tmp->uId = Auth::user()->id;
                 $tmp->mode = getValueInfo('login');
@@ -59,7 +56,7 @@ class HomeController extends Controller {
 
         return view('login', ['msg' => '']);
     }
-
+    
     public function logout() {
         Auth::logout();
         Session::flush();
@@ -83,7 +80,7 @@ class HomeController extends Controller {
 
         return view('config.radius', array('radius' => ConfigModel::first()->radius));
     }
-
+    
     public function totalSearch() {
 
         if (isset($_POST["key"]) && isset($_POST["kindPlaceId"])) {
@@ -163,61 +160,10 @@ class HomeController extends Controller {
             $tmp->uId = Auth::user()->id;
             $tmp->mode = getValueInfo('selfChangePass');
             $tmp->save();
-
+            
             echo "ok";
         }
 
-    }
-
-    public function specialAdvice() {
-        return view('config.specialAdvice', array('kindPlaceIds' => Place::all()));
-    }
-
-    public function submitAdvice()
-    {
-
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["mode"])) {
-
-            $mode = makeValidInput($_POST["mode"]);
-            if ($mode > 4 || $mode < 0)
-                return "nok";
-
-            $advice = SpecialAdvice::find($mode);
-            if ($advice == null) {
-                $advice = new SpecialAdvice();
-                $advice->id = $mode;
-            }
-
-            $advice->placeId = makeValidInput($_POST["placeId"]);
-            $advice->kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            try {
-                $advice->save();
-                return "ok";
-            } catch (Exception $x) {
-            }
-        }
-
-        return "nok";
-    }
-
-    public function findPlace() {
-
-        if (isset($_POST["kindPlaceId"]) && isset($_POST["key"])) {
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $key = makeValidInput($_POST["key"]);
-            switch ($kindPlaceId) {
-                case 1:
-                default:
-                    echo json_encode(DB::select("select id, name from amaken WHERE name LIKE '%$key%'"));
-                    break;
-                case 3:
-                    echo json_encode(DB::select("select id, name from restaurant WHERE name LIKE '%$key%'"));
-                    break;
-                case 4:
-                    echo json_encode(DB::select("select id, name from hotels WHERE name LIKE '%$key%'"));
-                    break;
-            }
-        }
     }
 
 }

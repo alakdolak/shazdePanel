@@ -2,84 +2,140 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/LastActivityController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/MsgController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/OffCodeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/MsgAccess.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/AdminLog.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/BannerPosts.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/Comment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/FavoritePost.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/Message.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/OffCode.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/PlaceStyle.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/PostComment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/SectionPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/SpecialAdvice.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/TripStyle.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/calendar-green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/clockpicker.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/standalone.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/calendar-fa.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/calendar-setup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/calendar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/clockpicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/editor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/jalali.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/jquery.timepicker.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/config/manageNoFollow.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/config/publicity/sectionStep2.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/config/specialAdvice.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/content/post/createPostStep2.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/content/post/createPostStep3.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/content/post/createPostStep4.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/content/user/controlActivityContent.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/content/user/controlContent.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/content/user/controlPostComment.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/msg/msgs.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/msg/sendMsg.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/offer/createOffer.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/offer/offers.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/report/lastActivity.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/seoTester/seoTester.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/seoTester/seoTesterResult.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shazde_panel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shazde_panel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/URL.php" beforeDir="false" afterPath="$PROJECT_DIR$/URL.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AltController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AltController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BackupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BackupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Common.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PublicityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PublicityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SeoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SeoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/dbChange.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/dbChange.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/ACL.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ACL.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Activity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Activity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/LogModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/LogModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Section.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Section.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bootstrap.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/config/publicity/ads.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/config/publicity/ads.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/config/publicity/section.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/config/publicity/section.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/post/posts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/post/posts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/manageAccess.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/manageAccess.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/Backup.php" afterPath="$PROJECT_DIR$/app/Console/Commands/Backup.php" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Commands/ScheduleList.php" afterPath="$PROJECT_DIR$/app/Console/Commands/ScheduleList.php" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AgeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AgeController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AltController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AltController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BackupController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/BackupController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Common.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Common.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LastActivityController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/LastActivityController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LevelController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/LevelController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MedalController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/MedalController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MsgController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/MsgController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OffCodeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/OffCodeController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PublicityController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PublicityController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SeoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SeoController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/APIController.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/APIController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AdminLevel.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/AdminLevel.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/AltAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/AltAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckForMaintenanceMode.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckForMaintenanceMode.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CommentAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/CommentAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/ConfigAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/ConfigAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/ContentAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/ContentAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/MsgAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/MsgAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/OffCodeAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/OffCodeAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/PostAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/PostAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/PublicityAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/PublicityAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/SeoAccess.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/SeoAccess.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/SuperAdminLevel.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/SuperAdminLevel.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/BroadcastServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/BroadcastServiceProvider.php" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
+      <change beforePath="$PROJECT_DIR$/app/models/Cities.php" afterPath="$PROJECT_DIR$/app/models/Cities.php" />
+      <change beforePath="$PROJECT_DIR$/app/models/Company.php" afterPath="$PROJECT_DIR$/app/models/Company.php" />
+      <change beforePath="$PROJECT_DIR$/app/models/Post.php" afterPath="$PROJECT_DIR$/app/models/Post.php" />
+      <change beforePath="$PROJECT_DIR$/app/models/Section.php" afterPath="$PROJECT_DIR$/app/models/Section.php" />
+      <change beforePath="$PROJECT_DIR$/app/models/SectionPage.php" afterPath="$PROJECT_DIR$/app/models/SectionPage.php" />
+      <change beforePath="$PROJECT_DIR$/app/models/SpecialAdvice.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/database/.gitignore" afterPath="$PROJECT_DIR$/database/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+      <change beforePath="$PROJECT_DIR$/public/.htaccess" afterPath="$PROJECT_DIR$/public/.htaccess" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/public/assets/css/bootstrap-theme.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/public/assets/css/bootstrap-theme.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/bootstrap.css" afterPath="$PROJECT_DIR$/public/assets/css/bootstrap.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/public/assets/css/bootstrap.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/assets/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/public/assets/fonts/glyphicons-halflings-regular.svg" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/bootstrap.js" afterPath="$PROJECT_DIR$/public/assets/js/bootstrap.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/public/assets/js/bootstrap.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/html5shiv.js" afterPath="$PROJECT_DIR$/public/assets/js/html5shiv.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/jquery.js" afterPath="$PROJECT_DIR$/public/assets/js/jquery.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/jquery.min.js" afterPath="$PROJECT_DIR$/public/assets/js/jquery.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/respond.min.js" afterPath="$PROJECT_DIR$/public/assets/js/respond.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/css/adminpro-custon-icon.css" afterPath="$PROJECT_DIR$/public/css/adminpro-custon-icon.css" />
+      <change beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/public/css/bootstrap.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/css/clockpicker.css" afterPath="$PROJECT_DIR$/public/css/clockpicker.css" />
+      <change beforePath="$PROJECT_DIR$/public/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/public/css/font-awesome.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/css/normalize.css" afterPath="$PROJECT_DIR$/public/css/normalize.css" />
+      <change beforePath="$PROJECT_DIR$/public/css/responsive.css" afterPath="$PROJECT_DIR$/public/css/responsive.css" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
+      <change beforePath="$PROJECT_DIR$/public/dist/bootstrap-clockpicker.css" afterPath="$PROJECT_DIR$/public/dist/bootstrap-clockpicker.css" />
+      <change beforePath="$PROJECT_DIR$/public/dist/bootstrap-clockpicker.js" afterPath="$PROJECT_DIR$/public/dist/bootstrap-clockpicker.js" />
+      <change beforePath="$PROJECT_DIR$/public/dist/bootstrap-clockpicker.min.css" afterPath="$PROJECT_DIR$/public/dist/bootstrap-clockpicker.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/dist/bootstrap-clockpicker.min.js" afterPath="$PROJECT_DIR$/public/dist/bootstrap-clockpicker.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/dist/jquery-clockpicker.css" afterPath="$PROJECT_DIR$/public/dist/jquery-clockpicker.css" />
+      <change beforePath="$PROJECT_DIR$/public/dist/jquery-clockpicker.js" afterPath="$PROJECT_DIR$/public/dist/jquery-clockpicker.js" />
+      <change beforePath="$PROJECT_DIR$/public/dist/jquery-clockpicker.min.css" afterPath="$PROJECT_DIR$/public/dist/jquery-clockpicker.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/dist/jquery-clockpicker.min.js" afterPath="$PROJECT_DIR$/public/dist/jquery-clockpicker.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/adminpro-icon.svg" afterPath="$PROJECT_DIR$/public/fonts/adminpro-icon.svg" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.svg" />
+      <change beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
+      <change beforePath="$PROJECT_DIR$/public/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/public/js/bootstrap.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/js/clockpicker.js" afterPath="$PROJECT_DIR$/public/js/clockpicker.js" />
+      <change beforePath="$PROJECT_DIR$/public/js/flot/jquery.flot.js" afterPath="$PROJECT_DIR$/public/js/flot/jquery.flot.js" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery.mCustomScrollbar.concat.min.js" afterPath="$PROJECT_DIR$/public/js/jquery.mCustomScrollbar.concat.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery.scrollUp.min.js" afterPath="$PROJECT_DIR$/public/js/jquery.scrollUp.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery.timepicker.min.js" afterPath="$PROJECT_DIR$/public/js/jquery.timepicker.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/js/vendor/jquery-1.11.3.min.js" afterPath="$PROJECT_DIR$/public/js/vendor/jquery-1.11.3.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/js/vendor/modernizr-2.8.3.min.js" afterPath="$PROJECT_DIR$/public/js/vendor/modernizr-2.8.3.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/js/wow/wow.min.js" afterPath="$PROJECT_DIR$/public/js/wow/wow.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/robots.txt" afterPath="$PROJECT_DIR$/public/robots.txt" />
+      <change beforePath="$PROJECT_DIR$/public/web.config" afterPath="$PROJECT_DIR$/public/web.config" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/auth.php" afterPath="$PROJECT_DIR$/resources/lang/en/auth.php" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/pagination.php" afterPath="$PROJECT_DIR$/resources/lang/en/pagination.php" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/passwords.php" afterPath="$PROJECT_DIR$/resources/lang/en/passwords.php" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/validation.php" afterPath="$PROJECT_DIR$/resources/lang/en/validation.php" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/_variables.scss" afterPath="$PROJECT_DIR$/resources/sass/_variables.scss" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" afterPath="$PROJECT_DIR$/resources/sass/app.scss" />
+      <change beforePath="$PROJECT_DIR$/resources/views/config/specialAdvice.blade.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/post/posts.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/post/posts.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" afterPath="$PROJECT_DIR$/routes/api.php" />
+      <change beforePath="$PROJECT_DIR$/routes/channels.php" afterPath="$PROJECT_DIR$/routes/channels.php" />
+      <change beforePath="$PROJECT_DIR$/routes/console.php" afterPath="$PROJECT_DIR$/routes/console.php" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
+      <change beforePath="$PROJECT_DIR$/storage/app/.gitignore" afterPath="$PROJECT_DIR$/storage/app/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/.gitignore" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/.gitignore" afterPath="$PROJECT_DIR$/storage/framework/cache/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" afterPath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" afterPath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/testing/.gitignore" afterPath="$PROJECT_DIR$/storage/framework/testing/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/views/.gitignore" afterPath="$PROJECT_DIR$/storage/framework/views/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/storage/logs/.gitignore" afterPath="$PROJECT_DIR$/storage/logs/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/tests/CreatesApplication.php" afterPath="$PROJECT_DIR$/tests/CreatesApplication.php" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/ExampleTest.php" afterPath="$PROJECT_DIR$/tests/Feature/ExampleTest.php" />
+      <change beforePath="$PROJECT_DIR$/tests/TestCase.php" afterPath="$PROJECT_DIR$/tests/TestCase.php" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/ExampleTest.php" afterPath="$PROJECT_DIR$/tests/Unit/ExampleTest.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,15 +143,15 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="shazde_panel" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -105,13 +161,26 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>cityId</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/grgk/seo-analyzer" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
@@ -222,13 +291,67 @@
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-cors" />
     </include_path>
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="3" />
+    <option name="y" value="25" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
   <component name="ProjectId" id="1PbECGnVYIH7Hq8tGRL9H8p5tPi" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="shazdePanel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="shazdePanel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="shazdePanel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="shazdePanel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Middleware" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="SearchEverywhereHistoryKey" value=".htac&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/public/.htaccess&#10;submitLogs&#9;null&#9;null&#10;controlActivityContent&#9;null&#9;null&#10;controlContent&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/content/user/controlContent.blade.php&#10;lastActivities&#9;null&#9;null&#10;we&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/routes/web.php&#10;las&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/report/lastActivity.blade.php&#10;lastAc&#9;null&#9;null&#10;.env&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/.env&#10;Com&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Controllers/Common.php&#10;home.&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/home.blade.php&#10;HomeController&#9;null&#9;null&#10;HomeC&#9;null&#9;null&#10;User&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Controllers/UserController.php&#10;setPostInterval&#9;null&#9;null&#10;structure&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/layouts/structure.blade.php&#10;createPos&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/content/post/createPostStep4.blade.php&#10;createPost&#9;null&#9;null&#10;getValueInfo&#9;null&#9;null&#10;Last&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Controllers/LastActivityController.php&#10;last&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Controllers/LastActivityController.php&#10;Off&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Controllers/OffCodeController.php&#10;PostController&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Controllers/PostController.php&#10;str&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/layouts/structure.blade.php&#10;offers&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/offer/offers.blade.php&#10;OffCode&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Controllers/OffCodeController.php&#10;Ke&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Kernel.php&#10;Kernel.php&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Kernel.php&#10;manageAc&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/users/manageAccess.blade.php&#10;ACL&#9;null&#9;null&#10;deleteOffe&#9;null&#9;null&#10;lastActivity&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/report/lastActivity.blade.php&#10;lastActivitie&#9;null&#9;null&#10;OffCodeController&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/Http/Controllers/OffCodeController.php&#10;searchForCit&#9;null&#9;null&#10;doCreateOffer&#9;null&#9;null&#10;editSection&#9;null&#9;null&#10;S&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/models/Section.php&#10;section&#9;null&#9;null&#10;config/ana&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/config/analytics.php&#10;URL&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php&#10;URL.&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php&#10;doChangePlace&#9;null&#9;null&#10;Post&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/app/models/Post.php&#10;posts&#9;null&#9;null&#10;d38&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/storage/framework/views/d38578819ed38e770cff5ca8ca1610fd172699e3.php&#10;crea&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/resources/views/content/post/createPost.blade.php&#10;composer&#9;FILE&#9;file://C:/xampp/htdocs/shazde_panel/vendor/composer/composer/bin/composer&#10;deleteLogs&#9;null&#9;null&#10;imageBacku&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../koochita" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
@@ -265,29 +388,30 @@
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
-      <method v="2" />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
       <tasks />
       <arguments />
       <envs />
-      <method v="2" />
     </configuration>
-    <configuration default="true" type="mocha-javascript-test-runner">
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <working-directory />
       <pass-parent-env>true</pass-parent-env>
+      <envs />
       <ui>bdd</ui>
       <extra-mocha-options />
       <test-kind>DIRECTORY</test-kind>
       <test-directory />
       <recursive>false</recursive>
-      <method v="2" />
     </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -345,6 +469,7 @@
       <workItem from="1567687842070" duration="2492000" />
       <workItem from="1567707107441" duration="229000" />
       <workItem from="1569838107264" duration="1910000" />
+      <workItem from="1571054277966" duration="685000" />
     </task>
     <task id="LOCAL-00001" summary="last changes">
       <created>1556982242677</created>
@@ -405,6 +530,33 @@
     <option name="localTasksCounter" value="9" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="685000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-13" y="-13" width="2762" height="1770" extended-state="6" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991013" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -414,6 +566,12 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -429,9 +587,26 @@
       <collection />
     </option>
   </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="last changes" />
     <MESSAGE value="image backup completed" />
     <option name="LAST_COMMIT_MESSAGE" value="image backup completed" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

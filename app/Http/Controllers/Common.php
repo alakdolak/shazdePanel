@@ -72,6 +72,7 @@ function getMessages() {
         'username.required' => 'لطفا نام کاربری مورد نظر خود را وارد نمایید',
         'password.require' => 'لطفا رمزعبور خود را وارد نمایید',
         'confirm_password.required' => 'لطفا تکرار رمزعبور خود را وارد نمایید',
+        'cityId.required' => 'لطفا شهر را مشخص نمایید',
 
         'username.unique' => 'نام کاربری مورد نظر در سامانه موجود است',
         'phone.unique' => 'شماره همراه مورد نظر در سامانه موجود است',

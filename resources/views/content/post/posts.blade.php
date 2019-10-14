@@ -21,8 +21,12 @@
 
         <div class="sparkline8-list shadow-reset mg-tb-30">
             <div class="sparkline8-hd">
-                <div class="main-sparkline8-hd">
+                <div class="main-sparkline8-hd" style=" width: 100%; display: flex; justify-content: space-between;">
                     <h1>پست های منتخب</h1>
+                    <div>
+                        <button onclick="document.location.href = '{{route('createPost')}}'" class="btn btn-primary">افزودن پست جدید</button>
+                        <button class="btn btn-primary">افزودن دسته ای پست</button>
+                    </div>
                 </div>
             </div>
 

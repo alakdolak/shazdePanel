@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $stateId
  * @property float $x
  * @property float $y
+ * @property string $description
+ * @property string $image
  * @method static \Illuminate\Database\Query\Builder|\App\models\Cities whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\Cities whereStateId($value)
  */

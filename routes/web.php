@@ -23,7 +23,12 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function() {
 
     Route::get('chooseCity/{mode}', ['as' => 'chooseCity', 'uses' => 'PlaceController@chooseCity']);
 
-    Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
+    Route::get('city/index', ['as' => 'city.index', 'uses' => 'PlaceController@indexCity']);
+    Route::get('city/add', ['as' => 'city.add', 'uses' => 'PlaceController@addCity']);
+    Route::post('city/store', ['as' => 'city.store', 'uses' => 'PlaceController@storeCity']);
+    Route::get('city/edit/{id}', ['as' => 'city.edit', 'uses' => 'PlaceController@editCity']);
+    Route::post('city/doEdit', ['as' => 'city.doEdit', 'uses' => 'PlaceController@doEditCity']);
+    Route::post('city/delete', ['as' => 'city.delete', 'uses' => 'PlaceController@deleteCity']);
 
 });
 
@@ -56,7 +61,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), functio
     Route::get('seoTester', ['as' => 'seoTester', 'uses' => 'SeoController@seoTester']);
 
     Route::post('doSeoTest', ['as' => 'doSeoTest', 'uses' => 'SeoController@doSeoTest']);
-
+    
     Route::post('changeNoFollow', ['as' => 'changeNoFollow', 'uses' => 'SeoController@changeNoFollow']);
 
 });
@@ -88,7 +93,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'publicityAccess']), f
     Route::get('sectionStep2/{sectionId}' , array('as' => 'sectionStep2' , 'uses' => 'PublicityController@sectionStep2'));
 
     Route::post('addPageToSection/{sectionId}' , array('as' => 'addPageToSection' , 'uses' => 'PublicityController@addPageToSection'));
-
+    
     Route::post('deleteSection' , array('as' => 'deleteSection' , 'uses' => 'PublicityController@deleteSection'));
 
     Route::any('seeAds', array('as' => 'seeAds', 'uses' => 'PublicityController@seeAds'));
@@ -108,7 +113,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
     Route::get('createPost', ['as' => 'createPost', 'uses' => 'PostController@createPost']);
 
     Route::get('createPostStep2/{id}', ['as' => 'createPostStep2', 'uses' => 'PostController@createPostStep2']);
-
+    
     Route::get('createPostStep3/{id}', ['as' => 'createPostStep3', 'uses' => 'PostController@createPostStep3']);
 
     Route::get('createPostStep4/{id}', ['as' => 'createPostStep4', 'uses' => 'PostController@createPostStep4']);
@@ -122,7 +127,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
     Route::post('doEditPost', ['as' => 'doEditPost', 'uses' => 'PostController@doEditPost']);
 
     Route::post('editPostTag', ['as' => 'editPostTag', 'uses' => 'PostController@editPostTag']);
-
+    
     Route::post('uploadCKEditor', function () {
 
         try {
@@ -208,7 +213,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'msgAccess']), functio
     Route::post('doSendMsg', ['as' => 'doSendMsg', 'uses' => 'MsgController@doSendMsg']);
 
     Route::get('msgs', ['as' => 'msgs', 'uses' => 'MsgController@msgs']);
-
+    
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'offCodeAccess']), function () {
@@ -220,7 +225,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'offCodeAccess']), fun
     Route::post('doCreateOffer', ['as' => 'doCreateOffer', 'uses' => 'OffCodeController@doCreateOffer']);
 
     Route::post('deleteOffer', ['as' => 'deleteOffer', 'uses' => 'OffCodeController@deleteOffer']);
-
+    
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), function () {
@@ -270,16 +275,13 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'configAccess']), func
     Route::post('removeBackup', ['as' => 'removeBackup', 'uses' => 'BackupController@removeBackup']);
 
     Route::get('getImageBackup/{idx}', ['as' => 'getImageBackup', 'uses' => 'BackupController@getImageBackup']);
-
+    
     Route::post('imageBackup', ['as' => 'imageBackup', 'uses' => 'BackupController@imageBackup']);
 
     Route::post('getDonePercentage', ['as' => 'getDonePercentage', 'uses' => 'BackupController@getDonePercentage']);
 
     Route::post('initialImageBackUp', ['as' => 'initialImageBackUp', 'uses' => 'BackupController@initialImageBackUp']);
 
-    Route::any('specialAdvice', array('as' => 'specialAdvice', 'uses' => 'HomeController@specialAdvice'));
-
-    Route::post('submitAdvice', array('as' => 'submitAdvice', 'uses' => 'HomeController@submitAdvice'));
 });
 
 
@@ -313,9 +315,9 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('totalSearch', array('as' => 'totalSearch', 'uses' => 'HomeController@totalSearch'));
 
     Route::post('searchForCity', array('as' => 'searchForCity', 'uses' => 'PlaceController@searchForCity'));
-
+    
     Route::post('searchForCityAndState', array('as' => 'searchForCityAndState', 'uses' => 'PlaceController@searchForCityAndState'));
-
+    
     Route::post('searchForState', array('as' => 'searchForState', 'uses' => 'PlaceController@searchForState'));
 
     Route::get('logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);

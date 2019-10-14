@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\models\AdminLog;
 use App\models\BannerPosts;
+use App\models\Cities;
 use App\models\FavoritePost;
 use App\models\Hotel;
 use App\models\Place;
 use App\models\Post;
+use App\models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -82,7 +84,8 @@ class PostController extends Controller {
             'category' => 'required',
             'relatedMode' => 'required',
             'placeIdOrC' => 'required',
-            'kindPlaceIdOrD' => 'required'
+            'kindPlaceIdOrD' => 'required',
+            'cityId' => 'required'
         ], getMessages());
 
 
@@ -95,6 +98,9 @@ class PostController extends Controller {
         $post->title = makeValidInput($_POST["title"]);
         $post->category = makeValidInput($_POST["category"]);
         $post->categoryColor = makeValidInput($_POST["categoryColor"]);
+        $post->cityId = makeValidInput($_POST["cityId"]);
+//        $post->date = '';
+//        $post->time = '';
 
         $relatedMode = makeValidInput($_POST["relatedMode"]);
 
@@ -221,7 +227,8 @@ class PostController extends Controller {
             'category' => 'required',
             'relatedMode' => 'required',
             'placeIdOrC' => 'required',
-            'kindPlaceIdOrD' => 'required'
+            'kindPlaceIdOrD' => 'required',
+            'cityId' => 'required'
         ], getMessages());
 
         $id = makeValidInput($_POST["id"]);
@@ -238,6 +245,7 @@ class PostController extends Controller {
         $post->title = makeValidInput($_POST["title"]);
         $post->category = makeValidInput($_POST["category"]);
         $post->categoryColor = makeValidInput($_POST["categoryColor"]);
+        $post->cityId = makeValidInput($_POST["cityId"]);
 
         $relatedMode = makeValidInput($_POST["relatedMode"]);
 
@@ -269,6 +277,12 @@ class PostController extends Controller {
             return Redirect::route('home');
 
         $placeName = getPlaceAndFolderName($post->kindPlaceId, $post->placeId)[0]->name;
+
+        if($post->cityId != null) {
+            $city = Cities::find($post->cityId);
+            $state = State::find($city->stateId);
+            $post->city = $city->name . ' در ' . $state->name;
+        }
 
         return view('content.post.createPost', ['categories' => getPostCategories(),
             'places' => Place::all(), 'post' => $post, 'placeName' => $placeName
