@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\Adab;
+use App\models\AdminLog;
 use App\models\Amaken;
 use App\models\Hotel;
 use App\models\LogModel;
 use App\models\Majara;
 use App\models\PicItem;
 use App\models\Restaurant;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
@@ -176,7 +178,17 @@ class AltController extends Controller {
                     break;
             }
 
-            $place->save();
+            try {
+                $place->save();
+
+                $tmp = new AdminLog();
+                $tmp->uId = Auth::user()->id;
+                $tmp->mode = getValueInfo('removeMainPic');
+                $tmp->additional1 = $kindPlaceId;
+                $tmp->additional2 = $place->id;
+                $tmp->save();
+            }
+            catch (\Exception $x) {}
 
         }
 
@@ -244,6 +256,12 @@ class AltController extends Controller {
 
                     $place->save();
 
+                    $tmp = new AdminLog();
+                    $tmp->mode = getValueInfo('changePic');
+                    $tmp->uId = Auth::user()->id;
+                    $tmp->additional1 = $kindPlaceId;
+                    $tmp->additional2 = $place->id;
+                    $tmp->save();
                 }
                 else {
                     dd($err);

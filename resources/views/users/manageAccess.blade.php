@@ -97,6 +97,14 @@
                         <span class="myLabel">مدیریت تبلیغات</span>
                     </div>
 
+                    <div class="col-xs-12">
+                        <label class="switch">
+                            <input onchange="changeAccess('msg')" type="checkbox" {{($access->msg) ? 'checked' : ''}}>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="myLabel">مدیریت پیام رسانی</span>
+                    </div>
+
                 </center>
             </div>
 

@@ -23,6 +23,8 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function() {
 
     Route::get('chooseCity/{mode}', ['as' => 'chooseCity', 'uses' => 'PlaceController@chooseCity']);
 
+    Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
+
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'altAccess']), function () {
@@ -49,6 +51,14 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), functio
 
     Route::post('doChangeSeo', ['as' => 'doChangeSeo', 'uses' => 'SeoController@doChangeSeo']);
 
+    Route::get('manageNoFollow', ['as' => 'manageNoFollow', 'uses' => 'SeoController@manageNoFollow']);
+
+    Route::get('seoTester', ['as' => 'seoTester', 'uses' => 'SeoController@seoTester']);
+
+    Route::post('doSeoTest', ['as' => 'doSeoTest', 'uses' => 'SeoController@doSeoTest']);
+
+    Route::post('changeNoFollow', ['as' => 'changeNoFollow', 'uses' => 'SeoController@changeNoFollow']);
+
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), function () {
@@ -71,6 +81,14 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'publicityAccess']), f
 
     Route::any('addSection' , array('as' => 'section' , 'uses' => 'PublicityController@addSection'));
 
+    Route::any('editSection' , array('as' => 'editSection' , 'uses' => 'PublicityController@editSection'));
+
+    Route::post('editSection' , array('as' => 'editSection' , 'uses' => 'PublicityController@editSection'));
+
+    Route::get('sectionStep2/{sectionId}' , array('as' => 'sectionStep2' , 'uses' => 'PublicityController@sectionStep2'));
+
+    Route::post('addPageToSection/{sectionId}' , array('as' => 'addPageToSection' , 'uses' => 'PublicityController@addPageToSection'));
+
     Route::post('deleteSection' , array('as' => 'deleteSection' , 'uses' => 'PublicityController@deleteSection'));
 
     Route::any('seeAds', array('as' => 'seeAds', 'uses' => 'PublicityController@seeAds'));
@@ -87,16 +105,137 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
 
     Route::get('posts', ['as' => 'posts', 'uses' => 'PostController@posts']);
 
+    Route::get('createPost', ['as' => 'createPost', 'uses' => 'PostController@createPost']);
+
+    Route::get('createPostStep2/{id}', ['as' => 'createPostStep2', 'uses' => 'PostController@createPostStep2']);
+
+    Route::get('createPostStep3/{id}', ['as' => 'createPostStep3', 'uses' => 'PostController@createPostStep3']);
+
+    Route::get('createPostStep4/{id}', ['as' => 'createPostStep4', 'uses' => 'PostController@createPostStep4']);
+
+    Route::post('setPostPic/{id}', ['as' => 'setPostPic', 'uses' => 'PostController@setPostPic']);
+
+    Route::post('setPostInterval/{id}', ['as' => 'setPostInterval', 'uses' => 'PostController@setPostInterval']);
+
+    Route::get('editPost/{id}', ['as' => 'editPost', 'uses' => 'PostController@editPost']);
+
+    Route::post('doEditPost', ['as' => 'doEditPost', 'uses' => 'PostController@doEditPost']);
+
+    Route::post('editPostTag', ['as' => 'editPostTag', 'uses' => 'PostController@editPostTag']);
+
+    Route::post('uploadCKEditor', function () {
+
+        try {
+            if ($this->request->hasFiles() == true) {
+                $errors = []; // Store all foreseen and unforseen errors here
+                $fileExtensions = ['jpeg','jpg','png','gif','svg'];
+                $uploadDirectory = __DIR__ . '/../../Uploads/';
+                $Y = date("Y");
+                $M = date("m");
+
+                foreach ($this->request->getUploadedFiles() as $file) {
+
+                    if (in_array($file->getExtension(),$fileExtensions)) {
+
+                        if($file->getSize() < 2000000)  {
+                            if (!file_exists($uploadDirectory . $Y)) {
+                                mkdir($uploadDirectory.$Y, 0777, true);
+                            }
+                            if (!file_exists($uploadDirectory.$Y.'/'.$M)) {
+                                mkdir($uploadDirectory.$Y.'/'.$M, 0777, true);
+                            }
+
+                            $namenew = md5($file->getName().time()).'.'.$file->getExtension();
+                            $uploadDirectory .= $Y.'/'.$M.'/';
+                            $file->moveTo($uploadDirectory.$namenew);
+                        }
+                        else {
+                            $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
+                        }
+                    }
+                    else{$errors[] = "This file extension is not allowed. Please upload a JPEG ,svg,gif,,jpg,PNG file";}
+
+                    if(empty($errors))  {
+                        echo '{
+                        "uploaded": true,
+                        "url": "http://localhost/cms/public/Uploads/'.$Y.'/'.$M.'/'.$namenew.'"}';
+                    }
+                    else{
+                        echo '{
+                        "uploaded": false,
+                        "error": {
+                            "message": "could not upload this image1"
+                    }';
+                    }
+                }
+            }
+            else {
+                echo '{
+                "uploaded": false,
+                "error": {
+                    "message": "could not upload this image1"
+                }';
+            }
+        }
+
+        catch (\Exception $e) {
+            echo '{
+            "uploaded": false,
+            "error": {
+                "message": "could not upload this image0"
+            }';
+        }
+    })->name('uploadCKEditor');
+
+    Route::post('doAddPost', ['as' => 'doAddPost', 'uses' => 'PostController@doAddPost']);
+
+    Route::post('deletePost', ['as' => 'deletePost', 'uses' => 'PostController@deletePost']);
+
+    Route::post('addToFavoritePosts', ['as' => 'addToFavoritePosts', 'uses' => 'PostController@addToFavoritePosts']);
+
+    Route::post('addToBannerPosts', ['as' => 'addToBannerPosts', 'uses' => 'PostController@addToBannerPosts']);
+
+    Route::post('deleteFromFavoritePosts', ['as' => 'deleteFromFavoritePosts', 'uses' => 'PostController@deleteFromFavoritePosts']);
+
+    Route::post('deleteFromBannerPosts', ['as' => 'deleteFromBannerPosts', 'uses' => 'PostController@deleteFromBannerPosts']);
+
+});
+
+Route::group(array('middleware' => ['auth', 'adminLevel', 'msgAccess']), function () {
+
+    Route::get('sendMsg', ['as' => 'sendMsg', 'uses' => 'MsgController@sendMsg']);
+
+    Route::post('doSendMsg', ['as' => 'doSendMsg', 'uses' => 'MsgController@doSendMsg']);
+
+    Route::get('msgs', ['as' => 'msgs', 'uses' => 'MsgController@msgs']);
 
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'offCodeAccess']), function () {
+
+    Route::get('offers/{mode?}', ['as' => 'offers', 'uses' => 'OffCodeController@offers']);
+
+    Route::get('createOffer', ['as' => 'createOffer', 'uses' => 'OffCodeController@createOffer']);
+
+    Route::post('doCreateOffer', ['as' => 'doCreateOffer', 'uses' => 'OffCodeController@doCreateOffer']);
+
+    Route::post('deleteOffer', ['as' => 'deleteOffer', 'uses' => 'OffCodeController@deleteOffer']);
 
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), function () {
 
     Route::get('lastActivities', ['as' => 'lastActivities', 'uses' => 'CommentController@lastActivities']);
+
+    Route::get('controlActivityContent/{activityId}/{confirm?}', ['as' => 'controlActivityContent', 'uses' => 'CommentController@controlActivityContent']);
+
+    Route::post('submitLogs', array('as' => 'submitLogs', 'uses' => 'CommentController@submitLogs'));
+
+    Route::post('unSubmitLogs', array('as' => 'unSubmitLogs', 'uses' => 'CommentController@unSubmitLogs'));
+
+    Route::post('deleteLogs', array('as' => 'deleteLogs', 'uses' => 'CommentController@deleteLogs'));
+
+    Route::post('changeUserContent', array('as' => 'changeUserContent', 'uses' => 'CommentController@changeUserContent'));
 
 });
 
@@ -131,13 +270,16 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'configAccess']), func
     Route::post('removeBackup', ['as' => 'removeBackup', 'uses' => 'BackupController@removeBackup']);
 
     Route::get('getImageBackup/{idx}', ['as' => 'getImageBackup', 'uses' => 'BackupController@getImageBackup']);
-    
+
     Route::post('imageBackup', ['as' => 'imageBackup', 'uses' => 'BackupController@imageBackup']);
 
     Route::post('getDonePercentage', ['as' => 'getDonePercentage', 'uses' => 'BackupController@getDonePercentage']);
 
     Route::post('initialImageBackUp', ['as' => 'initialImageBackUp', 'uses' => 'BackupController@initialImageBackUp']);
 
+    Route::any('specialAdvice', array('as' => 'specialAdvice', 'uses' => 'HomeController@specialAdvice'));
+
+    Route::post('submitAdvice', array('as' => 'submitAdvice', 'uses' => 'HomeController@submitAdvice'));
 });
 
 
@@ -157,6 +299,9 @@ Route::group(array('middleware' => ['auth', 'superAdminLevel']), function () {
 
     Route::post('changePass', ['as' => 'changePass', 'uses' => 'UserController@changePass']);
 
+    Route::get('systemLastActivities', ['as' => 'systemLastActivities', 'uses' => 'LastActivityController@lastActivities']);
+
+    Route::post('deleteSystemLogs', ['as' => 'deleteSystemLogs', 'uses' => 'LastActivityController@deleteLogs']);
 });
 
 Route::group(array('middleware' => ['auth']), function () {
@@ -168,9 +313,9 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('totalSearch', array('as' => 'totalSearch', 'uses' => 'HomeController@totalSearch'));
 
     Route::post('searchForCity', array('as' => 'searchForCity', 'uses' => 'PlaceController@searchForCity'));
-    
+
     Route::post('searchForCityAndState', array('as' => 'searchForCityAndState', 'uses' => 'PlaceController@searchForCityAndState'));
-    
+
     Route::post('searchForState', array('as' => 'searchForState', 'uses' => 'PlaceController@searchForState'));
 
     Route::get('logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);

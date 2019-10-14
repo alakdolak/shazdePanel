@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $config
  * @property boolean $offCode
  * @property boolean $publicity
+ * @property boolean $msg
  * @method static \Illuminate\Database\Query\Builder|\App\models\ACL whereUserId($value)
  */
 

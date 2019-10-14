@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\models\ACL;
+use App\models\AdminLog;
 use App\models\Cities;
 use App\models\DefaultPic;
 use App\models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -58,6 +60,10 @@ class UserController extends Controller {
                 if($user != null) {
                     $user->password = Hash::make($pass);
                     $user->save();
+                    $tmp = new AdminLog();
+                    $tmp->uId = Auth::user()->id;
+                    $tmp->mode = getValueInfo('changePass');
+                    $tmp->save();
                 }
             }
 
@@ -177,6 +183,10 @@ class UserController extends Controller {
 
                 case "publicity":
                     $acl->publicity = !$acl->publicity;
+                    break;
+
+                case "msg":
+                    $acl->msg = !$acl->msg;
                     break;
             }
 

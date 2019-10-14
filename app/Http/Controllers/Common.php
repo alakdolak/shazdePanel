@@ -6,6 +6,61 @@ use App\models\Hotel;
 use App\models\Majara;
 use App\models\Restaurant;
 use Illuminate\Support\Facades\URL;
+use PHPMailer\PHPMailer\PHPMailer;
+
+function getPostCategories() {
+
+    return [
+        [
+            'super' => "اماکن گردشگری",
+            'childs' => [
+                ['id' => 1, 'key' => 'اماکن تاریخی'],
+                ['id' => 2, 'key' => 'اماکن مذهبی'],
+                ['id' => 3, 'key' => 'اماکن تفریحی'],
+                ['id' => 4, 'key' => 'طبیعت گردی'],
+                ['id' => 5, 'key' => 'مراکز خرید'],
+                ['id' => 6, 'key' => 'موزه ها']
+            ]
+        ],
+        [
+            'super' => "هتل و رستوران",
+            "childs" => [
+                ['id' => 7, 'key' => 'هتل'],
+                ['id' => 8, 'key' => 'رستوران'],
+            ]
+        ],
+        [
+            'super' => "حمل و نقل",
+            'childs' => [
+                ['id' => 9, 'key' => 'هواپیما'],
+                ['id' => 10, 'key' => 'اتوبوس'],
+                ['id' => 11, 'key' => 'سواری'],
+                ['id' => 12, 'key' => 'فطار']
+            ]
+        ],
+        [
+            'super' => "آداب و رسوم",
+            "childs" => [
+                ['id' => 13, 'key' => 'سوغات محلی'],
+                ['id' => 14, 'key' => 'صنایع دستی'],
+                ['id' => 15, 'key' => 'اماکن تفریحی'],
+                ['id' => 16, 'key' => 'غذای محلی'],
+                ['id' => 17, 'key' => 'لباس محلی'],
+                ['id' => 18, 'key' => 'گویش محلی'],
+                ['id' => 19, 'key' => 'اصطلاحات محلی'],
+            ]
+        ],
+        [
+            'super' => "جشنواره و آیین",
+            "childs" => [
+                ['id' => 20, 'key' => 'رسوم محلی'],
+                ['id' => 21, 'key' => 'جشنواره'],
+                ['id' => 22, 'key' => 'تور'],
+                ['id' => 23, 'key' => 'کنسرت']
+            ]
+        ]
+    ];
+}
 
 function getMessages() {
     return [
@@ -45,7 +100,21 @@ function getValueInfo($key) {
         'restaurantMode' => 1, 'fastfood' => 2,
         'bom' => 8,
         'ghaza' => 3, 'soghat' => 1, 'sanaye' => 6,
-        '5_min' => 1, '10_min' => 2, '15_min' => 3, '30_min' => 4, 'hour' => 5, 'day' => 6, 'week' => 7, 'month' => 8
+        '5_min' => 1, '10_min' => 2, '15_min' => 3, '30_min' => 4, 'hour' => 5, 'day' => 6, 'week' => 7, 'month' => 8,
+        
+        
+        'editPost' => 1, 'deletePost' => 2, 'createPost' => 3, 'changePass' => 4, 'changeNoFollow' => 5, 'changeSeo' => 6,
+        'changeUserContent' => 7, 'submitLog' => 8, 'deleteLog' => 9, 'unSubmitLog' => 10, 'removeBackup' => 11,
+        'addBackup' => 12, 'manualBackup' => 13, 'imageBackup' => 14, 'removeMainPic' => 15, 'login' => 16, 'determineRadius' => 17,
+        'selfChangePass' => 18, 'mail' => 19, 'phone' => 20, 'messageBox' => 21, 'offCode' => 22, 'submitPost' => 23,
+        'unSubmitPost' => 24,
+
+
+        'hotel-detail' => 1, 'adab-detail' => 2, 'amaken-detail' => 3, 'majara-detail' => 4, 'restaurant-detail' => 5,
+        'hotel-list' => 6, 'adab-list' => 7, 'amaken-list' => 8, 'majara-list' => 9, 'restaurant-list' => 10,
+        'main_page' => 11,
+
+        'staticOffer' => 1, 'dynamicOffer' => 2
     ];
 
     return $values[$key];
@@ -373,7 +442,7 @@ function sendMail($text, $recipient, $subject) {
         return true;
     } catch (Exception $e) {
 //        echo 'Message could not be sent.';
-        echo 'Mailer Error: ' . $mail->ErrorInfo;
+//        echo 'Mailer Error: ' . $mail->ErrorInfo;
         return false;
     }
 }
@@ -492,7 +561,7 @@ function convertStringToDate($date, $spliter = '/') {
     return $date[0] . $date[1] . $date[2] . $date[3] . $spliter . $date[4] . $date[5] . $spliter . $date[6] . $date[7];
 }
 
-function sendSMS($destNum, $text, $template, $token2 = "") {
+function sendSMS($destNum, $text, $template, $token2 = "", $token3 = "") {
 
     require_once __DIR__ . '/../../../vendor/autoload.php';
 

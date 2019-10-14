@@ -3,6 +3,13 @@
 @section('header')
     @parent
 
+    <script src = {{URL::asset("js/calendar.js") }}></script>
+    <script src = {{URL::asset("js/calendar-setup.js") }}></script>
+    <script src = {{URL::asset("js/calendar-fa.js") }}></script>
+    <script src = {{URL::asset("js/jalali.js") }}></script>
+    <link rel="stylesheet" href="{{URL::asset('css/standalone.css')}}">
+    <link rel="stylesheet" href = {{URL::asset("css/calendar-green.css") }}>
+
     <style>
         .col-xs-12 {
             margin-top: 10px;
@@ -33,7 +40,6 @@
 @section('content')
 
     @include('layouts.modal')
-{{--    @include('layouts.pop-up-create-trip')--}}
 
     <div class="col-md-2"></div>
 
@@ -118,7 +124,7 @@
                                     @foreach($sections as $section)
                                         <div>
                                             <label for="section_{{$section->id}}">{{$section->name}}</label>
-                                            <input onchange="changeSection('{{$section->id}}')" id="section_{{$section->id}}" type="checkbox" value="{{$section->id}}" name="sections[]">
+                                            <input id="section_{{$section->id}}" type="checkbox" value="{{$section->id}}" name="sections[]">
                                             <span id="part_{{$section->id}}"></span>
                                         </div>
                                     @endforeach
@@ -136,24 +142,49 @@
                                     <input type="file" name="pic" accept="image/png" required>
                                 </label>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="ui_column" style="max-width: 200px">
-                                    <div id="date_btn_start_edit">تاریخ شروع</div>
-                                    <label style="position: relative; margin:6px; width: 100%; height: 30px; border: 1px solid #e5e5e5; border-radius: 2px; box-shadow: 0 7px 12px -7px #e5e5e5 inset;">
-                                        <span onclick="editDateTrip()" class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>
-                                        <input name="startDate" id="date_input_start_edit_2" placeholder="روز/ماه/سال" required readonly style="padding: 7px; position: absolute; top: 1px; right: 35px; border: none; background: transparent;" type="text">
-                                    </label>
-                                </div>
-                            </div>
 
                             <div class="col-xs-12">
-                                <div class="ui_column" style="max-width: 200px">
-                                    <div id="date_btn_end_edit">تاریخ اتمام</div>
-                                    <label style="position: relative; margin:6px; width: 100%; height: 30px; border: 1px solid #e5e5e5; border-radius: 2px; box-shadow: 0 7px 12px -7px #e5e5e5 inset;">
-                                        <span onclick="editDateTripEnd()" class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>
-                                        <input name="endDate" id="date_input_end_edit_2" placeholder="روز/ماه/سال" required readonly style="padding: 7px; position: absolute; top: 1px; right: 35px; border: none; background: transparent;" type="text">
-                                    </label>
-                                </div>
+
+                                <center class="col-xs-6">
+                                    <input type="button"
+                                           style="border: none; width: 15px;  height: 15px; background: url({{ URL::asset('img/calender.png') }}) repeat 0 0; background-size: 100% 100%;"
+                                           id="date_btn_end">
+                                    <span>تا تاریخ</span>
+
+                                    <input type="text" style="max-width: 200px" class="form-detail"
+                                           name="endDate" id="date_input_end" onchange="end()" readonly>
+
+                                    <script>
+                                        Calendar.setup({
+                                            inputField: "date_input_end",
+                                            button: "date_btn_end",
+                                            ifFormat: "%Y/%m/%d",
+                                            dateType: "jalali"
+                                        });
+                                    </script>
+                                </center>
+
+                                <center class="col-xs-6">
+
+                                    <input type="button"
+                                           style="border: none;  width: 15px; height: 15px; background: url({{ URL::asset('img/calender.png') }}) repeat 0 0; background-size: 100% 100%;"
+                                           id="date_btn_Start">
+
+                                    <span style="direction: rtl">از تاریخ</span>
+
+                                    <input type="text" style="max-width: 200px" class="form-detail"
+                                           name="startDate" id="date_input_start" onchange="start()" readonly>
+
+                                    <script>
+                                        Calendar.setup({
+                                            inputField: "date_input_start",
+                                            button: "date_btn_Start",
+                                            ifFormat: "%Y/%m/%d",
+                                            dateType: "jalali"
+                                        });
+                                    </script>
+                                </center>
+
                             </div>
 
                             <div class="col-xs-12">
@@ -200,13 +231,9 @@
                                         <div>
                                             <label for="section_{{$section->id}}">{{$section->name}}</label>
                                             @if($section->select == 1)
-                                                <input onchange="changeSection('{{$section->id}}')" checked id="section_{{$section->id}}" type="checkbox" value="{{$section->id}}" name="sections[]">
-                                                <span id="part_{{$section->id}}">
-                                                    <input type="number" min="1" max="10" value="{{$section->part}}" name="parts[]">
-                                                </span>
+                                                <input checked id="section_{{$section->id}}" type="checkbox" value="{{$section->id}}" name="sections[]">
                                             @else
-                                                <input onchange="changeSection('{{$section->id}}')" id="section_{{$section->id}}" type="checkbox" value="{{$section->id}}" name="sections[]">
-                                                <span id="part_{{$section->id}}"></span>
+                                                <input id="section_{{$section->id}}" type="checkbox" value="{{$section->id}}" name="sections[]">
                                             @endif
                                         </div>
                                     @endforeach
@@ -231,31 +258,56 @@
 
                             <div class="col-xs-12">
                                 <label>
-                                    <input onchange="writeFileName(this.value)" id="photo" type="file" name="pic" style="display: none">
+                                    <input onchange="writeFileName(this.value)" id="photo" type="file" name="pic">
                                     <label for="photo">
                                         <div class="ui_button primary addPhotoBtn">تصویر </div>
                                     </label>
                                     <p id="fileName"></p>
                                 </label>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="ui_column" style="max-width: 200px">
-                                    <div id="date_btn_start_edit">تاریخ شروع</div>
-                                    <label style="position: relative; margin:6px; width: 100%; height: 30px; border: 1px solid #e5e5e5; border-radius: 2px; box-shadow: 0 7px 12px -7px #e5e5e5 inset;">
-                                        <span onclick="editDateTrip()" class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>
-                                        <input value="{{convertStringToDate($ad->from_)}}" name="startDate" id="date_input_start_edit_2" placeholder="روز/ماه/سال" required readonly style="padding: 7px; position: absolute; top: 1px; right: 35px; border: none; background: transparent;" type="text">
-                                    </label>
-                                </div>
-                            </div>
 
                             <div class="col-xs-12">
-                                <div class="ui_column" style="max-width: 200px">
-                                    <div id="date_btn_end_edit">تاریخ اتمام</div>
-                                    <label style="position: relative; margin:6px; width: 100%; height: 30px; border: 1px solid #e5e5e5; border-radius: 2px; box-shadow: 0 7px 12px -7px #e5e5e5 inset;">
-                                        <span onclick="editDateTripEnd()" class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>
-                                        <input value="{{convertStringToDate($ad->to_)}}" name="endDate" id="date_input_end_edit_2" placeholder="روز/ماه/سال" required readonly style="padding: 7px; position: absolute; top: 1px; right: 35px; border: none; background: transparent;" type="text">
-                                    </label>
-                                </div>
+
+                                <center class="col-xs-6">
+                                    <input type="button"
+                                           style="border: none; width: 15px;  height: 15px; background: url({{ URL::asset('img/calender.png') }}) repeat 0 0; background-size: 100% 100%;"
+                                           id="date_btn_end">
+                                    <span>تا تاریخ</span>
+
+                                    <input type="text" style="max-width: 200px" class="form-detail"
+                                           name="endDate" value="{{convertStringToDate($ad->to_)}}" id="date_input_end" onchange="end()" readonly>
+
+                                    <script>
+                                        Calendar.setup({
+                                            inputField: "date_input_end",
+                                            button: "date_btn_end",
+                                            ifFormat: "%Y/%m/%d",
+                                            dateType: "jalali"
+                                        });
+                                    </script>
+                                </center>
+
+                                <center class="col-xs-6">
+
+                                    <input type="button"
+                                           style="border: none;  width: 15px; height: 15px; background: url({{ URL::asset('img/calender.png') }}) repeat 0 0; background-size: 100% 100%;"
+                                           id="date_btn_Start">
+
+                                    <span style="direction: rtl">از تاریخ</span>
+
+                                    <input type="text" style="max-width: 200px" class="form-detail"
+                                           name="startDate" value="{{convertStringToDate($ad->from_)}}" id="date_input_start" onchange="start()" readonly>
+
+                                    <script>
+                                        Calendar.setup({
+                                            inputField: "date_input_start",
+                                            button: "date_btn_Start",
+                                            ifFormat: "%Y/%m/%d",
+                                            dateType: "jalali"
+                                        });
+                                    </script>
+                                </center>
+
                             </div>
 
                             <div class="col-xs-12">
@@ -272,13 +324,6 @@
     <div class="col-md-2"></div>
 
     <script>
-
-        function changeSection(val) {
-            if($("#section_" + val).prop('checked'))
-                $("#part_" + val).empty().append('<input type="number" min="1" max="10" value="1" name="parts[]">');
-            else
-                $("#part_" + val).empty();
-        }
 
         function editDateTrip() {
 

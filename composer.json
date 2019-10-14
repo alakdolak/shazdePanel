@@ -9,14 +9,16 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
-        "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0",
-        "kavenegar/php": "1.2.*",
-        "phpmailer/phpmailer": "^6.0",
         "barryvdh/laravel-cors": "^0.11.0",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "phpoffice/phpexcel": "^1.8"
+        "fideloper/proxy": "^4.0",
+        "grgk/seo-analyzer": "^1.0",
+        "kavenegar/php": "1.2.*",
+        "laravel/framework": "5.8.*",
+        "laravel/tinker": "^1.0",
+        "phpmailer/phpmailer": "^6.0",
+        "phpoffice/phpexcel": "^1.8",
+        "spatie/laravel-analytics": "^3.7"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

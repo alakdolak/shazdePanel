@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $activityId
  * @property integer $visitorId
  * @property integer $relatedTo
+ * @property string $text
+ * @property string $date
+ * @property string $subject
+ * @property string $alt
  * @property boolean $seen
  * @property boolean $confirm
  * @method static \Illuminate\Database\Query\Builder|\App\models\LogModel whereRelatedTo($value)

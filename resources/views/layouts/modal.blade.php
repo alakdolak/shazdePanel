@@ -74,8 +74,10 @@
             newElement += '">';
             newElement += '<label>';
             newElement += '<span>' + items[i].label + '</span>';
-            if(items[i].type != "select")
+            if(items[i].type != "select" && items[i].type != "textarea")
                 newElement += '<input type="' + items[i].type +'" name="' + items[i].name + '" value="'+ items[i].value +'" maxlength="100" required>';
+            else if(items[i].type != "select")
+                newElement += '<textarea style="width: 300px; height: 100px" id="' + items[i].name + '" required>' + items[i].value.replace(/['"]+/g, '') + '</textarea>';
             else {
                 newElement += '<select name="' + items[i].name + '">';
                 var options = JSON.parse(items[i].options);
@@ -115,8 +117,11 @@
             if(items[i].type == "password")
                 checkSame = true;
 
-            if(items[i].type != "select")
+            if(items[i].type != "select" && items[i].type != "textarea")
                 newElement += '<input type="' + items[i].type + '" id="' + items[i].name + '" value="' + items[i].value + '" maxlength="100" required>';
+            else if(items[i].type != "select") {
+                newElement += '<textarea style="width: 300px; height: 100px" id="' + items[i].name + '" required>' + items[i].value.replace(/['"]+/g, '') + '</textarea>';
+            }
             else {
                 newElement += '<select id="' + items[i].name + '">';
                 var options = JSON.parse(items[i].options);

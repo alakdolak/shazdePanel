@@ -69,7 +69,8 @@ class Kernel extends HttpKernel
         'contentAccess' => \App\Http\Middleware\ContentAccess::class,
         'configAccess' => \App\Http\Middleware\ConfigAccess::class,
         'offCodeAccess' => \App\Http\Middleware\OffCodeAccess::class,
-        'publicityAccess' => \App\Http\Middleware\PublicityAccess::class
+        'publicityAccess' => \App\Http\Middleware\PublicityAccess::class,
+        'msgAccess' => \App\Http\Middleware\MsgAccess::class
     ];
 
     /**

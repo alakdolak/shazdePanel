@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\models\AdminLog;
 use App\models\Backup;
 use App\models\ImageBackUp;
 use FilesystemIterator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -78,22 +80,46 @@ class BackupController extends Controller {
     public function removeBackup() {
 
         if(isset($_POST["id"])) {
-            Backup::destroy(makeValidInput($_POST["id"]));
+
+            try {
+                Backup::destroy(makeValidInput($_POST["id"]));
+
+                $tmp = new AdminLog();
+                $tmp->uId = Auth::user()->id;
+                $tmp->mode = getValueInfo('removeBackup');
+                $tmp->additional1 = makeValidInput($_POST["id"]);
+                $tmp->save();
+
+            }
+            catch (\Exception $x) {}
+
         }
 
     }
 
     public function addBackup() {
-        
+
         if(isset($_POST["url"]) && isset($_POST['interval']) && isset($_POST["username"]) && isset($_POST["password"])) {
-            
+
             $backup = new Backup();
             $backup->_interval_ = makeValidInput($_POST["interval"]);
             $backup->username = makeValidInput($_POST["username"]);
             $backup->password = makeValidInput($_POST["password"]);
             $backup->url = makeValidInput($_POST["url"]);
 
-            $backup->save();
+            try {
+                $backup->save();
+                $tmp = new AdminLog();
+                $tmp->uId = Auth::user()->id;
+                $tmp->mode = getValueInfo('addBackup');
+                $tmp->additional1 = $backup->id;
+                $tmp->save();
+            }
+            catch (\Exception $x) {
+
+            }
+
+
         }
 
         return Redirect::route('backup');
@@ -181,7 +207,7 @@ class BackupController extends Controller {
         $mysqlUserName      = "administrator_persoulio";
         $mysqlPassword      = "yGrn65~6";
         $mysqlHostName      = "127.0.0.1";
-        $DbName             = "admin_shazde";
+        $DbName             = "pro";
         $tables             = false;
 
         $content = $this->Export_Database($mysqlHostName, $mysqlUserName, $mysqlPassword, $DbName,  $tables);
@@ -235,8 +261,13 @@ class BackupController extends Controller {
         $mysqlUserName      = "administrator_persoulio";
         $mysqlPassword      = "yGrn65~6";
         $mysqlHostName      = "127.0.0.1";
-        $DbName             = "admin_shazde";
+        $DbName             = "pro";
         $tables             = false;
+
+        $tmp = new AdminLog();
+        $tmp->uId = Auth::user()->id;
+        $tmp->mode = getValueInfo('manualBackUp');
+        $tmp->save();
 
         $content = $this->Export_Database($mysqlHostName, $mysqlUserName, $mysqlPassword, $DbName,  $tables);
 
@@ -305,7 +336,7 @@ class BackupController extends Controller {
         $total += $this->scan_dir($rootPath6);
 
         DB::connection('mysql2')->delete('delete from imageBackUp WHERE 1');
-        
+
         $imageBackUp = new ImageBackUp();
         $imageBackUp->total = $total;
         $imageBackUp->done = 0;
@@ -330,6 +361,11 @@ class BackupController extends Controller {
     }
 
     public function imageBackup() {
+
+        $tmp = new AdminLog();
+        $tmp->uId = Auth::user()->id;
+        $tmp->mode = getValueInfo('imageBackup');
+        $tmp->save();
 
         $root = __DIR__ ."/../../../../imageBackUps/";
         $chunkNo = 1;

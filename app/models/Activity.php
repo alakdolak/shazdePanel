@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $controllerNeed
  * @method static \Illuminate\Database\Query\Builder|\App\models\Activity whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\models\Activity whereVisibility($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\models\Activity whereControllerNeed($value)
  */
 
 class Activity extends Model {

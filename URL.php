@@ -54,6 +54,8 @@ class URL extends Facade
                     return 'http://localhost/userPhoto/' .$stub;
                 case "ads":
                     return 'http://localhost/ads/' .$stub;
+                case "css":
+                    return 'http://localhost/ads/' .$stub;
             }
         }
 

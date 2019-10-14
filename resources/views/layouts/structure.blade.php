@@ -65,7 +65,7 @@
         <!-- modernizr JS
             ============================================ -->
         <script src="{{URL::asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
-        <script src="{{URL::asset('js/jquery.js')}}"></script>
+        <script src="{{URL::asset('js/jquery.min.js')}}"></script>
 
         <style>
             .dropdown-item {
@@ -79,6 +79,11 @@
             .hidden {
                 display: none !important;
             }
+
+            .calendar > table {
+                width: 100%;
+            }
+
         </style>
 
         <script>
@@ -115,8 +120,6 @@
         <div class="left-sidebar-pro">
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <a href="#"><img src="img/message/1.jpg" alt="" />
-                    </a>
                     <h3>پنل شازده مسافر</h3>
                 </div>
                 <div class="left-custom-menu-adp-wrap">
@@ -128,11 +131,13 @@
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">مدیریت محتوا</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('choosePlace', ['mode' => 'alt'])}}" class="dropdown-item">تصاویر و alt آنها</a>
-                                    <a href="{{route('chooseCity', ['mode' => 'seo'])}}" class="dropdown-item">سئو صفحات</a>
+                                    <a href="{{route('chooseCity', ['mode' => 'seo'])}}" class="dropdown-item">تگ ها و متا صفحات</a>
+                                    <a href="{{route('manageNoFollow')}}" class="dropdown-item">مدیریت لینک ها</a>
                                     <a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
                                     <a href="{{route('lastActivities')}}" class="dropdown-item">فعالیت های اخیر</a>
                                     <a href="{{route('posts')}}" class="dropdown-item">مدیریت پست ها</a>
                                     <a href="{{route('uploadMainContent')}}" class="dropdown-item">افزودن محتوا</a>
+                                    <a href="{{route('seoTester')}}" class="dropdown-item">تست  سئو صفحات</a>
                                 </div>
                             </li>
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-flask"></i> <span class="mini-dn">مدال ها</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
@@ -146,7 +151,7 @@
                                     <a href="{{route('determineRadius')}}" class="dropdown-item">تعیین شعاع مکان های نزدیک</a>
                                     <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
                                     <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
-                                    <a href="project-list.html" class="dropdown-item">Project List</a>
+                                    <a href="{{route('offers')}}" class="dropdown-item">مدیریت کد های تخفیف</a>
                                     <a href="project-details.html" class="dropdown-item">Project Details</a>
                                 </div>
                             </li>
@@ -168,6 +173,19 @@
                                     <a href="{{route('seeAds')}}" class="dropdown-item">تبلیغات</a>
                                 </div>
                             </li>
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">گزارشات</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                    <a href="{{route('systemLastActivities')}}" class="dropdown-item">آخرین فعالیت های سیستمی</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">پیام رسانی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                    <a href="{{route('sendMsg')}}" class="dropdown-item">ارسال پیام</a>
+                                    <a href="{{route('msgs')}}" class="dropdown-item">پیام های ارسال شده</a>
+                                </div>
+                            </li>
+
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">پروفایل کاربری</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('changePass')}}" class="dropdown-item">تغییر رمزعبور</a>

@@ -1598,7 +1598,7 @@ ul.comment-action-st li a{
 	color:#fff;
 }
 .messages-scrollbar, .dashone-comment.dashtwo-comment{
-	height: 503px;
+	height: 85vh !important;
 }
 .dashtwo-messages .dashtwo-messsage-title{
 	font-size: 15px;

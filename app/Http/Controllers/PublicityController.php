@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\Company;
 use App\models\Publicity;
 use App\models\Section;
+use App\models\SectionPage;
 use App\models\SectionPublicity;
 use App\models\State;
 use App\models\StatePublicity;
@@ -44,23 +45,124 @@ class PublicityController extends Controller {
         return view('company', ['company' => Company::all(), 'msg' => '']);
     }
 
-    public function addSection() {
+    public function sectionStep2($sectionId) {
+        
+        $section = Section::whereId($sectionId);
+        
+        if($section == null)
+            return Redirect::route('section');
 
-        $err = '';
-        if (isset($_POST['name'])) {
-            $name = makeValidInput($_POST['name']);
-            $section = new Section();
-            $section->name = $name;
+        $pages = SectionPage::whereSectionId($sectionId)->select('page')->get();
+        $out = [];
+        $counter = 0;
 
-            try {
-                $section->save();
+        foreach ($pages as $page)
+            $out[$counter++] = $page->page;
+        
+        return view('config.publicity.sectionStep2', ['section' => $section, 'pages' => $out]);
+    }
+
+    public function addPageToSection($sectionId) {
+
+        if(isset($_POST["page"])) {
+
+            $section = Section::whereId($sectionId);
+
+            if($section == null)
                 return Redirect::route('section');
-            } catch (Exception $e) {
-                $err = 'مسیر مورد نظر در سامانه موجود است';
+
+            $page = $_POST["page"];
+            SectionPage::whereSectionId($sectionId)->delete();
+            
+            foreach ($page as $itr) {
+                $tmp = new SectionPage();
+                $tmp->sectionId = $sectionId;
+                $tmp->page = $itr;
+                $tmp->save();
             }
         }
 
-        return view('config.publicity.section', ['section' => Section::all(), 'msg' => $err]);
+        return Redirect::route('section');
+    }
+    
+    public function addSection() {
+
+        $err = '';
+
+        if (
+            isset($_POST['name']) && isset($_POST['mobileHidden']) &&
+            isset($_POST["width"]) && isset($_POST["height"]) && isset($_POST["backgroundSize"])
+        ) {
+            $name = makeValidInput($_POST['name']);
+            $section = new Section();
+            $section->name = $name;
+            $section->top_ = (isset($_POST["top"])&& !empty($_POST["top"])) ? makeValidInput($_POST["top"]) : -1;
+            $section->left_ = (isset($_POST["left"])&& !empty($_POST["left"])) ? makeValidInput($_POST["left"]) : -1;
+            $section->right_ = (isset($_POST["right"])&& !empty($_POST["right"])) ? makeValidInput($_POST["right"]) : -1;
+            $section->bottom_ = (isset($_POST["bottom"])&& !empty($_POST["bottom"])) ? makeValidInput($_POST["bottom"]) : -1;
+            $section->width = makeValidInput($_POST["width"]);
+            $section->height = makeValidInput($_POST["height"]);
+            $section->backgroundSize = (makeValidInput($_POST["backgroundSize"]) == "1");
+
+            $section->mobileHidden = (makeValidInput($_POST["mobileHidden"]) == "1");
+
+            if(makeValidInput($_POST["mobileHidden"]) != "1") {
+                $section->mobileTop = (isset($_POST["mobileTop"])&& !empty($_POST["mobileTop"])) ? makeValidInput($_POST["mobileTop"]) : -1;
+                $section->mobileLeft = (isset($_POST["mobileLeft"])&& !empty($_POST["mobileLeft"])) ? makeValidInput($_POST["mobileLeft"]) : -1;
+                $section->mobileRight = (isset($_POST["mobileRight"])&& !empty($_POST["mobileRight"])) ? makeValidInput($_POST["mobileRight"]) : -1;
+                $section->mobileBottom = (isset($_POST["mobileBottom"])&& !empty($_POST["mobileBottom"])) ? makeValidInput($_POST["mobileBottom"]) : -1;
+            }
+
+            try {
+                $section->save();
+                return Redirect::route('sectionStep2', ['sectionId' => $section->id]);
+            } catch (Exception $e) {
+                dd($e->getMessage());
+            }
+        }
+
+        $sections = Section::all();
+
+        foreach ($sections as $section) {
+
+            switch ($section->page) {
+                case getValueInfo('hotel-detail'):
+                    $section->page = 'hotel-detail';
+                    break;
+                case getValueInfo('adab-detail'):
+                    $section->page = 'adab-detail';
+                    break;
+                case getValueInfo('majara-detail'):
+                    $section->page = 'majara-detail';
+                    break;
+                case getValueInfo('amaken-detail'):
+                    $section->page = 'amaken-detail';
+                    break;
+                case getValueInfo('restaurant-detail'):
+                    $section->page = 'restarant-detail';
+                    break;
+                case getValueInfo('main_page'):
+                    $section->page = 'main_page';
+                    break;
+                case getValueInfo('hotel-list'):
+                    $section->page = 'hotel-list';
+                    break;
+                case getValueInfo('adab-list'):
+                    $section->page = 'adab-list';
+                    break;
+                case getValueInfo('majara-list'):
+                    $section->page = 'majara-list';
+                    break;
+                case getValueInfo('restaurant-list'):
+                    $section->page = 'restaurant-list';
+                    break;
+                case getValueInfo('amaken-list'):
+                    $section->page = 'amaken-list';
+                    break;
+            }
+        }
+
+        return view('config.publicity.section', ['section' => $sections, 'msg' => $err]);
     }
 
     public function deleteSection() {
@@ -72,6 +174,40 @@ class PublicityController extends Controller {
         }
 
         return view('section', ['section' => Section::all(), 'msg' => '']);
+    }
+
+    public function editSection() {
+
+        if(isset($_POST["id"])) {
+
+            $section = Section::whereId(makeValidInput($_POST["id"]));
+            
+            if ($section == null)
+                return Redirect::route('home');
+            
+            $section->name = makeValidInput($_POST["name"]);
+            $section->top_ = (isset($_POST["top"])&& !empty($_POST["top"])) ? makeValidInput($_POST["top"]) : -1;
+            $section->left_ = (isset($_POST["left"])&& !empty($_POST["left"])) ? makeValidInput($_POST["left"]) : -1;
+            $section->right_ = (isset($_POST["right"])&& !empty($_POST["right"])) ? makeValidInput($_POST["right"]) : -1;
+            $section->bottom_ = (isset($_POST["bottom"])&& !empty($_POST["bottom"])) ? makeValidInput($_POST["bottom"]) : -1;
+            $section->width = makeValidInput($_POST["width"]);
+            $section->height = makeValidInput($_POST["height"]);
+            $section->backgroundSize = (makeValidInput($_POST["backgroundSize"]) == "1");
+
+            $section->mobileHidden = (makeValidInput($_POST["mobileHidden"]) == "1");
+
+            if(makeValidInput($_POST["mobileHidden"]) != "1") {
+                $section->mobileTop = (isset($_POST["mobileTop"])&& !empty($_POST["mobileTop"])) ? makeValidInput($_POST["mobileTop"]) : -1;
+                $section->mobileLeft = (isset($_POST["mobileLeft"])&& !empty($_POST["mobileLeft"])) ? makeValidInput($_POST["mobileLeft"]) : -1;
+                $section->mobileRight = (isset($_POST["mobileRight"])&& !empty($_POST["mobileRight"])) ? makeValidInput($_POST["mobileRight"]) : -1;
+                $section->mobileBottom = (isset($_POST["mobileBottom"])&& !empty($_POST["mobileBottom"])) ? makeValidInput($_POST["mobileBottom"]) : -1;
+            }
+            
+            $section->save();
+
+
+            return Redirect::route('section');
+        }
     }
 
     public function seeAds() {
@@ -103,7 +239,7 @@ class PublicityController extends Controller {
 
         if(isset($_POST["addPublicity"]) && isset($_POST["startDate"]) && isset($_POST["companyId"]) &&
             isset($_POST["endDate"]) && isset($_POST["states"]) && isset($_POST["sections"]) && isset($_POST["url"]) &&
-            isset($_FILES["pic"]) && isset($_POST["parts"])
+            isset($_FILES["pic"])
         ) {
 
             $startDate = convertDateToString(makeValidInput($_POST["startDate"]));
@@ -116,12 +252,11 @@ class PublicityController extends Controller {
                 $companyId = makeValidInput($_POST["companyId"]);
                 $states = $_POST["states"];
                 $sections = $_POST["sections"];
-                $parts = $_POST["parts"];
 
                 $url = makeValidInput($_POST["url"]);
 
                 $file = $_FILES["pic"];
-                $targetFile = __DIR__ . "/../../../../ads/" . $file["name"];
+                $targetFile = __DIR__ . "/../../../../assets/ads/" . $file["name"];
 
                 $err = "";
 
@@ -143,14 +278,11 @@ class PublicityController extends Controller {
                         $adv->pic = $file["name"];
                         $adv->save();
 
-                        $counter = 0;
-
                         foreach ($sections as $section) {
                             $section = makeValidInput($section);
                             $tmp = new SectionPublicity();
                             $tmp->sectionId = $section;
                             $tmp->publicityId = $adv->id;
-                            $tmp->part = makeValidInput($parts[$counter++]);
                             $tmp->save();
                         }
 
@@ -182,8 +314,8 @@ class PublicityController extends Controller {
             $tmp = Publicity::whereId(makeValidInput($_POST["adId"]));
 
             if($tmp != null) {
-                if(file_exists(__DIR__ . '/../../../public/ads/' . $tmp->pic))
-                    unlink(__DIR__ . '/../../../public/ads/' . $tmp->pic);
+                if(file_exists(__DIR__ . '/../../../../assets/ads/' . $tmp->pic))
+                    unlink(__DIR__ . '/../../../../assets/ads/' . $tmp->pic);
                 $tmp->delete();
             }
         }
@@ -201,8 +333,7 @@ class PublicityController extends Controller {
             return Redirect::route('seeAds');
 
         if(isset($_POST["addPublicity"]) && isset($_POST["startDate"]) && isset($_POST["companyId"]) &&
-            isset($_POST["endDate"]) && isset($_POST["states"]) && isset($_POST["sections"]) && isset($_POST["url"]) &&
-            isset($_POST["parts"])
+            isset($_POST["endDate"]) && isset($_POST["states"]) && isset($_POST["sections"]) && isset($_POST["url"])
         ) {
 
             $startDate = convertDateToString(makeValidInput($_POST["startDate"]));
@@ -215,14 +346,13 @@ class PublicityController extends Controller {
                 $companyId = makeValidInput($_POST["companyId"]);
                 $states = $_POST["states"];
                 $sections = $_POST["sections"];
-                $parts = $_POST["parts"];
                 $url = makeValidInput($_POST["url"]);
                 $err = "";
 
                 if(isset($_FILES["pic"]) && $ad->pic != $_FILES["pic"]["name"]) {
 
                     $file = $_FILES["pic"];
-                    $targetFile = __DIR__ . "/../../../public/ads/" . $file["name"];
+                    $targetFile = __DIR__ . "/../../../../assets/ads/" . $file["name"];
 
                     if (!file_exists($targetFile)) {
                         $err = uploadCheck($targetFile, "pic", "ایجاد تبلیغ جدید", 300000000, -1);
@@ -248,14 +378,11 @@ class PublicityController extends Controller {
                         $ad->to_ = $endDate;
                         $ad->save();
 
-                        $counter = 0;
-
                         foreach ($sections as $section) {
                             $section = makeValidInput($section);
                             $tmp = new SectionPublicity();
                             $tmp->publicityId = $ad->id;
                             $tmp->sectionId = $section;
-                            $tmp->part = makeValidInput($parts[$counter++]);
                             $tmp->save();
                         }
 
@@ -286,10 +413,8 @@ class PublicityController extends Controller {
         $sections = Section::all();
         foreach ($sections as $section) {
             $tmp = SectionPublicity::wherePublicityId($adId)->whereSectionId($section->id)->first();
-            if($tmp != null) {
+            if($tmp != null)
                 $section->select = 1;
-                $section->part = $tmp->part;
-            }
             else
                 $section->select = 0;
         }
