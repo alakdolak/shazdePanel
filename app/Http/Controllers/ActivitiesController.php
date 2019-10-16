@@ -11,7 +11,7 @@ class ActivitiesController extends Controller
     {
         $activities = Activity::all();
 
-        return view('activities.index', compact(['activities']));
+        return view('admin.activities.index', compact(['activities']));
     }
 
     public function store(Request $request)

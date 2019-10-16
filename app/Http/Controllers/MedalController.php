@@ -20,8 +20,8 @@ class MedalController extends Controller {
         foreach($medals as $medal) {
             if($medal->kindPlaceId != -1) {
                 $arr[$counter++] = ['name' => $medal->name, 'id' => $medal->id,
-                    'pic_1' => URL::asset('../../badges/' . $medal->pic_1),
-                    'pic_2' => URL::asset('../../badges/' . $medal->pic_2),
+                    'pic_1' => URL::asset('badges/' . $medal->pic_1),
+                    'pic_2' => URL::asset('badges/' . $medal->pic_2),
                     "activity" => Activity::whereId($medal->activityId)->name,
                     'floor' => $medal->floor,
                     'kindPlaceId' => Place::whereId($medal->kindPlaceId)->name

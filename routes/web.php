@@ -37,6 +37,36 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::post('descriptions/doEdit', 'DescriptionController@doEdit')->name('descriptions.doEdit');
     Route::post('descriptions/delete', 'DescriptionController@delete')->name('descriptions.delete');
 
+//    اماکن
+    Route::get('places', 'PlacesController@index')->name('places.index');
+    Route::post('places/store', 'PlacesController@store')->name('places.store');
+    Route::post('places/doEdit', 'PlacesController@doEdit')->name('places.doEdit');
+    Route::post('places/delete', 'PlacesController@delete')->name('places.delete');
+
+//    سبک سفر
+    Route::get('tripStyle', 'TripStyleController@index')->name('tripStyle.index');
+    Route::post('tripStyle/store', 'TripStyleController@store')->name('tripStyle.store');
+    Route::post('tripStyle/doEdit', 'TripStyleController@doEdit')->name('tripStyle.doEdit');
+    Route::post('tripStyle/delete', 'TripStyleController@delete')->name('tripStyle.delete');
+
+//    تگ ها
+    Route::get('tags/{kind?}', 'TagsController@index')->name('tags.index');
+    Route::post('tags/store', 'TagsController@store')->name('tags.store');
+    Route::post('tags/doEdit', 'TagsController@doEdit')->name('tags.doEdit');
+    Route::post('tags/delete', 'TagsController@delete')->name('tags.delete');
+
+//    ایتم تصاویر
+    Route::get('picItems/{kind?}', 'PicItemController@index')->name('picItems.index');
+    Route::post('picItems/store', 'PicItemController@store')->name('picItems.store');
+    Route::post('picItems/doEdit', 'PicItemController@doEdit')->name('picItems.doEdit');
+    Route::post('picItems/delete', 'PicItemController@delete')->name('picItems.delete');
+
+//    مدیریت نظران
+    Route::get('opinions/{kind?}', 'OpinionsController@index')->name('opinions.index');
+    Route::post('opinions/store', 'OpinionsController@store')->name('opinions.store');
+    Route::post('opinions/doEdit', 'OpinionsController@doEdit')->name('opinions.doEdit');
+    Route::post('opinions/delete', 'OpinionsController@delete')->name('opinions.delete');
+
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel']), function() {
