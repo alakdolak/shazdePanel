@@ -17,6 +17,17 @@ Route::get('login', ['as' => 'login', 'uses' => 'HomeController@login']);
 
 Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 
+//kiavash add
+Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
+
+    Route::get('meta/index/{kind?}', 'MetaController@index')->name('meta.index');
+
+    Route::get('meta/edit/{kind}/{id}','MetaController@edit')->name('meta.edit');
+
+    Route::post('meta/doEdit', 'MetaController@doEdit')->name('meta.doEdit');
+
+});
+
 Route::group(array('middleware' => ['auth', 'adminLevel']), function() {
 
     Route::get('choosePlace/{mode}', ['as' => 'choosePlace', 'uses' => 'PlaceController@choosePlace']);
@@ -24,10 +35,15 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function() {
     Route::get('chooseCity/{mode}', ['as' => 'chooseCity', 'uses' => 'PlaceController@chooseCity']);
 
     Route::get('city/index', ['as' => 'city.index', 'uses' => 'PlaceController@indexCity']);
+
     Route::get('city/add', ['as' => 'city.add', 'uses' => 'PlaceController@addCity']);
+
     Route::post('city/store', ['as' => 'city.store', 'uses' => 'PlaceController@storeCity']);
+
     Route::get('city/edit/{id}', ['as' => 'city.edit', 'uses' => 'PlaceController@editCity']);
+
     Route::post('city/doEdit', ['as' => 'city.doEdit', 'uses' => 'PlaceController@doEditCity']);
+
     Route::post('city/delete', ['as' => 'city.delete', 'uses' => 'PlaceController@deleteCity']);
 
 });

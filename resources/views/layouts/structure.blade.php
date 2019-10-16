@@ -141,6 +141,13 @@
                                     <a href="{{route('seoTester')}}" class="dropdown-item">تست  سئو صفحات</a>
                                 </div>
                             </li>
+
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">کیاوش</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                    <a href="{{route('meta.index')}}" class="dropdown-item">meta اضافه کردن</a>
+                                </div>
+                            </li>
+
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-flask"></i> <span class="mini-dn">مدال ها</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('levels')}}" class="dropdown-item">تعیین سطوح</a>
