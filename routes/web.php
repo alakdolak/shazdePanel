@@ -20,11 +20,22 @@ Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 //kiavash add
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
+//    meta
     Route::get('meta/index/{kind?}', 'MetaController@index')->name('meta.index');
-
     Route::get('meta/edit/{kind}/{id}','MetaController@edit')->name('meta.edit');
-
     Route::post('meta/doEdit', 'MetaController@doEdit')->name('meta.doEdit');
+
+//    فعالیت
+    Route::get('activities', 'ActivitiesController@index')->name('activities.index');
+    Route::post('activities/store', 'ActivitiesController@store')->name('activities.store');
+    Route::post('activities/doEdit', 'ActivitiesController@doEdit')->name('activities.doEdit');
+    Route::post('activities/delete', 'ActivitiesController@delete')->name('activities.delete');
+
+//    توضیحات descriptions
+    Route::get('descriptions', 'DescriptionController@index')->name('descriptions.index');
+    Route::post('descriptions/store', 'DescriptionController@store')->name('descriptions.store');
+    Route::post('descriptions/doEdit', 'DescriptionController@doEdit')->name('descriptions.doEdit');
+    Route::post('descriptions/delete', 'DescriptionController@delete')->name('descriptions.delete');
 
 });
 

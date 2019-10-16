@@ -74,7 +74,7 @@
                         </div>
                         <div>
                         @foreach($target as $item)
-                            <div id="item_{{$item->id}}" class="col-sm-2">
+                            <div id="item_{{$item->id}}" class="col-sm-4">
                                 <a href="{{URL('meta/edit/' . $kind . '/' . $item->id)}}">
                                     <button class="btn btn-primary width-auto margin_bot">
                                         {{$item->name}}
@@ -93,9 +93,10 @@
 
     <script>
 
-        var names = {!! $target !!};
+        @if(isset($kind))
+            var names = {!! $target !!};
 
-        function search(_value){
+            function search(_value){
             if(_value == ''){
                 for(i = 0; i < names.length; i++){
                     document.getElementById('item_' + names[i]['id']).style.display = 'block';
@@ -110,6 +111,7 @@
                 }
             }
         }
+        @endif
     </script>
 
 

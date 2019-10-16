@@ -145,6 +145,8 @@
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">کیاوش</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('meta.index')}}" class="dropdown-item">meta اضافه کردن</a>
+                                    <a href="{{route('activities.index')}}" class="dropdown-item">فعالیت ها</a>
+                                    <a href="{{route('descriptions.index')}}" class="dropdown-item">توضیحات</a>
                                 </div>
                             </li>
 
