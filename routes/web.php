@@ -32,10 +32,10 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::post('activities/delete', 'ActivitiesController@delete')->name('activities.delete');
 
 //    توضیحات descriptions
-    Route::get('descriptions', 'DescriptionController@index')->name('descriptions.index');
-    Route::post('descriptions/store', 'DescriptionController@store')->name('descriptions.store');
-    Route::post('descriptions/doEdit', 'DescriptionController@doEdit')->name('descriptions.doEdit');
-    Route::post('descriptions/delete', 'DescriptionController@delete')->name('descriptions.delete');
+//    Route::get('descriptions', 'DescriptionController@index')->name('descriptions.index');
+//    Route::post('descriptions/store', 'DescriptionController@store')->name('descriptions.store');
+//    Route::post('descriptions/doEdit', 'DescriptionController@doEdit')->name('descriptions.doEdit');
+//    Route::post('descriptions/delete', 'DescriptionController@delete')->name('descriptions.delete');
 
 //    اماکن
     Route::get('places', 'PlacesController@index')->name('places.index');
@@ -66,6 +66,18 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::post('opinions/store', 'OpinionsController@store')->name('opinions.store');
     Route::post('opinions/doEdit', 'OpinionsController@doEdit')->name('opinions.doEdit');
     Route::post('opinions/delete', 'OpinionsController@delete')->name('opinions.delete');
+
+//  سئولات نظرسنجی
+    Route::get('questions/{kind?}', 'QuestionsController@index')->name('questions.index');
+    Route::post('questions/store', 'QuestionsController@store')->name('questions.store');
+    Route::post('questions/doEdit', 'QuestionsController@doEdit')->name('questions.doEdit');
+    Route::post('questions/delete', 'QuestionsController@delete')->name('questions.delete');
+
+//  گزارشات
+    Route::get('reports/{kind?}', 'ReportsController@index')->name('reports.index');
+    Route::post('reports/store', 'ReportsController@store')->name('reports.store');
+    Route::post('reports/doEdit', 'ReportsController@doEdit')->name('reports.doEdit');
+    Route::post('reports/delete', 'ReportsController@delete')->name('reports.delete');
 
 });
 
