@@ -20,22 +20,17 @@ Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 //kiavash add
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
-//    meta
-    Route::get('meta/index/{kind?}', 'MetaController@index')->name('meta.index');
-    Route::get('meta/edit/{kind}/{id}','MetaController@edit')->name('meta.edit');
-    Route::post('meta/doEdit', 'MetaController@doEdit')->name('meta.doEdit');
-
 //    فعالیت
     Route::get('activities', 'ActivitiesController@index')->name('activities.index');
     Route::post('activities/store', 'ActivitiesController@store')->name('activities.store');
     Route::post('activities/doEdit', 'ActivitiesController@doEdit')->name('activities.doEdit');
     Route::post('activities/delete', 'ActivitiesController@delete')->name('activities.delete');
 
-//    توضیحات descriptions
-//    Route::get('descriptions', 'DescriptionController@index')->name('descriptions.index');
-//    Route::post('descriptions/store', 'DescriptionController@store')->name('descriptions.store');
-//    Route::post('descriptions/doEdit', 'DescriptionController@doEdit')->name('descriptions.doEdit');
-//    Route::post('descriptions/delete', 'DescriptionController@delete')->name('descriptions.delete');
+//    تصاویر پیش قرض
+    Route::get('defaultPics', 'DefaultPicsController@index')->name('defaultPics.index');
+    Route::post('defaultPics/store', 'DefaultPicsController@store')->name('defaultPics.store');
+    Route::post('defaultPics/doEdit', 'DefaultPicsController@doEdit')->name('defaultPics.doEdit');
+    Route::post('defaultPics/delete', 'DefaultPicsController@delete')->name('defaultPics.delete');
 
 //    اماکن
     Route::get('places', 'PlaceController@index')->name('places.index');
@@ -54,6 +49,12 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::post('tags/store', 'TagsController@store')->name('tags.store');
     Route::post('tags/doEdit', 'TagsController@doEdit')->name('tags.doEdit');
     Route::post('tags/delete', 'TagsController@delete')->name('tags.delete');
+
+//    تسبک مکان
+    Route::get('placeStyle/{kind?}', 'PlaceStyleController@index')->name('placeStyle.index');
+    Route::post('placeStyle/store', 'PlaceStyleController@store')->name('placeStyle.store');
+    Route::post('placeStyle/doEdit', 'PlaceStyleController@doEdit')->name('placeStyle.doEdit');
+    Route::post('placeStyle/delete', 'PlaceStyleController@delete')->name('placeStyle.delete');
 
 //    ایتم تصاویر
     Route::get('picItems/{kind?}', 'PicItemController@index')->name('picItems.index');

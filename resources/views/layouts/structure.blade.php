@@ -144,12 +144,12 @@
 
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">کیاوش</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{route('meta.index')}}" class="dropdown-item">meta اضافه کردن</a>
                                     <a href="{{route('activities.index')}}" class="dropdown-item">فعالیت ها</a>
-                                    {{--<a href="{{route('descriptions.index')}}" class="dropdown-item">توضیحات</a>--}}
+                                    <a href="{{route('defaultPics.index')}}" class="dropdown-item">تصاویر پیش فرض</a>
                                     <a href="{{route('places.index')}}" class="dropdown-item">اماکن</a>
                                     <a href="{{route('tripStyle.index')}}" class="dropdown-item">سبک های سفر</a>
                                     <a href="{{url('tags')}}" class="dropdown-item">تگ ها</a>
+                                    <a href="{{url('placeStyle')}}" class="dropdown-item">سبک مکان</a>
                                     <a href="{{url('picItems')}}" class="dropdown-item">آیتم تصاویر</a>
                                     <a href="{{url('opinions')}}" class="dropdown-item">مدیریت نظرات</a>
                                     <a href="{{url('questions')}}" class="dropdown-item">سئوالات نظرسنجی</a>
