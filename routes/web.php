@@ -38,10 +38,10 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 //    Route::post('descriptions/delete', 'DescriptionController@delete')->name('descriptions.delete');
 
 //    اماکن
-    Route::get('places', 'PlacesController@index')->name('places.index');
-    Route::post('places/store', 'PlacesController@store')->name('places.store');
-    Route::post('places/doEdit', 'PlacesController@doEdit')->name('places.doEdit');
-    Route::post('places/delete', 'PlacesController@delete')->name('places.delete');
+    Route::get('places', 'PlaceController@index')->name('places.index');
+    Route::post('places/store', 'PlaceController@store')->name('places.store');
+    Route::post('places/doEdit', 'PlaceController@doEdit')->name('places.doEdit');
+    Route::post('places/delete', 'PlaceController@delete')->name('places.delete');
 
 //    سبک سفر
     Route::get('tripStyle', 'TripStyleController@index')->name('tripStyle.index');
@@ -78,6 +78,15 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::post('reports/store', 'ReportsController@store')->name('reports.store');
     Route::post('reports/doEdit', 'ReportsController@doEdit')->name('reports.doEdit');
     Route::post('reports/delete', 'ReportsController@delete')->name('reports.delete');
+
+    //    تگ گویش
+    Route::get('goyeshTags', 'GoyeshTagsController@index')->name('goyeshTags.index');
+    Route::post('goyeshTags/store', 'GoyeshTagsController@store')->name('goyeshTags.store');
+    Route::post('goyeshTags/doEdit', 'GoyeshTagsController@doEdit')->name('goyeshTags.doEdit');
+    Route::post('goyeshTags/delete', 'GoyeshTagsController@delete')->name('goyeshTags.delete');
+
+    //    توضیحات سن برای بلیت
+    Route::any('ageSentences', 'AgeController@ageSentences')->name('ageSentences');
 
 });
 

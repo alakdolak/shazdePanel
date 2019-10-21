@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Place;
+use App\models\GoyeshTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class PlacesController extends Controller
+class GoyeshTagsController extends Controller
 {
     public function index()
     {
-        $places = Place::all();
+        $tags = GoyeshTag::all();
 
-        return view('admin.places.index', compact(['places']));
+        return view('admin.goyeshTags.index', compact(['tags']));
     }
 
     public function store(Request $request)
@@ -21,16 +21,15 @@ class PlacesController extends Controller
             'name' => 'required'
         ]);
 
-        $place = Place::where('name', $request->name)->first();
+        $tag = GoyeshTag::where('name', $request->name)->first();
 
-        if($place == null){
-            $place =  new Place();
-            $place->name = $request->name;
-            $place->visibility = 1;
-            $place->save();
+        if($tag == null){
+            $tag =  new GoyeshTag();
+            $tag->name = $request->name;
+            $tag->save();
         }
         else{
-            Session::flash('error', 'این مکان قبلا تعریف شده است');
+            Session::flash('error', 'این تگ قبلا تعریف شده است');
         }
         return redirect()->back();
     }
@@ -42,16 +41,16 @@ class PlacesController extends Controller
             'id' => 'required'
         ]);
 
-        $place = Place::find($request->id);
+        $tag = GoyeshTag::find($request->id);
 
-        if($place != null){
-            $checkPlace = Place::where('name', $request->name)->first();
-            if($checkPlace == null) {
-                $place->name = $request->name;
-                $place->save();
+        if($tag != null){
+            $checkTag = GoyeshTag::where('name', $request->name)->first();
+            if($checkTag == null) {
+                $tag->name = $request->name;
+                $tag->save();
             }
             else{
-                Session::flash('error', 'مکانی با این نام موجود می باشد');
+                Session::flash('error', 'تگی به این صورت موجود می باشد');
             }
         }
         else{
@@ -66,8 +65,9 @@ class PlacesController extends Controller
             'id' => 'required'
         ]);
 
-        Place::find($request->id)->delete();
+        GoyeshTag::find($request->id)->delete();
 
         return redirect()->back();
     }
+
 }

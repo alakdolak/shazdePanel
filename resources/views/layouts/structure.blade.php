@@ -154,6 +154,8 @@
                                     <a href="{{url('opinions')}}" class="dropdown-item">مدیریت نظرات</a>
                                     <a href="{{url('questions')}}" class="dropdown-item">سئوالات نظرسنجی</a>
                                     <a href="{{url('reports')}}" class="dropdown-item">گزارشات</a>
+                                    <a href="{{url('goyeshTags')}}" class="dropdown-item">تگ گویش ها</a>
+                                    <a href="{{url('ageSentences')}}" class="dropdown-item">توضیحات سن برای بلیت</a>
                                 </div>
                             </li>
 
