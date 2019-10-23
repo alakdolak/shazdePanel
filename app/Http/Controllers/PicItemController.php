@@ -13,7 +13,7 @@ class PicItemController extends Controller
     {
         if($kind == ''){
             $places = Place::all();
-            return view('admin.picItem.index', compact(['places']));
+            return view('config.picItem', compact(['places']));
         }
         else{
             $kind = Place::where('name', $kind)->first();
@@ -21,7 +21,7 @@ class PicItemController extends Controller
                 return redirect()->back();
 
             $picItems = PicItem::where('kindPlaceId', $kind->id)->get();
-            return view('admin.picItem.index', compact(['kind', 'picItems']));
+            return view('config.picItem', compact(['kind', 'picItems']));
         }
     }
 

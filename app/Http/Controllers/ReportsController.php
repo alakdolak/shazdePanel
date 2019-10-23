@@ -13,7 +13,7 @@ class ReportsController extends Controller
     {
         if($kind == ''){
             $places = Place::all();
-            return view('admin.reports.index', compact(['places']));
+            return view('config.reports', compact(['places']));
         }
         else{
             $kind = Place::where('name', $kind)->first();
@@ -21,7 +21,7 @@ class ReportsController extends Controller
                 return redirect()->back();
 
             $reports = ReportsType::where('kindPlaceId', $kind->id)->get();
-            return view('admin.reports.index', compact(['kind', 'reports']));
+            return view('config.reports', compact(['kind', 'reports']));
         }
     }
 

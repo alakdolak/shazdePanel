@@ -12,7 +12,7 @@ class GoyeshTagsController extends Controller
     {
         $tags = GoyeshTag::all();
 
-        return view('admin.goyeshTags.index', compact(['tags']));
+        return view('config.goyeshTags', compact(['tags']));
     }
 
     public function store(Request $request)

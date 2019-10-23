@@ -13,7 +13,7 @@ class QuestionsController extends Controller
     {
         if($kind == ''){
             $places = Place::all();
-            return view('admin.question.index', compact(['places']));
+            return view('config.question', compact(['places']));
         }
         else{
             $kind = Place::where('name', $kind)->first();
@@ -21,7 +21,7 @@ class QuestionsController extends Controller
                 return redirect()->back();
 
             $questions = Question::where('kindPlaceId', $kind->id)->get();
-            return view('admin.question.index', compact(['kind', 'questions']));
+            return view('config.question', compact(['kind', 'questions']));
         }
     }
 

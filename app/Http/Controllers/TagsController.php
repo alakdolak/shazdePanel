@@ -13,7 +13,7 @@ class TagsController extends Controller
     {
         if($kind == ''){
             $places = Place::all();
-            return view('admin.tags.index', compact(['places']));
+            return view('config.tags', compact(['places']));
         }
         else{
             $kind = Place::where('name', $kind)->first();
@@ -21,7 +21,7 @@ class TagsController extends Controller
                 return redirect()->back();
 
             $tags = Tag::where('kindPlaceId', $kind->id)->get();
-            return view('admin.tags.index', compact(['kind', 'tags']));
+            return view('config.tags', compact(['kind', 'tags']));
         }
     }
 

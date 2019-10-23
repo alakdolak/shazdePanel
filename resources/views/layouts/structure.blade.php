@@ -141,8 +141,19 @@
                                     <a href="{{route('seoTester')}}" class="dropdown-item">تست  سئو صفحات</a>
                                 </div>
                             </li>
-
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">کیاوش</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-pie-chart"></i> <span class="mini-dn">تنظیمات سیستمی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                    <a href="{{url('reports')}}" class="dropdown-item">گزارشات</a>
+                                    <a href="{{url('goyeshTags')}}" class="dropdown-item">تگ گویش ها</a>
+                                    <a href="{{url('ageSentences')}}" class="dropdown-item">توضیحات سن برای بلیت</a>
+                                    <a href="{{route('determineRadius')}}" class="dropdown-item">تعیین شعاع مکان های نزدیک</a>
+                                    <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
+                                    <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
+                                    <a href="{{route('offers')}}" class="dropdown-item">مدیریت کد های تخفیف</a>
+                                    <a href="project-details.html" class="dropdown-item">Project Details</a>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-pie-chart"></i> <span class="mini-dn">تنظیمات سیستمی2</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('activities.index')}}" class="dropdown-item">فعالیت ها</a>
                                     <a href="{{route('defaultPics.index')}}" class="dropdown-item">تصاویر پیش فرض</a>
@@ -153,9 +164,6 @@
                                     <a href="{{url('picItems')}}" class="dropdown-item">آیتم تصاویر</a>
                                     <a href="{{url('opinions')}}" class="dropdown-item">مدیریت نظرات</a>
                                     <a href="{{url('questions')}}" class="dropdown-item">سئوالات نظرسنجی</a>
-                                    <a href="{{url('reports')}}" class="dropdown-item">گزارشات</a>
-                                    <a href="{{url('goyeshTags')}}" class="dropdown-item">تگ گویش ها</a>
-                                    <a href="{{url('ageSentences')}}" class="dropdown-item">توضیحات سن برای بلیت</a>
                                 </div>
                             </li>
 
@@ -163,15 +171,6 @@
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('levels')}}" class="dropdown-item">تعیین سطوح</a>
                                     <a href="{{route('medals')}}" class="dropdown-item">تعیین مدال ها</a>
-                                </div>
-                            </li>
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-pie-chart"></i> <span class="mini-dn">تنظیمات سیستمی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{route('determineRadius')}}" class="dropdown-item">تعیین شعاع مکان های نزدیک</a>
-                                    <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
-                                    <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
-                                    <a href="{{route('offers')}}" class="dropdown-item">مدیریت کد های تخفیف</a>
-                                    <a href="project-details.html" class="dropdown-item">Project Details</a>
                                 </div>
                             </li>
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-bar-chart-o"></i> <span class="mini-dn">مدیریت کاربران</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>

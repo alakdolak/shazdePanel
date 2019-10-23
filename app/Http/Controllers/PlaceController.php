@@ -25,7 +25,7 @@ class PlaceController extends Controller {
     {
         $places = Place::all();
 
-        return view('admin.places.index', compact(['places']));
+        return view('config.places', compact(['places']));
     }
 
     public function store(Request $request)

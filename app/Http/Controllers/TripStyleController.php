@@ -12,7 +12,7 @@ class TripStyleController extends Controller
     {
         $style = TripStyle::all();
 
-        return view('admin.tripStyle.index', compact(['style']));
+        return view('config.tripStyle', compact(['style']));
     }
 
     public function store(Request $request)

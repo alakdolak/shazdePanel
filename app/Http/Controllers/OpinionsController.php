@@ -13,7 +13,7 @@ class OpinionsController extends Controller
     {
         if($kind == ''){
             $places = Place::all();
-            return view('admin.opinion.index', compact(['places']));
+            return view('config.opinion', compact(['places']));
         }
         else{
             $kind = Place::where('name', $kind)->first();
@@ -21,7 +21,7 @@ class OpinionsController extends Controller
                 return redirect()->back();
 
             $opinions = Opinion::where('kindPlaceId', $kind->id)->get();
-            return view('admin.opinion.index', compact(['kind', 'opinions']));
+            return view('config.opinion', compact(['kind', 'opinions']));
         }
     }
 
