@@ -131,6 +131,7 @@
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">مدیریت محتوا</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('city.index')}}" class="dropdown-item">اطلاعات شهرها</a>
+                                    <a href="{{url('topInCity')}}" class="dropdown-item">پیشنهاد ویژه شهر</a>
                                     <a href="{{route('choosePlace', ['mode' => 'alt'])}}" class="dropdown-item">تصاویر و alt آنها</a>
                                     <a href="{{route('chooseCity', ['mode' => 'seo'])}}" class="dropdown-item">تگ ها و متا صفحات</a>
                                     <a href="{{route('manageNoFollow')}}" class="dropdown-item">مدیریت لینک ها</a>

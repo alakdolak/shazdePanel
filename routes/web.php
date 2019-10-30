@@ -89,6 +89,10 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     //    توضیحات سن برای بلیت
     Route::any('ageSentences', 'AgeController@ageSentences')->name('ageSentences');
 
+    Route::get('topInCity/{cityId?}', 'PlaceController@topInCity')->name('topInCity');
+    Route::post('topInCity/store', 'PlaceController@topInCityStore')->name('topInCity.store');
+    Route::post('findInCity', 'PlaceController@findInCity')->name('findInCity');
+
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel']), function() {

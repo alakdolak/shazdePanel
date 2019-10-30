@@ -9,7 +9,9 @@ use App\models\Hotel;
 use App\models\Majara;
 use App\models\Place;
 use App\models\Restaurant;
+use App\models\SpecialAdvice;
 use App\models\State;
+use App\models\TopInCity;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -930,6 +932,90 @@ class PlaceController extends Controller {
 
         $city->save();
         return \redirect(route('city.index'));
+    }
+
+    public function topInCity($cityId = '')
+    {
+        if($cityId == ''){
+            return view('content.city.topInCity.choose');
+        }
+        else{
+            $city = Cities::find($cityId);
+
+            if($city == null){
+                return \redirect(url('topInCity'));
+            }
+            else{
+                $specialAdvise = SpecialAdvice::where('cityId', $cityId)->get();
+                $placeId = Place::where('name', 'اماکن')->OrWhere('name','رستوران')->OrWhere('name','هتل')->get();
+
+                $amakenId = Place::where('name', 'اماکن')->first();
+                $restaurantId = Place::where('name', 'رستوران')->first();
+                $hotelId = Place::where('name', 'هتل')->first();
+
+                foreach ($specialAdvise as $item){
+                    if($item->kindPlaceId == $amakenId->id) {
+                        $item->kindPlaceName = $amakenId->name;
+                        $item->name = Amaken::find($item->placeId)->name;
+                    }
+                    elseif($item->kindPlaceId == $restaurantId->id) {
+                        $item->kindPlaceName = $restaurantId->name;
+                        $item->name = Restaurant::find($item->placeId)->name;
+                    }
+                    elseif($item->kindPlaceId == $hotelId->id) {
+                        $item->kindPlaceName = $hotelId->name;
+                        $item->name = Hotel::find($item->placeId)->name;
+                    }
+                }
+
+                return view('content.city.topInCity.specialInCity', compact(['specialAdvise', 'city', 'placeId']));
+            }
+        }
+    }
+
+    public function findInCity(Request $request)
+    {
+
+        $amakenId = Place::where('name', 'اماکن')->first();
+        $restaurantId = Place::where('name', 'رستوران')->first();
+        $hotelId = Place::where('name', 'هتل')->first();
+
+        if($request->kind == $amakenId->id){
+            $find = DB::select('SELECT name, id FROM amaken WHERE name LIKE "%' . $request->name . '%" and cityId = ' . $request->cityId);
+        }
+        elseif($request->kind == $restaurantId->id){
+            $find = DB::select('SELECT name, id FROM restaurant WHERE name LIKE "%' . $request->name . '%" and cityId = ' . $request->cityId);
+        }
+        elseif($request->kind == $hotelId->id){
+            $find = DB::select('SELECT name, id FROM hotels WHERE name LIKE "%' . $request->name . '%" and cityId = ' . $request->cityId);
+        }
+
+        echo json_encode($find);
+        return;
+    }
+
+    public function topInCityStore(Request $request)
+    {
+        if($request->replace == 0){
+            $new = new SpecialAdvice();
+            $new->cityId = $request->cityId;
+            $new->placeId = $request->placeId;
+            $new->kindPlaceId = $request->kindPlaceId;
+            $new->save();
+        }
+        else{
+            $change = SpecialAdvice::find($request->replace);
+
+            if($change != null){
+                $change->cityId = $request->cityId;
+                $change->placeId = $request->placeId;
+                $change->kindPlaceId = $request->kindPlaceId;
+                $change->save();
+            }
+
+        }
+
+        return \redirect()->back();
     }
 
 }
