@@ -17,7 +17,6 @@ Route::get('login', ['as' => 'login', 'uses' => 'HomeController@login']);
 
 Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 
-//kiavash add
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
 //    فعالیت
@@ -152,6 +151,24 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), functio
 Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), function () {
 
     Route::get('changeContent/{city}/{mode}/{cityMode}/{wantedKey?}/{filter?}', ['as' => 'changeContent', 'uses' => 'PlaceController@changeContent']);
+
+    Route::get('newChangeContent/{cityId}/{mode}/{cityMode}', 'PlaceController@newChangeContent')->name('newChangeContent');
+
+    Route::get('editContent/{mode}/{id}', 'PlaceController@editContent')->name('editContent');
+
+    Route::get('newContent/{cityMode}/{cityId}/{mode}', 'PlaceController@newContent')->name('newContent');
+
+    Route::post('storeAmaken', 'PlaceController@storeAmaken')->name('storeAmaken');
+
+    Route::post('storeHotel', 'PlaceController@storeHotel')->name('storeHotel');
+
+    Route::post('storeRestaurant', 'PlaceController@storeRestaurant')->name('storeRestaurant');
+
+    Route::post('storeMajara', 'PlaceController@storeMajara')->name('storeMajara');
+
+    Route::post('storeMahaliFood', 'PlaceController@storeMahaliFood')->name('storeMahaliFood');
+
+    Route::post('storeSogatSanaie', 'PlaceController@storeSogatSanaie')->name('storeSogatSanaie');
 
     Route::post('doChangePlace', ['as' => 'doChangePlace', 'uses' => 'PlaceController@doChangePlace']);
 
@@ -398,9 +415,9 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('totalSearch', array('as' => 'totalSearch', 'uses' => 'HomeController@totalSearch'));
 
     Route::post('searchForCity', array('as' => 'searchForCity', 'uses' => 'PlaceController@searchForCity'));
-    
+
     Route::post('searchForCityAndState', array('as' => 'searchForCityAndState', 'uses' => 'PlaceController@searchForCityAndState'));
-    
+
     Route::post('searchForState', array('as' => 'searchForState', 'uses' => 'PlaceController@searchForState'));
 
     Route::get('logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
@@ -408,5 +425,11 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::get('changePass', ['as' => 'changePass', 'uses' => 'HomeController@changePass']);
 
     Route::post('doChangePass', ['as' => 'doChangePass', 'uses' => 'HomeController@doChangePass']);
+
+});
+
+Route::group(array('middleware' => ['auth']), function () {
+
+    Route::post('findCityWithState', 'AjaxController@findCityWithState')->name('find.city.withState');
 
 });

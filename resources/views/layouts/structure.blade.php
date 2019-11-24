@@ -15,7 +15,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="{{URL::asset('img/favicon.png')}}">
         <!-- Google Fonts
             ============================================ -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
+        {{--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">--}}
         <!-- Bootstrap CSS
             ============================================ -->
         <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
@@ -120,7 +120,7 @@
         <div class="left-sidebar-pro">
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>پنل شازده مسافر</h3>
+                    <h3>پنل کوچیتا</h3>
                 </div>
                 <div class="left-custom-menu-adp-wrap">
                     <ul class="nav navbar-nav left-sidebar-menu-pro">
@@ -136,6 +136,7 @@
                                     <a href="{{route('chooseCity', ['mode' => 'seo'])}}" class="dropdown-item">تگ ها و متا صفحات</a>
                                     <a href="{{route('manageNoFollow')}}" class="dropdown-item">مدیریت لینک ها</a>
                                     <a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
+                                    <a href="{{route('chooseCity', ['mode' => 'content2'])}}" class="dropdown-item">2تغییر محتوای صفحات</a>
                                     <a href="{{route('lastActivities')}}" class="dropdown-item">فعالیت های اخیر</a>
                                     <a href="{{route('posts')}}" class="dropdown-item">مدیریت پست ها</a>
                                     <a href="{{route('uploadMainContent')}}" class="dropdown-item">افزودن محتوا</a>
