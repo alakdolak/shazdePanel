@@ -150,7 +150,10 @@
                                                         <a href="{{URL::asset('editContent/' . $mode . '/' . $item->id)}}">
                                                             <button class="btn btn-warning">ویرایش</button>
                                                         </a>
-                                                        <button class="btn btn-dnager" onclick="deleteModal({{$item->id}})">حذف</button>
+                                                        <a href="{{URL::asset('uploadImgPage/' . $mode . '/' . $item->id)}}">
+                                                            <button class="btn btn-primary">ویرایش عکس</button>
+                                                        </a>
+                                                        <button class="btn btn-danger" onclick="deleteModal({{$item->id}})">حذف</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -177,8 +180,14 @@
                 </div>
 
                 <!-- Modal footer -->
-                <div class="modal-footer" style="text-align: center">
-                    <button class="btn btn-danger">بله</button>
+                <div class="modal-footer" style="text-align: center; display: flex; justify-content: center">
+                    <form action="{{route('deletePlace')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" id="deleteId">
+                        <input type="hidden" name="kindPlaceId" value="{{$mode}}">
+
+                        <button type="submit" class="btn btn-danger">بله حذف شود</button>
+                    </form>
                     <button class="btn nextStepBtnTourCreation" data-dismiss="modal">خیر</button>
                 </div>
 
@@ -189,6 +198,7 @@
 
     <script>
         var places = {!! $jsonPlace !!};
+        var _token = '{{csrf_token()}}';
 
         function search(_value){
             for(i = 0; i < places.length; i++){
@@ -212,6 +222,7 @@
 
             document.getElementById('deleteName1').innerText = place.name;
             document.getElementById('deleteName2').innerText = place.name;
+            document.getElementById('deleteId').value = place.id;
 
             $("#deleteModal").modal();
         }

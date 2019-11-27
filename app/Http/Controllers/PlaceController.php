@@ -9,6 +9,7 @@ use App\models\Hotel;
 use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\Place;
+use App\models\PlacePic;
 use App\models\Restaurant;
 use App\models\SogatSanaie;
 use App\models\SpecialAdvice;
@@ -25,6 +26,386 @@ use Illuminate\Support\Facades\Session;
 
 
 class PlaceController extends Controller {
+
+    public function uploadImgPage($kindPlaceId, $id)
+    {
+        switch ($kindPlaceId){
+            case 1:
+                $place = Amaken::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
+                $kindPlaceName = 'amaken';
+                break;
+            case 3:
+                $place = Restaurant::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
+                $kindPlaceName = 'restaurant';
+                break;
+            case 4:
+                $place = Hotel::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
+                $kindPlaceName = 'hotels';
+                break;
+            case 6:
+                $place = Majara::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
+                $kindPlaceName = 'majara';
+                break;
+            case 10:
+                $place = SogatSanaie::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
+                $kindPlaceName = 'sogatsanaie';
+                break;
+            case 11:
+                $place = MahaliFood::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
+                $kindPlaceName = 'mahalifood';
+                break;
+        }
+        $city = Cities::find($place->cityId);
+        $state = State::find($city->stateId);
+
+        $place->pics = PlacePic::where('placeId', $place->id)->where('kindPlaceId', $kindPlaceId)->get();
+
+        foreach ($place->pics as $item)
+            $item->number = explode('.', $item->picNumber)[0];
+
+        return view('content.newContent.uploadImg', compact(['kindPlaceId', 'place', 'kindPlaceName', 'state']));
+    }
+
+    public function getCrop(Request $request)
+    {
+        if( isset($_FILES["l-1"]) && $_FILES["l-1"]['error'] == 0 &&
+            isset($_FILES["t-1"]) && $_FILES["t-1"]['error'] == 0 &&
+            isset($_FILES["s-1"]) && $_FILES["s-1"]['error'] == 0 &&
+            isset($_FILES["f-1"]) && $_FILES["f-1"]['error'] == 0 &&
+            isset($_FILES["mainPic"]) && $_FILES["mainPic"]['error'] == 0 &&
+            isset($request->picNumber) && isset($request->placeId) && isset($request->kindPlaceId)) {
+
+            $valid_ext = array('image/jpeg','image/png');
+            if(in_array($_FILES['mainPic']['type'], $valid_ext) && in_array($_FILES['s-1']['type'], $valid_ext) &&
+                in_array($_FILES['f-1']['type'], $valid_ext) && in_array($_FILES['l-1']['type'], $valid_ext) &&
+                in_array($_FILES['t-1']['type'], $valid_ext)){
+
+                $id = $request->placeId;
+                $kindPlaceId = $request->kindPlaceId;
+
+                switch ($kindPlaceId){
+                    case 1:
+                        $place = Amaken::find($id);
+                        $kindPlaceName = 'amaken';
+                        break;
+                    case 3:
+                        $place = Restaurant::find($id);
+                        $kindPlaceName = 'restaurant';
+                        break;
+                    case 4:
+                        $place = Hotel::find($id);
+                        $kindPlaceName = 'hotels';
+                        break;
+                    case 6:
+                        $place = Majara::find($id);
+                        $kindPlaceName = 'majara';
+                        break;
+                    case 10:
+                        $place = SogatSanaie::find($id);
+                        $kindPlaceName = 'sogatsanaie';
+                        break;
+                    case 11:
+                        $place = MahaliFood::find($id);
+                        $kindPlaceName = 'mahalifood';
+                        break;
+                }
+
+                if($place != null) {
+
+                    if ($place->file == null || $place->file == 'none' || $place->file == '' ||
+                        !file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $place->file)) {
+
+                        $newFileName = rand(1000000, 9999999);
+                        while (file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $newFileName))
+                            $newFileName = (int)($newFileName - 1);
+
+                        $location = __DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $newFileName;
+
+                        mkdir($location);
+                        if(file_exists($location)){
+                            $place->file = $newFileName;
+                            $place->save();
+                        }
+                        else {
+                            echo 'error';
+                            return;
+                        }
+                    }
+
+                    $location = __DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $place->file;
+                    $picNumber = null;
+
+                    if ($request->kind == 'edit'){
+                        $picNumber = $request->picNumber;
+                        if ($picNumber == 0)
+                            $picNumber = $place->picNumber;
+                        else
+                            $picNumber .= '.jpg';
+
+                        if ($picNumber != null) {
+                            if (file_exists($location . '/f-' . $picNumber))
+                                unlink($location . '/f-' . $picNumber);
+                            if (file_exists($location . '/s-' . $picNumber))
+                                unlink($location . '/s-' . $picNumber);
+                            if (file_exists($location . '/t-' . $picNumber))
+                                unlink($location . '/t-' . $picNumber);
+                            if (file_exists($location . '/l-' . $picNumber))
+                                unlink($location . '/l-' . $picNumber);
+                            if (file_exists($location . '/' . $picNumber))
+                                unlink($location . '/' . $picNumber);
+                        }
+
+                    }
+                    else {
+                        $allPicNumber = PlacePic::where('placeId', $place->id)->where('kindPlaceId', $kindPlaceId)->pluck('picNumber')->toArray();
+                        array_push($allPicNumber, $place->picNumber);
+
+                        for($i = 1; $i < 1000; $i++) {
+                            $picNumber = $i . '.jpg';
+                            if (!in_array($picNumber, $allPicNumber)) {
+                                $check = true;
+                                if (file_exists($location . '/f-' . $picNumber))
+                                    $check = false;
+                                if (file_exists($location . '/s-' . $picNumber))
+                                    $check = false;
+                                if (file_exists($location . '/t-' . $picNumber))
+                                    $check = false;
+                                if (file_exists($location . '/l-' . $picNumber))
+                                    $check = false;
+                                if (file_exists($location . '/' . $picNumber))
+                                    $check = false;
+
+                                if($check){
+                                    if($request->picNumber == 0){
+                                        $place->picNumber = $picNumber;
+                                        $place->save();
+                                    }
+                                    else {
+                                        $newPic = new PlacePic();
+                                        $newPic->picNumber = $picNumber;
+                                        $newPic->placeId = $place->id;
+                                        $newPic->kindPlaceId = $kindPlaceId;
+                                        $newPic->save();
+                                    }
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if($picNumber != null) {
+                        $destinationT = $location . '/t-' . $picNumber;
+                        $destinationF = $location . '/f-' . $picNumber;
+                        $destinationS = $location . '/s-' . $picNumber;
+                        $destinationL = $location . '/l-' . $picNumber;
+                        $destinationMainPic = $location . '/' . $picNumber;
+
+                        compressImage($_FILES['f-1']['tmp_name'], $destinationF, 60);
+                        compressImage($_FILES['t-1']['tmp_name'], $destinationT, 60);
+                        compressImage($_FILES['s-1']['tmp_name'], $destinationS, 60);
+                        compressImage($_FILES['l-1']['tmp_name'], $destinationL, 60);
+                        compressImage($_FILES['mainPic']['tmp_name'], $destinationMainPic, 60);
+
+                        echo 'ok';
+                    }
+                    else
+                        echo 'nok4';
+                }
+                else
+                    echo 'nok3';
+            }
+            else
+                echo 'nok2';
+        }
+        else
+            echo 'nok1';
+        return ;
+    }
+
+    public function deletePlacePic(Request $request)
+    {
+        $pic = PlacePic::find($request->id);
+        if($pic != null){
+            switch ($pic->kindPlaceId){
+                case 1:
+                    $place = Amaken::find($pic->placeId);
+                    $folderName = 'amaken';
+                    break;
+                case 3:
+                    $place = Restaurant::find($pic->placeId);
+                    $folderName = 'restaurant';
+                    break;
+                case 4:
+                    $place = Hotel::find($pic->placeId);
+                    $folderName = 'hotels';
+                    break;
+                case 6:
+                    $place = Majara::find($pic->placeId);
+                    $folderName = 'majara';
+                    break;
+                case 10:
+                    $place = SogatSanaie::find($pic->placeId);
+                    $folderName = 'sogatsanaie';
+                    break;
+                case 11:
+                    $place = MahaliFood::find($pic->placeId);
+                    $folderName = 'mahalifood';
+                    break;
+                default:
+                    echo 'nok';
+                    return;
+            }
+            if($place != null) {
+                $location = __DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file;
+
+                $this->deletePlacePicFiles($location, $pic->picNumber);
+
+                $pic->delete();
+                echo 'ok';
+            }
+            else
+                echo 'nok';
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
+
+    public function changeAltPic(Request $request)
+    {
+        $pic = PlacePic::find($request->id);
+        if($pic != null){
+            $pic->alt = $request->alt;
+            $pic->save();
+
+            echo 'ok';
+        }
+        else
+            echo 'nok';
+        return;
+    }
+
+    public function setMainPic(Request $request)
+    {
+        $pic = PlacePic::find($request->id);
+
+        if($pic != null){
+            switch ($pic->kindPlaceId){
+                case 1:
+                    $place = Amaken::find($pic->placeId);
+                    break;
+                case 3:
+                    $place = Restaurant::find($pic->placeId);
+                    break;
+                case 4:
+                    $place = Hotel::find($pic->placeId);
+                    break;
+                case 6:
+                    $place = Majara::find($pic->placeId);
+                    break;
+                case 10:
+                    $place = SogatSanaie::find($pic->placeId);
+                    break;
+                case 11:
+                    $place = MahaliFood::find($pic->placeId);
+                    break;
+                default:
+                    echo 'nok';
+                    return;
+            }
+            if($place != null){
+                $mainPicNum = $pic->picNumber;
+                $pic->picNumber = $place->picNumber;
+                $pic->save();
+
+                $place->picNumber = $mainPicNum;
+                $place->save();
+
+                echo 'ok';
+            }
+        }
+
+        return;
+    }
+
+    public function deletePlace(Request $request)
+    {
+        $id = $request->id;
+        $kindPlaceId  = $request->kindPlaceId;
+
+        switch ($kindPlaceId){
+            case 1:
+                $place = Amaken::find($id);
+                $folderKind = 'amaken';
+                break;
+            case 3:
+                $place = Restaurant::find($id);
+                $folderKind = 'restaurant';
+                break;
+            case 4:
+                $place = Hotel::find($id);
+                $folderKind = 'hotels';
+                break;
+            case 6:
+                $place = Majara::find($id);
+                $folderKind = 'majara';
+                break;
+            case 10:
+                $place = SogatSanaie::find($id);
+                $folderKind = 'sogatsanaie';
+                break;
+            case 11:
+                $place = MahaliFood::find($id);
+                $folderKind = 'mahalifood';
+                break;
+        }
+
+        if($place != null){
+            $place->pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $id)->get();
+            $isFile = false;
+            if($place->file != null && $place->file != 'none' && $place->file != '') {
+                $location = __DIR__ . '/../../../../assets/_images/' . $folderKind . '/' . $place->file;
+                $isFile = true;
+            }
+
+            foreach ($place->pics as $item) {
+                if($isFile)
+                    $this->deletePlacePicFiles($location, $item->picNumber);
+                $item->delete();
+            }
+
+            if($isFile)
+                $this->deletePlacePicFiles($location, $place->picNumber);
+            $place->delete();
+
+            if($isFile)
+                deleteDir($location);
+        }
+
+        return \redirect()->back();
+    }
+
+    private function deletePlacePicFiles($location, $picNumber){
+
+        $locationF = $location . '/f-' . $picNumber;
+        $locationS = $location .  '/s-' . $picNumber;
+        $locationL = $location .  '/l-' . $picNumber;
+        $locationT = $location .  '/t-' . $picNumber ;
+        $locationMain = $location .  '/' . $picNumber ;
+
+        if (file_exists($locationF))
+            unlink($locationF);
+        if (file_exists($locationS))
+            unlink($locationS);
+        if (file_exists($locationL))
+            unlink($locationL);
+        if (file_exists($locationT))
+            unlink($locationT);
+        if (file_exists($locationMain))
+            unlink($locationMain);
+    }
 
     public function newChangeContent($cityId, $mode, $cityMode){
 
@@ -58,7 +439,7 @@ class PlaceController extends Controller {
                 $id = $state2->id;
                 $stateId = $state2->id;
 
-                $places = DB::select('select h.name, h.cityId, h.id, h.mainPic from ' . $kind . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+                $places = DB::select('select h.name, h.cityId, h.id, h.picNumber from ' . $kind . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
             }
             else{
                 $city = Cities::find($cityId);
@@ -66,7 +447,7 @@ class PlaceController extends Controller {
                 $id = $cityId;
                 $stateId = $city->stateId;
 
-                $places = DB::select('select name, cityId, id, mainPic FROM ' . $kind . ' WHERE cityId = ' . $id);
+                $places = DB::select('select name, cityId, id, picNumber FROM ' . $kind . ' WHERE cityId = ' . $id);
             }
             foreach ($places as $item){
                 $item->pic = URL::asset('_images/nopic/blank.jpg');
@@ -306,6 +687,7 @@ class PlaceController extends Controller {
                 $titleName = 'رستوران جدید';
                 $url = route('storeRestaurant');
                 $kind = 'restaurant';
+                break;
             case 4:
                 $titleName = 'هتل جدید';
                 $url = route('storeHotel');
@@ -315,6 +697,7 @@ class PlaceController extends Controller {
                 $titleName = 'ماجرای جدید';
                 $url = route('storeMajara');
                 $kind = 'majara';
+                break;
             case 10:
                 $titleName = 'سوغات/صنایع جدید';
                 $url = route('storeSogatSanaie');
@@ -355,6 +738,13 @@ class PlaceController extends Controller {
             $amaken->markaz = 0;
             $amaken->hoome = 0;
             $amaken->class = 0;
+
+            $amaken->pic_1 = 0;
+            $amaken->pic_2 = 0;
+            $amaken->pic_3 = 0;
+            $amaken->pic_4 = 0;
+            $amaken->pic_5 = 0;
+
             $amaken->author = \auth()->user()->id;
 
         }
@@ -488,7 +878,7 @@ class PlaceController extends Controller {
 
         $amaken->save();
 
-        return \redirect(\url('newChangeContent/' . $amaken->cityId . '/1/1'));
+        return \redirect(\url('uploadImgPage/1/' . $amaken->id));
     }
 
     public function storeHotel(Request $request)
@@ -508,6 +898,19 @@ class PlaceController extends Controller {
 
         if(isset($request->inputType) && $request->inputType == 'new'){
             $hotel = new Hotel();
+
+            $hotel->markaz = 0;
+            $hotel->hoome = 0;
+            $hotel->class = 0;
+            $hotel->mahali = 0;
+            $hotel->fasele = 0;
+            $hotel->file = '';
+
+            $hotel->pic_1 = 0;
+            $hotel->pic_2 = 0;
+            $hotel->pic_3 = 0;
+            $hotel->pic_4 = 0;
+            $hotel->pic_5 = 0;
 
             $hotel->author = \auth()->user()->id;
         }
@@ -777,7 +1180,7 @@ class PlaceController extends Controller {
 
         $hotel->save();
 
-        return \redirect(\url('newChangeContent/' . $hotel->cityId . '/4/1'));
+        return \redirect(\url('uploadImgPage/4/' . $hotel->id));
     }
 
     public function storeRestaurant(Request $request)
@@ -797,10 +1200,17 @@ class PlaceController extends Controller {
         if(isset($request->inputType) && $request->inputType == 'new'){
             $restaurant = new Restaurant();
 
-            $restaurant->file = 'none';
             $restaurant->markaz = 0;
             $restaurant->hoome = 0;
             $restaurant->class = 0;
+
+            $restaurant->file = 'none';
+            $restaurant->pic_1 = 0;
+            $restaurant->pic_2 = 0;
+            $restaurant->pic_3 = 0;
+            $restaurant->pic_4 = 0;
+            $restaurant->pic_5 = 0;
+
             $restaurant->author = \auth()->user()->id;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
@@ -936,7 +1346,7 @@ class PlaceController extends Controller {
 
         $restaurant->save();
 
-        return \redirect(\url('newChangeContent/' . $restaurant->cityId . '/3/1'));
+        return \redirect(\url('uploadImgPage/3/' . $restaurant->id));
     }
 
     public function storeMajara(Request $request)
@@ -958,6 +1368,12 @@ class PlaceController extends Controller {
             $majara->manategh = 0;
             $majara->class = 0;
             $majara->file = 'none';
+
+            $majara->pic_1 = 0;
+            $majara->pic_2 = 0;
+            $majara->pic_3 = 0;
+            $majara->pic_4 = 0;
+            $majara->pic_5 = 0;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $majara = Majara::find($request->id);
@@ -1091,7 +1507,7 @@ class PlaceController extends Controller {
 
         $majara->save();
 
-        return \redirect(\url('newChangeContent/' . $majara->cityId . '/6/1'));
+        return \redirect(\url('uploadImgPage/6/' . $majara->id));
     }
 
     public function storeMahaliFood(Request $request)
@@ -1171,7 +1587,7 @@ class PlaceController extends Controller {
 
         $newMahali->save();
 
-        return \redirect(\url('newChangeContent/' . $newMahali->cityId . '/11/1'));
+        return \redirect(\url('uploadImgPage/11/' . $newMahali->id));
     }
 
     public function storeSogatSanaie(Request $request)
@@ -1207,9 +1623,20 @@ class PlaceController extends Controller {
         $newSogat->description = $request->description;
         $newSogat->alt = $request->keyword;
 
-        $newSogat->weight = $request->weight;
-        $newSogat->size = $request->size;
-        $newSogat->price = $request->price;
+        if(isset($request->weight) && $request->weight != null)
+            $newSogat->weight = $request->weight;
+        else
+            $newSogat->weight = 1;
+
+        if(isset($request->price) && $request->price != null)
+            $newSogat->price = $request->price;
+        else
+            $newSogat->price = 1;
+
+        if(isset($request->size) && $request->size != null)
+            $newSogat->size = $request->size;
+        else
+            $newSogat->size = 1;
 
         $newSogat->eatable = $request->eatable;
 
@@ -1294,7 +1721,7 @@ class PlaceController extends Controller {
         $newSogat->author = \auth()->user()->id;
         $newSogat->save();
 
-        return \redirect(\url('newChangeContent/' . $newSogat->cityId . '/10/1'));
+        return \redirect(\url('uploadImgPage/10/' . $newSogat->id));
     }
 
 
