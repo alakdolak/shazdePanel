@@ -84,6 +84,14 @@
                 width: 100%;
             }
 
+            input{
+                border-color: #333333 !important;
+                border-radius: 10px !important;
+            }
+            select{
+                border-color: #333333 !important;
+                border-radius: 10px !important;
+            }
         </style>
 
         <script>
@@ -126,7 +134,10 @@
                     <ul class="nav navbar-nav left-sidebar-menu-pro">
                         @if(\Illuminate\Support\Facades\Auth::check())
                             <li>
-                                <a href="{{route('home')}}" aria-expanded="false"><i class="fa big-icon fa-home"></i> <span class="mini-dn">خانه</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                                <a href="{{route('home')}}" aria-expanded="false">
+                                    <i class="fa big-icon fa-home"></i>
+                                    <span class="mini-dn">خانه</span>
+                                </a>
                             </li>
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">مدیریت محتوا</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
@@ -152,6 +163,7 @@
                                     <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
                                     <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
                                     <a href="{{route('offers')}}" class="dropdown-item">مدیریت کد های تخفیف</a>
+                                    <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
                                     <a href="project-details.html" class="dropdown-item">Project Details</a>
                                 </div>
                             </li>
@@ -211,6 +223,13 @@
                                     <a href="{{route('changePass')}}" class="dropdown-item">تغییر رمزعبور</a>
                                     <a href="{{route('logout')}}" class="dropdown-item">خروج</a>
                                 </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{route('uiFeatures')}}"  role="button" class="nav-link dropdown-toggle">
+                                    <i class="fa big-icon fa-table"></i>
+                                    <span class="mini-dn">UI Features</span>
+                                </a>
                             </li>
                         @else
                             <li>

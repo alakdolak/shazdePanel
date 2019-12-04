@@ -597,3 +597,24 @@ function compressImage($source, $destination, $quality){
 
     imagejpeg($image, $destination, $quality);
 }
+
+function deletePlacePicFiles($location, $picNumber){
+    $locationF = $location . '/f-' . $picNumber;
+    $locationS = $location .  '/s-' . $picNumber;
+    $locationL = $location .  '/l-' . $picNumber;
+    $locationT = $location .  '/t-' . $picNumber ;
+    $locationMain = $location .  '/' . $picNumber ;
+
+    if (file_exists($locationF))
+        unlink($locationF);
+    if (file_exists($locationS))
+        unlink($locationS);
+    if (file_exists($locationL))
+        unlink($locationL);
+    if (file_exists($locationT))
+        unlink($locationT);
+    if (file_exists($locationMain))
+        unlink($locationMain);
+
+    return true;
+}

@@ -15,212 +15,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
-Route::get('check', function(){
-//    $Pic  = \App\models\PlacePic::where('kindPlaceId', 4)->get();
-//    $place = \App\models\Hotel::find(1);
-//    dd($Pic);
+Route::get('updateMainDataBase', function(){
 
-    \DB::select('DROP TABLE placepics');
-
-    Schema::create('placepics', function (Blueprint $table) {
-        $table->increments('id');
-        $table->string('picNumber');
-        $table->unsignedInteger('placeId');
-        $table->unsignedInteger('kindPlaceId');
-        $table->string('alt')->nullable();
-    });
-
-});
-
-Route::get('check2', function(){
-    dd(\App\models\PlacePic::all()->count());
-});
-
-Route::get('fillHotelPic', function(){
-    $Place = \App\models\Hotel::all();
-    foreach ($Place as $item){
-        if($item->file != null && $item->file != 'none'){
-            $text = 'VALUES';
-            $first = false;
-
-
-            if($item->pic_1 != null){
-                $item->picNumber = '1.jpg';
-                if($item->alt1 != null)
-                    $item->alt = $item->alt1;
-                $item->save();
-            }
-            if($item->pic_2 != null){
-                $first = true;
-                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt2 . "')";
-            }
-            if($item->pic_3 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_4 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_5 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt5 . "')";
-            }
-
-            if($text != 'VALUES')
-                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
-        }
-    }
-
-    dd('done');
-});
-Route::get('fillAmakenPic', function(){
-    $Place = \App\models\Amaken::all();
-    foreach ($Place as $item){
-        if($item->file != null && $item->file != 'none'){
-            $text = 'VALUES';
-            $first = false;
-
-            if($item->pic_1 != null){
-                $item->picNumber = '1.jpg';
-                if($item->alt1 != null)
-                    $item->alt = $item->alt1;
-                $item->save();
-            }
-            if($item->pic_2 != null){
-                $first = true;
-                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt2 . "')";
-            }
-            if($item->pic_3 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_4 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_5 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt5 . "')";
-            }
-
-            if($text != 'VALUES')
-                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
-        }
-    }
-
-    dd('done');
-});
-Route::get('fillRestPic', function(){
-    $Place = \App\models\Restaurant::all();
-    foreach ($Place as $item){
-        if($item->file != null && $item->file != 'none'){
-            $text = 'VALUES';
-            $first = false;
-
-            if($item->pic_1 != null){
-                $item->picNumber = '1.jpg';
-                if($item->alt1 != null)
-                    $item->alt = $item->alt1;
-                $item->save();
-            }
-            if($item->pic_2 != null){
-                $first = true;
-                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt2 . "')";
-            }
-            if($item->pic_3 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_4 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_5 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt5 . "')";
-            }
-
-            if($text != 'VALUES')
-                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
-        }
-    }
-
-    dd('done');
-});
-Route::get('fillMajaraPic', function(){
-    $Place = \App\models\Majara::all();
-    foreach ($Place as $item){
-        if($item->file != null && $item->file != 'none'){
-            $text = 'VALUES';
-            $first = false;
-
-
-            if($item->pic_1 != null){
-                $item->picNumber = '1.jpg';
-                if($item->alt1 != null)
-                    $item->alt = $item->alt1;
-                $item->save();
-            }
-            if($item->pic_2 != null){
-                $first = true;
-                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt2 . "')";
-            }
-            if($item->pic_3 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_4 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_5 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt5 . "')";
-            }
-
-            if($text != 'VALUES')
-                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
-        }
-    }
-
-    dd('done');
 });
 
 
@@ -279,7 +75,9 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::post('opinions/delete', 'OpinionsController@delete')->name('opinions.delete');
 
 //  سئولات نظرسنجی
-    Route::get('questions/{kind?}', 'QuestionsController@index')->name('questions.index');
+    Route::get('questions', 'QuestionsController@index')->name('questions.index');
+    Route::get('questions/new', 'QuestionsController@newPage')->name('questions.new');
+    Route::get('questions/edit/{id}', 'QuestionsController@editPage')->name('questions.edit');
     Route::post('questions/store', 'QuestionsController@store')->name('questions.store');
     Route::post('questions/doEdit', 'QuestionsController@doEdit')->name('questions.doEdit');
     Route::post('questions/delete', 'QuestionsController@delete')->name('questions.delete');
@@ -302,10 +100,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::get('topInCity/{cityId?}', 'PlaceController@topInCity')->name('topInCity');
     Route::post('topInCity/store', 'PlaceController@topInCityStore')->name('topInCity.store');
     Route::post('findInCity', 'PlaceController@findInCity')->name('findInCity');
-
-});
-
-Route::group(array('middleware' => ['auth', 'adminLevel']), function() {
 
     Route::get('choosePlace/{mode}', ['as' => 'choosePlace', 'uses' => 'PlaceController@choosePlace']);
 
@@ -602,7 +396,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'configAccess']), func
 
 });
 
-
 Route::group(array('middleware' => ['auth', 'superAdminLevel']), function () {
 
     Route::get('users', ['as' => 'users', 'uses' => 'UserController@users']);
@@ -644,10 +437,18 @@ Route::group(array('middleware' => ['auth']), function () {
 
     Route::post('doChangePass', ['as' => 'doChangePass', 'uses' => 'HomeController@doChangePass']);
 
-});
-
-Route::group(array('middleware' => ['auth']), function () {
-
     Route::post('findCityWithState', 'AjaxController@findCityWithState')->name('find.city.withState');
 
+    Route::get('/photographer/Index', 'UserContentController@photographerIndex')->name('photographer.index');
+
+    Route::post('/photographer/submit', 'UserContentController@photographerSubmit')->name('photographer.submit');
+
+    Route::post('/photographer/delete', 'UserContentController@photographerDelete')->name('photographer.delete');
+
 });
+
+
+
+Route::get('uiFeatures', function(){
+   return view('uiFeatures');
+})->name('uiFeatures');

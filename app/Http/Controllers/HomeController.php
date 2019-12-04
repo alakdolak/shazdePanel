@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\AdminLog;
 use App\models\ConfigModel;
+use App\models\PhotographersPic;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +14,9 @@ use Illuminate\Support\Facades\Session;
 class HomeController extends Controller {
 
     public function home() {
-        return view('home');
+        $photographerNotAgree = PhotographersPic::where('status', 0)->get();
+
+        return view('home', compact(['photographerNotAgree']));
     }
 
     public function login() {

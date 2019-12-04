@@ -401,7 +401,6 @@
             var files = e.files;
             var done = function (url) {
                 image.src = url;
-                // $('#modal').modal('show');
                 $('#modal').modal({backdrop: 'static', keyboard: false});
             };
             var reader;
