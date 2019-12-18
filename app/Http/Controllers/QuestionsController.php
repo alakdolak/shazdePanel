@@ -143,6 +143,7 @@ class QuestionsController extends Controller
 
         }
         $kindPlace = Place::all();
+
         return view('config.questions.index', compact(['questions', 'kindPlace']));
     }
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Activity;
 use App\models\AdminLog;
 use App\models\ConfigModel;
+use App\models\LogModel;
 use App\models\PhotographersPic;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +18,10 @@ class HomeController extends Controller {
     public function home() {
         $photographerNotAgree = PhotographersPic::where('status', 0)->get();
 
-        return view('home', compact(['photographerNotAgree']));
+        $acitvity = Activity::where('name', 'نظر')->first();
+        $newReviews = LogModel::where('activityId', $acitvity->id)->where('confirm', 0)->count();
+
+        return view('home', compact(['photographerNotAgree', 'newReviews']));
     }
 
     public function login() {

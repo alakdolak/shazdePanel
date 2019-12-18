@@ -445,6 +445,14 @@ Route::group(array('middleware' => ['auth']), function () {
 
     Route::post('/photographer/delete', 'UserContentController@photographerDelete')->name('photographer.delete');
 
+    Route::get('/reviews/index', 'ReviewsController@index')->name('reviews.index');
+
+    Route::post('/reviews/pic/delete', 'ReviewsController@deleteReviewPic')->name('reviews.pic.delete');
+
+    Route::post('/reviews/confirm', 'ReviewsController@confirmReview')->name('reviews.confirm');
+
+    Route::post('/reviews/delete', 'ReviewsController@deleteReview')->name('reviews.delete');
+
 });
 
 

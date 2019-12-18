@@ -618,3 +618,12 @@ function deletePlacePicFiles($location, $picNumber){
 
     return true;
 }
+
+function gregorianToJalali($time, $splite = '-'){
+    include_once 'jdate.php';
+
+    $date = explode($splite, $time);
+    $date = gregorian_to_jalali($date[0], $date[1], $date[2]);
+
+    return $date;
+}
