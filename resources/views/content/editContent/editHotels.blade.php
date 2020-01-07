@@ -309,18 +309,18 @@
                                     <div class="row" style="margin-top: 10px;">
 
                                         <div class="col-sm-2 f_r">
-                                            <span style="direction: rtl" class="myLabel">موقعیت:</span>
+                                            <span style="direction: rtl" class="myLabel">موقعیت ترافیکی:</span>
                                         </div>
 
                                         <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">شلوغ</span>
+                                            <span style="direction: rtl" class="myLabel">پرازدحام</span>
                                             <label class="switch">
                                                 <input type="radio" name="population" value="1" {{$place->shologh? 'checked' : ''}}>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
                                         <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">خلوت</span>
+                                            <span style="direction: rtl" class="myLabel">کم‌ازدحام</span>
                                             <label class="switch">
                                                 <input type="radio" name="population" value="2" {{$place->khalvat? 'checked' : ''}}>
                                                 <span class="slider round"></span>

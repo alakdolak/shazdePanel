@@ -73,6 +73,10 @@
             margin-bottom: 10px;
             padding-left: 10px;
         }
+
+        .marTop{
+            margin-top: 10px;
+        }
     </style>
 
 @stop

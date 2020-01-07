@@ -90,8 +90,8 @@
                                         <th data-field="tarikhi" data-editable="true">تاریخی</th>
                                         <th data-field="markaz" data-editable="true">مرکز</th>
                                         <th data-field="hoome" data-editable="true">حومه</th>
-                                        <th data-field="shologh" data-editable="true">شلوغ</th>
-                                        <th data-field="khalvat" data-editable="true">خلوت</th>
+                                        <th data-field="shologh" data-editable="true">پرازدحام</th>
+                                        <th data-field="khalvat" data-editable="true">کم‌ازدحام</th>
                                         <th data-field="tabiat" data-editable="true">طبیعت</th>
                                         <th data-field="kooh" data-editable="true">کوه</th>
                                         <th data-field="darya" data-editable="true">دریا</th>

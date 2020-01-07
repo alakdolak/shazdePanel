@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
 Route::get('updateMainDataBase', function(){
+    \DB::select("ALTER TABLE `majara` ADD `berke` TINYINT NOT NULL DEFAULT '0' AFTER `dasht`, ADD `beach` TINYINT NOT NULL DEFAULT '0' AFTER `berke`, ADD `geoPark` TINYINT NOT NULL DEFAULT '0' AFTER `beach`, ADD `river` TINYINT NOT NULL DEFAULT '0' AFTER `geoPark`, ADD `cheshme` TINYINT NOT NULL DEFAULT '0' AFTER `river`, ADD `talab` TINYINT NOT NULL DEFAULT '0' AFTER `cheshme`;");
+    \DB::select("ALTER TABLE `majara` ADD `walking` TINYINT NOT NULL DEFAULT '0' AFTER `sahranavardi`, ADD `swimming` TINYINT NOT NULL DEFAULT '0' AFTER `walking`, ADD `rockClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `swimming`, ADD `stoneClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `rockClimbing`, ADD `valleyClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `stoneClimbing`, ADD `caveClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `valleyClimbing`, ADD `iceClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `caveClimbing`, ADD `offRoad` TINYINT NOT NULL DEFAULT '0' AFTER `iceClimbing`, ADD `boat` TINYINT NOT NULL DEFAULT '0' AFTER `offRoad`, ADD `rafting` TINYINT NOT NULL DEFAULT '0' AFTER `boat`, ADD `surfing` TINYINT NOT NULL DEFAULT '0' AFTER `rafting`;");
+
+    \DB::select("ALTER TABLE `amaken` ADD `tejari` TINYINT NOT NULL DEFAULT '0' AFTER `baftetarikhi`, ADD `mazhabi` TINYINT NOT NULL DEFAULT '0' AFTER `tejari`, ADD `sanati` TINYINT NOT NULL DEFAULT '0' AFTER `mazhabi`;");
+    \DB::select("ALTER TABLE `amaken` ADD `jangal` TINYINT NOT NULL DEFAULT '0' AFTER `kavir`, ADD `shahri` TINYINT NOT NULL DEFAULT '0' AFTER `jangal`, ADD `village` TINYINT NOT NULL DEFAULT '0' AFTER `shahri`;");
+    \DB::select("ALTER TABLE `amaken` ADD `boomi` TINYINT NOT NULL DEFAULT '0' AFTER `tarikhibana`;");
+    \DB::select("ALTER TABLE `amaken` ADD `weather` TINYINT NOT NULL DEFAULT '0' AFTER `mamooli`;");
 
 });
 
@@ -454,8 +461,6 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('/reviews/delete', 'ReviewsController@deleteReview')->name('reviews.delete');
 
 });
-
-
 
 Route::get('uiFeatures', function(){
    return view('uiFeatures');

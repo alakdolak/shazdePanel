@@ -110,6 +110,9 @@ class PlaceController extends Controller {
                         break;
                 }
 
+                if(!file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName))
+                    mkdir(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName);
+
                 if($place != null) {
 
                     if ($place->file == null || $place->file == 'none' || $place->file == '' ||
@@ -764,7 +767,9 @@ class PlaceController extends Controller {
         $amaken->meta = $request->meta;
         $amaken->keyword = $request->keyword;
         $amaken->h1 = $request->h1;
-        $amaken->description = $request->description;
+        $amaken->description = nl2br($request->description);
+
+
 
         if($request->address != null)
             $amaken->address = $request->address;
@@ -786,11 +791,6 @@ class PlaceController extends Controller {
         else
             $amaken->tarikhi = 0;
 
-        if(isset($request->mooze) && $request->mooze == 'on')
-            $amaken->mooze = 1;
-        else
-            $amaken->mooze = 0;
-
         if(isset($request->tafrihi) && $request->tafrihi == 'on')
             $amaken->tafrihi = 1;
         else
@@ -801,15 +801,20 @@ class PlaceController extends Controller {
         else
             $amaken->tabiatgardi = 0;
 
-        if(isset($request->markazkharid) && $request->markazkharid == 'on')
-            $amaken->markazkharid = 1;
+        if(isset($request->tejari) && $request->tejari == 'on')
+            $amaken->tejari = 1;
         else
-            $amaken->markazkharid = 0;
+            $amaken->tejari = 0;
 
-        if(isset($request->baftetarikhi) && $request->baftetarikhi == 'on')
-            $amaken->baftetarikhi = 1;
+        if(isset($request->mazhabi) && $request->mazhabi == 'on')
+            $amaken->mazhabi = 1;
         else
-            $amaken->baftetarikhi = 0;
+            $amaken->mazhabi = 0;
+
+        if(isset($request->sanati) && $request->sanati == 'on')
+            $amaken->sanati = 1;
+        else
+            $amaken->sanati = 0;
 
         $amaken->boundArea = $request->boundArea;
 
@@ -821,11 +826,6 @@ class PlaceController extends Controller {
             $amaken->shologh = 0;
             $amaken->khalvat = 1;
         }
-
-        if(isset($request->tabiat) && $request->tabiat == 'on')
-            $amaken->tabiat = 1;
-        else
-            $amaken->tabiat = 0;
 
         if(isset($request->kooh) && $request->kooh == 'on')
             $amaken->kooh = 1;
@@ -842,21 +842,41 @@ class PlaceController extends Controller {
         else
             $amaken->kavir = 0;
 
+        if(isset($request->jangal) && $request->jangal == 'on')
+            $amaken->jangal = 1;
+        else
+            $amaken->jangal = 0;
+
+        if(isset($request->shahri) && $request->shahri == 'on')
+            $amaken->shahri = 1;
+        else
+            $amaken->shahri = 0;
+
+        if(isset($request->village) && $request->village == 'on')
+            $amaken->village = 1;
+        else
+            $amaken->village = 0;
+
+        if(isset($request->weather))
+            $amaken->weather = $request->weather;
+        else
+            $amaken->weather = $request->weather;
+
         switch ($request->archi){
             case 1:
                 $amaken->modern = 1;
                 $amaken->tarikhibana = 0;
-                $amaken->mamooli = 0;
+                $amaken->boomi = 0;
                 break;
             case 2:
                 $amaken->modern = 0;
                 $amaken->tarikhibana = 1;
-                $amaken->mamooli = 0;
+                $amaken->boomi = 0;
                 break;
             case 3:
                 $amaken->modern = 0;
                 $amaken->tarikhibana = 0;
-                $amaken->mamooli = 1;
+                $amaken->boomi = 1;
                 break;
         }
 
@@ -929,7 +949,7 @@ class PlaceController extends Controller {
         $hotel->D = $request->D;
         $hotel->meta = $request->meta;
         $hotel->h1 = $request->h1;
-        $hotel->description = $request->description;
+        $hotel->description = nl2br($request->description);
         $hotel->keyword = $request->keyword;
         $hotel->kind_id = $request->kind;
         $hotel->rate_int = $request->rate_int;
@@ -1228,7 +1248,7 @@ class PlaceController extends Controller {
         $restaurant->D = $request->D;
         $restaurant->meta = $request->meta;
         $restaurant->h1 = $request->h1;
-        $restaurant->description = $request->description;
+        $restaurant->description = nl2br($request->description);
         $restaurant->keyword = $request->keyword;
         $restaurant->kind_id = $request->kind_id;
 
@@ -1390,7 +1410,7 @@ class PlaceController extends Controller {
         $majara->D = $request->D;
         $majara->meta = $request->meta;
         $majara->h1 = $request->h1;
-        $majara->description = $request->description;
+        $majara->description = nl2br($request->description);
         $majara->keyword = $request->keyword;
 
         if($request->dastresi != null)
@@ -1488,6 +1508,91 @@ class PlaceController extends Controller {
         else
             $majara->dasht = 0;
 
+        if(isset($request->berke) && $request->berke == 'on')
+            $majara->berke = 1;
+        else
+            $majara->berke = 0;
+
+        if(isset($request->beach) && $request->beach == 'on')
+            $majara->beach = 1;
+        else
+            $majara->beach = 0;
+
+        if(isset($request->geoPark) && $request->geoPark == 'on')
+            $majara->geoPark = 1;
+        else
+            $majara->geoPark = 0;
+
+        if(isset($request->river) && $request->river == 'on')
+            $majara->river = 1;
+        else
+            $majara->river = 0;
+
+        if(isset($request->cheshme) && $request->cheshme == 'on')
+            $majara->cheshme = 1;
+        else
+            $majara->cheshme = 0;
+
+        if(isset($request->talab) && $request->talab == 'on')
+            $majara->talab = 1;
+        else
+            $majara->talab = 0;
+
+        if(isset($request->walking) && $request->walking == 'on')
+            $majara->walking = 1;
+        else
+            $majara->walking = 0;
+
+        if(isset($request->swimming) && $request->swimming == 'on')
+            $majara->swimming = 1;
+        else
+            $majara->swimming = 0;
+
+        if(isset($request->rockClimbing) && $request->rockClimbing == 'on')
+            $majara->rockClimbing = 1;
+        else
+            $majara->rockClimbing = 0;
+
+        if(isset($request->stoneClimbing) && $request->stoneClimbing == 'on')
+            $majara->stoneClimbing = 1;
+        else
+            $majara->stoneClimbing = 0;
+
+        if(isset($request->valleyClimbing) && $request->valleyClimbing == 'on')
+            $majara->valleyClimbing = 1;
+        else
+            $majara->valleyClimbing = 0;
+
+        if(isset($request->caveClimbing) && $request->caveClimbing == 'on')
+            $majara->caveClimbing = 1;
+        else
+            $majara->caveClimbing = 0;
+
+        if(isset($request->iceClimbing) && $request->iceClimbing == 'on')
+            $majara->iceClimbing = 1;
+        else
+            $majara->iceClimbing = 0;
+
+        if(isset($request->offRoad) && $request->offRoad == 'on')
+            $majara->offRoad = 1;
+        else
+            $majara->offRoad = 0;
+
+        if(isset($request->boat) && $request->boat == 'on')
+            $majara->boat = 1;
+        else
+            $majara->boat = 0;
+
+        if(isset($request->rafting) && $request->rafting == 'on')
+            $majara->rafting = 1;
+        else
+            $majara->rafting = 0;
+
+        if(isset($request->surfing) && $request->surfing == 'on')
+            $majara->surfing = 1;
+        else
+            $majara->surfing = 0;
+
 
         $majara->tag1 = $request->tag[0];
         $majara->tag2 = $request->tag[1];
@@ -1512,7 +1617,6 @@ class PlaceController extends Controller {
 
     public function storeMahaliFood(Request $request)
     {
-//        dd($request->all());
 
         $request->validate([
             'name' => 'required',
@@ -1544,7 +1648,7 @@ class PlaceController extends Controller {
         $newMahali->keyword = $request->keyword;
         $newMahali->h1 = $request->h1;
         $newMahali->meta = $request->meta;
-        $newMahali->description = $request->description;
+        $newMahali->description = nl2br($request->description);
         $newMahali->alt = $request->keyword;
 
         if(isset($request->veg) && $request->veg == 1)
@@ -1556,7 +1660,7 @@ class PlaceController extends Controller {
             $newMahali->hotOrCold = $request->hotOrCold;
 
         if(isset($request->recipes) && $request->recipes != null)
-            $newMahali->recipes = $request->recipes;
+            $newMahali->recipes = nl2br($request->recipes);
         else
             $newMahali->recipes = null;
 
@@ -1620,7 +1724,7 @@ class PlaceController extends Controller {
         $newSogat->keyword = $request->keyword;
         $newSogat->h1 = $request->h1;
         $newSogat->meta = $request->meta;
-        $newSogat->description = $request->description;
+        $newSogat->description =  nl2br($request->description);
         $newSogat->alt = $request->keyword;
 
         if(isset($request->weight) && $request->weight != null)

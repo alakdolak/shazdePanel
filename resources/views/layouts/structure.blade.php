@@ -92,6 +92,9 @@
                 border-color: #333333 !important;
                 border-radius: 10px !important;
             }
+            .left-menu-dropdown{
+                width: 100% !important;
+            }
         </style>
 
         <script>
