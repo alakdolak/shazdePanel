@@ -42,26 +42,81 @@
 </div>
 
 <hr>
-<div class="row" style="margin-top: 10px;">
+<div id="firForWho" class="row" style="margin-top: 10px;">
 
     <div class="f_r" style="margin-left: 20px">
-        <span style="direction: rtl; text-align: right" class="myLabel" >نوع غذا:</span>
+        <span style="direction: rtl; text-align: right" class="myLabel" >مناسب برای:</span>
     </div>
 
     <div class=" f_r" style="margin-left: 10px;">
-        <span style="direction: rtl" class="myLabel">گیاهی</span>
+        <span style="direction: rtl" class="myLabel">افراد گیاه‌خوار</span>
         <label class="switch">
-            <input type="radio" name="veg" id="veg" value="1" checked>
+            <input type="checkbox" name="vegetarian" id="vegetarian" value="on" onchange="fitFor(1)">
             <span class="slider round"></span>
         </label>
     </div>
-    <div class="f_r">
-        <span style="direction: rtl" class="myLabel">غیرگیاهی</span>
+    <div class="f_r" style="margin-left: 10px;">
+        <span style="direction: rtl" class="myLabel">وگان</span>
         <label class="switch">
-            <input type="radio" name="veg" id="veg" value="0">
+            <input type="checkbox" name="vegan" id="vegan" value="on" onchange="fitFor(2)">
             <span class="slider round"></span>
         </label>
     </div>
+    <div class="f_r" style="margin-left: 10px;">
+        <span style="direction: rtl" class="myLabel">افراد مبتلا به دیابت</span>
+        <label class="switch">
+            <input type="checkbox" name="diabet" id="diabet" value="on" onchange="fitFor(3)">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <div class="f_r" style="margin-left: 10px;">
+        <span style="direction: rtl" class="myLabel">هیچ کدام</span>
+        <label class="switch">
+            <input type="checkbox" name="commonEat" id="commonEat" value="on" onchange="fitFor(4)">
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+
+<hr>
+<div class="row" style="margin-top: 10px;">
+
+    <div class=" f_r" style="margin-left: 10px;">
+        <span>
+            <input type="text" class="form-control" name="energy" id="energy" placeholder="مقدار کالری"
+                   style="width: 100px; display: inline-block">
+        </span>
+        <span>
+            کیلوکالری در هر
+        </span>
+        <span>
+            <input type="text" class="form-control" name="volume" id="volume" placeholder="مقدار مرجع"
+                   style="width: 100px; display: inline-block">
+        </span>
+        <span>
+            <select name="source" class="form-control" style="width: 100px; display: inline-block">
+                <option value="1">قاشق</option>
+                <option value="2">گرم</option>
+            </select>
+        </span>
+    </div>
+
+    <span class=" f_r" style="margin-left: 10px;">
+        <span style="direction: rtl" class="myLabel">برنج</span>
+        <label class="switch">
+            <input type="checkbox" name="rice" id="rice" value="on">
+            <span class="slider round"></span>
+        </label>
+    </span>
+
+    <span class=" f_r" style="margin-left: 10px;">
+        <span style="direction: rtl" class="myLabel">نان</span>
+        <label class="switch">
+            <input type="checkbox" name="bread" id="bread" value="on">
+            <span class="slider round"></span>
+        </label>
+    </span>
+
 </div>
 
 <hr>
@@ -127,6 +182,35 @@
         var error_text = '';
         var error = false;
 
+        var diabet = document.getElementById('diabet').checked;
+        var vegetarian = document.getElementById('vegetarian').checked;
+        var vegan = document.getElementById('vegan').checked;
+        var commonEat = document.getElementById('commonEat').checked;
+
+        if(!diabet && !vegetarian && !vegan && !commonEat ){
+            error = true;
+            error_text += '<li>حتما باید یکی از گزینه های "مناسب برای" را انتخاب کنید</li>';
+            document.getElementById('firForWho').classList.add('error');
+
+        }
+
+        var volume = document.getElementById('volume').value;
+        var energy = document.getElementById('energy').value;
+        if(volume == '' || energy == ''){
+            error = true;
+            error_text += '<li>فیلدهای کالری باید پر شود.</li>';
+        }
+
         showErrorDivOrsubmit(error_text, error);
+    }
+
+    function fitFor(num){
+        if(num == 4){
+            document.getElementById('diabet').checked = false;
+            document.getElementById('vegetarian').checked = false;
+            document.getElementById('vegan').checked = false;
+        }
+        else
+            document.getElementById('commonEat').checked = false;
     }
 </script>

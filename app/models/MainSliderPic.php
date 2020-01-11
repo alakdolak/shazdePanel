@@ -4,8 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MahaliFood extends Model
+class MainSliderPic extends Model
 {
-    protected $table = 'mahaliFood';
+    protected $table = 'mainSliderPic';
     public $timestamps = false;
 }

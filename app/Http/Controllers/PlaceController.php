@@ -7,6 +7,7 @@ use App\models\Amaken;
 use App\models\Cities;
 use App\models\Hotel;
 use App\models\MahaliFood;
+use App\models\MahaliFoodDiet;
 use App\models\Majara;
 use App\models\Place;
 use App\models\PlacePic;
@@ -429,13 +430,13 @@ class PlaceController extends Controller {
                 $kind = 'majara';
                 break;
             case 10:
-                $kind = 'sogatsanaies';
+                $kind = 'sogatSanaies';
                 break;
             case 11:
-                $kind = 'mahalifood';
+                $kind = 'mahaliFood';
                 break;
         }
-        if($kind == 'mahalifood' || $kind == 'sogatsanaies'){
+        if($kind == 'mahaliFood' || $kind == 'sogatSanaies'){
             if($cityMode == 0){
                 $state2 = State::find($cityId);
                 $name = $state2->name;
@@ -519,6 +520,8 @@ class PlaceController extends Controller {
                     $place->tag15,
                 ];
 
+                $place->description = trueShowForTextArea($place->description);
+
                 return view('content.editContent.editAmaken', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState']));
             case 4:
                 $place = Hotel::find($id);
@@ -545,6 +548,8 @@ class PlaceController extends Controller {
                     $place->tag14,
                     $place->tag15,
                 ];
+
+                $place->description = trueShowForTextArea($place->description);
 
                 return view('content.editContent.editHotels', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState']));
                 break;
@@ -574,11 +579,14 @@ class PlaceController extends Controller {
                     $place->tag15,
                 ];
 
+                $place->description = trueShowForTextArea($place->description);
+
                 return view('content.editContent.editRestaurant', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState']));
                 break;
             case 6:
                 $place = Majara::find($id);
                 $city = Cities::find($place->cityId);
+                $state = State::find($city->stateId);
                 $place->city = $city->name;
                 $place->stateId = $city->stateId;
                 $place->tags = [
@@ -598,6 +606,8 @@ class PlaceController extends Controller {
                     $place->tag14,
                     $place->tag15,
                 ];
+
+                $place->description = trueShowForTextArea($place->description);
 
                 $cities = Cities::where('stateId', $city->stateId)->get();
 
@@ -626,6 +636,8 @@ class PlaceController extends Controller {
                     $sogat->tag14,
                     $sogat->tag15,
                 ];
+
+                $sogat->description = trueShowForTextArea($sogat->description);
 
                 $cities = Cities::where('stateId', $city->stateId)->get();
 
@@ -656,7 +668,12 @@ class PlaceController extends Controller {
                     $food->tag15,
                 ];
 
+                $food->recipes = trueShowForTextArea($food->recipes);
+                $food->description = trueShowForTextArea($food->description);
+
                 $cities = Cities::where('stateId', $city->stateId)->get();
+
+                $food->diet = MahaliFoodDiet::where('mahaliFoodId', $food->id)->first();
 
                 return view('content.editContent.editMahaliFood', compact(['food', 'kind', 'state', 'allState', 'mode', 'cities', 'city']));
                 break;
@@ -713,7 +730,7 @@ class PlaceController extends Controller {
                 break;
         }
 
-        return view('content.newContent.newContentCore', compact(['city', 'state', 'allState', 'allCity', 'mode', 'cities', 'kind', 'url', 'titleName']));
+        return view('content.newContent.newContentCore', compact(['city', 'state', 'allState', 'mode', 'cities', 'kind', 'url', 'titleName']));
 
     }
 
@@ -860,25 +877,25 @@ class PlaceController extends Controller {
         if(isset($request->weather))
             $amaken->weather = $request->weather;
         else
-            $amaken->weather = $request->weather;
+            $amaken->weather = 0;
 
-        switch ($request->archi){
-            case 1:
-                $amaken->modern = 1;
-                $amaken->tarikhibana = 0;
-                $amaken->boomi = 0;
-                break;
-            case 2:
-                $amaken->modern = 0;
-                $amaken->tarikhibana = 1;
-                $amaken->boomi = 0;
-                break;
-            case 3:
-                $amaken->modern = 0;
-                $amaken->tarikhibana = 0;
-                $amaken->boomi = 1;
-                break;
-        }
+        if(isset($request->modern) && $request->modern == 'on')
+            $amaken->modern = 1;
+        else
+            $amaken->modern = 0;
+        if(isset($request->tarikhibana) && $request->tarikhibana == 'on')
+            $amaken->tarikhibana = 1;
+        else
+            $amaken->tarikhibana = 0;
+        if(isset($request->boomi) && $request->boomi == 'on')
+            $amaken->boomi = 1;
+        else
+            $amaken->boomi = 0;
+        if(isset($request->mazhabiArch) && $request->mazhabiArch == 'on')
+            $amaken->mazhabiArch = 1;
+        else
+            $amaken->mazhabiArch = 0;
+
 
         $amaken->tag1 = $request->tag[0];
         $amaken->tag2 = $request->tag[1];
@@ -1410,7 +1427,7 @@ class PlaceController extends Controller {
         $majara->D = $request->D;
         $majara->meta = $request->meta;
         $majara->h1 = $request->h1;
-        $majara->description = nl2br($request->description);
+        $majara->description = nl2br($request->description, false);
         $majara->keyword = $request->keyword;
 
         if($request->dastresi != null)
@@ -1651,10 +1668,20 @@ class PlaceController extends Controller {
         $newMahali->description = nl2br($request->description);
         $newMahali->alt = $request->keyword;
 
-        if(isset($request->veg) && $request->veg == 1)
-            $newMahali->veg = 1;
+        if(isset($request->diabet) && $request->diabet == 'on')
+            $newMahali->diabet = 1;
         else
-            $newMahali->veg = 0;
+            $newMahali->diabet = 0;
+
+        if(isset($request->vegan) && $request->vegan == 'on')
+            $newMahali->vegan = 1;
+        else
+            $newMahali->vegan = 0;
+
+        if(isset($request->vegetarian) && $request->vegetarian == 'on')
+            $newMahali->vegetarian = 1;
+        else
+            $newMahali->vegetarian = 0;
 
         if(isset($request->hotOrCold))
             $newMahali->hotOrCold = $request->hotOrCold;
@@ -1690,6 +1717,34 @@ class PlaceController extends Controller {
         $newMahali->tag15 = $request->tag[14];
 
         $newMahali->save();
+
+        $diet = MahaliFoodDiet::where('mahaliFoodId', $newMahali->id)->first();
+        if($diet == null) {
+            $diet = new MahaliFoodDiet();
+        }
+            $diet->energy = $request->energy;
+            $diet->volume = $request->volume;
+            $diet->mahaliFoodId = $newMahali->id;
+            if($request->source == 1){
+                $diet->gram = 1;
+                $diet->spoon = 0;
+            }
+            else{
+                $diet->gram = 0;
+                $diet->spoon = 1;
+            }
+
+            if(isset($request->rice) && $request->rice == 'on')
+                $diet->rice = 1;
+            else
+                $diet->rice = 0;
+
+            if(isset($request->bread) && $request->bread == 'on')
+                $diet->bread = 1;
+            else
+                $diet->bread = 0;
+
+            $diet->save();
 
         return \redirect(\url('uploadImgPage/11/' . $newMahali->id));
     }

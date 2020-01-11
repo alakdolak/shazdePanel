@@ -83,9 +83,14 @@
                         <div class="sparkline13-graph">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <h2>
-                                        بارگذاری عکس‌های {{$place->name}}
-                                    </h2>
+                                    <div style="display: inline-block">
+                                        <h2>
+                                            بارگذاری عکس‌های {{$place->name}}
+                                        </h2>
+                                    </div>
+                                    <a href="{{url('editContent/' . $kindPlaceId . '/' . $place->id)}}">
+                                        <button class="btn btn-primary" style="float: left">بازگشت</button>
+                                    </a>
                                 </div>
 
                                 <input type="hidden" id="placeId" value="{{$place->id}}">

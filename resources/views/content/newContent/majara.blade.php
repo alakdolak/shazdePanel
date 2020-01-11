@@ -94,7 +94,7 @@
         </label>
     </div>
     <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">قایق‌سواری در موج‌های خروشان</span>
+        <span style="direction: rtl" class="myLabel">رفتینگ</span>
         <label class="switch">
             <input type="checkbox" name="rafting" id="rafting" value="on">
             <span class="slider round"></span>

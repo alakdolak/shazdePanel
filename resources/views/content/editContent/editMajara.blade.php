@@ -281,7 +281,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                        <span style="direction: rtl" class="myLabel">قایق‌سواری در موج‌های خروشان</span>
+                                        <span style="direction: rtl" class="myLabel">رفتینگ</span>
                                         <label class="switch">
                                             <input type="checkbox" name="rafting" id="rafting" value="on" {{$place->rafting? 'checked' : ''}}>
                                             <span class="slider round"></span>
@@ -296,7 +296,7 @@
                                         </div>
 
                                         <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کوه</span>
+                                            <span style="direction: rtl" class="myLabel">کوهستان</span>
                                             <label class="switch">
                                                 <input type="checkbox" name="kooh" id="kooh" value="on" {{$place->kooh? 'checked' : ''}}>
                                                 <span class="slider round"></span>

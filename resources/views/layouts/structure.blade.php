@@ -146,8 +146,6 @@
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('city.index')}}" class="dropdown-item">اطلاعات شهرها</a>
                                     <a href="{{url('topInCity')}}" class="dropdown-item">پیشنهاد ویژه شهر</a>
-                                    <a href="{{route('choosePlace', ['mode' => 'alt'])}}" class="dropdown-item">تصاویر و alt آنها</a>
-                                    <a href="{{route('chooseCity', ['mode' => 'seo'])}}" class="dropdown-item">تگ ها و متا صفحات</a>
                                     <a href="{{route('manageNoFollow')}}" class="dropdown-item">مدیریت لینک ها</a>
                                     <a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
                                     <a href="{{route('chooseCity', ['mode' => 'content2'])}}" class="dropdown-item">2تغییر محتوای صفحات</a>
@@ -167,6 +165,7 @@
                                     <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
                                     <a href="{{route('offers')}}" class="dropdown-item">مدیریت کد های تخفیف</a>
                                     <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
+                                    <a href="{{route('slider.index')}}" class="dropdown-item">عکس اسلاید صفحه اول</a>
                                     <a href="project-details.html" class="dropdown-item">Project Details</a>
                                 </div>
                             </li>
@@ -179,7 +178,6 @@
                                     <a href="{{url('tags')}}" class="dropdown-item">تگ ها</a>
                                     <a href="{{url('placeStyle')}}" class="dropdown-item">سبک مکان</a>
                                     <a href="{{url('picItems')}}" class="dropdown-item">آیتم تصاویر</a>
-                                    <a href="{{url('opinions')}}" class="dropdown-item">مدیریت نظرات</a>
                                     <a href="{{url('questions')}}" class="dropdown-item">سئوالات نظرسنجی</a>
                                 </div>
                             </li>

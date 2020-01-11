@@ -188,7 +188,7 @@
                                             </label>
                                         </div>
                                         <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">طبیعت</span>
+                                            <span style="direction: rtl" class="myLabel">طبیعی</span>
                                             <label class="switch">
                                                 <input type="checkbox" name="tabiatgardi" id="tabiatgardi" value="on" {{$place->tabiatgardi? 'checked' : ''}}>
                                                 <span class="slider round"></span>
@@ -322,7 +322,6 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
-
                                     </div>
 
                                     <hr>
@@ -335,21 +334,28 @@
                                         <div class="col-sm-2 f_r" style="border-left: solid gray;">
                                             <span style="direction: rtl" class="myLabel">مدرن: </span>
                                             <label class="switch">
-                                                <input type="radio" name="archi" value="1" {{$place->modern? 'checked' : ''}}>
+                                                <input type="checkbox" name="modern" value="on" {{$place->modern? 'checked' : ''}}>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
                                         <div class="col-sm-2 f_r" style="border-left: solid gray;">
                                             <span style="direction: rtl" class="myLabel">تاریخی</span>
                                             <label class="switch">
-                                                <input type="radio" name="archi" value="2" {{$place->tarikhibana? 'checked' : ''}}>
+                                                <input type="checkbox" name="tarikhibana" value="on" {{$place->tarikhibana? 'checked' : ''}}>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
                                         <div class="col-sm-2 f_r">
                                             <span style="direction: rtl" class="myLabel" style="border-left: solid gray;">بومی</span>
                                             <label class="switch">
-                                                <input type="radio" name="archi" value="3" {{$place->boomi? 'checked' : ''}}>
+                                                <input type="checkbox" name="boomi" value="on" {{$place->boomi? 'checked' : ''}}>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-2 f_r">
+                                            <span style="direction: rtl" class="myLabel" style="border-left: solid gray;">مذهبی</span>
+                                            <label class="switch">
+                                                <input type="checkbox" name="mazhabiArch" value="on" {{$place->mazhabiArch? 'checked' : ''}}>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>

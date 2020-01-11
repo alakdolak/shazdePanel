@@ -75,12 +75,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::post('picItems/doEdit', 'PicItemController@doEdit')->name('picItems.doEdit');
     Route::post('picItems/delete', 'PicItemController@delete')->name('picItems.delete');
 
-//    مدیریت نظران
-    Route::get('opinions/{kind?}', 'OpinionsController@index')->name('opinions.index');
-    Route::post('opinions/store', 'OpinionsController@store')->name('opinions.store');
-    Route::post('opinions/doEdit', 'OpinionsController@doEdit')->name('opinions.doEdit');
-    Route::post('opinions/delete', 'OpinionsController@delete')->name('opinions.delete');
-
 //  سئولات نظرسنجی
     Route::get('questions', 'QuestionsController@index')->name('questions.index');
     Route::get('questions/new', 'QuestionsController@newPage')->name('questions.new');
@@ -123,24 +117,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::post('city/doEdit', ['as' => 'city.doEdit', 'uses' => 'PlaceController@doEditCity']);
 
     Route::post('city/delete', ['as' => 'city.delete', 'uses' => 'PlaceController@deleteCity']);
-
-});
-
-Route::group(array('middleware' => ['auth', 'adminLevel', 'altAccess']), function () {
-
-    Route::get('changeAlt/{id}/{mode}', ['as' => 'changeAlt', 'uses' => 'AltController@changeAlt']);
-
-    Route::post('doChangeAlt/{id}/{kindPlaceId}', ['as' => 'doChangeAlt', 'uses' => 'AltController@doChangeAlt']);
-
-    Route::post('doChangeAltForUserPic', ['as' => 'doChangeAltForUserPic', 'uses' => 'AltController@doChangeAltForUserPic']);
-
-    Route::post('doChangePic/{id}/{kindPlaceId}', ['as' => 'doChangePic', 'uses' => 'AltController@doChangePic']);
-
-    Route::post('removeMainPic/{id}/{kindPlaceId}', ['as' => 'removeMainPic', 'uses' => 'AltController@removeMainPic']);
-
-    Route::post('removeUserPic', ['as' => 'removeUserPic', 'uses' => 'AltController@removeUserPic']);
-
-    Route::post('doChangeUserPic', ['as' => 'doChangeUserPic', 'uses' => 'AltController@doChangeUserPic']);
 
 });
 
@@ -459,6 +435,15 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('/reviews/confirm', 'ReviewsController@confirmReview')->name('reviews.confirm');
 
     Route::post('/reviews/delete', 'ReviewsController@deleteReview')->name('reviews.delete');
+
+    Route::get('/mainSlider/index', 'SliderController@index')->name('slider.index');
+
+    Route::post('/mainSlider/picStore', 'SliderController@storePic')->name('slider.storePic');
+    Route::post('/mainSlider/deletePic', 'SliderController@deletePic')->name('slider.deletePic');
+    Route::post('/mainSlider/changePic', 'SliderController@changePic')->name('slider.changePic');
+    Route::post('/mainSlider/changeAltPic', 'SliderController@changeAltPic')->name('slider.changeAltPic');
+    Route::post('/mainSlider/changeTextPic', 'SliderController@changeTextPic')->name('slider.changeTextPic');
+    Route::post('/mainSlider/changeColor', 'SliderController@changeColor')->name('slider.changeColor');
 
 });
 

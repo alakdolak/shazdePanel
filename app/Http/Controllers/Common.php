@@ -405,8 +405,8 @@ function _custom_check_national_code($code) {
 function makeValidInput($input) {
     $input = addslashes($input);
     $input = trim($input);
-    if(get_magic_quotes_gpc())
-        $input = stripslashes($input);
+//    if(get_magic_quotes_gpc())
+//        $input = stripslashes($input);
     $input = htmlspecialchars($input);
     return $input;
 }
@@ -626,4 +626,12 @@ function gregorianToJalali($time, $splite = '-'){
     $date = gregorian_to_jalali($date[0], $date[1], $date[2]);
 
     return $date;
+}
+
+function trueShowForTextArea($text){
+    $breaks = array("<br />","<br>","<br/>");
+    $text = str_ireplace("\r\n", "", $text);
+    $text = str_ireplace($breaks, "\r\n", $text);
+
+    return $text;
 }

@@ -124,7 +124,7 @@
                                         <div class="tab {{$kind == 'majara' ? 'chooseTab': ''}}">ماجرا</div>
                                     </a>
                                     <a href="{{url('/newChangeContent/' . $id . '/10/' . $cityMode )}}">
-                                        <div class="tab {{$kind == 'sogatsanaies' ? 'chooseTab': ''}}">صنایع دستی/سوغات</div>
+                                        <div class="tab {{$kind == 'sogatSanaies' ? 'chooseTab': ''}}">صنایع دستی/سوغات</div>
                                     </a>
                                     <a href="{{url('/newChangeContent/' . $id . '/11/' . $cityMode )}}">
                                         <div class="tab {{$kind == 'mahalifood' ? 'chooseTab': ''}}">غذای محلی</div>

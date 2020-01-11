@@ -46,7 +46,7 @@
         </label>
     </div>
     <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">طبیعت</span>
+        <span style="direction: rtl" class="myLabel">طبیعی</span>
         <label class="switch">
             <input type="checkbox" name="tabiatgardi" id="tabiatgardi" value="on">
             <span class="slider round"></span>
@@ -194,21 +194,28 @@
     <div class="col-sm-2 f_r" style="border-left: solid gray;">
         <span style="direction: rtl" class="myLabel">مدرن: </span>
         <label class="switch">
-            <input type="radio" name="archi" value="1">
+            <input type="checkbox" name="modern" value="on">
             <span class="slider round"></span>
         </label>
     </div>
     <div class="col-sm-2 f_r" style="border-left: solid gray;">
         <span style="direction: rtl" class="myLabel">تاریخی</span>
         <label class="switch">
-            <input type="radio" name="archi" value="2">
+            <input type="checkbox" name="tarikhibana" value="on">
             <span class="slider round"></span>
         </label>
     </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">بومی</span>
+    <div class="col-sm-2 f_r">
+        <span style="direction: rtl; border-left: solid gray;" class="myLabel">بومی</span>
         <label class="switch">
-            <input type="radio" name="archi" value="3">
+            <input type="checkbox" name="boomi" value="on">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <div class="col-sm-2 f_r">
+        <span style="direction: rtl; border-left: solid gray;" class="myLabel">مذهبی</span>
+        <label class="switch">
+            <input type="checkbox" name="mazhabiArch" value="on">
             <span class="slider round"></span>
         </label>
     </div>
