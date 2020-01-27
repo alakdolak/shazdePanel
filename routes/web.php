@@ -12,17 +12,13 @@
 */
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
+use Symfony\Component\HttpFoundation\Request;
+
 
 Route::get('updateMainDataBase', function(){
-    \DB::select("ALTER TABLE `majara` ADD `berke` TINYINT NOT NULL DEFAULT '0' AFTER `dasht`, ADD `beach` TINYINT NOT NULL DEFAULT '0' AFTER `berke`, ADD `geoPark` TINYINT NOT NULL DEFAULT '0' AFTER `beach`, ADD `river` TINYINT NOT NULL DEFAULT '0' AFTER `geoPark`, ADD `cheshme` TINYINT NOT NULL DEFAULT '0' AFTER `river`, ADD `talab` TINYINT NOT NULL DEFAULT '0' AFTER `cheshme`;");
-    \DB::select("ALTER TABLE `majara` ADD `walking` TINYINT NOT NULL DEFAULT '0' AFTER `sahranavardi`, ADD `swimming` TINYINT NOT NULL DEFAULT '0' AFTER `walking`, ADD `rockClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `swimming`, ADD `stoneClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `rockClimbing`, ADD `valleyClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `stoneClimbing`, ADD `caveClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `valleyClimbing`, ADD `iceClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `caveClimbing`, ADD `offRoad` TINYINT NOT NULL DEFAULT '0' AFTER `iceClimbing`, ADD `boat` TINYINT NOT NULL DEFAULT '0' AFTER `offRoad`, ADD `rafting` TINYINT NOT NULL DEFAULT '0' AFTER `boat`, ADD `surfing` TINYINT NOT NULL DEFAULT '0' AFTER `rafting`;");
-
-    \DB::select("ALTER TABLE `amaken` ADD `tejari` TINYINT NOT NULL DEFAULT '0' AFTER `baftetarikhi`, ADD `mazhabi` TINYINT NOT NULL DEFAULT '0' AFTER `tejari`, ADD `sanati` TINYINT NOT NULL DEFAULT '0' AFTER `mazhabi`;");
-    \DB::select("ALTER TABLE `amaken` ADD `jangal` TINYINT NOT NULL DEFAULT '0' AFTER `kavir`, ADD `shahri` TINYINT NOT NULL DEFAULT '0' AFTER `jangal`, ADD `village` TINYINT NOT NULL DEFAULT '0' AFTER `shahri`;");
-    \DB::select("ALTER TABLE `amaken` ADD `boomi` TINYINT NOT NULL DEFAULT '0' AFTER `tarikhibana`;");
-    \DB::select("ALTER TABLE `amaken` ADD `weather` TINYINT NOT NULL DEFAULT '0' AFTER `mamooli`;");
 
 });
 
@@ -203,6 +199,8 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'publicityAccess']), f
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), function () {
 
+    Route::get('/gardeshNameList', 'PostController@gardeshNameList')->name('gardeshNameList');
+
     Route::get('posts', ['as' => 'posts', 'uses' => 'PostController@posts']);
 
     Route::get('createPost', ['as' => 'createPost', 'uses' => 'PostController@createPost']);
@@ -223,9 +221,10 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
 
     Route::post('editPostTag', ['as' => 'editPostTag', 'uses' => 'PostController@editPostTag']);
     
-    Route::post('uploadCKEditor', function () {
+    Route::post('/uploadCKEditor', function (Request $request) {
 
         try {
+
             if ($this->request->hasFiles() == true) {
                 $errors = []; // Store all foreseen and unforseen errors here
                 $fileExtensions = ['jpeg','jpg','png','gif','svg'];
@@ -298,6 +297,18 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
     Route::post('deleteFromFavoritePosts', ['as' => 'deleteFromFavoritePosts', 'uses' => 'PostController@deleteFromFavoritePosts']);
 
     Route::post('deleteFromBannerPosts', ['as' => 'deleteFromBannerPosts', 'uses' => 'PostController@deleteFromBannerPosts']);
+
+    Route::post('postTagSearch', 'PostController@postTagSearch')->name('postTagSearch');
+
+    Route::post('newPostCategory', 'PostController@newPostCategory')->name('newPostCategory');
+
+    Route::post('storePost', 'PostController@storePost')->name('storePost');
+
+    Route::post('storeDescriptionPost', 'PostController@storeDescriptionPost')->name('storeDescriptionPost');
+
+    Route::post('imageUploadCKeditor4', 'PostController@imageUploadCKeditor4')->name('imageUploadCKeditor4');
+
+    Route::post('seoTesterPostContent', 'SeoController@seoTesterPostContent')->name('seoTesterPostContent');
 
 });
 
@@ -420,8 +431,6 @@ Route::group(array('middleware' => ['auth']), function () {
 
     Route::post('doChangePass', ['as' => 'doChangePass', 'uses' => 'HomeController@doChangePass']);
 
-    Route::post('findCityWithState', 'AjaxController@findCityWithState')->name('find.city.withState');
-
     Route::get('/photographer/Index', 'UserContentController@photographerIndex')->name('photographer.index');
 
     Route::post('/photographer/submit', 'UserContentController@photographerSubmit')->name('photographer.submit');
@@ -435,17 +444,54 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('/reviews/confirm', 'ReviewsController@confirmReview')->name('reviews.confirm');
 
     Route::post('/reviews/delete', 'ReviewsController@deleteReview')->name('reviews.delete');
+});
+
+//mainPage slider setting
+Route::group(array('middleware' => ['auth']), function(){
 
     Route::get('/mainSlider/index', 'SliderController@index')->name('slider.index');
 
     Route::post('/mainSlider/picStore', 'SliderController@storePic')->name('slider.storePic');
-    Route::post('/mainSlider/deletePic', 'SliderController@deletePic')->name('slider.deletePic');
-    Route::post('/mainSlider/changePic', 'SliderController@changePic')->name('slider.changePic');
-    Route::post('/mainSlider/changeAltPic', 'SliderController@changeAltPic')->name('slider.changeAltPic');
-    Route::post('/mainSlider/changeTextPic', 'SliderController@changeTextPic')->name('slider.changeTextPic');
-    Route::post('/mainSlider/changeColor', 'SliderController@changeColor')->name('slider.changeColor');
 
+    Route::post('/mainSlider/deletePic', 'SliderController@deletePic')->name('slider.deletePic');
+
+    Route::post('/mainSlider/changePic', 'SliderController@changePic')->name('slider.changePic');
+
+    Route::post('/mainSlider/changeAltPic', 'SliderController@changeAltPic')->name('slider.changeAltPic');
+
+    Route::post('/mainSlider/changeTextPic', 'SliderController@changeTextPic')->name('slider.changeTextPic');
+
+    Route::post('/mainSlider/changeColor', 'SliderController@changeColor')->name('slider.changeColor');
 });
+
+//mainPage Suggesion
+Route::group(array('middleware' => ['auth']), function(){
+
+    Route::get('/mainSuggestion/index', 'MainSuggestionController@index')->name('mainSuggestion.index');
+
+    Route::post('/mainSuggestion/search', 'MainSuggestionController@search')->name('mainSuggestion.search');
+
+    Route::post('/mainSuggestion/chooseId', 'MainSuggestionController@chooseId')->name('mainSuggestion.chooseId');
+
+    Route::post('/mainSuggestion/deleteRecord', 'MainSuggestionController@deleteRecord')->name('mainSuggestion.deleteRecord');
+});
+
+//ajaxController
+Route::group(array('middleware' => ['auth']), function(){
+
+    Route::post('getCityWithState', 'AjaxController@getCityWithState')->name('get.allcity.withState');
+
+    Route::post('findPlace', 'AjaxController@findPlace')->name('find.place');
+});
+
+
+Route::get('gardeshEdit/{id}', 'PostController@gardeshNameEdit');
+
+Route::post('deleteGardesh', 'PostController@deleteGardesh')->name('deleteGardesh');
+
+Route::get('addGardeshNameTags', 'PostController@addGardeshNameTags')->name('addGardeshNameTags');
+
+Route::get('myWordsCount', 'SeoController@myWordsCount')->name('myWordsCount');
 
 Route::get('uiFeatures', function(){
    return view('uiFeatures');

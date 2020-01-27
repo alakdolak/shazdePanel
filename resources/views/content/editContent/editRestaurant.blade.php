@@ -450,7 +450,7 @@
     <script>
         var keyword = '{{$place->keyword}}';
         var _token = '{{csrf_token()}}';
-        var findCityUrl = '{{route("find.city.withState")}}';
+        var findCityUrl = '{{route("get.allcity.withState")}}';
         var city = {!! $cities !!};
     </script>
 

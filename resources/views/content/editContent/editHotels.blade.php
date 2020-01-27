@@ -675,7 +675,7 @@
     <script>
         var keyword = '{{$place->keyword}}';
         var _token = '{{csrf_token()}}';
-        var findCityUrl = '{{route("find.city.withState")}}';
+        var findCityUrl = '{{route("get.allcity.withState")}}';
         var vabas = {{ ($place->vabastegi == '0' || $place->vabastegi == null || $place->vabastegi == '') ? 0 : 1}};
         var city = {!! $cities !!};
     </script>

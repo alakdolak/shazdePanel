@@ -235,7 +235,7 @@
             city = [];
             $.ajax({
                 type: 'post',
-                url: '{{route("find.city.withState")}}',
+                url: '{{route("get.allcity.withState")}}',
                 data: {
                     '_token' : _token,
                     'id' : _value

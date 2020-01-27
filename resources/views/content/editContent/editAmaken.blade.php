@@ -471,7 +471,7 @@
         var keyword = '{{$place->keyword}}';
         var _token = '{{csrf_token()}}';
         var city = {!! $cities !!};
-        var findCityUrl = '{{route("find.city.withState")}}';
+        var findCityUrl = '{{route("get.allcity.withState")}}';
 
         function checkForm(){
             var error_text = '';

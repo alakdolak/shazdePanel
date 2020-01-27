@@ -4,8 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MahaliFoodDiet extends Model
+class PostPlaceRelation extends Model
 {
-    protected $table = 'mahaliFoodDiets';
+    protected $table = 'postPlaceRelations';
     public $timestamps = false;
 }

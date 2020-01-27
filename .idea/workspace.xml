@@ -1,30 +1,378 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/routes/web.php" line="473" />
+    <bookmark url="file://$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" line="306" />
+    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/SeoController.php" line="763" />
+    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/SeoController.php" line="742" />
+    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/SeoController.php" line="699" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="question">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/SliderController.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/MahaliFoodDiet.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/MainSliderPic.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/resources/views/config/mainSliderPic.blade.php" />
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/MainSuggestionController.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/PostCategory.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/PostCategoryRelation.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/PostCityRelation.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/PostLikes.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/PostPlaceRelation.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/PostTag.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/PostTagsRelation.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.bootstrap.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.bootstrap.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.bootstrap4.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.bootstrap4.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.foundation.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.foundation.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.jqueryui.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.jqueryui.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.semanticui.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/dataTables.semanticui.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/jquery.dataTables.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/DataTable/jquery.dataTables.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/calendar/persian-datepicker.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/calendar/persian-datepicker.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/clockPicker/clockpicker.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.bootstrap.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.bootstrap.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.bootstrap4.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.bootstrap4.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.foundation.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.foundation.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.jqueryui.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.jqueryui.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.semanticui.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/dataTables.semanticui.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/jquery.dataTables.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/DataTable/jquery.dataTables.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/calendar/persian-date.min.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/calendar/persian-datepicker.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/ckeditor.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/config.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/contents.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/lang/en-au.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/lang/en-ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/lang/en-gb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/lang/en.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/lang/fa.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/_translationstatus.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/af.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/az.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/da.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/de-ch.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/de.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/el.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/en-au.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/en-gb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/en.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/es-mx.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/es.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/et.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/eu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/fo.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/he.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/id.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/it.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/km.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/no.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/oc.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/si.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/th.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/tt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/about/dialogs/about.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/about/dialogs/hidpi/logo_ckeditor.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/about/dialogs/logo_ckeditor.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloonpanel/skins/kama/balloonpanel.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloonpanel/skins/moono-lisa/balloonpanel.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloonpanel/skins/moono-lisa/images/close.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloonpanel/skins/moono-lisa/images/hidpi/close.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloonpanel/skins/moono/balloonpanel.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloonpanel/skins/moono/images/close.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloonpanel/skins/moono/images/hidpi/close.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloontoolbar/skins/default.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloontoolbar/skins/kama/balloontoolbar.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloontoolbar/skins/moono-lisa/balloontoolbar.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/balloontoolbar/skins/moono/balloontoolbar.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/clipboard/dialogs/paste.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/colordialog/dialogs/colordialog.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/colordialog/dialogs/colordialog.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/copyformatting/cursors/cursor-disabled.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/copyformatting/cursors/cursor.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/copyformatting/styles/copyformatting.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/dialog/dialogDefinition.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/dialog/styles/dialog.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/div/dialogs/div.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/easyimage/dialogs/easyimagealt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/easyimage/styles/easyimage.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/find/dialogs/find.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/flash/dialogs/flash.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/flash/images/placeholder.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/dialogs/button.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/dialogs/checkbox.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/dialogs/form.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/dialogs/hiddenfield.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/dialogs/radio.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/dialogs/select.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/dialogs/textarea.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/dialogs/textfield.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/forms/images/hiddenfield.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/icons.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/icons_hidpi.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/iframe/dialogs/iframe.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/iframe/images/placeholder.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/image/dialogs/image.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/image/images/noimage.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/imagebase/styles/imagebase.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/link/dialogs/anchor.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/link/dialogs/link.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/link/images/anchor.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/link/images/hidpi/anchor.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/liststyle/dialogs/liststyle.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/magicline/images/hidpi/icon-rtl.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/magicline/images/hidpi/icon.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/magicline/images/icon-rtl.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/magicline/images/icon.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/pagebreak/images/pagebreak.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/pastefromgdocs/filter/default.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/pastefromword/filter/default.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/pastetools/filter/common.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/preview/preview.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/scayt/CHANGELOG.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/scayt/LICENSE.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/scayt/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/scayt/dialogs/dialog.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/scayt/dialogs/options.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/scayt/dialogs/toolbar.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/scayt/skins/moono-lisa/scayt.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_address.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_blockquote.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_div.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_h1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_h2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_h3.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_h4.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_h5.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_h6.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_p.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/showblocks/images/block_pre.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/dialogs/smiley.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/angel_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/angel_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/angry_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/angry_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/broken_heart.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/broken_heart.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/confused_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/confused_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/cry_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/cry_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/devil_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/devil_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/embaressed_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/embarrassed_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/embarrassed_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/envelope.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/envelope.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/heart.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/heart.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/kiss.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/kiss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/lightbulb.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/lightbulb.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/omg_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/omg_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/regular_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/regular_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/sad_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/sad_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/shades_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/shades_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/teeth_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/teeth_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/thumbs_down.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/thumbs_down.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/thumbs_up.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/thumbs_up.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/tongue_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/tongue_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/tounge_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/whatchutalkingabout_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/whatchutalkingabout_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/wink_smile.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/wink_smile.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/_translationstatus.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/af.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/ar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/az.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/bg.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/cs.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/cy.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/da.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/de-ch.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/de.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/el.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/en-au.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/en-ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/en-gb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/en.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/eo.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/es-mx.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/es.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/et.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/eu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/fa.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/fi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/fr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/gl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/he.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/hr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/hu.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/id.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/it.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/ja.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/km.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/ko.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/ku.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/lt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/lv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/nb.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/nl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/no.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/oc.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/pl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/pt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/ro.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/ru.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/si.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/sk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/sl.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/sq.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/sr-latn.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/sr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/sv.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/th.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/tr.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/tt.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/ug.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/uk.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/vi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/lang/zh.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/specialchar/dialogs/specialchar.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/table/dialogs/table.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/tableselection/styles/tableselection.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/tabletools/dialogs/tableCell.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/templates/dialogs/templates.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/templates/dialogs/templates.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/templates/templates/default.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/templates/templates/images/template1.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/templates/templates/images/template2.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/templates/templates/images/template3.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/widget/images/handle.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/wsc/LICENSE.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/wsc/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/wsc/dialogs/ciframe.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/wsc/dialogs/tmpFrameset.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/wsc/dialogs/wsc.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/wsc/dialogs/wsc.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/wsc/dialogs/wsc_ie.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/plugins/wsc/skins/moono-lisa/wsc.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/sample.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/sf.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/dialog.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/dialog_ie.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/dialog_ie8.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/dialog_iequirks.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/editor.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/editor_gecko.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/editor_ie.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/editor_ie8.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/editor_iequirks.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/icons.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/icons_hidpi.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/arrow.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/close.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/hidpi/close.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/hidpi/lock-open.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/hidpi/lock.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/hidpi/refresh.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/lock-open.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/lock.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/refresh.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/images/spinner.gif" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/skins/moono-lisa/readme.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/styles.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/ckeditor/vendor/promise.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/js/clockPicker/clockpicker.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/views/content/MainSuggestion/index.blade.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/views/content/post/gardeshNameContent.blade.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/resources/views/content/post/gardeshNameList.blade.php" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AltController.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/URL2.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AjaxController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AjaxController.php" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Common.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Common.php" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OpinionsController.php" afterPath="" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" />
-      <change beforePath="$PROJECT_DIR$/app/models/MahaliFood.php" afterPath="$PROJECT_DIR$/app/models/MahaliFood.php" />
-      <change beforePath="$PROJECT_DIR$/app/models/PlacePic.php" afterPath="$PROJECT_DIR$/app/models/PlacePic.php" />
-      <change beforePath="$PROJECT_DIR$/app/models/SogatSanaie.php" afterPath="$PROJECT_DIR$/app/models/SogatSanaie.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/config/opinion.blade.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/changeAlt.blade.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SeoController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SeoController.php" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" />
+      <change beforePath="$PROJECT_DIR$/app/models/MahaliFoodDiet.php" afterPath="$PROJECT_DIR$/app/models/MainSuggestion.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/config/questions/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/config/questions/edit.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/config/questions/new.blade.php" afterPath="$PROJECT_DIR$/resources/views/config/questions/new.blade.php" />
       <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editAmaken.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editAmaken.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editHotels.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editHotels.blade.php" />
       <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php" />
       <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editMajara.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editMajara.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editRestaurant.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editRestaurant.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editSogatSanaie.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editSogatSanaie.blade.php" />
       <change beforePath="$PROJECT_DIR$/resources/views/content/newChangeContent.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/newChangeContent.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/amaken.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/newContent/amaken.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/mahalifood.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/newContent/mahalifood.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/majara.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/newContent/majara.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/uploadImg.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/newContent/uploadImg.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/newSogatSanaie.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/newContent/newSogatSanaie.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/post/posts.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/post/posts.blade.php" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
@@ -58,101 +406,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="web.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1321">
-              <caret line="445" column="100" lean-forward="false" selection-start-line="445" selection-start-column="89" selection-end-line="445" selection-end-column="100" />
+            <state relative-caret-position="1454">
+              <caret line="199" column="87" lean-forward="false" selection-start-line="199" selection-start-column="87" selection-end-line="199" selection-end-column="87" />
               <folding>
-                <element signature="e#8425#10343#1#PHP" expanded="false" />
-                <element signature="e#10426#11746#1#PHP" expanded="false" />
-                <element signature="e#11824#16031#1#PHP" expanded="false" />
-                <element signature="e#12920#15315#0#PHP" expanded="false" />
-                <element signature="e#16108#16378#1#PHP" expanded="false" />
-                <element signature="e#16459#16880#1#PHP" expanded="false" />
-                <element signature="e#16961#17682#1#PHP" expanded="false" />
-                <element signature="e#17762#19556#1#PHP" expanded="false" />
-                <element signature="e#19625#20555#1#PHP" expanded="false" />
-                <marker date="1578742809895" expanded="true" signature="573:936" ph="ALTER TABLE `majara`... " />
-                <marker date="1578742809895" expanded="true" signature="958:1692" ph="ALTER TABLE `majara`... " />
-                <marker date="1578742809895" expanded="true" signature="1715:1916" ph="ALTER TABLE `amaken`... " />
-                <marker date="1578742809895" expanded="true" signature="1938:2131" ph="ALTER TABLE `amaken`... " />
-                <marker date="1578742809895" expanded="true" signature="2153:2234" ph="ALTER TABLE `amaken`... " />
-                <marker date="1578742809895" expanded="true" signature="2256:2335" ph="ALTER TABLE `amaken`... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SliderController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SliderController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="777">
-              <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-              <folding>
-                <element signature="e#40#69#0#PHP" expanded="true" />
-                <element signature="e#314#1340#0#PHP" expanded="false" />
-                <element signature="e#1346#1876#0#PHP" expanded="false" />
-                <element signature="e#1882#3124#0#PHP" expanded="false" />
-                <element signature="e#3130#3555#0#PHP" expanded="false" />
-                <element signature="e#3191#3532#0#PHP" expanded="false" />
-                <element signature="e#3561#4070#0#PHP" expanded="false" />
-                <element signature="e#4076#4545#0#PHP" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mainSliderPic.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/config/mainSliderPic.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="270" column="0" lean-forward="false" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
-              <folding>
-                <element signature="e#1991#2012#0#HTML" expanded="true" />
-                <element signature="e#2478#2500#0#HTML" expanded="true" />
-                <element signature="e#4064#5829#0#HTML" expanded="false" />
-                <element signature="e#4157#4182#0#HTML" expanded="true" />
-                <element signature="e#4585#4610#0#HTML" expanded="true" />
-                <element signature="e#5354#5422#0#HTML" expanded="true" />
-                <element signature="e#6089#6917#0#HTML" expanded="false" />
-                <element signature="e#6236#6281#0#HTML" expanded="true" />
-                <element signature="e#6619#6641#0#HTML" expanded="true" />
-                <element signature="e#7327#13094#0#HTML" expanded="false" />
-                <element signature="e#13129#13542#0#HTML" expanded="false" />
-                <element signature="e#13151#13531#0#HTML" expanded="false" />
-                <element signature="e#13578#14113#0#HTML" expanded="false" />
-                <element signature="e#14726#15539#0#HTML" expanded="false" />
-                <marker date="1578744077084" expanded="true" signature="9:28" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="40:48" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="97:125" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="578:587" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="1687:1712" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="1687:1718" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="1777:1779" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="1925:1927" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="1938:1987" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="2270:2272" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="2454:2456" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="2527:2529" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="2708:2721" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="2727:2729" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="2994:2996" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3084:3086" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3154:3168" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3278:3291" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3297:3299" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3567:3569" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3662:3664" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3737:3752" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3863:3876" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="3882:3884" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="7124:7136" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="7180:7193" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="7180:7211" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="7253:7266" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="14296:14325" ph="..." />
-                <marker date="1578744077084" expanded="true" signature="14388:14400" ph="..." />
+                <element signature="e#865#5926#1#PHP" expanded="false" />
+                <element signature="e#6003#6645#1#PHP" expanded="false" />
+                <element signature="e#6726#8644#1#PHP" expanded="false" />
+                <element signature="e#8727#10047#1#PHP" expanded="false" />
+                <element signature="e#10125#15042#1#PHP" expanded="false" />
+                <element signature="e#11295#13736#1#PHP" expanded="false" />
+                <element signature="e#13549#13730#0#PHP" expanded="false" />
+                <element signature="e#15119#15389#1#PHP" expanded="false" />
+                <element signature="e#15470#15891#1#PHP" expanded="false" />
+                <element signature="e#15972#16693#1#PHP" expanded="false" />
+                <element signature="e#16773#18567#1#PHP" expanded="false" />
+                <element signature="e#18636#19566#1#PHP" expanded="false" />
+                <element signature="e#19616#21242#1#PHP" expanded="false" />
+                <element signature="e#21318#22035#1#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -164,59 +437,45 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="laravel" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>opinions</find>
-      <find>ALtCOn</find>
-      <find>changeNoFollow</find>
-      <find>mahalifood</find>
-      <find>$kindPlaceName</find>
-      <find>mahaliFoodDiet</find>
-      <find>kindPlaceId</find>
-      <find>place</find>
-      <find>mainPicShowReq0</find>
-      <find>pic</find>
-      <find>review</find>
-      <find>reviewPicNumber</find>
-      <find>تغییر عکس</find>
-      <find>deletePic</find>
-      <find>picRow</find>
-      <find>showPic</find>
-      <find>picNumber</find>
-      <find>changeAlt</find>
-      <find>changePic</find>
-      <find>changeText</find>
-      <find>.switch</find>
-      <find>changeChooseColor</find>
-      <find>color</find>
-      <find>backGround</find>
-      <find>changeColors</find>
-      <find>ajax</find>
-      <find>switch</find>
-      <find>changeChooseBackground</find>
-      <find>background</find>
-      <find>allowBackground</find>
+      <find>$uniqueSeoTitle</find>
+      <find>$uniqueKey</find>
+      <find>uniqueKeyword</find>
+      <find>نامک شما تکراری است. لطفا آن را تغییر دهید</find>
+      <find>seoTesterInline</find>
+      <find>seoTitle</find>
+      <find>warningCount</find>
+      <find>meta</find>
+      <find>909</find>
+      <find>$title</find>
+      <find>$keyword</find>
+      <find>keyword</find>
+      <find>strlen</find>
+      <find>mb_strlen</find>
+      <find>redi</find>
+      <find>href</find>
+      <find>متن باید حتما دارای عکس اصلی باشد.</find>
+      <find>$postId</find>
+      <find>post</find>
+      <find>loading</find>
+      <find>loader</find>
+      <find>PostLike</find>
+      <find>sentencesCount</find>
+      <find>$totalCount</find>
+      <find>deletePost</find>
+      <find>row</find>
+      <find>$location</find>
+      <find>$percent</find>
+      <find>warningMo</find>
+      <find>seoTesterInlineseoTesterPostContent</find>
     </findStrings>
     <replaceStrings>
-      <replace>$id</replace>
-      <replace>picNumber</replace>
-      <replace>$picNumber</replace>
-      <replace>$photo[$i]</replace>
-      <replace>_id</replace>
-      <replace>onkeyup</replace>
-      <replace>changeAnsType</replace>
-      <replace>{{$item[0]-&gt;stateId}}</replace>
-      <replace>questions</replace>
-      <replace>tableSearch</replace>
-      <replace>$location .=</replace>
-      <replace>$placeId</replace>
-      <replace>swimming</replace>
-      <replace>rockClimbing</replace>
       <replace>stoneClimbing</replace>
       <replace>valleyClimbing</replace>
       <replace>caveClimbing</replace>
@@ -233,6 +492,20 @@
       <replace>sogatSanaies</replace>
       <replace>mahaliFood</replace>
       <replace>description</replace>
+      <replace>' + id + '</replace>
+      <replace>$value</replace>
+      <replace>get.allcity.withState</replace>
+      <replace>getCityWithState</replace>
+      <replace>\DB::</replace>
+      <replace>#mainCategoryDiv</replace>
+      <replace>.labelCategory</replace>
+      <replace>checkBoxTd</replace>
+      <replace>$warningResultCount</replace>
+      <replace>$goodResultCount</replace>
+      <replace>keyword</replace>
+      <replace>$badResultCount</replace>
+      <replace>checkSeo</replace>
+      <replace>errorResult</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\shazdePanel\app\models</dir>
@@ -246,33 +519,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/content/newContent/newSogatSanaie.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/content/newContent/sogatsanaie.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/content/editContent/editSogatSanaie.blade.php" />
-        <option value="$USER_HOME$/Desktop/site-project/tools/cropperjs-master/docs/examples/minimum-and-maximum-cropped-dimensions.html" />
-        <option value="$PROJECT_DIR$/storage/framework/views/70436c71071a0aaf180b0dec74e1cffb4cf0e639.php" />
-        <option value="$PROJECT_DIR$/resources/views/test.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/content/newChangeContent.blade.php" />
-        <option value="$PROJECT_DIR$/URL.php" />
-        <option value="$USER_HOME$/Desktop/درس/URL.php" />
-        <option value="$PROJECT_DIR$/resources/views/uiFeatures.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" />
-        <option value="$PROJECT_DIR$/resources/views/userContent/photographer/photographer.blade.php" />
-        <option value="$PROJECT_DIR$/public/css/multiselect/bootstrap.css" />
-        <option value="$PROJECT_DIR$/public/css/multiselect/semantic.css" />
-        <option value="$PROJECT_DIR$/resources/views/config/newQuestion.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/config/Questions/newQuestion.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/config/Questions/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/config/Questions/new.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/config/Questions/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/config/questions/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/QuestionsController.php" />
-        <option value="$PROJECT_DIR$/resources/views/content/changeHotel.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
-        <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" />
-        <option value="$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
         <option value="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/content/newContent/majara.blade.php" />
@@ -281,22 +527,49 @@
         <option value="$PROJECT_DIR$/resources/views/content/newContent/uploadImg.blade.php" />
         <option value="$PROJECT_DIR$/app/models/DietMahaliFood.php" />
         <option value="$PROJECT_DIR$/resources/views/content/newContent/mahalifood.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Common.php" />
         <option value="$PROJECT_DIR$/resources/views/content/editContent/editMajara.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/content/editContent/editAmaken.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/content/newContent/amaken.blade.php" />
         <option value="$PROJECT_DIR$/app/models/MahaliFood.php" />
         <option value="$PROJECT_DIR$/app/models/MahaliFoodDiet.php" />
-        <option value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php" />
         <option value="$USER_HOME$/Desktop/URL.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" />
         <option value="$PROJECT_DIR$/storage/framework/views/0e6b8b83d9c914d76e995980c38242b953199562.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/MainController.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SliderController.php" />
         <option value="$PROJECT_DIR$/resources/views/config/mainSliderPic.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/config/tags.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/content/MainSuggestion/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/MainSuggestionController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" />
+        <option value="$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/content/post/gardeshNameContent.blade.php" />
+        <option value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/URL2.php" />
+        <option value="$PROJECT_DIR$/URL.php" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/build-config.js" />
+        <option value="$PROJECT_DIR$/public/js/counterup/ckeditorEasyImg.js" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/plugins/MyCustomUploadAdapterPlugin/MyUploadAdapter.js" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/plugins/MyCustomUploadAdapterPlugin/dialogs/MyCustomUploadAdapterPlugin.js" />
+        <option value="$PROJECT_DIR$/app/start/global.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor.js" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/plugins/kiavash/kiavash.js" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/plugins/kiavash/dialog/plugin.js" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/plugins/timestamp/dialog/plugin.js" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/plugins/timestamp/plugin.js" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/sample.js" />
+        <option value="$PROJECT_DIR$/public/js/ckeditor/config.js" />
+        <option value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/AjaxController.php" />
+        <option value="$PROJECT_DIR$/storage/framework/views/bc956c71cfa99ef797796583a8850511d45b7581.php" />
+        <option value="$PROJECT_DIR$/resources/views/config/questions/edit.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/MainController.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/content/post/gardeshNameList.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Common.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SeoController.php" />
+        <option value="$PROJECT_DIR$/resources/views/content/post/posts.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PostController.php" />
       </list>
     </option>
   </component>
@@ -429,8 +702,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-13" />
-    <option name="y" value="-13" />
+    <option name="x" value="1054" />
+    <option name="y" value="442" />
     <option name="width" value="2762" />
     <option name="height" value="1770" />
   </component>
@@ -450,6 +723,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -462,51 +737,36 @@
               <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="shazdePanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="shazdePanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="amaken&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/amaken.blade.php&#10;NEWcON&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;compressImage&#9;null&#9;null&#10;MainCO&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/MainController.php&#10;mainS&#9;null&#9;null&#10;PLACE&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;URL&#9;null&#9;null&#10;place&#9;null&#9;null&#10;SeoController&#9;null&#9;null&#10;getFolderName&#9;null&#9;null&#10;AltController&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/AltController.php&#10;choosePlace&#9;null&#9;null&#10;PicItemController&#9;null&#9;null&#10;stru&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/layouts/structure.blade.php&#10;OpinionsController&#9;null&#9;null&#10;web&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/routes/web.php&#10;appser&#9;null&#9;null&#10;storeAmake&#9;null&#9;null&#10;newCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;ma&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/majara.blade.php&#10;SogatSanaie&#9;null&#9;null&#10;majara&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/majara.blade.php&#10;editM&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMajara.blade.php&#10;حمشزث&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;comm&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/Common.php&#10;common&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/Common.php&#10;mahalifood&#9;null&#9;null&#10;maha&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/mahalifood.blade.php&#10;showErrorDivOrsubmit&#9;null&#9;null&#10;mahali&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/mahalifood.blade.php&#10;editMah&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMahaliFood.blade.php&#10;majar&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMajara.blade.php&#10;storeMajara&#9;null&#9;null&#10;doAddPost&#9;null&#9;null&#10;ckeditor&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor.js&#10;structure&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/layouts/structure.blade.php&#10;home&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/home.blade.php&#10;HomeController&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/HomeController.php&#10;deletePlacePicFiles&#9;null&#9;null&#10;changeHotel&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/changeHotel.blade.php&#10;changeContent&#9;null&#9;null&#10;chooseCity&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/chooseCity.blade.php&#10;ques&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/QuestionsController.php&#10;index&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/config/questions/index.blade.php&#10;QuestionsController&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/QuestionsController.php&#10;crop&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/cropper/cropper.js&#10;edit&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;semantic&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/multiselect/semantic.css&#10;deletePic&#9;null&#9;null&#10;getCrop&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="common&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/Common.php&#10;bc956c71cfa99ef797796583a8850511d45b7581&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/storage/framework/views/bc956c71cfa99ef797796583a8850511d45b7581.php&#10;storePost&#9;null&#9;null&#10;create&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/createPost.blade.php&#10;content&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newChangeContent.blade.php&#10;hotel&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/changeHotel.blade.php&#10;doSeoTest&#9;null&#9;null&#10;post&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PostController.php&#10;stru&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/layouts/structure.blade.php&#10;structure&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/layouts/structure.blade.php&#10;mainCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/MainController.php&#10;editPost&#9;null&#9;null&#10;main&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/MainController.php&#10;edit&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/config/questions/edit.blade.php&#10;QuestionsController&#9;null&#9;null&#10;gardeshNameList&#9;null&#9;null&#10;changeHotel&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/changeHotel.blade.php&#10;changeContent&#9;null&#9;null&#10;posts&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/posts.blade.php&#10;storeDescriptionPost&#9;null&#9;null&#10;findCityWithState&#9;null&#9;null&#10;ajax&#9;null&#9;null&#10;upload&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/uploadImg.blade.php&#10;postCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PostController.php&#10;editor&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor.js&#10;vendor/laravel/framework/src/Illuminate/Support&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/vendor/laravel/framework/src/Illuminate/Support&#10;ckedit&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor.js&#10;gardeshNameContent&#9;null&#9;null&#10;getPostCategories&#9;null&#9;null&#10;postTag&#9;null&#9;null&#10;persian-datepicker&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/css/calendar/persian-datepicker.css&#10;initSample&#9;null&#9;null&#10;createPost&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/createPost.blade.php&#10;URL&#9;null&#9;null&#10;editMahaliFood&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMahaliFood.blade.php&#10;mahali&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/models/MahaliFood.php&#10;MainSuggestionController&#9;null&#9;null&#10;slider&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/config/mainSliderPic.blade.php&#10;amaken&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/amaken.blade.php&#10;NEWcON&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;compressImage&#9;null&#9;null&#10;MainCO&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/MainController.php&#10;mainS&#9;null&#9;null&#10;PLACE&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;place&#9;null&#9;null&#10;SeoController&#9;null&#9;null&#10;getFolderName&#9;null&#9;null&#10;AltController&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/AltController.php&#10;choosePlace&#9;null&#9;null&#10;PicItemController&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../shazde_panel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../kouchita" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\shazdePanel\resources\views\config\Questions" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\css\multiselect" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
-      <recent name="C:\xampp\htdocs\shazdePanel\resources\views\config" />
-      <recent name="C:\xampp\htdocs\shazdePanel\app\Http\Controllers" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js\ckeditor\plugins\kiavash\dialog" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js\ckeditor\plugins\MyCustomUploadAdapterPlugin\dialogs" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js\ckeditor" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js\counterup" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js\ckeditor\plugins" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\css\multiselect\themes" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\css\multiselect" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\js\multiselect" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\js" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\css" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js\DataTabel" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\css\DataTable" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js\ckeditor\plugins\timestamp\icon" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -665,7 +925,28 @@
       <workItem from="1578382496556" duration="198000" />
       <workItem from="1578466251319" duration="1577000" />
       <workItem from="1578479986500" duration="16106000" />
-      <workItem from="1578727597663" duration="11462000" />
+      <workItem from="1578727597663" duration="12810000" />
+      <workItem from="1578813326825" duration="4000" />
+      <workItem from="1578813705048" duration="1054000" />
+      <workItem from="1578835639457" duration="5830000" />
+      <workItem from="1578845714239" duration="1425000" />
+      <workItem from="1578900651420" duration="1081000" />
+      <workItem from="1578916295156" duration="8321000" />
+      <workItem from="1579070111456" duration="26886000" />
+      <workItem from="1579255665564" duration="450000" />
+      <workItem from="1579334608192" duration="23286000" />
+      <workItem from="1579531146203" duration="93000" />
+      <workItem from="1579591930713" duration="23270000" />
+      <workItem from="1579632803847" duration="40000" />
+      <workItem from="1579633832623" duration="1186000" />
+      <workItem from="1579635259189" duration="18000" />
+      <workItem from="1579635552594" duration="491000" />
+      <workItem from="1579638009726" duration="373000" />
+      <workItem from="1579641470087" duration="136000" />
+      <workItem from="1579679713493" duration="20432000" />
+      <workItem from="1579717418627" duration="1052000" />
+      <workItem from="1579940029099" duration="24197000" />
+      <workItem from="1580118796483" duration="11559000" />
     </task>
     <task id="LOCAL-00001" summary="last changes">
       <created>1556982242677</created>
@@ -828,11 +1109,18 @@
       <option name="project" value="LOCAL" />
       <updated>1578382573672</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="mainslider pic">
+      <created>1578758353885</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1578758353885</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="356913000" />
+    <option name="totallyTimeSpent" value="509445000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="2762" height="1770" extended-state="6" />
@@ -844,10 +1132,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16515957" sideWeight="0.5021119" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279846" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17356928" sideWeight="0.49788806" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2059488" sideWeight="0.49788806" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991013" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -858,6 +1146,27 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991013" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16515957" sideWeight="0.5021119" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279846" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18900603" sideWeight="0.49788806" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -907,180 +1216,734 @@
     <MESSAGE value="new edit for content" />
     <MESSAGE value="contentPic" />
     <MESSAGE value="question" />
-    <option name="LAST_COMMIT_MESSAGE" value="question" />
+    <MESSAGE value="mainslider pic" />
+    <option name="LAST_COMMIT_MESSAGE" value="mainslider pic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="44" />
+      <option name="time" value="84" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/config/mainSliderPic.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3604">
-          <caret line="53" column="87" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="82" selection-end-column="5" />
+        <state relative-caret-position="485">
+          <caret line="63" column="101" lean-forward="false" selection-start-line="63" selection-start-column="101" selection-end-line="63" selection-end-column="101" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/ReviewUserAssigned.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/content/post/gardeshNameContent.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="1321">
+          <caret line="49" column="70" lean-forward="false" selection-start-line="49" selection-start-column="70" selection-end-line="49" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/RouteServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3847">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/ckeditor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="1003" column="156" lean-forward="false" selection-start-line="1003" selection-start-column="156" selection-end-line="1003" selection-end-column="156" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/image/dialogs/image.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/userContent/review/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="282" column="29" lean-forward="false" selection-start-line="282" selection-start-column="17" selection-end-line="282" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserContentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5576">
-          <caret line="131" column="48" lean-forward="false" selection-start-line="131" selection-start-column="48" selection-end-line="131" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4420">
-          <caret line="77" column="214" lean-forward="false" selection-start-line="77" selection-start-column="155" selection-end-line="77" selection-end-column="214" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/editor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28492">
-          <caret line="412" column="42" lean-forward="false" selection-start-line="412" selection-start-column="42" selection-end-line="412" selection-end-column="42" />
+        <state relative-caret-position="1321">
+          <caret line="13570" column="63" lean-forward="false" selection-start-line="13570" selection-start-column="63" selection-end-line="13570" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/MyCustomUploadAdapterPlugin/dialogs/MyCustomUploadAdapterPlugin.js" />
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-223">
+          <caret line="1062" column="21" lean-forward="false" selection-start-line="1062" selection-start-column="21" selection-end-line="1062" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/start/global.php" />
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="913">
+          <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/ckeditor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="18" column="39" lean-forward="false" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="39" />
+        <state relative-caret-position="544">
+          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/post/createPost.blade.php">
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/about/dialogs/about.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="400" column="56" lean-forward="false" selection-start-line="400" selection-start-column="56" selection-end-line="400" selection-end-column="56" />
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/iframe/dialogs/iframe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/find/dialogs/find.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/timestamp/dialog/plugin.js" />
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/timestamp/icon/angel_smile.png" />
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/smiley/images/angel_smile.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/plugins/timestamp/plugin.js" />
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/sample.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2788">
+          <caret line="41" column="39" lean-forward="false" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ckeditor/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/content/newContent/uploadImg.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1247">
+          <caret line="308" column="48" lean-forward="true" selection-start-line="308" selection-start-column="48" selection-end-line="308" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/document/pic.jpg" />
+    <entry file="file://$PROJECT_DIR$/storage/framework/views/0aaa0970354bc72f7faa606d9c942406eb3c7430.php" />
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AjaxController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="128" column="46" lean-forward="false" selection-start-line="128" selection-start-column="46" selection-end-line="128" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/content/changeAmaken.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7887">
+          <caret line="55" column="40" lean-forward="false" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/multiselect/semantic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/multiselect/semantic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuestionsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19992">
+          <caret line="302" column="46" lean-forward="false" selection-start-line="302" selection-start-column="42" selection-end-line="302" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/config/questions/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26180">
+          <caret line="385" column="12" lean-forward="false" selection-start-line="385" selection-start-column="12" selection-end-line="385" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/calendar/persian-date.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/calendar/persian-datepicker.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MainController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DataTable/dataTables.bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/DataTable/dataTables.semanticui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/structure.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="180" column="54" lean-forward="true" selection-start-line="180" selection-start-column="54" selection-end-line="180" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/content/post/gardeshNameList.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="129" column="12" lean-forward="false" selection-start-line="129" selection-start-column="12" selection-end-line="129" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/content/changeHotel.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2856">
+          <caret line="68" column="111" lean-forward="false" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/content/newChangeContent.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="103" column="73" lean-forward="false" selection-start-line="103" selection-start-column="60" selection-end-line="103" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PlaceController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/framework/views/bc956c71cfa99ef797796583a8850511d45b7581.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="477" column="144" lean-forward="false" selection-start-line="477" selection-start-column="137" selection-end-line="477" selection-end-column="144" />
+          <folding>
+            <marker date="1580130297137" expanded="true" signature="30307:30350" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="37085:37128" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="37242:37285" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="40677:40720" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="40836:40879" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="50863:50874" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="51095:51110" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="51284:51297" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="51505:51516" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="51677:51690" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="52271:52286" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="52473:52486" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="52996:53007" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="53168:53181" ph="..." />
+            <marker date="1580130297137" expanded="true" signature="54397:54415" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/PostLikes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Common.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="612" column="21" lean-forward="false" selection-start-line="612" selection-start-column="9" selection-end-line="612" selection-end-column="21" />
+          <folding>
+            <element signature="n#getMessages#0;n#!!top" expanded="false" />
+            <element signature="e#231#1262#0#PHP" expanded="false" />
+            <element signature="n#persianNumber#0;n#!!top" expanded="false" />
+            <element signature="n#getValueInfo#0;n#!!top" expanded="false" />
+            <element signature="n#deleteDir#0;n#!!top" expanded="false" />
+            <element signature="e#2883#2990#0#PHP" expanded="false" />
+            <element signature="e#2995#3081#0#PHP" expanded="false" />
+            <element signature="e#3132#3278#0#PHP" expanded="false" />
+            <element signature="e#3168#3272#0#PHP" expanded="false" />
+            <element signature="e#3229#3272#0#PHP" expanded="false" />
+            <element signature="n#recurse_copy#0;n#!!top" expanded="false" />
+            <element signature="e#3386#3724#0#PHP" expanded="false" />
+            <element signature="e#3439#3718#0#PHP" expanded="false" />
+            <element signature="e#3496#3708#0#PHP" expanded="false" />
+            <element signature="e#3627#3708#0#PHP" expanded="false" />
+            <element signature="n#getPlaceAndFolderName#0;n#!!top" expanded="false" />
+            <element signature="e#3810#4914#0#PHP" expanded="false" />
+            <element signature="e#3878#3988#0#PHP" expanded="false" />
+            <element signature="e#3997#4128#0#PHP" expanded="false" />
+            <element signature="e#4137#4280#0#PHP" expanded="false" />
+            <element signature="e#4289#4420#0#PHP" expanded="false" />
+            <element signature="e#4429#4908#0#PHP" expanded="false" />
+            <element signature="e#4550#4889#0#PHP" expanded="false" />
+            <element signature="e#4588#4875#0#PHP" expanded="false" />
+            <element signature="e#4636#4748#0#PHP" expanded="false" />
+            <element signature="e#4769#4857#0#PHP" expanded="false" />
+            <element signature="n#getFolderName#0;n#!!top" expanded="false" />
+            <element signature="e#5028#5433#0#PHP" expanded="false" />
+            <element signature="e#5061#5143#0#PHP" expanded="false" />
+            <element signature="e#5152#5235#0#PHP" expanded="false" />
+            <element signature="e#5244#5327#0#PHP" expanded="false" />
+            <element signature="e#5336#5427#0#PHP" expanded="false" />
+            <element signature="n#getMainPic#0;n#!!top" expanded="false" />
+            <element signature="e#5517#11538#0#PHP" expanded="false" />
+            <element signature="e#5542#6732#0#PHP" expanded="false" />
+            <element signature="e#5562#6477#0#PHP" expanded="false" />
+            <element signature="e#5599#6182#0#PHP" expanded="false" />
+            <element signature="e#5737#6163#0#PHP" expanded="false" />
+            <element signature="e#6207#6461#0#PHP" expanded="false" />
+            <element signature="e#6497#6731#0#PHP" expanded="false" />
+            <element signature="e#6742#7932#0#PHP" expanded="false" />
+            <element signature="e#6762#7677#0#PHP" expanded="false" />
+            <element signature="e#6799#7382#0#PHP" expanded="false" />
+            <element signature="e#6937#7363#0#PHP" expanded="false" />
+            <element signature="e#7407#7661#0#PHP" expanded="false" />
+            <element signature="e#7697#7931#0#PHP" expanded="false" />
+            <element signature="e#7942#9132#0#PHP" expanded="false" />
+            <element signature="e#7962#8877#0#PHP" expanded="false" />
+            <element signature="e#7999#8582#0#PHP" expanded="false" />
+            <element signature="e#8137#8563#0#PHP" expanded="false" />
+            <element signature="e#8607#8861#0#PHP" expanded="false" />
+            <element signature="e#8897#9131#0#PHP" expanded="false" />
+            <element signature="e#9142#10332#0#PHP" expanded="false" />
+            <element signature="e#9162#10077#0#PHP" expanded="false" />
+            <element signature="e#9199#9782#0#PHP" expanded="false" />
+            <element signature="e#9337#9763#0#PHP" expanded="false" />
+            <element signature="e#9807#10061#0#PHP" expanded="false" />
+            <element signature="e#10097#10331#0#PHP" expanded="false" />
+            <element signature="e#10342#11532#0#PHP" expanded="false" />
+            <element signature="e#10362#11277#0#PHP" expanded="false" />
+            <element signature="e#10399#10982#0#PHP" expanded="false" />
+            <element signature="e#10537#10963#0#PHP" expanded="false" />
+            <element signature="e#11007#11261#0#PHP" expanded="false" />
+            <element signature="e#11297#11531#0#PHP" expanded="false" />
+            <element signature="n#jalaliToGregorian#0;n#!!top" expanded="false" />
+            <element signature="n#getPast#0;n#!!top" expanded="false" />
+            <element signature="n#_custom_check_national_code#0;n#!!top" expanded="false" />
+            <element signature="n#makeValidInput#0;n#!!top" expanded="false" />
+            <element signature="n#sendMail#0;n#!!top" expanded="false" />
+            <element signature="e#12994#14120#0#PHP" expanded="false" />
+            <element signature="e#13366#13385#0#PHP" expanded="false" />
+            <element signature="e#13973#14120#0#PHP" expanded="false" />
+            <element signature="n#uploadCheck#0;n#!!top" expanded="false" />
+            <element signature="e#14294#14520#0#PHP" expanded="false" />
+            <element signature="e#14576#14915#0#PHP" expanded="false" />
+            <element signature="e#14768#14915#0#PHP" expanded="false" />
+            <element signature="n#upload#0;n#!!top" expanded="false" />
+            <element signature="e#14990#15197#0#PHP" expanded="false" />
+            <element signature="e#15076#15197#0#PHP" expanded="false" />
+            <element signature="n#formatDate#0;n#!!top" expanded="false" />
+            <element signature="n#convertDate#0;n#!!top" expanded="false" />
+            <element signature="n#getToday#0;n#!!top" expanded="false" />
+            <element signature="n#getCurrentYear#0;n#!!top" expanded="false" />
+            <element signature="n#convertDateToString#0;n#!!top" expanded="false" />
+            <element signature="n#convertTimeToString#0;n#!!top" expanded="false" />
+            <element signature="n#convertStringToTime#0;n#!!top" expanded="false" />
+            <element signature="n#convertStringToDate#0;n#!!top" expanded="false" />
+            <element signature="n#sendSMS#0;n#!!top" expanded="false" />
+            <element signature="e#17209#17888#0#PHP" expanded="false" />
+            <element signature="e#17397#17507#0#PHP" expanded="false" />
+            <element signature="e#17422#17497#0#PHP" expanded="false" />
+            <element signature="e#17518#17687#0#PHP" expanded="false" />
+            <element signature="e#17692#17888#0#PHP" expanded="false" />
+            <element signature="n#compressImage#0;n#!!top" expanded="false" />
+            <element signature="n#deletePlacePicFiles#0;n#!!top" expanded="false" />
+            <element signature="n#trueShowForTextArea#0;n#!!top" expanded="false" />
+            <element signature="n#makeSlug#0;n#!!top" expanded="false" />
+            <element signature="n#convertNumber#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1321">
-          <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="3718" column="0" lean-forward="true" selection-start-line="3718" selection-start-column="0" selection-end-line="3718" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/newContent/hotel.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="173" column="0" lean-forward="false" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/editContentPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="757">
-          <caret line="236" column="0" lean-forward="false" selection-start-line="236" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/PlacePic.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/DietMahaliFood.php" />
-    <entry file="file://$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="293" column="46" lean-forward="false" selection-start-line="292" selection-start-column="58" selection-end-line="293" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/newContent/mahalifood.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="913">
-          <caret line="114" column="46" lean-forward="false" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/editContent/editMajara.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="298" column="96" lean-forward="false" selection-start-line="298" selection-start-column="96" selection-end-line="298" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/SogatSanaie.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/newContent/majara.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1271">
-          <caret line="140" column="56" lean-forward="false" selection-start-line="140" selection-start-column="56" selection-end-line="140" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-447">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OpinionsController.php" />
-    <entry file="file://$PROJECT_DIR$/resources/views/config/opinion.blade.php" />
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PicItemController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="37" column="35" lean-forward="false" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="35" />
+        <state relative-caret-position="670">
+          <caret line="740" column="36" lean-forward="false" selection-start-line="740" selection-start-column="36" selection-end-line="740" selection-end-column="36" />
           <folding>
-            <element signature="e#205#688#0#PHP" expanded="false" />
+            <element signature="e#40#64#0#PHP" expanded="true" />
+            <element signature="e#880#1530#0#PHP" expanded="false" />
+            <element signature="e#1536#2176#0#PHP" expanded="false" />
+            <element signature="e#2182#3945#0#PHP" expanded="false" />
+            <element signature="e#2237#2711#0#PHP" expanded="false" />
+            <element signature="e#2256#2695#0#PHP" expanded="false" />
+            <element signature="e#3335#3661#0#PHP" expanded="false" />
+            <element signature="e#3519#3661#0#PHP" expanded="false" />
+            <element signature="e#3671#3939#0#PHP" expanded="false" />
+            <element signature="e#3828#3939#0#PHP" expanded="false" />
+            <element signature="e#3951#4258#0#PHP" expanded="false" />
+            <element signature="e#3992#4251#0#PHP" expanded="false" />
+            <element signature="e#4264#4489#0#PHP" expanded="false" />
+            <element signature="e#4495#4743#0#PHP" expanded="false" />
+            <element signature="e#4749#5777#0#PHP" expanded="false" />
+            <element signature="e#4792#5730#0#PHP" expanded="false" />
+            <element signature="e#5284#5720#0#PHP" expanded="false" />
+            <element signature="e#5381#5647#0#PHP" expanded="false" />
+            <element signature="e#5593#5647#0#PHP" expanded="false" />
+            <element signature="e#5674#5720#0#PHP" expanded="false" />
+            <element signature="e#5783#6031#0#PHP" expanded="false" />
+            <element signature="e#6037#6547#0#PHP" expanded="false" />
+            <element signature="e#6085#6500#0#PHP" expanded="false" />
+            <element signature="e#6553#8459#0#PHP" expanded="false" />
+            <element signature="e#6609#7115#0#PHP" expanded="false" />
+            <element signature="e#6628#7099#0#PHP" expanded="false" />
+            <element signature="e#7207#7334#0#PHP" expanded="false" />
+            <element signature="e#7828#8154#0#PHP" expanded="false" />
+            <element signature="e#8012#8154#0#PHP" expanded="false" />
+            <element signature="e#8465#8786#0#PHP" expanded="false" />
+            <element signature="e#8513#8779#0#PHP" expanded="false" />
+            <element signature="e#8656#8769#0#PHP" expanded="false" />
+            <element signature="e#8792#9074#0#PHP" expanded="false" />
+            <element signature="e#8845#9068#0#PHP" expanded="false" />
+            <element signature="e#8888#9058#0#PHP" expanded="false" />
+            <element signature="e#9080#9398#0#PHP" expanded="false" />
+            <element signature="e#9126#9391#0#PHP" expanded="false" />
+            <element signature="e#9268#9381#0#PHP" expanded="false" />
+            <element signature="e#9404#9683#0#PHP" expanded="false" />
+            <element signature="e#9455#9677#0#PHP" expanded="false" />
+            <element signature="e#9498#9667#0#PHP" expanded="false" />
+            <element signature="e#9691#11829#0#PHP" expanded="false" />
+            <element signature="e#11835#12156#0#PHP" expanded="false" />
+            <element signature="e#12162#15707#0#PHP" expanded="false" />
+            <element signature="e#13589#14102#0#PHP" expanded="false" />
+            <element signature="e#14452#15426#0#PHP" expanded="false" />
+            <element signature="e#16033#16212#0#PHP" expanded="false" />
+            <element signature="e#16440#16718#0#PHP" expanded="false" />
+            <element signature="e#17468#17750#0#PHP" expanded="false" />
+            <element signature="e#17759#17979#0#PHP" expanded="false" />
+            <element signature="e#17988#18255#0#PHP" expanded="false" />
+            <element signature="e#18434#18586#0#PHP" expanded="false" />
+            <element signature="e#18595#18839#0#PHP" expanded="false" />
+            <element signature="e#18848#19244#0#PHP" expanded="false" />
+            <element signature="e#19254#19558#0#PHP" expanded="false" />
+            <element signature="e#20381#22391#0#PHP" expanded="false" />
+            <element signature="e#22005#22391#0#PHP" expanded="false" />
+            <element signature="e#22450#24653#0#PHP" expanded="false" />
+            <element signature="e#23080#23751#0#PHP" expanded="false" />
+            <element signature="e#23765#24229#0#PHP" expanded="false" />
+            <element signature="e#24248#24653#0#PHP" expanded="false" />
+            <element signature="e#26001#26323#0#PHP" expanded="false" />
+            <element signature="e#26063#26300#0#PHP" expanded="false" />
+            <element signature="e#26329#26959#0#PHP" expanded="false" />
+            <element signature="e#26965#28011#0#PHP" expanded="false" />
+            <element signature="e#28017#28558#0#PHP" expanded="false" />
+            <element signature="e#28564#30218#0#PHP" expanded="false" />
+            <element signature="e#30224#30577#0#PHP" expanded="false" />
+            <element signature="e#30583#31054#0#PHP" expanded="false" />
+            <element signature="e#31060#31343#0#PHP" expanded="false" />
+            <marker date="1580131273982" expanded="true" signature="24720:24752" ph="DELETE FROM wp_posts... " />
+            <marker date="1580131273982" expanded="true" signature="24805:24857" ph="DELETE FROM wp_term_relationships... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/changeAlt.blade.php" />
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AltController.php" />
+    <entry file="file://$PROJECT_DIR$/resources/views/content/post/posts.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="157" column="49" lean-forward="false" selection-start-line="157" selection-start-column="49" selection-end-line="157" selection-end-column="49" />
+          <folding>
+            <element signature="e#6636#9707#0#HTML" expanded="false" />
+            <element signature="e#14094#18782#0#HTML" expanded="false" />
+            <element signature="e#14245#18519#0#HTML" expanded="false" />
+            <marker date="1580131157231" expanded="true" signature="9:28" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="40:48" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="940:987" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="2788:2797" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="3292:3311" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="4742:4760" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="6583:6598" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="6651:6660" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="6711:6723" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="6777:6798" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="6904:6930" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="7038:7049" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="7355:7375" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="7483:7493" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="7792:7805" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="7854:7903" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="7998:8015" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="8253:8262" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="8275:8310" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="8705:8714" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="8727:8761" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="9066:9104" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="9451:9460" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="11121:11129" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="11247:11266" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="11657:11689" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="12080:12110" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="12494:12519" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="12909:12936" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="13719:13741" ph="..." />
+            <marker date="1580131157231" expanded="true" signature="13800:13812" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SeoController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11560">
-          <caret line="21" column="6" lean-forward="false" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        <state relative-caret-position="670">
+          <caret line="924" column="0" lean-forward="false" selection-start-line="924" selection-start-column="0" selection-end-line="924" selection-end-column="0" />
           <folding>
-            <marker date="1559242585451" expanded="true" signature="5959:6019" ph="update hotels... " />
-            <marker date="1559242585451" expanded="true" signature="6295:6353" ph="update adab... " />
-            <marker date="1559242585451" expanded="true" signature="6631:6691" ph="update amaken... " />
-            <marker date="1559242585451" expanded="true" signature="6973:7037" ph="update restaurant... " />
-            <marker date="1559242585451" expanded="true" signature="7315:7375" ph="update majara... " />
+            <element signature="e#40#60#0#PHP" expanded="true" />
+            <element signature="e#634#5516#0#PHP" expanded="false" />
+            <element signature="e#5522#7936#0#PHP" expanded="false" />
+            <element signature="e#7942#8063#0#PHP" expanded="false" />
+            <element signature="e#8069#11909#0#PHP" expanded="false" />
+            <element signature="e#11915#12547#0#PHP" expanded="false" />
+            <element signature="e#12183#12472#0#PHP" expanded="false" />
+            <element signature="e#12553#13051#0#PHP" expanded="false" />
+            <element signature="e#12707#12996#0#PHP" expanded="false" />
+            <element signature="e#13057#14223#0#PHP" expanded="false" />
+            <element signature="e#13096#13999#0#PHP" expanded="false" />
+            <element signature="e#14880#20061#0#PHP" expanded="false" />
+            <element signature="e#14976#15407#0#PHP" expanded="false" />
+            <element signature="e#15217#15407#0#PHP" expanded="false" />
+            <element signature="e#15504#15869#0#PHP" expanded="false" />
+            <element signature="e#15705#15869#0#PHP" expanded="false" />
+            <element signature="e#15957#16312#0#PHP" expanded="false" />
+            <element signature="e#16149#16312#0#PHP" expanded="false" />
+            <element signature="e#16402#16745#0#PHP" expanded="false" />
+            <element signature="e#16591#16745#0#PHP" expanded="false" />
+            <element signature="e#16759#17262#0#PHP" expanded="false" />
+            <element signature="e#16875#17248#0#PHP" expanded="false" />
+            <element signature="e#17080#17248#0#PHP" expanded="false" />
+            <element signature="e#17358#17712#0#PHP" expanded="false" />
+            <element signature="e#17551#17712#0#PHP" expanded="false" />
+            <element signature="e#17807#18268#0#PHP" expanded="false" />
+            <element signature="e#18072#18268#0#PHP" expanded="false" />
+            <element signature="e#18339#18920#0#PHP" expanded="false" />
+            <element signature="e#18548#18920#0#PHP" expanded="false" />
+            <element signature="e#18773#18920#0#PHP" expanded="false" />
+            <element signature="e#19276#19907#0#PHP" expanded="false" />
+            <element signature="e#19752#19907#0#PHP" expanded="false" />
+            <element signature="e#19926#20061#0#PHP" expanded="false" />
+            <element signature="e#20071#20691#0#PHP" expanded="false" />
+            <element signature="e#20176#20543#0#PHP" expanded="false" />
+            <element signature="e#20562#20691#0#PHP" expanded="false" />
+            <element signature="e#21211#21345#0#PHP" expanded="false" />
+            <element signature="e#21355#25357#0#PHP" expanded="false" />
+            <element signature="e#21561#22323#0#PHP" expanded="false" />
+            <element signature="e#21907#22323#0#PHP" expanded="false" />
+            <element signature="e#22148#22323#0#PHP" expanded="false" />
+            <element signature="e#22336#22722#0#PHP" expanded="false" />
+            <element signature="e#22526#22722#0#PHP" expanded="false" />
+            <element signature="e#22735#23137#0#PHP" expanded="false" />
+            <element signature="e#22988#23137#0#PHP" expanded="false" />
+            <element signature="e#23201#23573#0#PHP" expanded="false" />
+            <element signature="e#23412#23573#0#PHP" expanded="false" />
+            <element signature="e#23586#23913#0#PHP" expanded="false" />
+            <element signature="e#23768#23913#0#PHP" expanded="false" />
+            <element signature="e#23982#24410#0#PHP" expanded="false" />
+            <element signature="e#24238#24410#0#PHP" expanded="false" />
+            <element signature="e#24468#24832#0#PHP" expanded="false" />
+            <element signature="e#24641#24832#0#PHP" expanded="false" />
+            <element signature="e#24845#25204#0#PHP" expanded="false" />
+            <element signature="e#25040#25204#0#PHP" expanded="false" />
+            <element signature="e#25223#25357#0#PHP" expanded="false" />
+            <element signature="e#25367#26005#0#PHP" expanded="false" />
+            <element signature="e#25475#25856#0#PHP" expanded="false" />
+            <element signature="e#25650#25856#0#PHP" expanded="false" />
+            <element signature="e#25875#26005#0#PHP" expanded="false" />
+            <element signature="e#26016#26641#0#PHP" expanded="false" />
+            <element signature="e#27443#27994#0#PHP" expanded="false" />
+            <element signature="e#28000#28561#0#PHP" expanded="false" />
+            <element signature="e#28567#29699#0#PHP" expanded="false" />
+            <element signature="e#28682#29450#0#PHP" expanded="false" />
+            <element signature="e#29705#30225#0#PHP" expanded="false" />
+            <element signature="e#30231#30463#0#PHP" expanded="false" />
+            <element signature="e#30469#30686#0#PHP" expanded="false" />
+            <element signature="e#30692#31501#0#PHP" expanded="false" />
+            <element signature="e#31507#32748#0#PHP" expanded="false" />
+            <element signature="e#31869#32707#0#PHP" expanded="false" />
+            <element signature="e#31921#32697#0#PHP" expanded="false" />
+            <element signature="e#33277#33719#0#PHP" expanded="false" />
+            <element signature="e#33963#34533#0#PHP" expanded="false" />
+            <marker date="1580131135673" expanded="false" signature="20724:21201" ph="..." />
+            <marker date="1580131135673" expanded="true" signature="25299:25310" ph="..." />
+            <marker date="1580131135673" expanded="true" signature="25577:25590" ph="..." />
+            <marker date="1580131135673" expanded="true" signature="25772:25783" ph="..." />
+            <marker date="1580131135673" expanded="true" signature="26345:26356" ph="..." />
+            <marker date="1580131135673" expanded="true" signature="26535:26546" ph="..." />
+            <marker date="1580131135673" expanded="true" signature="26794:26807" ph="..." />
+            <marker date="1580131135673" expanded="true" signature="26971:26982" ph="..." />
+            <marker date="1580131135673" expanded="true" signature="27161:27172" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/content/post/createPost.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="541" column="87" lean-forward="false" selection-start-line="541" selection-start-column="87" selection-end-line="541" selection-end-column="87" />
+          <folding>
+            <element signature="e#23323#23330#1#HTML" expanded="true" />
+            <element signature="e#23466#23511#0#HTML" expanded="true" />
+            <element signature="e#23685#23712#0#HTML" expanded="true" />
+            <element signature="e#23824#23850#0#HTML" expanded="true" />
+            <element signature="e#0#52436#0#Blade" expanded="false" />
+            <element signature="e#26057#26174#0#HTML" expanded="false" />
+            <element signature="e#26209#26280#0#HTML" expanded="false" />
+            <element signature="e#26321#26538#0#HTML" expanded="false" />
+            <element signature="e#26573#27471#0#HTML" expanded="false" />
+            <element signature="e#26669#27460#0#HTML" expanded="false" />
+            <element signature="e#27506#27691#0#HTML" expanded="false" />
+            <element signature="e#27722#28443#0#HTML" expanded="false" />
+            <element signature="e#27836#28433#0#HTML" expanded="false" />
+            <element signature="e#27935#28419#0#HTML" expanded="false" />
+            <element signature="e#28480#28690#0#HTML" expanded="false" />
+            <element signature="e#28725#29036#0#HTML" expanded="false" />
+            <element signature="e#29082#29604#0#HTML" expanded="false" />
+            <element signature="e#29645#29930#0#HTML" expanded="false" />
+            <element signature="e#29973#30066#0#HTML" expanded="false" />
+            <element signature="e#30104#30197#0#HTML" expanded="false" />
+            <element signature="e#30235#33321#0#HTML" expanded="false" />
+            <element signature="e#33356#34521#0#HTML" expanded="false" />
+            <element signature="e#34572#35480#0#HTML" expanded="false" />
+            <element signature="e#35519#35736#0#HTML" expanded="false" />
+            <element signature="e#35776#36682#0#HTML" expanded="false" />
+            <element signature="e#36716#37416#0#HTML" expanded="false" />
+            <element signature="e#37457#37776#0#HTML" expanded="false" />
+            <element signature="e#37807#39045#0#HTML" expanded="false" />
+            <element signature="e#39083#39289#0#HTML" expanded="false" />
+            <element signature="e#39317#41235#0#HTML" expanded="false" />
+            <element signature="e#41265#45006#0#HTML" expanded="false" />
+            <element signature="e#42293#42383#0#HTML" expanded="false" />
+            <element signature="e#42484#42583#0#HTML" expanded="false" />
+            <element signature="e#42618#43379#0#HTML" expanded="false" />
+            <element signature="e#44371#44798#0#HTML" expanded="false" />
+            <element signature="e#45035#45681#0#HTML" expanded="false" />
+            <element signature="e#46669#48440#0#HTML" expanded="false" />
+            <element signature="e#48606#48798#0#HTML" expanded="false" />
+            <element signature="e#48836#49040#0#HTML" expanded="false" />
+            <element signature="e#49057#49213#0#HTML" expanded="false" />
+            <element signature="e#49248#49433#0#HTML" expanded="false" />
+            <element signature="e#49450#49595#0#HTML" expanded="false" />
+            <element signature="e#49666#49934#0#HTML" expanded="false" />
+            <element signature="e#50012#50229#0#HTML" expanded="false" />
+            <element signature="e#50246#50410#0#HTML" expanded="false" />
+            <element signature="e#50786#50931#0#HTML" expanded="false" />
+            <marker date="1580130294792" expanded="true" signature="9:28" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="40:48" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="102:124" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="105:124" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="163:200" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="233:268" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="319:368" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="393:438" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="471:518" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="584:629" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="654:698" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="750:764" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="5269:5278" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="5327:5357" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="5417:5485" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="6137:6206" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="6275:6349" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="6419:6486" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="6929:6960" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="7261:7292" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="7864:7882" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8005:8014" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8090:8099" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8182:8191" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8222:8231" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8404:8415" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8529:8538" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8594:8603" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8794:8803" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="8853:8873" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="9011:9021" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="9096:9106" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="9197:9207" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="9238:9248" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="9490:9502" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="9681:9691" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="9747:9757" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="10787:10805" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="10856:10865" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="10908:10919" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="13296:13325" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="13995:14007" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="14628:14662" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="15057:15069" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="15118:15158" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="17295:17310" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="17373:17382" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="17388:17399" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="17743:17755" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="17806:17826" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="17968:17979" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="18151:18165" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="19499:19511" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="19554:19575" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="19773:19784" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="19952:19966" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="20988:21020" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="21356:21389" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="21708:21737" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="22060:22089" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="22856:22870" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="24273:24311" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="24798:24810" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="45915:45944" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="46004:46016" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="46456:46471" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="50652:50663" ph="..." />
+            <marker date="1580130294792" expanded="true" signature="52053:52071" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1089,324 +1952,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ActivitiesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/ACL.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="16" column="28" lean-forward="false" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/MahaliFoodDiet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/URL.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="30" column="12" lean-forward="false" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="54" column="27" lean-forward="false" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/MahaliFood.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/editContent/editAmaken.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="845">
-          <caret line="332" column="0" lean-forward="false" selection-start-line="332" selection-start-column="0" selection-end-line="360" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PlaceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="959">
-          <caret line="1726" column="48" lean-forward="false" selection-start-line="1726" selection-start-column="48" selection-end-line="1726" selection-end-column="48" />
-          <folding>
-            <element signature="e#22398#22933#0#PHP" expanded="false" />
-            <element signature="e#26362#27420#0#PHP" expanded="false" />
-            <element signature="e#58223#58429#0#PHP" expanded="false" />
-            <element signature="e#58343#58429#0#PHP" expanded="false" />
-            <marker date="1578497305862" expanded="true" signature="16722:16834" ph="select h.nam... ${$kind}" />
-            <marker date="1578497305862" expanded="true" signature="17077:17146" ph="select name,... ${$kind}" />
-            <marker date="1578497305862" expanded="true" signature="17552:17668" ph="select h.nam... ${$kind}" />
-            <marker date="1578497305862" expanded="true" signature="17900:17971" ph="SELECT name,... ${$kind}" />
-            <marker date="1578497305862" expanded="true" signature="66553:66626" ph="select h.* f... hotels" />
-            <marker date="1578497305862" expanded="true" signature="68092:68165" ph="select m.* f... majara" />
-            <marker date="1578497305862" expanded="true" signature="68969:69046" ph="select h.* f... restaurant" />
-            <marker date="1578497305862" expanded="true" signature="70063:70136" ph="select h.* f... amaken" />
-            <marker date="1578497305862" expanded="true" signature="71267:71327" ph="update hotels... " />
-            <marker date="1578497305862" expanded="true" signature="71439:71497" ph="update adab... " />
-            <marker date="1578497305862" expanded="true" signature="71611:71671" ph="update amaken... " />
-            <marker date="1578497305862" expanded="true" signature="71789:71853" ph="update restaurant... " />
-            <marker date="1578497305862" expanded="true" signature="71967:72027" ph="update majara... " />
-            <marker date="1578497305862" expanded="true" signature="73179:73327" ph="SELECT citie... cities" />
-            <marker date="1578497305862" expanded="true" signature="73497:73661" ph="SELECT 'city... cities" />
-            <marker date="1578497305862" expanded="true" signature="73696:73764" ph="SELECT 'stat... state" />
-            <marker date="1578497305862" expanded="true" signature="73949:74000" ph="SELECT id, n... state" />
-            <marker date="1578497305862" expanded="true" signature="96879:96963" ph="SELECT name,... amaken" />
-            <marker date="1578497305862" expanded="true" signature="97081:97169" ph="SELECT name,... restaurant" />
-            <marker date="1578497305862" expanded="true" signature="97282:97366" ph="SELECT name,... hotels" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/structure.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1029">
-          <caret line="167" column="66" lean-forward="false" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AjaxController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PlaceStyleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/newContent/uploadImg.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="914">
-          <caret line="95" column="49" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="647" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/MainSliderPic.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/storage/framework/views/0e6b8b83d9c914d76e995980c38242b953199562.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="217" column="25" lean-forward="false" selection-start-line="217" selection-start-column="25" selection-end-line="217" selection-end-column="25" />
-          <folding>
-            <marker date="1578743916354" expanded="true" signature="5997:6010" ph="..." />
-            <marker date="1578743916354" expanded="true" signature="6126:6139" ph="..." />
-            <marker date="1578743916354" expanded="true" signature="6467:6481" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MainController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-          <folding>
-            <element signature="e#40#69#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Common.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="589" column="9" lean-forward="false" selection-start-line="589" selection-start-column="9" selection-end-line="589" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1321">
-          <caret line="445" column="100" lean-forward="false" selection-start-line="445" selection-start-column="89" selection-end-line="445" selection-end-column="100" />
+        <state relative-caret-position="1454">
+          <caret line="199" column="87" lean-forward="false" selection-start-line="199" selection-start-column="87" selection-end-line="199" selection-end-column="87" />
           <folding>
-            <element signature="e#8425#10343#1#PHP" expanded="false" />
-            <element signature="e#10426#11746#1#PHP" expanded="false" />
-            <element signature="e#11824#16031#1#PHP" expanded="false" />
-            <element signature="e#12920#15315#0#PHP" expanded="false" />
-            <element signature="e#16108#16378#1#PHP" expanded="false" />
-            <element signature="e#16459#16880#1#PHP" expanded="false" />
-            <element signature="e#16961#17682#1#PHP" expanded="false" />
-            <element signature="e#17762#19556#1#PHP" expanded="false" />
-            <element signature="e#19625#20555#1#PHP" expanded="false" />
-            <marker date="1578742809895" expanded="true" signature="573:936" ph="ALTER TABLE `majara`... " />
-            <marker date="1578742809895" expanded="true" signature="958:1692" ph="ALTER TABLE `majara`... " />
-            <marker date="1578742809895" expanded="true" signature="1715:1916" ph="ALTER TABLE `amaken`... " />
-            <marker date="1578742809895" expanded="true" signature="1938:2131" ph="ALTER TABLE `amaken`... " />
-            <marker date="1578742809895" expanded="true" signature="2153:2234" ph="ALTER TABLE `amaken`... " />
-            <marker date="1578742809895" expanded="true" signature="2256:2335" ph="ALTER TABLE `amaken`... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/newContent/amaken.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="102" column="28" lean-forward="false" selection-start-line="102" selection-start-column="22" selection-end-line="102" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#div#3;n#div#6;n#!!top" expanded="false" />
-            <marker date="1578494422409" expanded="true" signature="219:231" ph="..." />
-            <marker date="1578494422409" expanded="true" signature="591:602" ph="..." />
-            <marker date="1578494422409" expanded="true" signature="866:880" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
-          <folding>
-            <marker date="1578309881118" expanded="true" signature="9:28" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="40:48" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="86:114" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="1805:1814" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="2734:2744" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="2970:2974" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="3579:3590" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="4105:4123" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="4198:4207" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="4213:4253" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="4319:4330" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="4980:5004" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="5146:5167" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="5538:5585" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="6577:6594" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="6645:6672" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="6718:6735" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="6786:6812" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="6858:6879" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="6930:6961" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="7007:7024" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="7075:7102" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="7148:7169" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="7220:7251" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="7297:7319" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="7370:7402" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="7935:7949" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="8419:8428" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="9213:9224" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="9959:9979" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="10650:10671" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="10914:10918" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="11044:11048" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="11054:11078" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="11724:11781" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="12083:12095" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="12129:12157" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="12184:12193" ph="..." />
-            <marker date="1578309881118" expanded="true" signature="12232:12267" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SliderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="777">
-          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding>
-            <element signature="e#40#69#0#PHP" expanded="true" />
-            <element signature="e#314#1340#0#PHP" expanded="false" />
-            <element signature="e#1346#1876#0#PHP" expanded="false" />
-            <element signature="e#1882#3124#0#PHP" expanded="false" />
-            <element signature="e#3130#3555#0#PHP" expanded="false" />
-            <element signature="e#3191#3532#0#PHP" expanded="false" />
-            <element signature="e#3561#4070#0#PHP" expanded="false" />
-            <element signature="e#4076#4545#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/config/mainSliderPic.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="270" column="0" lean-forward="false" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
-          <folding>
-            <element signature="e#1991#2012#0#HTML" expanded="true" />
-            <element signature="e#2478#2500#0#HTML" expanded="true" />
-            <element signature="e#4064#5829#0#HTML" expanded="false" />
-            <element signature="e#4157#4182#0#HTML" expanded="true" />
-            <element signature="e#4585#4610#0#HTML" expanded="true" />
-            <element signature="e#5354#5422#0#HTML" expanded="true" />
-            <element signature="e#6089#6917#0#HTML" expanded="false" />
-            <element signature="e#6236#6281#0#HTML" expanded="true" />
-            <element signature="e#6619#6641#0#HTML" expanded="true" />
-            <element signature="e#7327#13094#0#HTML" expanded="false" />
-            <element signature="e#13129#13542#0#HTML" expanded="false" />
-            <element signature="e#13151#13531#0#HTML" expanded="false" />
-            <element signature="e#13578#14113#0#HTML" expanded="false" />
-            <element signature="e#14726#15539#0#HTML" expanded="false" />
-            <marker date="1578744077084" expanded="true" signature="9:28" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="40:48" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="97:125" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="578:587" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="1687:1712" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="1687:1718" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="1777:1779" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="1925:1927" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="1938:1987" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="2270:2272" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="2454:2456" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="2527:2529" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="2708:2721" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="2727:2729" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="2994:2996" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3084:3086" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3154:3168" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3278:3291" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3297:3299" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3567:3569" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3662:3664" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3737:3752" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3863:3876" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="3882:3884" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="7124:7136" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="7180:7193" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="7180:7211" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="7253:7266" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="14296:14325" ph="..." />
-            <marker date="1578744077084" expanded="true" signature="14388:14400" ph="..." />
+            <element signature="e#865#5926#1#PHP" expanded="false" />
+            <element signature="e#6003#6645#1#PHP" expanded="false" />
+            <element signature="e#6726#8644#1#PHP" expanded="false" />
+            <element signature="e#8727#10047#1#PHP" expanded="false" />
+            <element signature="e#10125#15042#1#PHP" expanded="false" />
+            <element signature="e#11295#13736#1#PHP" expanded="false" />
+            <element signature="e#13549#13730#0#PHP" expanded="false" />
+            <element signature="e#15119#15389#1#PHP" expanded="false" />
+            <element signature="e#15470#15891#1#PHP" expanded="false" />
+            <element signature="e#15972#16693#1#PHP" expanded="false" />
+            <element signature="e#16773#18567#1#PHP" expanded="false" />
+            <element signature="e#18636#19566#1#PHP" expanded="false" />
+            <element signature="e#19616#21242#1#PHP" expanded="false" />
+            <element signature="e#21318#22035#1#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -68,6 +68,25 @@
         <script src="{{URL::asset('js/jquery.min.js')}}"></script>
 
         <style>
+            .loaderDiv{
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                z-index: 99999;
+                left: 0px;
+                top: 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #000000c7;
+            }
+            .loader {
+                background-image: url("{{URL::asset('_images/loading.svg')}}");
+                width: 200px;
+                height: 200px;
+                background-size: 200px 200px;
+            }
+
             .dropdown-item {
                 text-align: right;
             }
@@ -85,12 +104,16 @@
             }
 
             input{
-                border-color: #333333 !important;
+                border-color: gray !important;
                 border-radius: 10px !important;
+                border: solid;
+                outline: none;
+                padding: 3px 10px;
             }
             select{
-                border-color: #333333 !important;
+                border-color: gray !important;
                 border-radius: 10px !important;
+                border: solid;
             }
             .left-menu-dropdown{
                 width: 100% !important;
@@ -122,7 +145,9 @@
 </head>
 
 <body class="materialdesign">
-
+    <div class="loaderDiv" id="loader" style="display: none">
+        <div class="loader"></div>
+    </div>
     <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -142,15 +167,18 @@
                                     <span class="mini-dn">خانه</span>
                                 </a>
                             </li>
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">مدیریت محتوا</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">مدیریت محتوا</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('city.index')}}" class="dropdown-item">اطلاعات شهرها</a>
                                     <a href="{{url('topInCity')}}" class="dropdown-item">پیشنهاد ویژه شهر</a>
+                                    <a href="{{route('mainSuggestion.index')}}" class="dropdown-item">پیشنهادهای صفحه اول</a>
                                     <a href="{{route('manageNoFollow')}}" class="dropdown-item">مدیریت لینک ها</a>
                                     <a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
                                     <a href="{{route('chooseCity', ['mode' => 'content2'])}}" class="dropdown-item">2تغییر محتوای صفحات</a>
                                     <a href="{{route('lastActivities')}}" class="dropdown-item">فعالیت های اخیر</a>
                                     <a href="{{route('posts')}}" class="dropdown-item">مدیریت پست ها</a>
+                                    <a href="{{route('gardeshNameList')}}" class="dropdown-item">پست‌های گردشنامه</a>
                                     <a href="{{route('uploadMainContent')}}" class="dropdown-item">افزودن محتوا</a>
                                     <a href="{{route('seoTester')}}" class="dropdown-item">تست  سئو صفحات</a>
                                 </div>

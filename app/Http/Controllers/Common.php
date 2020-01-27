@@ -8,60 +8,6 @@ use App\models\Restaurant;
 use Illuminate\Support\Facades\URL;
 use PHPMailer\PHPMailer\PHPMailer;
 
-function getPostCategories() {
-
-    return [
-        [
-            'super' => "اماکن گردشگری",
-            'childs' => [
-                ['id' => 1, 'key' => 'اماکن تاریخی'],
-                ['id' => 2, 'key' => 'اماکن مذهبی'],
-                ['id' => 3, 'key' => 'اماکن تفریحی'],
-                ['id' => 4, 'key' => 'طبیعت گردی'],
-                ['id' => 5, 'key' => 'مراکز خرید'],
-                ['id' => 6, 'key' => 'موزه ها']
-            ]
-        ],
-        [
-            'super' => "هتل و رستوران",
-            "childs" => [
-                ['id' => 7, 'key' => 'هتل'],
-                ['id' => 8, 'key' => 'رستوران'],
-            ]
-        ],
-        [
-            'super' => "حمل و نقل",
-            'childs' => [
-                ['id' => 9, 'key' => 'هواپیما'],
-                ['id' => 10, 'key' => 'اتوبوس'],
-                ['id' => 11, 'key' => 'سواری'],
-                ['id' => 12, 'key' => 'فطار']
-            ]
-        ],
-        [
-            'super' => "آداب و رسوم",
-            "childs" => [
-                ['id' => 13, 'key' => 'سوغات محلی'],
-                ['id' => 14, 'key' => 'صنایع دستی'],
-                ['id' => 15, 'key' => 'اماکن تفریحی'],
-                ['id' => 16, 'key' => 'غذای محلی'],
-                ['id' => 17, 'key' => 'لباس محلی'],
-                ['id' => 18, 'key' => 'گویش محلی'],
-                ['id' => 19, 'key' => 'اصطلاحات محلی'],
-            ]
-        ],
-        [
-            'super' => "جشنواره و آیین",
-            "childs" => [
-                ['id' => 20, 'key' => 'رسوم محلی'],
-                ['id' => 21, 'key' => 'جشنواره'],
-                ['id' => 22, 'key' => 'تور'],
-                ['id' => 23, 'key' => 'کنسرت']
-            ]
-        ]
-    ];
-}
-
 function getMessages() {
     return [
 
@@ -635,3 +581,48 @@ function trueShowForTextArea($text){
 
     return $text;
 }
+
+function makeSlug($name){
+    $name = str_replace(':', '', $name);
+    $name = str_replace('\\', '', $name);
+    $name = str_replace('|', '', $name);
+    $name = str_replace('/', '', $name);
+    $name = str_replace('*', '', $name);
+    $name = str_replace('?', '', $name);
+    $name = str_replace('<', '', $name);
+    $name = str_replace('>', '', $name);
+    $name = str_replace('"', '', $name);
+    $name = str_replace(' ', '_', $name);
+
+    return $name;
+}
+
+function convertNumber($kind , $number){
+
+    $en = array("0","1","2","3","4","5","6","7","8","9");
+    $fa = array("۰","۱","۲","۳","۴","۵","۶","۷","۸","۹");
+
+    if($kind == 'en')
+        $number = str_replace($fa, $en, $number);
+    else
+        $number = str_replace($en, $fa, $number);
+
+    return $number;
+}
+
+function deleteFolder($dir) {
+    if (is_dir($dir)) {
+        $objects = scandir($dir);
+        foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+                if (filetype($dir."/".$object) == "dir")
+                    deleteFolder($dir."/".$object);
+                else unlink   ($dir."/".$object);
+            }
+        }
+        reset($objects);
+        rmdir($dir);
+    }
+}
+
+

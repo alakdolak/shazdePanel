@@ -253,19 +253,19 @@
                                         <div class=" f_r" style="margin-left: 10px;">
                                             <span>
                                                 <input type="text" class="form-control" name="energy" id="energy" placeholder="مقدار کالری"
-                                                       style="width: 100px; display: inline-block" value="{{$food->diet != null ? $food->diet->energy : ''}}">
+                                                       style="width: 100px; display: inline-block" value="{{$food->energy}}">
                                             </span>
                                             <span>
                                                 کیلوکالری در هر
                                             </span>
                                             <span>
                                                 <input type="text" class="form-control" name="volume" id="volume" placeholder="مقدار مرجع"
-                                                       style="width: 100px; display: inline-block"  value="{{$food->diet != null ? $food->diet->volume : ''}}">
+                                                       style="width: 100px; display: inline-block"  value="{{$food->volume}}">
                                             </span>
                                             <span>
                                                 <select name="source" class="form-control" style="width: 100px; display: inline-block">
-                                                    <option value="1" {{$food->diet != null && $food->diet->gram == 1 ? 'selected' : ''}}>قاشق</option>
-                                                    <option value="2" {{$food->diet != null && $food->diet->spoon == 1 ? 'selected' : ''}}>گرم</option>
+                                                    <option value="1" {{$food->gram == 1 ? 'selected' : ''}}>قاشق</option>
+                                                    <option value="2" {{$food->spoon == 1 ? 'selected' : ''}}>گرم</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -273,7 +273,7 @@
                                         <span class=" f_r" style="margin-left: 10px;">
                                             <span style="direction: rtl" class="myLabel">برنج</span>
                                             <label class="switch">
-                                                <input type="checkbox" name="rice" id="rice" value="on" {{$food->diet != null && $food->diet->rice == 1 ? 'checked' : ''}}>
+                                                <input type="checkbox" name="rice" id="rice" value="on" {{$food->rice == 1 ? 'checked' : ''}}>
                                                 <span class="slider round"></span>
                                             </label>
                                         </span>
@@ -281,7 +281,7 @@
                                         <span class=" f_r" style="margin-left: 10px;">
                                             <span style="direction: rtl" class="myLabel">نان</span>
                                             <label class="switch">
-                                                <input type="checkbox" name="bread" id="bread" value="on" {{$food->diet != null && $food->diet->bread == 1 ? 'checked' : ''}}>
+                                                <input type="checkbox" name="bread" id="bread" value="on" {{$food->bread == 1 ? 'checked' : ''}}>
                                                 <span class="slider round"></span>
                                             </label>
                                         </span>
@@ -417,7 +417,7 @@
     <script>
         var keyword = '{{$food->keyword}}';
         var _token = '{{csrf_token()}}';
-        var findCityUrl = '{{route("find.city.withState")}}';
+        var findCityUrl = '{{route("get.allcity.withState")}}';
         var city = {!! $cities !!};
     </script>
 

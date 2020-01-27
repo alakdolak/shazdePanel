@@ -7,7 +7,6 @@ use App\models\Amaken;
 use App\models\Cities;
 use App\models\Hotel;
 use App\models\MahaliFood;
-use App\models\MahaliFoodDiet;
 use App\models\Majara;
 use App\models\Place;
 use App\models\PlacePic;
@@ -672,8 +671,6 @@ class PlaceController extends Controller {
                 $food->description = trueShowForTextArea($food->description);
 
                 $cities = Cities::where('stateId', $city->stateId)->get();
-
-                $food->diet = MahaliFoodDiet::where('mahaliFoodId', $food->id)->first();
 
                 return view('content.editContent.editMahaliFood', compact(['food', 'kind', 'state', 'allState', 'mode', 'cities', 'city']));
                 break;
@@ -1700,6 +1697,27 @@ class PlaceController extends Controller {
         }
         $newMahali->material = json_encode($material);
 
+        $newMahali->energy = $request->energy;
+        $newMahali->volume = $request->volume;
+        if($request->source == 1){
+            $newMahali->gram = 1;
+            $newMahali->spoon = 0;
+        }
+        else{
+            $newMahali->gram = 0;
+            $newMahali->spoon = 1;
+        }
+
+        if(isset($request->rice) && $request->rice == 'on')
+            $newMahali->rice = 1;
+        else
+            $newMahali->rice = 0;
+
+        if(isset($request->bread) && $request->bread == 'on')
+            $newMahali->bread = 1;
+        else
+            $newMahali->bread = 0;
+
         $newMahali->tag1 = $request->tag[0];
         $newMahali->tag2 = $request->tag[1];
         $newMahali->tag3 = $request->tag[2];
@@ -1717,34 +1735,6 @@ class PlaceController extends Controller {
         $newMahali->tag15 = $request->tag[14];
 
         $newMahali->save();
-
-        $diet = MahaliFoodDiet::where('mahaliFoodId', $newMahali->id)->first();
-        if($diet == null) {
-            $diet = new MahaliFoodDiet();
-        }
-            $diet->energy = $request->energy;
-            $diet->volume = $request->volume;
-            $diet->mahaliFoodId = $newMahali->id;
-            if($request->source == 1){
-                $diet->gram = 1;
-                $diet->spoon = 0;
-            }
-            else{
-                $diet->gram = 0;
-                $diet->spoon = 1;
-            }
-
-            if(isset($request->rice) && $request->rice == 'on')
-                $diet->rice = 1;
-            else
-                $diet->rice = 0;
-
-            if(isset($request->bread) && $request->bread == 'on')
-                $diet->bread = 1;
-            else
-                $diet->bread = 0;
-
-            $diet->save();
 
         return \redirect(\url('uploadImgPage/11/' . $newMahali->id));
     }

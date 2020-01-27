@@ -155,7 +155,7 @@
 
 
     <script>
-        var findCityUrl = '{{route("find.city.withState")}}';
+        var findCityUrl = '{{route("get.allcity.withState")}}';
         var _token = '{{csrf_token()}}';
         var city = [];
         var selectedCity = [];
