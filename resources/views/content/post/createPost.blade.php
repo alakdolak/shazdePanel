@@ -8,6 +8,7 @@
 
     <script src="{{URL::asset('js/ckeditor/ckeditor.js')}}"></script>
     <script src="{{URL::asset('js/ckeditor/sample.js')}}"></script>
+    <script src="{{URL::asset('js/jalali.js')}}"></script>
 
 
     <link rel="stylesheet" href="{{URL::asset('css/calendar/persian-datepicker.css')}}"/>
@@ -237,6 +238,9 @@
                                         <input type="checkbox" id="category{{$item->id}}" name="category[]" value="{{$item->id}}" class="form-control checkbox">
                                         <span class="checkmark"></span>
                                         <span class="labelName">{{$item->name}}</span>
+                                        @if(auth()->user()->level == 1)
+                                            <i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory({{$item->id}}, this)"></i>
+                                        @endif
                                     </label>
                                     <div id="mainCategory{{$item->id}}" class="mainCatButton" onclick="changeMainCategory({{$item->id}})" >
                                         اصلی
@@ -251,6 +255,9 @@
                                                 <span class="labelName">
                                                     {{$item2->name}}
                                                 </span>
+                                                @if(auth()->user()->level == 1)
+                                                    <i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory({{$item2->id}}, this)"></i>
+                                                @endif
                                             </label>
                                             <div id="mainCategory{{$item2->id}}" class="mainCatButton" onclick="changeMainCategory({{$item2->id}})">
                                                 اصلی
@@ -262,11 +269,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-top: 20px; margin-right: 10px;">
-                    <a onclick="showNewCategory(this)" style="cursor: pointer;">
-                        +افزودن دسته بندی جدید
-                    </a>
-                </div>
+                @if(auth()->user()->level == 1)
+                    <div class="row" style="margin-top: 20px; margin-right: 10px;">
+                        <a onclick="showNewCategory(this)" style="cursor: pointer;">
+                            +افزودن دسته بندی جدید
+                        </a>
+                    </div>
+                @endif
                 <div class="row" style="margin-top: 20px; display: none">
                     <div class="form-group">
                         <label for="selectCategory" style="font-size: 9px; margin-left: 3px">دسته بندی جدید</label>
@@ -293,18 +302,18 @@
 
             <div class="sparkline8-hd" style="padding: 5px 10px">
                 <div class="main-sparkline8-hd">
-                    <h4>تگ ها</h4>
+                    <h4>برچسب ها</h4>
                 </div>
             </div>
             <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
                 <div class="row">
                     <div>
                         <a id="newTagButton" onclick="showNewTag(this)" style="cursor: pointer;">
-                            +افزودن تگ جدید
+                            افزودن برچسب جدید+
                         </a>
                     </div>
                     <div class="form-group" style="display: none">
-                        <label for="newTag">تگ جدید</label>
+                        <label for="newTag">برچسب جدید</label>
                         <div class="inputBorder">
                             <div class="inputGroup">
                                 <input type="text" class="newTag" id="newTag" onkeyup="searchTag(this.value)">
@@ -343,176 +352,179 @@
     </div>
 
     <div class="col-md-9">
-        <div class="sparkline8-list shadow-reset mg-tb-30">
-            <div class="sparkline8-hd">
-                <div class="main-sparkline8-hd">
-                    @if(isset($post))
-                        <h1>ویرایش پست</h1>
-                    @else
-                        <h1>افزودن پست جدید</h1>
-                    @endif
-                </div>
-            </div>
-
-            <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
-                <div class="row" style="text-align: right">
-
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label for="title">عنوان پست</label>
-                            <input class="form-control" type="text" name="title" id="title" value="{{(isset($post) ? $post->title : '')}}">
-                        </div>
+        <div class="col-md-12">
+            <div class="sparkline8-list shadow-reset mg-tb-30">
+                <div class="sparkline8-hd">
+                    <div class="main-sparkline8-hd">
+                        @if(isset($post))
+                            <h1>ویرایش پست</h1>
+                        @else
+                            <h1>افزودن پست جدید</h1>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="col-xs-12">
-                        <div class="adjoined-bottom">
-                            <div class="grid-container">
-                                <div class="grid-width-100">
+                <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
+                    <div class="row" style="text-align: right">
+
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="title">عنوان پست</label>
+                                <input class="form-control" type="text" name="title" id="title" value="{{(isset($post) ? $post->title : '')}}">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="adjoined-bottom">
+                                <div class="grid-container">
+                                    <div class="grid-width-100">
                                     <textarea id="editor" name="text">
                                         @if(isset($post))
                                             {!! html_entity_decode($post->description) !!}
                                         @endif
                                     </textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-9">
-        <div class="sparkline8-list shadow-reset">
-
-            <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
-                <div class="row" style="text-align: right">
-
-                    <div class="col-xs-6">
-                        <div class="row">
-                            <div class="col-md-6" id="searchCityDiv" style="padding: 0px">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label for="placeNameSearch">شهر:</label>
-                                        <div class="inputBorder">
-                                            <div class="inputGroup">
-                                                <input type="text" class="newTag" id="cityNameSearch" onkeyup="findCity(this.value)">
-                                                <input type="hidden" id="cityIdSearch">
-                                                <i class="fa fa-check checkIconTag" onclick="chooseCity()"></i>
-                                            </div>
-                                            <div id="searchCityResultDiv" class="searchTagResultDiv"></div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 floR">
-                                <div class="form-group">
-                                    <label for="osatn">استان</label>
-                                    <select id="ostan" class="form-control" onchange="changeOstan(this)">
-                                        <option value="0">استان را انتخاب کنید</option>
-                                        @foreach($ostan as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="sparkline8-list shadow-reset">
+
+                <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
+                    <div class="row" style="text-align: right">
+
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="col-md-6" id="searchCityDiv" style="padding: 0px">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="placeNameSearch">شهر:</label>
+                                            <div class="inputBorder">
+                                                <div class="inputGroup">
+                                                    <input type="text" class="newTag" id="cityNameSearch" onkeyup="findCity(this.value)">
+                                                    <input type="hidden" id="cityIdSearch">
+                                                    <i class="fa fa-check checkIconTag" onclick="chooseCity()"></i>
+                                                </div>
+                                                <div id="searchCityResultDiv" class="searchTagResultDiv"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 floR">
+                                    <div class="form-group">
+                                        <label for="osatn">استان</label>
+                                        <select id="ostan" class="form-control" onchange="changeOstan(this)">
+                                            <option value="0">استان را انتخاب کنید</option>
+                                            @foreach($ostan as $item)
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div id="selectedCity" class="row">
+                                        @if(isset($post))
+                                            @foreach($post->city as $item)
+                                                <div class="inTag">
+                                                    <input type="text" value="{{$item->name}}" style="border: none; width: 100%; font-size: 12px;" readonly>
+                                                    <input type="hidden" name="cities[]" id="cities" value="{{$item->validId}}" style="border: none; width: 100%; font-size: 12px;" readonly>
+                                                    <i class="fa fa-close closeIconTag" onclick="deleteCity(this)"></i>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div id="selectedCity" class="row">
-                                    @if(isset($post))
-                                        @foreach($post->city as $item)
+                        </div>
+
+                        <div class="col-xs-6" style="border-left: solid gray">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="placeNameSearch">با چه مکانی ارتباط دارد:</label>
+                                    <div class="inputBorder">
+                                        <div class="inputGroup">
+                                            <input type="text" class="newTag" id="placeNameSearch" onkeyup="findPlace(this.value)" style="width: 95%;">
+                                        </div>
+                                        <div id="searchPlaceResultDiv" class="searchTagResultDiv"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="selectedPlace" class="row">
+                                @if(isset($post))
+                                    @foreach($post->place as $item)
+                                        <div class="col-md-6 floR">
                                             <div class="inTag">
                                                 <input type="text" value="{{$item->name}}" style="border: none; width: 100%; font-size: 12px;" readonly>
-                                                <input type="hidden" name="cities[]" id="cities" value="{{$item->validId}}" style="border: none; width: 100%; font-size: 12px;" readonly>
-                                                <i class="fa fa-close closeIconTag" onclick="deleteCity(this)"></i>
+                                                <input type="hidden" name="places[]" id="places" value="{{$item->validId}}" style="border: none; width: 100%; font-size: 12px;" readonly>
+                                                <i class="fa fa-close closeIconTag" onclick="deletePlace(this)"></i>
                                             </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6" style="border-left: solid gray">
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="placeNameSearch">با چه مکانی ارتباط دارد:</label>
-                                <div class="inputBorder">
-                                    <div class="inputGroup">
-                                        <input type="text" class="newTag" id="placeNameSearch" onkeyup="findPlace(this.value)" style="width: 95%;">
-                                    </div>
-                                    <div id="searchPlaceResultDiv" class="searchTagResultDiv"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="selectedPlace" class="row">
-                            @if(isset($post))
-                                @foreach($post->place as $item)
-                                    <div class="col-md-6 floR">
-                                        <div class="inTag">
-                                            <input type="text" value="{{$item->name}}" style="border: none; width: 100%; font-size: 12px;" readonly>
-                                            <input type="hidden" name="places[]" id="places" value="{{$item->validId}}" style="border: none; width: 100%; font-size: 12px;" readonly>
-                                            <i class="fa fa-close closeIconTag" onclick="deletePlace(this)"></i>
                                         </div>
-                                    </div>
-                                @endforeach
-                            @endif
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-9" style="margin-top: 25px;">
-        <div class="sparkline8-list shadow-reset">
+        <div class="col-md-12" style="margin-top: 25px;">
+            <div class="sparkline8-list shadow-reset">
 
-            <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
-                <div class="row" style="text-align: right">
-                    <div class="col-md-6 floR">
-                        <div class="form-group">
-                            <label for="keyword">کلمه کلیدی</label>
-                            <input class="form-control" type="text" id="keyword" name="keyword" value="{{isset($post)? $post->keyword: ''}}">
+                <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
+                    <div class="row" style="text-align: right">
+                        <div class="col-md-12 floR">
+                            <div class="form-group">
+                                <label for="keyword">کلمه کلیدی</label>
+                                <input class="form-control" type="text" id="keyword" name="keyword" value="{{isset($post)? $post->keyword: ''}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 floR">
-                        <div class="form-group">
-                            <label for="seoTitle">عنوان سئو </label>
-                            <input class="form-control" type="text" id="seoTitle" name="seoTitle" value="{{isset($post)? $post->seoTitle: ''}}">
+                        <div class="col-md-12 floR">
+                            <div class="form-group">
+                                <label for="seoTitle">عنوان سئو: <span id="seoTitleNumber" style="font-weight: 200;"></span> </label>
+                                <input class="form-control" type="text" id="seoTitle" name="seoTitle" onkeyup="changeSeoTitle(this.value)" value="{{isset($post)? $post->seoTitle: ''}}">
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 floR">
-                        <div class="form-group">
-                            <label for="slug">نامک</label>
-                            <input class="form-control" type="text" id="slug" name="slug" value="{{isset($post)? $post->slug: ''}}">
+                        <div class="col-md-12 floR">
+                            <div class="form-group">
+                                <label for="slug">نامک</label>
+                                <input class="form-control" type="text" id="slug" name="slug" value="{{isset($post)? $post->slug: ''}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 floR">
-                        <div class="form-group">
-                            <label for="meta">متا</label>
-                            <textarea class="form-control" type="text" id="meta" name="meta" rows="3">{{isset($post)? $post->meta: ''}}</textarea>
+                        <div class="col-md-12 floR">
+                            <div class="form-group">
+                                <label for="meta">متا: <span id="metaNumber" style="font-weight: 200;"></span></label>
+                                <textarea class="form-control" type="text" id="meta" name="meta" onkeyup="changeMeta(this.value)" rows="3">{{isset($post)? $post->meta: ''}}</textarea>
+                            </div>
                         </div>
+
                     </div>
 
+                    <div class="row" style="text-align: center">
+                        <button class="btn btn-primary" onclick="checkSeo(0)">تست سئو</button>
+                    </div>
+                    <div class="row" style="text-align: right">
+                        <div id="errorResult"></div>
+                        <div id="warningResult"></div>
+                        <div id="goodResult"></div>
+                    </div>
                 </div>
 
-                <div class="row" style="text-align: center">
-                    <button class="btn btn-primary" onclick="checkSeo(0)">تست سئو</button>
-                </div>
-                <div class="row" style="text-align: right">
-                    <div id="errorResult"></div>
-                    <div id="warningResult"></div>
-                    <div id="goodResult"></div>
-                </div>
+                <center style="padding: 10px; text-align: center; width: 100%;">
+                    <input type="button" onclick="checkSeo(1)"  value="ثبت" class="btn btn-success">
+                    <input type="button" onclick="window.location.href='{{route("posts")}}'"  value="بازگشت" class="btn btn-secondry">
+                </center>
+
             </div>
-
-            <center style="padding: 10px; text-align: center; width: 100%;">
-                <input type="button" onclick="checkSeo(1)"  value="ثبت" class="btn btn-success">
-                <input type="button" onclick="window.location.href='{{route("posts")}}'"  value="بازگشت" class="btn btn-secondry">
-            </center>
-
         </div>
     </div>
 
@@ -744,25 +756,29 @@
                             var id = response[1];
 
                             if(parent == 0){
-                                var text =  '<div class="row mainCategory">\n' +
-                                            '<label for="category' + id + '" class="labelCategory mainLabelCategory"  onclick="chooseCategory(this, ' + id + ')">\n' +
-                                            value +
+                                    var text =  '<div class="row mainCategory">\n' +
+                                            '<label for="category' + id + '" class="labelCategory mainLabelCategory" onclick="chooseCategory(this, ' + id + ')">\n' +
                                             '<input type="checkbox" id="category' + id + '" name="category[]" value="' + id + '" class="form-control checkbox">\n' +
+                                            '<span class="checkmark"></span>\n' +
+                                            '<span class="labelName">' + value + '</span>\n' +
+                                            '<i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory(' + id + ', this)"></i>\n' +
                                             '</label>\n' +
-                                            '<div id="mainCategory' + id + '" class="mainCatButton" onclick="changeMainCategory(' + id + ')">\n' +
+                                            '<div id="mainCategory' + id + '" class="mainCatButton" onclick="changeMainCategory(' + id + ')" >\n' +
                                             'اصلی\n' +
                                             '</div>\n' +
-                                            '</div>\n' +
-                                            '<div id="subCategoryDiv' + id + '"></div>\n' +
-                                            '<hr>';
+                                            '</div>\n';
 
                                 $('#mainCategoryDiv').append(text);
                             }
                             else{
                                 var text =  '<div class="row subCategory">\n' +
                                             '<label for="category' + id + '" class="labelCategory subLabelCategory" onclick="chooseCategory(this, ' + id + ')">\n' +
-                                            value +
                                             '<input type="checkbox" id="category' + id + '" name="category[]" value="' + id + '" class="form-control checkbox">\n' +
+                                            '<span class="checkmark"></span>\n' +
+                                            '<span class="labelName">\n' +
+                                            value +
+                                            '</span>\n' +
+                                            '<i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory(' + id + ', this)"></i>\n' +
                                             '</label>\n' +
                                             '<div id="mainCategory' + id + '" class="mainCatButton" onclick="changeMainCategory(' + id + ')">\n' +
                                             'اصلی\n' +
@@ -882,7 +898,7 @@
                 document.getElementById('searchCityResultDiv').innerHTML= '';
                 document.getElementById('cityNameSearch').value = _name;
                 document.getElementById('cityIdSearch').value = _id;
-                chooseCity();
+                // chooseCity();
             }
         }
 
@@ -927,9 +943,10 @@
             $(element).parent().remove();
         }
 
-        function findSrc(){
+        var errorInUploadImage = false;
+        function findSrc(startPos){
             var desc = CKEDITOR.instances['editor'].getData();
-            var index1 = desc.indexOf('blob');
+            var index1 = desc.indexOf('blob', startPos);
             if(index1 != -1){
                 var index2 = desc.indexOf('"',(index1-2));
                 var index3 = desc.indexOf('"',(index1+2));
@@ -961,24 +978,29 @@
                     processData: false,
                     contentType: false,
                     success: function(response){
-
                         if(response != 'nok1' && response != 'nok2') {
                             result = desc.replace(imageUrl, response);
                             CKEDITOR.instances['editor'].setData(result);
                             findSrc();
                         }
                         else{
-                            alert('در هنگام اپلود عکس ها مشکلی پیش امد');
-                            submitDescription();
+                            errorInUploadImage = true;
+                            findSrc(index3);
                         }
 
+                    },
+                    error: function(response){
+                        console.log(response)
+                        errorInUploadImage = true;
+                        findSrc(index3);
                     }
                 })
             }
-            else{
+            else {
+                if(errorInUploadImage)
+                    alert('در هنگام اپلود عکس ها مشکلی پیش امد');
                 submitDescription();
             }
-
         }
 
         function storePost(){
@@ -1007,7 +1029,13 @@
                 alert('تاریخ و ساعت انتشار را مشخص کنید.');
                 return;
             }
+            else if(release != 'release'){
+                var d = new Date();
+                date = d.getJalaliFullYear() + '/' + (d.getJalaliMonth() + 1) + '/' + d.getJalaliDate();
+            }
+
             if(release != 'draft'){
+
                 if(mainCategory == 0){
                     alert('لطفا دسته بندی اصلی را مشخص کنید.');
                     return;
@@ -1087,7 +1115,7 @@
                     if(response[0] == 'ok'){
                         postId = response[1];
                         document.getElementById('postId').value = response[1];
-                        findSrc();
+                        findSrc(0);
                     }
                 }
             });
@@ -1220,7 +1248,7 @@
 
             if(!(inputMainPic.files && inputMainPic.files[0]) && (post == null || post['pic'] == null)){
                 errorCount++;
-                text = '<div style="color: red;">متن باید حتما دارای عکس اصلی باشد.</div>';
+                text = '<div style="color: red;">مقاله باید حتما دارای عکس اصلی باشد.</div>';
                 $('#errorResult').append(text);
             }
             else{
@@ -1266,6 +1294,49 @@
             }
         }
 
+        function changeSeoTitle(_value){
+            var text = _value.length + ' حرف';
+            $('#seoTitleNumber').text(text)
+            if(_value.length > 60 && _value.length <= 85)
+                $('#seoTitleNumber').css('color', 'green')
+            else
+                $('#seoTitleNumber').css('color', 'red')
+
+        }
+
+        function changeMeta(_value){
+            var text = _value.length + ' حرف';
+            $('#metaNumber').text(text);
+            if(_value.length > 120 && _value.length <= 156)
+                $('#metaNumber').css('color', 'green');
+            else
+                $('#metaNumber').css('color', 'red');
+
+        }
+
+        function deleteCategory(_id, _element){
+            $.ajax({
+                type: 'post',
+                url: '{{route("post.category.delete")}}',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    id: _id
+                },
+                success: function(response){
+                    if(response == 'hasArticle')
+                        alert('دسته بندی را به علت وجود مطلب نمی توانید حذف کنید. ابتدا مطلب مرتب را حذف کنید.')
+                    else if(response == 'hasSub')
+                        alert('دسته بندی به علت داشتن زیر دسته نمی تواندی حذف کنید.')
+                    else if(response == 'ok') {
+                        $(_element).parent().parent().remove();
+                        alert('دسته بندی حذف شد')
+                    }
+                },
+                err: function(err){
+
+                }
+            })
+        }
     </script>
 
 @stop

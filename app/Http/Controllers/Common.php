@@ -3,8 +3,10 @@
 use App\models\Adab;
 use App\models\Amaken;
 use App\models\Hotel;
+use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\Restaurant;
+use App\models\SogatSanaie;
 use Illuminate\Support\Facades\URL;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -102,6 +104,40 @@ function recurse_copy($src,$dst) {
     closedir($dir);
 }
 
+function getKindPlaceNameAndPlace($kindPlaceId, $placeId){
+    $kindName = null;
+    $place = null;
+
+    switch ($kindPlaceId){
+        case 1:
+            $kindName = 'اماکن';
+            $place = Amaken::find($placeId);
+            break;
+        case 3:
+            $kindName = 'رستوران';
+            $place = Restaurant::find($placeId);
+            break;
+        case 4:
+            $kindName = 'هتل';
+            $place = Hotel::find($placeId);
+            break;
+        case 6:
+            $kindName = 'ماجرا';
+            $place = Majara::find($placeId);
+            break;
+        case 10:
+            $kindName = 'صنایع و سوغات';
+            $place = SogatSanaie::find($placeId);
+            break;
+        case 11:
+            $kindName = 'غذای محلی';
+            $place = MahaliFood::find($placeId);
+            break;
+    }
+
+    return [$kindName, $place];
+}
+
 function getPlaceAndFolderName($kindPlaceId, $placeId) {
 
     switch ($kindPlaceId) {
@@ -121,22 +157,6 @@ function getPlaceAndFolderName($kindPlaceId, $placeId) {
         case getValueInfo('majara'):
             $place = Majara::whereId($placeId);
             $folderName = "majara";
-            break;
-        case getValueInfo('adab'):
-            $place = Adab::whereId($placeId);
-            $folderName = "adab/";
-
-            if($place != null) {
-
-                switch ($place->category) {
-                    case getValueInfo('ghaza'):
-                        $folderName .= 'ghazamahali';
-                        break;
-                    default:
-                        $folderName .= 'soghat';
-                        break;
-                }
-            }
             break;
     }
     

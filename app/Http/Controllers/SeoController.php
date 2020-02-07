@@ -429,6 +429,10 @@ class SeoController extends Controller {
                 $goodResult .= '<div style="color: green;">تکرار عبارت کلیدی در متن مناسب است. : %'. $keyWordDensity .'</div>';
                 $goodResultCount++;
             }
+            else if($keyWordDensity >= 3){
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">تکرار عبارت کلیدی در متن بیش از حد بالاست است. : %'. $keyWordDensity .'</div>';
+            }
             else {
                 $badResultCount++;
                 $badResult .= '<div style="color: red;">تکرار عبارت کلیدی در متن بیش از حد پایین است. : %'. $keyWordDensity .'</div>';
@@ -487,10 +491,11 @@ class SeoController extends Controller {
             }
 
             $keywordDensityInTitle = $this->keywordDensityInTitle($text, $key);
-
             if($keywordDensityInTitle > 30 && $keywordDensityInTitle < 75) {
                 $goodResult .= '<div style="color: green;">تیترهای فرعی شامل عبارت کلیدی می باشد. : %'. $keywordDensityInTitle .'</div>';
                 $goodResultCount++;
+            }
+            else if($keywordDensityInTitle == 9999){
             }
             else {
                 $badResultCount++;
@@ -578,12 +583,12 @@ class SeoController extends Controller {
                 $warningResult .= '<div style="color: #dec300;"> صفحه شما در حال حاضر  پست تلقی می شود اگر می خواهید مقاله محسوب شود طول آن را به بیش از 900 کلمه تغییر دهید:' . $allWordCountInP[0] . ' کلمه </div>';
             }
             else if($allWordCountInP[0] > 900){
-                $goodResult .= '<div style="color: green;">صفحه شما متن تخصصی یا مقاله تلقی می شود و مناسب است.:' . $allWordCountInP[0] . '</div>';
+                $goodResult .= '<div style="color: green;">صفحه شما متن تخصصی یا مقاله تلقی می شود و مناسب است.:' . $allWordCountInP[0] . ' کلمه</div>';
                 $goodResultCount++;
             }
             else{
                 $badResultCount++;
-                $badResult .= '<div style="color: red;">متن شما بیش از حد کوتاه است :' . $allWordCountInP[0] . '</div>';
+                $badResult .= '<div style="color: red;">متن شما بیش از حد کوتاه است :' . $allWordCountInP[0] . ' کلمه</div>';
             }
             if(count($allWordCountInP) > 3) {
                 $goodResult .= '<div style="color: green;">خوانایی متن شما مناسب است.</div>';
@@ -603,9 +608,9 @@ class SeoController extends Controller {
             }
 
             $titles = $this->getAllTitles($text);
-            if(count($titles[0]) <= 1){
-                $badResultCount++;
-                $badResult .= '<div style="color: red;">متن شما دارای تیترهای زیرمجموعه کافی نیست حتما اضافه کنید</div>';
+            if(count($titles[0]) < 1){
+                $warningResultCount++;
+                $warningResult .= '<div style="color: #dec300;">احتمالا متن شما جامع نیست ، بهتر است از تیتر های فرعی استفاده کنید</div>';
             }
             else{
                 $goodResult .= '<div style="color: green;">استفاده از تیترهای زیرمجموعه مناسب است</div>';
@@ -626,7 +631,7 @@ class SeoController extends Controller {
                 $warningResult .= '<div style="color: #dec300;">بیش از بیست درصد جملات دارای بیش از بیست کلمه می باشند  که پیشنهاد نمی گردد.: %' . $sentences . '</div>';
             }
             else{
-                $goodResult .= '<div style="color: green;">تعداد کلمات جمله ها مناسب است: ' . $sentences . '</div>';
+                $goodResult .= '<div style="color: green;">تمامی جملات زیر 20 کلمه دارند.</div>';
                 $goodResultCount++;
             }
 
@@ -645,7 +650,7 @@ class SeoController extends Controller {
             }
             else{
                 $badResultCount++;
-                $badResult .= '<div style="color: red;">برای تمام عکس ها عبارت جایگزین را تعریف کنید.</div>';
+                $badResult .= '<div style="color: red;">بای تمام عکس ها عبارت جایگزین را تعریف کنید.</div>';
             }
         }
         else{
@@ -701,17 +706,26 @@ class SeoController extends Controller {
     }
 
     private function keywordDensity($text, $keyword){
-
         $text = html_entity_decode($text);
         $text = strip_tags($text);
         $text = trueShowForTextArea($text);
 
+
         $arr = explode(' ', $text);
         $countAllWords = count($arr);
-        $keyIntext = substr_count($text, $keyword);
+        if(count(explode(' ', $keyword)) == 1) {
+            $keyInText = 0;
+            foreach ($arr as $item) {
+                if ($item == $keyword)
+                    $keyInText++;
+            }
+        }
+        else
+            $keyInText = substr_count($text, $keyword);
+
         $keywordCount = count(explode(' ', $keyword));
 
-        $keyWordDensity = (( (int)$keywordCount * (int)$keyIntext) / (int)$countAllWords) * 100;
+        $keyWordDensity = (( (int)$keywordCount * (int)$keyInText) / (int)$countAllWords) * 100;
         $keyWordDensity = floor($keyWordDensity * 100)/100;
 
         return $keyWordDensity;
@@ -730,7 +744,20 @@ class SeoController extends Controller {
         else if($textKind == 'slug')
             $p = str_replace('_', ' ', $text);
 
-        $keyInText = substr_count($p, $keyword);
+        $p = html_entity_decode($p);
+        $p = strip_tags($p);
+        $p = trueShowForTextArea($p);
+
+        if(count(explode(' ', $keyword)) == 1){
+            $arr = explode(' ', $p);
+            $keyInText = 0;
+            foreach ($arr as $item){
+                if($item == $keyword)
+                    $keyInText++;
+            }
+        }
+        else
+            $keyInText = substr_count($p, $keyword);
 
         return $keyInText;
     }
@@ -761,15 +788,34 @@ class SeoController extends Controller {
 
                 $arr = explode(' ', $txt);
                 $totalCount += count($arr);
+
+                if(count(explode(' ', $keyword)) == 1) {
+                    $keyInText = 0;
+                    foreach ($arr as $item) {
+                        if ($item == $keyword)
+                            $keyInText++;
+                    }
+                    $keyCount += $keyInText;
+                }
+
                 $keyCount += substr_count($txt, $keyword);
+
                 $s = $end;
             }
         }
 
         $keywordCount = count(explode(' ', $keyword));
 
-        $keyWordDensity = (( (int)$keywordCount * (int)$keyCount) / (int)$totalCount) * 100;
-        $keyWordDensity = floor($keyWordDensity * 100)/100;
+        $zeroTitle = false;
+        if($totalCount == 0)
+            $zeroTitle = true;
+
+        if(!$zeroTitle) {
+            $keyWordDensity = (((int)$keywordCount * (int)$keyCount) / (int)$totalCount) * 100;
+            $keyWordDensity = floor($keyWordDensity * 100) / 100;
+        }
+        else
+            $keyWordDensity = 9999;
 
         return $keyWordDensity;
     }
@@ -884,6 +930,7 @@ class SeoController extends Controller {
         $overCount = 0;
         $s = 0;
         $totalCount = 0;
+        $i = 0;
         while(true){
             $st = strpos($text, '<p', $s);
             if(!is_int($st) || $st == -1)
@@ -892,29 +939,50 @@ class SeoController extends Controller {
             $start = strpos($text, '>', $st);
             $end = strpos($text, '</p>', $start);
             $len = $end - $start;
-            $p = substr($text, $start+1,  $len);
 
+            $p = substr($text, $start+1,  $len);
             $p = html_entity_decode($p);
             $p = strip_tags($p);
 
-            $ss = 0;
-            while(true){
-                $stSenc = strpos($text, '.', $ss);
-                if(!is_int($stSenc) || $stSenc == -1)
-                    break;
+            if($p != null){
+                $ss = 0;
+                $i++;
+                while(true){
+                    $stSenc1 = strpos($p, '.', $ss);
+                    $stSenc2 = strpos($p, '؟', $ss);
+                    $stSenc3 = strpos($p, '!', $ss);
 
-                $len = $stSenc - $ss;
-                $sentences = substr($text, $ss,  $len);
+                    if($stSenc1 == false && $stSenc2 == false && $stSenc3 == false)
+                        break;
 
-                $ss = $stSenc + 1;
+                    if($stSenc1 == false)
+                        $stSenc1 = 99999999999;
+                    if($stSenc2 == false)
+                        $stSenc2 = 99999999999;
+                    if($stSenc3 == false)
+                        $stSenc3 = 99999999999;
 
-                $exp = explode(' ', $sentences);
-                if(count($exp) > 20)
-                    $overCount++;
+                    if($stSenc2 > $stSenc3)
+                        $stSenc2 = $stSenc3;
+                    if($stSenc1 > $stSenc2)
+                        $stSenc = $stSenc2;
+                    else
+                        $stSenc = $stSenc1;
 
-                $totalCount++;
+                    if(!is_int($stSenc) || $stSenc == -1)
+                        break;
+
+                    $len = $stSenc - $ss;
+                    $sentences = substr($p, $ss,  $len);
+                    $ss = $stSenc + 1;
+
+                    $exp = explode(' ', $sentences);
+                    if(count($exp) > 20)
+                        $overCount++;
+
+                    $totalCount++;
+                }
             }
-
             $s = $end;
         }
 

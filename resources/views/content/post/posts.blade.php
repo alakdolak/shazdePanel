@@ -144,7 +144,7 @@
                                         اخرین ویرایش
                                     </th>
                                     <th style="text-align: right">
-                                        پست منتخب
+                                        پست داغ
                                     </th>
                                     <th style="text-align: right">
                                         پست بنر

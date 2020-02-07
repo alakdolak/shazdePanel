@@ -13,15 +13,144 @@ use App\models\Majara;
 use App\models\PicItem;
 use App\models\Place;
 use App\models\PlaceStyle;
+use App\models\Post;
 use App\models\PostComment;
 use App\models\Restaurant;
 use App\models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 
 class CommentController extends Controller {
+
+    public function newComments()
+    {
+        $activityId = Activity::where('name', 'پاسخ')->first();
+        $logsComment = LogModel::where('confirm', 0)->where('activityId', $activityId->id)->orderBy('date', 'DESC')->get();
+
+        foreach ($logsComment as $item){
+            $date = gregorianToJalali($item->date);
+            $item->date = $date[0] . '/' . $date[1] . '/' . $date[2];
+            $u = User::find($item->visitorId);
+            if($u == null)
+                $item->delete();
+            else
+                $item->username = $u->username;
+
+            $k = getKindPlaceNameAndPlace($item->kindPlaceId, $item->placeId);
+            $item->kindName = null;
+            $item->place = null;
+            if($k[0] != null)
+                $item->kindName = $k[0];
+            if($k[1] != null)
+                $item->place = $k[1]->name;
+
+            switch ($item->kindPlaceId){
+                case 1:
+                    $item->url = 'https://koochita.com/amaken-details/' . $item->placeId . '/' . $item->place;
+                    break;
+                case 3:
+                    $item->url = 'https://koochita.com/restaurant-details/' . $item->placeId . '/' . $item->place;
+                    break;
+                case 4:
+                    $item->url = 'https://koochita.com/hotel-details/' . $item->placeId . '/' . $item->place;
+                    break;
+                case 6:
+                    $item->url = 'https://koochita.com/majara-details/' . $item->placeId . '/' . $item->place;
+                    break;
+                case 10:
+                    $item->url = 'https://koochita.com/sanaiesogat-details/' . $item->placeId . '/' . $item->place;
+                    break;
+                case 11:
+                    $item->url = 'https://koochita.com/mahaliFood-details/' . $item->placeId . '/' . $item->place;
+                    break;
+            }
+        }
+
+        $postComment = PostComment::where('status', 0)->get();
+        foreach ($postComment as $item) {
+            $date = explode(' ', $item->created_at)[0];
+            $date = gregorianToJalali($date);
+            $item->date = $date[0] . '/' . $date[1] . '/' . $date[2];
+
+            $u = User::find($item->userId);
+            if($u == null)
+                $item->delete();
+            else
+                $item->username = $u->username;
+
+            $post = Post::find($item->postId);
+            if($post == null)
+                $item->delete();
+            else
+                $item->post = $post->slug;
+        }
+
+        return view('/userContent/comments/newComments', compact(['postComment', 'logsComment']));
+
+    }
+
+    public function submitComment(Request $request)
+    {
+        if(isset($request->type) && isset($request->id)){
+            if($request->type == 'article'){
+                $com = PostComment::find($request->id);
+                $com->status = 1;
+                $com->save();
+            }
+            else if($request->type == 'log'){
+                $com = LogModel::find($request->id);
+                $com->confirm = 1;
+                $com->save();
+            }
+        }
+
+        return \redirect(route('comments.new'));
+    }
+
+    public function deleteComment(Request $request)
+    {
+        if(isset($request->type) && isset($request->id)){
+            if($request->type == 'article'){
+                $com = PostComment::find($request->id);
+                if($com->haveAns == 1)
+                    $this->deleteRelatedComment('article', $com->id);
+                $com->delete();
+            }
+            else if($request->type == 'log'){
+                $com = LogModel::find($request->id);
+                if($com->subject == 'ans')
+                    $this->deleteRelatedComment('log', $com->id);
+                $com->delete();
+            }
+        }
+
+        return \redirect(route('comments.new'));
+    }
+    private function deleteRelatedComment($type, $id){
+        if($type == 'article'){
+            $coms = PostComment::where('astTo', $id)->get();
+            foreach ($coms as $com){
+                if($com->haveAns == 1)
+                    $this->deleteRelatedComment($type, $com->id);
+                $com->delete();
+            }
+        }
+        else if($type == 'log'){
+            $coms = LogModel::where('relatedTo', $id)->get();
+            foreach ($coms as $com) {
+                if ($com->subject == 'ans')
+                    $this->deleteRelatedComment($type, $com->id);
+                $com->delete();
+            }
+        }
+
+        return;
+    }
+
 
     public function lastActivities() {
         return view('content.user.controlContent', ['activities' => Activity::whereControllerNeed(true)->get()]);

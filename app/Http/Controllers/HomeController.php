@@ -7,6 +7,7 @@ use App\models\AdminLog;
 use App\models\ConfigModel;
 use App\models\LogModel;
 use App\models\PhotographersPic;
+use App\models\PostComment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,13 @@ class HomeController extends Controller {
         $acitvity = Activity::where('name', 'نظر')->first();
         $newReviews = LogModel::where('activityId', $acitvity->id)->where('confirm', 0)->count();
 
-        return view('home', compact(['photographerNotAgree', 'newReviews']));
+        $activity = Activity::where('name', 'پاسخ')->first();
+        $reviewComment = LogModel::where('confirm', 0)->where('activityId', $activity->id)->count();
+        $postComment = PostComment::where('status', 0)->count();
+
+        $newCommentCount = $reviewComment + $postComment;
+
+        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount']));
     }
 
     public function login() {

@@ -199,27 +199,19 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'publicityAccess']), f
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), function () {
 
+    Route::group(array('middleware' => ['auth', 'superAdminLevel']), function (){
+        Route::post('/post/category/delete', 'PostController@deleteCategory')->name('post.category.delete');
+
+        Route::post('newPostCategory', 'PostController@newPostCategory')->name('newPostCategory');
+    });
+
     Route::get('/gardeshNameList', 'PostController@gardeshNameList')->name('gardeshNameList');
 
     Route::get('posts', ['as' => 'posts', 'uses' => 'PostController@posts']);
 
     Route::get('createPost', ['as' => 'createPost', 'uses' => 'PostController@createPost']);
 
-    Route::get('createPostStep2/{id}', ['as' => 'createPostStep2', 'uses' => 'PostController@createPostStep2']);
-    
-    Route::get('createPostStep3/{id}', ['as' => 'createPostStep3', 'uses' => 'PostController@createPostStep3']);
-
-    Route::get('createPostStep4/{id}', ['as' => 'createPostStep4', 'uses' => 'PostController@createPostStep4']);
-
-    Route::post('setPostPic/{id}', ['as' => 'setPostPic', 'uses' => 'PostController@setPostPic']);
-
-    Route::post('setPostInterval/{id}', ['as' => 'setPostInterval', 'uses' => 'PostController@setPostInterval']);
-
     Route::get('editPost/{id}', ['as' => 'editPost', 'uses' => 'PostController@editPost']);
-
-    Route::post('doEditPost', ['as' => 'doEditPost', 'uses' => 'PostController@doEditPost']);
-
-    Route::post('editPostTag', ['as' => 'editPostTag', 'uses' => 'PostController@editPostTag']);
     
     Route::post('/uploadCKEditor', function (Request $request) {
 
@@ -286,8 +278,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
         }
     })->name('uploadCKEditor');
 
-    Route::post('doAddPost', ['as' => 'doAddPost', 'uses' => 'PostController@doAddPost']);
-
     Route::post('deletePost', ['as' => 'deletePost', 'uses' => 'PostController@deletePost']);
 
     Route::post('addToFavoritePosts', ['as' => 'addToFavoritePosts', 'uses' => 'PostController@addToFavoritePosts']);
@@ -299,8 +289,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
     Route::post('deleteFromBannerPosts', ['as' => 'deleteFromBannerPosts', 'uses' => 'PostController@deleteFromBannerPosts']);
 
     Route::post('postTagSearch', 'PostController@postTagSearch')->name('postTagSearch');
-
-    Route::post('newPostCategory', 'PostController@newPostCategory')->name('newPostCategory');
 
     Route::post('storePost', 'PostController@storePost')->name('storePost');
 
@@ -332,22 +320,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'offCodeAccess']), fun
 
     Route::post('deleteOffer', ['as' => 'deleteOffer', 'uses' => 'OffCodeController@deleteOffer']);
     
-});
-
-Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), function () {
-
-    Route::get('lastActivities', ['as' => 'lastActivities', 'uses' => 'CommentController@lastActivities']);
-
-    Route::get('controlActivityContent/{activityId}/{confirm?}', ['as' => 'controlActivityContent', 'uses' => 'CommentController@controlActivityContent']);
-
-    Route::post('submitLogs', array('as' => 'submitLogs', 'uses' => 'CommentController@submitLogs'));
-
-    Route::post('unSubmitLogs', array('as' => 'unSubmitLogs', 'uses' => 'CommentController@unSubmitLogs'));
-
-    Route::post('deleteLogs', array('as' => 'deleteLogs', 'uses' => 'CommentController@deleteLogs'));
-
-    Route::post('changeUserContent', array('as' => 'changeUserContent', 'uses' => 'CommentController@changeUserContent'));
-
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'configAccess']), function () {
@@ -475,6 +447,30 @@ Route::group(array('middleware' => ['auth']), function(){
 
     Route::post('/mainSuggestion/deleteRecord', 'MainSuggestionController@deleteRecord')->name('mainSuggestion.deleteRecord');
 });
+
+//comments
+Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), function () {
+
+    Route::get('/comments/new', 'CommentController@newComments')->name('comments.new');
+
+    Route::post('/comments/delete', 'CommentController@deleteComment')->name('comment.delete');
+
+    Route::post('/comments/submit', 'CommentController@submitComment')->name('comment.submit');
+
+    Route::get('lastActivities', ['as' => 'lastActivities', 'uses' => 'CommentController@lastActivities']);
+
+    Route::get('controlActivityContent/{activityId}/{confirm?}', ['as' => 'controlActivityContent', 'uses' => 'CommentController@controlActivityContent']);
+
+    Route::post('submitLogs', array('as' => 'submitLogs', 'uses' => 'CommentController@submitLogs'));
+
+    Route::post('unSubmitLogs', array('as' => 'unSubmitLogs', 'uses' => 'CommentController@unSubmitLogs'));
+
+    Route::post('deleteLogs', array('as' => 'deleteLogs', 'uses' => 'CommentController@deleteLogs'));
+
+    Route::post('changeUserContent', array('as' => 'changeUserContent', 'uses' => 'CommentController@changeUserContent'));
+
+});
+
 
 //ajaxController
 Route::group(array('middleware' => ['auth']), function(){
