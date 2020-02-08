@@ -25,7 +25,7 @@
                         <div class="sparkline13-graph">
                             <div class="container-fluid">
                                 <div class="row">
-
+                                    <h3>عکس های تایید نشده</h3>
                                     <table class="table table-striped  table-bordered" dir="rtl">
                                         <thead>
                                             <tr>
@@ -52,7 +52,7 @@
                                                     </td>
                                                     <td>استان {{$photo[$i]->state->name}} شهر {{$photo[$i]->city->name}}</td>
                                                     <td>
-                                                        <a onclick="showPics({{$i}})">
+                                                        <a onclick="showPics(0, {{$i}})">
                                                             مشاهده عکس
                                                         </a>
                                                     </td>
@@ -61,8 +61,56 @@
                                                     <td>{{$photo[$i]->alt}}</td>
                                                     <td>{{$photo[$i]->uploadDate}}</td>
                                                     <td>
-                                                        <button class="btn btn-success" onclick="submitPic({{$i}})">تایید</button>
-                                                        <button class="btn btn-danger" onclick="deletePic({{$i}})">حذف</button>
+                                                        <button class="btn btn-success" onclick="submitPic(0, {{$i}})">تایید</button>
+                                                        <button class="btn btn-danger" onclick="deletePic(0, {{$i}})">حذف</button>
+                                                    </td>
+                                                </tr>
+                                            @endfor
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <hr>
+
+                                <div class="row">
+                                    <h3>عکس های تایید شده</h3>
+                                    <table class="table table-striped  table-bordered" dir="rtl">
+                                        <thead>
+                                            <tr>
+                                                <th>نام کاربری</th>
+                                                <th>نوع محل</th>
+                                                <th>نام مکان</th>
+                                                <th>شهر مکان</th>
+                                                <th>عکس</th>
+                                                <th>نام عکس</th>
+                                                <th>توضیح عکس</th>
+                                                <th>alt عکس</th>
+                                                <th>تاریخ بارگزاری</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for($i = 0; $i < count($oldPhoto); $i++)
+                                                <tr>
+                                                    <td>{{$oldPhoto[$i]->userName}}</td>
+                                                    <td>{{$oldPhoto[$i]->kindPlace}}</td>
+                                                    <td>
+                                                        <a href="{{$oldPhoto[$i]->url}}" target="_blank">
+                                                            {{$oldPhoto[$i]->placeName}}
+                                                        </a>
+                                                    </td>
+                                                    <td>استان {{$oldPhoto[$i]->state->name}} شهر {{$oldPhoto[$i]->city->name}}</td>
+                                                    <td>
+                                                        <a onclick="showPics(1, {{$i}})">
+                                                            مشاهده عکس
+                                                        </a>
+                                                    </td>
+                                                    <td>{{$oldPhoto[$i]->name}}</td>
+                                                    <td style="max-width: 200px;">{{$oldPhoto[$i]->description}}</td>
+                                                    <td>{{$oldPhoto[$i]->alt}}</td>
+                                                    <td>{{$oldPhoto[$i]->uploadDate}}</td>
+                                                    <td>
+                                                        {{--<button class="btn btn-success" onclick="submitPic(1, {{$i}})">تایید</button>--}}
+                                                        <button class="btn btn-danger" onclick="deletePic(1, {{$i}})">حذف</button>
                                                     </td>
                                                 </tr>
                                             @endfor
@@ -134,24 +182,42 @@
 
     <script>
         var photos = {!! $photo !!};
+        var oldPhoto = {!! $oldPhoto !!};
 
-        function showPics(_index) {
-            document.getElementById('mainPic').src = photos[_index]['pics']['mainPic'];
-            document.getElementById('sPic').src = photos[_index]['pics']['s'];
-            document.getElementById('fPic').src = photos[_index]['pics']['f'];
-            document.getElementById('tPic').src = photos[_index]['pics']['t'];
-            document.getElementById('lPic').src = photos[_index]['pics']['l'];
+        function showPics(_kind, _index) {
+            var p;
+            if(_kind == 1)
+                p = oldPhoto[_index];
+            else
+                p = photos[_index];
+
+            document.getElementById('mainPic').src = p['pics']['mainPic'];
+            document.getElementById('sPic').src = p['pics']['s'];
+            document.getElementById('fPic').src = p['pics']['f'];
+            document.getElementById('tPic').src = p['pics']['t'];
+            document.getElementById('lPic').src = p['pics']['l'];
 
             $('#showPics').modal('show');
         }
 
-        function deletePic(_index){
-            document.getElementById('deleteId').value = photos[_index]['id'];
+        function deletePic(_kind, _index){
+            var p;
+            if(_kind == 1)
+                p = oldPhoto[_index];
+            else
+                p = photos[_index];
+
+            document.getElementById('deleteId').value = p['id'];
             $('#deletePic').modal('show');
         }
 
-        function submitPic(_index){
-            document.getElementById('submitId').value = photos[_index]['id'];
+        function submitPic(_kind, _index){
+            var p;
+            if(_kind == 1)
+                p = oldPhoto[_index];
+            else
+                p = photos[_index];
+            document.getElementById('submitId').value = p['id'];
             $('#submitForm').submit();
         }
     </script>

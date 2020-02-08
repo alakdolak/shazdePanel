@@ -70,7 +70,8 @@
 
                                                     <tbody>
                                                         @foreach($newReviews as $item)
-                                                            <tr id="row_{{$item->id}}">
+                                                            @if($item->place != null)
+                                                                <tr id="row_{{$item->id}}">
                                                                 <td>
                                                                     {{$item->user->first_name}} {{$item->user->last_name}}
                                                                 </td>
@@ -105,6 +106,7 @@
                                                                     </button>
                                                                 </td>
                                                             </tr>
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>

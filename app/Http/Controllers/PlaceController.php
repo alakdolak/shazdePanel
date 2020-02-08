@@ -555,7 +555,7 @@ class PlaceController extends Controller {
             case 3:
                 $place = Restaurant::find($id);
                 $city = Cities::find($place->cityId);
-
+                $state = State::find($city->stateId);
                 $cities = Cities::where('stateId', $city->stateId)->get();
 
                 $place->city = $city->name;

@@ -264,8 +264,8 @@
                                             </span>
                                             <span>
                                                 <select name="source" class="form-control" style="width: 100px; display: inline-block">
-                                                    <option value="1" {{$food->gram == 1 ? 'selected' : ''}}>قاشق</option>
-                                                    <option value="2" {{$food->spoon == 1 ? 'selected' : ''}}>گرم</option>
+                                                    <option value="1" {{$food->spoon == 1 ? 'selected' : ''}}>قاشق</option>
+                                                    <option value="2" {{$food->gram == 1 ? 'selected' : ''}}>گرم</option>
                                                 </select>
                                             </span>
                                         </div>

@@ -31,6 +31,7 @@ class ReviewsController extends Controller
             $item->countPic = 0;
             $item->countVideo = 0;
             $item->count360 = 0;
+
             foreach ($item->pics as $item2){
                 if($item2->is360 == 1)
                     $item->count360++;

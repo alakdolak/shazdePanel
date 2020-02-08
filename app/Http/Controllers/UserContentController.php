@@ -21,7 +21,6 @@ class UserContentController extends Controller
     public function photographerIndex()
     {
         $photo = PhotographersPic::where('status', 0)->get();
-
         foreach ($photo as $item){
 
             switch ($item->kindPlaceId){
@@ -88,7 +87,74 @@ class UserContentController extends Controller
                 $item->userName = $user->username;
         }
 
-        return view('userContent.photographer.photographer', compact(['photo']));
+        $oldPhoto = PhotographersPic::where('status', 1)->orderBy('created_at', 'DESC')->get();
+        foreach ($oldPhoto as $item){
+
+            switch ($item->kindPlaceId){
+                case 1:
+                    $file = 'amaken';
+                    $place = Amaken::find($item->placeId);
+                    $item->kindPlace = 'اماکن';
+                    $url ='https://koochita.com/amaken-details/' ;
+                    break;
+                case 3:
+                    $file = 'restaurant';
+                    $place = Restaurant::find($item->placeId);
+                    $item->kindPlace = 'رستوران';
+                    $url ='https://koochita.com/restaurant-details/' ;
+                    break;
+                case 4:
+                    $file = 'hotels';
+                    $place = Hotel::find($item->placeId);
+                    $item->kindPlace = 'هتل';
+                    $url ='https://koochita.com/hotel-details/' ;
+                    break;
+                case 6:
+                    $file = 'majara';
+                    $place = Majara::find($item->placeId);
+                    $item->kindPlace = 'ماجرا';
+                    $url ='https://koochita.com/majara-details/' ;
+                    break;
+                case 10:
+                    $file = 'sogatsanaie';
+                    $place = SogatSanaie::find($item->placeId);
+                    $item->kindPlace = 'سوغات/صنایع';
+                    $url ='https://koochita.com/hotel-details/' ;
+                    break;
+                case 11:
+                    $file = 'mahalifood';
+                    $place = MahaliFood::find($item->placeId);
+                    $item->kindPlace = 'غذای محلی';
+                    $url ='https://koochita.com/hotel-details/' ;
+                    break;
+            }
+
+            $item->placeName = $place->name;
+            $item->placeId = $place->id;
+            $item->url = $url . $item->placeId . '/' . $item->placeName;
+
+            $item->city = Cities::find($place->cityId);
+            $item->state = State::find($item->city->stateId);
+
+            $item->pics = [
+                's' => URL::asset('userPhoto/' . $file . '/' . $place->file . '/s-' . $item->pic),
+                'f' => URL::asset('userPhoto/' . $file . '/' . $place->file . '/f-' . $item->pic),
+                'l' => URL::asset('userPhoto/' . $file . '/' . $place->file . '/l-' . $item->pic),
+                't' => URL::asset('userPhoto/' . $file . '/' . $place->file . '/t-' . $item->pic),
+                'mainPic' => URL::asset('userPhoto/' . $file . '/' . $place->file . '/' . $item->pic),
+            ];
+
+            $item->uploadDate = convertDate($item->created_at);
+
+
+            $user = User::find($item->userId);
+            $item->userName = '';
+            $item->userName = $user->first_name . ' ' . $user->last_name;
+            if($item->userName == ' ')
+                $item->userName = $user->username;
+        }
+
+        return view('userContent.photographer.photographer', compact(['photo', 'oldPhoto']));
     }
 
     public function photographerDelete(Request $request)
