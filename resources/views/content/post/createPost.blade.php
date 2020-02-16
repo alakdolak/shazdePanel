@@ -185,6 +185,13 @@
             -ms-transform: rotate(45deg);
             transform: rotate(45deg);
         }
+        .cke_widget_wrapper_easyimage-side, :not(.cke_widget_wrapper_easyimage):not(.cke_widget_wrapper_easyimage-side) > .easyimage-side, .cke_widget_wrapper_easyimage-align-right, :not(.cke_widget_wrapper_easyimage):not(.cke_widget_wrapper_easyimage-align-right) > .easyimage-align-right{
+            float: left !important;
+            max-width: 50% !important;
+            min-width: 10em !important;
+            margin-right: 1.5em !important;
+            margin-left: 0em !important;
+        }
     </style>
 @stop
 

@@ -167,97 +167,141 @@
                                     <span class="mini-dn">خانه</span>
                                 </a>
                             </li>
+
                             <li class="nav-item">
-                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-envelope"></i> <span class="mini-dn">مدیریت محتوا</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{route('city.index')}}" class="dropdown-item">اطلاعات شهرها</a>
-                                    <a href="{{url('topInCity')}}" class="dropdown-item">پیشنهاد ویژه شهر</a>
-                                    <a href="{{route('mainSuggestion.index')}}" class="dropdown-item">پیشنهادهای صفحه اول</a>
-                                    <a href="{{route('manageNoFollow')}}" class="dropdown-item">مدیریت لینک ها</a>
-                                    <a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
-                                    <a href="{{route('chooseCity', ['mode' => 'content2'])}}" class="dropdown-item">2تغییر محتوای صفحات</a>
-                                    <a href="{{route('lastActivities')}}" class="dropdown-item">فعالیت های اخیر</a>
-                                    <a href="{{route('posts')}}" class="dropdown-item">مدیریت پست ها</a>
-                                    <a href="{{route('gardeshNameList')}}" class="dropdown-item">پست‌های گردشنامه</a>
-                                    <a href="{{route('uploadMainContent')}}" class="dropdown-item">افزودن محتوا</a>
-                                    <a href="{{route('seoTester')}}" class="dropdown-item">تست  سئو صفحات</a>
-                                </div>
-                            </li>
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-pie-chart"></i> <span class="mini-dn">تنظیمات سیستمی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{url('reports')}}" class="dropdown-item">گزارشات</a>
-                                    <a href="{{url('goyeshTags')}}" class="dropdown-item">تگ گویش ها</a>
-                                    <a href="{{url('ageSentences')}}" class="dropdown-item">توضیحات سن برای بلیت</a>
-                                    <a href="{{route('determineRadius')}}" class="dropdown-item">تعیین شعاع مکان های نزدیک</a>
-                                    <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
-                                    <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
-                                    <a href="{{route('offers')}}" class="dropdown-item">مدیریت کد های تخفیف</a>
-                                    <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
-                                    <a href="{{route('slider.index')}}" class="dropdown-item">عکس اسلاید صفحه اول</a>
-                                    <a href="project-details.html" class="dropdown-item">Project Details</a>
-                                </div>
-                            </li>
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-pie-chart"></i> <span class="mini-dn">تنظیمات سیستمی2</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{route('activities.index')}}" class="dropdown-item">فعالیت ها</a>
-                                    <a href="{{route('defaultPics.index')}}" class="dropdown-item">تصاویر پیش فرض</a>
-                                    <a href="{{route('places.index')}}" class="dropdown-item">اماکن</a>
-                                    <a href="{{route('tripStyle.index')}}" class="dropdown-item">سبک های سفر</a>
-                                    <a href="{{url('tags')}}" class="dropdown-item">تگ ها</a>
-                                    <a href="{{url('placeStyle')}}" class="dropdown-item">سبک مکان</a>
-                                    <a href="{{url('picItems')}}" class="dropdown-item">آیتم تصاویر</a>
-                                    <a href="{{url('questions')}}" class="dropdown-item">سئوالات نظرسنجی</a>
-                                </div>
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <i class="fa big-icon fa-envelope"></i>
+                                    <span class="mini-dn">محتوای کوچیتا</span>
+                                    <span class="indicator-right-menu mini-dn">
+                                        <i class="fa indicator-mn fa-angle-left"></i>
+                                    </span>
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('city.index')}}" class="dropdown-item">اطلاعات شهرها</a>
+                                        <a href="{{url('topInCity')}}" class="dropdown-item">پیشنهاد ویژه شهر</a>
+                                        <a href="{{route('chooseCity', ['mode' => 'content2'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
+                                        {{--<a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>--}}
+
+                                        <a href="{{route('posts')}}" class="dropdown-item">مدیریت مقاله ها</a>
+                                        <a href="{{route('gardeshNameList')}}" class="dropdown-item">مقاله‌های گردشنامه</a>
+
+                                        <a href="{{route('seoTester')}}" class="dropdown-item">تست  سئو صفحات</a>
+                                    </div>
+                                </a>
                             </li>
 
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-flask"></i> <span class="mini-dn">مدال ها</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{route('levels')}}" class="dropdown-item">تعیین سطوح</a>
-                                    <a href="{{route('medals')}}" class="dropdown-item">تعیین مدال ها</a>
-                                </div>
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <i class="fa big-icon fa-envelope"></i>
+                                    <span class="mini-dn">کنترل محتوای کاربران</span>
+                                    <span class="indicator-right-menu mini-dn">
+                                        <i class="fa indicator-mn fa-angle-left"></i>
+                                    </span>
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="#" class="dropdown-item">مدیریت پست‌ها</a>
+                                        <a href="#" class="dropdown-item">مدیریت سوال‌ها</a>
+                                        <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
+                                        <a href="#" class="dropdown-item">Recycle Bin</a>
+
+                                    </div>
+                                </a>
                             </li>
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-bar-chart-o"></i> <span class="mini-dn">مدیریت کاربران</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown chart-left-menu-std animated flipInX">
-                                    <a href="{{route('users')}}" class="dropdown-item">کاربران</a>
-                                    <a href="{{route('register')}}" class="dropdown-item">افزودن ادمین جدید</a>
-                                    <a href="area-charts.html" class="dropdown-item">Area Charts</a>
-                                    <a href="rounded-chart.html" class="dropdown-item">Rounded Charts</a>
-                                    <a href="c3.html" class="dropdown-item">C3 Charts</a>
-                                    <a href="sparkline.html" class="dropdown-item">Sparkline Charts</a>
-                                    <a href="peity.html" class="dropdown-item">Peity Charts</a>
-                                </div>
+
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <i class="fa big-icon fa-envelope"></i>
+                                    <span class="mini-dn">پیام های کاربران پنل</span>
+                                    <span class="indicator-right-menu mini-dn">
+                                        <i class="fa indicator-mn fa-angle-left"></i>
+                                    </span>
+                                </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <i class="fa big-icon fa-envelope"></i>
+                                    <span class="mini-dn">مدیریت</span>
+                                    <span class="indicator-right-menu mini-dn">
+                                        <i class="fa indicator-mn fa-angle-left"></i>
+                                    </span>
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('mainSuggestion.index')}}" class="dropdown-item">پیشنهادهای صفحه اول</a>
+                                        <a href="{{route('slider.index')}}" class="dropdown-item">عکس اسلاید صفحه اول</a>
+                                        <a href="{{url('questions')}}" class="dropdown-item">سئوالات نظرسنجی</a>
+
+                                        <a href="{{url('reports')}}" class="dropdown-item">گزارشات</a>
+                                        <a href="{{route('manageNoFollow')}}" class="dropdown-item">مدیریت لینک ها</a>
+                                        <a href="{{route('lastActivities')}}" class="dropdown-item">فعالیت های اخیر</a>
+                                        <a href="{{route('systemLastActivities')}}" class="dropdown-item">آخرین فعالیت های سیستمی</a>
+
+                                        <a href="{{route('levels')}}" class="dropdown-item">تعیین سطوح</a>
+                                        <a href="{{route('medals')}}" class="dropdown-item">تعیین مدال ها</a>
+
+                                        <a href="{{route('users')}}" class="dropdown-item">کاربران</a>
+                                        <a href="{{route('register')}}" class="dropdown-item">افزودن ادمین جدید</a>
+
+                                        <a href="{{route('uploadMainContent')}}" class="dropdown-item">افزودن محتوا به صورت گروهی</a>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <i class="fa big-icon fa-envelope"></i>
+                                    <span class="mini-dn">تنظیمات</span>
+                                    <span class="indicator-right-menu mini-dn">
+                                        <i class="fa indicator-mn fa-angle-left"></i>
+                                    </span>
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{url('ageSentences')}}" class="dropdown-item">توضیحات سن برای بلیت</a>
+                                        <a href="{{route('determineRadius')}}" class="dropdown-item">تعیین شعاع مکان های نزدیک</a>
+                                        <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
+                                        <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
+                                        <a href="{{route('offers')}}" class="dropdown-item">مدیریت کد های تخفیف</a>
+
+                                        <a href="{{route('changePass')}}" class="dropdown-item">تغییر رمزعبور</a>
+
+                                    </div>
+                                </a>
+                            </li>
+
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">مدیریت تبلیغات</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('company')}}" class="dropdown-item">شرکت های تبلیغاتی</a>
                                     <a href="{{route('section')}}" class="dropdown-item">قسمت های تبلیغاتی</a>
                                     <a href="{{route('seeAds')}}" class="dropdown-item">تبلیغات</a>
-                                </div>
-                            </li>
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">گزارشات</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{route('systemLastActivities')}}" class="dropdown-item">آخرین فعالیت های سیستمی</a>
-                                </div>
-                            </li>
 
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">پیام رسانی</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                     <a href="{{route('sendMsg')}}" class="dropdown-item">ارسال پیام</a>
                                     <a href="{{route('msgs')}}" class="dropdown-item">پیام های ارسال شده</a>
                                 </div>
                             </li>
 
-                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-table"></i> <span class="mini-dn">پروفایل کاربری</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
-                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                    <a href="{{route('changePass')}}" class="dropdown-item">تغییر رمزعبور</a>
-                                    <a href="{{route('logout')}}" class="dropdown-item">خروج</a>
-                                </div>
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <i class="fa big-icon fa-envelope"></i>
+                                    <span class="mini-dn">بی گروه</span>
+                                    <span class="indicator-right-menu mini-dn">
+                                        <i class="fa indicator-mn fa-angle-left"></i>
+                                    </span>
+                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                        <a href="{{route('activities.index')}}" class="dropdown-item">فعالیت ها</a>
+                                        <a href="{{route('defaultPics.index')}}" class="dropdown-item">تصاویر پیش فرض</a>
+                                        <a href="{{route('places.index')}}" class="dropdown-item">اماکن</a>
+                                        <a href="{{route('tripStyle.index')}}" class="dropdown-item">سبک های سفر</a>
+                                        <a href="{{url('tags')}}" class="dropdown-item">تگ ها</a>
+                                        <a href="{{url('placeStyle')}}" class="dropdown-item">سبک مکان</a>
+                                        <a href="{{url('picItems')}}" class="dropdown-item">آیتم تصاویر</a>
+                                        <a href="{{route('uiFeatures')}}" class="dropdown-item">UI Features</a>
+
+                                    </div>
+                                </a>
                             </li>
 
+
+
                             <li class="nav-item">
-                                <a href="{{route('uiFeatures')}}"  role="button" class="nav-link dropdown-toggle">
+                                <a href="{{route('logout')}}"  role="button" class="nav-link dropdown-toggle">
                                     <i class="fa big-icon fa-table"></i>
-                                    <span class="mini-dn">UI Features</span>
+                                    <span class="mini-dn">خروج</span>
                                 </a>
                             </li>
                         @else

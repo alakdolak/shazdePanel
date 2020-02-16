@@ -270,6 +270,9 @@ class PostController extends Controller {
             $time = str_replace(':', '', $request->time);
             $post->time = $time;
         }
+        if($request->releaseType != 'future')
+            $post->time = '0000';
+
         if(isset($request->meta))
             $post->meta = $request->meta;
         if($request->keyword != null)
@@ -413,16 +416,6 @@ class PostController extends Controller {
                 }
             }
         }
-        else{
-            $allCity = PostCityRelation::where('postId', $postId)->where('stateId', 0)->where('cityId', 0)->first();
-            if($allCity == null){
-                $newCity = new PostCityRelation();
-                $newCity->stateId = 0;
-                $newCity->cityId = 0;
-                $newCity->postId = $postId;
-                $newCity->save();
-            }
-        }
 
         $place = json_decode($request->placeId);
         if(count($place) != 0) {
@@ -466,16 +459,6 @@ class PostController extends Controller {
                     $newPlace->postId = $postId;
                     $newPlace->save();
                 }
-            }
-        }
-        else{
-            $allPlace = PostPlaceRelation::where('postId', $postId)->where('kindPlaceId', 0)->where('placeId', 0)->first();
-            if($allPlace == null){
-                $newPlace = new PostPlaceRelation();
-                $newPlace->kindPlaceId = 0;
-                $newPlace->placeId = 0;
-                $newPlace->postId = $postId;
-                $newPlace->save();
             }
         }
 

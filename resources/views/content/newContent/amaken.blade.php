@@ -26,238 +26,29 @@
     </div>
 </div>
 
-<hr>
-<div class="row" style="display: flex">
-    <div class="col-sm-2 f_r">
-        کاربری:
-    </div>
-    <div class="col-sm-2 f_r"  style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">تاریخی</span>
-        <label class="switch">
-            <input type="checkbox" name="tarikhi" id="tarikhi" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">تفریحی</span>
-        <label class="switch">
-            <input type="checkbox" name="tafrihi" id="tafrihi" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">طبیعی</span>
-        <label class="switch">
-            <input type="checkbox" name="tabiatgardi" id="tabiatgardi" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
+@foreach($features as $feat)
+    <hr>
+    <div class="row" style="display: flex; flex-wrap: wrap">
+        <div class="col-sm-12 f_r" style="font-weight: bold; margin-bottom: 10px">
+            {{$feat->name}}:
+        </div>
+        <?php $last = 0; ?>
+        @foreach($feat->subFeat as $item)
+            <?php $last++; ?>
+            <div class="col-sm-2 f_r" style="{{$last == count($feat->subFeat) ? '' : 'border-left: solid gray; '}} display: flex; justify-content: space-around; margin-bottom: 5px">
+                <span style="direction: rtl" class="myLabel">{{$item->name}}</span>
 
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">تجاری</span>
-        <label class="switch">
-            <input type="checkbox" name="tejari" id="tejari" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">مذهبی</span>
-        <label class="switch">
-            <input type="checkbox" name="mazhabi" id="mazhabi" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">صنعتی</span>
-        <label class="switch">
-            <input type="checkbox" name="sanati" id="sanati" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
+                @if($item->type == 'YN')
+                    <label class="switch">
+                        <input type="checkbox" name="features[]" value="{{$item->id}}">
+                        <span class="slider round"></span>
+                    </label>
+                @endif
 
-</div>
-
-<hr>
-<div class="row" style="margin-top: 10px;">
-
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl" class="myLabel">محدوده قرار گیری:</span>
+            </div>
+        @endforeach
     </div>
-
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">مرکز شهر</span>
-        <label class="switch">
-            <input type="radio" name="boundArea" value="1">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">حومه شهر</span>
-        <label class="switch">
-            <input type="radio" name="boundArea" value="2">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl" class="myLabel">خارج شهر</span>
-        <label class="switch">
-            <input type="radio" name="boundArea" value="3">
-            <span class="slider round"></span>
-        </label>
-    </div>
-</div>
-
-<hr>
-<div class="row" style="margin-top: 10px;">
-
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl" class="myLabel">موقعیت ترافیکی:</span>
-    </div>
-
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">پر ازدحام</span>
-        <label class="switch">
-            <input type="radio" name="population" value="1">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl" class="myLabel">کم ازدحام</span>
-        <label class="switch">
-            <input type="radio" name="population" value="2">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    {{--this section for shologh and khalvat--}}
-</div>
-
-<hr>
-<div class="row" style="margin-top: 10px;">
-
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl" class="myLabel">محیط:</span>
-    </div>
-
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">کوهستان</span>
-        <label class="switch">
-            <input type="checkbox" name="kooh" id="kooh" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">دریا</span>
-        <label class="switch">
-            <input type="checkbox" name="darya" id="darya" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">کویر</span>
-        <label class="switch">
-            <input type="checkbox" name="kavir" id="kavir" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">جنگل</span>
-        <label class="switch">
-            <input type="checkbox" name="jangal" id="jangal" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">شهری</span>
-        <label class="switch">
-            <input type="checkbox" name="shahri" id="shahri" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">روستایی</span>
-        <label class="switch">
-            <input type="checkbox" name="village" id="village" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-
-</div>
-
-<hr>
-<div class="row" style="margin-top: 10px;">
-
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl" class="myLabel">معماری:</span>
-    </div>
-
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">مدرن: </span>
-        <label class="switch">
-            <input type="checkbox" name="modern" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">تاریخی</span>
-        <label class="switch">
-            <input type="checkbox" name="tarikhibana" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl; border-left: solid gray;" class="myLabel">بومی</span>
-        <label class="switch">
-            <input type="checkbox" name="boomi" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl; border-left: solid gray;" class="myLabel">مذهبی</span>
-        <label class="switch">
-            <input type="checkbox" name="mazhabiArch" value="on">
-            <span class="slider round"></span>
-        </label>
-    </div>
-</div>
-
-<hr>
-<div class="row" style="margin-top: 10px;">
-
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl" class="myLabel">آب و هوا:</span>
-    </div>
-
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">مرطوب و سرد: </span>
-        <label class="switch">
-            <input type="radio" name="weather" value="1">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">گرم و خشک</span>
-        <label class="switch">
-            <input type="radio" name="weather" value="2">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r" style="border-left: solid gray;">
-        <span style="direction: rtl" class="myLabel">گرم و مرطوب</span>
-        <label class="switch">
-            <input type="radio" name="weather" value="3">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <div class="col-sm-2 f_r">
-        <span style="direction: rtl" class="myLabel">معتدل</span>
-        <label class="switch">
-            <input type="radio" name="weather" value="4">
-            <span class="slider round"></span>
-        </label>
-    </div>
-</div>
-
+@endforeach
 
 <script>
 

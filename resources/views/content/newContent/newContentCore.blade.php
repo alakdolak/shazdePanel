@@ -86,6 +86,7 @@
     <div class="errorDiv" id="errorDiv"></div>
 
 
+
     <div class="data-table-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
@@ -155,7 +156,6 @@
                                             <input type="hidden" name="C" id="lat" value="1">
                                             <input type="hidden" name="D" id="lng" value="1">
                                         @endif
-
                                     </div>
 
                                     @if($kind == 'amaken')
@@ -172,30 +172,32 @@
                                         @include('content.newContent.sogatsanaie')
                                     @endif
 
-
                                     <hr>
-                                    <div class="row center">
-                                        <div class="col-md-6 f_r">
+                                    <div class="row">
+                                        <div class="col-md-12 f_r">
                                             <div class="form-group">
                                                 <label for="keyword"> کلمه کلیدی</label>
-                                                <input type="text" class="form-control" name="keyword" id="keyword" onchange="setkeyWord(this.value)" value="{{old('keyword')}}">
+                                                <input type="text" class="form-control" name="keyword" id="keyword" value="{{old('keyword')}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 f_r">
+                                        <div class="col-md-12 f_r">
                                             <div class="form-group">
-                                                <label for="h1"> عنوان اصلی</label>
-                                                <input type="text" class="form-control" name="h1" id="h1" onchange="changeH1(this.value)" value="{{old('h1')}}">
-                                                <div class="inputDescription">
-                                                    همان h1 است
-                                                </div>
+                                                <label for="seoTitle"> عنوان سئو : <span id="seoTitleNumber" style="font-weight: 200;"></span></label>
+                                                <input type="text" class="form-control" name="seoTitle" id="seoTitle" onkeyup="changeSeoTitle(this.value)" value="{{old('seoTitle')}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 f_r">
+                                            <div class="form-group">
+                                                <label for="slug"> نامک</label>
+                                                <input type="text" class="form-control" name="slug" id="slug" value="{{old('slug')}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="site">متا</label>
-                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="metaCheck(this.value)" maxlength="153" minlength="130">{{old('meta')}}</textarea>
+                                                <label for="site">متا : <span id="metaNumber" style="font-weight: 200;"></span></label>
+                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="changeMeta(this.value)">{{old('meta')}}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="remainWordMeta" style="font-size: 15px;"></div>
                                                 </div>
@@ -205,7 +207,7 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="site">توضیح</label>
-                                                <textarea class="form-control" name="description" id="description" rows="10" onkeyup="descriptionCheck(this.value)">{!! old('description') !!}</textarea>
+                                                <textarea class="form-control" name="description" id="description" rows="10" >{!! old('description') !!}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="remainWord" style="font-size: 15px;"></div>
                                                     <div class="inputDescription" id="keywordDensity" style="font-size: 15px;"></div>
@@ -229,11 +231,20 @@
                                     </div>
 
                                     <hr>
-                                    <div class="row" style="margin-top: 10px; display: flex; justify-content: center;">
-                                        <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkForm()">تایید</button>
-                                        <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/'. $state->id . '/' . $mode . '/0')}}'">خروج</button>
+                                    <div class="row" style="text-align: center">
+                                        <button type="button" class="btn btn-primary" onclick="checkSeo(0)">تست سئو</button>
+                                    </div>
+                                    <div class="row" style="text-align: right">
+                                        <div id="errorResult"></div>
+                                        <div id="warningResult"></div>
+                                        <div id="goodResult"></div>
                                     </div>
 
+                                    <hr>
+                                    <div class="row" style="margin-top: 10px; display: flex; justify-content: center;">
+                                        <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkSeo(1)">تایید</button>
+                                        <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/'. $state->id . '/' . $mode . '/0')}}'">خروج</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -270,6 +281,36 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="warningModal" style="direction: rtl">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">اخطارها</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div style="font-size: 18px; margin-bottom: 20px;">
+                        در پست شما اخطارهای زیر موجود است . ایا از ثبت پست خود اطمینان دارید؟
+                    </div>
+
+                    <div id="warningContentModal" style="padding-right: 5px;"></div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer" style="text-align: center">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">خیر اصلاح می کنم.</button>
+                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="showErrorDivOrsubmit()">بله پست ثبت شود</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script>
         var map;
         var marker = 0;
@@ -320,6 +361,130 @@
             document.getElementById('lng').value = marker.getPosition().lng();
         }
 
+        function checkSeo(kind){
+
+            var name = document.getElementById('name').value;
+            var value = document.getElementById('keyword').value;
+            var seoTitle = document.getElementById('seoTitle').value;
+            var slug = document.getElementById('slug').value;
+            var meta = document.getElementById('meta').value;
+            var description = document.getElementById('description').value;
+
+            $.ajax({
+                type: 'post',
+                url : '{{route("placeSeoTest")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    keyword: value,
+                    meta: meta,
+                    seoTitle: seoTitle,
+                    slug: slug,
+                    text: description,
+                    name: name,
+                    kindPlaceId: {{$mode}}
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    document.getElementById('errorResult').innerHTML = '';
+                    document.getElementById('warningResult').innerHTML = '';
+                    document.getElementById('goodResult').innerHTML = '';
+
+
+                    $('#warningResult').append(response[0]);
+                    $('#goodResult').append(response[1]);
+                    $('#errorResult').append(response[2]);
+                    uniqueKeyword = response[5];
+                    uniqueSlug = response[6];
+                    uniqueTitle = response[7];
+                    uniqueSeoTitle = response[8];
+
+                    errorCount = response[3];
+                    warningCount = response[4];
+
+                    inlineSeoCheck(kind);
+                }
+            })
+        }
+
+        function inlineSeoCheck(kind){
+            // var tags = $("input[id='tags']").map(function(){return [$(this).val()];}).get();
+            // if(tags.length == 0){
+            //     errorCount++;
+            //     text = '<div style="color: red;">شما باید برای متن خود برچسب انتخاب نمایید</div>';
+            //     $('#errorResult').append(text);
+            // }
+            // else if(tags.length < 10){
+            //     warningCount++;
+            //     text = '<div style="color: #dec300;">پیشنهاد می گردد حداقل ده برچسب انتخاب نمایید.</div>';
+            //     $('#warningResult').append(text);
+            // }
+            // else{
+            //     text = '<div style="color: green;">تعداد برچسب های متن مناسب می باشد.</div>';
+            //     $('#goodResult').append(text);
+            // }
+
+            if(kind == 1) {
+                var name = document.getElementById('name').value;
+                var city = document.getElementById('cityId').value;
+                if(errorCount > 0){
+                    alert('برای ثبت مکان باید تمام ارورها را برطرف کنید .');
+                    return;
+                }
+                if(city == 0){
+                    alert('لطفا یک شهر انتخاب کنید.');
+                    return;
+                }
+                if(!uniqueTitle){
+                    alert('عنوان مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueSlug){
+                    alert('نامک مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueKeyword){
+                    alert('کلمه کلیدی مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueSeoTitle){
+                    alert('عنوان سئو مقاله یکتا نیست');
+                    return;
+                }
+                else {
+                    if (warningCount > 0) {
+                        $('#warningContentModal').html('');
+                        $('#warningResult').children().each(function (){
+                            text = '<li style="margin-bottom: 5px">' + $(this).text() + '</li>';
+                            $('#warningContentModal').append(text);
+                        });
+                        $('#warningModal').modal('show');
+                        return;
+                    }
+                    else
+                        showErrorDivOrsubmit();
+                }
+            }
+        }
+
+        function changeSeoTitle(_value){
+            var text = _value.length + ' حرف';
+            $('#seoTitleNumber').text(text)
+            if(_value.length > 60 && _value.length <= 85)
+                $('#seoTitleNumber').css('color', 'green');
+            else
+                $('#seoTitleNumber').css('color', 'red');
+
+        }
+
+        function changeMeta(_value){
+            var text = _value.length + ' حرف';
+            $('#metaNumber').text(text);
+            if(_value.length > 120 && _value.length <= 156)
+                $('#metaNumber').css('color', 'green');
+            else
+                $('#metaNumber').css('color', 'red');
+
+        }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
 

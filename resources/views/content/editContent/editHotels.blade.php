@@ -233,377 +233,55 @@
 
                                     </div>
 
-                                    <hr>
-                                    <div class="row" style="display: flex">
-                                        <div class="col-sm-2 f_r">
-                                            غذای هتل:
+                                    @foreach($features as $feat)
+                                        <hr>
+                                        <div class="row" style="display: flex; flex-wrap: wrap">
+                                            <div class="col-sm-12 f_r" style="font-weight: bold; margin-bottom: 10px">
+                                                {{$feat->name}}:
+                                            </div>
+                                            <?php $last = 0; ?>
+                                            @foreach($feat->subFeat as $item)
+                                                <?php $last++; ?>
+                                                <div class="col-sm-2 f_r" style="{{$last == count($feat->subFeat) ? '' : 'border-left: solid gray; '}} display: flex; justify-content: space-around; margin-bottom: 5px">
+                                                    <span style="direction: rtl" class="myLabel">{{$item->name}}</span>
+                                                    @if($item->type == 'YN')
+                                                        <label class="switch">
+                                                            <input type="checkbox" name="features[]" value="{{$item->id}}" {{in_array($item->id, $placeFeatures) ? 'checked' : ''}}>
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    @endif
+                                                </div>
+                                            @endforeach
                                         </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">ایرانی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="food_irani" id="food_irani" {{$place->food_irani? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">محلی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="food_mahali" id="food_mahali" {{$place->food_mahali? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">فرنگی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="food_farangi" id="food_farangi" {{$place->food_farangi? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کافی شاپ</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="coffeeshop" id="coffeeshop" {{$place->coffeeshop? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    @endforeach
 
                                     <hr>
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div class="col-sm-2 f_r">
-                                            <span style="direction: rtl" class="myLabel">محدوده قرار گیری:</span>
-                                        </div>
-
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">مرکز شهر</span>
-                                            <label class="switch">
-                                                <input type="radio" name="boundArea" value="1" {{$place->boundArea == 1? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">حومه شهر</span>
-                                            <label class="switch">
-                                                <input type="radio" name="boundArea" value="2" {{$place->boundArea == 2? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">خارج شهر</span>
-                                            <label class="switch">
-                                                <input type="radio" name="boundArea" value="3" {{$place->boundArea == 3? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">داخل بافت تاریخی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="tarikhi"  {{$place->tarikhi == 1? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div class="col-sm-2 f_r">
-                                            <span style="direction: rtl" class="myLabel">موقعیت ترافیکی:</span>
-                                        </div>
-
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">پرازدحام</span>
-                                            <label class="switch">
-                                                <input type="radio" name="population" value="1" {{$place->shologh? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کم‌ازدحام</span>
-                                            <label class="switch">
-                                                <input type="radio" name="population" value="2" {{$place->khalvat? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        {{--this section for shologh and khalvat--}}
-                                    </div>
-
-                                    <hr>
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div class="col-sm-2 f_r">
-                                            <span style="direction: rtl" class="myLabel">محیط:</span>
-                                        </div>
-
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">طبیعت</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="tabiat" id="tabiat" {{$place->tabiat? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کوه</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="kooh" id="kooh" {{$place->kooh? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">دریا</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="darya" id="darya" {{$place->darya? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کویر</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="kavir" id="kavir" {{$place->kavir? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div class="col-sm-2 f_r">
-                                            <span style="direction: rtl" class="myLabel">معماری:</span>
-                                        </div>
-
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">مدرن: </span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="modern" id="modern" {{$place->modern? 'checked' : ''}} onchange="changeArchi('modern')">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">سنتی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="sonnati" id="sonnati" {{$place->sonnati? 'checked' : ''}} onchange="changeArchi('sonnati')">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">قدیمی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="ghadimi" id="ghadimi" {{$place->ghadimi? 'checked' : ''}} onchange="changeArchi('ghadimi')">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">معمولی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="mamooli" id="mamooli" {{$place->mamooli? 'checked' : ''}} onchange="changeArchi('mamooli')">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div class="col-sm-2 f_r">
-                                            <span style="direction: rtl" class="myLabel">امکانات غذایی هتل:</span>
-                                        </div>
-
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">صبحانه رایگان</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="breakfast" id="breakfast" {{$place->breakfast? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">نهار رایگان</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="lunch" id="lunch" {{$place->lunch? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="col-sm-2 f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">شام رایگان</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="dinner" id="dinner" {{$place->dinner? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                    </div>
-
-                                    <hr>
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div class="eleman f_r" style="width: 100%;">
-                                            <span style="direction: rtl" class="myLabel">امکانات هتل:</span>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">پارکینگ </span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="parking" id="parking" {{$place->parking? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">باشگاه ورزشی </span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="club" id="club" {{$place->club? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">استخر</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="pool" id="pool" {{$place->pool? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">گرمایش و سرمایش در اتاق</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="tahviye" id="tahviye" {{$place->tahviye? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">امکانات ویژه معلولان</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="maalool" id="maalool" {{$place->maalool? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">اینترنت در اتاق</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="internet" id="internet" {{$place->internet? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">انتن دهی در اتاق</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="anten" id="anten" {{$place->anten? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">رستوران</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="restaurant" id="restaurant" {{$place->restaurant? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">سوئیت</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="swite" id="swite" {{$place->swite? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">امکانات ماساژ</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="masazh" id="masazh" {{$place->masazh? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">خدمات خشک شویی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="laundry" id="laundry" {{$place->laundry? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">گشت روزانه</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="gasht" id="gasht" {{$place->gasht? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">گاوصندوق در اتاق</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="safe_box" id="safe_box" {{$place->safe_box? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">فروشگاه</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="shop" id="shop" {{$place->shop? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">روف گاردن</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="roof_garden" id="roof_garden" {{$place->roof_garden? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">گیم نت</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="game_net" id="game_net" {{$place->game_net? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r">
-                                            <span style="direction: rtl" class="myLabel">اتاق کنفرانس</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="confrenss_room" id="confrenss_room" {{$place->confrenss_room? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                    </div>
-
-                                    <hr>
-                                    <div class="row center">
-                                        <div class="col-md-6 f_r">
+                                    <div class="row">
+                                        <div class="col-md-12 f_r">
                                             <div class="form-group">
                                                 <label for="keyword"> کلمه کلیدی</label>
                                                 <input type="text" class="form-control" name="keyword" id="keyword" value="{{$place->keyword}}" onchange="setkeyWord(this.value)">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 f_r">
+                                        <div class="col-md-12 f_r">
                                             <div class="form-group">
-                                                <label for="h1"> عنوان اصلی</label>
-                                                <input type="text" class="form-control" name="h1" id="h1" value="{{$place->h1}}" onchange="changeH1(this.value)">
-                                                <div class="inputDescription">
-                                                    همان h1 است
-                                                </div>
+                                                <label for="seoTitle"> عنوان سئو : <span id="seoTitleNumber" style="font-weight: 200;"></span></label>
+                                                <input type="text" class="form-control" name="seoTitle" id="seoTitle" value="{{$place->seoTitle}}" onkeyup="changeSeoTitle(this.value)">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 f_r">
+                                            <div class="form-group">
+                                                <label for="slug"> نامک</label>
+                                                <input type="text" class="form-control" name="slug" id="slug" value="{{$place->seoTitle}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="site">متا</label>
-                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="metaCheck(this.value)" maxlength="153" minlength="130">{!! $place->meta !!}</textarea>
+                                                <label for="site">متا : <span id="metaNumber" style="font-weight: 200;"></span></label>
+                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="changeMeta(this.value)" maxlength="153" minlength="130">{!! $place->meta !!}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="remainWordMeta" style="font-size: 15px;"></div>
                                                 </div>
@@ -613,18 +291,18 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="site">توضیح</label>
-                                                <textarea class="form-control" name="description" id="description" rows="10" onkeyup="descriptionCheck(this.value)">{!! $place->description !!}</textarea>
+                                                <textarea class="form-control" name="description" id="description" rows="10">{!! $place->description !!}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="remainWord" style="font-size: 15px;"></div>
                                                     <div class="inputDescription" id="keywordDensity" style="font-size: 15px;"></div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
 
                                     <hr>
                                     <div class="row">
-
                                         @for($i = 0; $i < count($place->tags); $i++)
                                             <div class="f_r" style="margin-left: 15px;">
                                                 <div class="form-group">
@@ -633,12 +311,22 @@
                                                 </div>
                                             </div>
                                         @endfor
+                                    </div>
 
+
+                                    <hr>
+                                    <div class="row" style="text-align: center">
+                                        <button type="button" class="btn btn-primary" onclick="checkSeo(0)">تست سئو</button>
+                                    </div>
+                                    <div class="row" style="text-align: right">
+                                        <div id="errorResult"></div>
+                                        <div id="warningResult"></div>
+                                        <div id="goodResult"></div>
                                     </div>
 
                                     <hr>
                                     <div class="row" style="margin-top: 10px; display: flex; justify-content: center;">
-                                        <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkForm()">تایید</button>
+                                        <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkSeo(1)">تایید</button>
                                         <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/'. $place->stateId . '/' . $mode . '/0')}}'">خروج</button>
                                     </div>
 
@@ -666,6 +354,35 @@
                 <div class="modal-footer" style="text-align: center">
                     <button type="button" class="btn btn-danger">بله</button>
                     <button class="btn nextStepBtnTourCreation" data-dismiss="modal">خیر</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="warningModal" style="direction: rtl">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">اخطارها</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div style="font-size: 18px; margin-bottom: 20px;">
+                        در پست شما اخطارهای زیر موجود است . ایا از ثبت پست خود اطمینان دارید؟
+                    </div>
+
+                    <div id="warningContentModal" style="padding-right: 5px;"></div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer" style="text-align: center">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">خیر اصلاح می کنم.</button>
+                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="checkForm()">بله پست ثبت شود</button>
                 </div>
 
             </div>
@@ -728,15 +445,116 @@
             vabas = 0
         }
 
-        function changeArchi(_id){
-            if(_id == 'modern'){
-                document.getElementById('sonnati').checked = false;
-                document.getElementById('ghadimi').checked = false;
-                document.getElementById('mamooli').checked = false;
+
+        function checkSeo(kind){
+
+            var name = document.getElementById('name').value;
+            var value = document.getElementById('keyword').value;
+            var seoTitle = document.getElementById('seoTitle').value;
+            var slug = document.getElementById('slug').value;
+            var meta = document.getElementById('meta').value;
+            var description = document.getElementById('description').value;
+
+            $.ajax({
+                type: 'post',
+                url : '{{route("placeSeoTest")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    keyword: value,
+                    meta: meta,
+                    seoTitle: seoTitle,
+                    slug: slug,
+                    text: description,
+                    name: name,
+                    id: {{$place->id}},
+                    kindPlaceId: {{$mode}}
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    document.getElementById('errorResult').innerHTML = '';
+                    document.getElementById('warningResult').innerHTML = '';
+                    document.getElementById('goodResult').innerHTML = '';
+
+
+                    $('#warningResult').append(response[0]);
+                    $('#goodResult').append(response[1]);
+                    $('#errorResult').append(response[2]);
+                    uniqueKeyword = response[5];
+                    uniqueSlug = response[6];
+                    uniqueTitle = response[7];
+                    uniqueSeoTitle = response[8];
+
+                    errorCount = response[3];
+                    warningCount = response[4];
+
+                    inlineSeoCheck(kind);
+                }
+            })
+        }
+
+        function inlineSeoCheck(kind){
+
+            if(kind == 1) {
+                var name = document.getElementById('name').value;
+                var city = document.getElementById('cityId').value;
+                if(errorCount > 0){
+                    alert('برای ثبت مکان باید تمام ارورها را برطرف کنید .');
+                    return;
+                }
+                if(city == 0){
+                    alert('لطفا یک شهر انتخاب کنید.');
+                    return;
+                }
+                if(!uniqueTitle){
+                    alert('عنوان مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueSlug){
+                    alert('نامک مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueKeyword){
+                    alert('کلمه کلیدی مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueSeoTitle){
+                    alert('عنوان سئو مقاله یکتا نیست');
+                    return;
+                }
+                else {
+                    if (warningCount > 0) {
+                        $('#warningContentModal').html('');
+                        $('#warningResult').children().each(function (){
+                            text = '<li style="margin-bottom: 5px">' + $(this).text() + '</li>';
+                            $('#warningContentModal').append(text);
+                        });
+                        $('#warningModal').modal('show');
+                        return;
+                    }
+                    else
+                        checkForm();
+                }
             }
-            else{
-                document.getElementById('modern').checked = false;
-            }
+        }
+
+        function changeSeoTitle(_value){
+            var text = _value.length + ' حرف';
+            $('#seoTitleNumber').text(text)
+            if(_value.length > 60 && _value.length <= 85)
+                $('#seoTitleNumber').css('color', 'green');
+            else
+                $('#seoTitleNumber').css('color', 'red');
+
+        }
+
+        function changeMeta(_value){
+            var text = _value.length + ' حرف';
+            $('#metaNumber').text(text);
+            if(_value.length > 120 && _value.length <= 156)
+                $('#metaNumber').css('color', 'green');
+            else
+                $('#metaNumber').css('color', 'red');
+
         }
 
     </script>
@@ -756,6 +574,7 @@
             </div>
         </div>
     </div>
+
     <script>
         var map;
         var C = {{$place->C}};

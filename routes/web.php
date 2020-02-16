@@ -142,6 +142,8 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), fun
 
     Route::get('newContent/{cityMode}/{cityId}/{mode}', 'PlaceController@newContent')->name('newContent');
 
+    Route::get('editPlace/{kindPlaceId}/{placeId?}', 'PlaceController@editPlace')->name('editPlace');
+
     Route::post('storeAmaken', 'PlaceController@storeAmaken')->name('storeAmaken');
 
     Route::post('storeHotel', 'PlaceController@storeHotel')->name('storeHotel');
@@ -167,6 +169,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), fun
 
     Route::post('doUploadMainContent', ['as' => 'doUploadMainContent', 'uses' => 'PlaceController@doUploadMainContent']);
 
+    Route::post('placeSeoTest', 'SeoController@placeSeoTest')->name('placeSeoTest');
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'publicityAccess']), function () {

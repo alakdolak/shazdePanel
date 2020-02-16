@@ -84,8 +84,6 @@
 @section('content')
 
     <div class="errorDiv" id="errorDiv"></div>
-
-
     <div class="data-table-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
@@ -173,297 +171,66 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-                                    <div class="row" style="margin-top: 10px;">
+                                    @foreach($features as $feat)
+                                        <hr>
+                                        <div class="row" style="display: flex; flex-wrap: wrap">
+                                            <div class="col-sm-12 f_r" style="font-weight: bold; margin-bottom: 10px">
+                                                {{$feat->name}}:
+                                            </div>
+                                            <?php $last = 0; ?>
+                                            @foreach($feat->subFeat as $item)
+                                                <?php $last++; ?>
+                                                <div class="col-sm-2 f_r" style="{{$last == count($feat->subFeat) ? '' : 'border-left: solid gray; '}} display: flex; justify-content: space-around; margin-bottom: 5px">
+                                                    <span style="direction: rtl" class="myLabel">{{$item->name}}</span>
 
-                                        <div class="col-sm-2 f_r" style="width: 100%;">
-                                            <span style="direction: rtl; font-weight: bold" class="myLabel" >مناسب برای:</span>
-                                        </div>
+                                                    @if($item->type == 'YN')
+                                                        <label class="switch">
+                                                            <input type="checkbox" name="features[]" value="{{$item->id}}" {{in_array($item->id, $placeFeatures) ? 'checked' : ''}}>
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    @endif
 
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کوه نوردی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="koohnavardi" id="koohnavardi" value="on" {{$place->koohnavardi? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">پیاده‌روی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="walking" id="walking" value="on" {{$place->walking? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">شنا</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="swimming" id="swimming" value="on" {{$place->swimming? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">صخره‌نوردی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="rockClimbing" id="rockClimbing" value="on" {{$place->rockClimbing? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">سنگ‌نوردی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="stoneClimbing" id="stoneClimbing" value="on" {{$place->stoneClimbing? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">دره‌نوردی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="valleyClimbing" id="valleyClimbing" value="on" {{$place->valleyClimbing? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">غار‌نوردی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="caveClimbing" id="caveClimbing" value="on" {{$place->caveClimbing? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">یخ‌نوردی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="iceClimbing" id="iceClimbing" value="on" {{$place->iceClimbing? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">آفرود</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="offRoad" id="offRoad" value="on" {{$place->offRoad? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">قایق‌سواری</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="boat" id="boat" value="on" {{$place->boat? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">موج سواری</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="surfing" id="surfing" value="on" {{$place->surfing? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کمپ (چادر زدن)</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="kamp" id="kamp" value="on" {{$place->kamp? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">صحرانوردی</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="sahranavardi" id="sahranavardi" value="on" {{$place->sahranavardi? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">پیک نیک</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="piknik" id="piknik" value="on" {{$place->piknik? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 f_r marTop" style="border-left: solid gray;">
-                                        <span style="direction: rtl" class="myLabel">رفتینگ</span>
-                                        <label class="switch">
-                                            <input type="checkbox" name="rafting" id="rafting" value="on" {{$place->rafting? 'checked' : ''}}>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
+                                    @endforeach
 
                                     <hr>
-                                    <div class="row" style="margin-top: 10px;">
-
-                                        <div class="eleman f_r" style="width: 100%">
-                                            <span style="direction: rtl; font-weight: bold" class="myLabel">ویژگی های محیطی:</span>
-                                        </div>
-
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کوهستان</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="kooh" id="kooh" value="on" {{$place->kooh? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">دریا</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="darya" id="darya" value="on" {{$place->darya? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">دریاچه</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="daryache" id="daryache" value="on" {{$place->daryache? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">شهری</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="shahri" id="shahri" value="on" {{$place->shahri? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">منطقه‌حفاظت شده</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="hefazat" id="hefazat" value="on" {{$place->hefazat? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">حیات وحش</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="hayatevahsh" id="hayatevahsh" value="on" {{$place->hayatevahsh? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">کویر</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="kavir" id="kavir" value="on" {{$place->kavir? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">رمل</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="raml" id="raml" value="on" {{$place->raml? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">جنگل</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="jangal" id="jangal" value="on" {{$place->jangal? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">آبشار</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="abshar" id="abshar" value="on" {{$place->abshar? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">دره</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="darre" id="darre" value="on" {{$place->darre? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">بکر</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="bekr" id="bekr" value="on" {{$place->bekr? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">دشت</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="dasht" id="dasht" value="on" {{$place->dasht? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">برکه</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="berke" id="berke" value="on" {{$place->berke? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">ساحل</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="beach" id="beach" value="on" {{$place->beach? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">ژئوپارک</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="geoPark" id="geoPark" value="on" {{$place->geoPark? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">رودخانه</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="river" id="river" value="on" {{$place->river? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">چشمه</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="cheshme" id="cheshme" value="on" {{$place->cheshme? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                        <div class="eleman f_r" style="border-left: solid gray;">
-                                            <span style="direction: rtl" class="myLabel">تالاب</span>
-                                            <label class="switch">
-                                                <input type="checkbox" name="talab" id="talab" value="on" {{$place->talab? 'checked' : ''}}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <div class="row center">
-                                        <div class="col-md-6 f_r">
+                                    <div class="row">
+                                        <div class="col-md-12 f_r">
                                             <div class="form-group">
                                                 <label for="keyword"> کلمه کلیدی</label>
                                                 <input type="text" class="form-control" name="keyword" id="keyword" value="{{$place->keyword}}" onchange="setkeyWord(this.value)">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 f_r">
+                                        <div class="col-md-12 f_r">
                                             <div class="form-group">
-                                                <label for="h1"> عنوان اصلی</label>
-                                                <input type="text" class="form-control" name="h1" id="h1" value="{{$place->h1}}" onchange="changeH1(this.value)">
-                                                <div class="inputDescription">
-                                                    همان h1 است
-                                                </div>
+                                                <label for="seoTitle"> عنوان سئو : <span id="seoTitleNumber" style="font-weight: 200;"></span></label>
+                                                <input type="text" class="form-control" name="seoTitle" id="seoTitle" value="{{$place->seoTitle}}" onkeyup="changeSeoTitle(this.value)">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 f_r">
+                                            <div class="form-group">
+                                                <label for="slug"> نامک</label>
+                                                <input type="text" class="form-control" name="slug" id="slug" value="{{$place->seoTitle}}">
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="site">متا</label>
-                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="metaCheck(this.value)" maxlength="153" minlength="130">{!! $place->meta !!}</textarea>
+                                                <label for="site">متا : <span id="metaNumber" style="font-weight: 200;"></span></label>
+                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="changeMeta(this.value)">{!! $place->meta !!}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="remainWordMeta" style="font-size: 15px;"></div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="site">توضیح</label>
-                                                <textarea class="form-control" name="description" id="description" rows="10" onkeyup="descriptionCheck(this.value)">{!! $place->description !!}</textarea>
+                                                <textarea class="form-control" name="description" id="description" rows="10">{!! $place->description !!}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="remainWord" style="font-size: 15px;"></div>
                                                     <div class="inputDescription" id="keywordDensity" style="font-size: 15px;"></div>
@@ -474,7 +241,6 @@
 
                                     <hr>
                                     <div class="row">
-
                                         @for($i = 0; $i < count($place->tags); $i++)
                                             <div class="f_r" style="margin-left: 15px;">
                                                 <div class="form-group">
@@ -487,8 +253,18 @@
                                     </div>
 
                                     <hr>
+                                    <div class="row" style="text-align: center">
+                                        <button type="button" class="btn btn-primary" onclick="checkSeo(0)">تست سئو</button>
+                                    </div>
+                                    <div class="row" style="text-align: right">
+                                        <div id="errorResult"></div>
+                                        <div id="warningResult"></div>
+                                        <div id="goodResult"></div>
+                                    </div>
+
+                                    <hr>
                                     <div class="row" style="margin-top: 10px; display: flex; justify-content: center;">
-                                        <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkForm()">تایید</button>
+                                        <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkSeo(1)">تایید</button>
                                         <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/'. $place->stateId . '/' . $mode . '/0')}}'">خروج</button>
                                     </div>
 
@@ -516,6 +292,51 @@
                 <div class="modal-footer" style="text-align: center">
                     <button type="button" class="btn btn-danger">بله</button>
                     <button class="btn nextStepBtnTourCreation" data-dismiss="modal">خیر</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mapModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body" style="direction: rtl">
+                    <div id="map" style="width: 100%; height: 500px; background-color: red"></div>
+                </div>
+
+                <div class="modal-footer" style="text-align: center">
+                    <button class="btn nextStepBtnTourCreation" data-dismiss="modal">تایید</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="warningModal" style="direction: rtl">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">اخطارها</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div style="font-size: 18px; margin-bottom: 20px;">
+                        در پست شما اخطارهای زیر موجود است . ایا از ثبت پست خود اطمینان دارید؟
+                    </div>
+
+                    <div id="warningContentModal" style="padding-right: 5px;"></div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer" style="text-align: center">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">خیر اصلاح می کنم.</button>
+                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="checkForm()">بله پست ثبت شود</button>
                 </div>
 
             </div>
@@ -556,23 +377,119 @@
 
             showErrorDivOrsubmit(error_text, error);
         }
+
+        function checkSeo(kind){
+
+            var name = document.getElementById('name').value;
+            var value = document.getElementById('keyword').value;
+            var seoTitle = document.getElementById('seoTitle').value;
+            var slug = document.getElementById('slug').value;
+            var meta = document.getElementById('meta').value;
+            var description = document.getElementById('description').value;
+
+            $.ajax({
+                type: 'post',
+                url : '{{route("placeSeoTest")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    keyword: value,
+                    meta: meta,
+                    seoTitle: seoTitle,
+                    slug: slug,
+                    text: description,
+                    name: name,
+                    id: {{$place->id}},
+                    kindPlaceId: {{$mode}}
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    document.getElementById('errorResult').innerHTML = '';
+                    document.getElementById('warningResult').innerHTML = '';
+                    document.getElementById('goodResult').innerHTML = '';
+
+
+                    $('#warningResult').append(response[0]);
+                    $('#goodResult').append(response[1]);
+                    $('#errorResult').append(response[2]);
+                    uniqueKeyword = response[5];
+                    uniqueSlug = response[6];
+                    uniqueTitle = response[7];
+                    uniqueSeoTitle = response[8];
+
+                    errorCount = response[3];
+                    warningCount = response[4];
+
+                    inlineSeoCheck(kind);
+                }
+            })
+        }
+
+        function inlineSeoCheck(kind){
+
+            if(kind == 1) {
+                var name = document.getElementById('name').value;
+                var city = document.getElementById('cityId').value;
+                if(errorCount > 0){
+                    alert('برای ثبت مکان باید تمام ارورها را برطرف کنید .');
+                    return;
+                }
+                if(city == 0){
+                    alert('لطفا یک شهر انتخاب کنید.');
+                    return;
+                }
+                if(!uniqueTitle){
+                    alert('عنوان مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueSlug){
+                    alert('نامک مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueKeyword){
+                    alert('کلمه کلیدی مقاله یکتا نیست');
+                    return;
+                }
+                else if(!uniqueSeoTitle){
+                    alert('عنوان سئو مقاله یکتا نیست');
+                    return;
+                }
+                else {
+                    if (warningCount > 0) {
+                        $('#warningContentModal').html('');
+                        $('#warningResult').children().each(function (){
+                            text = '<li style="margin-bottom: 5px">' + $(this).text() + '</li>';
+                            $('#warningContentModal').append(text);
+                        });
+                        $('#warningModal').modal('show');
+                        return;
+                    }
+                    else
+                        checkForm();
+                }
+            }
+        }
+
+        function changeSeoTitle(_value){
+            var text = _value.length + ' حرف';
+            $('#seoTitleNumber').text(text)
+            if(_value.length > 60 && _value.length <= 85)
+                $('#seoTitleNumber').css('color', 'green');
+            else
+                $('#seoTitleNumber').css('color', 'red');
+
+        }
+
+        function changeMeta(_value){
+            var text = _value.length + ' حرف';
+            $('#metaNumber').text(text);
+            if(_value.length > 120 && _value.length <= 156)
+                $('#metaNumber').css('color', 'green');
+            else
+                $('#metaNumber').css('color', 'red');
+
+        }
     </script>
 
-    <div class="modal fade" id="mapModal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-                <div class="modal-body" style="direction: rtl">
-                    <div id="map" style="width: 100%; height: 500px; background-color: red"></div>
-                </div>
-
-                <div class="modal-footer" style="text-align: center">
-                    <button class="btn nextStepBtnTourCreation" data-dismiss="modal">تایید</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
     <script>
         var map;
         var C = {{$place->C}};

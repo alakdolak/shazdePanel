@@ -9,6 +9,8 @@ use App\models\Hotel;
 use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\Place;
+use App\models\PlaceFeatureRelation;
+use App\models\PlaceFeatures;
 use App\models\PlacePic;
 use App\models\Restaurant;
 use App\models\SogatSanaie;
@@ -29,32 +31,10 @@ class PlaceController extends Controller {
 
     public function uploadImgPage($kindPlaceId, $id)
     {
-        switch ($kindPlaceId){
-            case 1:
-                $place = Amaken::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
-                $kindPlaceName = 'amaken';
-                break;
-            case 3:
-                $place = Restaurant::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
-                $kindPlaceName = 'restaurant';
-                break;
-            case 4:
-                $place = Hotel::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
-                $kindPlaceName = 'hotels';
-                break;
-            case 6:
-                $place = Majara::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
-                $kindPlaceName = 'majara';
-                break;
-            case 10:
-                $place = SogatSanaie::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
-                $kindPlaceName = 'sogatsanaie';
-                break;
-            case 11:
-                $place = MahaliFood::select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
-                $kindPlaceName = 'mahalifood';
-                break;
-        }
+        $kindPlace = Place::find($kindPlaceId);
+        $place = DB::table($kindPlace->tableName)->select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
+        $kindPlaceName = $kindPlace->fileName;
+
         $city = Cities::find($place->cityId);
         $state = State::find($city->stateId);
 
@@ -493,186 +473,88 @@ class PlaceController extends Controller {
         $kind = 'edit';
         $allState = State::all();
 
+        $kindFeatures = array();
+        $features = PlaceFeatures::where('kindPlaceId', $mode)->where('parent', 0)->get();
+        foreach ($features as $item) {
+            $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
+            $sf = PlaceFeatures::where('parent', $item->id)->pluck('id')->toArray();
+            $kindFeatures = array_merge($kindFeatures, $sf);
+        }
+        $placeFeatures = PlaceFeatureRelation::where('placeId', $id)->whereIn('featureId', $kindFeatures)->pluck('featureId')->toArray();
+
+        $kindPlace = Place::find($mode);
+        $place = DB::table($kindPlace->tableName)->find($id);
+        $city = Cities::find($place->cityId);
+        $cities = Cities::where('stateId', $city->stateId)->get();
+        $state = State::find($city->stateId);
+        $place->city = $city->name;
+        $place->stateId = $city->stateId;
+        $place->tags = [
+            $place->tag1,
+            $place->tag2,
+            $place->tag3,
+            $place->tag4,
+            $place->tag5,
+            $place->tag6,
+            $place->tag7,
+            $place->tag8,
+            $place->tag9,
+            $place->tag10,
+            $place->tag11,
+            $place->tag12,
+            $place->tag13,
+            $place->tag14,
+            $place->tag15,
+        ];
+        $place->description = trueShowForTextArea($place->description);
+
         switch ($mode){
             case 1:
-                $place = Amaken::find($id);
-                $city = Cities::find($place->cityId);
-                $cities = Cities::where('stateId', $city->stateId)->get();
-                $state = State::find($city->stateId);
-                $place->city = $city->name;
-                $place->stateId = $city->stateId;
-                $place->tags = [
-                    $place->tag1,
-                    $place->tag2,
-                    $place->tag3,
-                    $place->tag4,
-                    $place->tag5,
-                    $place->tag6,
-                    $place->tag7,
-                    $place->tag8,
-                    $place->tag9,
-                    $place->tag10,
-                    $place->tag11,
-                    $place->tag12,
-                    $place->tag13,
-                    $place->tag14,
-                    $place->tag15,
-                ];
-
-                $place->description = trueShowForTextArea($place->description);
-
-                return view('content.editContent.editAmaken', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState']));
+                return view('content.editContent.editAmaken', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
+                break;
             case 4:
-                $place = Hotel::find($id);
-                $city = Cities::find($place->cityId);
-                $state = State::find($city->stateId);
-                $cities = Cities::where('stateId', $city->stateId)->get();
-
-                $place->city = $city->name;
-                $place->stateId = $city->stateId;
-                $place->tags = [
-                    $place->tag1,
-                    $place->tag2,
-                    $place->tag3,
-                    $place->tag4,
-                    $place->tag5,
-                    $place->tag6,
-                    $place->tag7,
-                    $place->tag8,
-                    $place->tag9,
-                    $place->tag10,
-                    $place->tag11,
-                    $place->tag12,
-                    $place->tag13,
-                    $place->tag14,
-                    $place->tag15,
-                ];
-
-                $place->description = trueShowForTextArea($place->description);
-
-                return view('content.editContent.editHotels', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState']));
+                return view('content.editContent.editHotels', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
                 break;
             case 3:
-                $place = Restaurant::find($id);
-                $city = Cities::find($place->cityId);
-                $state = State::find($city->stateId);
-                $cities = Cities::where('stateId', $city->stateId)->get();
-
-                $place->city = $city->name;
-                $place->stateId = $city->stateId;
-                $place->tags = [
-                    $place->tag1,
-                    $place->tag2,
-                    $place->tag3,
-                    $place->tag4,
-                    $place->tag5,
-                    $place->tag6,
-                    $place->tag7,
-                    $place->tag8,
-                    $place->tag9,
-                    $place->tag10,
-                    $place->tag11,
-                    $place->tag12,
-                    $place->tag13,
-                    $place->tag14,
-                    $place->tag15,
-                ];
-
-                $place->description = trueShowForTextArea($place->description);
-
-                return view('content.editContent.editRestaurant', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState']));
+                return view('content.editContent.editRestaurant', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
                 break;
             case 6:
-                $place = Majara::find($id);
-                $city = Cities::find($place->cityId);
-                $state = State::find($city->stateId);
-                $place->city = $city->name;
-                $place->stateId = $city->stateId;
-                $place->tags = [
-                    $place->tag1,
-                    $place->tag2,
-                    $place->tag3,
-                    $place->tag4,
-                    $place->tag5,
-                    $place->tag6,
-                    $place->tag7,
-                    $place->tag8,
-                    $place->tag9,
-                    $place->tag10,
-                    $place->tag11,
-                    $place->tag12,
-                    $place->tag13,
-                    $place->tag14,
-                    $place->tag15,
-                ];
-
-                $place->description = trueShowForTextArea($place->description);
-
-                $cities = Cities::where('stateId', $city->stateId)->get();
-
-                return view('content.editContent.editMajara', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState']));
+                return view('content.editContent.editMajara', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
                 break;
             case 10:
-                $sogat = SogatSanaie::find($id);
-                $city = Cities::find($sogat->cityId);
-                $sogat->city = $city->name;
-                $sogat->stateId = $city->stateId;
-                $state = State::find($city->stateId);
-                $sogat->tags = [
-                    $sogat->tag1,
-                    $sogat->tag2,
-                    $sogat->tag3,
-                    $sogat->tag4,
-                    $sogat->tag5,
-                    $sogat->tag6,
-                    $sogat->tag7,
-                    $sogat->tag8,
-                    $sogat->tag9,
-                    $sogat->tag10,
-                    $sogat->tag11,
-                    $sogat->tag12,
-                    $sogat->tag13,
-                    $sogat->tag14,
-                    $sogat->tag15,
-                ];
-
-                $sogat->description = trueShowForTextArea($sogat->description);
-
-                $cities = Cities::where('stateId', $city->stateId)->get();
-
-                return view('content.editContent.editSogatSanaie', compact(['sogat', 'kind', 'state', 'allState', 'mode', 'cities', 'city']));
+                return view('content.editContent.editSogatSanaie', compact(['place', 'kind', 'state', 'allState', 'mode', 'cities', 'city', 'features', 'placeFeatures']));
                 break;
             case 11:
-                $food = MahaliFood::find($id);
-                $city = Cities::find($food->cityId);
-                $food->city = $city->name;
-                $food->stateId = $city->stateId;
-                $state = State::find($city->stateId);
-                $food->material = json_decode($food->material);
-                $food->tags = [
-                    $food->tag1,
-                    $food->tag2,
-                    $food->tag3,
-                    $food->tag4,
-                    $food->tag5,
-                    $food->tag6,
-                    $food->tag7,
-                    $food->tag8,
-                    $food->tag9,
-                    $food->tag10,
-                    $food->tag11,
-                    $food->tag12,
-                    $food->tag13,
-                    $food->tag14,
-                    $food->tag15,
-                ];
+//                $food = MahaliFood::find($id);
+//                $city = Cities::find($food->cityId);
+//                $food->city = $city->name;
+//                $food->stateId = $city->stateId;
+//                $state = State::find($city->stateId);
+                $place->material = json_decode($place->material);
+//                $food->tags = [
+//                    $food->tag1,
+//                    $food->tag2,
+//                    $food->tag3,
+//                    $food->tag4,
+//                    $food->tag5,
+//                    $food->tag6,
+//                    $food->tag7,
+//                    $food->tag8,
+//                    $food->tag9,
+//                    $food->tag10,
+//                    $food->tag11,
+//                    $food->tag12,
+//                    $food->tag13,
+//                    $food->tag14,
+//                    $food->tag15,
+//                ];
+//
+                $place->recipes = trueShowForTextArea($place->recipes);
+//                $food->description = trueShowForTextArea($food->description);
+//
+//                $cities = Cities::where('stateId', $city->stateId)->get();
 
-                $food->recipes = trueShowForTextArea($food->recipes);
-                $food->description = trueShowForTextArea($food->description);
-
-                $cities = Cities::where('stateId', $city->stateId)->get();
-
-                return view('content.editContent.editMahaliFood', compact(['food', 'kind', 'state', 'allState', 'mode', 'cities', 'city']));
+                return view('content.editContent.editMahaliFood', compact(['place', 'kind', 'state', 'allState', 'mode', 'cities', 'city', 'features', 'placeFeatures']));
                 break;
             default:
                 return \redirect()->back();
@@ -727,18 +609,22 @@ class PlaceController extends Controller {
                 break;
         }
 
-        return view('content.newContent.newContentCore', compact(['city', 'state', 'allState', 'mode', 'cities', 'kind', 'url', 'titleName']));
+        $features = PlaceFeatures::where('kindPlaceId', $mode)->where('parent', 0)->get();
+        foreach ($features as $item)
+            $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
+
+        return view('content.newContent.newContentCore', compact(['city', 'state', 'allState', 'mode', 'cities', 'kind', 'url', 'titleName', 'features']));
 
     }
 
     public function storeAmaken(Request $request)
     {
+
         $request->validate([
             'name' => 'required',
             'cityId' => 'required',
             'keyword' => 'required',
-            'address' => 'required',
-            'h1' => 'required',
+            'seoTitle' => 'required',
             'meta' => 'required',
             'description' => 'required',
             'D' => 'required',
@@ -749,12 +635,6 @@ class PlaceController extends Controller {
             $amaken = new Amaken();
 
             $amaken->file = 'none';
-            $amaken->farhangi = 0;
-            $amaken->ghadimi = 0;
-            $amaken->emkanat = 0;
-            $amaken->markaz = 0;
-            $amaken->hoome = 0;
-            $amaken->class = 0;
 
             $amaken->pic_1 = 0;
             $amaken->pic_2 = 0;
@@ -780,10 +660,12 @@ class PlaceController extends Controller {
         $amaken->D = $request->D;
         $amaken->meta = $request->meta;
         $amaken->keyword = $request->keyword;
-        $amaken->h1 = $request->h1;
         $amaken->description = nl2br($request->description);
-
-
+        $amaken->seoTitle = $request->seoTitle;
+        if($request->slug == null || $request->slug == '')
+            $amaken->slug = makeSlug($request->keyword);
+        else
+            $amaken->slug = makeSlug($request->slug);
 
         if($request->address != null)
             $amaken->address = $request->address;
@@ -799,100 +681,6 @@ class PlaceController extends Controller {
             $amaken->site = $request->site;
         else
             $amaken->site = '';
-
-        if(isset($request->tarikhi) && $request->tarikhi == 'on')
-            $amaken->tarikhi = 1;
-        else
-            $amaken->tarikhi = 0;
-
-        if(isset($request->tafrihi) && $request->tafrihi == 'on')
-            $amaken->tafrihi = 1;
-        else
-            $amaken->tafrihi = 0;
-
-        if(isset($request->tabiatgardi) && $request->tabiatgardi == 'on')
-            $amaken->tabiatgardi = 1;
-        else
-            $amaken->tabiatgardi = 0;
-
-        if(isset($request->tejari) && $request->tejari == 'on')
-            $amaken->tejari = 1;
-        else
-            $amaken->tejari = 0;
-
-        if(isset($request->mazhabi) && $request->mazhabi == 'on')
-            $amaken->mazhabi = 1;
-        else
-            $amaken->mazhabi = 0;
-
-        if(isset($request->sanati) && $request->sanati == 'on')
-            $amaken->sanati = 1;
-        else
-            $amaken->sanati = 0;
-
-        $amaken->boundArea = $request->boundArea;
-
-        if($request->population == 1){
-            $amaken->shologh = 1;
-            $amaken->khalvat = 0;
-        }
-        else{
-            $amaken->shologh = 0;
-            $amaken->khalvat = 1;
-        }
-
-        if(isset($request->kooh) && $request->kooh == 'on')
-            $amaken->kooh = 1;
-        else
-            $amaken->kooh = 0;
-
-        if(isset($request->darya) && $request->darya == 'on')
-            $amaken->darya = 1;
-        else
-            $amaken->darya = 0;
-
-        if(isset($request->kavir) && $request->kavir == 'on')
-            $amaken->kavir = 1;
-        else
-            $amaken->kavir = 0;
-
-        if(isset($request->jangal) && $request->jangal == 'on')
-            $amaken->jangal = 1;
-        else
-            $amaken->jangal = 0;
-
-        if(isset($request->shahri) && $request->shahri == 'on')
-            $amaken->shahri = 1;
-        else
-            $amaken->shahri = 0;
-
-        if(isset($request->village) && $request->village == 'on')
-            $amaken->village = 1;
-        else
-            $amaken->village = 0;
-
-        if(isset($request->weather))
-            $amaken->weather = $request->weather;
-        else
-            $amaken->weather = 0;
-
-        if(isset($request->modern) && $request->modern == 'on')
-            $amaken->modern = 1;
-        else
-            $amaken->modern = 0;
-        if(isset($request->tarikhibana) && $request->tarikhibana == 'on')
-            $amaken->tarikhibana = 1;
-        else
-            $amaken->tarikhibana = 0;
-        if(isset($request->boomi) && $request->boomi == 'on')
-            $amaken->boomi = 1;
-        else
-            $amaken->boomi = 0;
-        if(isset($request->mazhabiArch) && $request->mazhabiArch == 'on')
-            $amaken->mazhabiArch = 1;
-        else
-            $amaken->mazhabiArch = 0;
-
 
         $amaken->tag1 = $request->tag[0];
         $amaken->tag2 = $request->tag[1];
@@ -912,18 +700,35 @@ class PlaceController extends Controller {
 
         $amaken->save();
 
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0) {
+            $existFeatures = PlaceFeatureRelation::where('placeId', $amaken->id)->get();
+            $has = array();
+            foreach ($existFeatures as $item) {
+                if (in_array($item->featureId, $request->features))
+                    array_push($has, $item->featureId);
+                else
+                    $item->delete();
+            }
+            foreach ($request->features as $item) {
+                if (!in_array($item, $has)) {
+                    $newFeature = new PlaceFeatureRelation();
+                    $newFeature->placeId = $amaken->id;
+                    $newFeature->featureId = $item;
+                    $newFeature->save();
+                }
+            }
+        }
+
         return \redirect(\url('uploadImgPage/1/' . $amaken->id));
     }
 
     public function storeHotel(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'cityId' => 'required',
-            'address' => 'required',
             'keyword' => 'required',
-            'h1' => 'required',
+            'seoTitle' => 'required',
             'meta' => 'required',
             'description' => 'required',
             'D' => 'required',
@@ -932,13 +737,6 @@ class PlaceController extends Controller {
 
         if(isset($request->inputType) && $request->inputType == 'new'){
             $hotel = new Hotel();
-
-            $hotel->markaz = 0;
-            $hotel->hoome = 0;
-            $hotel->class = 0;
-            $hotel->mahali = 0;
-            $hotel->fasele = 0;
-            $hotel->file = '';
 
             $hotel->pic_1 = 0;
             $hotel->pic_2 = 0;
@@ -962,11 +760,15 @@ class PlaceController extends Controller {
         $hotel->C = $request->C;
         $hotel->D = $request->D;
         $hotel->meta = $request->meta;
-        $hotel->h1 = $request->h1;
+        $hotel->seoTitle = $request->seoTitle;
         $hotel->description = nl2br($request->description);
         $hotel->keyword = $request->keyword;
         $hotel->kind_id = $request->kind;
         $hotel->rate_int = $request->rate_int;
+        if($request->slug == null || $request->slug == '')
+            $hotel->slug = makeSlug($request->keyword);
+        else
+            $hotel->slug = makeSlug($request->slug);
         if($request->rate_int > 0){
             switch ($request->rate_int){
                 case 1:
@@ -1013,189 +815,6 @@ class PlaceController extends Controller {
         else
             $hotel->vabastegi = '';
 
-        if(isset($request->food_irani) && $request->food_irani == 'on')
-            $hotel->food_irani = 1;
-        else
-            $hotel->food_irani = 0;
-
-        if(isset($request->food_mahali) && $request->food_mahali == 'on')
-            $hotel->food_mahali = 1;
-        else
-            $hotel->food_mahali = 0;
-
-        if(isset($request->food_farangi) && $request->food_farangi == 'on')
-            $hotel->food_farangi = 1;
-        else
-            $hotel->food_farangi = 0;
-
-        if(isset($request->coffeeshop) && $request->coffeeshop == 'on')
-            $hotel->coffeeshop = 1;
-        else
-            $hotel->coffeeshop = 0;
-
-        if(isset($request->tarikhi) && $request->tarikhi == 'on')
-            $hotel->tarikhi = 1;
-        else
-            $hotel->tarikhi = 0;
-
-        $hotel->boundArea = $request->boundArea;
-
-        if($request->population == 1){
-            $hotel->shologh = 1;
-            $hotel->khalvat = 0;
-        }
-        else{
-            $hotel->shologh = 0;
-            $hotel->khalvat = 1;
-        }
-
-        if(isset($request->tabiat) && $request->tabiat == 'on')
-            $hotel->tabiat = 1;
-        else
-            $hotel->tabiat = 0;
-
-        if(isset($request->kooh) && $request->kooh == 'on')
-            $hotel->kooh = 1;
-        else
-            $hotel->kooh = 0;
-
-        if(isset($request->darya) && $request->darya == 'on')
-            $hotel->darya = 1;
-        else
-            $hotel->darya = 0;
-
-        if(isset($request->kavir) && $request->kavir == 'on')
-            $hotel->kavir = 1;
-        else
-            $hotel->kavir = 0;
-
-        if(isset($request->modern) && $request->modern == 'on'){
-            $hotel->modern = 1;
-            $hotel->sonnati = 0;
-            $hotel->ghadimi = 0;
-            $hotel->mamooli = 0;
-        }
-        else {
-            $hotel->modern = 0;
-
-            if(isset($request->sonnati) && $request->sonnati == 'on')
-                $hotel->sonnati = 1;
-            else
-                $hotel->sonnati = 0;
-
-            if(isset($request->ghadimi) && $request->ghadimi == 'on')
-                $hotel->ghadimi = 1;
-            else
-                $hotel->ghadimi = 0;
-
-            if(isset($request->mamooli) && $request->mamooli == 'on')
-                $hotel->mamooli = 1;
-            else
-                $hotel->mamooli = 0;
-        }
-
-        if(isset($request->breakfast) && $request->breakfast == 'on')
-            $hotel->breakfast = 1;
-        else
-            $hotel->breakfast = 0;
-
-        if(isset($request->lunch) && $request->lunch == 'on')
-            $hotel->lunch = 1;
-        else
-            $hotel->lunch = 0;
-
-        if(isset($request->dinner) && $request->dinner == 'on')
-            $hotel->dinner = 1;
-        else
-            $hotel->dinner = 0;
-
-        if(isset($request->parking) && $request->parking == 'on')
-            $hotel->parking = 1;
-        else
-            $hotel->parking = 0;
-
-        if(isset($request->club) && $request->club == 'on')
-            $hotel->club = 1;
-        else
-            $hotel->club = 0;
-
-        if(isset($request->pool) && $request->pool == 'on')
-            $hotel->pool = 1;
-        else
-            $hotel->pool = 0;
-
-        if(isset($request->tahviye) && $request->tahviye == 'on')
-            $hotel->tahviye = 1;
-        else
-            $hotel->tahviye = 0;
-
-        if(isset($request->maalool) && $request->maalool == 'on')
-            $hotel->maalool = 1;
-        else
-            $hotel->maalool = 0;
-
-        if(isset($request->internet) && $request->internet == 'on')
-            $hotel->internet = 1;
-        else
-            $hotel->internet = 0;
-
-        if(isset($request->anten) && $request->anten == 'on')
-            $hotel->anten = 1;
-        else
-            $hotel->anten = 0;
-
-        if(isset($request->restaurant) && $request->restaurant == 'on')
-            $hotel->restaurant = 1;
-        else
-            $hotel->restaurant = 0;
-
-        if(isset($request->swite) && $request->swite == 'on')
-            $hotel->swite = 1;
-        else
-            $hotel->swite = 0;
-
-        if(isset($request->masazh) && $request->masazh == 'on')
-            $hotel->masazh = 1;
-        else
-            $hotel->masazh = 0;
-
-        if(isset($request->laundry) && $request->laundry == 'on')
-            $hotel->laundry = 1;
-        else
-            $hotel->laundry = 0;
-
-        if(isset($request->gasht) && $request->gasht == 'on')
-            $hotel->gasht = 1;
-        else
-            $hotel->gasht = 0;
-
-        if(isset($request->safe_box) && $request->safe_box == 'on')
-            $hotel->safe_box = 1;
-        else
-            $hotel->safe_box = 0;
-
-        if(isset($request->shop) && $request->shop == 'on')
-            $hotel->shop = 1;
-        else
-            $hotel->shop = 0;
-
-        if(isset($request->roof_garden) && $request->roof_garden == 'on')
-            $hotel->roof_garden = 1;
-        else
-            $hotel->roof_garden = 0;
-
-        if(isset($request->game_net) && $request->game_net == 'on')
-            $hotel->game_net = 1;
-        else
-            $hotel->game_net = 0;
-
-        if(isset($request->confrenss_room) && $request->confrenss_room == 'on')
-            $hotel->confrenss_room = 1;
-        else
-            $hotel->confrenss_room = 0;
-
-
-
         $hotel->tag1 = $request->tag[0];
         $hotel->tag2 = $request->tag[1];
         $hotel->tag3 = $request->tag[2];
@@ -1214,6 +833,25 @@ class PlaceController extends Controller {
 
         $hotel->save();
 
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0) {
+            $existFeatures = PlaceFeatureRelation::where('placeId', $hotel->id)->get();
+            $has = array();
+            foreach ($existFeatures as $item) {
+                if (in_array($item->featureId, $request->features))
+                    array_push($has, $item->featureId);
+                else
+                    $item->delete();
+            }
+            foreach ($request->features as $item) {
+                if (!in_array($item, $has)) {
+                    $newFeature = new PlaceFeatureRelation();
+                    $newFeature->placeId = $hotel->id;
+                    $newFeature->featureId = $item;
+                    $newFeature->save();
+                }
+            }
+        }
+
         return \redirect(\url('uploadImgPage/4/' . $hotel->id));
     }
 
@@ -1224,7 +862,7 @@ class PlaceController extends Controller {
             'cityId' => 'required',
             'address' => 'required',
             'keyword' => 'required',
-            'h1' => 'required',
+            'seoTitle' => 'required',
             'meta' => 'required',
             'description' => 'required',
             'D' => 'required',
@@ -1261,10 +899,14 @@ class PlaceController extends Controller {
         $restaurant->C = $request->C;
         $restaurant->D = $request->D;
         $restaurant->meta = $request->meta;
-        $restaurant->h1 = $request->h1;
+        $restaurant->seoTitle = $request->seoTitle;
         $restaurant->description = nl2br($request->description);
         $restaurant->keyword = $request->keyword;
         $restaurant->kind_id = $request->kind_id;
+        if($request->slug == null || $request->slug == '')
+            $restaurant->slug = makeSlug($request->keyword);
+        else
+            $restaurant->slug = makeSlug($request->slug);
 
         if($request->address != null)
             $restaurant->address = $request->address;
@@ -1280,87 +922,6 @@ class PlaceController extends Controller {
             $restaurant->site = $request->site;
         else
             $restaurant->site = '';
-
-        if(isset($request->food_irani) && $request->food_irani == 'on')
-            $restaurant->food_irani = 1;
-        else
-            $restaurant->food_irani = 0;
-
-        if(isset($request->food_mahali) && $request->food_mahali == 'on')
-            $restaurant->food_mahali = 1;
-        else
-            $restaurant->food_mahali = 0;
-
-        if(isset($request->food_farangi) && $request->food_farangi == 'on')
-            $restaurant->food_farangi = 1;
-        else
-            $restaurant->food_farangi = 0;
-
-        if(isset($request->coffeeshop) && $request->coffeeshop == 'on')
-            $restaurant->coffeeshop = 1;
-        else
-            $restaurant->coffeeshop = 0;
-
-        if(isset($request->tarikhi) && $request->tarikhi == 'on')
-            $restaurant->tarikhi = 1;
-        else
-            $restaurant->tarikhi = 0;
-
-        $restaurant->boundArea = $request->boundArea;
-
-        if($request->population == 1){
-            $restaurant->shologh = 1;
-            $restaurant->khalvat = 0;
-        }
-        else{
-            $restaurant->shologh = 0;
-            $restaurant->khalvat = 1;
-        }
-
-        if(isset($request->tabiat) && $request->tabiat == 'on')
-            $restaurant->tabiat = 1;
-        else
-            $restaurant->tabiat = 0;
-
-        if(isset($request->kooh) && $request->kooh == 'on')
-            $restaurant->kooh = 1;
-        else
-            $restaurant->kooh = 0;
-
-        if(isset($request->darya) && $request->darya == 'on')
-            $restaurant->darya = 1;
-        else
-            $restaurant->darya = 0;
-
-        if(isset($request->kavir) && $request->kavir == 'on')
-            $restaurant->kavir = 1;
-        else
-            $restaurant->kavir = 0;
-
-        if(isset($request->modern) && $request->modern == 'on'){
-            $restaurant->modern = 1;
-            $restaurant->sonnati = 0;
-            $restaurant->ghadimi = 0;
-            $restaurant->mamooli = 0;
-        }
-        else {
-            $restaurant->modern = 0;
-
-            if(isset($request->sonnati) && $request->sonnati == 'on')
-                $restaurant->sonnati = 1;
-            else
-                $restaurant->sonnati = 0;
-
-            if(isset($request->ghadimi) && $request->ghadimi == 'on')
-                $restaurant->ghadimi = 1;
-            else
-                $restaurant->ghadimi = 0;
-
-            if(isset($request->mamooli) && $request->mamooli == 'on')
-                $restaurant->mamooli = 1;
-            else
-                $restaurant->mamooli = 0;
-        }
 
         $restaurant->tag1 = $request->tag[0];
         $restaurant->tag2 = $request->tag[1];
@@ -1380,6 +941,26 @@ class PlaceController extends Controller {
 
         $restaurant->save();
 
+
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0) {
+            $existFeatures = PlaceFeatureRelation::where('placeId', $restaurant->id)->get();
+            $has = array();
+            foreach ($existFeatures as $item) {
+                if (in_array($item->featureId, $request->features))
+                    array_push($has, $item->featureId);
+                else
+                    $item->delete();
+            }
+            foreach ($request->features as $item) {
+                if (!in_array($item, $has)) {
+                    $newFeature = new PlaceFeatureRelation();
+                    $newFeature->placeId = $restaurant->id;
+                    $newFeature->featureId = $item;
+                    $newFeature->save();
+                }
+            }
+        }
+
         return \redirect(\url('uploadImgPage/3/' . $restaurant->id));
     }
 
@@ -1389,7 +970,7 @@ class PlaceController extends Controller {
             'name' => 'required',
             'cityId' => 'required',
             'keyword' => 'required',
-            'h1' => 'required',
+            'seoTitle' => 'required',
             'meta' => 'required',
             'description' => 'required',
             'D' => 'required',
@@ -1423,9 +1004,13 @@ class PlaceController extends Controller {
         $majara->C = $request->C;
         $majara->D = $request->D;
         $majara->meta = $request->meta;
-        $majara->h1 = $request->h1;
+        $majara->seoTitle = $request->seoTitle;
         $majara->description = nl2br($request->description, false);
         $majara->keyword = $request->keyword;
+        if($request->slug == null || $request->slug == '')
+            $majara->slug = makeSlug($request->keyword);
+        else
+            $majara->slug = makeSlug($request->slug);
 
         if($request->dastresi != null)
             $majara->dastresi = $request->dastresi;
@@ -1436,177 +1021,6 @@ class PlaceController extends Controller {
             $majara->nazdik = $request->nazdik;
         else
             $majara->nazdik = '';
-
-        if(isset($request->kooh) && $request->kooh == 'on')
-            $majara->kooh = 1;
-        else
-            $majara->kooh = 0;
-
-        if(isset($request->darya) && $request->darya == 'on')
-            $majara->darya = 1;
-        else
-            $majara->darya = 0;
-
-        if(isset($request->daryache) && $request->daryache == 'on')
-            $majara->daryache = 1;
-        else
-            $majara->daryache = 0;
-
-        if(isset($request->hayatevahsh) && $request->hayatevahsh == 'on')
-            $majara->hayatevahsh = 1;
-        else
-            $majara->hayatevahsh = 0;
-
-        if(isset($request->shahri) && $request->shahri == 'on')
-            $majara->shahri = 1;
-        else
-            $majara->shahri = 0;
-
-        if(isset($request->hefazat) && $request->hefazat == 'on')
-            $majara->hefazat = 1;
-        else
-            $majara->hefazat = 0;
-
-        if(isset($request->kavir) && $request->kavir == 'on')
-            $majara->kavir = 1;
-        else
-            $majara->kavir = 0;
-
-        if(isset($request->raml) && $request->raml == 'on')
-            $majara->raml = 1;
-        else
-            $majara->raml = 0;
-
-        if(isset($request->jangal) && $request->jangal == 'on')
-            $majara->jangal = 1;
-        else
-            $majara->jangal = 0;
-
-        if(isset($request->kamp) && $request->kamp == 'on')
-            $majara->kamp = 1;
-        else
-            $majara->kamp = 0;
-
-        if(isset($request->koohnavardi) && $request->koohnavardi == 'on')
-            $majara->koohnavardi = 1;
-        else
-            $majara->koohnavardi = 0;
-
-        if(isset($request->sahranavardi) && $request->sahranavardi == 'on')
-            $majara->sahranavardi = 1;
-        else
-            $majara->sahranavardi = 0;
-
-        if(isset($request->abshar) && $request->abshar == 'on')
-            $majara->abshar = 1;
-        else
-            $majara->abshar = 0;
-
-        if(isset($request->darre) && $request->darre == 'on')
-            $majara->darre = 1;
-        else
-            $majara->darre = 0;
-
-        if(isset($request->piknik) && $request->piknik == 'on')
-            $majara->piknik = 1;
-        else
-            $majara->piknik = 0;
-
-        if(isset($request->bekr) && $request->bekr == 'on')
-            $majara->bekr = 1;
-        else
-            $majara->bekr = 0;
-
-        if(isset($request->dasht) && $request->dasht == 'on')
-            $majara->dasht = 1;
-        else
-            $majara->dasht = 0;
-
-        if(isset($request->berke) && $request->berke == 'on')
-            $majara->berke = 1;
-        else
-            $majara->berke = 0;
-
-        if(isset($request->beach) && $request->beach == 'on')
-            $majara->beach = 1;
-        else
-            $majara->beach = 0;
-
-        if(isset($request->geoPark) && $request->geoPark == 'on')
-            $majara->geoPark = 1;
-        else
-            $majara->geoPark = 0;
-
-        if(isset($request->river) && $request->river == 'on')
-            $majara->river = 1;
-        else
-            $majara->river = 0;
-
-        if(isset($request->cheshme) && $request->cheshme == 'on')
-            $majara->cheshme = 1;
-        else
-            $majara->cheshme = 0;
-
-        if(isset($request->talab) && $request->talab == 'on')
-            $majara->talab = 1;
-        else
-            $majara->talab = 0;
-
-        if(isset($request->walking) && $request->walking == 'on')
-            $majara->walking = 1;
-        else
-            $majara->walking = 0;
-
-        if(isset($request->swimming) && $request->swimming == 'on')
-            $majara->swimming = 1;
-        else
-            $majara->swimming = 0;
-
-        if(isset($request->rockClimbing) && $request->rockClimbing == 'on')
-            $majara->rockClimbing = 1;
-        else
-            $majara->rockClimbing = 0;
-
-        if(isset($request->stoneClimbing) && $request->stoneClimbing == 'on')
-            $majara->stoneClimbing = 1;
-        else
-            $majara->stoneClimbing = 0;
-
-        if(isset($request->valleyClimbing) && $request->valleyClimbing == 'on')
-            $majara->valleyClimbing = 1;
-        else
-            $majara->valleyClimbing = 0;
-
-        if(isset($request->caveClimbing) && $request->caveClimbing == 'on')
-            $majara->caveClimbing = 1;
-        else
-            $majara->caveClimbing = 0;
-
-        if(isset($request->iceClimbing) && $request->iceClimbing == 'on')
-            $majara->iceClimbing = 1;
-        else
-            $majara->iceClimbing = 0;
-
-        if(isset($request->offRoad) && $request->offRoad == 'on')
-            $majara->offRoad = 1;
-        else
-            $majara->offRoad = 0;
-
-        if(isset($request->boat) && $request->boat == 'on')
-            $majara->boat = 1;
-        else
-            $majara->boat = 0;
-
-        if(isset($request->rafting) && $request->rafting == 'on')
-            $majara->rafting = 1;
-        else
-            $majara->rafting = 0;
-
-        if(isset($request->surfing) && $request->surfing == 'on')
-            $majara->surfing = 1;
-        else
-            $majara->surfing = 0;
-
 
         $majara->tag1 = $request->tag[0];
         $majara->tag2 = $request->tag[1];
@@ -1626,6 +1040,25 @@ class PlaceController extends Controller {
 
         $majara->save();
 
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0) {
+            $existFeatures = PlaceFeatureRelation::where('placeId', $majara->id)->get();
+            $has = array();
+            foreach ($existFeatures as $item) {
+                if (in_array($item->featureId, $request->features))
+                    array_push($has, $item->featureId);
+                else
+                    $item->delete();
+            }
+            foreach ($request->features as $item) {
+                if (!in_array($item, $has)) {
+                    $newFeature = new PlaceFeatureRelation();
+                    $newFeature->placeId = $majara->id;
+                    $newFeature->featureId = $item;
+                    $newFeature->save();
+                }
+            }
+        }
+
         return \redirect(\url('uploadImgPage/6/' . $majara->id));
     }
 
@@ -1637,7 +1070,7 @@ class PlaceController extends Controller {
             'cityId' => 'required',
             'kind' => 'required',
             'keyword' => 'required',
-            'h1' => 'required',
+            'seoTitle' => 'required',
             'meta' => 'required',
             'description' => 'required',
             'tag' => 'required',
@@ -1660,10 +1093,14 @@ class PlaceController extends Controller {
         $newMahali->cityId = $request->cityId;
         $newMahali->kind = $request->kind;
         $newMahali->keyword = $request->keyword;
-        $newMahali->h1 = $request->h1;
+        $newMahali->seoTitle = $request->seoTitle;
         $newMahali->meta = $request->meta;
         $newMahali->description = nl2br($request->description);
         $newMahali->alt = $request->keyword;
+        if($request->slug == null || $request->slug == '')
+            $newMahali->slug = makeSlug($request->keyword);
+        else
+            $newMahali->slug = makeSlug($request->slug);
 
         if(isset($request->diabet) && $request->diabet == 'on')
             $newMahali->diabet = 1;
@@ -1746,7 +1183,7 @@ class PlaceController extends Controller {
             'cityId' => 'required',
             'eatable' => 'required',
             'keyword' => 'required',
-            'h1' => 'required',
+            'seoTitle' => 'required',
             'meta' => 'required',
             'description' => 'required',
         ]);
@@ -1767,10 +1204,14 @@ class PlaceController extends Controller {
         $newSogat->name = $request->name;
         $newSogat->cityId = $request->cityId;
         $newSogat->keyword = $request->keyword;
-        $newSogat->h1 = $request->h1;
+        $newSogat->seoTitle = $request->seoTitle;
         $newSogat->meta = $request->meta;
         $newSogat->description =  nl2br($request->description);
         $newSogat->alt = $request->keyword;
+        if($request->slug == null || $request->slug == '')
+            $newSogat->slug = makeSlug($request->keyword);
+        else
+            $newSogat->slug = makeSlug($request->slug);
 
         if(isset($request->weight) && $request->weight != null)
             $newSogat->weight = $request->weight;
@@ -1872,6 +1313,7 @@ class PlaceController extends Controller {
 
         return \redirect(\url('uploadImgPage/10/' . $newSogat->id));
     }
+
 
 
 
@@ -2203,45 +1645,9 @@ class PlaceController extends Controller {
             $tmp->phone = $content[$j++];
             $tmp->site = $content[$j++];
             $tmp->description = $content[$j++];
-            $tmp->food_irani = $content[$j++];
-            $tmp->food_mahali = $content[$j++];
-            $tmp->food_farangi = $content[$j++];
-            $tmp->coffeeshop = $content[$j++];
-            $tmp->tarikhi = $content[$j++];
-            $tmp->markaz = $content[$j++];
-            $tmp->hoome = $content[$j++];
-            $tmp->shologh = $content[$j++];
-            $tmp->khalvat = $content[$j++];
-            $tmp->tabiat = $content[$j++];
-            $tmp->kooh = $content[$j++];
-            $tmp->darya = $content[$j++];
-            $tmp->class = $content[$j++];
             $tmp->vabastegi = $content[$j++];
-            $tmp->parking = $content[$j++];
-            $tmp->club = $content[$j++];
-            $tmp->pool = $content[$j++];
-            $tmp->tahviye = $content[$j++];
-            $tmp->maalool = $content[$j++];
-            $tmp->internet = $content[$j++];
-            $tmp->anten = $content[$j++];
-            $tmp->breakfast = $content[$j++];
-            $tmp->restaurant = $content[$j++];
-            $tmp->swite = $content[$j++];
-            $tmp->masazh = $content[$j++];
-            $tmp->mahali = $content[$j++];
             $tmp->rate = $content[$j++];
             $tmp->room_num = $content[$j++];
-            $tmp->modern = $content[$j++];
-            $tmp->sonnati = $content[$j++];
-            $tmp->ghadimi = $content[$j++];
-            $tmp->mamooli = $content[$j++];
-            $tmp->laundry = $content[$j++];
-            $tmp->gasht = $content[$j++];
-            $tmp->safe_box = $content[$j++];
-            $tmp->shop = $content[$j++];
-            $tmp->roof_garden = $content[$j++];
-            $tmp->game_net = $content[$j++];
-            $tmp->confrenss_room = $content[$j++];
             $tmp->kind_id = $content[$j++];
             $tmp->file = $content[$j];
 
@@ -2718,19 +2124,21 @@ class PlaceController extends Controller {
             }
 
             $temp = explode(".", $_FILES["image"]["name"]);
-            $newfilename = $request->city_name . '.' . end($temp);
+            $newfilename = $request->city_name . '.jpg';
 
             $pic = __DIR__ . '/../../../../assets/_images/city/' . $newfilename;
 
-            $err = uploadCheck($pic, "image", "افزودن عکس جدید", 3000000, -1);
-            if(empty($err)) {
-                $err = upload($pic, "image", "افزودن عکس جدید");
-                if (!empty($err))
-                    dd($err);
-            }
-            else {
-                dd($err);
-            }
+            compressImage($_FILES['image']['tmp_name'], $pic, 80);
+
+//            $err = uploadCheck($pic, "image", "افزودن عکس جدید", 3000000, -1);
+//            if(empty($err)) {
+//                $err = upload($pic, "image", "افزودن عکس جدید");
+//                if (!empty($err))
+//                    dd($err);
+//            }
+//            else {
+//                dd($err);
+//            }
         }
 
         $city->name = $request->city_name;

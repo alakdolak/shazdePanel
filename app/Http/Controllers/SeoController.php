@@ -312,8 +312,7 @@ class SeoController extends Controller {
 
     }
 
-    public function myWordsCount(){
-        $text = Post::find(113)->description;
+    public function myWordsCount($text){
 
         $text = html_entity_decode($text);
         $text = strip_tags($text);
@@ -321,22 +320,26 @@ class SeoController extends Controller {
 
         $arr = explode(' ', $text);
         $words = [];
+        $errorWords = [];
+        $wordCount = count($arr);
 
         foreach ($arr as $word) {
-
-            if(mb_strlen($word, 'utf8') > 4) {
-                if (array_key_exists($word, $words)) {
-                    $words[$word] = $words[$word] + 1;
-                } else {
-                    $words[$word] = 1;
-                }
+            if (array_key_exists($word, $words)) {
+                $words[$word] = $words[$word] + 1;
+            } else {
+                $words[$word] = 1;
             }
+        }
+        foreach ($words as $word => $count){
+            $count = floor($count / $wordCount * 100);
+            $words[$word] = $count;
+            if($count > 10)
+                array_push($errorWords, $word);
         }
 
         arsort($words);
 
-        dd($words);
-        return $words;
+        return [$words, $errorWords];
     }
 
     private function myGetWords(string $text) {
@@ -394,6 +397,8 @@ class SeoController extends Controller {
 
         return view('seoTester.seoTesterResult', ['results' => $results, 'totalWord' => count(explode(' ', $page->getFactor('text')))]);
     }
+
+
 
     public function seoTester() {
         return view('seoTester.seoTester');
@@ -491,7 +496,7 @@ class SeoController extends Controller {
             }
 
             $keywordDensityInTitle = $this->keywordDensityInTitle($text, $key);
-            if($keywordDensityInTitle > 30 && $keywordDensityInTitle < 75) {
+            if($keywordDensityInTitle > 30) {
                 $goodResult .= '<div style="color: green;">تیترهای فرعی شامل عبارت کلیدی می باشد. : %'. $keywordDensityInTitle .'</div>';
                 $goodResultCount++;
             }
@@ -503,11 +508,11 @@ class SeoController extends Controller {
             }
 
             $keywordNumWord = count(explode(' ', $key));
-            if($keywordNumWord > 1 && $keywordNumWord <= 4){
+            if($keywordNumWord > 1 && $keywordNumWord <= 6){
                 $goodResult .= '<div style="color: green;">طول عبارت کلیدی مناسب است</div>';
                 $goodResultCount++;
             }
-            else if($keywordNumWord > 4 && $keywordNumWord <= 6){
+            else if($keywordNumWord > 6 && $keywordNumWord <= 10){
                 $warningResultCount++;
                 $warningResult .= '<div style="color: #dec300;">طول عبارت کلیدی می تواند بهینه تر باشد</div>';
             }
@@ -587,17 +592,19 @@ class SeoController extends Controller {
                 $goodResultCount++;
             }
             else{
-                $badResultCount++;
-                $badResult .= '<div style="color: red;">متن شما بیش از حد کوتاه است :' . $allWordCountInP[0] . ' کلمه</div>';
+                $warningResultCount++;
+                $warningResult .= '<div style="color: #ffb938;">متن شما کوتاه تر از 300 کلمه است و اصلا توصیه نمی شود. :' . $allWordCountInP[0] . 'کلمه</div>';
             }
+
             if(count($allWordCountInP) > 3) {
                 $goodResult .= '<div style="color: green;">خوانایی متن شما مناسب است.</div>';
                 $goodResultCount++;
             }
             else {
-                $badResultCount++;
-                $badResult .= '<div style="color: red;">تعداد پاراگراف متن شما بسیار کم است و ممکن است در خوانایی آن ایراد ایجاد کند</div>';
+                $warningResultCount++;
+                $warningResult .= '<div style="color: red;">تعداد پاراگراف متن شما بسیار کم است و ممکن است در خوانایی آن ایراد ایجاد کند</div>';
             }
+
             if($parError != 0){
                 $warningResultCount++;
                 $warningResult .= '<div style="color: #dec300;">طول بعضی از پاراگراف ها بیش از 150 کلمه می باشد که پیشنهاد نمی گردد. پارگراف: ' . $parError . '</div>';
@@ -626,9 +633,9 @@ class SeoController extends Controller {
             }
 
             $sentences = $this->sentencesCount($text);
-            if($sentences > 20){
+            if($sentences > 30){
                 $warningResultCount++;
-                $warningResult .= '<div style="color: #dec300;">بیش از بیست درصد جملات دارای بیش از بیست کلمه می باشند  که پیشنهاد نمی گردد.: %' . $sentences . '</div>';
+                $warningResult .= '<div style="color: #dec300;">بیش از سی درصد جملات دارای بیش از بیست کلمه می باشند  که پیشنهاد نمی گردد.: %' . $sentences . '</div>';
             }
             else{
                 $goodResult .= '<div style="color: green;">تمامی جملات زیر 20 کلمه دارند.</div>';
@@ -704,6 +711,199 @@ class SeoController extends Controller {
 
         echo json_encode([$warningResult, $goodResult, $badResult, $badResultCount, $warningResultCount, $uniqueKey, $uniqueSlug, $uniqueTitle, $uniqueSeoTitle]);
     }
+
+    public function placeSeoTest(Request $request)
+    {
+        $text = $request->text;
+        $meta = $request->meta;
+        $key = $request->keyword;
+        $seoTitle = $request->seoTitle;
+        $slug= $request->slug;
+        $name = $request->name;
+
+        $goodResultCount = 0;
+        $badResultCount = 0;
+        $warningResultCount = 0;
+
+        $warningResult = '';
+        $goodResult = '';
+        $badResult = '';
+
+        $uniqueKey = true;
+        $uniqueSlug = true;
+        $uniqueTitle = true;
+        $uniqueSeoTitle = true;
+
+
+        if($key != null){
+            $keyWordDensity = $this->keywordDensity($text, $key);
+            if($keyWordDensity > 0.5 && $keyWordDensity < 3) {
+                $goodResult .= '<div style="color: green;">تکرار عبارت کلیدی در متن مناسب است. : %'. $keyWordDensity .'</div>';
+                $goodResultCount++;
+            }
+            else if($keyWordDensity >= 3){
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">تکرار عبارت کلیدی در متن بیش از حد بالاست است. : %'. $keyWordDensity .'</div>';
+            }
+            else {
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">تکرار عبارت کلیدی در متن بیش از حد پایین است. : %'. $keyWordDensity .'</div>';
+            }
+
+            $keywordInMeta = $this->keywordInText($meta, $key, 'common');
+            if($keywordInMeta > 0) {
+                $goodResult .= '<div style="color: green;">توضیحات  متا شامل عبارت کلیدی می باشد</div>';
+                $goodResultCount++;
+            }
+            else {
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">عبارت کلیدی را در توضیحات متا به کار ببرید.</div>';
+            }
+
+            if($slug != null){
+                $keywordInSlugTitle = $this->keywordInText($slug, $key, 'slug');
+                if($keywordInSlugTitle > 0) {
+                    $goodResult .= '<div style="color: green;">نامک شامل عبارت کلیدی می باشد</div>';
+                    $goodResultCount++;
+                }
+                else {
+                    $badResultCount++;
+                    $badResult .= '<div style="color: red;">عبارت کلیدی را در نامک به کار ببرید.</div>';
+                }
+            }
+
+            $keywordInSeoTitle = $this->keywordInText($seoTitle, $key, 'common');
+            if($keywordInSeoTitle > 0) {
+                $goodResult .= '<div style="color: green;">عنوان سئو شامل عبارت کلیدی می باشد</div>';
+                $goodResultCount++;
+            }
+            else {
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">عبارت کلیدی را در عنوان سئو به کار ببرید.</div>';
+            }
+
+            $keywordNumWord = count(explode(' ', $key));
+            if($keywordNumWord > 0 && $keywordNumWord <= 6){
+                $goodResult .= '<div style="color: green;">طول عبارت کلیدی مناسب است</div>';
+                $goodResultCount++;
+            }
+            else if($keywordNumWord > 6 && $keywordNumWord <= 10){
+                $warningResultCount++;
+                $warningResult .= '<div style="color: #dec300;">طول عبارت کلیدی می تواند بهینه تر باشد</div>';
+            }
+            else{
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">طول عبارت کلیدی نامناسب است </div>';
+            }
+
+            $keywordSimiralInDataBase = $this->keywordInPlaceDataBase($key, $request->id, $request->kindPlaceId);
+            if(!$keywordSimiralInDataBase){
+                $uniqueKey = false;
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">عبارت کلیدی شما کاملا تکراری است. آن را تغییر دهید.</div>';
+            }
+            else{
+                $goodResult .= '<div style="color: green;"> عبارت کلیدی شما کاملا جدید است.</div>';
+                $goodResultCount++;
+            }
+
+            if($name != null && $name != ''){
+                $keywordInName = $this->keywordInText($name, $key, 'common');
+                if($keywordInSeoTitle > 0) {
+                    $goodResult .= '<div style="color: green;">نام شامل عبارت کلیدی می باشد</div>';
+                    $goodResultCount++;
+                }
+                else {
+                    $badResultCount++;
+                    $badResult .= '<div style="color: red;">عبارت کلیدی را در نام به کار ببرید.</div>';
+                }
+            }
+            else{
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">پرکردن نام الزامی است.</div>';
+            }
+
+        }
+        else{
+            $badResultCount++;
+            $badResult .= '<div style="color: red;">پرکردن کلمه‌کلیدی الزامی است</div>';
+        }
+
+        if($slug != null){
+            $slugInDataBase = $this->slugInPlaceDataBase($slug, $request->id, $request->kindPlaceId);
+            if($slugInDataBase) {
+                $goodResult .= '<div style="color: green;">نامک شما یکتاست.</div>';
+                $goodResultCount++;
+            }
+            else {
+                $uniqueSlug = false;
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">نامک شما تکراری است. لطفا آن را تغییر دهید</div>';
+            }
+        }
+        else{
+            $badResultCount++;
+            $badResult .= '<div style="color: red;">پرکردن نامک الزامی است</div>';
+        }
+
+        if($seoTitle != null) {
+            $seoTitleInDataBase = $this->seoInPlaceDataBase($seoTitle, $request->id, $request->kindPlaceId);
+            if ($seoTitleInDataBase) {
+                $goodResult .= '<div style="color: green;">عنوان سئو شما یکتاست.</div>';
+                $goodResultCount++;
+            } else {
+                $uniqueSeoTitle = false;
+                $badResultCount++;
+                $badResult .= '<div style="color: red;">عنوان سئو شما تکراری است. لطفا آن را تغییر دهید</div>';
+            }
+        }
+        else{
+            $badResultCount++;
+            $badResult .= '<div style="color: red;">پرکردن عنوان سئو الزامی است</div>';
+        }
+
+        $countAllWord = $this->myWordsCount($text);
+        $countError = $countAllWord[1];
+        $allWord = $countAllWord[0];
+        if(count($countError) > 0){
+            $warningResultCount++;
+            $warningResult .= '<div style="color: #dec300;">تعداد تکرار کلمات زیر بیش از 10 درصد می باشد:';
+            $warningResult .= '<ul>';
+            foreach ($countError as $item){
+                $warningResult .= '<li>' . $item . '</li>';
+            }
+            $warningResult .= '</ul></div>';
+        }
+
+        if(mb_strlen($seoTitle, 'utf8') <= 85 && mb_strlen($seoTitle, 'utf8') > 60){
+            $goodResultCount++;
+            $goodResult .= '<div style="color: green;">طول عنوان سئو مناسب است.</div>';
+        }
+        else if(mb_strlen($seoTitle, 'utf8') > 85){
+            $badResultCount++;
+            $badResult .= '<div style="color: red;">عنوان سئو بیش از حد بلند است: ' . mb_strlen($seoTitle, 'utf8') . ' کاراکتر</div>';
+        }
+        else{
+            $badResultCount++;
+            $badResult .= '<div style="color: red;">عنوان سئو بیش از حد کوتاه است: ' . mb_strlen($seoTitle, 'utf8') . ' کاراکتر</div>';
+        }
+
+        if(mb_strlen($meta, 'utf8') <= 156 && mb_strlen($meta, 'utf8') > 120){
+            $goodResultCount++;
+            $goodResult .= '<div style="color: green;">طول توضیح متا مناسب است.</div>';
+        }
+        else if(mb_strlen($meta, 'utf8') > 156){
+            $badResultCount++;
+            $badResult .= '<div style="color: red;">توضیح متا بیش از حد بلند است: ' . mb_strlen($meta, 'utf8') . ' کاراکتر است</div>';
+        }
+        else{
+            $badResultCount++;
+            $badResult .= '<div style="color: red;">توضیح متا بیش از حد کوتاه است: ' . mb_strlen($meta, 'utf8') . ' کاراکتر است</div>';
+        }
+
+        echo json_encode([$warningResult, $goodResult, $badResult, $badResultCount, $warningResultCount, $uniqueKey, $uniqueSlug, $uniqueTitle, $uniqueSeoTitle]);
+    }
+
 
     private function keywordDensity($text, $keyword){
         $text = html_entity_decode($text);
@@ -787,7 +987,8 @@ class SeoController extends Controller {
                 $txt = trueShowForTextArea($txt);
 
                 $arr = explode(' ', $txt);
-                $totalCount += count($arr);
+                $totalCount++;
+//                $totalCount += count($arr);
 
                 if(count(explode(' ', $keyword)) == 1) {
                     $keyInText = 0;
@@ -811,7 +1012,7 @@ class SeoController extends Controller {
             $zeroTitle = true;
 
         if(!$zeroTitle) {
-            $keyWordDensity = (((int)$keywordCount * (int)$keyCount) / (int)$totalCount) * 100;
+            $keyWordDensity = ((int)$keyCount / (int)$totalCount) * 100;
             $keyWordDensity = floor($keyWordDensity * 100) / 100;
         }
         else
@@ -836,6 +1037,24 @@ class SeoController extends Controller {
         return [$similar, $same];
     }
 
+    private function keywordInPlaceDataBase($keyword, $id, $kindPlaceId)
+    {
+        $kindPlace = Place::where('tableName', '!=', null)->get();
+        foreach ($kindPlace as $item){
+            if($item->id == $kindPlaceId)
+                $place = DB::table($item->tableName)->where('keyword', $keyword)->where('id', '!=', $id)->first();
+            else
+                $place = DB::table($item->tableName)->where('keyword', $keyword)->first();
+
+            if($place != null)
+                dd($place, $kindPlaceId, $item->id);
+//                return false;
+
+        }
+
+        return true;
+    }
+
     private function seoInDataBase($seoTitle, $id)
     {
         $seo = Post::where('seoTitle', $seoTitle)->where('id', '!=', $id)->first();
@@ -846,6 +1065,21 @@ class SeoController extends Controller {
             return false;
     }
 
+    private function seoInPlaceDataBase($seoTitle, $id, $kindPlaceId)
+    {
+        $kindPlace = Place::where('tableName', '!=', null)->get();
+        foreach ($kindPlace as $item){
+            if($item->id == $kindPlaceId)
+                $place = DB::table($item->tableName)->where('seoTitle', $seoTitle)->where('id', '!=', $id)->get();
+            else
+                $place = DB::table($item->tableName)->where('seoTitle', $seoTitle)->get();
+
+            if(count($place) != 0)
+                return false;
+        }
+        return true;
+    }
+
     private function slugInDataBase($slug, $id)
     {
         $s = Post::where('slug', $slug)->where('id', '!=', $id)->first();
@@ -854,6 +1088,21 @@ class SeoController extends Controller {
             return true;
         else
             return false;
+    }
+
+    private function slugInPlaceDataBase($slug, $id, $kindPlaceId)
+    {
+        $kindPlace = Place::where('tableName', '!=', null)->get();
+        foreach ($kindPlace as $item){
+            if($item->id == $kindPlaceId)
+                $place = DB::table($item->tableName)->where('slug', $slug)->where('id', '!=', $id)->get();
+            else
+                $place = DB::table($item->tableName)->where('slug', $slug)->get();
+
+            if(count($place) != 0)
+                return false;
+        }
+        return true;
     }
 
     private function allWordCountInP($text){
