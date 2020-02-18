@@ -124,19 +124,27 @@
                                             <div class="form-group">
                                                 <label for="name"> استان</label>
                                                 <select id="state" name="state" class="form-control" onchange="findCity(this.value)">
-                                                    @foreach($allState as $item)
-                                                        <option value="{{$item->id}}" {{$item->id == $state->id? 'selected' : ''}}>
-                                                            {{$item->name}}
-                                                        </option>
-                                                    @endforeach
+                                                    @if($state != 0)
+                                                        @foreach($allState as $item)
+                                                            <option value="{{$item->id}}" {{$item->id == $state->id? 'selected' : ''}}>
+                                                                {{$item->name}}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach($allState as $item)
+                                                            <option value="{{$item->id}}">
+                                                                {{$item->name}}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3 f_r">
                                             <div class="form-group" style="position: relative">
                                                 <label for="name"> شهر</label>
-                                                <input type="text" class="form-control" name="city" id="city" value="{{$city ? $city->name : ''}}" onkeyup="searchCity(this.value)">
-                                                <input type="hidden" name="cityId" id="cityId" value="{{$city ? $city->id : 0}}">
+                                                <input type="text" class="form-control" name="city" id="city" value="{{isset($city) ? $city->name : ''}}" onkeyup="searchCity(this.value)">
+                                                <input type="hidden" name="cityId" id="cityId" value="{{isset($city) ? $city->id : 0}}">
 
                                                 <div id="citySearch" class="citySearch">
                                                     <ul id="resultCity"></ul>
@@ -243,7 +251,7 @@
                                     <hr>
                                     <div class="row" style="margin-top: 10px; display: flex; justify-content: center;">
                                         <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkSeo(1)">تایید</button>
-                                        <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/'. $state->id . '/' . $mode . '/0')}}'">خروج</button>
+                                        <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/0/' . $mode . '/country')}}'">خروج</button>
                                     </div>
                                 </form>
                             </div>

@@ -391,7 +391,7 @@ class PlaceController extends Controller {
     }
 
     public function newChangeContent($cityId, $mode, $cityMode){
-
+        $kindPlace = Place::find($mode);
         $state = State::all();
 
         switch ($mode) {
@@ -415,52 +415,58 @@ class PlaceController extends Controller {
                 $kind = 'mahaliFood';
                 break;
         }
-        if($kind == 'mahaliFood' || $kind == 'sogatSanaies'){
-            if($cityMode == 0){
-                $state2 = State::find($cityId);
-                $name = $state2->name;
-                $id = $state2->id;
-                $stateId = $state2->id;
 
-                $places = DB::select('select h.name, h.cityId, h.id, h.picNumber from ' . $kind . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
-            }
-            else{
-                $city = Cities::find($cityId);
-                $name = $city->name;
-                $id = $cityId;
-                $stateId = $city->stateId;
+        if($cityMode != 'country') {
+            if ($kind == 'mahaliFood' || $kind == 'sogatSanaies') {
+                if ($cityMode == 0) {
+                    $state2 = State::find($cityId);
+                    $name = $state2->name;
+                    $id = $state2->id;
+                    $stateId = $state2->id;
 
-                $places = DB::select('select name, cityId, id, picNumber FROM ' . $kind . ' WHERE cityId = ' . $id);
-            }
-            foreach ($places as $item){
-                $item->pic = URL::asset('_images/nopic/blank.jpg');
-            }
-        }
-        else {
-            if ($cityMode == 0) {
-                $state2 = State::find($cityId);
-                $name = $state2->name;
-                $id = $state2->id;
-                $stateId = $state2->id;
+                    $places = DB::select('select h.name, h.cityId, h.id, h.picNumber from ' . $kind . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+                } else {
+                    $city = Cities::find($cityId);
+                    $name = $city->name;
+                    $id = $cityId;
+                    $stateId = $city->stateId;
 
-                $places = DB::select('select h.name, h.cityId, h.pic_1, h.file, h.id from ' . $kind . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
-            } else {
-                $city = Cities::find($cityId);
-                $name = $city->name;
-                $id = $cityId;
-                $stateId = $city->stateId;
-
-                $places = DB::select('SELECT name, cityId, pic_1, file, id FROM ' . $kind . ' WHERE cityId = ' . $cityId);
-            }
-
-            foreach ($places as $item){
-                if($item->pic_1 != 0 || ($item->file != '' && $item->file != null))
-                    $item->pic = URL::asset('_images/' . $kind . '/' . $item->file . '/f-1.jpg');
-                else
+                    $places = DB::select('select name, cityId, id, picNumber FROM ' . $kind . ' WHERE cityId = ' . $id);
+                }
+                foreach ($places as $item) {
                     $item->pic = URL::asset('_images/nopic/blank.jpg');
+                }
+            } else {
+                if ($cityMode == 0) {
+                    $state2 = State::find($cityId);
+                    $name = $state2->name;
+                    $id = $state2->id;
+                    $stateId = $state2->id;
+
+                    $places = DB::select('select h.name, h.cityId, h.pic_1, h.file, h.id from ' . $kind . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+                } else {
+                    $city = Cities::find($cityId);
+                    $name = $city->name;
+                    $id = $cityId;
+                    $stateId = $city->stateId;
+
+                    $places = DB::select('SELECT name, cityId, pic_1, file, id FROM ' . $kind . ' WHERE cityId = ' . $cityId);
+                }
+
+                foreach ($places as $item) {
+                    if ($item->pic_1 != 0 || ($item->file != '' && $item->file != null))
+                        $item->pic = URL::asset('_images/' . $kind . '/' . $item->file . '/f-1.jpg');
+                    else
+                        $item->pic = URL::asset('_images/nopic/blank.jpg');
+                }
             }
         }
-
+        else{
+            $places = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId'])->get();
+            $stateId = 0;
+            $id = 0;
+            $name = 'کل کشور';
+        }
         $city = Cities::where('stateId',$stateId)->get();
 
         $jsonPlace = json_encode($places);
@@ -563,17 +569,19 @@ class PlaceController extends Controller {
 
     public function newContent($cityMode, $cityId, $mode)
     {
-        if($cityMode == 1){
-            $city = Cities::find($cityId);
-            $state = State::find($city->stateId);
-            $allState = State::all();
-            $cities = Cities::where('stateId', $state->id)->get();
-        }
-        else{
-            $city = null;
-            $state = State::find($cityId);
-            $allState = State::all();
-            $cities = Cities::where('stateId', $state->id)->get();
+        $allState = State::all();
+        $state = 0;
+        $cities = 0;
+        if($cityMode != 'country') {
+            if ($cityMode == 1) {
+                $city = Cities::find($cityId);
+                $state = State::find($city->stateId);
+                $cities = Cities::where('stateId', $state->id)->get();
+            } else {
+                $city = null;
+                $state = State::find($cityId);
+                $cities = Cities::where('stateId', $state->id)->get();
+            }
         }
 
         switch ($mode){

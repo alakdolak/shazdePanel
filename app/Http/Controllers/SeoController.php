@@ -737,7 +737,7 @@ class SeoController extends Controller {
 
         if($key != null){
             $keyWordDensity = $this->keywordDensity($text, $key);
-            if($keyWordDensity > 0.5 && $keyWordDensity < 3) {
+            if($keyWordDensity > 1.5 && $keyWordDensity < 3) {
                 $goodResult .= '<div style="color: green;">تکرار عبارت کلیدی در متن مناسب است. : %'. $keyWordDensity .'</div>';
                 $goodResultCount++;
             }

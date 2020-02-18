@@ -192,7 +192,7 @@
                                         <div class="col-md-12 f_r" >
                                             <div class="form-group" style="display: flex; flex-direction: column">
                                                 <div>
-                                                    <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/'. $state->id . '/' . $kindPlaceId . '/0')}}'">خروج</button>
+                                                    <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/0/' . $kindPlaceId . '/country')}}'">خروج</button>
                                                 </div>
                                             </div>
                                         </div>

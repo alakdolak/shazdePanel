@@ -265,7 +265,7 @@
                                     <hr>
                                     <div class="row" style="margin-top: 10px; display: flex; justify-content: center;">
                                         <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkSeo(1)">تایید</button>
-                                        <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/'. $place->stateId . '/' . $mode . '/0')}}'">خروج</button>
+                                        <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/0/' . $mode . '/country')}}'">خروج</button>
                                     </div>
 
                                 </form>

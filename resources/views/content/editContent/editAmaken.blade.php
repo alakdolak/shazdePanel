@@ -262,7 +262,7 @@
                                     <hr>
                                     <div class="row" style="margin-top: 10px; display: flex; justify-content: center;">
                                         <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkSeo(1)">تایید</button>
-                                        <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/'. $place->stateId . '/' . $mode . '/0')}}'">خروج</button>
+                                        <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/0/' . $mode . '/country')}}'">خروج</button>
                                     </div>
 
                                 </form>
@@ -313,14 +313,14 @@
             var error_text = '';
             var error = false;
 
-            var address = document.getElementById('address').value;
-            if(address == '' || address == null || address == ' '){
-                error = true;
-                error_text += '<li>ادرس را کامل کنید.</li>';
-                document.getElementById('address').classList.add('error');
-            }
-            else
-                document.getElementById('address').classList.remove('error');
+            // var address = document.getElementById('address').value;
+            // if(address == '' || address == null || address == ' '){
+            //     error = true;
+            //     error_text += '<li>ادرس را کامل کنید.</li>';
+            //     document.getElementById('address').classList.add('error');
+            // }
+            // else
+            //     document.getElementById('address').classList.remove('error');
 
             showErrorDivOrsubmit(error_text, error);
         }

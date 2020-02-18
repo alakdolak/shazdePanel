@@ -78,6 +78,7 @@
                                         </div>
                                         <div class="form-group" style="position: relative">
                                             <select id="state" class="form-control" onchange="findCity(this.value)" style="width: 49%; display: inline-block">
+                                                <option value="0" {{$stateId == '0' ? 'selected' : ''}}>کل کشور</option>
                                                 @foreach($state as $item)
                                                     <option value="{{$item->id}}" {{$item->id == $stateId ? 'selected' : ''}}>{{$item->name}}</option>
                                                 @endforeach
@@ -97,16 +98,11 @@
                                     </div>
                                     <div class="col-md-4" style="text-align: right">
                                         <h4>
-                                            {{$cityMode == 1 ? 'شهر' : 'استان'}}
+                                            @if($cityMode != 'country')
+                                                {{$cityMode == 1 ? 'شهر' : 'استان'}}
+                                            @endif
                                             {{$name}}
                                         </h4>
-                                        @if($mode != 10 && $mode != 11)
-                                            <a href="{{url('changeContent/' . $id . '/' . $mode . '/' . $cityMode . '/1' )}}">
-                                                <button type="button" class="btn btn-success">
-                                                    نمایش به صورت جدولی
-                                                </button>
-                                            </a>
-                                        @endif
                                     </div>
                                 </div>
                                 <hr>
@@ -132,33 +128,35 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    @foreach($places as $item)
-                                        <div id="place_{{$item->id}}" class="col-sm-3 content">
-                                            <div class="mainContent">
-                                                <div class="row" style="width: 100%;">
-                                                    {{--<div class="col-12" style="height: 200px;">--}}
-                                                        {{--<img src="{{$item->pic}}" style="height: 200px;">--}}
-                                                    {{--</div>--}}
-                                                </div>
-                                                <div class="row" style="margin-top: 10px;">
-                                                    <div class="col-12">
-                                                        <h4>
-                                                            {{ $item->name }}
-                                                        </h4>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <a href="{{URL::asset('editContent/' . $mode . '/' . $item->id)}}">
-                                                            <button class="btn btn-warning">ویرایش</button>
-                                                        </a>
-                                                        <a href="{{URL::asset('uploadImgPage/' . $mode . '/' . $item->id)}}">
-                                                            <button class="btn btn-primary">ویرایش عکس</button>
-                                                        </a>
-                                                        <button class="btn btn-danger" onclick="deleteModal({{$item->id}})">حذف</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
+
+                                    <table class="table" data-toggle="table" data-pagination="true" data-search="true">
+                                        <thead style="background: black; color: white;">
+                                        <tr>
+                                            <th style="text-align: right">
+                                                عنوان
+                                            </th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($places as $item)
+                                            <tr>
+                                                <td>{{$item->name}}</td>
+                                                <td style="display: flex">
+                                                    <a href="{{URL::asset('editContent/' . $mode . '/' . $item->id)}}">
+                                                        <button class="btn btn-warning">ویرایش متن</button>
+                                                    </a>
+                                                    <a href="{{URL::asset('uploadImgPage/' . $mode . '/' . $item->id)}}">
+                                                        <button class="btn btn-primary">ویرایش عکس</button>
+                                                    </a>
+                                                    <button class="btn btn-danger" onclick="deleteModal({{$item->id}})">حذف</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+
                                 </div>
                             </div>
                         </div>
@@ -199,6 +197,8 @@
     <script>
         var places = {!! $jsonPlace !!};
         var _token = '{{csrf_token()}}';
+        var city = {!! $city !!};
+        var url = '{{url("newChangeContent/")}}';
 
         function search(_value){
             for(i = 0; i < places.length; i++){
@@ -226,8 +226,6 @@
 
             $("#deleteModal").modal();
         }
-
-        var city = {!! $city !!};
 
         function findCity(_value){
             document.getElementById('citySearch').style.display = 'none';
@@ -277,16 +275,24 @@
 
         }
 
-        var url = '{{url("newChangeContent/")}}';
         function newSearch(){
             var cityId = document.getElementById('cityId').value;
             var stateId = document.getElementById('stateId').value;
 
-            if(cityId == 0){
-                window.location.href = url + '/' + stateId + '/' + {{$mode}} + '/0';
+            if(stateId == 0) {
+                window.location.href = url + '/' + stateId + '/' + {{$mode}} +'/country';
+                return;
             }
-            else
-                window.location.href = url + '/' + cityId + '/' + {{$mode}} + '/1' ;
+
+            if(cityId == 0) {
+                window.location.href = url + '/' + stateId + '/' + {{$mode}} +'/0';
+                return;
+            }
+            else {
+                window.location.href = url + '/' + cityId + '/' + {{$mode}} +'/1';
+                return;
+            }
+
         }
 
 

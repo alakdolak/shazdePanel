@@ -178,9 +178,7 @@
                                     <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                         <a href="{{route('city.index')}}" class="dropdown-item">اطلاعات شهرها</a>
                                         <a href="{{url('topInCity')}}" class="dropdown-item">پیشنهاد ویژه شهر</a>
-                                        <a href="{{route('chooseCity', ['mode' => 'content2'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
-                                        {{--<a href="{{route('chooseCity', ['mode' => 'content'])}}" class="dropdown-item">تغییر محتوای صفحات</a>--}}
-
+                                        <a href="{{route('newChangeContent', ['cityId' => 0, 'mode' => 1, 'cityMode' => 'country'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
                                         <a href="{{route('posts')}}" class="dropdown-item">مدیریت مقاله ها</a>
                                         <a href="{{route('gardeshNameList')}}" class="dropdown-item">مقاله‌های گردشنامه</a>
 

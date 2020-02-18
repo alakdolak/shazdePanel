@@ -4,14 +4,6 @@
     @parent
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-    {{--<script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>--}}
-
-    {{--<link rel="stylesheet" href="{{URL::asset('css/DataTable/datatables.bootstrap.css')}}">--}}
-    {{--<link rel="stylesheet" href="{{URL::asset('css/DataTable/datatables.bootstrap4.css')}}">--}}
-    {{--<link rel="stylesheet" href="{{URL::asset('css/DataTable/datatables.foundation.css')}}">--}}
-    {{--<link rel="stylesheet" href="{{URL::asset('css/DataTable/datatables.jqueryui.css')}}">--}}
-    {{--<link rel="stylesheet" href="{{URL::asset('css/DataTable/datatables.semanticui.css')}}">--}}
-    {{--<link rel="stylesheet" href="{{URL::asset('css/DataTable/jquery.datatables.css')}}">--}}
 
     <script type="text/javascript" charset="utf8" src="{{URL::asset('js/DataTable/jquery.dataTables.js')}}" defer></script>
 
@@ -113,7 +105,9 @@
                                 <tr>
                                     <td>{{$post->post_title}}</td>
                                     <td style="display: flex">
-                                        <button class="btn btn-primary" onclick="window.location.href = '{{url("gardeshEdit/". $post->ID)}}'">ویرایش پست</button>
+                                        <a href='{{url("gardeshEdit/". $post->ID)}}'>
+                                            <button class="btn btn-primary">ویرایش پست</button>
+                                        </a>
                                         <button class="btn btn-danger" onclick="deleteGardesh({{$post->ID}}, this)">حذف پست</button>
                                     </td>
                                 </tr>
