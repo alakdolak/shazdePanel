@@ -513,6 +513,12 @@ class PlaceController extends Controller {
             $place->tag15,
         ];
         $place->description = trueShowForTextArea($place->description);
+        $place->zoom = 15;
+        if($place->C == null && $place->D == null) {
+            $place->C = 32.42056639964595;
+            $place->D = 54.00537109375;
+            $place->zoom = 5;
+        }
 
         switch ($mode){
             case 1:

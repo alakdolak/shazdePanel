@@ -75,7 +75,6 @@
 
     <div class="errorDiv" id="errorDiv"></div>
 
-
     <div class="data-table-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
@@ -135,8 +134,11 @@
                                         <div class="col-md-2 f_r">
                                             <div class="form-group">
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">انتخاب از روی نقشه</button>
-                                                <input type="hidden" name="C" id="lat" value="{{$place->C}}">
-                                                <input type="hidden" name="D" id="lng" value="{{$place->D}}">
+                                                <label for="lat">lat(C)</label>
+                                                <input type="text" name="C" id="lat" value="{{$place->C}}" onchange="setNewMarker()">
+
+                                                <label for="lng">lng(D)</label>
+                                                <input type="text" name="D" id="lng" value="{{$place->D}}" onchange="setNewMarker()">
                                             </div>
                                         </div>
                                     </div>
@@ -226,11 +228,11 @@
 
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <label for="site">توضیح</label>
-                                                <textarea class="form-control" name="description" id="description" rows="10">{!! $place->description !!}</textarea>
+                                                <label for="description">توضیح</label>
+                                                <textarea class="form-control" name="description" id="description" rows="10" onkeyup="descriptionCounter(this.value)">{!! $place->description !!}</textarea>
                                                 <div>
-                                                    <div class="inputDescription" id="remainWord" style="font-size: 15px;"></div>
-                                                    <div class="inputDescription" id="keywordDensity" style="font-size: 15px;"></div>
+                                                    <div class="inputDescription" id="descriptionWordCount" style="font-size: 15px;"></div>
+                                                    <div class="inputDescription" id="descriptionCharCount" style="font-size: 15px;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -466,7 +468,7 @@
 
         function init(){
             var mapOptions = {
-                zoom: 15,
+                zoom: {{$place->zoom}},
                 center: new google.maps.LatLng(C, D),
                 // How you would like to style the map.
                 // This is where you would paste any style found on Snazzy Maps.
@@ -509,9 +511,19 @@
                 position: location,
                 map: map,
             });
-
             document.getElementById('lat').value = marker.getPosition().lat();
             document.getElementById('lng').value = marker.getPosition().lng();
+        }
+
+        function setNewMarker(){
+            marker.setMap(null);
+            var lat = document.getElementById('lat').value;
+            var lng = document.getElementById('lng').value;
+
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map,
+            });
         }
 
     </script>

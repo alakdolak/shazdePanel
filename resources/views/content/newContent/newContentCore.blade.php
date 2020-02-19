@@ -161,8 +161,11 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <input type="hidden" name="C" id="lat" value="1">
-                                            <input type="hidden" name="D" id="lng" value="1">
+                                            <label for="lat">lat(C)</label>
+                                            <input type="text" name="C" id="lat" value="1" onchange="setNewMarker()">
+
+                                            <label for="lng">lng(D)</label>
+                                            <input type="text" name="D" id="lng" value="1" onchange="setNewMarker()">
                                         @endif
                                     </div>
 
@@ -214,11 +217,11 @@
 
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <label for="site">توضیح</label>
-                                                <textarea class="form-control" name="description" id="description" rows="10" >{!! old('description') !!}</textarea>
+                                                <label for="description">توضیح</label>
+                                                <textarea class="form-control" name="description" id="description" rows="10" onkeyup="descriptionCounter(this.value)">{!! old('description') !!}</textarea>
                                                 <div>
-                                                    <div class="inputDescription" id="remainWord" style="font-size: 15px;"></div>
-                                                    <div class="inputDescription" id="keywordDensity" style="font-size: 15px;"></div>
+                                                    <div class="inputDescription" id="descriptionWordCount" style="font-size: 15px;"></div>
+                                                    <div class="inputDescription" id="descriptionCharCount" style="font-size: 15px;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -367,6 +370,17 @@
 
             document.getElementById('lat').value = marker.getPosition().lat();
             document.getElementById('lng').value = marker.getPosition().lng();
+        }
+
+        function setNewMarker(){
+            marker.setMap(null);
+            var lat = document.getElementById('lat').value;
+            var lng = document.getElementById('lng').value;
+
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map,
+            });
         }
 
         function checkSeo(kind){

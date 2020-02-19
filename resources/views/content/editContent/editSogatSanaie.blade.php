@@ -428,11 +428,11 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <label for="site">توضیح</label>
-                                                <textarea class="form-control" name="description" id="description" rows="10">{!! $place->description !!}</textarea>
+                                                <label for="description">توضیح</label>
+                                                <textarea class="form-control" name="description" id="description" rows="10" onkeyup="descriptionCounter(this.value)">{!! $place->description !!}</textarea>
                                                 <div>
-                                                    <div class="inputDescription" id="remainWord" style="font-size: 15px;"></div>
-                                                    <div class="inputDescription" id="keywordDensity" style="font-size: 15px;"></div>
+                                                    <div class="inputDescription" id="descriptionWordCount" style="font-size: 15px;"></div>
+                                                    <div class="inputDescription" id="descriptionCharCount" style="font-size: 15px;"></div>
                                                 </div>
                                             </div>
                                         </div>

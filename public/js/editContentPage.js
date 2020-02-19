@@ -1,6 +1,13 @@
 var tagError1 = false;
 var tagError2 = false;
 
+function descriptionCounter(value) {
+    var charLen = value.length;
+    var wordLen = value.split(" ");
+
+    document.getElementById('descriptionWordCount').innerText = 'تعداد کلمات :' + wordLen.length;
+    document.getElementById('descriptionCharCount').innerText = 'تعداد حروف : ' + charLen;
+}
 
 function setkeyWord(_value){
     keyword = _value;
