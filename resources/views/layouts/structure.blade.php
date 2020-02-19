@@ -1,6 +1,9 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
+<?php
+    if(auth()->check())
+        $userACL = \App\models\ACL::where('userId', auth()->user()->id)->first();
+?>
 <head>
 
     @section('header')
@@ -168,6 +171,14 @@
                                 </a>
                             </li>
 
+                            <li>
+                                <a href="{{route('changePass')}}" aria-expanded="false">
+                                    <i class="fa big-icon fa-home"></i>
+                                    <span class="mini-dn">تغییر رمزعبور</span>
+                                </a>
+                            </li>
+
+                        @if(isset($userACL) && $userACL->post == 1)
                             <li class="nav-item">
                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                     <i class="fa big-icon fa-envelope"></i>
@@ -186,23 +197,25 @@
                                     </div>
                                 </a>
                             </li>
+                        @endif
 
+                        @if(isset($userACL) && $userACL->msg == 1)
                             <li class="nav-item">
-                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                                    <i class="fa big-icon fa-envelope"></i>
-                                    <span class="mini-dn">کنترل محتوای کاربران</span>
-                                    <span class="indicator-right-menu mini-dn">
-                                        <i class="fa indicator-mn fa-angle-left"></i>
-                                    </span>
-                                    <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                        <a href="#" class="dropdown-item">مدیریت پست‌ها</a>
-                                        <a href="#" class="dropdown-item">مدیریت سوال‌ها</a>
-                                        <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
-                                        <a href="#" class="dropdown-item">Recycle Bin</a>
-
-                                    </div>
-                                </a>
-                            </li>
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                <i class="fa big-icon fa-envelope"></i>
+                                <span class="mini-dn">کنترل محتوای کاربران</span>
+                                <span class="indicator-right-menu mini-dn">
+                                    <i class="fa indicator-mn fa-angle-left"></i>
+                                </span>
+                                <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                    <a href="#" class="dropdown-item">مدیریت پست‌ها</a>
+                                    <a href="#" class="dropdown-item">مدیریت سوال‌ها</a>
+                                    <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
+                                    <a href="#" class="dropdown-item">Recycle Bin</a>
+                                </div>
+                            </a>
+                        </li>
+                        @endif
 
                             <li class="nav-item">
                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
@@ -214,6 +227,7 @@
                                 </a>
                             </li>
 
+                        @if(isset($userACL) && $userACL->config == 1)
                             <li class="nav-item">
                                 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                     <i class="fa big-icon fa-envelope"></i>
@@ -255,9 +269,6 @@
                                         <a href="{{route('ages')}}" class="dropdown-item">مدیریت سنین</a>
                                         <a href="{{route('backup')}}" class="dropdown-item">مدیریت پشتیبانی</a>
                                         <a href="{{route('offers')}}" class="dropdown-item">مدیریت کد های تخفیف</a>
-
-                                        <a href="{{route('changePass')}}" class="dropdown-item">تغییر رمزعبور</a>
-
                                     </div>
                                 </a>
                             </li>
@@ -293,8 +304,7 @@
                                     </div>
                                 </a>
                             </li>
-
-
+                        @endif
 
                             <li class="nav-item">
                                 <a href="{{route('logout')}}"  role="button" class="nav-link dropdown-toggle">

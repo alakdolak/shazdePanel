@@ -73,9 +73,9 @@
                                         </a>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="جستجو..." onkeyup="search(this.value)">
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<input type="text" class="form-control" placeholder="جستجو..." onkeyup="search(this.value)">--}}
+                                        {{--</div>--}}
                                         <div class="form-group" style="position: relative">
                                             <select id="state" class="form-control" onchange="findCity(this.value)" style="width: 49%; display: inline-block">
                                                 <option value="0" {{$stateId == '0' ? 'selected' : ''}}>کل کشور</option>

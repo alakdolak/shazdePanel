@@ -742,12 +742,12 @@ class SeoController extends Controller {
                 $goodResultCount++;
             }
             else if($keyWordDensity >= 3){
-                $badResultCount++;
-                $badResult .= '<div style="color: red;">تکرار عبارت کلیدی در متن بیش از حد بالاست است. : %'. $keyWordDensity .'</div>';
+                $warningResultCount++;
+                $warningResult .= '<div style="color: #dec300;">تکرار عبارت کلیدی در متن بیش از حد بالاست است. : %'. $keyWordDensity .'</div>';
             }
             else {
-                $badResultCount++;
-                $badResult .= '<div style="color: red;">تکرار عبارت کلیدی در متن بیش از حد پایین است. : %'. $keyWordDensity .'</div>';
+                $warningResultCount++;
+                $warningResult .= '<div style="color: #dec300;">تکرار عبارت کلیدی در متن بیش از حد پایین است. : %'. $keyWordDensity .'</div>';
             }
 
             $keywordInMeta = $this->keywordInText($meta, $key, 'common');
@@ -1039,7 +1039,7 @@ class SeoController extends Controller {
 
     private function keywordInPlaceDataBase($keyword, $id, $kindPlaceId)
     {
-        $kindPlace = Place::where('tableName', '!=', null)->get();
+        $kindPlace = Place::whereNotNull('tableName')->get();
         foreach ($kindPlace as $item){
             if($item->id == $kindPlaceId)
                 $place = DB::table($item->tableName)->where('keyword', $keyword)->where('id', '!=', $id)->first();
@@ -1047,8 +1047,8 @@ class SeoController extends Controller {
                 $place = DB::table($item->tableName)->where('keyword', $keyword)->first();
 
             if($place != null)
-                dd($place, $kindPlaceId, $item->id);
-//                return false;
+                return false;
+//            dd($place, $kindPlaceId, $item->id);
 
         }
 
