@@ -696,11 +696,11 @@ class SeoController extends Controller {
             $badResult .= '<div style="color: red;">عنوان سئو بیش از حد کوتاه است: ' . mb_strlen($seoTitle, 'utf8') . ' کاراکتر</div>';
         }
 
-        if(mb_strlen($meta, 'utf8') <= 156 && mb_strlen($meta, 'utf8') > 120){
+        if(mb_strlen($meta, 'utf8') <= 160 && mb_strlen($meta, 'utf8') > 120){
             $goodResultCount++;
             $goodResult .= '<div style="color: green;">طول توضیح متا مناسب است.</div>';
         }
-        else if(mb_strlen($meta, 'utf8') > 156){
+        else if(mb_strlen($meta, 'utf8') > 160){
             $badResultCount++;
             $badResult .= '<div style="color: red;">توضیح متا بیش از حد بلند است: ' . mb_strlen($meta, 'utf8') . ' کاراکتر است</div>';
         }
@@ -888,11 +888,11 @@ class SeoController extends Controller {
             $badResult .= '<div style="color: red;">عنوان سئو بیش از حد کوتاه است: ' . mb_strlen($seoTitle, 'utf8') . ' کاراکتر</div>';
         }
 
-        if(mb_strlen($meta, 'utf8') <= 156 && mb_strlen($meta, 'utf8') > 120){
+        if(mb_strlen($meta, 'utf8') <= 160 && mb_strlen($meta, 'utf8') > 120){
             $goodResultCount++;
             $goodResult .= '<div style="color: green;">طول توضیح متا مناسب است.</div>';
         }
-        else if(mb_strlen($meta, 'utf8') > 156){
+        else if(mb_strlen($meta, 'utf8') > 160){
             $badResultCount++;
             $badResult .= '<div style="color: red;">توضیح متا بیش از حد بلند است: ' . mb_strlen($meta, 'utf8') . ' کاراکتر است</div>';
         }
@@ -1041,15 +1041,15 @@ class SeoController extends Controller {
     {
         $kindPlace = Place::whereNotNull('tableName')->get();
         foreach ($kindPlace as $item){
-            if($item->id == $kindPlaceId)
-                $place = DB::table($item->tableName)->where('keyword', $keyword)->where('id', '!=', $id)->first();
-            else
-                $place = DB::table($item->tableName)->where('keyword', $keyword)->first();
+            if($item->tableName != 'majara'){
+                if($item->id == $kindPlaceId)
+                    $place = DB::table($item->tableName)->where('keyword', $keyword)->where('id', '!=', $id)->first();
+                else
+                    $place = DB::table($item->tableName)->where('keyword', $keyword)->first();
 
-            if($place != null)
-                return false;
-//            dd($place, $kindPlaceId, $item->id);
-
+                if($place != null)
+                    return false;
+            }
         }
 
         return true;

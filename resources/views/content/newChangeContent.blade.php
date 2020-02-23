@@ -150,7 +150,7 @@
                                                     <a href="{{URL::asset('uploadImgPage/' . $mode . '/' . $item->id)}}">
                                                         <button class="btn btn-primary">ویرایش عکس</button>
                                                     </a>
-                                                    <button class="btn btn-danger" onclick="deleteModal({{$item->id}})">حذف</button>
+                                                    {{--<button class="btn btn-danger" onclick="deleteModal({{$item->id}})">حذف</button>--}}
                                                 </td>
                                             </tr>
                                         @endforeach

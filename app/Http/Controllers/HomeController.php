@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\AdminLog;
+use App\models\Amaken;
+use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\LogModel;
 use App\models\PhotographersPic;
+use App\models\PlaceFeatureRelation;
+use App\models\PlaceFeatures;
 use App\models\PostComment;
+use App\models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -181,4 +186,83 @@ class HomeController extends Controller {
 
     }
 
+
+
+    public function convertAmakenFeatures()
+    {
+        dd('don');
+
+        $amaken = Amaken::select(['id', 'name', 'keyword'])
+                            ->get();
+        foreach ($amaken as $item){
+            similar_text($item->name, $item->keyword, $percent);
+            echo $item->id . ' => '. $percent;
+            echo '<br>';
+//            if($percent < 70){
+//                $item->keyword = $item->name;
+//                $item->save();
+//            }
+        }
+
+        $amakenFeature = PlaceFeatures::where('kindPlaceId', 1)
+                        ->where('parent', '!=', 0)
+                        ->get();
+        $amakenRelated = [];
+        $amakenRel = [];
+
+        foreach ($amakenFeature as $item)
+            PlaceFeatureRelation::where('featureId', $item->id)->delete();
+
+        foreach ($amakenFeature as $item){
+            $amakenRel = [];
+            if($item->name == 'تاریخی')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'tarikhi'];
+            else if($item->name == 'تفریحی')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'tafrihi'];
+            else if($item->name == 'طبیعی')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'tabiatgardi'];
+            else if($item->name == 'مرکز شهر')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'markaz'];
+            else if($item->name == 'حومه شهر')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'hoome'];
+            else if($item->name == 'پر ازدحام')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'shologh'];
+            else if($item->name == 'کم ازدحام')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'khalvat'];
+            else if($item->name == 'کوهستان')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'kooh'];
+            else if($item->name == 'دریا')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'darya'];
+            else if($item->name == 'کویر')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'kavir'];
+            else if($item->name == 'جنگل')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'jangal'];
+            else if($item->name == 'شهری')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'shahri'];
+            else if($item->name == 'مدرن')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'modern'];
+            else if($item->name == 'تاریخی بنا')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'tarikhibana'];
+            else if($item->name == 'بومی')
+                $amakenRel = ['featureId' => $item->id, 'colName' => 'boomi'];
+            else
+                continue;
+            array_push($amakenRelated, $amakenRel);
+        }
+
+        $insertQuery = 'INSERT INTO placeFeatureRelations (id, placeId, featureId, ans) VALUES';
+        $values = '';
+        foreach ($amaken as $item){
+            foreach ($amakenRelated as $item2){
+                if($item[$item2['colName']] == 1){
+                    if($values != '')
+                        $values .= ', ';
+                    $values .= ' (null, ' . $item["id"] . ', ' . $item2["featureId"] . ', null)';
+                }
+            }
+        }
+        $insertQuery .= $values;
+        DB::select($insertQuery);
+        dd('done');
+    }
 }

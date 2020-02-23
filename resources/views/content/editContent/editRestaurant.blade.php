@@ -230,7 +230,7 @@
                                         <div class="col-md-12 f_r">
                                             <div class="form-group">
                                                 <label for="slug"> نامک</label>
-                                                <input type="text" class="form-control" name="slug" id="slug" value="{{$place->seoTitle}}">
+                                                <input type="text" class="form-control" name="slug" id="slug" value="{{$place->slug}}">
                                             </div>
                                         </div>
                                     </div>
@@ -239,7 +239,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="site">متا : <span id="metaNumber" style="font-weight: 200;"></span></label>
-                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="changeMeta(this.value)" maxlength="153" minlength="130">{!! $place->meta !!}</textarea>
+                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="changeMeta(this.value)" maxlength="160" minlength="130">{!! $place->meta !!}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="remainWordMeta" style="font-size: 15px;"></div>
                                                 </div>
@@ -490,7 +490,7 @@
         function changeMeta(_value){
             var text = _value.length + ' حرف';
             $('#metaNumber').text(text);
-            if(_value.length > 120 && _value.length <= 156)
+            if(_value.length > 120 && _value.length <= 160)
                 $('#metaNumber').css('color', 'green');
             else
                 $('#metaNumber').css('color', 'red');

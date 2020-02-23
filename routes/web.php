@@ -22,6 +22,8 @@ Route::get('updateMainDataBase', function(){
 
 });
 
+Route::get('convertAmakenFeatures', 'HomeController@convertAmakenFeatures');
+
 
 Route::get('login', ['as' => 'login', 'uses' => 'HomeController@login']);
 

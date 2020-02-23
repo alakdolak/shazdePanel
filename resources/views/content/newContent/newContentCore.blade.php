@@ -501,7 +501,7 @@
         function changeMeta(_value){
             var text = _value.length + ' حرف';
             $('#metaNumber').text(text);
-            if(_value.length > 120 && _value.length <= 156)
+            if(_value.length > 120 && _value.length <= 160)
                 $('#metaNumber').css('color', 'green');
             else
                 $('#metaNumber').css('color', 'red');
