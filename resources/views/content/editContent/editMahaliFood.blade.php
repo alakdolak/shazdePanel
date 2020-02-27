@@ -288,24 +288,26 @@
                                             مواد مورد نیاز
                                         </div>
                                         <div id="material" class="col-md-12">
-                                            @for($i = 0; $i < count($place->material); $i++)
-                                                <div class="row" style="margin-top: 10px;">
-                                                    <div class="col-md-3 f_r">
-                                                        <label>
-                                                            نام مواد
-                                                        </label>
-                                                        <input type="text" name="matName[{{$i}}]"
-                                                               value="{{$place->material[$i][0]}}">
+                                            @if(isset($place->material) && is_array($place->material))
+                                                @for($i = 0; $i < count($place->material); $i++)
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <div class="col-md-3 f_r">
+                                                            <label>
+                                                                نام مواد
+                                                            </label>
+                                                            <input type="text" name="matName[{{$i}}]"
+                                                                   value="{{$place->material[$i][0]}}">
+                                                        </div>
+                                                        <div class="col-md-3 f_r">
+                                                            <label>
+                                                                مقدار مواد
+                                                            </label>
+                                                            <input type="text" name="matValue[{{$i}}]"
+                                                                   value="{{$place->material[$i][1]}}">
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-3 f_r">
-                                                        <label>
-                                                            مقدار مواد
-                                                        </label>
-                                                        <input type="text" name="matValue[{{$i}}]"
-                                                               value="{{$place->material[$i][1]}}">
-                                                    </div>
-                                                </div>
-                                            @endfor
+                                                @endfor
+                                            @endif
                                         </div>
                                         <div class="col-md-12" style="margin-top: 20px;">
                                             <button type="button" class="btn btn-success" onclick="addMaterial()">
@@ -446,7 +448,11 @@
     <script src="{{URL::asset('js/editContentPage.js')}}"></script>
 
     <script>
-        var materialNum = {{count($place->material)}};
+        @if(isset($place->material) && is_array($place->material))
+            var materialNum = {{count($place->material)}};
+        @else
+            var materialNum = 0;
+        @endif
 
         function addMaterial() {
             var text = '<div class="row" style="margin-top: 10px;">\n' +

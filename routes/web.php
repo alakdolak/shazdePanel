@@ -17,6 +17,231 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Request;
 
+//include_once  __DIR__ . '/../app/Http/Controllers/Common.php';
+//Route::get('getAdabToSogat', function(){
+//
+//   $adab = \App\models\Adab::where('category', 1)->get();
+//   foreach ($adab as $item){
+//       $newSogat = new \App\models\SogatSanaie();
+//       $newSogat->name = $item->name;
+//       $newSogat->cityId = $item->cityId;
+//       $newSogat->file = $item->file;
+//       if($item->pic_1 == 1)
+//           $newSogat->picNumber = '1.jpg';
+//
+//       $newSogat->alt = $item->keyword;
+//       $newSogat->description = $item->description;
+//       $newSogat->keyword = $item->keyword;
+//       $newSogat->slug = makeSlug($item->keyword);
+//       if(mb_strlen($item->meta, 'utf8') < 300)
+//           $newSogat->meta = $item->meta;
+//       else
+//           $newSogat->meta = rtrim(mb_strimwidth($item->meta, 0, 299, '', 'UTF-8'));
+//
+//       $newSogat->seoTitle = $item->h1;
+//
+//       $newSogat->tag1 = $item->tag1;
+//       $newSogat->tag2 = $item->tag2;
+//       $newSogat->tag3 = $item->tag3;
+//       $newSogat->tag4 = $item->tag4;
+//       $newSogat->tag5 = $item->tag5;
+//       $newSogat->tag6 = $item->tag6;
+//       $newSogat->tag7 = $item->tag7;
+//       $newSogat->tag8 = $item->tag8;
+//       $newSogat->tag9 = $item->tag9;
+//       $newSogat->tag10 = $item->tag10;
+//       $newSogat->tag11 = $item->tag11;
+//       $newSogat->tag12 = $item->tag12;
+//       $newSogat->tag13 = $item->tag13;
+//       $newSogat->tag14 = $item->tag14;
+//       $newSogat->tag15 = $item->tag15;
+//
+//       $newSogat->author = 1;
+//       $newSogat->authorized = 1;
+//
+//       $newSogat->save();
+//
+//       $id = $newSogat->id;
+//
+//       $sqlQuery = 'INSERT INTO placePics (id, picNumber, placeId, kindPlaceId, alt) VALUES ';
+//       $val = '';
+//       if($item->pic_2 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "2.jpg", ' . $id . ', 10, "' . $item->alt2 . '")';
+//       }
+//       if($item->pic_3 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "3.jpg", ' . $id . ', 10, "' . $item->alt3 . '")';
+//       }
+//       if($item->pic_4 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "4.jpg", ' . $id . ', 10, "' . $item->alt4 . '")';
+//       }
+//       if($item->pic_5 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "5.jpg", ' . $id . ', 10, "' . $item->alt5 . '")';
+//       }
+//       $sqlQuery .= $val;
+//       if($val != '')
+//           \DB::select($sqlQuery);
+//
+//   }
+//    dd('done');
+//});
+//Route::get('getAdabToSogat2', function(){
+//   $adab = \App\models\Adab::where('category', 6)->get();
+//   foreach ($adab as $item){
+//       $newSogat = new \App\models\SogatSanaie();
+//       $newSogat->name = $item->name;
+//       $newSogat->cityId = $item->cityId;
+//       $newSogat->file = $item->file;
+//       if($item->pic_1 == 1)
+//           $newSogat->picNumber = '1.jpg';
+//
+//       $newSogat->alt = $item->keyword;
+//       $newSogat->description = $item->description;
+//       $newSogat->keyword = $item->keyword;
+//       $newSogat->slug = makeSlug($item->keyword);
+//       if(mb_strlen($item->meta, 'utf8') < 300)
+//           $newSogat->meta = $item->meta;
+//       else
+//           $newSogat->meta = rtrim(mb_strimwidth($item->meta, 0, 299, '', 'UTF-8'));
+//
+//       $newSogat->seoTitle = $item->h1;
+//
+//       $newSogat->tag1 = $item->tag1;
+//       $newSogat->tag2 = $item->tag2;
+//       $newSogat->tag3 = $item->tag3;
+//       $newSogat->tag4 = $item->tag4;
+//       $newSogat->tag5 = $item->tag5;
+//       $newSogat->tag6 = $item->tag6;
+//       $newSogat->tag7 = $item->tag7;
+//       $newSogat->tag8 = $item->tag8;
+//       $newSogat->tag9 = $item->tag9;
+//       $newSogat->tag10 = $item->tag10;
+//       $newSogat->tag11 = $item->tag11;
+//       $newSogat->tag12 = $item->tag12;
+//       $newSogat->tag13 = $item->tag13;
+//       $newSogat->tag14 = $item->tag14;
+//       $newSogat->tag15 = $item->tag15;
+//
+//       $newSogat->author = 1;
+//       $newSogat->authorized = 1;
+//
+//       $newSogat->save();
+//
+//       $id = $newSogat->id;
+//
+//       $sqlQuery = 'INSERT INTO placePics (id, picNumber, placeId, kindPlaceId, alt) VALUES ';
+//       $val = '';
+//       if($item->pic_2 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "2.jpg", ' . $id . ', 10, "' . $item->alt2 . '")';
+//       }
+//       if($item->pic_3 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "3.jpg", ' . $id . ', 10, "' . $item->alt3 . '")';
+//       }
+//       if($item->pic_4 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "4.jpg", ' . $id . ', 10, "' . $item->alt4 . '")';
+//       }
+//       if($item->pic_5 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "5.jpg", ' . $id . ', 10, "' . $item->alt5 . '")';
+//       }
+//       $sqlQuery .= $val;
+//       if($val != '')
+//           \DB::select($sqlQuery);
+//
+//   }
+//    dd('done');
+//});
+//Route::get('getAdabToSogat3', function(){
+//   $adab = \App\models\Adab::where('category', 3)->get();
+//   foreach ($adab as $item){
+//       $newSogat = new \App\models\MahaliFood();
+//       $newSogat->name = $item->name;
+//       $newSogat->cityId = $item->cityId;
+//       $newSogat->file = $item->file;
+//       if($item->pic_1 == 1)
+//           $newSogat->picNumber = '1.jpg';
+//
+//       $newSogat->alt = $item->keyword;
+//       $newSogat->description = $item->description;
+//       $newSogat->keyword = $item->keyword;
+//       $newSogat->slug = makeSlug($item->keyword);
+//       if(mb_strlen($item->meta, 'utf8') < 300)
+//           $newSogat->meta = $item->meta;
+//       else
+//           $newSogat->meta = rtrim(mb_strimwidth($item->meta, 0, 299, '', 'UTF-8'));
+//
+//       $newSogat->seoTitle = $item->h1;
+//
+//       $newSogat->hotOrCold = 1;
+//       $newSogat->kind = 1;
+//       $newSogat->vegetarian = 0;
+//
+//       $newSogat->tag1 = $item->tag1;
+//       $newSogat->tag2 = $item->tag2;
+//       $newSogat->tag3 = $item->tag3;
+//       $newSogat->tag4 = $item->tag4;
+//       $newSogat->tag5 = $item->tag5;
+//       $newSogat->tag6 = $item->tag6;
+//       $newSogat->tag7 = $item->tag7;
+//       $newSogat->tag8 = $item->tag8;
+//       $newSogat->tag9 = $item->tag9;
+//       $newSogat->tag10 = $item->tag10;
+//       $newSogat->tag11 = $item->tag11;
+//       $newSogat->tag12 = $item->tag12;
+//       $newSogat->tag13 = $item->tag13;
+//       $newSogat->tag14 = $item->tag14;
+//       $newSogat->tag15 = $item->tag15;
+//
+//       $newSogat->author = 1;
+//       $newSogat->authorized = 1;
+//
+//       $newSogat->save();
+//
+//       $id = $newSogat->id;
+//
+//       $sqlQuery = 'INSERT INTO placePics (id, picNumber, placeId, kindPlaceId, alt) VALUES ';
+//       $val = '';
+//       if($item->pic_2 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "2.jpg", ' . $id . ', 11, "' . $item->alt2 . '")';
+//       }
+//       if($item->pic_3 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "3.jpg", ' . $id . ', 11, "' . $item->alt3 . '")';
+//       }
+//       if($item->pic_4 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "4.jpg", ' . $id . ', 11, "' . $item->alt4 . '")';
+//       }
+//       if($item->pic_5 == 1){
+//           if($val != '')
+//               $val .=' ,';
+//           $val .= '(null, "5.jpg", ' . $id . ', 11, "' . $item->alt5 . '")';
+//       }
+//       $sqlQuery .= $val;
+//       if($val != '')
+//           \DB::select($sqlQuery);
+//
+//   }
+//    dd('done');
+//});
 
 Route::get('updateMainDataBase', function(){
 

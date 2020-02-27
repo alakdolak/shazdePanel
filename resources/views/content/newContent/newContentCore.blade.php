@@ -143,9 +143,8 @@
                                         <div class="col-md-3 f_r">
                                             <div class="form-group" style="position: relative">
                                                 <label for="name"> شهر</label>
-                                                <input type="text" class="form-control" name="city" id="city" value="{{isset($city) ? $city->name : ''}}" onkeyup="searchCity(this.value)">
-                                                <input type="hidden" name="cityId" id="cityId" value="{{isset($city) ? $city->id : 0}}">
-
+                                                <input type="text" class="form-control" name="city" id="city" value="{{isset($city) && isset($city->name) ? $city->name : ''}}" onkeyup="searchCity(this.value)">
+                                                <input type="hidden" name="cityId" id="cityId" value="{{isset($city) && isset($city->id) ? $city->id : 0}}">
                                                 <div id="citySearch" class="citySearch">
                                                     <ul id="resultCity"></ul>
                                                 </div>
@@ -156,16 +155,16 @@
                                             <div class="col-md-2 f_r">
                                                 <div class="form-group">
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">انتخاب از روی نقشه</button>
-                                                    <input type="hidden" name="C" id="lat" value="0">
-                                                    <input type="hidden" name="D" id="lng" value="0">
+                                                    <label for="lat">lat(C)</label>
+                                                    <input type="text" name="C" id="lat" value="1" onchange="setNewMarker()">
+
+                                                    <label for="lng">lng(D)</label>
+                                                    <input type="text" name="D" id="lng" value="1" onchange="setNewMarker()">
                                                 </div>
                                             </div>
                                         @else
-                                            <label for="lat">lat(C)</label>
-                                            <input type="text" name="C" id="lat" value="1" onchange="setNewMarker()">
-
-                                            <label for="lng">lng(D)</label>
-                                            <input type="text" name="D" id="lng" value="1" onchange="setNewMarker()">
+                                            <input type="hidden" name="C" id="lat" value="0">
+                                            <input type="hidden" name="D" id="lng" value="0">
                                         @endif
                                     </div>
 

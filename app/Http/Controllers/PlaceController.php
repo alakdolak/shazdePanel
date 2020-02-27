@@ -514,10 +514,12 @@ class PlaceController extends Controller {
         ];
         $place->description = trueShowForTextArea($place->description);
         $place->zoom = 15;
-        if($place->C == null && $place->D == null) {
-            $place->C = 32.42056639964595;
-            $place->D = 54.00537109375;
-            $place->zoom = 5;
+        if($kindPlace->tableName != 'sogatSanaies' && $kindPlace->tableName != 'mahaliFood') {
+            if ($place->C == null && $place->D == null) {
+                $place->C = 32.42056639964595;
+                $place->D = 54.00537109375;
+                $place->zoom = 5;
+            }
         }
 
         switch ($mode){
@@ -588,6 +590,10 @@ class PlaceController extends Controller {
                 $state = State::find($cityId);
                 $cities = Cities::where('stateId', $state->id)->get();
             }
+        }
+        else {
+            $city = null;
+            $cities = Cities::where('stateId', $allState[0]->id)->get();
         }
 
         switch ($mode){

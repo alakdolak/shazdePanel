@@ -123,7 +123,7 @@
                                         <div class="tab {{$kind == 'sogatSanaies' ? 'chooseTab': ''}}">صنایع دستی/سوغات</div>
                                     </a>
                                     <a href="{{url('/newChangeContent/' . $id . '/11/' . $cityMode )}}">
-                                        <div class="tab {{$kind == 'mahalifood' ? 'chooseTab': ''}}">غذای محلی</div>
+                                        <div class="tab {{$kind == 'mahaliFood' ? 'chooseTab': ''}}">غذای محلی</div>
                                     </a>
                                 </div>
                                 <hr>
