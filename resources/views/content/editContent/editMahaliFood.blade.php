@@ -165,6 +165,7 @@
                                             <select id="kind" name="kind">
                                                 <option value="1" {{$place->kind == 1? 'selected': ''}}>چلوخورش</option>
                                                 <option value="2" {{$place->kind == 2? 'selected': ''}}>خوراک</option>
+                                                <option value="8" {{$place->kind == 8? 'selected': ''}}>سوپ و آش</option>
                                                 <option value="3" {{$place->kind == 3? 'selected': ''}}>سالاد و پیش غذا
                                                 </option>
                                                 <option value="4" {{$place->kind == 4? 'selected': ''}}>ساندویچ</option>

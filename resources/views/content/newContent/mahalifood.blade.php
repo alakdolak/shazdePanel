@@ -8,6 +8,7 @@
         <select id="kind" name="kind">
             <option value="1">چلوخورش</option>
             <option value="2">خوراک</option>
+            <option value="8">سوپ و آش</option>
             <option value="3">سالاد و پیش غذا</option>
             <option value="4">ساندویچ</option>
             <option value="5">کباب</option>
