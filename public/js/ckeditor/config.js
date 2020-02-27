@@ -5,7 +5,7 @@
 
 CKEDITOR.editorConfig = function( config ) {
     config.defaultLanguage = 'fa';
-    config.removePlugins = 'image';
+    // config.removePlugins = 'image';
     config.toolbarGroups = [
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
