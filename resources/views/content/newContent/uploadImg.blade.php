@@ -489,12 +489,12 @@
                 autoCropArea: 1,
                 ready: function (){
                     var canvasl = cropperSqu.getCroppedCanvas({
-                        width: 150,
-                        height: 150,
+                        width: 250,
+                        height: 250,
                     });
                     var canvast = cropperSqu.getCroppedCanvas({
-                        width: 50,
-                        height: 50,
+                        width: 150,
+                        height: 150,
                     });
 
                     squaResultCanvas = canvasl.toDataURL();
@@ -515,12 +515,12 @@
                         autoCropArea: 1,
                         ready: function (){
                             var canvasf = cropperReq.getCroppedCanvas({
-                                width: 250,
-                                height: 167
+                                width: 300,
+                                height: 200
                             });
                             var canvass = cropperReq.getCroppedCanvas({
-                                width: 550,
-                                height: 367,
+                                width: 610,
+                                height: 406,
                             });
 
                             squaResultCanvas = canvass.toDataURL();

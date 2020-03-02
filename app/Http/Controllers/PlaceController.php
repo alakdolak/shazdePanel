@@ -184,11 +184,11 @@ class PlaceController extends Controller {
                         $destinationL = $location . '/l-' . $picNumber;
                         $destinationMainPic = $location . '/' . $picNumber;
 
-                        compressImage($_FILES['f-1']['tmp_name'], $destinationF, 60);
-                        compressImage($_FILES['t-1']['tmp_name'], $destinationT, 60);
-                        compressImage($_FILES['s-1']['tmp_name'], $destinationS, 60);
-                        compressImage($_FILES['l-1']['tmp_name'], $destinationL, 60);
-                        compressImage($_FILES['mainPic']['tmp_name'], $destinationMainPic, 60);
+                        compressImage($_FILES['f-1']['tmp_name'], $destinationF, 80);
+                        compressImage($_FILES['t-1']['tmp_name'], $destinationT, 80);
+                        compressImage($_FILES['s-1']['tmp_name'], $destinationS, 80);
+                        compressImage($_FILES['l-1']['tmp_name'], $destinationL, 80);
+                        compressImage($_FILES['mainPic']['tmp_name'], $destinationMainPic, 80);
 
                         echo 'ok';
                     }

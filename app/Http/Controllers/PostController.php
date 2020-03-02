@@ -367,11 +367,11 @@ class PostController extends Controller {
                     unlink($location);
             }
             else{
-                $post->pic = 'mainPic.jpg';
+                $post->pic = time() . '-mainPic.jpg';
                 $post->save();
                 $location .= '/' . $post->pic;
             }
-            compressImage($_FILES['pic']['tmp_name'], $location, 100);
+            compressImage($_FILES['pic']['tmp_name'], $location, 80);
         }
 
         $city = json_decode($request->cityId);
