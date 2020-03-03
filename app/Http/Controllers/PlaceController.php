@@ -738,6 +738,8 @@ class PlaceController extends Controller {
                 }
             }
         }
+        else
+            PlaceFeatureRelation::where('placeId', $amaken->id)->delete();
 
         return \redirect(\url('uploadImgPage/1/' . $amaken->id));
     }
@@ -871,6 +873,8 @@ class PlaceController extends Controller {
                 }
             }
         }
+        else
+            PlaceFeatureRelation::where('placeId', $hotel->id)->delete();
 
         return \redirect(\url('uploadImgPage/4/' . $hotel->id));
     }
@@ -980,6 +984,8 @@ class PlaceController extends Controller {
                 }
             }
         }
+        else
+            PlaceFeatureRelation::where('placeId', $restaurant->id)->delete();
 
         return \redirect(\url('uploadImgPage/3/' . $restaurant->id));
     }
@@ -1078,6 +1084,8 @@ class PlaceController extends Controller {
                 }
             }
         }
+        else
+            PlaceFeatureRelation::where('placeId', $majara->id)->delete();
 
         return \redirect(\url('uploadImgPage/6/' . $majara->id));
     }
