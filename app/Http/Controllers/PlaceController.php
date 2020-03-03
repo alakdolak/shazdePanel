@@ -1154,10 +1154,13 @@ class PlaceController extends Controller {
             $newMahali->recipes = null;
 
         $material = array();
-        for ($i = 0; $i < count($request->matName) && $i < count($request->matValue); $i++){
-            if(isset($request->matName[$i]) && $request->matName[$i] != null && isset($request->matValue[$i]) && $request->matValue[$i] != null ){
-                $mat = [$request->matName[$i], $request->matValue[$i]];
-                array_push($material, $mat);
+
+        if(isset($request->matName)) {
+            for ($i = 0; $i < count($request->matName) && $i < count($request->matValue); $i++) {
+                if (isset($request->matName[$i]) && $request->matName[$i] != null && isset($request->matValue[$i]) && $request->matValue[$i] != null) {
+                    $mat = [$request->matName[$i], $request->matValue[$i]];
+                    array_push($material, $mat);
+                }
             }
         }
         $newMahali->material = json_encode($material);
@@ -1165,12 +1168,12 @@ class PlaceController extends Controller {
         $newMahali->energy = $request->energy;
         $newMahali->volume = $request->volume;
         if($request->source == 1){
-            $newMahali->gram = 1;
-            $newMahali->spoon = 0;
-        }
-        else{
             $newMahali->gram = 0;
             $newMahali->spoon = 1;
+        }
+        else{
+            $newMahali->gram = 1;
+            $newMahali->spoon = 0;
         }
 
         if(isset($request->rice) && $request->rice == 'on')
