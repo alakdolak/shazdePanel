@@ -383,6 +383,16 @@
                                                 </div>
                                             </div>
                                         @endfor
+                                        @if(count($place->tags) < 20)
+                                            @for($i = count($place->tags); $i < 20; $i++)
+                                                <div class="f_r" style="margin-left: 15px;">
+                                                    <div class="form-group">
+                                                        <label for="name"> برچسب {{$i+1}} </label>
+                                                        <input type="text" class="form-control" name="tag[]" id="tag{{$i+1}}" value="" onchange="checkTags()" {{$i < 5 ? 'required' : ''}}>
+                                                    </div>
+                                                </div>
+                                            @endfor
+                                        @endif
                                     </div>
 
                                     <hr>

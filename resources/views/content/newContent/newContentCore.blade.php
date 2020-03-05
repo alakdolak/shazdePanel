@@ -229,7 +229,7 @@
                                     <hr>
                                     <div class="row">
 
-                                        @for($i = 0; $i < 15; $i++)
+                                        @for($i = 0; $i < 20; $i++)
                                             <div class="f_r" style="margin-left: 15px;">
                                                 <div class="form-group">
                                                     <label for="name"> برچسب {{$i+1}} </label>

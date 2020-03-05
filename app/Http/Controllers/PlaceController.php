@@ -12,6 +12,7 @@ use App\models\Place;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
 use App\models\PlacePic;
+use App\models\PlaceTag;
 use App\models\Restaurant;
 use App\models\SogatSanaie;
 use App\models\SpecialAdvice;
@@ -495,23 +496,7 @@ class PlaceController extends Controller {
         $state = State::find($city->stateId);
         $place->city = $city->name;
         $place->stateId = $city->stateId;
-        $place->tags = [
-            $place->tag1,
-            $place->tag2,
-            $place->tag3,
-            $place->tag4,
-            $place->tag5,
-            $place->tag6,
-            $place->tag7,
-            $place->tag8,
-            $place->tag9,
-            $place->tag10,
-            $place->tag11,
-            $place->tag12,
-            $place->tag13,
-            $place->tag14,
-            $place->tag15,
-        ];
+        $place->tags = PlaceTag::getTags($kindPlace->id, $place->id);
         $place->description = trueShowForTextArea($place->description);
         $place->zoom = 15;
         if($kindPlace->tableName != 'sogatSanaies' && $kindPlace->tableName != 'mahaliFood') {
@@ -539,35 +524,8 @@ class PlaceController extends Controller {
                 return view('content.editContent.editSogatSanaie', compact(['place', 'kind', 'state', 'allState', 'mode', 'cities', 'city', 'features', 'placeFeatures']));
                 break;
             case 11:
-//                $food = MahaliFood::find($id);
-//                $city = Cities::find($food->cityId);
-//                $food->city = $city->name;
-//                $food->stateId = $city->stateId;
-//                $state = State::find($city->stateId);
                 $place->material = json_decode($place->material);
-//                $food->tags = [
-//                    $food->tag1,
-//                    $food->tag2,
-//                    $food->tag3,
-//                    $food->tag4,
-//                    $food->tag5,
-//                    $food->tag6,
-//                    $food->tag7,
-//                    $food->tag8,
-//                    $food->tag9,
-//                    $food->tag10,
-//                    $food->tag11,
-//                    $food->tag12,
-//                    $food->tag13,
-//                    $food->tag14,
-//                    $food->tag15,
-//                ];
-//
                 $place->recipes = trueShowForTextArea($place->recipes);
-//                $food->description = trueShowForTextArea($food->description);
-//
-//                $cities = Cities::where('stateId', $city->stateId)->get();
-
                 return view('content.editContent.editMahaliFood', compact(['place', 'kind', 'state', 'allState', 'mode', 'cities', 'city', 'features', 'placeFeatures']));
                 break;
             default:
@@ -702,44 +660,15 @@ class PlaceController extends Controller {
         else
             $amaken->site = '';
 
-        $amaken->tag1 = $request->tag[0];
-        $amaken->tag2 = $request->tag[1];
-        $amaken->tag3 = $request->tag[2];
-        $amaken->tag4 = $request->tag[3];
-        $amaken->tag5 = $request->tag[4];
-        $amaken->tag6 = $request->tag[5];
-        $amaken->tag7 = $request->tag[6];
-        $amaken->tag8 = $request->tag[7];
-        $amaken->tag9 = $request->tag[8];
-        $amaken->tag10 = $request->tag[9];
-        $amaken->tag11 = $request->tag[10];
-        $amaken->tag12 = $request->tag[11];
-        $amaken->tag13 = $request->tag[12];
-        $amaken->tag14 = $request->tag[13];
-        $amaken->tag15 = $request->tag[14];
-
         $amaken->save();
 
-        if(isset($request->features) && is_array($request->features) && count($request->features) > 0) {
-            $existFeatures = PlaceFeatureRelation::where('placeId', $amaken->id)->get();
-            $has = array();
-            foreach ($existFeatures as $item) {
-                if (in_array($item->featureId, $request->features))
-                    array_push($has, $item->featureId);
-                else
-                    $item->delete();
-            }
-            foreach ($request->features as $item) {
-                if (!in_array($item, $has)) {
-                    $newFeature = new PlaceFeatureRelation();
-                    $newFeature->placeId = $amaken->id;
-                    $newFeature->featureId = $item;
-                    $newFeature->save();
-                }
-            }
-        }
+        $this->storePlaceTags(1, $amaken->id, $request->tag);
+
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
+            $this->storePlaceFeatures(1, $amaken->id, $request->features);
         else
-            PlaceFeatureRelation::where('placeId', $amaken->id)->delete();
+            PlaceFeatureRelation::where(['kindPlaceId' => 1, 'placeId', $amaken->id])->delete();
+
 
         return \redirect(\url('uploadImgPage/1/' . $amaken->id));
     }
@@ -837,44 +766,14 @@ class PlaceController extends Controller {
         else
             $hotel->vabastegi = '';
 
-        $hotel->tag1 = $request->tag[0];
-        $hotel->tag2 = $request->tag[1];
-        $hotel->tag3 = $request->tag[2];
-        $hotel->tag4 = $request->tag[3];
-        $hotel->tag5 = $request->tag[4];
-        $hotel->tag6 = $request->tag[5];
-        $hotel->tag7 = $request->tag[6];
-        $hotel->tag8 = $request->tag[7];
-        $hotel->tag9 = $request->tag[8];
-        $hotel->tag10 = $request->tag[9];
-        $hotel->tag11 = $request->tag[10];
-        $hotel->tag12 = $request->tag[11];
-        $hotel->tag13 = $request->tag[12];
-        $hotel->tag14 = $request->tag[13];
-        $hotel->tag15 = $request->tag[14];
-
         $hotel->save();
 
-        if(isset($request->features) && is_array($request->features) && count($request->features) > 0) {
-            $existFeatures = PlaceFeatureRelation::where('placeId', $hotel->id)->get();
-            $has = array();
-            foreach ($existFeatures as $item) {
-                if (in_array($item->featureId, $request->features))
-                    array_push($has, $item->featureId);
-                else
-                    $item->delete();
-            }
-            foreach ($request->features as $item) {
-                if (!in_array($item, $has)) {
-                    $newFeature = new PlaceFeatureRelation();
-                    $newFeature->placeId = $hotel->id;
-                    $newFeature->featureId = $item;
-                    $newFeature->save();
-                }
-            }
-        }
+        $this->storePlaceTags(4, $hotel->id, $request->tag);
+
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
+            $this->storePlaceFeatures(4, $hotel->id, $request->features);
         else
-            PlaceFeatureRelation::where('placeId', $hotel->id)->delete();
+            PlaceFeatureRelation::where(['kindPlaceId' => 4, 'placeId', $hotel->id])->delete();
 
         return \redirect(\url('uploadImgPage/4/' . $hotel->id));
     }
@@ -946,46 +845,14 @@ class PlaceController extends Controller {
             $restaurant->site = $request->site;
         else
             $restaurant->site = '';
-
-        $restaurant->tag1 = $request->tag[0];
-        $restaurant->tag2 = $request->tag[1];
-        $restaurant->tag3 = $request->tag[2];
-        $restaurant->tag4 = $request->tag[3];
-        $restaurant->tag5 = $request->tag[4];
-        $restaurant->tag6 = $request->tag[5];
-        $restaurant->tag7 = $request->tag[6];
-        $restaurant->tag8 = $request->tag[7];
-        $restaurant->tag9 = $request->tag[8];
-        $restaurant->tag10 = $request->tag[9];
-        $restaurant->tag11 = $request->tag[10];
-        $restaurant->tag12 = $request->tag[11];
-        $restaurant->tag13 = $request->tag[12];
-        $restaurant->tag14 = $request->tag[13];
-        $restaurant->tag15 = $request->tag[14];
-
         $restaurant->save();
 
+        $this->storePlaceTags(3, $restaurant->id, $request->tag);
 
-        if(isset($request->features) && is_array($request->features) && count($request->features) > 0) {
-            $existFeatures = PlaceFeatureRelation::where('placeId', $restaurant->id)->get();
-            $has = array();
-            foreach ($existFeatures as $item) {
-                if (in_array($item->featureId, $request->features))
-                    array_push($has, $item->featureId);
-                else
-                    $item->delete();
-            }
-            foreach ($request->features as $item) {
-                if (!in_array($item, $has)) {
-                    $newFeature = new PlaceFeatureRelation();
-                    $newFeature->placeId = $restaurant->id;
-                    $newFeature->featureId = $item;
-                    $newFeature->save();
-                }
-            }
-        }
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
+            $this->storePlaceFeatures(3, $restaurant->id, $request->features);
         else
-            PlaceFeatureRelation::where('placeId', $restaurant->id)->delete();
+            PlaceFeatureRelation::where(['kindPlaceId' => 3, 'placeId', $restaurant->id])->delete();
 
         return \redirect(\url('uploadImgPage/3/' . $restaurant->id));
     }
@@ -1048,44 +915,14 @@ class PlaceController extends Controller {
         else
             $majara->nazdik = '';
 
-        $majara->tag1 = $request->tag[0];
-        $majara->tag2 = $request->tag[1];
-        $majara->tag3 = $request->tag[2];
-        $majara->tag4 = $request->tag[3];
-        $majara->tag5 = $request->tag[4];
-        $majara->tag6 = $request->tag[5];
-        $majara->tag7 = $request->tag[6];
-        $majara->tag8 = $request->tag[7];
-        $majara->tag9 = $request->tag[8];
-        $majara->tag10 = $request->tag[9];
-        $majara->tag11 = $request->tag[10];
-        $majara->tag12 = $request->tag[11];
-        $majara->tag13 = $request->tag[12];
-        $majara->tag14 = $request->tag[13];
-        $majara->tag15 = $request->tag[14];
-
         $majara->save();
 
-        if(isset($request->features) && is_array($request->features) && count($request->features) > 0) {
-            $existFeatures = PlaceFeatureRelation::where('placeId', $majara->id)->get();
-            $has = array();
-            foreach ($existFeatures as $item) {
-                if (in_array($item->featureId, $request->features))
-                    array_push($has, $item->featureId);
-                else
-                    $item->delete();
-            }
-            foreach ($request->features as $item) {
-                if (!in_array($item, $has)) {
-                    $newFeature = new PlaceFeatureRelation();
-                    $newFeature->placeId = $majara->id;
-                    $newFeature->featureId = $item;
-                    $newFeature->save();
-                }
-            }
-        }
+        $this->storePlaceTags(6, $majara->id, $request->tag);
+
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
+            $this->storePlaceFeatures(6, $majara->id, $request->features);
         else
-            PlaceFeatureRelation::where('placeId', $majara->id)->delete();
+            PlaceFeatureRelation::where(['kindPlaceId' => 6, 'placeId', $majara->id])->delete();
 
         return \redirect(\url('uploadImgPage/6/' . $majara->id));
     }
@@ -1186,23 +1023,9 @@ class PlaceController extends Controller {
         else
             $newMahali->bread = 0;
 
-        $newMahali->tag1 = $request->tag[0];
-        $newMahali->tag2 = $request->tag[1];
-        $newMahali->tag3 = $request->tag[2];
-        $newMahali->tag4 = $request->tag[3];
-        $newMahali->tag5 = $request->tag[4];
-        $newMahali->tag6 = $request->tag[5];
-        $newMahali->tag7 = $request->tag[6];
-        $newMahali->tag8 = $request->tag[7];
-        $newMahali->tag9 = $request->tag[8];
-        $newMahali->tag10 = $request->tag[9];
-        $newMahali->tag11 = $request->tag[10];
-        $newMahali->tag12 = $request->tag[11];
-        $newMahali->tag13 = $request->tag[12];
-        $newMahali->tag14 = $request->tag[13];
-        $newMahali->tag15 = $request->tag[14];
-
         $newMahali->save();
+
+        $this->storePlaceTags(11, $newMahali->id, $request->tag);
 
         return \redirect(\url('uploadImgPage/11/' . $newMahali->id));
     }
@@ -1323,24 +1146,10 @@ class PlaceController extends Controller {
         if(isset($request->material) && $request->material != null)
             $newSogat->material = $request->material;
 
-        $newSogat->tag1 = $request->tag[0];
-        $newSogat->tag2 = $request->tag[1];
-        $newSogat->tag3 = $request->tag[2];
-        $newSogat->tag4 = $request->tag[3];
-        $newSogat->tag5 = $request->tag[4];
-        $newSogat->tag6 = $request->tag[5];
-        $newSogat->tag7 = $request->tag[6];
-        $newSogat->tag8 = $request->tag[7];
-        $newSogat->tag9 = $request->tag[8];
-        $newSogat->tag10 = $request->tag[9];
-        $newSogat->tag11 = $request->tag[10];
-        $newSogat->tag12 = $request->tag[11];
-        $newSogat->tag13 = $request->tag[12];
-        $newSogat->tag14 = $request->tag[13];
-        $newSogat->tag15 = $request->tag[14];
-
         $newSogat->author = \auth()->user()->id;
         $newSogat->save();
+
+        $this->storePlaceTags(10, $newSogat->id, $request->tag);
 
         return \redirect(\url('uploadImgPage/10/' . $newSogat->id));
     }
@@ -2312,4 +2121,69 @@ class PlaceController extends Controller {
         return \redirect()->back();
     }
 
+    private function storePlaceTags($kindPlaceId, $placeId, $newTags){
+        $placeTags = PlaceTag::where(['kindPlaceId' => $kindPlaceId, 'placeId' => $placeId])->get();
+        $notInId = [];
+        $inDataBaseTag = [];
+        $newTag = [];
+        foreach ($placeTags as $item){
+            array_push($inDataBaseTag, $item->tag);
+            if(!in_array($item->tag, $newTags))
+                array_push($notInId, $item);
+        }
+        foreach ($newTags as $item){
+            if(!in_array($item, $inDataBaseTag) && $item != null)
+                array_push($newTag, $item);
+        }
+
+        $saveNewTagCount = 0;
+        foreach ($notInId as $item){
+            $store = false;
+            for($i = 0; $i < count($newTag); $i++){
+                if($newTag[$i] != null){
+                    $item->tag = $newTag[$i];
+                    $item->save();
+                    $newTag[$i] = null;
+                    $store = true;
+                    $saveNewTagCount++;
+                    break;
+                }
+            }
+            if(!$store)
+                $item->delete();
+        }
+        if(count($newTag) > $saveNewTagCount){
+            foreach ($newTag as $tag){
+                if($tag != null){
+                    $newTagStore = new PlaceTag();
+                    $newTagStore->kindPlaceId = 1;
+                    $newTagStore->placeId = $placeId;
+                    $newTagStore->tag = $tag;
+                    $newTagStore->save();
+                }
+            }
+        }
+    }
+
+    private function storePlaceFeatures($kindPlaceId, $placeId, $features){
+        $existFeatures = PlaceFeatureRelation::where(['kindPlaceId' => $kindPlaceId, 'placeId' => $placeId])->get();
+        $has = array();
+        foreach ($existFeatures as $item) {
+            if (in_array($item->featureId, $features))
+                array_push($has, $item->featureId);
+            else
+                $item->delete();
+        }
+
+        foreach ($features as $item) {
+            if (!in_array($item, $has)) {
+                $newFeature = new PlaceFeatureRelation();
+                $newFeature->placeId = $placeId;
+                $newFeature->featureId = $item;
+                $newFeature->kindPlaceId = $kindPlaceId;
+                $newFeature->save();
+            }
+        }
+
+    }
 }

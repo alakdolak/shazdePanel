@@ -17,6 +17,17 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Request;
 
+//Route::get('updateTable', function(){
+//    $kindPlaces = \App\models\Place::all();
+//    foreach ($kindPlaces as $kindPlace){
+//        if($kindPlace->tableName != null){
+//            $features = \App\models\PlaceFeatures::where('kindPlaceId', $kindPlace->id)->pluck('id')->toArray();
+//            \App\models\PlaceFeatureRelation::whereIn('featureId', $features)->update(['kindPlaceId' => $kindPlace->id]);
+//        }
+//    }
+//    dd('done');
+//});
+
 //include_once  __DIR__ . '/../app/Http/Controllers/Common.php';
 //Route::get('getAdabToSogat', function(){
 //
