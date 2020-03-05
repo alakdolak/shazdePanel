@@ -667,7 +667,7 @@ class PlaceController extends Controller {
         if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
             $this->storePlaceFeatures(1, $amaken->id, $request->features);
         else
-            PlaceFeatureRelation::where(['kindPlaceId' => 1, 'placeId', $amaken->id])->delete();
+            PlaceFeatureRelation::where(['kindPlaceId' => 1, 'placeId' => $amaken->id])->delete();
 
 
         return \redirect(\url('uploadImgPage/1/' . $amaken->id));
@@ -773,7 +773,7 @@ class PlaceController extends Controller {
         if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
             $this->storePlaceFeatures(4, $hotel->id, $request->features);
         else
-            PlaceFeatureRelation::where(['kindPlaceId' => 4, 'placeId', $hotel->id])->delete();
+            PlaceFeatureRelation::where(['kindPlaceId' => 4, 'placeId' => $hotel->id])->delete();
 
         return \redirect(\url('uploadImgPage/4/' . $hotel->id));
     }
@@ -852,7 +852,7 @@ class PlaceController extends Controller {
         if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
             $this->storePlaceFeatures(3, $restaurant->id, $request->features);
         else
-            PlaceFeatureRelation::where(['kindPlaceId' => 3, 'placeId', $restaurant->id])->delete();
+            PlaceFeatureRelation::where(['kindPlaceId' => 3, 'placeId' => $restaurant->id])->delete();
 
         return \redirect(\url('uploadImgPage/3/' . $restaurant->id));
     }
@@ -922,7 +922,7 @@ class PlaceController extends Controller {
         if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
             $this->storePlaceFeatures(6, $majara->id, $request->features);
         else
-            PlaceFeatureRelation::where(['kindPlaceId' => 6, 'placeId', $majara->id])->delete();
+            PlaceFeatureRelation::where(['kindPlaceId' => 6, 'placeId' => $majara->id])->delete();
 
         return \redirect(\url('uploadImgPage/6/' . $majara->id));
     }

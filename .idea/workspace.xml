@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/routes/web.php" line="683" />
+    <bookmark url="file://$PROJECT_DIR$/routes/web.php" line="446" />
     <bookmark url="file://$PROJECT_DIR$/resources/views/content/post/createPost.blade.php" line="322" />
     <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/SeoController.php" line="935" />
     <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/SeoController.php" line="708" />
@@ -9,16 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/models/PlaceTag.php" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editAmaken.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editAmaken.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editHotels.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editHotels.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editMajara.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editMajara.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editRestaurant.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editRestaurant.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editSogatSanaie.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editSogatSanaie.blade.php" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" afterPath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,28 +43,72 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="web.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+            <state relative-caret-position="612">
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding>
                 <element signature="e#391#432#0#PHP" expanded="true" />
-                <element signature="e#17246#18566#1#PHP" expanded="false" />
-                <element signature="e#21614#21795#0#PHP" expanded="false" />
-                <element signature="e#22996#23266#1#PHP" expanded="false" />
-                <element signature="e#23347#23768#1#PHP" expanded="false" />
-                <element signature="e#23848#25642#1#PHP" expanded="false" />
-                <element signature="e#25711#26641#1#PHP" expanded="false" />
-                <element signature="e#28393#29110#1#PHP" expanded="false" />
-                <element signature="e#29181#29654#1#PHP" expanded="false" />
-                <element signature="e#29746#30750#1#PHP" expanded="false" />
-                <element signature="e#30818#31014#1#PHP" expanded="false" />
-                <marker date="1583395796654" expanded="true" signature="2720:2737" ph="INSERT INTO placepics... " />
-                <marker date="1583395796654" expanded="true" signature="2720:2791" ph="INSERT INTO placePics... " />
-                <marker date="1583395796654" expanded="true" signature="5262:5333" ph="INSERT INTO placePics... " />
-                <marker date="1583395796654" expanded="true" signature="7907:7978" ph="INSERT INTO placePics... " />
-                <marker date="1583395796654" expanded="true" signature="7925:7978" ph="INSERT INTO placepics... " />
+                <element signature="e#8991#10311#1#PHP" expanded="false" />
+                <element signature="e#13359#13540#0#PHP" expanded="false" />
+                <element signature="e#14741#15011#1#PHP" expanded="false" />
+                <element signature="e#15092#15513#1#PHP" expanded="false" />
+                <element signature="e#15593#17387#1#PHP" expanded="false" />
+                <element signature="e#17456#18386#1#PHP" expanded="false" />
+                <element signature="e#20138#20855#1#PHP" expanded="false" />
+                <element signature="e#20926#21399#1#PHP" expanded="false" />
+                <element signature="e#21491#22495#1#PHP" expanded="false" />
+                <element signature="e#22563#22759#1#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlaceController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PlaceController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="669" column="98" lean-forward="true" selection-start-line="669" selection-start-column="98" selection-end-line="669" selection-end-column="98" />
+              <folding>
+                <element signature="e#40#60#0#PHP" expanded="true" />
+                <element signature="e#759#1457#0#PHP" expanded="false" />
+                <element signature="e#2428#3467#0#PHP" expanded="false" />
+                <element signature="e#3664#8977#0#PHP" expanded="false" />
+                <element signature="e#23259#23552#1#PHP" expanded="false" />
+                <element signature="e#23564#24185#0#PHP" expanded="false" />
+                <element signature="e#23938#24185#0#PHP" expanded="false" />
+                <element signature="e#51995#52202#0#PHP" expanded="false" />
+                <element signature="e#52208#55295#0#PHP" expanded="false" />
+                <element signature="e#55301#58977#0#PHP" expanded="false" />
+                <element signature="e#58983#62921#0#PHP" expanded="false" />
+                <element signature="e#62927#65905#0#PHP" expanded="false" />
+                <element signature="e#65911#67587#0#PHP" expanded="false" />
+                <element signature="e#74104#74796#0#PHP" expanded="false" />
+                <element signature="e#74802#76317#0#PHP" expanded="false" />
+                <element signature="e#75052#75237#0#PHP" expanded="false" />
+                <element signature="e#75246#75394#0#PHP" expanded="false" />
+                <element signature="e#75914#76311#0#PHP" expanded="false" />
+                <element signature="e#76323#77108#0#PHP" expanded="false" />
+                <marker date="1583397397672" expanded="true" signature="15893:16005" ph="select h.nam... ${$kind}" />
+                <marker date="1583397397672" expanded="true" signature="16261:16330" ph="select name,... ${$kind}" />
+                <marker date="1583397397672" expanded="true" signature="16773:16889" ph="select h.nam... ${$kind}" />
+                <marker date="1583397397672" expanded="true" signature="17145:17216" ph="SELECT name,... ${$kind}" />
+                <marker date="1583397397672" expanded="true" signature="44710:44783" ph="select h.* f... hotels" />
+                <marker date="1583397397672" expanded="true" signature="46249:46322" ph="select m.* f... majara" />
+                <marker date="1583397397672" expanded="true" signature="47126:47203" ph="select h.* f... restaurant" />
+                <marker date="1583397397672" expanded="true" signature="48220:48293" ph="select h.* f... amaken" />
+                <marker date="1583397397672" expanded="true" signature="49424:49484" ph="update hotels... " />
+                <marker date="1583397397672" expanded="true" signature="49596:49654" ph="update adab... " />
+                <marker date="1583397397672" expanded="true" signature="49768:49828" ph="update amaken... " />
+                <marker date="1583397397672" expanded="true" signature="49946:50010" ph="update restaurant... " />
+                <marker date="1583397397672" expanded="true" signature="50124:50184" ph="update majara... " />
+                <marker date="1583397397672" expanded="true" signature="51336:51484" ph="SELECT citie... cities" />
+                <marker date="1583397397672" expanded="true" signature="51654:51818" ph="SELECT 'city... cities" />
+                <marker date="1583397397672" expanded="true" signature="51853:51921" ph="SELECT 'stat... state" />
+                <marker date="1583397397672" expanded="true" signature="73523:73607" ph="SELECT name,... amaken" />
+                <marker date="1583397397672" expanded="true" signature="73725:73813" ph="SELECT name,... restaurant" />
+                <marker date="1583397397672" expanded="true" signature="73926:74010" ph="SELECT name,... hotels" />
               </folding>
             </state>
           </provider>
@@ -91,8 +127,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mg</find>
-      <find>jgp</find>
       <find>chooseTab</find>
       <find>changeAdab</find>
       <find>changeAdabContent</find>
@@ -118,9 +152,11 @@
       <find>tags</find>
       <find>pluc</find>
       <find>PlaceFeatureRelation</find>
-      <find>storePlaceFeatures</find>
       <find>storePlaceTags</find>
       <find>tag</find>
+      <find>upload</find>
+      <find>unlink</find>
+      <find>storePlaceFeatures</find>
     </findStrings>
     <replaceStrings>
       <replace>rafting</replace>
@@ -214,9 +250,9 @@
         <option value="$PROJECT_DIR$/resources/views/content/editContent/editMajara.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/content/editContent/editRestaurant.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/content/editContent/editSogatSanaie.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" />
-        <option value="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" />
       </list>
     </option>
   </component>
@@ -387,7 +423,14 @@
               <item name="shazdePanel" type="b2602c69:ProjectViewProjectNode" />
               <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="models" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="shazdePanel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="shazdePanel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -397,7 +440,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="editA&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;getCrop&#9;null&#9;null&#10;upload&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/uploadImg.blade.php&#10;createPost&#9;null&#9;null&#10;post&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/createPost.blade.php&#10;getValueInfo&#9;null&#9;null&#10;superAdminLevel&#9;null&#9;null&#10;admin&#9;null&#9;null&#10;mahali&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMahaliFood.blade.php&#10;easyimage&#9;FILE&#9;file://C:/Users/kiavash/Desktop/site-project/tools/ckeditor/ckeditor4EasyImg/plugins/easyimage/dialogs/easyimagealt.js&#10;editPost&#9;null&#9;null&#10;easy&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor/plugins/easyimage/dialogs/easyimagealt.js&#10;ثشسغ&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor/plugins/easyimage/styles/easyimage.css&#10;web&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/routes/web.php&#10;changeAdab&#9;null&#9;null&#10;stru&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/layouts/structure.blade.php&#10;edit&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMahaliFood.blade.php&#10;makeSlug&#9;null&#9;null&#10;amaken&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;newCOn&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;6f7f547f305fb0684599d5df364864081a06a844&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/storage/framework/views/6f7f547f305fb0684599d5df364864081a06a844.php&#10;placeCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;editContentPage&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/editContentPage.js&#10;common&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/Common.php&#10;seo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/SeoController.php&#10;changeContent&#9;null&#9;null&#10;keywordInPlaceDataBase&#9;null&#9;null&#10;homeC&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/HomeController.php&#10;adminP&#9;null&#9;null&#10;newCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;editHo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editHotels.blade.php&#10;editConte&#9;null&#9;null&#10;edi&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;newContentCore&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;newContent&#9;null&#9;null&#10;new&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;garde&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/gardeshNameList.blade.php&#10;4ef197fa7476fbaba541f4565b75a3544728a508&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/storage/framework/views/4ef197fa7476fbaba541f4565b75a3544728a508.php&#10;newChangeContent&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newChangeContent.blade.php&#10;gardesh&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/gardeshNameList.blade.php&#10;placeCo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;uploadImg&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/uploadImg.blade.php&#10;storeHotel&#9;null&#9;null&#10;place&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;createPo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/createPost.blade.php&#10;postCon&#9;null&#9;null&#10;postcrea&#9;null&#9;null&#10;doEditCity&#9;null&#9;null&#10;صثذ&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/routes/web.php&#10;mahal&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/mahalifood.blade.php" />
+    <property name="SearchEverywhereHistoryKey" value="PlaceController&#9;null&#9;null&#10;place&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;editA&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;getCrop&#9;null&#9;null&#10;upload&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/uploadImg.blade.php&#10;createPost&#9;null&#9;null&#10;post&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/createPost.blade.php&#10;getValueInfo&#9;null&#9;null&#10;superAdminLevel&#9;null&#9;null&#10;admin&#9;null&#9;null&#10;mahali&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMahaliFood.blade.php&#10;easyimage&#9;FILE&#9;file://C:/Users/kiavash/Desktop/site-project/tools/ckeditor/ckeditor4EasyImg/plugins/easyimage/dialogs/easyimagealt.js&#10;editPost&#9;null&#9;null&#10;easy&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor/plugins/easyimage/dialogs/easyimagealt.js&#10;ثشسغ&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor/plugins/easyimage/styles/easyimage.css&#10;web&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/routes/web.php&#10;changeAdab&#9;null&#9;null&#10;stru&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/layouts/structure.blade.php&#10;edit&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMahaliFood.blade.php&#10;makeSlug&#9;null&#9;null&#10;amaken&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;newCOn&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;6f7f547f305fb0684599d5df364864081a06a844&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/storage/framework/views/6f7f547f305fb0684599d5df364864081a06a844.php&#10;placeCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;editContentPage&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/editContentPage.js&#10;common&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/Common.php&#10;seo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/SeoController.php&#10;changeContent&#9;null&#9;null&#10;keywordInPlaceDataBase&#9;null&#9;null&#10;homeC&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/HomeController.php&#10;adminP&#9;null&#9;null&#10;newCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;editHo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editHotels.blade.php&#10;editConte&#9;null&#9;null&#10;edi&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;newContentCore&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;newContent&#9;null&#9;null&#10;new&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;garde&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/gardeshNameList.blade.php&#10;4ef197fa7476fbaba541f4565b75a3544728a508&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/storage/framework/views/4ef197fa7476fbaba541f4565b75a3544728a508.php&#10;newChangeContent&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newChangeContent.blade.php&#10;gardesh&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/gardeshNameList.blade.php&#10;placeCo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;uploadImg&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/uploadImg.blade.php&#10;storeHotel&#9;null&#9;null&#10;createPo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/createPost.blade.php&#10;postCon&#9;null&#9;null&#10;postcrea&#9;null&#9;null&#10;doEditCity&#9;null&#9;null&#10;صثذ&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/routes/web.php" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../kouchita" />
@@ -655,7 +698,7 @@
       <workItem from="1583165189685" duration="1397000" />
       <workItem from="1583217178764" duration="704000" />
       <workItem from="1583251222736" duration="534000" />
-      <workItem from="1583392243795" duration="4634000" />
+      <workItem from="1583392243795" duration="5234000" />
     </task>
     <task id="LOCAL-00001" summary="last changes">
       <created>1556982242677</created>
@@ -923,11 +966,18 @@
       <option name="project" value="LOCAL" />
       <updated>1583251475119</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="debug">
+      <created>1583396908931</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1583396908931</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="626898000" />
+    <option name="totallyTimeSpent" value="627498000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3866" height="2106" extended-state="6" />
@@ -1858,72 +1908,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PlaceController.php">
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
-          <caret line="1151" column="52" lean-forward="false" selection-start-line="1151" selection-start-column="52" selection-end-line="1151" selection-end-column="52" />
+        <state relative-caret-position="612">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding>
-            <element signature="e#40#60#0#PHP" expanded="true" />
-            <element signature="e#23179#25559#0#PHP" expanded="false" />
-            <element signature="e#23259#23552#1#PHP" expanded="false" />
-            <element signature="e#23564#24185#0#PHP" expanded="false" />
-            <element signature="e#23938#24185#0#PHP" expanded="false" />
-            <element signature="e#51987#52194#0#PHP" expanded="false" />
-            <element signature="e#52200#55287#0#PHP" expanded="false" />
-            <element signature="e#55293#58969#0#PHP" expanded="false" />
-            <element signature="e#58975#62913#0#PHP" expanded="false" />
-            <element signature="e#62919#65897#0#PHP" expanded="false" />
-            <element signature="e#65903#67579#0#PHP" expanded="false" />
-            <element signature="e#74096#74788#0#PHP" expanded="false" />
-            <element signature="e#74794#76309#0#PHP" expanded="false" />
-            <element signature="e#75044#75229#0#PHP" expanded="false" />
-            <element signature="e#75238#75386#0#PHP" expanded="false" />
-            <element signature="e#75906#76303#0#PHP" expanded="false" />
-            <element signature="e#76315#77100#0#PHP" expanded="false" />
-            <marker date="1583396252461" expanded="true" signature="15893:16005" ph="select h.nam... ${$kind}" />
-            <marker date="1583396252461" expanded="true" signature="16261:16330" ph="select name,... ${$kind}" />
-            <marker date="1583396252461" expanded="true" signature="16773:16889" ph="select h.nam... ${$kind}" />
-            <marker date="1583396252461" expanded="true" signature="17145:17216" ph="SELECT name,... ${$kind}" />
-            <marker date="1583396252461" expanded="true" signature="44702:44775" ph="select h.* f... hotels" />
-            <marker date="1583396252461" expanded="true" signature="46241:46314" ph="select m.* f... majara" />
-            <marker date="1583396252461" expanded="true" signature="47118:47195" ph="select h.* f... restaurant" />
-            <marker date="1583396252461" expanded="true" signature="48212:48285" ph="select h.* f... amaken" />
-            <marker date="1583396252461" expanded="true" signature="49416:49476" ph="update hotels... " />
-            <marker date="1583396252461" expanded="true" signature="49588:49646" ph="update adab... " />
-            <marker date="1583396252461" expanded="true" signature="49760:49820" ph="update amaken... " />
-            <marker date="1583396252461" expanded="true" signature="49938:50002" ph="update restaurant... " />
-            <marker date="1583396252461" expanded="true" signature="50116:50176" ph="update majara... " />
-            <marker date="1583396252461" expanded="true" signature="51328:51476" ph="SELECT citie... cities" />
-            <marker date="1583396252461" expanded="true" signature="51646:51810" ph="SELECT 'city... cities" />
-            <marker date="1583396252461" expanded="true" signature="51845:51913" ph="SELECT 'stat... state" />
-            <marker date="1583396252461" expanded="true" signature="73515:73599" ph="SELECT name,... amaken" />
-            <marker date="1583396252461" expanded="true" signature="73717:73805" ph="SELECT name,... restaurant" />
-            <marker date="1583396252461" expanded="true" signature="73918:74002" ph="SELECT name,... hotels" />
+            <element signature="e#391#432#0#PHP" expanded="true" />
+            <element signature="e#8991#10311#1#PHP" expanded="false" />
+            <element signature="e#13359#13540#0#PHP" expanded="false" />
+            <element signature="e#14741#15011#1#PHP" expanded="false" />
+            <element signature="e#15092#15513#1#PHP" expanded="false" />
+            <element signature="e#15593#17387#1#PHP" expanded="false" />
+            <element signature="e#17456#18386#1#PHP" expanded="false" />
+            <element signature="e#20138#20855#1#PHP" expanded="false" />
+            <element signature="e#20926#21399#1#PHP" expanded="false" />
+            <element signature="e#21491#22495#1#PHP" expanded="false" />
+            <element signature="e#22563#22759#1#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PlaceController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        <state relative-caret-position="714">
+          <caret line="669" column="98" lean-forward="true" selection-start-line="669" selection-start-column="98" selection-end-line="669" selection-end-column="98" />
           <folding>
-            <element signature="e#391#432#0#PHP" expanded="true" />
-            <element signature="e#17246#18566#1#PHP" expanded="false" />
-            <element signature="e#21614#21795#0#PHP" expanded="false" />
-            <element signature="e#22996#23266#1#PHP" expanded="false" />
-            <element signature="e#23347#23768#1#PHP" expanded="false" />
-            <element signature="e#23848#25642#1#PHP" expanded="false" />
-            <element signature="e#25711#26641#1#PHP" expanded="false" />
-            <element signature="e#28393#29110#1#PHP" expanded="false" />
-            <element signature="e#29181#29654#1#PHP" expanded="false" />
-            <element signature="e#29746#30750#1#PHP" expanded="false" />
-            <element signature="e#30818#31014#1#PHP" expanded="false" />
-            <marker date="1583395796654" expanded="true" signature="2720:2737" ph="INSERT INTO placepics... " />
-            <marker date="1583395796654" expanded="true" signature="2720:2791" ph="INSERT INTO placePics... " />
-            <marker date="1583395796654" expanded="true" signature="5262:5333" ph="INSERT INTO placePics... " />
-            <marker date="1583395796654" expanded="true" signature="7907:7978" ph="INSERT INTO placePics... " />
-            <marker date="1583395796654" expanded="true" signature="7925:7978" ph="INSERT INTO placepics... " />
+            <element signature="e#40#60#0#PHP" expanded="true" />
+            <element signature="e#759#1457#0#PHP" expanded="false" />
+            <element signature="e#2428#3467#0#PHP" expanded="false" />
+            <element signature="e#3664#8977#0#PHP" expanded="false" />
+            <element signature="e#23259#23552#1#PHP" expanded="false" />
+            <element signature="e#23564#24185#0#PHP" expanded="false" />
+            <element signature="e#23938#24185#0#PHP" expanded="false" />
+            <element signature="e#51995#52202#0#PHP" expanded="false" />
+            <element signature="e#52208#55295#0#PHP" expanded="false" />
+            <element signature="e#55301#58977#0#PHP" expanded="false" />
+            <element signature="e#58983#62921#0#PHP" expanded="false" />
+            <element signature="e#62927#65905#0#PHP" expanded="false" />
+            <element signature="e#65911#67587#0#PHP" expanded="false" />
+            <element signature="e#74104#74796#0#PHP" expanded="false" />
+            <element signature="e#74802#76317#0#PHP" expanded="false" />
+            <element signature="e#75052#75237#0#PHP" expanded="false" />
+            <element signature="e#75246#75394#0#PHP" expanded="false" />
+            <element signature="e#75914#76311#0#PHP" expanded="false" />
+            <element signature="e#76323#77108#0#PHP" expanded="false" />
+            <marker date="1583397397672" expanded="true" signature="15893:16005" ph="select h.nam... ${$kind}" />
+            <marker date="1583397397672" expanded="true" signature="16261:16330" ph="select name,... ${$kind}" />
+            <marker date="1583397397672" expanded="true" signature="16773:16889" ph="select h.nam... ${$kind}" />
+            <marker date="1583397397672" expanded="true" signature="17145:17216" ph="SELECT name,... ${$kind}" />
+            <marker date="1583397397672" expanded="true" signature="44710:44783" ph="select h.* f... hotels" />
+            <marker date="1583397397672" expanded="true" signature="46249:46322" ph="select m.* f... majara" />
+            <marker date="1583397397672" expanded="true" signature="47126:47203" ph="select h.* f... restaurant" />
+            <marker date="1583397397672" expanded="true" signature="48220:48293" ph="select h.* f... amaken" />
+            <marker date="1583397397672" expanded="true" signature="49424:49484" ph="update hotels... " />
+            <marker date="1583397397672" expanded="true" signature="49596:49654" ph="update adab... " />
+            <marker date="1583397397672" expanded="true" signature="49768:49828" ph="update amaken... " />
+            <marker date="1583397397672" expanded="true" signature="49946:50010" ph="update restaurant... " />
+            <marker date="1583397397672" expanded="true" signature="50124:50184" ph="update majara... " />
+            <marker date="1583397397672" expanded="true" signature="51336:51484" ph="SELECT citie... cities" />
+            <marker date="1583397397672" expanded="true" signature="51654:51818" ph="SELECT 'city... cities" />
+            <marker date="1583397397672" expanded="true" signature="51853:51921" ph="SELECT 'stat... state" />
+            <marker date="1583397397672" expanded="true" signature="73523:73607" ph="SELECT name,... amaken" />
+            <marker date="1583397397672" expanded="true" signature="73725:73813" ph="SELECT name,... restaurant" />
+            <marker date="1583397397672" expanded="true" signature="73926:74010" ph="SELECT name,... hotels" />
           </folding>
         </state>
       </provider>
