@@ -127,7 +127,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), functio
     Route::get('seoTester', ['as' => 'seoTester', 'uses' => 'SeoController@seoTester']);
 
     Route::post('doSeoTest', ['as' => 'doSeoTest', 'uses' => 'SeoController@doSeoTest']);
-    
+
     Route::post('changeNoFollow', ['as' => 'changeNoFollow', 'uses' => 'SeoController@changeNoFollow']);
 
 });
@@ -187,7 +187,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'publicityAccess']), f
     Route::get('sectionStep2/{sectionId}' , array('as' => 'sectionStep2' , 'uses' => 'PublicityController@sectionStep2'));
 
     Route::post('addPageToSection/{sectionId}' , array('as' => 'addPageToSection' , 'uses' => 'PublicityController@addPageToSection'));
-    
+
     Route::post('deleteSection' , array('as' => 'deleteSection' , 'uses' => 'PublicityController@deleteSection'));
 
     Route::any('seeAds', array('as' => 'seeAds', 'uses' => 'PublicityController@seeAds'));
@@ -215,7 +215,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
     Route::get('createPost', ['as' => 'createPost', 'uses' => 'PostController@createPost']);
 
     Route::get('editPost/{id}', ['as' => 'editPost', 'uses' => 'PostController@editPost']);
-    
+
     Route::post('/uploadCKEditor', function (Request $request) {
 
         try {
@@ -310,7 +310,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'msgAccess']), functio
     Route::post('doSendMsg', ['as' => 'doSendMsg', 'uses' => 'MsgController@doSendMsg']);
 
     Route::get('msgs', ['as' => 'msgs', 'uses' => 'MsgController@msgs']);
-    
+
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'offCodeAccess']), function () {
@@ -322,7 +322,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'offCodeAccess']), fun
     Route::post('doCreateOffer', ['as' => 'doCreateOffer', 'uses' => 'OffCodeController@doCreateOffer']);
 
     Route::post('deleteOffer', ['as' => 'deleteOffer', 'uses' => 'OffCodeController@deleteOffer']);
-    
+
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'configAccess']), function () {
@@ -356,7 +356,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'configAccess']), func
     Route::post('removeBackup', ['as' => 'removeBackup', 'uses' => 'BackupController@removeBackup']);
 
     Route::get('getImageBackup/{idx}', ['as' => 'getImageBackup', 'uses' => 'BackupController@getImageBackup']);
-    
+
     Route::post('imageBackup', ['as' => 'imageBackup', 'uses' => 'BackupController@imageBackup']);
 
     Route::post('getDonePercentage', ['as' => 'getDonePercentage', 'uses' => 'BackupController@getDonePercentage']);
@@ -495,3 +495,13 @@ Route::get('myWordsCount', 'SeoController@myWordsCount')->name('myWordsCount');
 Route::get('uiFeatures', function(){
    return view('uiFeatures');
 })->name('uiFeatures');
+
+Route::get('latCountry', 'PlaceController@latCountry');
+//Route::get('uploadExcel1', 'PlaceController@uploadExcel1');
+//Route::get('uploadExcel2', 'PlaceController@uploadExcel2');
+//Route::get('uploadExcel3', 'PlaceController@uploadExcel3');
+//Route::get('uploadExcel4', 'PlaceController@uploadExcel4');
+//Route::get('uploadExcel5', 'PlaceController@uploadExcel5');
+//Route::get('uploadExcel6', 'PlaceController@uploadExcel6');
+//Route::get('uploadExcel7', 'PlaceController@uploadExcel7');
+//Route::get('uploadExcel8', 'PlaceController@uploadExcel8');

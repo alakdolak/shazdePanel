@@ -161,43 +161,7 @@ class UserContentController extends Controller
     {
         if(isset($request->id)){
             $photo = PhotographersPic::find($request->id);
-
-            switch ($photo->kindPlaceId){
-                case 1:
-                    $file = 'amaken';
-                    $place = Amaken::find($photo->placeId);
-                    break;
-                case 3:
-                    $file = 'restaurant';
-                    $place = Restaurant::find($photo->placeId);
-                    break;
-                case 4:
-                    $file = 'hotels';
-                    $place = Hotel::find($photo->placeId);
-                    break;
-                case 6:
-                    $file = 'majara';
-                    $place = Majara::find($photo->placeId);
-                    break;
-                case 10:
-                    $file = 'sogatsanaie';
-                    $place = SogatSanaie::find($photo->placeId);
-                    break;
-                case 11:
-                    $file = 'mahalifood';
-                    $place = MahaliFood::find($photo->placeId);
-                    break;
-            }
-
-            $logs = PhotographersLog::where('picId', $request->id)->get();
-            foreach ($logs as $item)
-                $item->delete();
-
-            $location = __DIR__ . '/../../../../assets/userPhoto/' . $file . '/' . $place->file;
-
-            $check = deletePlacePicFiles($location, $photo->pic);
-            if($check)
-                $photo->delete();
+            PhotographersPic::deletePhotographer($photo->id);
         }
 
         return redirect()->back();

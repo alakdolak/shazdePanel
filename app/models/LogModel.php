@@ -33,4 +33,28 @@ class LogModel extends Model {
         return LogModel::find($value);
     }
 
+    public static function deleteLog($id){
+
+        $log = LogModel::find($id);
+
+        if($log != null){
+            LogFeedBack::where('logId', $id)->delete();
+            Report::where('logId', $id)->delete();
+            ReviewUserAssigned::where('logId', $id)->delete();
+            QuestionUserAns::where('logId', $id)->delete();
+
+            $pics = ReviewPic::where('logId', $id)->get();
+            if(count($pics) > 0) {
+                $kindPlaceId = $log->kindPlaceId;
+                $placeId = $log->placeId;
+                foreach ($pics as $pic)
+                    ReviewPic::deleteWithPic($pic->id, $kindPlaceId, $placeId);
+            }
+            $log->delete();
+            return true;
+        }
+
+        return false;
+    }
+
 }

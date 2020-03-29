@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $site
  * @property string $phone
  * @property string $description
- * 
+ *
  * @property boolean $markaz
  * @property boolean $hoome
  * @property boolean $shologh
@@ -74,5 +74,39 @@ class Amaken extends Model {
 
     public static function whereId($value) {
         return Amaken::find($value);
+    }
+
+    public static function fullDelete($id)
+    {
+        $kindPlaceId = 1;
+        $kindPlace = Place::find($kindPlaceId);
+        $place = Amaken::find($id);
+        if($place != null) {
+            MainSuggestion::where('kindPlaceId', $kindPlaceId)->where('placeId', $id)->delete();
+            $photos = PhotographersPic::where('kindPlaceId', $kindPlaceId)->where('placeId', $id)->get();
+            foreach ($photos as $item)
+                PhotographersPic::deleteWithPic($item->id);
+
+            PlaceFeatureRelation::where('kindPlaceId', $kindPlaceId)->where('placeId', $id)->delete();
+            PlaceTag::where('kindPlaceId', $kindPlaceId)->where('placeId', $id)->delete();
+            PostPlaceRelation::where('kindPlaceId', $kindPlaceId)->where('placeId', $id)->delete();
+
+            $logs = LogModel::where('kindPlaceId', $kindPlaceId)->where('placeId', $id)->get();
+            foreach ($logs as $log)
+                LogModel::deleteLog($log->id);
+
+            $pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $id)->get();
+            foreach ($pics as $pic)
+                PlacePic::deleteWithPic($pic->id);
+
+            if ($kindPlace != null && $place != null) {
+                $location = __DIR__ . '/../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file;
+                deletePlacePicFiles($location, $place->picNumber);
+            }
+
+            $place->delete();
+            return true;
+        }
+        return false;
     }
 }

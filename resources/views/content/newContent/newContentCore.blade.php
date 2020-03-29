@@ -124,7 +124,7 @@
                                             <div class="form-group">
                                                 <label for="name"> استان</label>
                                                 <select id="state" name="state" class="form-control" onchange="findCity(this.value)">
-                                                    @if($state != 0)
+                                                    @if($state != null)
                                                         @foreach($allState as $item)
                                                             <option value="{{$item->id}}" {{$item->id == $state->id? 'selected' : ''}}>
                                                                 {{$item->name}}
