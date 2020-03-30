@@ -81,7 +81,6 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model {
 
     protected $table = 'restaurant';
-    public $timestamps = false;
 
     public static function whereId($value) {
         return Restaurant::find($value);

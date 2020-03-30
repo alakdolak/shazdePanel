@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Request;
 
 Route::get('updateMainDataBase', function(){
+'ALTER TABLE `amaken` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `alt5`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
+ALTER TABLE `hotels` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `alt5`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
+ALTER TABLE `restaurant` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `alt5`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
+ALTER TABLE `majara` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `alt5`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
+
+ALTER TABLE `sogatSanaies` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `authorized`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
+ALTER TABLE `mahaliFood` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `authorized`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;'  ;
 
 });
 

@@ -16,8 +16,6 @@ use Illuminate\Database\Eloquent\Model;
 class Majara extends Model {
 
     protected $table = 'majara';
-    public $timestamps = false;
-
 
     public static function whereId($value) {
         return Majara::find($value);

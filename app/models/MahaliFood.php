@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class MahaliFood extends Model
 {
     protected $table = 'mahaliFood';
-    public $timestamps = false;
 
     public static function fullDelete($id)
     {

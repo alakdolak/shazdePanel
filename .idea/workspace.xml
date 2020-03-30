@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/models/LogFeedBack.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/Report.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/tagExcel/اماکن_فارس_خام.xlsx" afterDir="false" />
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Amaken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Amaken.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Hotel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Hotel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/LogModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/LogModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/MahaliFood.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/MahaliFood.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Majara.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Majara.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/PhotographersPic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/PhotographersPic.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/PlacePic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/PlacePic.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Restaurant.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Restaurant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/ReviewPic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/ReviewPic.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/SogatSanaie.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/SogatSanaie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -453,7 +443,8 @@
       <workItem from="1584730223958" duration="40000" />
       <workItem from="1585394524135" duration="869000" />
       <workItem from="1585466956567" duration="117000" />
-      <workItem from="1585476967587" duration="6257000" />
+      <workItem from="1585476967587" duration="6583000" />
+      <workItem from="1585550434796" duration="2329000" />
     </task>
     <task id="LOCAL-00001" summary="last changes">
       <created>1556982242677</created>
@@ -735,7 +726,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583397494472</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="debug">
+      <created>1585488634633</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1585488634633</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -783,25 +781,29 @@
     <option name="LAST_COMMIT_MESSAGE" value="debug" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1585488617432">
+    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1585488633239">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585488617432" />
+    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585488633239" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1585488708299">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1585488708299" />
     <state x="762" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585476716086">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="762" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1585476716086" />
-    <state x="639" y="238" width="642" height="564" key="find.popup" timestamp="1585486511839">
+    <state x="639" y="238" width="642" height="564" key="find.popup" timestamp="1585551615556">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="639" y="238" width="642" height="564" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585486511839" />
+    <state x="639" y="238" width="642" height="564" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585551615556" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1585486131006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585486131006" />
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1585488386261">
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1585552183420">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585488386261" />
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585552183420" />
   </component>
 </project>

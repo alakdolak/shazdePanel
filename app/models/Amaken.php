@@ -70,7 +70,6 @@ use Illuminate\Database\Eloquent\Model;
 class Amaken extends Model {
 
     protected $table = 'amaken';
-    public $timestamps = false;
 
     public static function whereId($value) {
         return Amaken::find($value);
