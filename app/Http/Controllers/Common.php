@@ -50,8 +50,8 @@ function getValueInfo($key) {
         'bom' => 8,
         'ghaza' => 3, 'soghat' => 1, 'sanaye' => 6,
         '5_min' => 1, '10_min' => 2, '15_min' => 3, '30_min' => 4, 'hour' => 5, 'day' => 6, 'week' => 7, 'month' => 8,
-        
-        
+
+
         'editPost' => 1, 'deletePost' => 2, 'createPost' => 3, 'changePass' => 4, 'changeNoFollow' => 5, 'changeSeo' => 6,
         'changeUserContent' => 7, 'submitLog' => 8, 'deleteLog' => 9, 'unSubmitLog' => 10, 'removeBackup' => 11,
         'addBackup' => 12, 'manualBackup' => 13, 'imageBackup' => 14, 'removeMainPic' => 15, 'login' => 16, 'determineRadius' => 17,
@@ -104,40 +104,6 @@ function recurse_copy($src,$dst) {
     closedir($dir);
 }
 
-function getKindPlaceNameAndPlace($kindPlaceId, $placeId){
-    $kindName = null;
-    $place = null;
-
-    switch ($kindPlaceId){
-        case 1:
-            $kindName = 'اماکن';
-            $place = Amaken::find($placeId);
-            break;
-        case 3:
-            $kindName = 'رستوران';
-            $place = Restaurant::find($placeId);
-            break;
-        case 4:
-            $kindName = 'هتل';
-            $place = Hotel::find($placeId);
-            break;
-        case 6:
-            $kindName = 'ماجرا';
-            $place = Majara::find($placeId);
-            break;
-        case 10:
-            $kindName = 'صنایع و سوغات';
-            $place = SogatSanaie::find($placeId);
-            break;
-        case 11:
-            $kindName = 'غذای محلی';
-            $place = MahaliFood::find($placeId);
-            break;
-    }
-
-    return [$kindName, $place];
-}
-
 function getPlaceAndFolderName($kindPlaceId, $placeId) {
 
     switch ($kindPlaceId) {
@@ -159,9 +125,8 @@ function getPlaceAndFolderName($kindPlaceId, $placeId) {
             $folderName = "majara";
             break;
     }
-    
-    return [$place, $folderName];
 
+    return [$place, $folderName];
 }
 
 function getFolderName($kindPlaceId) {
@@ -381,7 +346,7 @@ function sendMail($text, $recipient, $subject) {
 
 
     require_once __DIR__ . '/../../../vendor/autoload.php';
-    
+
     $mail = new PHPMailer(true);                           // Passing `true` enables exceptions
     try {
         //Server settings

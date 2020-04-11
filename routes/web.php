@@ -461,11 +461,11 @@ Route::group(array('middleware' => ['auth']), function(){
 //comments
 Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), function () {
 
-    Route::get('/comments/new', 'CommentController@newComments')->name('comments.new');
+    Route::get('/comments/list', 'CommentController@listComments')->name('comments.list');
 
-    Route::post('/comments/delete', 'CommentController@deleteComment')->name('comment.delete');
+    Route::post('/comments/delete', 'CommentController@deleteComment')->name('comments.delete');
 
-    Route::post('/comments/submit', 'CommentController@submitComment')->name('comment.submit');
+    Route::post('/comments/submit', 'CommentController@submitComment')->name('comments.submit');
 
     Route::get('lastActivities', ['as' => 'lastActivities', 'uses' => 'CommentController@lastActivities']);
 

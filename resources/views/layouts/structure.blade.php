@@ -208,6 +208,7 @@
                                     <i class="fa indicator-mn fa-angle-left"></i>
                                 </span>
                                 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                    <a href="{{route('comments.list')}}" class="dropdown-item">مدیریت کامنت ها</a>
                                     <a href="#" class="dropdown-item">مدیریت پست‌ها</a>
                                     <a href="#" class="dropdown-item">مدیریت سوال‌ها</a>
                                     <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
