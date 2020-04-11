@@ -24,7 +24,7 @@ use SeoAnalyzer\HttpClient\Exception\HttpException;
 use SeoAnalyzer\Page;
 
 class SeoController extends Controller {
-    
+
     public function changeSeo($city, $mode, $wantedKey = -1, $selectedMode = -1) {
 
         $out = [];
@@ -178,7 +178,7 @@ class SeoController extends Controller {
                     }
                     break;
             }
-            
+
             $tmp = new AdminLog();
             $tmp->uId = Auth::user()->id;
             $tmp->mode = getValueInfo('changeSeo');

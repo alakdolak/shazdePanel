@@ -2223,102 +2223,64 @@ class PlaceController extends Controller {
 
     }
 
-    public function uploadExcel1()
+
+    public function insertTagsToDB($num1 = 2, $num2 = 2)
     {
-        $inputFileType = 'Xlsx';
-        $inputFileName = 'tagExcel/اماکن_فارس_خام.xlsx';
+        $location = __DIR__ . '/../../../public/tagExcel';
+        if(is_dir($location)){
+            $dirs = scandir($location);
+            if(count($dirs) > $num1){
+                $nLoc = $location . '/' . $dirs[$num1];
+                $folder = $dirs[$num1];
+                if(is_dir($nLoc)){
+                    $inDirs = scandir($nLoc);
+                    if(count($inDirs) > $num2){
+                        switch ($folder){
+                            case 'amaken':
+                                $kindPlaceId = 1;
+                                break;
+                            case 'rest':
+                                $kindPlaceId = 3;
+                                break;
+                            case 'hotels':
+                                $kindPlaceId = 4;
+                                break;
+                            case 'majara':
+                                $kindPlaceId = 6;
+                                break;
+                            case 'sogat':
+                                $kindPlaceId = 10;
+                                break;
+                            case 'food':
+                                $kindPlaceId = 11;
+                                break;
+                            default:
+                                dd('error');
+                                break;
+                        }
+                        $location = __DIR__ . '/../../../public/tagExcel/' . $folder . '/' . $inDirs[$num2];
 
-        $excelReader = PHPExcel_IOFactory::createReaderForFile($inputFileName);
-        $excelObj = $excelReader->load($inputFileName);
-        $workSheet = $excelObj->getSheet(0);
-        $contents = [];
-        $lastRow = $workSheet->getHighestRow();
-        $cols = $workSheet->getHighestColumn();
+                        $msg = $this->storeTagExcel($kindPlaceId, $location, $inDirs[$num2]);
 
-        $char = 'A';
-        $charArr = [];
-        $alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-        $cols = [];
-        for($i = 0; $i < count($alpha); $i++){
-            if($i == 0){
-                $cols = $alpha;
+                        $num2++;
+                        $nextUrl = url('insertTagsToDB/' . $num1 . '/' . $num2);
+
+                        return view('TagUploade/    showTagUpload', compact(['nextUrl', 'msg']));
+                    }
+                    else {
+                        $num1++;
+                        $num2 = 2;
+                        return \redirect(\url('insertTagsToDB/' . $num1 . '/' . $num2));
+                    }
+                }
+                else
+                    dd('error in :' . $num1, $num2);
             }
-            for($j = 0; $j < count($alpha); $j++)
-                array_push($cols, $alpha[$i].''.$alpha[$j]);
+            else
+                dd('end');
         }
-
-        for ($row = 2; $row <= $lastRow; $row++) {
-            if($workSheet->getCell($cols[0] . $row)->getValue() == null)
-                break;
-
-            $contents[$row - 2] = [];
-            for ($j = 0; $j < count($cols); $j++) {
-                $tmp = $workSheet->getCell($cols[$j] . $row)->getValue();
-                if($tmp != null)
-                    $contents[$row - 2][count($contents[$row - 2])] = $tmp;
-            }
-        }
-
-        for($i = 0; $i < count($contents); $i++)
-            $contents[$i][0] = (int)$contents[$i][0];
-
-        $sqlQuery = 'INSERT INTO `placeTags` (`id`, `kindPlaceId`, `placeId`, `tag`) VALUES ';
-
-        dd($contents);
     }
-
-    public function uploadExcel2()
-    {
-        $kindPlaceId = 3;
-        $inputFileName = 'tagExcel/restIsfahan.xlsx';
-        $this->storTagExcel($kindPlaceId, 1, $inputFileName);
-    }
-    public function uploadExcel3()
-    {
-        $kindPlaceId = 10;
-        $inputFileName = 'tagExcel/sogatIsfahan.xlsx';
-        $this->storTagExcel($kindPlaceId, 5, $inputFileName);
-    }
-    public function uploadExcel4()
-    {
-        $kindPlaceId = 10;
-        $inputFileName = 'tagExcel/sogatFars.xlsx';
-        $this->storTagExcel($kindPlaceId, 4, $inputFileName);
-    }
-    public function uploadExcel5()
-    {
-        $kindPlaceId = 10;
-        $inputFileName = 'tagExcel/sanaieFars.xlsx';
-        $this->storTagExcel($kindPlaceId, 6, $inputFileName);
-
-        dd('done');
-    }
-    public function uploadExcel6()
-    {
-        $kindPlaceId = 10;
-        $inputFileName = 'tagExcel/sanaieIsfahan.xlsx';
-        $this->storTagExcel($kindPlaceId, 7, $inputFileName);
-
-        dd('done');
-    }
-    public function uploadExcel7()
-    {
-        $kindPlaceId = 11;
-        $inputFileName = 'tagExcel/foodIsfahan.xlsx';
-        $this->storTagExcel($kindPlaceId, 4, $inputFileName);
-
-        dd('done');
-    }
-    public function uploadExcel8()
-    {
-        $kindPlaceId = 11;
-        $inputFileName = 'tagExcel/foodFars.xlsx';
-        $this->storTagExcel($kindPlaceId, 4, $inputFileName);
-
-        dd('done');
-    }
-
-    private function storTagExcel($kindPlaceId, $start, $inputFileName){
+    private function storeTagExcel($kindPlaceId, $inputFileName, $file){
 
         $kindPlace = Place::find($kindPlaceId);
         if($kindPlace == null){
@@ -2355,31 +2317,41 @@ class PlaceController extends Controller {
             $contents[$row - 2] = [];
             for ($j = 0; $j < count($cols); $j++) {
                 $tmp = $workSheet->getCell($cols[$j] . $row)->getValue();
-                if($tmp != null) {
+                if($tmp != null && $j != 0) {
                     $contents[$row - 2][count($contents[$row - 2])] = $tmp;
                 }
             }
         }
 
+        $msg = 'in File : ' . $file;
+        $msg .= '<br>KindPlaceId : ' . $kindPlaceId;
+
+        $msg .= '<ul>';
+
         $sqlQuery = 'INSERT INTO `placeTags` (`id`, `kindPlaceId`, `placeId`, `tag`) VALUES ';
+        $val = '';
         foreach ($contents as $item){
-            $rowCount++;
             $place = DB::table($tableName)->where('name', $item[0])->first();
             if($place != null){
+                $rowCount++;
                 PlaceTag::where(['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])->delete();
-                $val = '';
-
-                for($i = $start; $i < count($item); $i++){
+                for($i = 1; $i < count($item); $i++){
                     if($val != '')
                         $val .= ', ';
                     $val .= '(NULL, ' . $kindPlaceId . ', ' . $place->id . ', "' . $item[$i] . '")';
                     $tagCount++;
                 }
-
-                DB::select($sqlQuery . $val);
             }
+            else
+                $msg .= '<li>  error in : ' . $item[0] . '</li>';
         }
+        $msg .= '</ul>';
 
-        dd($rowCount, $tagCount);
+        $msg .= '<br>از  ' . count($contents) . ' مکان  :' . $rowCount . ' اضافه شد.';
+
+        if($val != '')
+            DB::select($sqlQuery . $val);
+
+        return $msg;
     }
 }

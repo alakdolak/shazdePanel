@@ -504,11 +504,5 @@ Route::get('uiFeatures', function(){
 })->name('uiFeatures');
 
 Route::get('latCountry', 'PlaceController@latCountry');
-//Route::get('uploadExcel1', 'PlaceController@uploadExcel1');
-//Route::get('uploadExcel2', 'PlaceController@uploadExcel2');
-//Route::get('uploadExcel3', 'PlaceController@uploadExcel3');
-//Route::get('uploadExcel4', 'PlaceController@uploadExcel4');
-//Route::get('uploadExcel5', 'PlaceController@uploadExcel5');
-//Route::get('uploadExcel6', 'PlaceController@uploadExcel6');
-//Route::get('uploadExcel7', 'PlaceController@uploadExcel7');
-//Route::get('uploadExcel8', 'PlaceController@uploadExcel8');
+
+Route::get('insertTagsToDB/{num1?}/{num2?}', 'PlaceController@insertTagsToDB');
