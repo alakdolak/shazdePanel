@@ -136,4 +136,30 @@ class AjaxController extends Controller
             echo json_encode($result);
         }
     }
+
+    public function testUploadPic(Request $request)
+    {
+        if($_FILES['pic'] &&  $_FILES['pic']['error'] == 0){
+            $fileName = time().$_FILES['pic']['name'];
+            $location = __DIR__ .'/../../../../assets/_images/testPics';
+            if(!is_dir($location))
+                mkdir($location);
+
+            $location .= '/' . $fileName;
+
+            if(move_uploaded_file($_FILES['pic']['tmp_name'], $location)){
+                $url = \URL::asset('_images/testPics/' . $fileName);
+                $size = filesize($location);
+                $size = floor(($size/1000)) . ' KB';
+
+                echo json_encode(['status' => 'ok', 'result' => ['url' => $url, 'size' => $size]]);
+            }
+            else
+                echo json_encode(['status' => 'nok2']);
+        }
+        else
+            echo json_encode(['status' => 'nok1']);
+
+        return;
+    }
 }

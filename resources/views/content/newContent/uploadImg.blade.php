@@ -364,34 +364,24 @@
         window.addEventListener('DOMContentLoaded', function () {
 
             $('#modal').on('shown.bs.modal', function () {
-                if (kindCrop == 1) {
-                    cropper = new Cropper(image, {
-                        dragMode: 'move',
-                        aspectRatio: 1/1,
-                        viewMode: 2,
-                        autoCropArea: 1,
-                        restore: false,
-                        movable: true,
-                        guides: false,
-                        center: false,
-                        highlight: false,
-                        toggleDragModeOnDblclick: false,
-                    });
-                }
-                else {
-                    cropper = new Cropper(image, {
-                        dragMode: 'move',
-                        aspectRatio: 3/2,
-                        viewMode: 2,
-                        autoCropArea: 1,
-                        restore: false,
-                        movable: true,
-                        guides: false,
-                        center: false,
-                        highlight: false,
-                        toggleDragModeOnDblclick: false,
-                    });
-                }
+                let ratio = 1/1;
+
+                if (kindCrop == 2)
+                    ratio = 3/2;
+
+                cropper = new Cropper(image, {
+                    dragMode: 'move',
+                    aspectRatio: ratio,
+                    viewMode: 2,
+                    autoCropArea: 1,
+                    restore: false,
+                    movable: true,
+                    guides: false,
+                    center: false,
+                    highlight: false,
+                    toggleDragModeOnDblclick: false,
+                });
+
             }).on('hidden.bs.modal', function () {
                 cropper.destroy();
                 cropper = null;

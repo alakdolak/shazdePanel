@@ -173,7 +173,7 @@ ul.message-list-menu li .message-info {
 	right: 130px;
 }
 }
- 
+
 /* Tablet desktop :768px. */
 @media (min-width: 768px) and (max-width: 991px) {
 
@@ -231,7 +231,7 @@ ul.message-list-menu li .message-info {
 	display:none;
 }
 .admin-logo {
-	margin-top: 0px; 
+	margin-top: 0px;
 	text-align:left;
 }
 .header-right-info ul.header-right-menu li .admintab-wrap.menu-setting-wrap.dropdown-menu {
@@ -402,7 +402,7 @@ ul.message-list-menu li .message-info {
 }
 /* Dark Layout Css */
 .left-sidebar-pro{
-	display:none;
+	/*display:none;*/
 }
 .wrapper-pro{
 	display:block;
@@ -441,7 +441,7 @@ ul.message-list-menu li .message-time {
 }
 }
 
- 
+
 /* small mobile :320px. */
 @media (max-width: 767px) {
 .container {width:300px}
@@ -733,7 +733,7 @@ ul.message-list-menu li .message-info {
 	margin-top: 30px;
 }
 .project-details-mg {
-	margin:0px !important; 
+	margin:0px !important;
 }
 .project-details-st {
 	text-align: left;
@@ -790,7 +790,7 @@ ul.message-list-menu li .message-info {
 }
 /* Dark Layout Css */
 .left-sidebar-pro{
-	display:none;
+	/*display:none;*/
 }
 .wrapper-pro{
 	display:block;
@@ -862,7 +862,7 @@ ul.message-list-menu li .message-time {
 	display:block;
 }
 }
- 
+
 /* Large Mobile :480px. */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 .container {width:450px}
@@ -929,4 +929,4 @@ ul.message-list-menu li .message-info {
 	right: 240px;
 }
 }
- 
+

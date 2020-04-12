@@ -526,7 +526,13 @@ function compressImage($source, $destination, $quality){
     elseif ($info['mime'] == 'image/png')
         $image = imagecreatefrompng($source);
 
-    imagejpeg($image, $destination, $quality);
+    try {
+        imagejpeg($image, $destination, $quality);
+        return true;
+    }
+    catch (Exception $exception){
+        return false;
+    }
 }
 
 function deletePlacePicFiles($location, $picNumber){

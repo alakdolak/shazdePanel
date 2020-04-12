@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\Adab;
 use App\models\Amaken;
 use App\models\Cities;
+use App\models\CityPic;
 use App\models\Hotel;
 use App\models\MahaliFood;
 use App\models\Majara;
@@ -29,6 +30,7 @@ use PHPExcel_IOFactory;
 use PHPExcel_RichText;
 use ZipArchive;
 use Illuminate\Support\Facades\Session;
+use function GuzzleHttp\Promise\all;
 
 
 class PlaceController extends Controller {
@@ -1435,24 +1437,6 @@ class PlaceController extends Controller {
         return view('content.choosePlace', ['url' => $url, 'places' => Place::whereVisibility(true)->get()]);
     }
 
-    public function chooseCity($mode) {
-
-        $url = route('root');
-
-        switch ($mode) {
-            case "seo":
-                $url = $url . "/changeSeo/";
-                break;
-            case "content":
-                $url = $url . "/changeContent/";
-                return view('content.chooseCity', ['url' => $url, 'mode' => 2, 'places' => Place::all()]);
-            case "content2":
-                $url = $url . "/newChangeContent/";
-                return view('content.chooseCity', ['url' => $url, 'mode' => 2, 'places' => Place::all()]);
-        }
-
-        return view('content.chooseCity', ['url' => $url, 'mode' => 1]);
-    }
 
     public function searchForCity() {
         $key = makeValidInput($_POST["key"]);
@@ -1909,169 +1893,6 @@ class PlaceController extends Controller {
             'places' => Place::all()]);
     }
 
-    public function indexCity()
-    {
-        $place = Place::all();
-        return view('content.city.indexCity', compact(['place']));
-
-    }
-
-    public function addCity()
-    {
-        $state = State::all();
-        $mode = 'add';
-
-        return view('content.city.add_editCity', compact(['mode', 'state']));
-    }
-
-    public function editCity($id)
-    {
-        $city = Cities::find($id);
-        $state = State::all();
-        $mode = 'edit';
-
-        return view('content.city.add_editCity', compact(['city', 'mode', 'state']));
-    }
-
-    public function deleteCity(Request $request)
-    {
-        $request->validate([
-            'id' => 'required'
-        ]);
-
-        $city = Cities::find($request->id);
-        if($city->image != null){
-            \File::delete(__DIR__ . '/../../../../assets/_images/city/' . $city->image);
-        }
-
-        PostCityRelation::where('cityId', $city->id)->delete();
-        QuestionSection::where('cityId', $city->id)->delete();
-
-        $kinPlace = Place::all();
-        foreach ($kinPlace as $kind){
-            if($kind->tableName != null){
-                $places = \DB::table($kind->tableName)->where('cityId', $city->id)->get();
-                foreach ($places as $place) {
-                    switch ($kind->id){
-                        case 1:
-                            Amaken::fullDelete($place->id);
-                            break;
-                        case 3:
-                            Restaurant::fullDelete($place->id);
-                            break;
-                        case 4:
-                            Hotel::fullDelete($place->id);
-                            break;
-                        case 6:
-                            Majara::fullDelete($place->id);
-                            break;
-                        case 10:
-                            SogatSanaie::fullDelete($place->id);
-                            break;
-                        case 11:
-                            MahaliFood::fullDelete($place->id);
-                            break;
-                    }
-                }
-            }
-        }
-        $city->delete();
-
-        return \redirect(route('city.index'));
-    }
-
-    public function doEditCity(Request $request)
-    {
-        $request->validate([
-            'id' => 'required',
-            'city_name' => 'required',
-            'city_x' => 'required',
-            'city_y' => 'required',
-            'state' => 'required',
-        ]);
-
-        $city = Cities::find($request->id);
-
-        $newfilename = null;
-        if(isset($_FILES["image"]) && $_FILES["image"]['error'] == 0) {
-
-            if($city->image != null){
-                \File::delete(__DIR__ . '/../../../../assets/_images/city/' . $city->image);
-            }
-
-            $temp = explode(".", $_FILES["image"]["name"]);
-            $newfilename = $request->city_name . '.jpg';
-
-            $pic = __DIR__ . '/../../../../assets/_images/city/' . $newfilename;
-
-            compressImage($_FILES['image']['tmp_name'], $pic, 80);
-
-//            $err = uploadCheck($pic, "image", "افزودن عکس جدید", 3000000, -1);
-//            if(empty($err)) {
-//                $err = upload($pic, "image", "افزودن عکس جدید");
-//                if (!empty($err))
-//                    dd($err);
-//            }
-//            else {
-//                dd($err);
-//            }
-        }
-
-        $city->name = $request->city_name;
-        $city->x = $request->city_x;
-        $city->y = $request->city_y;
-        $city->stateId = $request->state;
-        $city->description = $request->comment;
-        if($newfilename)
-            $city->image = $newfilename;
-
-        $city->save();
-        return \redirect()->back();
-    }
-
-    public function storeCity(Request $request)
-    {
-        $request->validate([
-            'city_name' => 'required',
-            'city_x' => 'required',
-            'city_y' => 'required',
-            'state' => 'required',
-            'comment' => 'required',
-        ]);
-
-        $newfilename = null;
-
-        if(isset($_FILES["image"]) && $_FILES["image"]['error'] == 0) {
-//            $name = time() . '_' . $_FILES["image"]["name"];
-            $temp = explode(".", $_FILES["image"]["name"]);
-            $newfilename = $request->city_name . '.' . end($temp);
-
-            $pic = __DIR__ . '/../../../../assets/_images/city/' . $newfilename;
-
-            $err = uploadCheck($pic, "image", "افزودن عکس جدید", 3000000, -1);
-            if(empty($err)) {
-                $err = upload($pic, "image", "افزودن عکس جدید");
-                if (!empty($err))
-                    dd($err);
-            }
-            else {
-                dd($err);
-            }
-        }
-
-        $city = new Cities();
-
-        $city->name = $request->city_name;
-        $city->x = $request->city_x;
-        $city->y = $request->city_y;
-        $city->stateId = $request->state;
-        $city->description = $request->comment;
-        if($newfilename)
-            $city->image = $newfilename;
-
-        $city->save();
-        return \redirect(route('city.index'));
-    }
 
     public function topInCity($cityId = '')
     {

@@ -107,20 +107,18 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
     Route::get('choosePlace/{mode}', ['as' => 'choosePlace', 'uses' => 'PlaceController@choosePlace']);
 
-    Route::get('chooseCity/{mode}', ['as' => 'chooseCity', 'uses' => 'PlaceController@chooseCity']);
 
-    Route::get('city/index', ['as' => 'city.index', 'uses' => 'PlaceController@indexCity']);
+    Route::get('chooseCity/{mode}', 'CityController@chooseCity')->name('chooseCity');
+    Route::get('city/index', 'CityController@indexCity')->name('city.index');
+    Route::get('city/add', 'CityController@addCity')->name('city.add');
+    Route::get('city/edit/{id}', 'CityController@editCity')->name('city.edit');
+    Route::post('city/store', 'CityController@storeCity')->name('city.store');
+    Route::post('city/storeImage', 'CityController@storeCityImage')->name('city.store.image');
+    Route::post('city/deleteImage', 'CityController@deleteCityImage')->name('city.delete.image');
+    Route::post('city/sizeImage', 'CityController@sizeCityImage')->name('city.size.image');
+    Route::post('city/delete', 'CityController@deleteCity')->name('city.delete');
 
-    Route::get('city/add', ['as' => 'city.add', 'uses' => 'PlaceController@addCity']);
-
-    Route::post('city/store', ['as' => 'city.store', 'uses' => 'PlaceController@storeCity']);
-
-    Route::get('city/edit/{id}', ['as' => 'city.edit', 'uses' => 'PlaceController@editCity']);
-
-    Route::post('city/doEdit', ['as' => 'city.doEdit', 'uses' => 'PlaceController@doEditCity']);
-
-    Route::post('city/delete', ['as' => 'city.delete', 'uses' => 'PlaceController@deleteCity']);
-
+    Route::post('imageUploadTest', 'AjaxController@testUploadPic')->name('image.upload.test');
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), function () {
