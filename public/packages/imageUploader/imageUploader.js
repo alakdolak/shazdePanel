@@ -28,6 +28,7 @@ function createNewPicSection(_info) {
     let myDropzone = new Dropzone("div#dropzone" + number, {
         url: _info['url'],
         paramName: "pic",
+        timeout: 60000,
         headers: {
             'X-CSRF-TOKEN': _info['csrf']
         },
@@ -38,7 +39,6 @@ function createNewPicSection(_info) {
                 formData.append("data", Data);
             });
             if(_info['initPic'] != '' && _info['initPic'] != null){
-                console.log(_info['initPic'])
                 for(x of _info['initPic'])
                     creteUploadedPicPictures(x['url'], x['id'], number, x['haveEdit'], x['haveAlt'], x['alt']);
             }
@@ -74,9 +74,11 @@ function creteUploadedPicPictures(_url, _id, _number,_haveEdit , _haveAlt, _alt)
         '       <button type="button" class="btn btn-danger" onclick="deletePicUploadedPic(' + _id + ', ' + _number + ', this)">پاک کردن عکس</button>\n';
     if(_haveEdit)
         text += '       <button type="button" class="btn btn-primary" onclick="editPicUploadedPic(' + _id + ', ' + _number + ', this)">ویرایش عکس</button>\n';
-    if(_haveAlt)
-        text += '       <input type="text" class="form-control" value="' + _alt + '" onchange="changeAltPicUploadedPic(' + _id + ', ' + _number + ', this.value)">   \n';
-
+    if(_haveAlt) {
+        if(_alt == null)
+            _alt = '';
+        text += '       <input type="text" id="altPic_' + _id + '" class="form-control" value="' + _alt + '" onchange="changeAltPicUploadedPic(' + _id + ', ' + _number + ', this.value)" placeholder="alt">   \n';
+    }
     text +=     '   </div>\n' +
         '</div>';
 

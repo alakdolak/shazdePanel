@@ -274,4 +274,22 @@ class CityController extends Controller
         return;
     }
 
+    public function storeCityImageAlt(Request $request)
+    {
+        if(isset($request->id) && isset($request->value)){
+            $pic = CityPic::find($request->id);
+            if($pic != null){
+                $pic->alt = $request->value;
+                $pic->save();
+                echo json_encode(['status' => 'ok']);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
 }

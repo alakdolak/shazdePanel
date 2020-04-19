@@ -303,9 +303,9 @@
                 cityPic[cityPic.length] = {
                     id: x['id'],
                     url: x['pic'],
-                    haveAlt: false,
+                    haveAlt: true,
                     haveEdit: false,
-                    alt: ''
+                    alt: x['alt']
                 };
         @endif
 
@@ -362,14 +362,14 @@
             data: {
                 id: cityId
             },
-            haveAlt: false,
+            haveAlt: true,
             haveEdit: false,
             initPic: cityPic,
             initCallBack: '',
             callBack: '',
             onDeletePic: deletePic,
             onEditPic: editPic,
-            onChangeAlt: ''
+            onChangeAlt: changeAlt
         };
 
         let createdDropZone = createNewPicSection(createNewPicSectionInfo);
@@ -401,6 +401,32 @@
         }
 
 
+        function changeAlt(_id, _value){
+            $.ajax({
+                type: 'post',
+                url: '{{route("city.store.alt")}}',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    id: _id,
+                    value: _value
+                },
+                success: function(response){
+                    try{
+                        response = JSON.parse(response);
+                        if(response['status'] != 'ok')
+                            $('#altPic_' + _id).val('');
+                    }
+                    catch (e) {
+                        console.log(e);
+                        $('#altPic_' + _id).val('');
+                    }
+                },
+                error: function(err){
+                    console.log(err)
+                    $('#altPic_' + _id).val('');
+                }
+            })
+        }
 
         let mainCropPic;
         function editPic(_id, _src){
