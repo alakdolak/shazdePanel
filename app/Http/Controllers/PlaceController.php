@@ -2175,4 +2175,277 @@ class PlaceController extends Controller {
 
         return $msg;
     }
+
+    public function insertVillageToDBPage()
+    {
+        return view('TagUploade.showVillageUpload');
+    }
+    public function insertVillageDB(Request $request){
+        $number = $request->number;
+
+        $location = __DIR__ . '/../../../public/tagExcel/village.xlsx';
+        if(is_file($location)){
+
+            $excelReader = PHPExcel_IOFactory::createReaderForFile($location);
+            $excelObj = $excelReader->load($location);
+            $workSheet = $excelObj->getSheet(0);
+            $lastRow = $workSheet->getHighestRow();
+            $cols = $workSheet->getHighestColumn();
+
+            $rowCount = 0;
+            $tagCount = 0;
+            $contents = [];
+            $cols = ['A', 'B', 'C'];
+            for ($row = $number; $row <= $lastRow && $row < ($number + 500); $row++) {
+                $contents[$row-1] = [];
+                for ($j = 0; $j < count($cols); $j++) {
+                    $tmp = $workSheet->getCell($cols[$j] . $row)->getValue();
+                    $contents[$row-1][count($contents[$row-1])] = $tmp;
+                }
+            }
+            $lastGetRow = $row;
+
+            $stateError = $request->stateErr;
+            $cityError = $request->cityErr;
+            $dupError = $request->dupErr;
+
+            if($stateError == null)
+                $stateError = [];
+            if($cityError == null)
+                $cityError = [];
+            if($dupError == null)
+                $dupError = [];
+
+            $sqlQuery = 'INSERT INTO `cities` (`id`, `name`, `x`, `y`, `stateId`, `description`, `image`, `isVillage`) VALUES ';
+            $val = '';
+            foreach ($contents as $item){
+                $state = State::where('name', $item[1])->first();
+                if($state != null){
+                    $city = Cities::where('stateId', $state->id)->where('name', $item[2])->where('isVillage', 0)->first();
+                    if($city != null){
+                        $village = Cities::where('isVillage', $city->id)->where('name', $item[0])->first();
+                        if($village == null){
+                            $rowCount++;
+                            if($val != '')
+                                $val .= ', ';
+                            $val .= '(NULL, "' . $item[0] . '", 0, 0, ' . $state->id . ', NULL, NULL, ' . $city->id . ')';
+                        }
+                        else{
+                            if(!in_array($item[0], $dupError))
+                                array_push($dupError, $item[0]);
+                        }
+                    }
+                    else{
+                        if(!in_array($item[2], $cityError))
+                            array_push($cityError, $item[2]);
+                    }
+                }
+                else {
+                    if(!in_array($item[1], $stateError))
+                        array_push($stateError, $item[1]);
+                }
+            }
+
+            if($val != '')
+                DB::select($sqlQuery . $val);
+
+            echo json_encode(['status' => 'ok', 'stateErr' => $stateError, 'cityErr' => $cityError, 'dupErr' => $dupError, 'added' => $rowCount, 'lastGetRow' => $lastGetRow]);
+
+            return;
+        }
+    }
+
+    public function addNEwCityDB()
+    {
+        $input =[
+            [
+                'name' => 'چاراویماق',
+                'stateName' => 'آذربایجان شرقی'
+            ],
+            [
+                'name' => 'خداآفرین',
+                'stateName' => 'آذربایجان شرقی'
+            ],
+            [
+                'name' => 'میانه',
+                'stateName' => 'آذربایجان شرقی'
+            ],
+            [
+                'name' => 'چالدران',
+                'stateName' => 'آذربایجان غربی'
+            ],
+            [
+                'name' => 'مهاباد',
+                'stateName' => 'آذربایجان غربی'
+            ],
+            [
+                'name' => 'کوثر',
+                'stateName' => 'اردبیل'
+            ],
+            [
+                'name' => 'فریدن',
+                'stateName' => 'اصفهان'
+            ],
+            [
+                'name' => 'لنجان',
+                'stateName' => 'اصفهان'
+            ],
+            [
+                'name' => 'سمیرم سفلی',
+                'stateName' => 'اصفهان'
+            ],
+            [
+                'name' => 'چرداول',
+                'stateName' => 'ایلام'
+            ],
+            [
+                'name' => 'دشتی',
+                'stateName' => 'بوشهر'
+            ],
+            [
+                'name' => 'تنگستان',
+                'stateName' => 'بوشهر'
+            ],
+            [
+                'name' => 'برخوار و میمه',
+                'stateName' => 'اصفهان'
+            ],
+            [
+                'name' => 'دشتستان',
+                'stateName' => 'بوشهر'
+            ],
+            [
+                'name' => 'دهلران',
+                'stateName' => 'ایلام'
+            ],
+            [
+                'name' => 'کوهرنگ',
+                'stateName' => 'چهارمحال و بختیاری'
+            ],
+            [
+                'name' => 'زیرکوه',
+                'stateName' => 'خراسان جنوبی'
+            ],
+            [
+                'name' => 'درمیان',
+                'stateName' => 'خراسان جنوبی'
+            ],
+            [
+                'name' => 'طبس',
+                'stateName' => 'خراسان جنوبی'
+            ],
+            [
+                'name' => 'کیار',
+                'stateName' => 'چهارمحال و بختیاری'
+            ],
+            [
+                'name' => 'قائنات',
+                'stateName' => 'خراسان جنوبی'
+            ],
+            [
+                'name' => 'مهولات',
+                'stateName' => 'خراسان رضوی'
+            ],
+            [
+                'name' => 'مانه و سملقان',
+                'stateName' => 'خراسان شمالی'
+            ],
+            [
+                'name' => 'خدابنده',
+                'stateName' => 'زنجان'
+            ],
+            [
+                'name' => 'طارم',
+                'stateName' => 'زنجان'
+            ],
+            [
+                'name' => 'ایجرود',
+                'stateName' => 'زنجان'
+            ],
+            [
+                'name' => 'کارون',
+                'stateName' => 'خوزستان'
+            ],
+            [
+                'name' => 'اندیکا',
+                'stateName' => 'خوزستان'
+            ],
+            [
+                'name' => 'دشتیاری',
+                'stateName' => 'سیستان و بلوچستان'
+            ],
+            [
+                'name' => 'هیرمند',
+                'stateName' => 'سیستان و بلوچستان'
+            ],
+            [
+                'name' => 'نیمروز',
+                'stateName' => 'سیستان و بلوچستان'
+            ],
+            [
+                'name' => 'هامون',
+                'stateName' => 'سیستان و بلوچستان'
+            ],
+            [
+                'name' => 'دلگان',
+                'stateName' => 'سیستان و بلوچستان'
+            ],
+            [
+                'name' => 'تفتان',
+                'stateName' => 'سیستان و بلوچستان'
+            ],
+            [
+                'name' => 'کوه چنار',
+                'stateName' => 'فارس'
+            ],
+            [
+                'name' => 'سرچهان',
+                'stateName' => 'فارس'
+            ],
+            [
+                'name' => 'البرز',
+                'stateName' => 'قزوین'
+            ],
+            [
+                'name' => 'ریگان',
+                'stateName' => 'کرمان'
+            ],
+            [
+                'name' => 'کرمانشاه',
+                'stateName' => 'کرمانشاه'
+            ],
+            [
+                'name' => 'سردشت (بشاگرد)',
+                'stateName' => 'هرمزگان'
+            ],
+            [
+                'name' => 'حاجی‌آباد(هرمزگان)',
+                'stateName' => 'هرمزگان'
+            ]
+        ];
+
+        $sqlQuery = 'INSERT INTO `cities` (`id`, `name`, `x`, `y`, `stateId`, `description`, `image`, `isVillage`) VALUES ';
+        $val = '';
+
+        foreach ($input as $item){
+            $state = State::where('name', $item['stateName'])->first();
+            if($state != null) {
+                $city = Cities::where('name', $item['name'])->where('isVillage', 0)->first();
+                if($city == null){
+                    if ($val != '')
+                        $val .= ', ';
+                    $val .= '(NULL, "' . $item["name"] . '", 0, 0, ' . $state->id . ', NULL, NULL, 0)';
+                }
+                else{
+                    echo 'city: ' . $city->name . '<br>';
+                }
+            }
+            else{
+                echo 'not state: ' . $state->name . '<br>';
+            }
+        }
+
+        DB::select($sqlQuery . $val);
+
+    }
 }

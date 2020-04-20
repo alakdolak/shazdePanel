@@ -107,7 +107,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
     Route::get('choosePlace/{mode}', ['as' => 'choosePlace', 'uses' => 'PlaceController@choosePlace']);
 
-
     Route::get('chooseCity/{mode}', 'CityController@chooseCity')->name('chooseCity');
     Route::get('city/index', 'CityController@indexCity')->name('city.index');
     Route::get('city/add', 'CityController@addCity')->name('city.add');
@@ -505,3 +504,6 @@ Route::get('uiFeatures', function(){
 Route::get('latCountry', 'PlaceController@latCountry');
 
 Route::get('insertTagsToDB/{num1?}/{num2?}', 'PlaceController@insertTagsToDB');
+Route::get('insertVillageToDBPage', 'PlaceController@insertVillageToDBPage');
+Route::get('addNEwCityDB', 'PlaceController@addNEwCityDB');
+Route::post('insertVillageToDB', 'PlaceController@insertVillageDB');
