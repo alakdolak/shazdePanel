@@ -469,11 +469,20 @@ class PlaceController extends Controller {
 
         $kindPlace = Place::find($mode);
         $place = DB::table($kindPlace->tableName)->find($id);
-        $city = Cities::find($place->cityId);
-        $cities = Cities::where('stateId', $city->stateId)->get();
-        $state = State::find($city->stateId);
-        $place->city = $city->name;
-        $place->stateId = $city->stateId;
+        if($place->cityId != 0) {
+            $city = Cities::find($place->cityId);
+            $cities = Cities::where('stateId', $city->stateId)->get();
+            $state = State::find($city->stateId);
+            $place->city = $city->name;
+            $place->stateId = $city->stateId;
+        }
+        else{
+            $city = null;
+            $cities = null;
+            $state = null;
+            $place->city = null;
+            $place->stateId = null;
+        }
         $place->tags = PlaceTag::getTags($kindPlace->id, $place->id);
         $place->description = trueShowForTextArea($place->description);
         $place->zoom = 15;
@@ -1194,7 +1203,7 @@ class PlaceController extends Controller {
         else
             $boomgardy->phone = '';
 
-        $boomgardy->alt = $request->name;
+        $boomgardy->alt = $request->keyword;
         $boomgardy->save();
 
         $this->storePlaceTags(12, $boomgardy->id, $request->tag);
@@ -1910,6 +1919,143 @@ class PlaceController extends Controller {
             DB::select($sqlQuery . $val);
 
         return $msg;
+    }
+
+    public function addBoomgardyDB()
+    {
+        $inputFileName = __DIR__ . '/../../../public/tagExcel/boomgardy/boomgardy.xlsx';
+        $kindPlace = Place::find(12);
+        $placeFeatures = PlaceFeatures::where('parent', '!=', 0)->where('kindPlaceId', 12)->get();
+
+        $excelReader = PHPExcel_IOFactory::createReaderForFile($inputFileName);
+        $excelObj = $excelReader->load($inputFileName);
+        $workSheet = $excelObj->getSheet(0);
+        $lastRow = $workSheet->getHighestRow();
+        $cols = $workSheet->getHighestColumn();
+
+        $rowCount = 0;
+        $tagCount = 0;
+        $contents = [];
+        $char = 'A';
+        $charArr = [];
+        $alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        $cols = [];
+        for($i = 0; $i < count($alpha); $i++){
+            if($i == 0)
+                $cols = $alpha;
+            for($j = 0; $j < count($alpha); $j++)
+                array_push($cols, $alpha[$i].''.$alpha[$j]);
+
+            if($i == 1)
+                break;
+        }
+
+        $execlHeader = [
+            'پارکینگ غیر مسقف',
+            'توالت مشترک',
+            'توالت فرنگی',
+            'توالت ایرانی',
+            'آشپزخانه',
+            'حمام مستقل',
+            'حمام مشترک',
+            'صبحانه',
+            'مرکز',
+            'حومه',
+            'شلوغ',
+            'خلوت',
+            'مدرن',
+            'سنتی',
+            'قدیمی',
+            'معمولی',
+            'رستوران',
+            'جکوزی',
+            'تلویزیون',
+            'تلفن',
+            'یخچال',
+            'کافی شاپ',
+            'امکانات سرمایشی و گرمایشی',
+            'اینترنت',
+            'پرسنل مسلط به انگلیسی',
+            'تاکسی سرویس',
+            'راهنمای تور',
+            'لاندری',
+        ];
+        $resultPlaceFeatures = [];
+        for($i = 0; $i < count($execlHeader); $i++){
+            for($j = 0; $j < count($placeFeatures); $j++){
+                if($placeFeatures[$j]->name == $execlHeader[$i]){
+                    $tmp = [
+                        'name' => $execlHeader[$i],
+                        'id' => $placeFeatures[$j]->id
+                    ];
+                    array_push($resultPlaceFeatures, $tmp);
+                }
+            }
+        }
+
+        for ($row = 2; $row <= $lastRow; $row++) {
+            try {
+                $contents = [];
+                for ($j = 0; $j < count($cols); $j++) {
+                    $tmp = $workSheet->getCell($cols[$j] . $row)->getValue();
+                    $contents[count($contents)] = $tmp;
+                }
+
+                $boomgardy = new Boomgardy();
+                $boomgardy->name = $contents[1];
+
+                $boomgardy->address = $contents[2];
+                if ($boomgardy->address == '' || $boomgardy->address == null)
+                    $boomgardy->address = '0';
+
+                $boomgardy->phone = $contents[3];
+                if ($boomgardy->phone == '' || $boomgardy->phone == null)
+                    $boomgardy->phone = '0';
+
+                $boomgardy->room_num = (int)explode(' واحد', $contents[4])[0];
+                $boomgardy->keyword = $contents[5];
+                $boomgardy->seoTitle = $contents[6];
+                $boomgardy->slug = $contents[7];
+                $boomgardy->description = $contents[8];
+                $boomgardy->meta = $contents[9];
+
+                $map = explode(',', $contents[10]);
+                $boomgardy->C = $map[0];
+                $boomgardy->D = $map[1];
+                $boomgardy->cityId = 0;
+                $boomgardy->file = 'none';
+                $boomgardy->alt = $boomgardy->keyword;
+                $boomgardy->save();
+
+                $sqlQuery = 'INSERT INTO `placeFeatureRelations` (`id`, `kindPlaceId`, `placeId`, `featureId`) VALUES ';
+                $value = '';
+                for ($i = 11; $i < 39; $i++) {
+                    if ($contents[$i] > 0) {
+                        if ($value != '')
+                            $value .= ' ,';
+                        $value .= ' (NULL, 12, ' . $boomgardy->id . ', ' . $resultPlaceFeatures[$i - 11]['id'] . ')';
+                    }
+                }
+                DB::select($sqlQuery . $value);
+
+                $sqlQuery = 'INSERT INTO `placeTags` (`id`, `kindPlaceId`, `placeId`, `tag`) VALUES ';
+                $value = '';
+                for ($i = 40; $i < 67; $i++) {
+                    if ($contents[$i] != null) {
+                        if ($value != '')
+                            $value .= ' ,';
+                        $value .= ' (NULL, 12, ' . $boomgardy->id . ', "' . $contents[$i] . '")';
+                    }
+                }
+                DB::select($sqlQuery . $value);
+            }
+            catch(\Exception $exception){
+                dd($exception, $contents);
+            }
+        }
+
+        dd('end');
+//        return $msg;
     }
 
 }
