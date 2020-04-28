@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Adab;
 use App\models\Amaken;
+use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\CityPic;
 use App\models\Hotel;
@@ -68,33 +69,24 @@ class PlaceController extends Controller {
 
                 $id = $request->placeId;
                 $kindPlaceId = $request->kindPlaceId;
+                $kindPlace = Place::find($kindPlaceId);
+                $kindPlaceName = $kindPlace->fileName;
+                $place = DB::table($kindPlace->tableName)->find($id);
 
-                switch ($kindPlaceId){
-                    case 1:
-                        $place = Amaken::find($id);
-                        $kindPlaceName = 'amaken';
-                        break;
-                    case 3:
-                        $place = Restaurant::find($id);
-                        $kindPlaceName = 'restaurant';
-                        break;
-                    case 4:
-                        $place = Hotel::find($id);
-                        $kindPlaceName = 'hotels';
-                        break;
-                    case 6:
-                        $place = Majara::find($id);
-                        $kindPlaceName = 'majara';
-                        break;
-                    case 10:
-                        $place = SogatSanaie::find($id);
-                        $kindPlaceName = 'sogatsanaie';
-                        break;
-                    case 11:
-                        $place = MahaliFood::find($id);
-                        $kindPlaceName = 'mahalifood';
-                        break;
-                }
+                if($kindPlaceId == 1)
+                    $place = Amaken::find($id);
+                else if($kindPlaceId == 3)
+                    $place = Restaurant::find($id);
+                else if($kindPlaceId == 4)
+                    $place = Hotel::find($id);
+                else if($kindPlaceId == 6)
+                    $place = Majara::find($id);
+                else if($kindPlaceId == 10)
+                    $place = SogatSanaie::find($id);
+                else if($kindPlaceId == 11)
+                    $place = MahaliFood::find($id);
+                else if($kindPlaceId == 12)
+                    $place = Boomgardy::find($id);
 
                 if(!file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName))
                     mkdir(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName);
@@ -400,68 +392,47 @@ class PlaceController extends Controller {
         $kindPlace = Place::find($mode);
         $state = State::all();
 
-        switch ($mode) {
-            case getValueInfo("hotel"):
-            default:
-                $kind = 'hotels';
-                break;
-            case getValueInfo('amaken'):
-                $kind = 'amaken';
-                break;
-            case getValueInfo('restaurant'):
-                $kind = 'restaurant';
-                break;
-            case getValueInfo('majara'):
-                $kind = 'majara';
-                break;
-            case 10:
-                $kind = 'sogatSanaies';
-                break;
-            case 11:
-                $kind = 'mahaliFood';
-                break;
-        }
-
         if($cityMode != 'country') {
-            if ($kind == 'mahaliFood' || $kind == 'sogatSanaies') {
+            if ($kindPlace->tableName == 'mahaliFood' || $kindPlace->tableName == 'sogatSanaies') {
                 if ($cityMode == 0) {
                     $state2 = State::find($cityId);
                     $name = $state2->name;
                     $id = $state2->id;
                     $stateId = $state2->id;
 
-                    $places = DB::select('select h.name, h.cityId, h.id, h.picNumber from ' . $kind . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+                    $places = DB::select('select h.name, h.cityId, h.id, h.picNumber from ' . $kindPlace->tableName . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
                 } else {
                     $city = Cities::find($cityId);
                     $name = $city->name;
                     $id = $cityId;
                     $stateId = $city->stateId;
 
-                    $places = DB::select('select name, cityId, id, picNumber FROM ' . $kind . ' WHERE cityId = ' . $id);
+                    $places = DB::select('select name, cityId, id, picNumber FROM ' . $kindPlace->tableName . ' WHERE cityId = ' . $id);
                 }
                 foreach ($places as $item) {
                     $item->pic = URL::asset('_images/nopic/blank.jpg');
                 }
-            } else {
+            }
+            else {
                 if ($cityMode == 0) {
                     $state2 = State::find($cityId);
                     $name = $state2->name;
                     $id = $state2->id;
                     $stateId = $state2->id;
 
-                    $places = DB::select('select h.name, h.cityId, h.pic_1, h.file, h.id from ' . $kind . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+                    $places = DB::select('select h.name, h.cityId, h.pic_1, h.file, h.id from ' . $kindPlace->tableName . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
                 } else {
                     $city = Cities::find($cityId);
                     $name = $city->name;
                     $id = $cityId;
                     $stateId = $city->stateId;
 
-                    $places = DB::select('SELECT name, cityId, pic_1, file, id FROM ' . $kind . ' WHERE cityId = ' . $cityId);
+                    $places = DB::select('SELECT name, cityId, pic_1, file, id FROM ' . $kindPlace->tableName . ' WHERE cityId = ' . $cityId);
                 }
 
                 foreach ($places as $item) {
                     if ($item->pic_1 != 0 || ($item->file != '' && $item->file != null))
-                        $item->pic = URL::asset('_images/' . $kind . '/' . $item->file . '/f-1.jpg');
+                        $item->pic = URL::asset('_images/' . $kindPlace->fileName . '/' . $item->file . '/f-1.jpg');
                     else
                         $item->pic = URL::asset('_images/nopic/blank.jpg');
                 }
@@ -476,6 +447,8 @@ class PlaceController extends Controller {
         $city = Cities::where('stateId',$stateId)->get();
 
         $jsonPlace = json_encode($places);
+
+        $kind = $kindPlace->tableName;
 
         return view('content.newChangeContent', compact(['name', 'cityMode', 'places', 'mode', 'id', 'jsonPlace', 'kind', 'state', 'stateId', 'city']));
     }
@@ -533,6 +506,10 @@ class PlaceController extends Controller {
                 $place->recipes = trueShowForTextArea($place->recipes);
                 return view('content.editContent.editMahaliFood', compact(['place', 'kind', 'state', 'allState', 'mode', 'cities', 'city', 'features', 'placeFeatures']));
                 break;
+            case 12:
+                return view('content.editContent.editBoomgardy', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
+                break;
+
             default:
                 return \redirect()->back();
         }
@@ -589,6 +566,11 @@ class PlaceController extends Controller {
                 $titleName = 'غذای محلی جدید';
                 $url = route('storeMahaliFood');
                 $kind = 'mahalifood';
+                break;
+            case 12:
+                $titleName = 'بوم گردی جدید';
+                $url = route('storeBoomgardy');
+                $kind = 'boomgardies';
                 break;
         }
 
@@ -1160,7 +1142,70 @@ class PlaceController extends Controller {
         return \redirect(\url('uploadImgPage/10/' . $newSogat->id));
     }
 
+    public function storeBoomgardy(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'cityId' => 'required',
+            'address' => 'required',
+            'keyword' => 'required',
+            'seoTitle' => 'required',
+            'meta' => 'required',
+            'description' => 'required',
+            'D' => 'required',
+            'C' => 'required',
+            'room_num' => 'required',
+        ]);
 
+        if(isset($request->inputType) && $request->inputType == 'new'){
+            $boomgardy = new Boomgardy();
+            $boomgardy->file = 'none';
+        }
+        else if(isset($request->id) && $request->inputType == 'edit'){
+            $boomgardy = Boomgardy::find($request->id);
+
+            if($boomgardy == null)
+                return \redirect()->back();
+        }
+        else
+            return \redirect()->back();
+
+        $boomgardy->name = $request->name;
+        $boomgardy->cityId = $request->cityId;
+        $boomgardy->room_num = $request->room_num;
+        $boomgardy->C = $request->C;
+        $boomgardy->D = $request->D;
+        $boomgardy->meta = $request->meta;
+        $boomgardy->seoTitle = $request->seoTitle;
+        $boomgardy->description = nl2br($request->description);
+        $boomgardy->keyword = $request->keyword;
+        if($request->slug == null || $request->slug == '')
+            $boomgardy->slug = makeSlug($request->keyword);
+        else
+            $boomgardy->slug = makeSlug($request->slug);
+
+        if($request->address != null)
+            $boomgardy->address = $request->address;
+        else
+            $boomgardy->address = '';
+
+        if($request->phone != null)
+            $boomgardy->phone = $request->phone;
+        else
+            $boomgardy->phone = '';
+
+        $boomgardy->alt = $request->name;
+        $boomgardy->save();
+
+        $this->storePlaceTags(12, $boomgardy->id, $request->tag);
+
+        if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
+            $this->storePlaceFeatures(12, $boomgardy->id, $request->features);
+        else
+            PlaceFeatureRelation::where(['kindPlaceId' => 12, 'placeId' => $boomgardy->id])->delete();
+
+        return \redirect(\url('uploadImgPage/12/' . $boomgardy->id));
+    }
 
 
     public function index()
@@ -1457,315 +1502,6 @@ class PlaceController extends Controller {
         $key = makeValidInput($_POST["key"]);
         $cities = DB::select("SELECT id, name FROM state WHERE name LIKE '%$key%' ");
         echo json_encode($cities);
-    }
-
-    private function uploadHotel($contents) {
-
-        $err = "";
-        $counter = 1;
-
-        foreach ($contents as $content) {
-            $tmp = new Hotel();
-            $j = 0;
-
-            $tmp->name = $content[$j++];
-            $tmp->address = $content[$j++];
-            $tmp->phone = $content[$j++];
-            $tmp->site = $content[$j++];
-            $tmp->description = $content[$j++];
-            $tmp->vabastegi = $content[$j++];
-            $tmp->rate = $content[$j++];
-            $tmp->room_num = $content[$j++];
-            $tmp->kind_id = $content[$j++];
-            $tmp->file = $content[$j];
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-1.jpg'))
-                $tmp->pic_1 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-2.jpg'))
-                $tmp->pic_2 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-3.jpg'))
-                $tmp->pic_3 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-4.jpg'))
-                $tmp->pic_4 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-5.jpg'))
-                $tmp->pic_5 = 1;
-
-            recurse_copy(__DIR__ . '/../../../public/tmpZip/' . $content[$j],
-                __DIR__ . '/../../../../assets/_images/hotels/' . $content[$j]);
-
-            deleteDir(__DIR__ . '/../../../public/tmpZip/' . $content[$j]);
-
-            $j++;
-            $tmp->meta = $content[$j++];
-            $tmp->cityId = $content[$j++];
-            $tmp->C = $content[$j++];
-            $tmp->D = $content[$j++];
-            $tmp->fasele = $content[$j++];
-            $tmp->rate_int = $content[$j++];
-            $tmp->keyword = $content[$j++];
-            $tmp->h1 = $content[$j++];
-            $tmp->alt1 = $content[$j++];
-            $tmp->alt2 = $content[$j++];
-            $tmp->alt3 = $content[$j++];
-            $tmp->alt4 = $content[$j++];
-            $tmp->alt5 = $content[$j++];
-            $tmp->tag1 = $content[$j++];
-            $tmp->tag2 = $content[$j++];
-            $tmp->tag3 = $content[$j++];
-            $tmp->tag4 = $content[$j++];
-            $tmp->tag5 = $content[$j++];
-            $tmp->tag6 = $content[$j++];
-            $tmp->tag7 = $content[$j++];
-            $tmp->tag8 = $content[$j++];
-            $tmp->tag9 = $content[$j++];
-            $tmp->tag10 = $content[$j++];
-            $tmp->tag11 = $content[$j++];
-            $tmp->tag12 = $content[$j++];
-            $tmp->tag13 = $content[$j++];
-            $tmp->tag14 = $content[$j++];
-            $tmp->tag15 = $content[$j];
-
-            $tmp->onlineReservation = 0;
-            $tmp->authorized = 0;
-            $tmp->author = Auth::user()->id;
-
-            try {
-                $tmp->save();
-            }
-            catch (\Exception $x) {
-                $err .= "خطا در خط " . ($counter) . "<br/>" . $x->getMessage() . "<br/>";
-            }
-            finally {
-                $counter++;
-            }
-        }
-
-        return $err;
-    }
-
-    private function uploadAmaken($contents) {
-
-        $err = "";
-        $counter = 1;
-
-        foreach ($contents as $content) {
-
-            $tmp = new Amaken();
-            $j = 0;
-
-            $tmp->name = $content[$j++];
-            $tmp->address = $content[$j++];
-            $tmp->phone = $content[$j++];
-            $tmp->site = $content[$j++];
-            $tmp->description = $content[$j++];
-
-            $tmp->emkanat = $content[$j++];
-            $tmp->tarikhi = $content[$j++];
-            $tmp->mooze = $content[$j++];
-            $tmp->tafrihi = $content[$j++];
-            $tmp->tabiatgardi = $content[$j++];
-            $tmp->markazkharid = $content[$j++];
-            $tmp->baftetarikhi = $content[$j++];
-
-            $tmp->markaz = $content[$j++];
-            $tmp->hoome = $content[$j++];
-            $tmp->shologh = $content[$j++];
-            $tmp->khalvat = $content[$j++];
-            $tmp->tabiat = $content[$j++];
-            $tmp->kooh = $content[$j++];
-            $tmp->darya = $content[$j++];
-            $tmp->class = $content[$j++];
-
-            $tmp->modern = $content[$j++];
-            $tmp->tarikhibana = $content[$j++];
-            $tmp->mamooli = $content[$j++];
-
-            $tmp->file = $content[$j];
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-1.jpg'))
-                $tmp->pic_1 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-2.jpg'))
-                $tmp->pic_2 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-3.jpg'))
-                $tmp->pic_3 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-4.jpg'))
-                $tmp->pic_4 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-5.jpg'))
-                $tmp->pic_5 = 1;
-
-            recurse_copy(__DIR__ . '/../../../public/tmpZip/' . $content[$j],
-                __DIR__ . '/../../../../assets/_images/amaken/' . $content[$j]);
-
-            deleteDir(__DIR__ . '/../../../public/tmpZip/' . $content[$j]);
-
-            $j++;
-
-            $tmp->meta = $content[$j++];
-            $tmp->cityId = $content[$j++];
-            $tmp->C = $content[$j++];
-            $tmp->D = $content[$j++];
-
-            $tmp->farhangi = $content[$j++];
-            $tmp->ghadimi = $content[$j++];
-
-            $tmp->keyword = $content[$j++];
-            $tmp->h1 = $content[$j++];
-            $tmp->alt1 = $content[$j++];
-            $tmp->alt2 = $content[$j++];
-            $tmp->alt3 = $content[$j++];
-            $tmp->alt4 = $content[$j++];
-            $tmp->alt5 = $content[$j++];
-            $tmp->tag1 = $content[$j++];
-            $tmp->tag2 = $content[$j++];
-            $tmp->tag3 = $content[$j++];
-            $tmp->tag4 = $content[$j++];
-            $tmp->tag5 = $content[$j++];
-            $tmp->tag6 = $content[$j++];
-            $tmp->tag7 = $content[$j++];
-            $tmp->tag8 = $content[$j++];
-            $tmp->tag9 = $content[$j++];
-            $tmp->tag10 = $content[$j++];
-            $tmp->tag11 = $content[$j++];
-            $tmp->tag12 = $content[$j++];
-            $tmp->tag13 = $content[$j++];
-            $tmp->tag14 = $content[$j++];
-            $tmp->tag15 = $content[$j];
-
-            $tmp->authorized = 0;
-            $tmp->author = Auth::user()->id;
-            try {
-                $tmp->save();
-            }
-            catch (\Exception $x) {
-                $err .= "خطا در خط " . ($counter) . "<br/>" . $x->getMessage() . "<br/>";
-            }
-            finally {
-                $counter++;
-            }
-        }
-
-        return $err;
-    }
-
-    private function uploadRestaurant($contents) {
-
-        $err = "";
-        $counter = 1;
-
-        foreach ($contents as $content) {
-
-            $tmp = new Restaurant();
-            $j = 0;
-
-            $tmp->name = $content[$j++];
-            $tmp->address = $content[$j++];
-            $tmp->phone = $content[$j++];
-            $tmp->site = $content[$j++];
-            $tmp->description = $content[$j++];
-
-            $tmp->food_irani = $content[$j++];
-            $tmp->food_mahali = $content[$j++];
-            $tmp->food_farangi = $content[$j++];
-            $tmp->coffeeshop = $content[$j++];
-            $tmp->tarikhi = $content[$j++];
-            $tmp->markaz = $content[$j++];
-            $tmp->hoome = $content[$j++];
-            $tmp->shologh = $content[$j++];
-            $tmp->khalvat = $content[$j++];
-            $tmp->tabiat = $content[$j++];
-            $tmp->kooh = $content[$j++];
-            $tmp->darya = $content[$j++];
-            $tmp->class = $content[$j++];
-
-            $tmp->markaz = $content[$j++];
-            $tmp->hoome = $content[$j++];
-            $tmp->shologh = $content[$j++];
-            $tmp->khalvat = $content[$j++];
-            $tmp->tabiat = $content[$j++];
-            $tmp->kooh = $content[$j++];
-            $tmp->darya = $content[$j++];
-            $tmp->class = $content[$j++];
-
-            $tmp->modern = $content[$j++];
-            $tmp->sonnati = $content[$j++];
-            $tmp->ghadimi = $content[$j++];
-            $tmp->mamooli = $content[$j++];
-            $tmp->kind_id = $content[$j++];
-
-            $tmp->file = $content[$j];
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-1.jpg'))
-                $tmp->pic_1 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-2.jpg'))
-                $tmp->pic_2 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-3.jpg'))
-                $tmp->pic_3 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-4.jpg'))
-                $tmp->pic_4 = 1;
-
-            if(file_exists(__DIR__ . '/../../../public/tmpZip/' . $content[$j] . '/s-5.jpg'))
-                $tmp->pic_5 = 1;
-
-            recurse_copy(__DIR__ . '/../../../public/tmpZip/' . $content[$j],
-                __DIR__ . '/../../../../assets/_images/restaurant/' . $content[$j]);
-
-            deleteDir(__DIR__ . '/../../../public/tmpZip/' . $content[$j]);
-
-            $j++;
-
-            $tmp->meta = $content[$j++];
-            $tmp->cityId = $content[$j++];
-            $tmp->C = $content[$j++];
-            $tmp->D = $content[$j++];
-
-            $tmp->keyword = $content[$j++];
-            $tmp->h1 = $content[$j++];
-            $tmp->alt1 = $content[$j++];
-            $tmp->alt2 = $content[$j++];
-            $tmp->alt3 = $content[$j++];
-            $tmp->alt4 = $content[$j++];
-            $tmp->alt5 = $content[$j++];
-            $tmp->tag1 = $content[$j++];
-            $tmp->tag2 = $content[$j++];
-            $tmp->tag3 = $content[$j++];
-            $tmp->tag4 = $content[$j++];
-            $tmp->tag5 = $content[$j++];
-            $tmp->tag6 = $content[$j++];
-            $tmp->tag7 = $content[$j++];
-            $tmp->tag8 = $content[$j++];
-            $tmp->tag9 = $content[$j++];
-            $tmp->tag10 = $content[$j++];
-            $tmp->tag11 = $content[$j++];
-            $tmp->tag12 = $content[$j++];
-            $tmp->tag13 = $content[$j++];
-            $tmp->tag14 = $content[$j++];
-            $tmp->tag15 = $content[$j];
-
-            $tmp->authorized = 0;
-            $tmp->author = Auth::user()->id;
-            try {
-                $tmp->save();
-            }
-            catch (\Exception $x) {
-                $err .= "خطا در خط " . ($counter) . "<br/>" . $x->getMessage() . "<br/>";
-            }
-            finally {
-                $counter++;
-            }
-        }
-
-        return $err;
     }
 
     private function preprocess($neededCol) {
@@ -2176,276 +1912,4 @@ class PlaceController extends Controller {
         return $msg;
     }
 
-    public function insertVillageToDBPage()
-    {
-        return view('TagUploade.showVillageUpload');
-    }
-    public function insertVillageDB(Request $request){
-        $number = $request->number;
-
-        $location = __DIR__ . '/../../../public/tagExcel/village.xlsx';
-        if(is_file($location)){
-
-            $excelReader = PHPExcel_IOFactory::createReaderForFile($location);
-            $excelObj = $excelReader->load($location);
-            $workSheet = $excelObj->getSheet(0);
-            $lastRow = $workSheet->getHighestRow();
-            $cols = $workSheet->getHighestColumn();
-
-            $rowCount = 0;
-            $tagCount = 0;
-            $contents = [];
-            $cols = ['A', 'B', 'C'];
-            for ($row = $number; $row <= $lastRow && $row < ($number + 500); $row++) {
-                $contents[$row-1] = [];
-                for ($j = 0; $j < count($cols); $j++) {
-                    $tmp = $workSheet->getCell($cols[$j] . $row)->getValue();
-                    $contents[$row-1][count($contents[$row-1])] = $tmp;
-                }
-            }
-            $lastGetRow = $row;
-
-            $stateError = $request->stateErr;
-            $cityError = $request->cityErr;
-            $dupError = $request->dupErr;
-
-            if($stateError == null)
-                $stateError = [];
-            if($cityError == null)
-                $cityError = [];
-            if($dupError == null)
-                $dupError = [];
-
-            $sqlQuery = 'INSERT INTO `cities` (`id`, `name`, `x`, `y`, `stateId`, `description`, `image`, `isVillage`) VALUES ';
-            $val = '';
-            foreach ($contents as $item){
-                $state = State::where('name', $item[1])->first();
-                if($state != null){
-                    $city = Cities::where('stateId', $state->id)->where('name', $item[2])->where('isVillage', 0)->first();
-                    if($city != null){
-                        $village = Cities::where('isVillage', $city->id)->where('name', $item[0])->first();
-                        if($village == null){
-                            $rowCount++;
-                            if($val != '')
-                                $val .= ', ';
-                            $val .= '(NULL, "' . $item[0] . '", 0, 0, ' . $state->id . ', NULL, NULL, ' . $city->id . ')';
-                        }
-                        else{
-                            if(!in_array($item[0], $dupError))
-                                array_push($dupError, $item[0]);
-                        }
-                    }
-                    else{
-                        if(!in_array($item[2], $cityError))
-                            array_push($cityError, $item[2]);
-                    }
-                }
-                else {
-                    if(!in_array($item[1], $stateError))
-                        array_push($stateError, $item[1]);
-                }
-            }
-
-            if($val != '')
-                DB::select($sqlQuery . $val);
-
-            echo json_encode(['status' => 'ok', 'stateErr' => $stateError, 'cityErr' => $cityError, 'dupErr' => $dupError, 'added' => $rowCount, 'lastGetRow' => $lastGetRow]);
-
-            return;
-        }
-    }
-
-    public function addNEwCityDB()
-    {
-        $input =[
-            [
-                'name' => 'چاراویماق',
-                'stateName' => 'آذربایجان شرقی'
-            ],
-            [
-                'name' => 'خداآفرین',
-                'stateName' => 'آذربایجان شرقی'
-            ],
-            [
-                'name' => 'میانه',
-                'stateName' => 'آذربایجان شرقی'
-            ],
-            [
-                'name' => 'چالدران',
-                'stateName' => 'آذربایجان غربی'
-            ],
-            [
-                'name' => 'مهاباد',
-                'stateName' => 'آذربایجان غربی'
-            ],
-            [
-                'name' => 'کوثر',
-                'stateName' => 'اردبیل'
-            ],
-            [
-                'name' => 'فریدن',
-                'stateName' => 'اصفهان'
-            ],
-            [
-                'name' => 'لنجان',
-                'stateName' => 'اصفهان'
-            ],
-            [
-                'name' => 'سمیرم سفلی',
-                'stateName' => 'اصفهان'
-            ],
-            [
-                'name' => 'چرداول',
-                'stateName' => 'ایلام'
-            ],
-            [
-                'name' => 'دشتی',
-                'stateName' => 'بوشهر'
-            ],
-            [
-                'name' => 'تنگستان',
-                'stateName' => 'بوشهر'
-            ],
-            [
-                'name' => 'برخوار و میمه',
-                'stateName' => 'اصفهان'
-            ],
-            [
-                'name' => 'دشتستان',
-                'stateName' => 'بوشهر'
-            ],
-            [
-                'name' => 'دهلران',
-                'stateName' => 'ایلام'
-            ],
-            [
-                'name' => 'کوهرنگ',
-                'stateName' => 'چهارمحال و بختیاری'
-            ],
-            [
-                'name' => 'زیرکوه',
-                'stateName' => 'خراسان جنوبی'
-            ],
-            [
-                'name' => 'درمیان',
-                'stateName' => 'خراسان جنوبی'
-            ],
-            [
-                'name' => 'طبس',
-                'stateName' => 'خراسان جنوبی'
-            ],
-            [
-                'name' => 'کیار',
-                'stateName' => 'چهارمحال و بختیاری'
-            ],
-            [
-                'name' => 'قائنات',
-                'stateName' => 'خراسان جنوبی'
-            ],
-            [
-                'name' => 'مهولات',
-                'stateName' => 'خراسان رضوی'
-            ],
-            [
-                'name' => 'مانه و سملقان',
-                'stateName' => 'خراسان شمالی'
-            ],
-            [
-                'name' => 'خدابنده',
-                'stateName' => 'زنجان'
-            ],
-            [
-                'name' => 'طارم',
-                'stateName' => 'زنجان'
-            ],
-            [
-                'name' => 'ایجرود',
-                'stateName' => 'زنجان'
-            ],
-            [
-                'name' => 'کارون',
-                'stateName' => 'خوزستان'
-            ],
-            [
-                'name' => 'اندیکا',
-                'stateName' => 'خوزستان'
-            ],
-            [
-                'name' => 'دشتیاری',
-                'stateName' => 'سیستان و بلوچستان'
-            ],
-            [
-                'name' => 'هیرمند',
-                'stateName' => 'سیستان و بلوچستان'
-            ],
-            [
-                'name' => 'نیمروز',
-                'stateName' => 'سیستان و بلوچستان'
-            ],
-            [
-                'name' => 'هامون',
-                'stateName' => 'سیستان و بلوچستان'
-            ],
-            [
-                'name' => 'دلگان',
-                'stateName' => 'سیستان و بلوچستان'
-            ],
-            [
-                'name' => 'تفتان',
-                'stateName' => 'سیستان و بلوچستان'
-            ],
-            [
-                'name' => 'کوه چنار',
-                'stateName' => 'فارس'
-            ],
-            [
-                'name' => 'سرچهان',
-                'stateName' => 'فارس'
-            ],
-            [
-                'name' => 'البرز',
-                'stateName' => 'قزوین'
-            ],
-            [
-                'name' => 'ریگان',
-                'stateName' => 'کرمان'
-            ],
-            [
-                'name' => 'کرمانشاه',
-                'stateName' => 'کرمانشاه'
-            ],
-            [
-                'name' => 'سردشت (بشاگرد)',
-                'stateName' => 'هرمزگان'
-            ],
-            [
-                'name' => 'حاجی‌آباد(هرمزگان)',
-                'stateName' => 'هرمزگان'
-            ]
-        ];
-
-        $sqlQuery = 'INSERT INTO `cities` (`id`, `name`, `x`, `y`, `stateId`, `description`, `image`, `isVillage`) VALUES ';
-        $val = '';
-
-        foreach ($input as $item){
-            $state = State::where('name', $item['stateName'])->first();
-            if($state != null) {
-                $city = Cities::where('name', $item['name'])->where('isVillage', 0)->first();
-                if($city == null){
-                    if ($val != '')
-                        $val .= ', ';
-                    $val .= '(NULL, "' . $item["name"] . '", 0, 0, ' . $state->id . ', NULL, NULL, 0)';
-                }
-                else{
-                    echo 'city: ' . $city->name . '<br>';
-                }
-            }
-            else{
-                echo 'not state: ' . $state->name . '<br>';
-            }
-        }
-
-        DB::select($sqlQuery . $val);
-
-    }
 }

@@ -212,7 +212,8 @@
         var error = false;
 
         var address = document.getElementById('address').value;
-        if(address == '' || address == null || address == ' '){
+
+        if(address.trim().length < 5){
             error = true;
             error_text += '<li>ادرس را کامل کنید.</li>';
             document.getElementById('address').classList.add('error');

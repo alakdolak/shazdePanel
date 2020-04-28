@@ -65,26 +65,22 @@
             width: 100%;
             padding: 0 20%;
             direction: rtl;
+            /*display: none;*/
         }
 
         .eleman{
             margin-left: 30px;
-            width: 160px;
+            width: 200px;
             margin-bottom: 10px;
-            padding-left: 10px;
-        }
-
-        .marTop{
-            margin-top: 10px;
         }
     </style>
+
 
 @stop
 
 @section('content')
 
     <div class="errorDiv" id="errorDiv"></div>
-
 
 
     <div class="data-table-area mg-b-15">
@@ -103,105 +99,130 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <h3 style="text-align: center;">
-                                            {{$titleName}}
+                                            ویرایش <span style="font-weight: bold">{{$place->name}}</span>
                                         </h3>
                                     </div>
                                 </div>
                                 <hr>
-                                <form id="form" action="{{$url}}" method="post" enctype="multipart/form-data" autocomplete="off">
+                                <form id="form" action="{{route('storeBoomgardy')}}" method="post" enctype="multipart/form-data" autocomplete="off">
                                     @csrf
-
-                                    <input type="hidden" name="inputType" value="new">
+                                    <input type="hidden" name="id" value="{{$place->id}}">
+                                    <input type="hidden" name="inputType" value="edit">
 
                                     <div class="row">
                                         <div class="col-md-4 f_r">
                                             <div class="form-group">
-                                                <label for="name"> نام</label>
-                                                <input type="text" class="form-control" name="name" id="name" placeholder="نام" value="{{old('name')}}">
+                                                <label for="name"> نام مکان</label>
+                                                <input type="text" class="form-control" name="name" id="name" value="{{$place->name}}">
                                             </div>
                                         </div>
                                         <div class="col-md-3 f_r">
                                             <div class="form-group">
                                                 <label for="name"> استان</label>
                                                 <select id="state" name="state" class="form-control" onchange="findCity(this.value)">
-                                                    @if($state != null)
-                                                        @foreach($allState as $item)
-                                                            <option value="{{$item->id}}" {{$item->id == $state->id? 'selected' : ''}}>
-                                                                {{$item->name}}
-                                                            </option>
-                                                        @endforeach
-                                                    @else
-                                                        @foreach($allState as $item)
-                                                            <option value="{{$item->id}}">
-                                                                {{$item->name}}
-                                                            </option>
-                                                        @endforeach
-                                                    @endif
+                                                    @foreach($allState as $item)
+                                                        <option value="{{$item->id}}" {{$item->id == $place->stateId? 'selected' : ''}}>
+                                                            {{$item->name}}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3 f_r">
                                             <div class="form-group" style="position: relative">
                                                 <label for="name"> شهر</label>
-                                                <input type="text" class="form-control" name="city" id="city" value="{{isset($city) && isset($city->name) ? $city->name : ''}}" onkeyup="searchCity(this.value)">
-                                                <input type="hidden" name="cityId" id="cityId" value="{{isset($city) && isset($city->id) ? $city->id : 0}}">
+                                                <input type="text" class="form-control" name="city" id="city" value="{{$place->city}}" onkeyup="searchCity(this.value)">
+                                                <input type="hidden" name="cityId" id="cityId" value="{{$place->cityId}}">
+
                                                 <div id="citySearch" class="citySearch">
                                                     <ul id="resultCity"></ul>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-2 f_r">
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">انتخاب از روی نقشه</button>
+                                                <label for="lat">lat(C)</label>
+                                                <input type="text" name="C" id="lat" value="{{$place->C}}" onchange="setNewMarker()">
 
-                                        @if($kind != 'mahalifood' && $kind != 'sogatsanaie')
-                                            <div class="col-md-2 f_r">
-                                                <div class="form-group">
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">انتخاب از روی نقشه</button>
-                                                    <label for="lat">lat(C)</label>
-                                                    <input type="text" name="C" id="lat" value="1" onchange="setNewMarker()">
-
-                                                    <label for="lng">lng(D)</label>
-                                                    <input type="text" name="D" id="lng" value="1" onchange="setNewMarker()">
-                                                </div>
+                                                <label for="lng">lng(D)</label>
+                                                <input type="text" name="D" id="lng" value="{{$place->D}}" onchange="setNewMarker()">
                                             </div>
-                                        @else
-                                            <input type="hidden" name="C" id="lat" value="0">
-                                            <input type="hidden" name="D" id="lng" value="0">
-                                        @endif
+                                        </div>
                                     </div>
 
-                                    @if($kind == 'amaken')
-                                        @include('content.newContent.amaken')
-                                    @elseif($kind == 'hotels')
-                                        @include('content.newContent.hotel')
-                                    @elseif($kind == 'restaurant')
-                                        @include('content.newContent.restaurant')
-                                    @elseif($kind == 'majara')
-                                        @include('content.newContent.majara')
-                                    @elseif($kind == 'mahalifood')
-                                        @include('content.newContent.mahalifood')
-                                    @elseif($kind == 'sogatsanaie')
-                                        @include('content.newContent.sogatsanaie')
-                                    @elseif($kind == 'boomgardies')
-                                        @include('content.newContent.boomgardies')
-                                    @endif
+                                    <div class="row">
+                                        <div class="col-md-6 f_r">
+                                            <div class="form-group">
+                                                <label for="phone"> شماره تماس</label>
+                                                <input type="text" class="form-control" name="phone" id="phone" value="{{$place->phone}}" minlength="8">
+                                                <div class="inputDescription">
+                                                    شماره تماس را همراه با کد شهر وارد کنید.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="address"> آدرس</label>
+                                                <input type="text" class="form-control" name="address" id="address" value="{{$place->address}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="row" style="display: flex; justify-content: center; align-items: center; height: 55px;">
+
+                                        <div class="col-md-3">
+                                            <span style="direction: rtl" class="myLabel">تعداد اتاق:</span>
+                                            <input type="text" class="form-control" name="room_num" id="room_num" value="{{$place->room_num}}">
+                                        </div>
+
+                                    </div>
+
+                                    @foreach($features as $feat)
+                                        <hr>
+                                        <div class="row" style="display: flex; flex-wrap: wrap">
+                                            <div class="col-sm-12 f_r" style="font-weight: bold; margin-bottom: 10px">
+                                                {{$feat->name}}:
+                                            </div>
+                                            <?php $last = 0; ?>
+                                            @foreach($feat->subFeat as $item)
+                                                <?php $last++; ?>
+                                                <div class="col-sm-2 f_r" style="{{$last == count($feat->subFeat) ? '' : 'border-left: solid gray; '}} display: flex; justify-content: space-around; margin-bottom: 5px">
+                                                    <span style="direction: rtl" class="myLabel">{{$item->name}}</span>
+                                                    @if($item->type == 'YN')
+                                                        <label class="switch">
+                                                            <input type="checkbox" name="features[]" value="{{$item->id}}" {{in_array($item->id, $placeFeatures) ? 'checked' : ''}}>
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endforeach
 
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12 f_r">
                                             <div class="form-group">
                                                 <label for="keyword"> کلمه کلیدی</label>
-                                                <input type="text" class="form-control" name="keyword" id="keyword" value="{{old('keyword')}}">
+                                                <input type="text" class="form-control" name="keyword" id="keyword" value="{{$place->keyword}}" onchange="setkeyWord(this.value)">
                                             </div>
                                         </div>
                                         <div class="col-md-12 f_r">
                                             <div class="form-group">
                                                 <label for="seoTitle"> عنوان سئو : <span id="seoTitleNumber" style="font-weight: 200;"></span></label>
-                                                <input type="text" class="form-control" name="seoTitle" id="seoTitle" onkeyup="changeSeoTitle(this.value)" value="{{old('seoTitle')}}">
+                                                <input type="text" class="form-control" name="seoTitle" id="seoTitle" value="{{$place->seoTitle}}" onkeyup="changeSeoTitle(this.value)">
                                             </div>
                                         </div>
+
                                         <div class="col-md-12 f_r">
                                             <div class="form-group">
                                                 <label for="slug"> نامک</label>
-                                                <input type="text" class="form-control" name="slug" id="slug" value="{{old('slug')}}">
+                                                <input type="text" class="form-control" name="slug" id="slug" value="{{$place->slug}}">
                                             </div>
                                         </div>
                                     </div>
@@ -209,7 +230,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="site">متا : <span id="metaNumber" style="font-weight: 200;"></span></label>
-                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="changeMeta(this.value)">{{old('meta')}}</textarea>
+                                                <textarea class="form-control" name="meta" id="meta" rows="10" onkeyup="changeMeta(this.value)" maxlength="160" minlength="130">{!! $place->meta !!}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="remainWordMeta" style="font-size: 15px;"></div>
                                                 </div>
@@ -219,28 +240,38 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="description">توضیح</label>
-                                                <textarea class="form-control" name="description" id="description" rows="10" onkeyup="descriptionCounter(this.value)">{!! old('description') !!}</textarea>
+                                                <textarea class="form-control" name="description" id="description" rows="10" onkeyup="descriptionCounter(this.value)">{!! $place->description !!}</textarea>
                                                 <div>
                                                     <div class="inputDescription" id="descriptionWordCount" style="font-size: 15px;"></div>
                                                     <div class="inputDescription" id="descriptionCharCount" style="font-size: 15px;"></div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
 
                                     <hr>
                                     <div class="row">
-
-                                        @for($i = 0; $i < 20; $i++)
+                                        @for($i = 0; $i < count($place->tags); $i++)
                                             <div class="f_r" style="margin-left: 15px;">
                                                 <div class="form-group">
                                                     <label for="name"> برچسب {{$i+1}} </label>
-                                                    <input type="text" class="form-control" name="tag[]" id="tag{{$i+1}}" {{$i < 5 ? 'required' : ''}} onchange="checkTags()">
+                                                    <input type="text" class="form-control" name="tag[]" id="tag{{$i+1}}" value="{{$place->tags[$i]}}" {{$i < 5 ? 'required' : ''}} onchange="checkTags()">
                                                 </div>
                                             </div>
                                         @endfor
-
+                                        @if(count($place->tags) < 20)
+                                            @for($i = count($place->tags); $i < 20; $i++)
+                                                <div class="f_r" style="margin-left: 15px;">
+                                                    <div class="form-group">
+                                                        <label for="name"> برچسب {{$i+1}} </label>
+                                                        <input type="text" class="form-control" name="tag[]" id="tag{{$i+1}}" value="" onchange="checkTags()" {{$i < 5 ? 'required' : ''}}>
+                                                    </div>
+                                                </div>
+                                            @endfor
+                                        @endif
                                     </div>
+
 
                                     <hr>
                                     <div class="row" style="text-align: center">
@@ -257,6 +288,7 @@
                                         <button type="button" class="btn btn-success" style="margin-left: 10px;" onclick="checkSeo(1)">تایید</button>
                                         <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/0/' . $mode . '/country')}}'">خروج</button>
                                     </div>
+
                                 </form>
                             </div>
                         </div>
@@ -266,28 +298,21 @@
         </div>
     </div>
 
-    <script>
-        var _token = '{{csrf_token()}}';
-        var findCityUrl = '{{route("get.allcity.withState")}}';
-        var city = {!! $cities !!};
-    </script>
-
-    <script src="{{URL::asset('js/editContentPage.js')}}"></script>
-
-
-    {{--map--}}
-    <div class="modal fade" id="mapModal">
+    <div class="modal fade" id="deleteModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-body" style="direction: rtl">
-                    <div id="map" style="width: 100%; height: 500px; background-color: red">
 
-                    </div>
+                <div class="modal-body" style="direction: rtl">
+                    <h3>حذف <span id="deleteName1" style="font-weight: bold"></span></h3>
+                    <p>
+                        ایا می خواهید <span id="deleteName2"  style="font-weight: bold"></span> را پاک کنید؟
+                    </p>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
-                    <button class="btn nextStepBtnTourCreation" data-dismiss="modal">تایید</button>
+                    <button type="button" class="btn btn-danger">بله</button>
+                    <button class="btn nextStepBtnTourCreation" data-dismiss="modal">خیر</button>
                 </div>
 
             </div>
@@ -316,7 +341,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">خیر اصلاح می کنم.</button>
-                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="showErrorDivOrsubmit()">بله پست ثبت شود</button>
+                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="checkForm()">بله پست ثبت شود</button>
                 </div>
 
             </div>
@@ -324,65 +349,40 @@
     </div>
 
     <script>
-        var map;
-        var marker = 0;
+        var keyword = '{{$place->keyword}}';
+        var _token = '{{csrf_token()}}';
+        var findCityUrl = '{{route("get.allcity.withState")}}';
+        var city = {!! $cities !!};
+    </script>
 
-        function init(){
-            var mapOptions = {
-                zoom: 5,
-                center: new google.maps.LatLng(32.42056639964595, 54.00537109375),
-                // How you would like to style the map.
-                // This is where you would paste any style found on Snazzy Maps.
-                styles: [{
-                    "featureType": "landscape",
-                    "stylers": [{"hue": "#FFA800"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
-                }, {
-                    "featureType": "road.highway",
-                    "stylers": [{"hue": "#53FF00"}, {"saturation": -73}, {"lightness": 40}, {"gamma": 1}]
-                }, {
-                    "featureType": "road.arterial",
-                    "stylers": [{"hue": "#FBFF00"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
-                }, {
-                    "featureType": "road.local",
-                    "stylers": [{"hue": "#00FFFD"}, {"saturation": 0}, {"lightness": 30}, {"gamma": 1}]
-                }, {
-                    "featureType": "water",
-                    "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
-                }, {
-                    "featureType": "poi",
-                    "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
-                }]
-            };
-            var mapElementSmall = document.getElementById('map');
-            map = new google.maps.Map(mapElementSmall, mapOptions);
+    <script src="{{URL::asset('js/editContentPage.js')}}"></script>
 
-            google.maps.event.addListener(map, 'click', function(event) {
-                getLat(event.latLng);
-            });
+    <script>
+        function checkForm(){
+            var error_text = '';
+            var error = false;
+
+            var room_num = document.getElementById('room_num').value;
+            if(room_num == '' || room_num == null){
+                error = true;
+                error_text += '<li>تعداد اتاق را کامل کنید.</li>';
+                document.getElementById('room_num').classList.add('error');
+            }
+            else
+                document.getElementById('room_num').classList.remove('error');
+
+            // var address = document.getElementById('address').value;
+            // if(address == '' || address == null || address == ' '){
+            //     error = true;
+            //     error_text += '<li>ادرس را کامل کنید.</li>';
+            //     document.getElementById('address').classList.add('error');
+            // }
+            // else
+            //     document.getElementById('address').classList.remove('error');
+
+            showErrorDivOrsubmit(error_text, error);
         }
 
-        function getLat(location){
-            if(marker != 0)
-                marker.setMap(null);
-            marker = new google.maps.Marker({
-                position: location,
-                map: map,
-            });
-
-            document.getElementById('lat').value = marker.getPosition().lat();
-            document.getElementById('lng').value = marker.getPosition().lng();
-        }
-
-        function setNewMarker(){
-            marker.setMap(null);
-            var lat = document.getElementById('lat').value;
-            var lng = document.getElementById('lng').value;
-
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: map,
-            });
-        }
 
         function checkSeo(kind){
 
@@ -404,6 +404,7 @@
                     slug: slug,
                     text: description,
                     name: name,
+                    id: {{$place->id}},
                     kindPlaceId: {{$mode}}
                 },
                 success: function(response){
@@ -430,21 +431,6 @@
         }
 
         function inlineSeoCheck(kind){
-            // var tags = $("input[id='tags']").map(function(){return [$(this).val()];}).get();
-            // if(tags.length == 0){
-            //     errorCount++;
-            //     text = '<div style="color: red;">شما باید برای متن خود برچسب انتخاب نمایید</div>';
-            //     $('#errorResult').append(text);
-            // }
-            // else if(tags.length < 10){
-            //     warningCount++;
-            //     text = '<div style="color: #dec300;">پیشنهاد می گردد حداقل ده برچسب انتخاب نمایید.</div>';
-            //     $('#warningResult').append(text);
-            // }
-            // else{
-            //     text = '<div style="color: green;">تعداد برچسب های متن مناسب می باشد.</div>';
-            //     $('#goodResult').append(text);
-            // }
 
             if(kind == 1) {
                 var name = document.getElementById('name').value;
@@ -484,7 +470,7 @@
                         return;
                     }
                     else
-                        showErrorDivOrsubmit();
+                        checkForm();
                 }
             }
         }
@@ -508,6 +494,92 @@
                 $('#metaNumber').css('color', 'red');
 
         }
+
+    </script>
+
+    <div class="modal fade" id="mapModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body" style="direction: rtl">
+                    <div id="map" style="width: 100%; height: 500px; background-color: red"></div>
+                </div>
+
+                <div class="modal-footer" style="text-align: center">
+                    <button class="btn nextStepBtnTourCreation" data-dismiss="modal">تایید</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var map;
+        var C = {{$place->C}};
+        var D = {{$place->D}};
+        var marker;
+
+        function init(){
+            var mapOptions = {
+                zoom: {{$place->zoom}},
+                center: new google.maps.LatLng(C, D),
+                // How you would like to style the map.
+                // This is where you would paste any style found on Snazzy Maps.
+                styles: [{
+                    "featureType": "landscape",
+                    "stylers": [{"hue": "#FFA800"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
+                }, {
+                    "featureType": "road.highway",
+                    "stylers": [{"hue": "#53FF00"}, {"saturation": -73}, {"lightness": 40}, {"gamma": 1}]
+                }, {
+                    "featureType": "road.arterial",
+                    "stylers": [{"hue": "#FBFF00"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
+                }, {
+                    "featureType": "road.local",
+                    "stylers": [{"hue": "#00FFFD"}, {"saturation": 0}, {"lightness": 30}, {"gamma": 1}]
+                }, {
+                    "featureType": "water",
+                    "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
+                }, {
+                    "featureType": "poi",
+                    "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
+                }]
+            };
+            var mapElementSmall = document.getElementById('map');
+            map = new google.maps.Map(mapElementSmall, mapOptions);
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                getLat(event.latLng);
+            });
+
+            marker = new google.maps.Marker({
+                position: {lat: C, lng: D},
+                map: map,
+            });
+        }
+
+        function getLat(location){
+            marker.setMap(null);
+            marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+
+            document.getElementById('lat').value = marker.getPosition().lat();
+            document.getElementById('lng').value = marker.getPosition().lng();
+        }
+        function setNewMarker(){
+            marker.setMap(null);
+            var lat = document.getElementById('lat').value;
+            var lng = document.getElementById('lng').value;
+
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map,
+            });
+        }
+
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
 

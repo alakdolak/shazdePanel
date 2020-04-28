@@ -97,6 +97,19 @@
                             </div>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                            <i class="fa big-icon fa-envelope"></i>
+                            <span class="mini-dn">Live</span>
+                            <span class="indicator-right-menu mini-dn">
+                                <i class="fa indicator-mn fa-angle-left"></i>
+                            </span>
+
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{url('manageStreams')}}" class="dropdown-item">مدیریت</a>
+                            </div>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">

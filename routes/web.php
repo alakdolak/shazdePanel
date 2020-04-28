@@ -36,6 +36,12 @@ Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
+//    پخش زنده
+    Route::get('manageStreams', ['as' => 'manageStreams', 'uses' => 'StreamController@manage']);
+    Route::get('addStream', ['as' => 'addStream', 'uses' => 'StreamController@addStream']);
+    Route::post('doAddStream', ['as' => 'doAddStream', 'uses' => 'StreamController@doAddStream']);
+    Route::post('removeStream', ['as' => 'removeStream', 'uses' => 'StreamController@removeStream']);
+
 //    فعالیت
     Route::get('activities', 'ActivitiesController@index')->name('activities.index');
     Route::post('activities/store', 'ActivitiesController@store')->name('activities.store');
@@ -160,6 +166,8 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), fun
     Route::post('storeMahaliFood', 'PlaceController@storeMahaliFood')->name('storeMahaliFood');
 
     Route::post('storeSogatSanaie', 'PlaceController@storeSogatSanaie')->name('storeSogatSanaie');
+
+    Route::post('storeBoomgardy', 'PlaceController@storeBoomgardy')->name('storeBoomgardy');
 
     Route::get('uploadImgPage/{kindPlaceId}/{id}', 'PlaceController@uploadImgPage')->name('uploadImgPage');
     Route::post('getCrop', 'PlaceController@getCrop') ->name('getCrop');
@@ -504,6 +512,3 @@ Route::get('uiFeatures', function(){
 Route::get('latCountry', 'PlaceController@latCountry');
 
 Route::get('insertTagsToDB/{num1?}/{num2?}', 'PlaceController@insertTagsToDB');
-Route::get('insertVillageToDBPage', 'PlaceController@insertVillageToDBPage');
-Route::get('addNEwCityDB', 'PlaceController@addNEwCityDB');
-Route::post('insertVillageToDB', 'PlaceController@insertVillageDB');
