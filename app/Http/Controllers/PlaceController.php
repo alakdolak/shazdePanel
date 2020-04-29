@@ -1923,7 +1923,7 @@ class PlaceController extends Controller {
 
     public function addBoomgardyDB()
     {
-        $inputFileName = __DIR__ . '/../../../public/tagExcel/boomgardy/boomgardy.xlsx';
+        $inputFileName = __DIR__ . '/../../../public/tagExcel/boomgardy/boomgardy2.xlsx';
         $kindPlace = Place::find(12);
         $placeFeatures = PlaceFeatures::where('parent', '!=', 0)->where('kindPlaceId', 12)->get();
 
@@ -1992,6 +1992,8 @@ class PlaceController extends Controller {
                 }
             }
         }
+        $cityError = [];
+        $con = 0;
 
         for ($row = 2; $row <= $lastRow; $row++) {
             try {
@@ -2008,53 +2010,67 @@ class PlaceController extends Controller {
                 if ($boomgardy->address == '' || $boomgardy->address == null)
                     $boomgardy->address = '0';
 
-                $boomgardy->phone = $contents[3];
+                $cityEx = $contents[4];
+                $city = Cities::where('name', $cityEx)->where('isVillage', 0)->first();
+                if($city == null){
+                    array_push($cityError, $contents[4]);
+                    continue;
+                }
+                else
+                    $boomgardy->cityId = $city->id;
+
+                $boomgardy->phone = $contents[5];
                 if ($boomgardy->phone == '' || $boomgardy->phone == null)
                     $boomgardy->phone = '0';
 
-                $boomgardy->room_num = (int)explode(' واحد', $contents[4])[0];
-                $boomgardy->keyword = $contents[5];
-                $boomgardy->seoTitle = $contents[6];
-                $boomgardy->slug = $contents[7];
-                $boomgardy->description = $contents[8];
-                $boomgardy->meta = $contents[9];
+                $boomgardy->room_num = (int)explode(' واحد', $contents[6])[0];
+                $boomgardy->keyword = $contents[7];
+                $boomgardy->seoTitle = $contents[8];
+                $boomgardy->slug = $contents[9];
+                $boomgardy->description = $contents[10];
+                $boomgardy->meta = $contents[11];
 
-                $map = explode(',', $contents[10]);
+                $map = explode(',', $contents[12]);
                 $boomgardy->C = $map[0];
                 $boomgardy->D = $map[1];
                 $boomgardy->cityId = 0;
                 $boomgardy->file = 'none';
                 $boomgardy->alt = $boomgardy->keyword;
                 $boomgardy->save();
+                $con++;
 
                 $sqlQuery = 'INSERT INTO `placeFeatureRelations` (`id`, `kindPlaceId`, `placeId`, `featureId`) VALUES ';
                 $value = '';
-                for ($i = 11; $i < 39; $i++) {
+                for ($i = 13; $i < 41; $i++) {
                     if ($contents[$i] > 0) {
                         if ($value != '')
                             $value .= ' ,';
-                        $value .= ' (NULL, 12, ' . $boomgardy->id . ', ' . $resultPlaceFeatures[$i - 11]['id'] . ')';
+                        $value .= ' (NULL, 12, ' . $boomgardy->id . ', ' . $resultPlaceFeatures[$i - 13]['id'] . ')';
                     }
                 }
-                DB::select($sqlQuery . $value);
+                if($value != '')
+                    DB::select($sqlQuery . $value);
 
                 $sqlQuery = 'INSERT INTO `placeTags` (`id`, `kindPlaceId`, `placeId`, `tag`) VALUES ';
                 $value = '';
-                for ($i = 40; $i < 67; $i++) {
+                for ($i = 42; $i < 73; $i++) {
                     if ($contents[$i] != null) {
                         if ($value != '')
                             $value .= ' ,';
                         $value .= ' (NULL, 12, ' . $boomgardy->id . ', "' . $contents[$i] . '")';
                     }
                 }
-                DB::select($sqlQuery . $value);
+
+                if($value != '')
+                    DB::select($sqlQuery . $value);
             }
             catch(\Exception $exception){
                 dd($exception, $contents);
             }
         }
 
-        dd('end');
+
+        dd($con, $cityError);
 //        return $msg;
     }
 
