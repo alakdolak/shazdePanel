@@ -352,7 +352,14 @@
         var keyword = '{{$place->keyword}}';
         var _token = '{{csrf_token()}}';
         var findCityUrl = '{{route("get.allcity.withState")}}';
-        var city = {!! $cities !!};
+
+        @if($cities == null)
+            var city = '';
+        @else
+            var city = {!! $cities !!};
+        @endif
+
+
     </script>
 
     <script src="{{URL::asset('js/editContentPage.js')}}"></script>

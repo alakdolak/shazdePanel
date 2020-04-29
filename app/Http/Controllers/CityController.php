@@ -68,6 +68,7 @@ class CityController extends Controller
 
     public function deleteCity(Request $request)
     {
+        dd(' این امکان از دسترس خارج است. به مدیر سایت اطلاع دهید');
         $request->validate([
             'id' => 'required'
         ]);
