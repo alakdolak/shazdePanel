@@ -122,6 +122,11 @@
                                 <textarea class="form-control" rows="20" id="comment" name="comment"> {!! isset($city->description) ? $city->description : '' !!}</textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="comment">عکس اصلی:</label>
+                                <img id="showMainPic" src="{{isset($city->image) ? $city->image : ''}}" style="max-width: 300px;">
+                            </div>
+
                             <div id="picSection" class="form-group" style="display: {{isset($city->id) ? 'block' : 'none'}}">
                                 <label for="image">عکس:</label>
                                 <div id="dragAndDropSection"></div>
@@ -369,7 +374,8 @@
             callBack: '',
             onDeletePic: deletePic,
             onEditPic: editPic,
-            onChangeAlt: changeAlt
+            onChangeAlt: changeAlt,
+            onChooseMainPic: chooseMainPic,
         };
 
         let createdDropZone = createNewPicSection(createNewPicSectionInfo);
@@ -396,6 +402,27 @@
                 },
                 error: function(error){
                     alert('error 3');
+                }
+            })
+        }
+
+        function chooseMainPic(_id, _src){
+            $.ajax({
+                type: 'post',
+                url: '{{route("city.chooseMainPic")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    cityId: cityId,
+                    id: _id
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    if(response['status'] == 'ok') {
+                        alert('عکس اصلی با موفقیت تغییر یافت');
+                        $('#showMainPic').attr('src', _src);
+                    }
+                    else
+                        alert('مشکلی در تغییر به وجود امد لطفا دوباره تلاش کنید')
                 }
             })
         }

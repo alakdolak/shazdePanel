@@ -58,6 +58,8 @@ class CityController extends Controller
         $state = State::all();
         $mode = 'edit';
 
+        $city->image = \URL::asset('_images/city/' . $city->id . '/' . $city->image);
+
         $pics = CityPic::where('cityId', $city->id)->get();
         foreach ($pics as $pic)
             $pic->pic = \URL::asset('_images/city/' . $city->id . '/' . $pic->pic);
@@ -282,6 +284,26 @@ class CityController extends Controller
             if($pic != null){
                 $pic->alt = $request->value;
                 $pic->save();
+                echo json_encode(['status' => 'ok']);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+    public function chooseMainPic(Request $request)
+    {
+        if(isset($request->cityId) && isset($request->id)){
+            $city = Cities::find($request->cityId);
+            $pic = CityPic::find($request->id);
+            if($city != null && $pic != null){
+                $city->image = $pic->pic;
+                $city->save();
+
                 echo json_encode(['status' => 'ok']);
             }
             else

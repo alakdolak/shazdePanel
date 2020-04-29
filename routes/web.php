@@ -118,6 +118,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
     Route::get('city/add', 'CityController@addCity')->name('city.add');
     Route::get('city/edit/{id}', 'CityController@editCity')->name('city.edit');
     Route::post('city/store', 'CityController@storeCity')->name('city.store');
+    Route::post('city/chooseMainPic', 'CityController@chooseMainPic')->name('city.chooseMainPic');
     Route::post('city/storeImage', 'CityController@storeCityImage')->name('city.store.image');
     Route::post('city/storeAlt', 'CityController@storeCityImageAlt')->name('city.store.alt');
     Route::post('city/deleteImage', 'CityController@deleteCityImage')->name('city.delete.image');

@@ -71,6 +71,7 @@ function creteUploadedPicPictures(_url, _id, _number,_haveEdit , _haveAlt, _alt)
     let text =  '<div id="uploadedPic_' + _number + '_' + _id + '" class="col-md-3 uploadedPicUploader">\n' +
         '   <img src="' + _url + '" class="uploadedPicImgUploader">\n' +
         '   <div class="uploadedPicHoverUploader">\n' +
+        '       <button type="button" class="btn btn-success" onclick="chooseMainPic(' + _id + ', ' + _number + ', this)">انتخاب به عنوان عکس اصلی</button>\n' +
         '       <button type="button" class="btn btn-danger" onclick="deletePicUploadedPic(' + _id + ', ' + _number + ', this)">پاک کردن عکس</button>\n';
     if(_haveEdit)
         text += '       <button type="button" class="btn btn-primary" onclick="editPicUploadedPic(' + _id + ', ' + _number + ', this)">ویرایش عکس</button>\n';
@@ -88,6 +89,14 @@ function creteUploadedPicPictures(_url, _id, _number,_haveEdit , _haveAlt, _alt)
 function deletePicUploadedPic(_id, _number, _element){
     if(typeof dropzoneSettings[_number]['onDeletePic'] === 'function')
         dropzoneSettings[_number]['onDeletePic'](_id);
+}
+
+function chooseMainPic(_id, _number, _element){
+
+    if(typeof dropzoneSettings[_number]['onChooseMainPic'] === 'function') {
+        let src = $(_element).parent().prev().attr('src');
+        dropzoneSettings[_number]['onChooseMainPic'](_id, src);
+    }
 }
 
 function editPicUploadedPic(_id, _number, _element){
