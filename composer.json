@@ -13,6 +13,8 @@
         "barryvdh/laravel-ide-helper": "^2.1",
         "fideloper/proxy": "^4.0",
         "grgk/seo-analyzer": "^1.0",
+        "hekmatinasser/verta": "^1.10",
+        "intervention/image": "^2.5",
         "kavenegar/php": "1.2.*",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",

@@ -19,6 +19,23 @@
                     </a>
                 </li>
 
+                @if(isset($userACL) && $userACL->vod == 1)
+                    <li class="nav-item">
+                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                            <i class="fa big-icon fa-envelope"></i>
+                            <span class="mini-dn">مدیریت ویدیوها</span>
+                            <span class="indicator-right-menu mini-dn">
+                                    <i class="fa indicator-mn fa-angle-left"></i>
+                                </span>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('vod.index')}}" class="dropdown-item">لیست ویدیوها</a>
+                                <a href="{{route('vod.video.category.index')}}" class="dropdown-item">دسته بندی ها</a>
+                                <a href="{{url('manageStreams')}}" class="dropdown-item">مدیریت LIVE</a>
+                            </div>
+                        </a>
+                    </li>
+                @endif
+
                 @if(isset($userACL) && $userACL->post == 1)
                     <li class="nav-item">
                         <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
@@ -49,6 +66,7 @@
                                     <i class="fa indicator-mn fa-angle-left"></i>
                                 </span>
                             <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="{{route('userAddPlace.list')}}" class="dropdown-item">مدیریت مکان های افزوده شدها</a>
                                 <a href="{{route('comments.list')}}" class="dropdown-item">مدیریت کامنت ها</a>
                                 <a href="#" class="dropdown-item">مدیریت پست‌ها</a>
                                 <a href="#" class="dropdown-item">مدیریت سوال‌ها</a>
@@ -94,19 +112,6 @@
                                 <a href="{{route('register')}}" class="dropdown-item">افزودن ادمین جدید</a>
 
                                 <a href="{{route('uploadMainContent')}}" class="dropdown-item">افزودن محتوا به صورت گروهی</a>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                            <i class="fa big-icon fa-envelope"></i>
-                            <span class="mini-dn">Live</span>
-                            <span class="indicator-right-menu mini-dn">
-                                <i class="fa indicator-mn fa-angle-left"></i>
-                            </span>
-
-                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-                                <a href="{{url('manageStreams')}}" class="dropdown-item">مدیریت</a>
                             </div>
                         </a>
                     </li>

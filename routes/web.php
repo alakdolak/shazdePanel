@@ -468,6 +468,8 @@ Route::group(array('middleware' => ['auth']), function(){
 //comments
 Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), function () {
 
+    Route::get('/userAddPlace/list', 'CommentController@userAddPlaceList')->name('userAddPlace.list');
+
     Route::get('/comments/list', 'CommentController@listComments')->name('comments.list');
 
     Route::post('/comments/delete', 'CommentController@deleteComment')->name('comments.delete');
@@ -488,6 +490,17 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), fun
 
 });
 
+Route::group(array('middleware' => ['auth']), function() {
+    Route::get('/vod/index', 'VideoController@vodIndex')->name('vod.index');
+    Route::post('/vode/confrim', 'VideoController@vodConfirm')->name('vod.confirm');
+    Route::post('/vode/doEditVideo', 'VideoController@doEditVideo')->name('vod.doEditVideo');
+    Route::post('/vod/editThumbnail', 'VideoController@editThumbnail')->name('vod.editThumbnail');
+    Route::post('/vode/deleteVideo', 'VideoController@deleteVideo')->name('vod.deleteVideo');
+
+    Route::get('/vod/video/category/index', 'VideoController@videoCategoryIndex')->name('vod.video.category.index');
+    Route::post('/vod/video/category/store', 'VideoController@videoCategoryStore')->name('vod.video.category.store');
+    Route::post('/vod/video/category/delete', 'VideoController@videoCategoryDelete')->name('vod.video.category.delete');
+});
 
 //ajaxController
 Route::group(array('middleware' => ['auth']), function(){
@@ -514,4 +527,4 @@ Route::get('latCountry', 'PlaceController@latCountry');
 
 Route::get('insertTagsToDB/{num1?}/{num2?}', 'PlaceController@insertTagsToDB');
 
-Route::get('/addBoomgardyDB', 'PlaceController@addBoomgardyDB');
+//Route::get('/addBoomgardyDB', 'PlaceController@addBoomgardyDB');

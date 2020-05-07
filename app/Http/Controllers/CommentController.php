@@ -6,17 +6,22 @@ use App\models\Activity;
 use App\models\Adab;
 use App\models\AdminLog;
 use App\models\Amaken;
+use App\models\Cities;
 use App\models\Comment;
 use App\models\Hotel;
 use App\models\LogModel;
 use App\models\Majara;
 use App\models\PicItem;
 use App\models\Place;
+use App\models\PlaceFeatureRelation;
+use App\models\PlaceFeatures;
 use App\models\PlaceStyle;
 use App\models\Post;
 use App\models\PostComment;
 use App\models\Restaurant;
+use App\models\State;
 use App\models\User;
+use App\models\UserAddPlace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -529,6 +534,281 @@ class CommentController extends Controller {
             }
             catch (\Exception $x) {}
         }
+    }
+
+
+    public function userAddPlaceList()
+    {
+        $showPlaces = [];
+        $places = UserAddPlace::all();
+
+        foreach ($places as $place){
+
+            $u = User::find($place->userId);
+            if($u == null)
+                $u->delete;
+            else{
+                $kindPlace = Place::find($place->kindPlaceId);
+                $place->kindPlace = $kindPlace->name;
+                $place->state = State::find($place->stateId);
+                if(is_numeric($place->city))
+                    $place->city = Cities::find($place->city)->name;
+                else
+                    $place->newCity = true;
+
+                $addPic = [];
+                $pics = json_decode($place->pics);
+
+                if($pics != null){
+                    foreach ($pics as $pic){
+                        if($pic != null) {
+                            $pic = URL::asset('_images/addPlaceByUser/' . $pic);
+                            array_push($addPic, $pic);
+                        }
+                    }
+                }
+
+                $place->addPic = $addPic;
+
+                $feat = [];
+                $features = json_decode($place->features);
+
+                if($place->kindPlaceId != 10 && $place->kindPlaceId != 11){
+                    $featuresId = $features->featuresId;
+                    $tfeatures = PlaceFeatures::where('kindPlaceId', $kindPlace->id)->where('parent', 0)->get();
+                    foreach ($tfeatures as $item)
+                        $item->sub = PlaceFeatures::whereIn('id', $featuresId)->where('parent', $item->id)->pluck('name')->toArray();
+                }
+
+                if ($place->kindPlaceId == 3){
+//                    if(isset($features->kind_id)) {
+//                        array_push($feat, ['نوع اقامتگاه', $kid]);
+//                    }
+                }
+                elseif ($place->kindPlaceId == 4){
+                    if(isset($features->kind_id)) {
+                        switch ($features->kind_id) {
+                            case 1:
+                                $kid = 'هتل';
+                                break;
+                            case 2:
+                                $kid = 'هتل آپارتمان';
+                                break;
+                            case 3:
+                                $kid = 'مهمان سرا';
+                                break;
+                            case 4:
+                                $kid = 'ویلا';
+                                break;
+                            case 5:
+                                $kid = 'متل';
+                                break;
+                            case 6:
+                                $kid = 'مجتمع تفریحی';
+                                break;
+                            case 7:
+                                $kid = 'پانسیون';
+                                break;
+                        }
+                        array_push($feat, ['نوع اقامتگاه', $kid]);
+                    }
+
+                    if(isset($features->rate_int))
+                        array_push($feat, ['درجه هتل', $features->rate_int]);
+                }
+                elseif ($place->kindPlaceId == 10){
+                    if(isset($features->size))
+                        switch ($features->size) {
+                            case 1:
+                                array_push($feat, ['ابعاد', 'کوچک']);
+                                break;
+                            case 2:
+                                array_push($feat, ['ابعاد', 'متوسط']);
+                                break;
+                            case 3:
+                                array_push($feat, ['ابعاد', 'بزرگ']);
+                                break;
+                        }
+
+                    if(isset($features->weight))
+                        switch ($features->weight){
+                        case 1:
+                            array_push($feat, ['وزن', 'سبک']);
+                            break;
+                        case 2:
+                            array_push($feat, ['وزن', 'متوسط']);
+                            break;
+                        case 3:
+                            array_push($feat, ['وزن', 'سنگین']);
+                            break;
+                    }
+
+                    if(isset($features->price))
+                        switch ($features->price){
+                        case 1:
+                            array_push($feat, ['کلاس قیمتی', 'ارزان']);
+                            break;
+                        case 2:
+                            array_push($feat, ['کلاس قیمتی', 'متوسط']);
+                            break;
+                        case 3:
+                            array_push($feat, ['کلاس قیمتی', 'گران']);
+                            break;
+
+                    }
+
+                    if($features->eatable == 1){
+                        $enFeat = ['torsh', 'shirin', 'talkh', 'malas', 'shor', 'tond'];
+                        $faFeat = ['ترش', 'شیرین', 'بلخ', 'ملس', 'شور', 'تند'];
+                        $imploaded = implode(',', $features->features);
+                        $n = str_replace($enFeat, $faFeat, $imploaded);
+                        array_push($feat, ['مزه', $n]);
+                    }
+                    else{
+                        $enFeat = ['jewelry', 'cloth', 'decorative', 'applied', 'style_1', 'style_2', 'style_3', 'fragile'];
+                        $faFeat = ['زیورآلات', 'پارچه و پوشیدنی', 'لوازم تزئینی', 'لوازم کاربردی منزل', 'سنتی', 'مدرن', 'تلفیقی', 'شکستنی'];
+                        $imploaded = implode(',', $features->features);
+                        $n = str_replace($enFeat, $faFeat, $imploaded);
+                        array_push($feat, ['ویژگی ها', $n]);
+                    }
+                }
+                elseif ($place->kindPlaceId == 11){
+                    if(isset($features->kind))
+                        switch ($features->kind){
+                        case 1:
+                            array_push($feat, ['کلاس غذا', 'چلوخورش']);
+                            break;
+                        case 2:
+                            array_push($feat, ['کلاس غذا', 'خوراک']);
+                            break;
+                        case 3:
+                            array_push($feat, ['کلاس غذا', 'سالاد و پیش غذا']);
+                            break;
+                        case 4:
+                            array_push($feat, ['کلاس غذا', 'ساندویچ']);
+                            break;
+                        case 5:
+                            array_push($feat, ['کلاس غذا', 'کباب']);
+                            break;
+                        case 6:
+                            array_push($feat, ['کلاس غذا', 'دسر']);
+                            break;
+                        case 7:
+                            array_push($feat, ['کلاس غذا', 'نوشیدنی']);
+                            break;
+                        case 8:
+                            array_push($feat, ['کلاس غذا', 'سوپ و آش']);
+                            break;
+                    }
+
+                    if(isset($features->hotFood)){
+                        if($features->hotFood == 'hot')
+                            array_push($feat, ['گرم یا سرد', 'گرم']);
+                        else
+                            array_push($feat, ['گرم یا سرد', 'سرد']);
+                    }
+                    if(isset($features->material)){
+                        $material = json_decode($features->material);
+                        $text = '<ul>';
+                        for($i = 0; $i < count($material); $i++){
+                            $text .= '<li>' . $material[$i][0] . ' : ' . $material[$i][1] . '</li>';
+                        }
+                        $text .= '</ul>';
+                        array_push($feat, ['مواد لازم', $text]);
+                    }
+
+                    if(isset($features->recipes))
+                        array_push($feat, ['دستور پخت', $features->recipes]);
+
+                    $enFeat = ['vegetarian', 'vegan', 'diabet'];
+                    $faFeat = ['گیاهخواران', 'وگان', 'دیابت'];
+                    $imploaded = implode(',', $features->features);
+                    $n = str_replace($enFeat, $faFeat, $imploaded);
+                    array_push($feat, ['مناسب برای', $n]);
+
+                }
+                elseif ($place->kindPlaceId == 12){
+                    if(isset($features->room_num))
+                        array_push($feat, ['تعداد اتاق', $features->room_num]);
+                }
+
+                $show = [
+                    [
+                        'نام',
+                        $place->name
+                    ],
+                    [
+                        'نوع',
+                        $kindPlace->name
+                    ],
+                    [
+                        'نام کاربری',
+                        $u->username
+                    ],
+                    [
+                        'شماره تماس کاربر',
+                        $u->phone
+                    ],
+                    [
+                        'استان',
+                        $place->state->name
+                    ],
+                    [
+                        'شهر',
+                        $place->city
+                    ],
+                    [
+                        'آدرس',
+                        $place->address
+                    ],
+                    [
+                        'lat',
+                        $place->lat
+                    ],
+                    [
+                        'lng',
+                        $place->lng
+                    ],
+                    [
+                        'تماس ثابت',
+                        $place->fixPhone
+                    ],
+                    [
+                        'تماس همراه',
+                        $place->phone
+                    ],
+                    [
+                        'ایمیل',
+                        $place->email
+                    ],
+                    [
+                        'وب سایت',
+                        $place->website
+                    ],
+                    [
+                        'توضیحات',
+                        $place->website
+                    ],
+                    [
+                        'امکانات اصلی',
+                        $tfeatures
+                    ],
+                    [
+                        'امکانات',
+                        $feat
+                    ]
+                ];
+                array_push($showPlaces, $show);
+            }
+        }
+
+//        foreach ($showPlaces as $place){
+//            foreach ($place as $item){
+//                echo $item[0] . '<br>';
+//            }
+//        }
+
+        return view('userContent.addPlace.userAddPlaceList', compact(['showPlaces']));
     }
 
 }
