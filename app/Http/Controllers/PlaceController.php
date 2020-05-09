@@ -1923,7 +1923,7 @@ class PlaceController extends Controller {
 
     public function addBoomgardyDB()
     {
-        $inputFileName = __DIR__ . '/../../../public/tagExcel/boomgardy/boomgardy2.xlsx';
+        $inputFileName = __DIR__ . '/../../../public/tagExcel/boomgardy/boomgardy4.xlsx';
         $kindPlace = Place::find(12);
         $placeFeatures = PlaceFeatures::where('parent', '!=', 0)->where('kindPlaceId', 12)->get();
 
@@ -1980,6 +1980,11 @@ class PlaceController extends Controller {
             'راهنمای تور',
             'لاندری',
         ];
+
+//        'امکانات سرمایشی و گرمایشی',
+//            'اینترنت',
+//            'پرسنل مسلط به انگلیسی',
+
         $resultPlaceFeatures = [];
         for($i = 0; $i < count($execlHeader); $i++){
             for($j = 0; $j < count($placeFeatures); $j++){
@@ -1995,6 +2000,17 @@ class PlaceController extends Controller {
         $cityError = [];
         $con = 0;
 
+        $contents = [];
+        for ($j = 0; $j < count($cols); $j++) {
+            $tmp = $workSheet->getCell($cols[$j] . 1)->getValue();
+            $contents[count($contents)] = $tmp;
+        }
+        for($i = 13; $i < 41; $i++){
+            $check = PlaceFeatures::where('name', $contents[$i])->where('kindPlaceId', 12)->first();
+            if($check == null)
+                dd($contents[$i]);
+        }
+
         for ($row = 2; $row <= $lastRow; $row++) {
             try {
                 $contents = [];
@@ -2006,14 +2022,14 @@ class PlaceController extends Controller {
                 $boomgardy = new Boomgardy();
                 $boomgardy->name = $contents[1];
 
-                $boomgardy->address = $contents[2];
+                $boomgardy->address = $contents[4];
                 if ($boomgardy->address == '' || $boomgardy->address == null)
                     $boomgardy->address = '0';
 
-                $cityEx = $contents[4];
+                $cityEx = $contents[3];
                 $city = Cities::where('name', $cityEx)->where('isVillage', 0)->first();
                 if($city == null){
-                    array_push($cityError, $contents[4]);
+                    array_push($cityError, $contents[3]);
                     continue;
                 }
                 else
@@ -2027,7 +2043,11 @@ class PlaceController extends Controller {
                 $boomgardy->keyword = $contents[7];
                 $boomgardy->seoTitle = $contents[8];
                 $boomgardy->slug = $contents[9];
-                $boomgardy->description = $contents[10];
+                if($contents[10] == null || $contents[10] == '')
+                    $boomgardy->description = '';
+                else
+                    $boomgardy->description = $contents[10];
+
                 $boomgardy->meta = $contents[11];
 
                 $map = explode(',', $contents[12]);

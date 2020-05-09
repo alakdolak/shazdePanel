@@ -527,4 +527,4 @@ Route::get('latCountry', 'PlaceController@latCountry');
 
 Route::get('insertTagsToDB/{num1?}/{num2?}', 'PlaceController@insertTagsToDB');
 
-//Route::get('/addBoomgardyDB', 'PlaceController@addBoomgardyDB');
+Route::get('/addBoomgardyDB', 'PlaceController@addBoomgardyDB');
