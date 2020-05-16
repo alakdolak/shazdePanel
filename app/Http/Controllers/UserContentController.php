@@ -9,6 +9,7 @@ use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\PhotographersLog;
 use App\models\PhotographersPic;
+use App\models\Place;
 use App\models\Restaurant;
 use App\models\SogatSanaie;
 use App\models\State;
@@ -22,49 +23,14 @@ class UserContentController extends Controller
     {
         $photo = PhotographersPic::where('status', 0)->get();
         foreach ($photo as $item){
-
-            switch ($item->kindPlaceId){
-                case 1:
-                    $file = 'amaken';
-                    $place = Amaken::find($item->placeId);
-                    $item->kindPlace = 'اماکن';
-                    $url ='https://koochita.com/amaken-details/' ;
-                    break;
-                case 3:
-                    $file = 'restaurant';
-                    $place = Restaurant::find($item->placeId);
-                    $item->kindPlace = 'رستوران';
-                    $url ='https://koochita.com/restaurant-details/' ;
-                    break;
-                case 4:
-                    $file = 'hotels';
-                    $place = Hotel::find($item->placeId);
-                    $item->kindPlace = 'هتل';
-                    $url ='https://koochita.com/hotel-details/' ;
-                    break;
-                case 6:
-                    $file = 'majara';
-                    $place = Majara::find($item->placeId);
-                    $item->kindPlace = 'ماجرا';
-                    $url ='https://koochita.com/majara-details/' ;
-                    break;
-                case 10:
-                    $file = 'sogatsanaie';
-                    $place = SogatSanaie::find($item->placeId);
-                    $item->kindPlace = 'سوغات/صنایع';
-                    $url ='https://koochita.com/hotel-details/' ;
-                    break;
-                case 11:
-                    $file = 'mahalifood';
-                    $place = MahaliFood::find($item->placeId);
-                    $item->kindPlace = 'غذای محلی';
-                    $url ='https://koochita.com/hotel-details/' ;
-                    break;
-            }
+            $kindPlace = Place::find($item->kindPlaceId);
+            $place = \DB::table($kindPlace->tableName)->find($item->placeId);
+            $file = $kindPlace->fileName;
+            $item->kindPlace = $kindPlace->name;
 
             $item->placeName = $place->name;
             $item->placeId = $place->id;
-            $item->url = $url . $item->placeId . '/' . $item->placeName;
+            $item->url = 'https://koochita.com/place-details/' . $kindPlace->id. '/' . $place->id;
 
             $item->city = Cities::find($place->cityId);
             $item->state = State::find($item->city->stateId);
@@ -90,48 +56,14 @@ class UserContentController extends Controller
         $oldPhoto = PhotographersPic::where('status', 1)->orderBy('created_at', 'DESC')->get();
         foreach ($oldPhoto as $item){
 
-            switch ($item->kindPlaceId){
-                case 1:
-                    $file = 'amaken';
-                    $place = Amaken::find($item->placeId);
-                    $item->kindPlace = 'اماکن';
-                    $url ='https://koochita.com/amaken-details/' ;
-                    break;
-                case 3:
-                    $file = 'restaurant';
-                    $place = Restaurant::find($item->placeId);
-                    $item->kindPlace = 'رستوران';
-                    $url ='https://koochita.com/restaurant-details/' ;
-                    break;
-                case 4:
-                    $file = 'hotels';
-                    $place = Hotel::find($item->placeId);
-                    $item->kindPlace = 'هتل';
-                    $url ='https://koochita.com/hotel-details/' ;
-                    break;
-                case 6:
-                    $file = 'majara';
-                    $place = Majara::find($item->placeId);
-                    $item->kindPlace = 'ماجرا';
-                    $url ='https://koochita.com/majara-details/' ;
-                    break;
-                case 10:
-                    $file = 'sogatsanaie';
-                    $place = SogatSanaie::find($item->placeId);
-                    $item->kindPlace = 'سوغات/صنایع';
-                    $url ='https://koochita.com/hotel-details/' ;
-                    break;
-                case 11:
-                    $file = 'mahalifood';
-                    $place = MahaliFood::find($item->placeId);
-                    $item->kindPlace = 'غذای محلی';
-                    $url ='https://koochita.com/hotel-details/' ;
-                    break;
-            }
+            $kindPlace = Place::find($item->kindPlaceId);
+            $place = \DB::table($kindPlace->tableName)->find($item->placeId);
+            $file = $kindPlace->fileName;
+            $item->kindPlace = $kindPlace->name;
 
             $item->placeName = $place->name;
             $item->placeId = $place->id;
-            $item->url = $url . $item->placeId . '/' . $item->placeName;
+            $item->url = 'https://koochita.com/place-details/' . $kindPlace->id. '/' . $place->id;
 
             $item->city = Cities::find($place->cityId);
             $item->state = State::find($item->city->stateId);
