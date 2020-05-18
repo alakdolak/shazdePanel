@@ -6,6 +6,7 @@ use App\models\Video;
 use App\models\VideoCategory;
 use App\models\VideoComment;
 use App\models\VideoFeedback;
+use App\models\VideoLive;
 use App\models\VideoPlaceRelation;
 use App\models\VideoTagRelation;
 use App\User;
@@ -221,6 +222,73 @@ class VideoController extends Controller
         }
         else
             echo json_encode(['status' => 'nok', 'msg' => 'Invalid Input']);
+
+        return;
+    }
+
+    public function liveVideoList()
+    {
+        $videos = VideoLive::where('userId', auth()->user()->id)->get();
+        foreach ($videos as $video)
+            $video->sDate = \verta($video->sDate)->format('Y-m-d');
+
+        return view('vod.live.liveVideoIndex', compact(['videos']));
+    }
+
+    public function liveVideoStore(Request $request)
+    {
+
+        if(isset($request->id) && isset($request->title) && isset($request->time) && isset($request->date)){
+            if($request->id == 0){
+                $live = new VideoLive();
+                $live->userId = auth()->user()->id;
+                while(true){
+                    $code = random_int(1000, 999999);
+                    $check = VideoLive::where('code', $code)->first();
+                    if($check == null)
+                        break;
+                }
+                $live->code = $code;
+            }
+            else
+                $live = VideoLive::find($request->id);
+
+            $date = explode('-', convertNumber('en', $request->date));
+            $date = Verta::getGregorian($date[0],$date[1],$date[2]);
+            if($date[1] < 10)
+                $date[1] = '0'.$date[1];
+            if($date[2] < 10)
+                $date[2] = '0'.$date[2];
+            $date = implode('-', $date);
+
+            $live->title = $request->title;
+            $live->description = $request->desc;
+            $live->sTime = convertNumber('en', $request->time);
+            $live->sDate = $date;
+            $live->save();
+
+            echo json_encode(['status' => 'ok']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+    public function liveVideoIsLive(Request $request)
+    {
+        if(isset($request->id)){
+            $video = VideoLive::find($request->id);
+            if($video->isLive == 1)
+                $video->isLive = 0;
+            else
+                $video->isLive = 1;
+            $video->save();
+
+            echo json_encode(['status' => 'ok']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
 
         return;
     }

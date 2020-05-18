@@ -30,7 +30,7 @@
                             <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
                                 <a href="{{route('vod.index')}}" class="dropdown-item">لیست ویدیوها</a>
                                 <a href="{{route('vod.video.category.index')}}" class="dropdown-item">دسته بندی ها</a>
-                                <a href="{{url('manageStreams')}}" class="dropdown-item">مدیریت LIVE</a>
+                                <a href="{{route('vod.live.index')}}" class="dropdown-item">مدیریت LIVE</a>
                             </div>
                         </a>
                     </li>

@@ -36,12 +36,6 @@ Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
-//    پخش زنده
-    Route::get('manageStreams', ['as' => 'manageStreams', 'uses' => 'StreamController@manage']);
-    Route::get('addStream', ['as' => 'addStream', 'uses' => 'StreamController@addStream']);
-    Route::post('doAddStream', ['as' => 'doAddStream', 'uses' => 'StreamController@doAddStream']);
-    Route::post('removeStream', ['as' => 'removeStream', 'uses' => 'StreamController@removeStream']);
-
 //    فعالیت
     Route::get('activities', 'ActivitiesController@index')->name('activities.index');
     Route::post('activities/store', 'ActivitiesController@store')->name('activities.store');
@@ -500,6 +494,16 @@ Route::group(array('middleware' => ['auth']), function() {
     Route::get('/vod/video/category/index', 'VideoController@videoCategoryIndex')->name('vod.video.category.index');
     Route::post('/vod/video/category/store', 'VideoController@videoCategoryStore')->name('vod.video.category.store');
     Route::post('/vod/video/category/delete', 'VideoController@videoCategoryDelete')->name('vod.video.category.delete');
+
+    Route::get('/vod/video/live', 'VideoController@liveVideoList')->name('vod.live.index');
+    Route::post('/vod/video/live/store', 'VideoController@liveVideoStore')->name('vod.live.store');
+    Route::post('/vod/video/live/isLive', 'VideoController@liveVideoIsLive')->name('vod.live.isLive');
+
+    //    پخش زنده
+    Route::get('manageStreams', ['as' => 'manageStreams', 'uses' => 'StreamController@manage']);
+    Route::get('addStream', ['as' => 'addStream', 'uses' => 'StreamController@addStream']);
+    Route::post('doAddStream', ['as' => 'doAddStream', 'uses' => 'StreamController@doAddStream']);
+    Route::post('removeStream', ['as' => 'removeStream', 'uses' => 'StreamController@removeStream']);
 });
 
 //ajaxController

@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="vod">
+      <change afterPath="$PROJECT_DIR$/app/models/VideoLive.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/vod/live/liveVideoIndex.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/sideNav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/sideNav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,25 +187,25 @@
     <property name="SearchEverywhereHistoryKey" value="common&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/Common.php&#10;storePlaceTags&#9;null&#9;null&#10;storePlaceFeatures&#9;null&#9;null&#10;newContent&#9;null&#9;null&#10;6f7f547f305fb0684599d5df364864081a06a844&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/storage/framework/views/6f7f547f305fb0684599d5df364864081a06a844.php&#10;newContentCore&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;post&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PostController.php&#10;uploadImg&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/uploadImg.blade.php&#10;PlaceController&#9;null&#9;null&#10;place&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;editA&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;getCrop&#9;null&#9;null&#10;upload&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/uploadImg.blade.php&#10;createPost&#9;null&#9;null&#10;getValueInfo&#9;null&#9;null&#10;superAdminLevel&#9;null&#9;null&#10;admin&#9;null&#9;null&#10;mahali&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMahaliFood.blade.php&#10;easyimage&#9;FILE&#9;file://C:/Users/kiavash/Desktop/site-project/tools/ckeditor/ckeditor4EasyImg/plugins/easyimage/dialogs/easyimagealt.js&#10;editPost&#9;null&#9;null&#10;easy&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor/plugins/easyimage/dialogs/easyimagealt.js&#10;ثشسغ&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/ckeditor/plugins/easyimage/styles/easyimage.css&#10;web&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/routes/web.php&#10;changeAdab&#9;null&#9;null&#10;stru&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/layouts/structure.blade.php&#10;edit&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editMahaliFood.blade.php&#10;makeSlug&#9;null&#9;null&#10;amaken&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;newCOn&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;placeCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;editContentPage&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/public/js/editContentPage.js&#10;seo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/SeoController.php&#10;changeContent&#9;null&#9;null&#10;keywordInPlaceDataBase&#9;null&#9;null&#10;homeC&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/HomeController.php&#10;adminP&#9;null&#9;null&#10;newCon&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;editHo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editHotels.blade.php&#10;editConte&#9;null&#9;null&#10;edi&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/editContent/editAmaken.blade.php&#10;new&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newContent/newContentCore.blade.php&#10;garde&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/gardeshNameList.blade.php&#10;4ef197fa7476fbaba541f4565b75a3544728a508&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/storage/framework/views/4ef197fa7476fbaba541f4565b75a3544728a508.php&#10;newChangeContent&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/newChangeContent.blade.php&#10;gardesh&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/gardeshNameList.blade.php&#10;placeCo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/app/Http/Controllers/PlaceController.php&#10;storeHotel&#9;null&#9;null&#10;createPo&#9;FILE&#9;file://C:/xampp/htdocs/shazdePanel/resources/views/content/post/createPost.blade.php&#10;postCon&#9;null&#9;null&#10;postcrea&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/tagExcel/boomgardy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/models" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel\boomgardy" />
-      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel" />
-      <recent name="C:\xampp\htdocs\shazdePanel\app\Http\Controllers" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\shazdePanel\resources\views\vod\live" />
       <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel\boomgardy" />
       <recent name="C:\xampp\htdocs\shazdePanel\resources\views" />
       <recent name="C:\xampp\htdocs\shazdePanel\public\packages\imageUploader" />
       <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel\sogat" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel\restu" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel\boomgardy" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel" />
+      <recent name="C:\xampp\htdocs\shazdePanel\app\Http\Controllers" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
     </key>
   </component>
   <component name="RunManager">
@@ -484,14 +488,10 @@
       <workItem from="1588892309494" duration="261000" />
       <workItem from="1589020811990" duration="3732000" />
       <workItem from="1589024626787" duration="25000" />
-      <workItem from="1589635301456" duration="905000" />
-    </task>
-    <task id="LOCAL-00006" summary="image backup completed">
-      <created>1557948914277</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1557948914277</updated>
+      <workItem from="1589635301456" duration="920000" />
+      <workItem from="1589712826949" duration="155000" />
+      <workItem from="1589832144957" duration="2878000" />
+      <workItem from="1589835408507" duration="4925000" />
     </task>
     <task id="LOCAL-00007" summary="image backup completed">
       <created>1558006956684</created>
@@ -829,7 +829,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589024548694</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="vod">
+      <created>1589637123807</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1589637123807</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -893,10 +900,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588768256756" />
-    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1589024546410">
+    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1589637122709">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1589024546410" />
+    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1589637122709" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1588101976810">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -913,17 +920,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="762" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588769950021" />
-    <state x="639" y="238" width="665" height="564" key="find.popup" timestamp="1588873805328">
+    <state x="639" y="238" width="665" height="564" key="find.popup" timestamp="1589835072968">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="639" y="238" width="665" height="564" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588873805328" />
+    <state x="639" y="238" width="665" height="564" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1589835072968" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1588873228360">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588873228360" />
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1589635325729">
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1589838284062">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1589635325729" />
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1589838284062" />
   </component>
 </project>
