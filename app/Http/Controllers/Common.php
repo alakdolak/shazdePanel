@@ -616,4 +616,34 @@ function deleteFolder($dir) {
     }
 }
 
+//    http://image.intervention.io/
+function resizeImage($pic, $size){
+    try {
+        $image = $pic;
+        $randNum = random_int(100,999);
+        $fileName = time() . $randNum. '.' . $image->getClientOriginalExtension();
+        foreach ($size as $item){
+            $input['imagename'] = $item['name'] .  $fileName ;
+            $destinationPath = $item['destination'];
+            $img = \Image::make($image->getRealPath());
+            $width = $img->width();
+            $height = $img->height();
+
+            if($item['width'] == null || $width > $item['width'])
+                $width = $item['width'];
+
+            if($item['height'] == null || $height > $item['height'])
+                $height = $item['height'];
+
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$input['imagename']);
+        }
+        return $fileName;
+    }
+    catch (Exception $exception){
+        return 'error';
+    }
+}
+
 

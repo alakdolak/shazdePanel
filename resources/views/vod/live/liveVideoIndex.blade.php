@@ -18,19 +18,6 @@
             direction: rtl;
             align-items: center;
         }
-        .addIcon{
-            font-size: 20px;
-            color: white;
-            background: green;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            margin: 0 20px;
-            cursor: pointer;
-        }
         .isLive{
             background: #adffab;
         }
@@ -40,6 +27,15 @@
 
         .errorInput{
             background: #ffd9d9;
+        }
+        .guestPic{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
     </style>
@@ -84,6 +80,7 @@
                                                         <th>کد پخش</th>
                                                         <th>ساعت شروع</th>
                                                         <th>تاریخ پخش</th>
+                                                        <th>لیست مهمانان</th>
                                                         <th></th>
                                                     </tr>
                                                     </thead>
@@ -104,6 +101,9 @@
                                                                 </td>
                                                                 <td>
                                                                     {{$video->sDate}}
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn btn-success" onclick="openGuestModal({{$video->id}})">مشاهده لیست مهمانان</button>
                                                                 </td>
                                                                 <td>
                                                                     @if($video->isLive == 1)
@@ -184,122 +184,157 @@
             </div>
         </div>
 
+        <div class="modal fade" id="guestModal" style="direction: rtl; text-align: right">
+            <input type="hidden" id="descriptionId">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
 
-        <script src="{{URL::asset('js/calendar/persian-date.min.js')}}"></script>
-        <script src="{{URL::asset('js/calendar/persian-datepicker.js')}}"></script>
+                    <div class="modal-header" style="display: flex;">
+                        <h4 class="modal-title">
+                            لیست مهمانان <span id="guestHeader"></span>
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" style="margin-right: auto">&times;</button>
+                    </div>
+                    <input type="hidden" id="guestVideoId">
+                    <div class="modal-body" id="guestBody">
 
-        <script src= {{URL::asset("js/clockPicker/clockpicker.js") }}></script>
-        <script>
+                        <div class="container-fluid">
+                            <input type="hidden" id="guestId_##index##" value="##id##">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="guestAction_##index##">نقش مهمان ##index## در برنامه:</label>
+                                        <input type="text" id="guestAction_##index##" class="form-control" value="##action##">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="guestName_##index##">نام مهمان ##index##:</label>
+                                        <input type="text" id="guestName_##index##" class="form-control" value="##name##">
+                                    </div>
+                                </div>
+                            </div>
 
-            $('#liveDate').persianDatepicker({
-                minDate: new Date().getTime(),
-                format: 'YYYY-MM-DD',
-                autoClose: true,
-            });
+                            <div class="row">
+                                <div class="col-md-6" style="display: flex; justify-content: center">
+                                    <div class="form-group guestPic">
+                                        <img id="guestPicImg_##index##" src="##pic##"  style="height: 100%">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="guestPic_##index##">عکس مهمان ##index##</label>
+                                        <input type="file" id="guestPic_##index##" class="form-control" onchange="readPic(this, ##index##)">
+                                    </div>
+                                </div>
+                            </div>
 
-            $('#liveTime').clockpicker({
-                donetext: 'تایید',
-                autoclose: true,
-            });
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="guestText_##index##">توضیح ##index##</label>
+                                    <textarea  id="guestText_##index##" class="form-control">##text##</textarea>
+                                </div>
+                            </div>
 
-            let videos = {!! $videos !!};
+                            <div class="row" style="justify-content: center; display: flex;">
+                                <input type="hidden" id="liveId">
+                                <button class="btn btn-primary" onclick="storeGuest(##index##)">ثبت</button>
+                            </div>
+                        </div>
+                        <hr>
 
-            function newLive() {
-                $('#liveId').val(0);
-                $('#liveTitle').val('');
-                $('#liveTime').val('');
-                $('#liveDate').val('');
-                $('#liveDesc').val('');
-                $('#newLiveHeader').text('افزودن Live جدید');
-                $('#newLiveModal').modal({backdrop: 'static', keyboard: false});
+                    </div>
+                    <div style="width: 100%; display: flex; justify-content: center">
+                        <div class="addIcon" onclick="newGuest()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@stop
+
+@section('script')
+    <script src="{{URL::asset('js/calendar/persian-date.min.js')}}"></script>
+    <script src="{{URL::asset('js/calendar/persian-datepicker.js')}}"></script>
+
+    <script src= {{URL::asset("js/clockPicker/clockpicker.js") }}></script>
+    <script>
+
+        let guestIndex = 1;
+        let guestInputSample = $('#guestBody').html();
+        $('#guestBody').html('');
+
+        $('#liveDate').persianDatepicker({
+            minDate: new Date().getTime(),
+            format: 'YYYY-MM-DD',
+            autoClose: true,
+        });
+
+        $('#liveTime').clockpicker({
+            donetext: 'تایید',
+            autoclose: true,
+        });
+
+        let videos = {!! $videos !!};
+
+        function newLive() {
+            $('#liveId').val(0);
+            $('#liveTitle').val('');
+            $('#liveTime').val('');
+            $('#liveDate').val('');
+            $('#liveDesc').val('');
+            $('#newLiveHeader').text('افزودن Live جدید');
+            $('#newLiveModal').modal({backdrop: 'static', keyboard: false});
+        }
+
+        function storeLive(){
+            let id = $('#liveId').val();
+            let title = $('#liveTitle').val();
+            let time = $('#liveTime').val();
+            let date = $('#liveDate').val();
+            let desc = $('#liveDesc').val();
+            let error = false;
+
+            if(title.trim().length < 2){
+                $('#liveTitle').addClass('errorInput');
+                error = true;
             }
+            else
+                $('#liveTitle').removeClass('errorInput');
 
-            function storeLive(){
-                let id = $('#liveId').val();
-                let title = $('#liveTitle').val();
-                let time = $('#liveTime').val();
-                let date = $('#liveDate').val();
-                let desc = $('#liveDesc').val();
-                let error = false;
-
-                if(title.trim().length < 2){
-                    $('#liveTitle').addClass('errorInput');
-                    error = true;
-                }
-                else
-                    $('#liveTitle').removeClass('errorInput');
-
-                if(time.trim().length < 2){
-                    $('#liveTime').addClass('errorInput');
-                    error = true;
-                }
-                else
-                    $('#liveTime').removeClass('errorInput');
-
-                if(date.trim().length < 2){
-                    $('#liveDate').addClass('errorInput');
-                    error = true;
-                }
-                else
-                    $('#liveDate').removeClass('errorInput');
-
-
-                if(!error){
-                    $.ajax({
-                        type: 'post',
-                        url: '{{route("vod.live.store")}}',
-                        data:{
-                            _token: '{{csrf_token()}}',
-                            id: id,
-                            title: title,
-                            time: time,
-                            date: date,
-                            desc: desc,
-                        },
-                        success: function(response){
-                            try{
-                                response = JSON.parse(response);
-                                if(response['status'] == 'ok')
-                                    location.reload();
-                                else
-                                    alert('Error in Store');
-                            }
-                            catch (e) {
-                                console.log(e);
-                                alert('Error in Store');
-                            }
-                        },
-                        error: function(err){
-                            console.log(err);
-                            alert('Error in Store');
-                        }
-                    })
-                }
+            if(time.trim().length < 2){
+                $('#liveTime').addClass('errorInput');
+                error = true;
             }
+            else
+                $('#liveTime').removeClass('errorInput');
 
-            function editLive(_id){
-                let vid;
-                videos.forEach((video) => {
-                    if(video.id == _id)
-                        vid = video;
-                });
-
-                $('#liveId').val(vid.id);
-                $('#liveTitle').val(vid.title);
-                $('#liveTime').val(vid.sTime);
-                $('#liveDate').val(vid.sDate);
-                $('#liveDesc').val(vid.description);
-                $('#newLiveHeader').text('ویرایش ' + vid.title);
-                $('#newLiveModal').modal({backdrop: 'static', keyboard: false});
+            if(date.trim().length < 2){
+                $('#liveDate').addClass('errorInput');
+                error = true;
             }
+            else
+                $('#liveDate').removeClass('errorInput');
 
-            function isLiveFunc(_id){
+
+            if(!error){
                 $.ajax({
                     type: 'post',
-                    url: '{{route("vod.live.isLive")}}',
-                    data: {
+                    url: '{{route("vod.live.store")}}',
+                    data:{
                         _token: '{{csrf_token()}}',
-                        id: _id
+                        id: id,
+                        title: title,
+                        time: time,
+                        date: date,
+                        desc: desc,
                     },
                     success: function(response){
                         try{
@@ -307,23 +342,124 @@
                             if(response['status'] == 'ok')
                                 location.reload();
                             else
-                                alert('Error In change');
+                                alert('Error in Store');
                         }
                         catch (e) {
                             console.log(e);
-                            alert('Error In change');
+                            alert('Error in Store');
                         }
                     },
-                    error: function (err) {
+                    error: function(err){
                         console.log(err);
-                        alert('Error In change');
+                        alert('Error in Store');
                     }
                 })
             }
+        }
 
-            function deleteLive(_id){
+        function editLive(_id){
+            let vid;
+            videos.forEach((video) => {
+                if(video.id == _id)
+                    vid = video;
+            });
 
+            $('#liveId').val(vid.id);
+            $('#liveTitle').val(vid.title);
+            $('#liveTime').val(vid.sTime);
+            $('#liveDate').val(vid.sDate);
+            $('#liveDesc').val(vid.description);
+            $('#newLiveHeader').text('ویرایش ' + vid.title);
+            $('#newLiveModal').modal({backdrop: 'static', keyboard: false});
+        }
+
+        function isLiveFunc(_id){
+            $.ajax({
+                type: 'post',
+                url: '{{route("vod.live.isLive")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    id: _id
+                },
+                success: function(response){
+                    try{
+                        response = JSON.parse(response);
+                        if(response['status'] == 'ok')
+                            location.reload();
+                        else
+                            alert('Error In change');
+                    }
+                    catch (e) {
+                        console.log(e);
+                        alert('Error In change');
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                    alert('Error In change');
+                }
+            })
+        }
+
+        function openGuestModal(_id){
+            let vid = null;
+            videos.forEach((video) => {
+                if(video.id == _id)
+                    vid = video;
+            });
+            if(vid != null){
+                $('#guestBody').html('');
+                guestIndex = 1;
+                $('#guestVideoId').val(vid.id);
+                $('#guestHeader').text(vid.title);
+                $('#guestModal').modal({backdrop: 'static', keyboard: false});
             }
-        </script>
+        }
 
-@stop
+        function readPic(input, _index){
+            if (input.files && input.files[0]) {
+                // data.append('pic', input.files[0]);
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#guestPicImg_' + _index).attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function newGuest(){
+            let guest = {
+                'index': guestIndex,
+                'name' : '',
+                'id' : 0,
+                'action': '',
+                'pic': '',
+                'text': '',
+            };
+            createGuestRow(guest);
+        }
+
+        function createGuestRow(_guest){
+            let text = guestInputSample;
+            let fk = Object.keys(_guest);
+            for (let x of fk) {
+                let t = '##' + x + '##';
+                let re = new RegExp(t, "g");
+                text = text.replace(re, _guest[x]);
+            }
+            $("#guestBody").append(text);
+            guestIndex++;
+        }
+
+        function storeGuest(_index){
+            let id = $('#guestId_' + _index).val();
+            let name = $('#guestName_' + _index).val();
+            let action = $('#guestAction_' + _index).val();
+            let text = $('#guestText_' + _index).val();
+        }
+
+        function deleteLive(_id){
+
+        }
+    </script>
+@endsection

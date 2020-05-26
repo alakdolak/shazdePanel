@@ -71,6 +71,10 @@
         <script src="{{URL::asset('js/jquery.min.js')}}"></script>
 
         <style>
+            .row{
+                width: 100%;
+                margin: 0px;
+            }
             .loaderDiv{
                 position: fixed;
                 width: 100%;
@@ -120,6 +124,20 @@
             .form-control{
                 border-color: gray !important;
                 border-radius: 5px;
+            }
+
+            .addIcon{
+                font-size: 20px;
+                color: white;
+                background: green;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                margin: 0 20px;
+                cursor: pointer;
             }
         </style>
 

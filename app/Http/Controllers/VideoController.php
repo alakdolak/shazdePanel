@@ -7,6 +7,7 @@ use App\models\VideoCategory;
 use App\models\VideoComment;
 use App\models\VideoFeedback;
 use App\models\VideoLive;
+use App\models\VideoLiveGuest;
 use App\models\VideoPlaceRelation;
 use App\models\VideoTagRelation;
 use App\User;
@@ -165,41 +166,87 @@ class VideoController extends Controller
 
     public function videoCategoryIndex()
     {
-        $category = VideoCategory::all();
-        return view('vod.categoryIndex', compact(['category']));
+        $category = VideoCategory::where('parent', 0)->get();
+        $allCategory = VideoCategory::all();
+
+        foreach ($category as $cat) {
+            $cat->sub = VideoCategory::where('parent', $cat->id)->get();
+            foreach ($cat->sub as $item){
+                $item->onIcon = \URL::asset('_images/video/category/' . $item->onIcon);
+                $item->offIcon = \URL::asset('_images/video/category/' . $item->offIcon);
+            }
+        }
+        foreach ($allCategory as $item){
+            if($item->parent != 0) {
+                $item->onIcon = \URL::asset('_images/video/category/' . $item->onIcon);
+                $item->offIcon = \URL::asset('_images/video/category/' . $item->offIcon);
+            }
+        }
+
+        return view('vod.category.categoryIndex', compact(['category', 'allCategory']));
     }
 
     public function videoCategoryStore(Request $request)
     {
-        if(isset($request->id) && isset($request->name)){
-            $check = VideoCategory::where('name', $request->name)->first();
-            if($check != null){
-                if($request->id != 0)
-                    $name = VideoCategory::find($request->id)->name;
-                else
-                    $name = $request->name;
-
-                echo json_encode(['status' => 'nok3', 'id' => $request->id, 'name' => $name]);
-                return;
-            }
-
-            if($request->id == 0)
-                $category = new VideoCategory();
-            else{
-                $category = VideoCategory::find($request->id);
-                if($category == null){
-                    echo json_encode(['status' => 'nok1', 'msg' => 'category id not found']);
-                    return;
+        if(isset($request->id) && isset($request->name) && isset($request->parent)){
+            $check = VideoCategory::where('name', $request->name)->where('id', '!=', $request->id)->first();
+            if($check == null){
+                if($request->id == 0)
+                        $category = new VideoCategory();
+                else{
+                    $category = VideoCategory::find($request->id);
+                    if($category == null){
+                        echo json_encode(['status' => 'nok3']);
+                        return;
+                    }
                 }
+
+                $category->name = $request->name;
+                $category->parent = $request->parent;
+
+                $location = __DIR__ .'/../../../../assets/_images/video/category';
+                if(!is_dir($location))
+                    mkdir($location);
+                $size = [
+                    [
+                        'width' => 150,
+                        'height' => 150,
+                        'name' => '',
+                        'destination' => $location
+                    ],
+                ];
+
+                if(isset($_FILES['onIcon']) && $_FILES['onIcon']['error'] == 0){
+
+                    $image = $request->file('onIcon');
+                    $fileName = resizeImage($image, $size);
+
+                    if($category->onIcon != null && is_file($location .'/'.$category->onIcon))
+                        unlink($location .'/'.$category->onIcon);
+
+                    $category->onIcon = $fileName;
+                }
+
+                if(isset($_FILES['offIcon']) && $_FILES['offIcon']['error'] == 0){
+
+                    $image = $request->file('offIcon');
+                    $fileName = resizeImage($image, $size);
+
+                    if($category->offIcon != null && is_file($location .'/'.$category->offIcon))
+                        unlink($location .'/'.$category->offIcon);
+
+                    $category->offIcon = $fileName;
+                }
+
+                $category->save();
+
+                echo json_encode(['status' => 'ok']);
             }
-
-            $category->name = $request->name;
-            $category->save();
-
-            echo json_encode(['status' => 'ok', 'id' => $category->id]);
+            else
+                echo json_encode(['status' => 'nok1']);
         }
         else
-            echo json_encode(['status' => 'nok', 'msg' => 'Invalid Input']);
+            echo json_encode(['status' => 'nok']);
 
         return;
     }
@@ -209,10 +256,23 @@ class VideoController extends Controller
         if(isset($request->id)){
             $category = VideoCategory::find($request->id);
             if($category != null) {
+                if($category->parent == 0){
+                    $vids = VideoCategory::where('parent', $category->id)->count();
+                    if($vids > 0){
+                        echo json_encode(['status' => 'nok3']);
+                        return;
+                    }
+                }
                 $vid = Video::where('categoryId', $request->id)->first();
                 if ($vid != null)
                     echo json_encode(['status' => 'nok2', 'msg' => 'cateError']);
                 else {
+                    $location = __DIR__ .'/../../../../assets/_images/video/category';
+                    if(is_file($location.'/'.$category->onIcon))
+                        unlink($location.'/'.$category->onIcon);
+                    if(is_file($location.'/'.$category->offIcon))
+                        unlink($location.'/'.$category->offIcon);
+
                     $category->delete();
                     echo json_encode(['status' => 'ok']);
                 }
@@ -229,8 +289,12 @@ class VideoController extends Controller
     public function liveVideoList()
     {
         $videos = VideoLive::where('userId', auth()->user()->id)->get();
-        foreach ($videos as $video)
+        foreach ($videos as $video) {
             $video->sDate = \verta($video->sDate)->format('Y-m-d');
+            $video->guest = VideoLiveGuest::where('videoId', $video->id)->get();
+            foreach ($video->guest as $guest)
+                $guest->pic = asset('_images/live/' . $video->id . '/' . $guest->pic);
+        }
 
         return view('vod.live.liveVideoIndex', compact(['videos']));
     }
