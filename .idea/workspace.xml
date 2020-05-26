@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="vod">
-      <change afterPath="$PROJECT_DIR$/app/models/VideoLiveGuest.php" afterDir="false" />
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="vod category">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Common.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vod/categoryIndex.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vod/category/categoryIndex.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vod/live/liveVideoIndex.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vod/live/liveVideoIndex.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vod/category/categoryIndex.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vod/category/categoryIndex.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -498,14 +493,9 @@
       <workItem from="1589979672236" duration="168000" />
       <workItem from="1590012596044" duration="126000" />
       <workItem from="1590404621070" duration="1544000" />
-      <workItem from="1590470040779" duration="5657000" />
-    </task>
-    <task id="LOCAL-00008" summary="image backup completed">
-      <created>1558007180515</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1558007180515</updated>
+      <workItem from="1590470040779" duration="5828000" />
+      <workItem from="1590477275117" duration="1078000" />
+      <workItem from="1590488381071" duration="272000" />
     </task>
     <task id="LOCAL-00009" summary="kiavash">
       <created>1571055068068</created>
@@ -843,7 +833,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589840475175</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="vod category">
+      <created>1590476264171</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1590476264174</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -871,7 +868,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="last changes" />
     <MESSAGE value="image backup completed" />
     <MESSAGE value="kiavash" />
     <MESSAGE value="meta اضافه کردن" />
@@ -896,7 +892,8 @@
     <MESSAGE value="mainpic city" />
     <MESSAGE value="add boomgardy 2" />
     <MESSAGE value="vod" />
-    <option name="LAST_COMMIT_MESSAGE" value="vod" />
+    <MESSAGE value="vod category" />
+    <option name="LAST_COMMIT_MESSAGE" value="vod category" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587373166142">
@@ -907,10 +904,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588768256756" />
-    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1590476215740">
+    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1590488699354">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590476215740" />
+    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590488699354" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1588101976810">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -927,10 +924,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="762" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1588769950021" />
-    <state x="639" y="238" width="665" height="564" key="find.popup" timestamp="1590472762781">
+    <state x="639" y="238" width="665" height="564" key="find.popup" timestamp="1590477280805">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="639" y="238" width="665" height="564" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590472762781" />
+    <state x="639" y="238" width="665" height="564" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590477280805" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1590474411795">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

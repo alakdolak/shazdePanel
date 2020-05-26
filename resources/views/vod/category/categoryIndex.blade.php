@@ -120,7 +120,7 @@
                                 <label for="onIconInput">حالت روشن</label>
                                 <input type="file" name="onIconInput" id="onIconInput" onchange="showNewIconPic('onIcon', this)">
                             </div>
-                            <img src="#" id="onIcon" style="width: 150px; height: 150px">
+                            <img src="#" id="onIcon" style="width: 150px; height: 150px; background: gray;">
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
