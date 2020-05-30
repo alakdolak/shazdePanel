@@ -31,6 +31,7 @@
                                 <a href="{{route('vod.index')}}" class="dropdown-item">لیست ویدیوها</a>
                                 <a href="{{route('vod.video.category.index')}}" class="dropdown-item">دسته بندی ها</a>
                                 <a href="{{route('vod.live.index')}}" class="dropdown-item">مدیریت LIVE</a>
+                                <a href="{{route('vod.video.comments')}}" class="dropdown-item">کامنت ها</a>
                             </div>
                         </a>
                     </li>
@@ -57,7 +58,7 @@
                     </li>
                 @endif
 
-                @if(isset($userACL) && $userACL->msg == 1)
+                @if(isset($userACL) && $userACL->comment == 1)
                     <li class="nav-item">
                         <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                             <i class="fa big-icon fa-envelope"></i>

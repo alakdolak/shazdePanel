@@ -31,43 +31,49 @@
                                         <div class="container-fluid">
                                             <div class="row">
 
-                                                @if(count($photographerNotAgree) > 0)
-                                                    <div class="col-lg-3">
-                                                        <a href="{{route('photographer.index')}}">
-                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                            <div class="income-dashone-pro">
-                                                                <div class="income-rate-total">
-                                                                    <div class="price-adminpro-rate">
-                                                                        <h3>
-                                                                            {{count($photographerNotAgree)}} عکس تایید نشده عکاسان
-                                                                        </h3>
+                                                <?php
+                                                    if(auth()->check())
+                                                        $userACL = \App\models\ACL::where('userId', auth()->user()->id)->first();
+                                                ?>
+
+                                                @if(isset($userACL) && $userACL->comment == 1)
+                                                    @if(count($photographerNotAgree) > 0)
+                                                        <div class="col-lg-3">
+                                                            <a href="{{route('photographer.index')}}">
+                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3>
+                                                                                {{count($photographerNotAgree)}} عکس تایید نشده عکاسان
+                                                                            </h3>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            </a>
                                                         </div>
-                                                        </a>
-                                                    </div>
-                                                @endif
+                                                    @endif
 
-                                                @if($newCommentCount > 0)
-                                                    <div class="col-lg-3">
-                                                        <a href="{{route('comments.list')}}">
-                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                            <div class="income-dashone-pro">
-                                                                <div class="income-rate-total">
-                                                                    <div class="price-adminpro-rate">
-                                                                        <h3>
-                                                                            {{$newCommentCount}} کامنت جدید
-                                                                        </h3>
+                                                    @if($newCommentCount > 0)
+                                                        <div class="col-lg-3">
+                                                            <a href="{{route('comments.list')}}">
+                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3>
+                                                                                {{$newCommentCount}} کامنت جدید
+                                                                            </h3>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            </a>
                                                         </div>
-                                                        </a>
-                                                    </div>
-                                                @endif
+                                                    @endif
 
-                                                @if($newReviews > 0)
+                                                    @if($newReviews > 0)
                                                     <div class="col-lg-3">
                                                         <a href="{{route('reviews.index')}}">
                                                             <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
@@ -81,6 +87,28 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                                @endif
+
+
+
+                                                @if(isset($userACL) && $userACL->vod == 1 && $newVideoComments > 0)
+
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('vod.video.comments')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3>
+                                                                                {{$newVideoComments}} کامنت ویدیو جدید
+                                                                            </h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </a>
                                                     </div>
                                                 @endif

@@ -495,6 +495,10 @@ Route::group(array('middleware' => ['auth']), function() {
     Route::post('/vod/video/category/store', 'VideoController@videoCategoryStore')->name('vod.video.category.store');
     Route::post('/vod/video/category/delete', 'VideoController@videoCategoryDelete')->name('vod.video.category.delete');
 
+    Route::get('/vod/video/comments', 'VideoController@videoComments')->name('vod.video.comments');
+    Route::post('/vod/video/comments/submit', 'VideoController@videoCommentSubmit')->name('vod.video.comment.submit');
+    Route::post('/vod/video/comments/delete', 'VideoController@videoCommentDelete')->name('vod.video.comment.delete');
+
     Route::get('/vod/video/live', 'VideoController@liveVideoList')->name('vod.live.index');
     Route::post('/vod/video/live/store', 'VideoController@liveVideoStore')->name('vod.live.store');
     Route::post('/vod/video/live/isLive', 'VideoController@liveVideoIsLive')->name('vod.live.isLive');

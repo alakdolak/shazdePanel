@@ -375,4 +375,97 @@ class VideoController extends Controller
 
         return;
     }
+
+    public function videoComments()
+    {
+        $confirmComments = [];
+        $newComments = [];
+
+        $coms = VideoComment::all();
+        foreach ($coms as $comment){
+            $ucomment = User::find($comment->userId);
+            if ($ucomment != null) {
+                $comment->username = $ucomment->username;
+                $comment->video = Video::find($comment->videoId);
+                if($comment->videoId == null){
+                    $this->deleteThisComment($comment->id);
+                    continue;
+                }
+                $comment->videoTitle = $comment->video->title;
+                $comment->videoUrl = 'https://koochita.com/streaming/show/'.$comment->video->code;
+
+                $comment->time = new Verta($comment->created_at);
+                $comment->time = $comment->time->format('Y-n-j H:i');
+
+                if($comment->parent != 0){
+                    $comment->ansTo = VideoComment::find($comment->parent);
+                    if($comment->ansTo == null){
+                        $this->deleteThisComment($comment->id);
+                        continue;
+                    }
+                    $comment->ansTo = $comment->ansTo->text;
+                }
+                else
+                    $comment->ansTo = '';
+
+                if($comment->confirm == 1) {
+                    $comment->like = VideoFeedback::where('commentId', $comment->id)->where('like', 1)->count();
+                    $comment->disLike = VideoFeedback::where('commentId', $comment->id)->where('like', -1)->count();
+                    $comment->ansCount = VideoComment::where('parent', $comment->id)->count();
+                    array_push($confirmComments, $comment);
+                }
+                else
+                    array_push($newComments, $comment);
+            }
+            else
+                $this->deleteThisComment($comment->id);
+        }
+
+        return view('vod.vodComments', compact(['confirmComments', 'newComments']));
+
+    }
+
+    public function videoCommentSubmit(Request $request)
+    {
+        if(isset($request->id)){
+            $comment = VideoComment::find($request->id);
+            if($comment != null){
+                $comment->confirm = 1;
+                $comment->save();
+
+                $newCount = VideoComment::where('confirm', 0)->count();
+
+                echo json_encode(['status' => 'ok', 'result' => $newCount]);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+    public function videoCommentDelete(Request $request)
+    {
+        if($request->id){
+            $this->deleteThisComment($request->id);
+            $newCount = VideoComment::where('confirm', 0)->count();
+            echo json_encode(['status' => 'ok', 'result' => $newCount]);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+    private function deleteThisComment($_id){
+        VideoFeedback::where('commentId', $_id)->delete();
+        $ans = VideoComment::where('parent', $_id)->get();
+        foreach ($ans as $item)
+            $this->deleteThisComment($item->id);
+
+        VideoComment::find($_id)->delete();
+        return;
+    }
 }

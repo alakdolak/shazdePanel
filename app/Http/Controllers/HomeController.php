@@ -13,6 +13,7 @@ use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
 use App\models\PostComment;
 use App\models\State;
+use App\models\VideoComment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +34,8 @@ class HomeController extends Controller {
 
         $newCommentCount = $reviewComment + $postComment;
 
-        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount']));
+        $newVideoComments = VideoComment::where('confirm', 0)->count();
+        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments']));
     }
 
     public function login() {
@@ -62,7 +64,7 @@ class HomeController extends Controller {
                     Session::flush();
                     return view('login', ['msg' => 'شما اجازه دسترسی به پنل را ندارید']);
                 }
-                
+
                 $tmp = new AdminLog();
                 $tmp->uId = Auth::user()->id;
                 $tmp->mode = getValueInfo('login');
@@ -76,7 +78,7 @@ class HomeController extends Controller {
 
         return view('login', ['msg' => '']);
     }
-    
+
     public function logout() {
         Auth::logout();
         Session::flush();
@@ -100,7 +102,7 @@ class HomeController extends Controller {
 
         return view('config.radius', array('radius' => ConfigModel::first()->radius));
     }
-    
+
     public function totalSearch() {
 
         if (isset($_POST["key"]) && isset($_POST["kindPlaceId"])) {
@@ -180,7 +182,7 @@ class HomeController extends Controller {
             $tmp->uId = Auth::user()->id;
             $tmp->mode = getValueInfo('selfChangePass');
             $tmp->save();
-            
+
             echo "ok";
         }
 
