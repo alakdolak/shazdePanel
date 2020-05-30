@@ -169,17 +169,16 @@ class VideoController extends Controller
         $category = VideoCategory::where('parent', 0)->get();
         $allCategory = VideoCategory::all();
 
-        foreach ($category as $cat) {
+        foreach ($category as $cat)
             $cat->sub = VideoCategory::where('parent', $cat->id)->get();
-            foreach ($cat->sub as $item){
-                $item->onIcon = \URL::asset('_images/video/category/' . $item->onIcon);
-                $item->offIcon = \URL::asset('_images/video/category/' . $item->offIcon);
-            }
-        }
         foreach ($allCategory as $item){
             if($item->parent != 0) {
                 $item->onIcon = \URL::asset('_images/video/category/' . $item->onIcon);
                 $item->offIcon = \URL::asset('_images/video/category/' . $item->offIcon);
+            }
+            else{
+                $item->banner = \URL::asset('_images/video/category/' . $item->banner);
+                $item->mainIcon = \URL::asset('_images/video/category/' . $item->onIcon);
             }
         }
 
@@ -236,6 +235,26 @@ class VideoController extends Controller
                         unlink($location .'/'.$category->offIcon);
 
                     $category->offIcon = $fileName;
+                }
+
+                if(isset($_FILES['banner']) && $_FILES['banner']['error'] == 0){
+                    $fileName = time() . $_FILES['banner']['name'];
+                    move_uploaded_file($_FILES['banner']['tmp_name'], $location.'/'.$fileName);
+
+                    if($category->banner != null && is_file($location .'/'.$category->banner))
+                        unlink($location .'/'.$category->banner);
+
+                    $category->banner = $fileName;
+                }
+
+                if(isset($_FILES['mainIcon']) && $_FILES['mainIcon']['error'] == 0){
+                    $fileName = time() . $_FILES['mainIcon']['name'];
+                    move_uploaded_file($_FILES['mainIcon']['tmp_name'], $location.'/'.$fileName);
+
+                    if($category->onIcon != null && is_file($location .'/'.$category->onIcon))
+                        unlink($location .'/'.$category->onIcon);
+
+                    $category->onIcon = $fileName;
                 }
 
                 $category->save();

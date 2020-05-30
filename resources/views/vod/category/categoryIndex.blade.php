@@ -114,6 +114,17 @@
                         </div>
 
                     </div>
+
+                    <div class="row" id="mainCategoryInputSection">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="mainIconInput">ایکون اصلی</label>
+                                <input type="file" name="mainIconInput" id="mainIconInput" onchange="showNewIconPic('mainIcon', this)">
+                            </div>
+                            <img src="#" id="mainIcon" style="width: 150px; height: 150px;">
+                        </div>
+                    </div>
+
                     <div class="row" id="categoryPicSection">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -130,6 +141,15 @@
                             <img src="#" id="offIcon" style="width: 150px; height: 150px">
                         </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="bannerInput">عکس بنر پس زمینه</label>
+                            <input type="file" name="bannerInput" id="bannerInput" onchange="showNewIconPic('banner', this)">
+                        </div>
+                        <img src="#" id="banner" style="width: 100%; height: 150px; background: gray;">
+                    </div>
+
                 </div>
 
                 <div class="modal-footer" style="display: flex; justify-content: center; align-items: center">
@@ -143,10 +163,11 @@
 
         <script>
             let allCategory = {!! $allCategory !!};
-            let category = {!! $category !!};
 
             let newOnIcon = null;
             let newOffIcon = null;
+            let newBanner = null;
+            let newMainIcon = null;
             function newCategoryFunc(_kind){
                 $('#thumbnailModalHeader').text('افزودن دسته بندی جدید');
                 $('#categoryId').val(0);
@@ -156,19 +177,29 @@
 
                 newOnIcon = null;
                 newOffIcon = null;
+                newBanner = null;
+                newMainIcon = null;
                 $('#onIconInput').val('');
+                $('#bannerInput').val('');
+                $('#mainIconInput').val('');
                 $('#offIconInput').val('');
                 $('#offIcon').attr('src', '');
                 $('#onIcon').attr('src', '');
+                $('#banner').attr('src', '');
+                $('#mainIcon').attr('src', '');
 
                 $('#newCategory').modal({backdrop: 'static', keyboard: false});
             }
 
             function changeParent(_value){
-                if(_value == 0)
+                if(_value == 0) {
                     $('#categoryPicSection').css('display', 'none');
-                else
+                    $('#mainCategoryInputSection').css('display', 'flex');
+                }
+                else {
                     $('#categoryPicSection').css('display', 'flex');
+                    $('#mainCategoryInputSection').css('display', 'none');
+                }
             }
 
             function showNewIconPic(_id, _input){
@@ -177,8 +208,12 @@
                     reader.onload = function (e) {
                         if(_id == 'onIcon')
                             newOnIcon = _input.files[0];
-                        else
+                        else if(_id == 'offIcon')
                             newOffIcon = _input.files[0];
+                        else if(_id == 'banner')
+                            newBanner = _input.files[0];
+                        else if(_id == 'mainIcon')
+                            newMainIcon = _input.files[0];
 
                         $('#'+_id).attr('src', e.target.result);
                     };
@@ -202,11 +237,17 @@
 
                     newOnIcon = null;
                     newOffIcon = null;
+                    newBanner = null;
+                    newMainIcon = null;
 
                     $('#onIconInput').val('');
+                    $('#bannerInput').val('');
+                    $('#mainIconInput').val('');
                     $('#offIconInput').val('');
                     $('#offIcon').attr('src', cat.offIcon);
                     $('#onIcon').attr('src', cat.onIcon);
+                    $('#banner').attr('src', cat.banner);
+                    $('#mainIcon').attr('src', cat.mainIcon);
 
                     $('#newCategory').modal({backdrop: 'static', keyboard: false});
                 }
@@ -237,6 +278,10 @@
                     formData.append('offIcon', newOffIcon);
                 if(parent != 0 && newOnIcon != null)
                     formData.append('onIcon', newOnIcon);
+                if(newBanner != null)
+                    formData.append('banner', newBanner);
+                if(newMainIcon != null)
+                    formData.append('mainIcon', newMainIcon);
 
                 openLoading();
                 $.ajax({
