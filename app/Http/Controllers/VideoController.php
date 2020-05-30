@@ -312,7 +312,7 @@ class VideoController extends Controller
             $video->sDate = \verta($video->sDate)->format('Y-m-d');
             $video->guest = VideoLiveGuest::where('videoId', $video->id)->get();
             foreach ($video->guest as $guest)
-                $guest->pic = asset('_images/live/' . $video->id . '/' . $guest->pic);
+                $guest->pic = \URL::asset('_images/video/live/' . $video->id . '/' . $guest->pic);
         }
 
         return view('vod.live.liveVideoIndex', compact(['videos']));
@@ -351,6 +351,65 @@ class VideoController extends Controller
             $live->save();
 
             echo json_encode(['status' => 'ok']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+    public function liveVideoStoreGuest(Request $request)
+    {
+        if(isset($request->name) && isset($request->videoId) && isset($request->id)){
+            $video = VideoLive::find($request->videoId);
+            if($video != null) {
+
+                if ($request->id == 0) {
+                    $guest = new VideoLiveGuest();
+                    $guest->videoId = $request->videoId;
+                }
+                else
+                    $guest = VideoLiveGuest::find($request->id);
+
+                if (isset($_FILES['pic']) && $_FILES['pic']['error'] == 0) {
+
+                    $location = __DIR__ . '/../../../../assets/_images/video/live/';
+                    if (!is_dir($location))
+                        mkdir($location);
+
+                    $location .= '/' . $video->id;
+                    if (!is_dir($location))
+                        mkdir($location);
+
+                    $size = [
+                        [
+                            'width' => 150,
+                            'height' => 150,
+                            'name' => '',
+                            'destination' => $location
+                        ],
+                    ];
+
+                    $image = $request->file('pic');
+                    $fileName = resizeImage($image, $size);
+
+                    if($guest->pic != null && is_file($location . '/' . $guest->pic))
+                        unlink($location .'/'.$guest->pic);
+
+                    $guest->pic = $fileName;
+                }
+
+                $guest->name = $request->name;
+                $guest->text = $request->text;
+                $guest->action = $request->action;
+                $guest->save();
+
+                $guest->pic = \URL::asset('_images/video/live/'.$video->id.'/'.$guest->pic);
+
+                echo json_encode(['status' => 'ok', 'result' => $guest]);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
         }
         else
             echo json_encode(['status' => 'nok']);

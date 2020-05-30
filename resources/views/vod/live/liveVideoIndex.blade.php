@@ -196,54 +196,7 @@
                         <button type="button" class="close" data-dismiss="modal" style="margin-right: auto">&times;</button>
                     </div>
                     <input type="hidden" id="guestVideoId">
-                    <div class="modal-body" id="guestBody">
-
-                        <div class="container-fluid">
-                            <input type="hidden" id="guestId_##index##" value="##id##">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="guestAction_##index##">نقش مهمان ##index## در برنامه:</label>
-                                        <input type="text" id="guestAction_##index##" class="form-control" value="##action##">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="guestName_##index##">نام مهمان ##index##:</label>
-                                        <input type="text" id="guestName_##index##" class="form-control" value="##name##">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6" style="display: flex; justify-content: center">
-                                    <div class="form-group guestPic">
-                                        <img id="guestPicImg_##index##" src="##pic##"  style="height: 100%">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="guestPic_##index##">عکس مهمان ##index##</label>
-                                        <input type="file" id="guestPic_##index##" class="form-control" onchange="readPic(this, ##index##)">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="guestText_##index##">توضیح ##index##</label>
-                                    <textarea  id="guestText_##index##" class="form-control">##text##</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row" style="justify-content: center; display: flex;">
-                                <input type="hidden" id="liveId">
-                                <button class="btn btn-primary" onclick="storeGuest(##index##)">ثبت</button>
-                            </div>
-                        </div>
-                        <hr>
-
-                    </div>
+                    <div class="modal-body" id="guestBody"></div>
                     <div style="width: 100%; display: flex; justify-content: center">
                         <div class="addIcon" onclick="newGuest()">
                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -251,12 +204,73 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-
                     </div>
-
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="newGuestModal" style="direction: rtl; text-align: right">
+            <input type="hidden" id="descriptionId">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header" style="display: flex;">
+                        <h4 class="modal-title">
+                            افزودن مهمان جدید
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" style="margin-right: auto">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <input type="hidden" id="newGuestId" value="0">
+                            <div class="row">
+                                <div class="col-md-6" style="float: right">
+                                    <div class="form-group">
+                                        <label for="newGuestName">نام مهمان :</label>
+                                        <input type="text" id="newGuestName" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="newGuestAction">نقش مهمان در برنامه:</label>
+                                        <input type="text" id="newGuestAction" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="display: flex; justify-content: center">
+                                    <div class="form-group guestPic">
+                                        <img id="newGuestPicImg"  style="height: 100%; max-width: auto;">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="newGuestPic">عکس مهمان:</label>
+                                        <input type="file" id="newGuestPic" class="form-control" onchange="readPic(this)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="newGuestText">توضیح </label>
+                                    <textarea  id="newGuestText" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="row" style="justify-content: center; display: flex;">
+                                <input type="hidden" id="liveId">
+                                <button class="btn btn-primary" onclick="storeGuest()">ثبت</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 @stop
 
@@ -269,7 +283,6 @@
 
         let guestIndex = 1;
         let guestInputSample = $('#guestBody').html();
-        $('#guestBody').html('');
 
         $('#liveDate').persianDatepicker({
             minDate: new Date().getTime(),
@@ -401,14 +414,37 @@
             })
         }
 
+        function deleteLive(_id){
+
+        }
+    </script>
+
+    <script>
+        let newPic = null;
+
+        function readPic(input, _index){
+            if (input.files && input.files[0]) {
+                newPic = input.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#newGuestPicImg').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
         function openGuestModal(_id){
             let vid = null;
             videos.forEach((video) => {
                 if(video.id == _id)
                     vid = video;
             });
+
             if(vid != null){
                 $('#guestBody').html('');
+                vid.guest.forEach(item =>{
+                    createGust(item);
+                });
                 guestIndex = 1;
                 $('#guestVideoId').val(vid.id);
                 $('#guestHeader').text(vid.title);
@@ -416,50 +452,106 @@
             }
         }
 
-        function readPic(input, _index){
-            if (input.files && input.files[0]) {
-                // data.append('pic', input.files[0]);
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#guestPicImg_' + _index).attr('src', e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
         function newGuest(){
-            let guest = {
-                'index': guestIndex,
-                'name' : '',
-                'id' : 0,
-                'action': '',
-                'pic': '',
-                'text': '',
-            };
-            createGuestRow(guest);
+            newPic = null;
+            $('#newGuestId').val(0);
+            $('#newGuestName').val('');
+            $('#newGuestPic').val('');
+            $('#newGuestText').val('');
+            $('#newGuestPicImg').attr('src', '');
+            $('#newGuestModal').modal({backdrop: 'static', keyboard: false});
         }
 
-        function createGuestRow(_guest){
-            let text = guestInputSample;
-            let fk = Object.keys(_guest);
-            for (let x of fk) {
-                let t = '##' + x + '##';
-                let re = new RegExp(t, "g");
-                text = text.replace(re, _guest[x]);
-            }
-            $("#guestBody").append(text);
-            guestIndex++;
-        }
 
         function storeGuest(_index){
-            let id = $('#guestId_' + _index).val();
-            let name = $('#guestName_' + _index).val();
-            let action = $('#guestAction_' + _index).val();
-            let text = $('#guestText_' + _index).val();
+            let id = $('#newGuestId').val();
+            let videoId = $('#guestVideoId').val();
+            let name = $('#newGuestName').val();
+            let action = $('#newGuestAction').val();
+            let text = $('#newGuestText').val();
+
+            if(newPic == null){
+                alert('عکس مهمان را قرار دهید');
+                return;
+            }
+
+            if(name.trim().length == 0){
+                alert('نام مهمان را وارد کنید');
+                return;
+            }
+
+            if(action.trim().length == 0){
+                alert('نقش مهمان را مشخص کنید');
+                return;
+            }
+
+            openLoading();
+            formData = new FormData();
+            formData.append('_token', '{{csrf_token()}}');
+            formData.append('id', id);
+            formData.append('videoId', videoId);
+            formData.append('name', name);
+            formData.append('action', action);
+            formData.append('text', text);
+            formData.append('pic', newPic);
+
+            $.ajax({
+                type: 'post',
+                url: '{{route('vod.live.guest.store')}}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(resposne){
+                    closeLoading();
+                    try{
+                        resposne = JSON.parse(resposne);
+                        if(resposne['status'] == 'ok'){
+                            $('#newGuestModal').modal('hide');
+                            createGust(resposne['result']);
+                            let vid = null;
+                            videos.forEach((video) => {
+                                if(video.id == videoId)
+                                    vid = video;
+                            });
+                            vid.guest.push(resposne['result']);
+                        }
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                },
+                error: function(err){
+                    console.log(err);
+                    closeLoading();
+                }
+            })
         }
 
-        function deleteLive(_id){
-
+        function createGust(_guest){
+            text = ' <div id="guestRow_' + _guest.id + '" class="row" style="font-size: 20px">\n' +
+                '                            <div class="col-md-6" >\n' +
+                '                                <div class="guestPic">\n' +
+                '                                    <img src="' + _guest.pic +'" style="height: 100%; max-width: auto">\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '                            <div class="col-md-6">\n' +
+                '                                <div class="row">\n' +
+                '                                    <span style="color: darkgray">نام مهمان:</span>\n' +
+                '                                    <span>' + _guest.name + '</span>\n' +
+                '                                </div>\n' +
+                '                                <div class="row">\n' +
+                '                                    <span style="color: darkgray">نقش مهمان:</span>\n' +
+                '                                    <span>' + _guest.action + '</span>\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '                            <div class="col-md-12">\n' +
+                '                                <span style="color: darkgray">توضیحات:</span>\n' +
+                '                                <span>' + _guest.text + '</span>\n' +
+                '                            </div>\n' +
+                '                        </div>' +
+                '                        <hr>';
+            $('#guestBody').append(text);
         }
     </script>
 @endsection
+
