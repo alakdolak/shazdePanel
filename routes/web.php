@@ -503,6 +503,7 @@ Route::group(array('middleware' => ['auth']), function() {
     Route::post('/vod/video/live/store', 'VideoController@liveVideoStore')->name('vod.live.store');
     Route::post('/vod/video/live/isLive', 'VideoController@liveVideoIsLive')->name('vod.live.isLive');
     Route::post('/vod/video/live/guest/store', 'VideoController@liveVideoStoreGuest')->name('vod.live.guest.store');
+    Route::post('/vod/video/live/guest/delete', 'VideoController@liveVideoDeleteGuest')->name('vod.live.guest.delete');
 
     //    پخش زنده
     Route::get('manageStreams', ['as' => 'manageStreams', 'uses' => 'StreamController@manage']);

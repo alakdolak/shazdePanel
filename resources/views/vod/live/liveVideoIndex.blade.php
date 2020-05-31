@@ -457,6 +457,7 @@
             $('#newGuestId').val(0);
             $('#newGuestName').val('');
             $('#newGuestPic').val('');
+            $('#newGuestAction').val('');
             $('#newGuestText').val('');
             $('#newGuestPicImg').attr('src', '');
             $('#newGuestModal').modal({backdrop: 'static', keyboard: false});
@@ -470,7 +471,7 @@
             let action = $('#newGuestAction').val();
             let text = $('#newGuestText').val();
 
-            if(newPic == null){
+            if(newPic == null && id == 0){
                 alert('عکس مهمان را قرار دهید');
                 return;
             }
@@ -506,6 +507,7 @@
                     try{
                         resposne = JSON.parse(resposne);
                         if(resposne['status'] == 'ok'){
+                            $('#guestRow_' + resposne['result']['id']).remove();
                             $('#newGuestModal').modal('hide');
                             createGust(resposne['result']);
                             let vid = null;
@@ -528,29 +530,91 @@
         }
 
         function createGust(_guest){
-            text = ' <div id="guestRow_' + _guest.id + '" class="row" style="font-size: 20px">\n' +
-                '                            <div class="col-md-6" >\n' +
-                '                                <div class="guestPic">\n' +
-                '                                    <img src="' + _guest.pic +'" style="height: 100%; max-width: auto">\n' +
-                '                                </div>\n' +
-                '                            </div>\n' +
-                '                            <div class="col-md-6">\n' +
-                '                                <div class="row">\n' +
-                '                                    <span style="color: darkgray">نام مهمان:</span>\n' +
-                '                                    <span>' + _guest.name + '</span>\n' +
-                '                                </div>\n' +
-                '                                <div class="row">\n' +
-                '                                    <span style="color: darkgray">نقش مهمان:</span>\n' +
-                '                                    <span>' + _guest.action + '</span>\n' +
-                '                                </div>\n' +
-                '                            </div>\n' +
-                '                            <div class="col-md-12">\n' +
-                '                                <span style="color: darkgray">توضیحات:</span>\n' +
-                '                                <span>' + _guest.text + '</span>\n' +
-                '                            </div>\n' +
-                '                        </div>' +
-                '                        <hr>';
-            $('#guestBody').append(text);
+            if(_guest != 0) {
+                text = ' <div id="guestRow_' + _guest.id + '" class="row" style="font-size: 20px">\n' +
+                    '                            <div class="col-md-6" >\n' +
+                    '                                <div class="guestPic">\n' +
+                    '                                    <img src="' + _guest.pic + '" style="height: 100%; max-width: auto">\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="col-md-6">\n' +
+                    '                                <div class="row">\n' +
+                    '                                    <span style="color: darkgray">نام مهمان:</span>\n' +
+                    '                                    <span>' + _guest.name + '</span>\n' +
+                    '                                </div>\n' +
+                    '                                <div class="row">\n' +
+                    '                                    <span style="color: darkgray">نقش مهمان:</span>\n' +
+                    '                                    <span>' + _guest.action + '</span>\n' +
+                    '                                </div>\n' +
+                    '                                <div class="row"><button class="btn btn-primary" onclick="editGuest(' + _guest.id + ')">ویرایش</button><button class="btn btn-danger" onclick="deleteGuest(' + _guest.id + ')">حذف</button></div>' +
+                    '                            </div>\n' +
+                    '                            <div class="col-md-12">\n' +
+                    '                                <span style="color: darkgray">توضیحات:</span>\n' +
+                    '                                <span>' + _guest.text + '</span>\n' +
+                    '                            </div>\n' +
+                    '                        </div>' +
+                    '                        <hr>';
+                $('#guestBody').append(text);
+            }
+        }
+
+        function editGuest(_id){
+            let videoId = $('#guestVideoId').val();
+            let vid = null;
+            videos.forEach((video) => {
+                if(video.id == videoId)
+                    vid = video;
+            });
+
+            let guest = null;
+            vid.guest.forEach(item => {
+                if(item.id == _id)
+                    guest = item;
+            });
+
+            if(guest != null){
+                newPic = null;
+                $('#newGuestId').val(guest.id);
+                $('#newGuestName').val(guest.name);
+                $('#newGuestAction').val(guest.action);
+                $('#newGuestPic').val('');
+                $('#newGuestText').val(guest.text);
+                $('#newGuestPicImg').attr('src', guest.pic);
+                $('#newGuestModal').modal({backdrop: 'static', keyboard: false});
+            }
+        }
+
+        function deleteGuest(_id){
+            openLoading();
+            $.ajax({
+                type:'post',
+                url: '{{route("vod.live.guest.delete")}}',
+                data:{
+                    _token: '{{csrf_token()}}',
+                    id: _id
+                },
+                success: function(response){
+                    closeLoading();
+                    try{
+                        response = JSON.parse(response);
+                        if(response.status == 'ok')
+                            location.reload();
+                        else{
+                            console.log(response);
+                            alert('response error');
+                        }
+                    }
+                    catch (e) {
+                        console.log(e)
+                        alert('parsing error');
+                    }
+                },
+                error: function(err){
+                    console.log(err);
+                    closeLoading();
+                    alert('server side error');
+                }
+            })
         }
     </script>
 @endsection

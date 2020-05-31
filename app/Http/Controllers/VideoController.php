@@ -417,6 +417,21 @@ class VideoController extends Controller
         return;
     }
 
+    public function liveVideoDeleteGuest(Request $request)
+    {
+        if(isset($request->id)){
+            $guest = VideoLiveGuest::find($request->id);
+            $location = __DIR__ . '/../../../../assets/_images/video/live/'.$guest->videoId.'/'.$guest->pic;
+            unlink($location);
+            $guest->delete();
+            echo json_encode(['status' => 'ok']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
     public function liveVideoIsLive(Request $request)
     {
         if(isset($request->id)){
