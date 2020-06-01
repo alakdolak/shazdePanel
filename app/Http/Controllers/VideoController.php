@@ -7,6 +7,7 @@ use App\models\VideoCategory;
 use App\models\VideoComment;
 use App\models\VideoFeedback;
 use App\models\VideoLive;
+use App\models\VideoLiveChats;
 use App\models\VideoLiveGuest;
 use App\models\VideoPlaceRelation;
 use App\models\VideoTagRelation;
@@ -436,8 +437,10 @@ class VideoController extends Controller
     {
         if(isset($request->id)){
             $video = VideoLive::find($request->id);
-            if($video->isLive == 1)
+            if($video->isLive == 1) {
                 $video->isLive = 0;
+                VideoLiveChats::where('videoId', $request->id)->delete();
+            }
             else
                 $video->isLive = 1;
             $video->save();
