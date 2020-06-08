@@ -59,12 +59,20 @@
             display: none;
             margin-bottom: 1rem;
         }
+        .topPics{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
     </style>
 
     <link rel="stylesheet" href="{{URL::asset('css/cropper/cropper.css')}}">
-
     <script src="{{URL::asset('js/cropper/cropper.js')}}"></script>
 
+    <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css')}}">
+    <link rel="stylesheet" href="{{asset('packages/dropzone/dropzone.css')}}">
+    <link rel="stylesheet" href="{{asset('packages/imageUploader/imageUploader.css')}}">
 @stop
 
 @section('content')
@@ -96,82 +104,75 @@
                                 <input type="hidden" id="placeId" value="{{$place->id}}">
                                 <input type="hidden" id="kindPlaceId" value="{{$kindPlaceId}}">
 
-                                <div id="picSection">
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-2 f_r" >
-                                            <div class="form-group">
-                                                <label for="picInput0" class="btn btn-primary">
-                                                    عکس اصلی
-                                                    <input type="file" name="picInput0" id="picInput0" style="display: none;" onchange="showPic(this, 0, '{{$place->picNumber != null ? "edit" : "new"}}')">
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-10" style="display: flex; justify-content: space-evenly">
-                                            <div style="width: 250px; height: 167px;">
-                                                @if($place->picNumber != null)
-                                                    <img id="mainPicShowReq0" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/f-'. $place->picNumber)}}" style="width: 100%; height: 100%;">
-                                                @else
-                                                    <img id="mainPicShowReq0" src="" style="width: 100%; height: 100%; display: none;">
-                                                @endif
-                                            </div>
-                                            <div style="width: 160px; height: 160px;">
-                                                @if($place->picNumber != null)
-                                                    <img id="mainPicShowSqa0" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/l-'. $place->picNumber)}}" style="width: 100%; height: 100%;">
-                                                @else
-                                                    <img id="mainPicShowSqa0" src="" style="width: 100%; height: 100%; display: none;">
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @for($i = 0; $i < count($place->pics); $i++)
+                                <div>
+                                    <div id="picSection">
                                         <hr>
-                                        <div id="divPic{{$place->pics[$i]->id}}" class="row">
-                                            <div class="col-md-4 f_r" >
-                                                <div class="form-group" style="display: flex; flex-direction: column">
-                                                    <div>
-                                                        <label for="picInput{{$place->pics[$i]->number}}" class="btn btn-primary">
-                                                            تغییر عکس
-                                                            <input type="file" name="picInput{{$place->pics[$i]->number}}" id="picInput{{$place->pics[$i]->number}}" style="display: none;" onchange="showPic(this, {{$place->pics[$i]->number}}, 'edit')">
-                                                        </label>
-                                                        <button class="btn btn-success" onclick="setMainPic({{$place->pics[$i]->id}})">
-                                                            انتخاب به عنوان عکس اصلی
-                                                        </button>
-                                                        <button class="btn btn-danger" onclick="deletePicAns({{$place->pics[$i]->id}})">
-                                                            حذف
-                                                        </button>
-                                                    </div>
-                                                    <div style="margin-top: 20px;">
-                                                        <label>
-                                                            alt عکس
-                                                        </label>
-                                                        <input type="text" class="form-control" id="alt{{$place->pics[$i]->id}}" value="{{$place->pics[$i]->alt}}">
-                                                        <button class="btn btn-warning" onclick="changeAlt({{$place->pics[$i]->id}})">
-                                                            تغییر alt
-                                                        </button>
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-2 f_r" >
+                                                <div class="form-group">
+                                                    <label for="picInput0" class="btn btn-primary">
+                                                        عکس اصلی
+{{--                                                        <input type="file" name="picInput0" id="picInput0" style="display: none;" onchange="showPic(this, 0, '{{$place->picNumber != null ? "edit" : "new"}}')">--}}
+                                                    </label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-8" style="display: flex; justify-content: space-evenly">
-                                                <div style="width: 250px; height: 167px;">
+                                            <div class="col-md-10" style="display: flex; justify-content: space-evenly">
+                                                <div class="topPics" style="width: 250px; height: 167px;">
                                                     @if($place->picNumber != null)
-                                                        <img id="mainPicShowReq{{$place->pics[$i]->number}}" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/f-'. $place->pics[$i]->picNumber)}}" style="width: 100%; height: 100%;">
+                                                        <img id="mainPicShowReq0" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/f-'. $place->picNumber)}}" style="height: 100%; width: auto; max-width: 100000px">
                                                     @else
-                                                        <img id="mainPicShowReq{{$place->pics[$i]->number}}" src="" style="width: 100%; height: 100%; display: none;">
+                                                        <img id="mainPicShowReq0" src="" style="height: 100%; width: auto; max-width: 100000px display: none;">
                                                     @endif
                                                 </div>
-                                                <div style="width: 160px; height: 160px;">
+                                                <div class="topPics" style="width: 160px; height: 160px;">
                                                     @if($place->picNumber != null)
-                                                        <img id="mainPicShowSqa{{$place->pics[$i]->id}}" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/l-'. $place->pics[$i]->picNumber)}}" style="width: 100%; height: 100%;">
+                                                        <img id="mainPicShowSqa0" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/l-'. $place->picNumber)}}" style="height: 100%; width: auto; max-width: 100000px">
                                                     @else
-                                                        <img id="mainPicShowSqa{{$place->pics[$i]->id}}" src="" style="width: 100%; height: 100%; display: none;">
+                                                        <img id="mainPicShowSqa0" src="" style="height: 100%; width: auto; max-width: 100000px display: none;">
                                                     @endif
-
                                                 </div>
                                             </div>
                                         </div>
-                                    @endfor
+
+                                        @for($i = 0; $i < count($place->pics); $i++)
+                                            <hr>
+                                            <div id="divPic{{$place->pics[$i]->id}}" class="row">
+                                                <div class="col-md-4 f_r" >
+                                                    <div class="form-group" style="display: flex; flex-direction: column">
+                                                        <div>
+                                                            <label for="picInput{{$place->pics[$i]->id}}" class="btn btn-primary">
+                                                                تغییر عکس
+                                                                <input type="file" name="picInput{{$place->pics[$i]->id}}" id="picInput{{$place->pics[$i]->id}}" style="display: none;" onchange="uploadNewPic(this, {{$place->pics[$i]->id}})">
+                                                            </label>
+                                                            <button class="btn btn-success" onclick="setMainPic({{$place->pics[$i]->id}})">
+                                                                انتخاب به عنوان عکس اصلی
+                                                            </button>
+                                                            <button class="btn btn-danger" onclick="deletePicAns({{$place->pics[$i]->id}})">
+                                                                حذف
+                                                            </button>
+                                                        </div>
+                                                        <div style="margin-top: 20px;">
+                                                            <label>
+                                                                alt عکس
+                                                            </label>
+                                                            <input type="text" class="form-control" id="alt{{$place->pics[$i]->id}}" value="{{$place->pics[$i]->alt}}">
+                                                            <button class="btn btn-warning" onclick="changeAlt({{$place->pics[$i]->id}})">
+                                                                تغییر alt
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8" style="display: flex; justify-content: space-evenly">
+                                                    <div class="topPics" style="width: 250px; height: 167px;">
+                                                        <img id="mainPicShowReq{{$place->pics[$i]->id}}" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/f-'. $place->pics[$i]->picNumber)}}" style="height: 100%; width: auto; max-width: 100000px">
+                                                    </div>
+                                                    <div class="topPics" style="width: 160px; height: 160px;">
+                                                        <img id="mainPicShowSqa{{$place->pics[$i]->id}}" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/l-'. $place->pics[$i]->picNumber)}}" style="height: 100%; width: auto; max-width: 100000px">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
 
 
                                     <hr>
@@ -179,9 +180,8 @@
                                         <div class="col-md-12 f_r" >
                                             <div class="form-group" style="display: flex; flex-direction: column">
                                                 <div>
-                                                    <label for="picInput1000" class="btn btn-success">
+                                                    <label for="picInput1000" class="btn btn-success" onclick="$('#dropzoneModal').modal('show')">
                                                         عکس جدید
-                                                        <input type="file" name="picInput1000" id="picInput1000" style="display: none;" onchange="showPic(this, 1000, 'new')">
                                                     </label>
                                                 </div>
                                             </div>
@@ -279,6 +279,27 @@
     </div>
     <input type="hidden" id="deletePic">
 
+
+    <div class="modal fade" id="dropzoneModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body" style="text-align: right">
+                    <div id="dropzone" class="dropzone"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop
+
+@section('script')
+
+    <script src="{{URL::asset('packages/dropzone/dropzone.js')}}"></script>
+    <script src="{{URL::asset('packages/dropzone/dropzone-amd-module.js')}}"></script>
+    <script src="{{URL::asset('packages/imageUploader/imageUploader.js')}}"></script>
+
     <script>
         var kindPlaceId = {{$kindPlaceId}};
         var placeId = {{$place->id}};
@@ -293,6 +314,99 @@
         var image = document.getElementById('image');
         var $progress = $('.progress');
         var $progressBar = $('.progress-bar');
+
+        let myDropzone = new Dropzone("div#dropzone", {
+            url: '{{route('place.storeImg')}}',
+            paramName: "pic",
+            timeout: 60000,
+            headers: {
+                'X-CSRF-TOKEN': '{{csrf_token()}}'
+            },
+            parallelUploads: 1,
+            acceptedFiles: 'image/*',
+            sending: function(file, xhr, _formData){
+                _formData.append('kindPlaceId', kindPlaceId);
+                _formData.append('placeId', placeId);
+                _formData.append('picNumber', 0);
+                _formData.append('kind', 'new');
+            }
+
+        }).on('success', function(file, response){
+            response = JSON.parse(response);
+            createNewRow(response.result);
+        });
+
+        function createNewRow(_result){
+            let text = '<hr><div id="divPi' + _result.id + '" class="row">\n' +
+                '                                                <div class="col-md-4 f_r" >\n' +
+                '                                                    <div class="form-group" style="display: flex; flex-direction: column">\n' +
+                '                                                        <div>\n' +
+                '                                                            <label for="picInput' + _result.id + '" class="btn btn-primary">تغییر عکس\n' +
+                '                                                                <input type="file" name="picInput' + _result.id + '" id="picInput' + _result.id + '" style="display: none;" onchange="uploadNewPic(this, ' + _result.id + ')">\n' +
+                '                                                            </label>\n' +
+                '                                                            <button class="btn btn-success" onclick="setMainPic(' + _result.id + ')"> انتخاب به عنوان عکس اصلی </button>\n' +
+                '                                                            <button class="btn btn-danger" onclick="deletePicAns(' + _result.id + ')">حذف</button>\n' +
+                '                                                        </div>\n' +
+                '                                                        <div style="margin-top: 20px;">\n' +
+                '                                                            <label>\n' +
+                '                                                                alt عکس\n' +
+                '                                                            </label>\n' +
+                '                                                            <input type="text" class="form-control" id="alt' + _result.id + '" value="' + _result.alt + '">\n' +
+                '                                                            <button class="btn btn-warning" onclick="changeAlt(' + _result.id + ')">\n' +
+                '                                                                تغییر alt\n' +
+                '                                                            </button>\n' +
+                '                                                        </div>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                                <div class="col-md-8" style="display: flex; justify-content: space-evenly">\n' +
+                '                                                    <div class="topPics" style="width: 250px; height: 167px;">\n' +
+                '                                                            <img id="mainPicShowReq' + _result.id + '" src="' + _result.pic + '" style="height: 100%; width: auto; max-width: 100000px">\n' +
+                '                                                    </div>\n' +
+                '                                                    <div class="topPics" style="width: 160px; height: 160px;">\n' +
+                '                                                            <img id="mainPicShowSqa' + _result.id + '" src="' + _result.pic + '" style="height: 100%; width: auto; max-width: 100000px">\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                            </div>';
+
+            $('#picSection').append(text);
+        }
+
+        function uploadNewPic(_input, _id){
+            if (_input.files && _input.files[0]) {
+                openLoading();
+
+                formData = new FormData();
+                formData.append('_token', '{{csrf_token()}}');
+                formData.append('kind', 'edit');
+                formData.append('id', _id);
+                formData.append('placeId', placeId);
+                formData.append('kindPlaceId', kindPlaceId);
+                formData.append('pic', _input.files[0]);
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{route('place.storeImg')}}',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response){
+                        console.log(response);
+                        response = JSON.parse(response);
+                        if(response['status'] == 'ok')
+                            location.reload();
+                        else{
+                            alert('parse error');
+                            closeLoading();
+                        }
+                    },
+                    error: function(err){
+                        alert('مشکلی در بارگزاری پیش امده لطفا دوباره تلاش کنید');
+                        closeLoading();
+                    }
+                })
+            }
+
+        }
 
         function showPic(input, id, kind) {
 
@@ -634,5 +748,4 @@
         }
 
     </script>
-
-@stop
+@endsection

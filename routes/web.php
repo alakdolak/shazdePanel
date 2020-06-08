@@ -165,6 +165,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), fun
     Route::post('storeBoomgardy', 'PlaceController@storeBoomgardy')->name('storeBoomgardy');
 
     Route::get('uploadImgPage/{kindPlaceId}/{id}', 'PlaceController@uploadImgPage')->name('uploadImgPage');
+    Route::post('place/storeImg', 'PlaceController@storeImg')->name('place.storeImg');
     Route::post('getCrop', 'PlaceController@getCrop') ->name('getCrop');
     Route::post('deletePlacePic', 'PlaceController@deletePlacePic') ->name('deletePlacePic');
     Route::post('changeAltPic', 'PlaceController@changeAltPic') ->name('changeAltPic');

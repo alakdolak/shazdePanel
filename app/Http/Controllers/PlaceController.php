@@ -42,15 +42,135 @@ class PlaceController extends Controller {
         $place = DB::table($kindPlace->tableName)->select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
         $kindPlaceName = $kindPlace->fileName;
 
-        $city = Cities::find($place->cityId);
-        $state = State::find($city->stateId);
-
         $place->pics = PlacePic::where('placeId', $place->id)->where('kindPlaceId', $kindPlaceId)->get();
 
         foreach ($place->pics as $item)
             $item->number = explode('.', $item->picNumber)[0];
 
-        return view('content.newContent.uploadImg', compact(['kindPlaceId', 'place', 'kindPlaceName', 'state']));
+        return view('content.newContent.uploadImg', compact(['kindPlaceId', 'place', 'kindPlaceName']));
+    }
+
+    public function storeImg(Request $request)
+    {
+        if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->kind)){
+            $kindPlaceId = $request->kindPlaceId;
+            $placeId = $request->placeId;
+            $kindPlace = Place::find($kindPlaceId);
+            switch ($kindPlaceId){
+                case 1:
+                    $place = Amaken::find($placeId);
+                    break;
+                case 3:
+                    $place = Restaurant::find($placeId);
+                    break;
+                case 4:
+                    $place = Hotel::find($placeId);
+                    break;
+                case 6:
+                    $place = Majara::find($placeId);
+                    break;
+                case 10:
+                    $place = SogatSanaie::find($placeId);
+                case 11:
+                    $place = MahaliFood::find($placeId);
+                    break;
+                case 12:
+                    $place = Boomgardy::find($placeId);
+                    break;
+                default:
+                    echo 'nok';
+                    return;
+            }
+            if($place != null){
+
+                $location = __DIR__ . '/../../../../assets/_images';
+
+                if(!is_dir($location . '/'. $kindPlace->fileName))
+                    mkdir($location . '/'. $kindPlace->fileName);
+                $location .= '/' . $kindPlace->fileName;
+
+                if ($place->file == null || $place->file == 'none' || $place->file == '' ||
+                    !is_dir($location . '/' . $place->file)) {
+                    $newFileName = rand(1000000, 9999999);
+                    while (file_exists($location . '/' . $newFileName))
+                        $newFileName = (int)($newFileName - 1);
+
+                    $location .= '/' . $newFileName;
+
+                    mkdir($location);
+                    if(is_dir($location)){
+                        $place->file = $newFileName;
+                        $place->save();
+                    }
+                    else {
+                        echo json_encode(['nok2']);
+                        return;
+                    }
+                }
+                else
+                    $location .= '/' . $place->file;
+
+                $picNumber = null;
+
+                $image = $request->file('pic');
+                $size = [
+                    [
+                        'width' => 350,
+                        'height' => 250,
+                        'name' => 'f-',
+                        'destination' => $location
+                    ],
+                    [
+                        'width' => 150,
+                        'height' => 150,
+                        'name' => 't-',
+                        'destination' => $location
+                    ],
+                    [
+                        'width' => 200,
+                        'height' => 200,
+                        'name' => 'l-',
+                        'destination' => $location
+                    ],
+                    [
+                        'width' => 600,
+                        'height' => 400,
+                        'name' => 's-',
+                        'destination' => $location
+                    ]
+                ];
+
+                if($request->kind == 'new') {
+                    $fileName = resizeImage($image, $size);
+                    move_uploaded_file($_FILES['pic']['tmp_name'], $location.'/'.$fileName);
+
+                    $newPic = new PlacePic();
+                    $newPic->picNumber = $fileName;
+                    $newPic->placeId = $place->id;
+                    $newPic->kindPlaceId = $kindPlaceId;
+                    $newPic->save();
+
+                    $newPic->pic = \URL::asset('_images/'.$kindPlace->fileName.'/'.$place->file.'/'.$newPic->picNumber);
+                    echo json_encode(['status' => 'ok', 'result' => $newPic]);
+                }
+                else{
+                    $pic = PlacePic::find($request->id);
+                    $fileName = resizeImage($image, $size);
+                    move_uploaded_file($_FILES['pic']['tmp_name'], $location.'/'.$fileName);
+                    $this->deletePlacePicFiles($location, $pic->picNumber);
+                    $pic->picNumber = $fileName;
+                    $pic->save();
+
+                    echo json_encode(['status' => 'ok']);
+                }
+            }
+            else
+                echo json_encode(['nok1']);
+        }
+        else
+            echo json_encode(['nok']);
+
+        return;
     }
 
     public function getCrop(Request $request)
@@ -72,21 +192,6 @@ class PlaceController extends Controller {
                 $kindPlace = Place::find($kindPlaceId);
                 $kindPlaceName = $kindPlace->fileName;
                 $place = DB::table($kindPlace->tableName)->find($id);
-
-                if($kindPlaceId == 1)
-                    $place = Amaken::find($id);
-                else if($kindPlaceId == 3)
-                    $place = Restaurant::find($id);
-                else if($kindPlaceId == 4)
-                    $place = Hotel::find($id);
-                else if($kindPlaceId == 6)
-                    $place = Majara::find($id);
-                else if($kindPlaceId == 10)
-                    $place = SogatSanaie::find($id);
-                else if($kindPlaceId == 11)
-                    $place = MahaliFood::find($id);
-                else if($kindPlaceId == 12)
-                    $place = Boomgardy::find($id);
 
                 if(!file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName))
                     mkdir(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName);
@@ -208,30 +313,28 @@ class PlaceController extends Controller {
     {
         $pic = PlacePic::find($request->id);
         if($pic != null){
+            $kindPlace = Place::find($pic->kindPlaceId);
+            $folderName = $kindPlace->fileName;
             switch ($pic->kindPlaceId){
                 case 1:
                     $place = Amaken::find($pic->placeId);
-                    $folderName = 'amaken';
                     break;
                 case 3:
                     $place = Restaurant::find($pic->placeId);
-                    $folderName = 'restaurant';
                     break;
                 case 4:
                     $place = Hotel::find($pic->placeId);
-                    $folderName = 'hotels';
                     break;
                 case 6:
                     $place = Majara::find($pic->placeId);
-                    $folderName = 'majara';
                     break;
                 case 10:
                     $place = SogatSanaie::find($pic->placeId);
-                    $folderName = 'sogatsanaie';
-                    break;
                 case 11:
                     $place = MahaliFood::find($pic->placeId);
-                    $folderName = 'mahalifood';
+                    break;
+                case 12:
+                    $place = Boomgardy::find($pic->placeId);
                     break;
                 default:
                     echo 'nok';
@@ -292,17 +395,26 @@ class PlaceController extends Controller {
                 case 11:
                     $place = MahaliFood::find($pic->placeId);
                     break;
+                case 12:
+                    $place = Boomgardy::find($pic->placeId);
+                    break;
                 default:
                     echo 'nok';
                     return;
             }
             if($place != null){
                 $mainPicNum = $pic->picNumber;
-                $pic->picNumber = $place->picNumber;
-                $pic->save();
+                $sidePic = $place->picNumber;
 
                 $place->picNumber = $mainPicNum;
                 $place->save();
+
+                if($sidePic != null) {
+                    $pic->picNumber =$sidePic;
+                    $pic->save();
+                }
+                else
+                    $pic->delete();
 
                 echo 'ok';
             }

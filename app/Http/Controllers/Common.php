@@ -620,8 +620,7 @@ function deleteFolder($dir) {
 function resizeImage($pic, $size){
     try {
         $image = $pic;
-        $randNum = random_int(100,999);
-        $fileName = time() . $randNum. '.' . $image->getClientOriginalExtension();
+        $fileName = time() . '.' . $image->getClientOriginalExtension();
         foreach ($size as $item){
             $input['imagename'] = $item['name'] .  $fileName ;
             $destinationPath = $item['destination'];
@@ -629,11 +628,26 @@ function resizeImage($pic, $size){
             $width = $img->width();
             $height = $img->height();
 
-            if($item['width'] == null || $width > $item['width'])
-                $width = $item['width'];
+            if($item['height'] != null && $item['width'] != null){
+                $ration = $width/$height;
+                $nWidth = $ration * $item['height'];
+                $nHeight = $item['width'] / $ration;
+                if($nWidth < $item['width']) {
+                    $height = $nHeight;
+                    $width = $item['width'];
+                }
+                else if($nHeight < $item['height']) {
+                    $width = $nWidth;
+                    $height = $item['height'];
+                }
+            }
+            else {
+                if ($item['width'] == null || $width > $item['width'])
+                    $width = $item['width'];
 
-            if($item['height'] == null || $height > $item['height'])
-                $height = $item['height'];
+                if ($item['height'] == null || $height > $item['height'])
+                    $height = $item['height'];
+            }
 
             $img->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
