@@ -465,6 +465,14 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), fun
 
     Route::get('/userAddPlace/list', 'CommentController@userAddPlaceList')->name('userAddPlace.list');
 
+    Route::get('userAddPlace/edit/{id}', 'CommentController@userAddPlaceEdit')->name('userAddPlace.edit');
+
+    Route::get('userAddPlace/pics/{id}', 'CommentController@userAddPlacePics')->name('userAddPlace.pics');
+
+    Route::post('userAddPlace/delete/pics', 'CommentController@userAddPlaceDeletePics')->name('userAddPlace.pics.delete');
+
+    Route::post('userAddPlace/delete', 'CommentController@userAddPlaceDelete')->name('userAddPlace.delete');
+
     Route::get('/comments/list', 'CommentController@listComments')->name('comments.list');
 
     Route::post('/comments/delete', 'CommentController@deleteComment')->name('comments.delete');

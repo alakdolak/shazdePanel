@@ -106,6 +106,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <h3 style="text-align: center;">
+                                            غذای محلی:
                                             ویرایش {{$place->name}}
                                         </h3>
                                     </div>
@@ -114,10 +115,13 @@
                                 <form id="form" action="{{route('storeMahaliFood')}}" method="post"
                                       enctype="multipart/form-data" autocomplete="off">
                                     @csrf
+                                    <input type="hidden" name="userId" value="{{isset($place->userId) ? $place->userId : auth()->user()->id}}">
+                                    <input type="hidden" name="addPlaceByUser" value="{{isset($place->addPlaceByUser) ? 1 : 0}}">
                                     <input type="hidden" name="id" value="{{$place->id}}">
+                                    <input type="hidden" name="inputType" value="edit">
+
                                     <input type="hidden" id="lat" value="1">
                                     <input type="hidden" id="lng" value="1">
-                                    <input type="hidden" name="inputType" value="edit">
 
                                     <div class="row">
                                         <div class="col-md-4 f_r">
@@ -144,9 +148,16 @@
                                             <div class="form-group" style="position: relative">
                                                 <label for="name"> شهر</label>
                                                 <input type="text" class="form-control" name="city" id="city"
-                                                       value="{{$place->city}}" onkeyup="searchCity(this.value)">
+                                                       value="{{isset($place->city) ? $place->city : ''}}" onkeyup="searchCity(this.value)">
                                                 <input type="hidden" name="cityId" id="cityId"
-                                                       value="{{$place->cityId}}">
+                                                       value="{{isset($place->cityId) ? $place->cityId : 0}}">
+                                                @if(isset($place->newCity))
+                                                    <div class="newCityWarning" style="color: red">
+                                                        کاربر شهر جدید به نام
+                                                        - <span style="color: green">{{$place->newCity}}</span> -
+                                                        وارد کرده است.
+                                                    </div>
+                                                @endif
 
                                                 <div id="citySearch" class="citySearch">
                                                     <ul id="resultCity"></ul>
@@ -166,8 +177,7 @@
                                                 <option value="1" {{$place->kind == 1? 'selected': ''}}>چلوخورش</option>
                                                 <option value="2" {{$place->kind == 2? 'selected': ''}}>خوراک</option>
                                                 <option value="8" {{$place->kind == 8? 'selected': ''}}>سوپ و آش</option>
-                                                <option value="3" {{$place->kind == 3? 'selected': ''}}>سالاد و پیش غذا
-                                                </option>
+                                                <option value="3" {{$place->kind == 3? 'selected': ''}}>سالاد و پیش غذا</option>
                                                 <option value="4" {{$place->kind == 4? 'selected': ''}}>ساندویچ</option>
                                                 <option value="5" {{$place->kind == 5? 'selected': ''}}>کباب</option>
                                                 <option value="6" {{$place->kind == 6? 'selected': ''}}>دسر</option>

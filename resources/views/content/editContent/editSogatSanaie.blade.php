@@ -105,7 +105,9 @@
                                 <hr>
                                 <form id="form" action="{{route('storeSogatSanaie')}}" method="post" enctype="multipart/form-data" autocomplete="off">
                                     @csrf
-                                    <input type="hidden" id="id" name="id" value="{{$place->id}}">
+                                    <input type="hidden" name="addPlaceByUser" value="{{isset($place->addPlaceByUser) ? 1 : 0}}">
+                                    <input type="hidden" name="id" value="{{$place->id}}">
+                                    <input type="hidden" name="userId" value="{{isset($place->userId) ? $place->userId : auth()->user()->id}}">
                                     <input type="hidden" name="inputType" value="edit">
 
                                     <input type="hidden" id="lat" value="1">
@@ -133,8 +135,15 @@
                                         <div class="col-md-3 f_r">
                                             <div class="form-group" style="position: relative">
                                                 <label for="name"> شهر</label>
-                                                <input type="text" class="form-control" name="city" id="city" value="{{$city ? $city->name : ''}}" onkeyup="searchCity(this.value)">
-                                                <input type="hidden" name="cityId" id="cityId" value="{{$city ? $city->id : 0}}">
+                                                <input type="text" class="form-control" name="city" id="city" value="{{isset($place->city) ? $place->city : ''}}" onkeyup="searchCity(this.value)">
+                                                <input type="hidden" name="cityId" id="cityId" value="{{isset($place->cityId) ? $place->cityId : 0}}">
+                                                @if(isset($place->newCity))
+                                                    <div class="newCityWarning" style="color: red">
+                                                        کاربر شهر جدید به نام
+                                                        - <span style="color: green">{{$place->newCity}}</span> -
+                                                        وارد کرده است.
+                                                    </div>
+                                                @endif
 
                                                 <div id="citySearch" class="citySearch">
                                                     <ul id="resultCity"></ul>
@@ -234,7 +243,7 @@
                                             <div class="col-sm-2 f_r" style="border-left: solid gray;">
                                                 <span style="direction: rtl" class="myLabel">لوازم تزئینی</span>
                                                 <label class="switch">
-                                                    <input type="checkbox" name="decorative" id="decorative" value="on"{{$place->decorative == 1 ? 'checked' : ''}}>
+                                                    <input type="checkbox" name="decorative" id="decorative" value="on" {{$place->decorative == 1 ? 'checked' : ''}}>
                                                     <span class="slider round"></span>
                                                 </label>
                                             </div>
@@ -557,7 +566,7 @@
 
             showErrorDivOrsubmit(error_text, error);
         }
-        
+
         function checkSeo(kind){
 
             var name = document.getElementById('name').value;

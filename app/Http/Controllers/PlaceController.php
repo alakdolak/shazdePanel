@@ -22,6 +22,7 @@ use App\models\SogatSanaie;
 use App\models\SpecialAdvice;
 use App\models\State;
 use App\models\TopInCity;
+use App\models\UserAddPlace;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -705,7 +706,6 @@ class PlaceController extends Controller {
 
     public function storeAmaken(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'cityId' => 'required',
@@ -717,19 +717,10 @@ class PlaceController extends Controller {
             'C' => 'required',
         ]);
 
-        if(isset($request->inputType) && $request->inputType == 'new'){
+        if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
             $amaken = new Amaken();
-
             $amaken->file = 'none';
-
-            $amaken->pic_1 = 0;
-            $amaken->pic_2 = 0;
-            $amaken->pic_3 = 0;
-            $amaken->pic_4 = 0;
-            $amaken->pic_5 = 0;
-
-            $amaken->author = \auth()->user()->id;
-
+            $amaken->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $amaken = Amaken::find($request->id);
@@ -770,13 +761,18 @@ class PlaceController extends Controller {
 
         $amaken->save();
 
+        if(isset($request->addPlaceByUser) && $request->addPlaceByUser == 1){
+            $aup = UserAddPlace::find($request->id);
+            $aup->archive = 1;
+            $aup->save();
+        }
+
         $this->storePlaceTags(1, $amaken->id, $request->tag);
 
         if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
             $this->storePlaceFeatures(1, $amaken->id, $request->features);
         else
             PlaceFeatureRelation::where(['kindPlaceId' => 1, 'placeId' => $amaken->id])->delete();
-
 
         return \redirect(\url('uploadImgPage/1/' . $amaken->id));
     }
@@ -794,16 +790,10 @@ class PlaceController extends Controller {
             'C' => 'required',
         ]);
 
-        if(isset($request->inputType) && $request->inputType == 'new'){
+        if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
             $hotel = new Hotel();
-
-            $hotel->pic_1 = 0;
-            $hotel->pic_2 = 0;
-            $hotel->pic_3 = 0;
-            $hotel->pic_4 = 0;
-            $hotel->pic_5 = 0;
-
-            $hotel->author = \auth()->user()->id;
+            $hotel->file = 'none';
+            $hotel->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $hotel = Hotel::find($request->id);
@@ -876,6 +866,12 @@ class PlaceController extends Controller {
 
         $hotel->save();
 
+        if(isset($request->addPlaceByUser) && $request->addPlaceByUser == 1){
+            $aup = UserAddPlace::find($request->id);
+            $aup->archive = 1;
+            $aup->save();
+        }
+
         $this->storePlaceTags(4, $hotel->id, $request->tag);
 
         if(isset($request->features) && is_array($request->features) && count($request->features) > 0)
@@ -900,21 +896,10 @@ class PlaceController extends Controller {
             'C' => 'required',
         ]);
 
-        if(isset($request->inputType) && $request->inputType == 'new'){
+        if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
             $restaurant = new Restaurant();
-
-            $restaurant->markaz = 0;
-            $restaurant->hoome = 0;
-            $restaurant->class = 0;
-
             $restaurant->file = 'none';
-            $restaurant->pic_1 = 0;
-            $restaurant->pic_2 = 0;
-            $restaurant->pic_3 = 0;
-            $restaurant->pic_4 = 0;
-            $restaurant->pic_5 = 0;
-
-            $restaurant->author = \auth()->user()->id;
+            $restaurant->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $restaurant = Restaurant::find($request->id);
@@ -954,6 +939,12 @@ class PlaceController extends Controller {
         else
             $restaurant->site = '';
         $restaurant->save();
+
+        if(isset($request->addPlaceByUser) && $request->addPlaceByUser == 1){
+            $aup = UserAddPlace::find($request->id);
+            $aup->archive = 1;
+            $aup->save();
+        }
 
         $this->storePlaceTags(3, $restaurant->id, $request->tag);
 
@@ -1038,7 +1029,6 @@ class PlaceController extends Controller {
 
     public function storeMahaliFood(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'cityId' => 'required',
@@ -1050,9 +1040,9 @@ class PlaceController extends Controller {
             'tag' => 'required',
         ]);
 
-        if(isset($request->inputType) && $request->inputType == 'new'){
+        if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
             $newMahali = new MahaliFood();
-            $newMahali->author = \auth()->user()->id;
+            $newMahali->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $newMahali = MahaliFood::find($request->id);
@@ -1134,6 +1124,12 @@ class PlaceController extends Controller {
 
         $newMahali->save();
 
+        if(isset($request->addPlaceByUser) && $request->addPlaceByUser == 1){
+            $aup = UserAddPlace::find($request->id);
+            $aup->archive = 1;
+            $aup->save();
+        }
+
         $this->storePlaceTags(11, $newMahali->id, $request->tag);
 
         return \redirect(\url('uploadImgPage/11/' . $newMahali->id));
@@ -1151,9 +1147,9 @@ class PlaceController extends Controller {
             'description' => 'required',
         ]);
 
-        if(isset($request->inputType) && $request->inputType == 'new'){
+        if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
             $newSogat = new SogatSanaie();
-            $newSogat->author = \auth()->user()->id;
+            $newSogat->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $newSogat = SogatSanaie::find($request->id);
@@ -1255,8 +1251,13 @@ class PlaceController extends Controller {
         if(isset($request->material) && $request->material != null)
             $newSogat->material = $request->material;
 
-        $newSogat->author = \auth()->user()->id;
         $newSogat->save();
+
+        if(isset($request->addPlaceByUser) && $request->addPlaceByUser == 1){
+            $aup = UserAddPlace::find($request->id);
+            $aup->archive = 1;
+            $aup->save();
+        }
 
         $this->storePlaceTags(10, $newSogat->id, $request->tag);
 
@@ -1278,9 +1279,10 @@ class PlaceController extends Controller {
             'room_num' => 'required',
         ]);
 
-        if(isset($request->inputType) && $request->inputType == 'new'){
+        if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
             $boomgardy = new Boomgardy();
             $boomgardy->file = 'none';
+            $boomgardy->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $boomgardy = Boomgardy::find($request->id);
@@ -1317,6 +1319,12 @@ class PlaceController extends Controller {
 
         $boomgardy->alt = $request->keyword;
         $boomgardy->save();
+
+        if(isset($request->addPlaceByUser) && $request->addPlaceByUser == 1){
+            $aup = UserAddPlace::find($request->id);
+            $aup->archive = 1;
+            $aup->save();
+        }
 
         $this->storePlaceTags(12, $boomgardy->id, $request->tag);
 
