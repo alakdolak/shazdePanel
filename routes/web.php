@@ -484,7 +484,16 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), fun
     Route::post('changeUserContent', array('as' => 'changeUserContent', 'uses' => 'CommentController@changeUserContent'));
 
 });
-
+Route::get('vodBoomb', function(){
+    $parCat = \App\models\VideoCategory::where('parent', 0)->pluck('id')->toArray();
+    $catagory = \App\models\VideoCategory::where('parent', '!=', 0)->pluck('id')->toArray();
+    $video = \App\models\Video::whereIn('categoryId', $parCat)->get();
+    foreach ($video as $item) {
+        $item->categoryId = $catagory[rand(0, count($catagory))];
+        $item->save();
+    }
+    dd(count($video));
+});
 Route::group(array('middleware' => ['auth']), function() {
     Route::get('/vod/index', 'VideoController@vodIndex')->name('vod.index');
     Route::post('/vode/confrim', 'VideoController@vodConfirm')->name('vod.confirm');

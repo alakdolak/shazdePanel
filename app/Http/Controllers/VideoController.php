@@ -19,7 +19,7 @@ class VideoController extends Controller
 {
     public function vodIndex()
     {
-        $videoCategory = VideoCategory::all();
+        $videoCategory = VideoCategory::where('parent', '!=', 0)->get();
 
         $videos = Video::orderByDesc('created_at')->get();
         $confirmedVideo = [];
