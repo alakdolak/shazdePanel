@@ -82,7 +82,7 @@
                                             <td>{{$item->name}}</td>
                                             <td>{{$item->kindPlace->name}}</td>
                                             <td>{{$item->user->username}}</td>
-                                            <td>{{$item->state->name}}</td>
+                                            <td>{{$item->state}}</td>
                                             <td>{{$item->city}}</td>
                                             <td style="display: flex; justify-content: space-between">
                                                 <a href="{{route('userAddPlace.edit', ['id' => $item->id])}}" data-toggle="tooltip" data-placement="top" title="ویرایش و دخیره" class="buttonIcon" style="background: blue;">

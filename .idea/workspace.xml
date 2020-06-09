@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug">
-      <change afterPath="$PROJECT_DIR$/resources/views/userContent/addPlace/userAddPlacePics.blade.php" afterDir="false" />
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="submit userAddPlace">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editAmaken.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editAmaken.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editBoomgardy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editBoomgardy.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editHotels.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editHotels.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editMahaliFood.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editRestaurant.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editRestaurant.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/editContent/editSogatSanaie.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/editContent/editSogatSanaie.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/userContent/addPlace/userAddPlaceList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/userContent/addPlace/userAddPlaceList.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -520,14 +510,7 @@
       <workItem from="1591615806479" duration="39000" />
       <workItem from="1591626872078" duration="630000" />
       <workItem from="1591635941477" duration="17000" />
-      <workItem from="1591694972861" duration="18276000" />
-    </task>
-    <task id="LOCAL-00017" summary="clean">
-      <created>1571818077690</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1571818077690</updated>
+      <workItem from="1591694972861" duration="18570000" />
     </task>
     <task id="LOCAL-00018" summary="specailAdvice for city">
       <created>1572428847259</created>
@@ -865,7 +848,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591695034083</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="submit userAddPlace">
+      <created>1591714345531</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1591714345532</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -893,7 +883,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="تصاویر پیش فرض و ..." />
     <MESSAGE value="clean" />
     <MESSAGE value="specailAdvice for city" />
     <MESSAGE value="new edit for content" />
@@ -918,7 +907,8 @@
     <MESSAGE value="delete live chats" />
     <MESSAGE value="upload group img for places" />
     <MESSAGE value="debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug" />
+    <MESSAGE value="submit userAddPlace" />
+    <option name="LAST_COMMIT_MESSAGE" value="submit userAddPlace" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587373166142">
@@ -929,10 +919,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588768256756" />
-    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1591714220567">
+    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1591714344051">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591714220567" />
+    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591714344051" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1590846308000">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -957,9 +947,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591713536724" />
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1591708577963">
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1591714578919">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591708577963" />
+    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591714578919" />
   </component>
 </project>
