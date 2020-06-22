@@ -17,16 +17,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Request;
 
-Route::get('updateMainDataBase', function(){
-'ALTER TABLE `amaken` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `alt5`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
-ALTER TABLE `hotels` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `alt5`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
-ALTER TABLE `restaurant` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `alt5`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
-ALTER TABLE `majara` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `alt5`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
-
-ALTER TABLE `sogatSanaies` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `authorized`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;
-ALTER TABLE `mahaliFood` ADD `created_at` TIMESTAMP NULL DEFAULT NULL AFTER `authorized`, ADD `updated_at` TIMESTAMP NULL DEFAULT NULL AFTER `created_at`;'  ;
-
-});
+Route::get('updateMainDataBase', 'HomeController@updateDatabase');
 
 Route::get('convertAmakenFeatures', 'HomeController@convertAmakenFeatures');
 
@@ -556,3 +547,8 @@ Route::get('latCountry', 'PlaceController@latCountry');
 Route::get('insertTagsToDB/{num1?}/{num2?}', 'PlaceController@insertTagsToDB');
 
 Route::get('/addBoomgardyDB', 'PlaceController@addBoomgardyDB');
+
+include_once __DIR__.'/../app/Http/Controllers/Common.php';
+Route::get('/testEmail/{email}', function ($email){
+    sendMail('hello', 'test', $email);
+});

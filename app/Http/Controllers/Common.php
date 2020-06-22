@@ -342,32 +342,21 @@ function makeValidInput($input) {
     return $input;
 }
 
-function sendMail($text, $recipient, $subject) {
-
-
+function sendMail($subject, $text, $recipient) {
     require_once __DIR__ . '/../../../vendor/autoload.php';
 
     $mail = new PHPMailer(true);                           // Passing `true` enables exceptions
     try {
-        //Server settings
-        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
         $mail->CharSet = "UTF-8";
-        //Recipients
-        $mail->setFrom('info@shazdemosafer.com', 'Mailer');
-//    $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+        $mail->setFrom('info@koochita.com', 'koochita');
         $mail->addAddress($recipient);               // Name is optional
 //        $mail->addReplyTo('ghane@shazdemosafer.com', 'Information');
 //    $mail->addCC('cc@example.com');
 //    $mail->addBCC('bcc@example.com');
-
-        //Attachments
-//    $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
-        //Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = $subject;
-        $mail->Body    = $text;
+        $mail->Body    = time();
         $mail->AltBody = $text;
 
         $mail->send();

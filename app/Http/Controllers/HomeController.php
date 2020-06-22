@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\Activity;
 use App\models\AdminLog;
 use App\models\Amaken;
+use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\LogModel;
@@ -266,5 +267,10 @@ class HomeController extends Controller {
         $insertQuery .= $values;
         DB::select($insertQuery);
         dd('done');
+    }
+
+    public function updateDatabase()
+    {
+
     }
 }

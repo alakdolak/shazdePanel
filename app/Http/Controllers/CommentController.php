@@ -642,7 +642,7 @@ class CommentController extends Controller {
         elseif($kindPlace->id == 4) {
             $place->kind_id = $place->feat->kind_id;
             $place->rate_int = $place->feat->rate_int;
-            return view('content.editContent.editHotelS', compact(['place', 'mode', 'state', 'cities', 'allState', 'features', 'placeFeatures']));
+            return view('content.editContent.editHotels', compact(['place', 'mode', 'state', 'cities', 'allState', 'features', 'placeFeatures']));
         }
         elseif($kindPlace->id == 10) {
             $place->size = $place->feat->size;

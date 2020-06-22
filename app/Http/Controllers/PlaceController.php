@@ -513,14 +513,14 @@ class PlaceController extends Controller {
                     $id = $state2->id;
                     $stateId = $state2->id;
 
-                    $places = DB::select('select h.name, h.cityId, h.id, h.picNumber from ' . $kindPlace->tableName . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+                    $places = DB::select('select h.name, h.cityId, h.id from ' . $kindPlace->tableName . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
                 } else {
                     $city = Cities::find($cityId);
                     $name = $city->name;
                     $id = $cityId;
                     $stateId = $city->stateId;
 
-                    $places = DB::select('select name, cityId, id, picNumber FROM ' . $kindPlace->tableName . ' WHERE cityId = ' . $id);
+                    $places = DB::select('select name, cityId, id FROM ' . $kindPlace->tableName . ' WHERE cityId = ' . $id);
                 }
                 foreach ($places as $item) {
                     $item->pic = URL::asset('_images/nopic/blank.jpg');
@@ -533,21 +533,14 @@ class PlaceController extends Controller {
                     $id = $state2->id;
                     $stateId = $state2->id;
 
-                    $places = DB::select('select h.name, h.cityId, h.pic_1, h.file, h.id from ' . $kindPlace->tableName . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
+                    $places = DB::select('select h.name, h.cityId, h.file, h.id from ' . $kindPlace->tableName . ' h, cities c WHERE h.cityId = c.id and c.stateId = ' . $cityId);
                 } else {
                     $city = Cities::find($cityId);
                     $name = $city->name;
                     $id = $cityId;
                     $stateId = $city->stateId;
 
-                    $places = DB::select('SELECT name, cityId, pic_1, file, id FROM ' . $kindPlace->tableName . ' WHERE cityId = ' . $cityId);
-                }
-
-                foreach ($places as $item) {
-                    if ($item->pic_1 != 0 || ($item->file != '' && $item->file != null))
-                        $item->pic = URL::asset('_images/' . $kindPlace->fileName . '/' . $item->file . '/f-1.jpg');
-                    else
-                        $item->pic = URL::asset('_images/nopic/blank.jpg');
+                    $places = DB::select('SELECT name, cityId, file, id FROM ' . $kindPlace->tableName . ' WHERE cityId = ' . $cityId);
                 }
             }
         }
