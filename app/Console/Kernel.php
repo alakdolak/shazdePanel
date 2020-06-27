@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule) {
 
-        $backups = DB::connection('mysql2')->select('select * from backup WHERE 1');
+        $backups = DB::connection('mysql2')->select('select * from backup WHERE 1 = 2');
 
         foreach ($backups as $itr) {
             switch ($itr->_interval_) {

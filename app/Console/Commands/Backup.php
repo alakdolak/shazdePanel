@@ -23,8 +23,8 @@ class Backup extends Command
      * @return mixed
      */
     public function handle() {
-        $backup = new BackupController();
-        $backup->autoBackup($this->argument('id'));
+//        $backup = new BackupController();
+//        $backup->autoBackup($this->argument('id'));
     }
 
     /**

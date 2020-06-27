@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $username
  * @property string $password
  * @property integer $_interval_
+ * @property boolean $mysql
  */
 
 class Backup extends Model {

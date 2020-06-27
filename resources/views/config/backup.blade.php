@@ -154,6 +154,7 @@
                         {'name': 'url', 'class': [], 'type': 'text', 'label': 'آدرس مقصد', 'value': ''},
                         {'name': 'username', 'class': [], 'type': 'text', 'label': 'نام کاربری', 'value': ''},
                         {'name': 'password', 'class': [], 'type': 'password', 'label': 'رمزعبور', 'value': ''},
+			{'name': 'mysql', 'class': [], 'type': 'checkbox', 'label': 'آیا بک اپ از دیتابیس است؟'},
                         {'name': 'interval', 'value': '', 'class': [], 'type': 'select', 'label': 'وضعیت جدید', 'options': '{!! json_encode($intervals) !!}'}
                     ],
                     'افزودن بک آپ جدید', '{{(isset($msg) ? $msg : '')}}'

@@ -106,6 +106,7 @@ class BackupController extends Controller {
             $backup->username = makeValidInput($_POST["username"]);
             $backup->password = makeValidInput($_POST["password"]);
             $backup->url = makeValidInput($_POST["url"]);
+	    $backup->mysql = isset($_POST["mysql"]);
 
             try {
                 $backup->save();
@@ -192,9 +193,11 @@ class BackupController extends Controller {
         return $content;
     }
 
+
     public function autoBackup($id) {
 
         $db = Backup::whereId($id);
+
         if(empty($db)) {
             Storage::delete('backup:all ' . $id);
             return;
@@ -204,50 +207,146 @@ class BackupController extends Controller {
         $username = $db->username;
         $password = $db->password;
 
-        $mysqlUserName      = "administrator_persoulio";
-        $mysqlPassword      = "yGrn65~6";
-        $mysqlHostName      = "127.0.0.1";
-        $DbName             = "pro";
-        $tables             = false;
+        if($db->mysql) {
 
-        $content = $this->Export_Database($mysqlHostName, $mysqlUserName, $mysqlPassword, $DbName,  $tables);
+            $mysqlUserName = "administrator_persoulio";
+            $mysqlPassword = "yGrn65~6";
+            $mysqlHostName = "127.0.0.1";
+            $DbName = "pro";
+            $tables = false;
 
-        $mysqlUserName      = "administrator_persoulio";
-        $mysqlPassword      = "yGrn65~6";
-        $mysqlHostName      = "127.0.0.1";
-        $DbName             = "panel_shazde";
-        $tables             = false;
+            $content = $this->Export_Database($mysqlHostName, $mysqlUserName, $mysqlPassword, $DbName, $tables);
 
-        $content .= $this->Export_Database($mysqlHostName, $mysqlUserName, $mysqlPassword, $DbName,  $tables);
+            $mysqlUserName = "administrator_persoulio";
+            $mysqlPassword = "yGrn65~6";
+            $mysqlHostName = "127.0.0.1";
+            $DbName = "panel_shazde";
+            $tables = false;
 
-        if(empty($url)) {
-            $backup_name = time() . "mybackup_panel.sql";
-            $backup_name = __DIR__ . '/../../../../assets/backups/' . $backup_name;
-            $fp = fopen($backup_name, 'w');
-            fwrite($fp, $content);
-            fclose($fp);
+            $content .= $this->Export_Database($mysqlHostName, $mysqlUserName, $mysqlPassword, $DbName, $tables);
+
+            if (empty($url)) {
+                $backup_name = time() . "mybackup_panel.sql";
+                $backup_name = __DIR__ . '/../../../../assets/backups/' . $backup_name;
+                $fp = fopen($backup_name, 'w');
+                fwrite($fp, $content);
+                fclose($fp);
+            } else {
+
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_BUFFERSIZE, 84000); // curl buffer size in bytes
+
+                $postData = array(
+                    'content' => $content,
+                    'username' => (empty($username)) ? 'shazde_panel' : $username,
+                    'password' => (empty($password)) ? '!!Mg22743823!!' : $password
+                );
+
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_exec($ch);
+                curl_close($ch);
+            }
         }
 
         else {
 
-            $ch = curl_init();
+            $DelFilePath = __DIR__ ."/../../../../imageBackUps/images.zip";
 
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_BUFFERSIZE, 84000); // curl buffer size in bytes
+            if(file_exists($DelFilePath))
+                unlink ($DelFilePath);
 
-            $postData = array(
-                'content' => $content,
-                'username' => (empty($username)) ? 'shazde_panel' : $username,
-                'password' => (empty($password)) ? '!!Mg22743823!!' : $password
+            $oldFiles = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator(__DIR__ ."/../../../../imageBackUps"),
+                RecursiveIteratorIterator::LEAVES_ONLY
             );
 
-            curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'POST');
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+            foreach ($oldFiles as $name => $file) {
+                if($file->isFile())
+                    unlink($file);
+            }
 
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_exec($ch);
-            curl_close ($ch);
+//            $tmp = new AdminLog();
+//            $tmp->uId = Auth::user()->id;
+ //           $tmp->mode = getValueInfo('imageBackup');
+ //           $tmp->save();
+
+            $root = __DIR__ ."/../../../../imageBackUps/";
+            $fileName = "images.zip";
+
+            $zip = new ZipArchive();
+            if ($zip->open($root . $fileName, ZipArchive::CREATE) != TRUE) {
+                die ("Could not open archive");
+            }
+
+            $rootPath = [
+                __DIR__ ."/../../../../assets/userPhoto",
+            ];
+
+            $relativePathes = [
+                "userPhoto",
+            ];
+
+            $files = [];
+
+            for ($i = 0; $i < count($rootPath); $i++) {
+                $files[$i] = new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator($rootPath[$i]),
+                    RecursiveIteratorIterator::LEAVES_ONLY
+                );
+            }
+
+            for ($i = 0; $i < count($rootPath); $i++) {
+
+                foreach ($files[$i] as $name => $file)  {
+                    if (!$file->isDir()) {
+                        $filePath = $file->getRealPath();
+                        $filePathTmp = explode('\\', $filePath);
+
+                        $start = false;
+                        $relativePath = "";
+                        for($j = 0; $j < count($filePathTmp); $j++) {
+                            if(!$start && $filePathTmp[$j] != $relativePathes[$i])
+                                continue;
+                            $start = true;
+                            $relativePath .= $filePathTmp[$j] . '/';
+                        }
+
+                        $relativePath = substr($relativePath, 0, strlen($relativePath) - 1);
+                        $zip->addFile($filePath, $relativePath);
+                    }
+                }
+
+            }
+
+            $zip->close();
+
+            $cFile = curl_file_create($DelFilePath);
+            $post = array('username' => $username, 'password' => $password, 'file'=> $cFile);
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 60);
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+            $response = curl_exec($curl);
+            curl_close ($curl);
+	echo $response . '\n';
+//            dd($response);
+//
+//             if($errno = curl_errno($curl)) {
+//                 $error_message = curl_strerror($errno);
+//                 dd("cURL error ({$errno}):\n {$error_message}");
+//             } else {
+//                 dd("<h2>File Uploaded</h2>");
+//             }
         }
+
         exit();
     }
 

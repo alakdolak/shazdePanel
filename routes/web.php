@@ -25,6 +25,8 @@ Route::get('login', ['as' => 'login', 'uses' => 'HomeController@login']);
 
 Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 
+Route::get('autoBackup/{id}','BackupController@autoBackup');
+
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
 //    فعالیت
