@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="backup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/Backup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/Backup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BackupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BackupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Backup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Backup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/config/backup.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/config/backup.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -524,14 +519,10 @@
       <workItem from="1592810787321" duration="711000" />
       <workItem from="1592890546468" duration="1666000" />
       <workItem from="1593245095798" duration="1145000" />
-      <workItem from="1593251814424" duration="1889000" />
-    </task>
-    <task id="LOCAL-00020" summary="contentPic">
-      <created>1574861881731</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1574861881731</updated>
+      <workItem from="1593251814424" duration="1925000" />
+      <workItem from="1593415069411" duration="508000" />
+      <workItem from="1593427622626" duration="743000" />
+      <workItem from="1593432048179" duration="843000" />
     </task>
     <task id="LOCAL-00021" summary="question">
       <created>1575461893688</created>
@@ -869,7 +860,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592811487183</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="backup">
+      <created>1593254232780</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1593254232780</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -897,7 +895,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="specailAdvice for city" />
     <MESSAGE value="new edit for content" />
     <MESSAGE value="contentPic" />
     <MESSAGE value="question" />
@@ -922,7 +919,8 @@
     <MESSAGE value="submit userAddPlace" />
     <MESSAGE value="debug addPlace by user" />
     <MESSAGE value="debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug" />
+    <MESSAGE value="backup" />
+    <option name="LAST_COMMIT_MESSAGE" value="backup" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587373166142">
@@ -933,10 +931,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588768256756" />
-    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1592890621249">
+    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1593432909453">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592890621249" />
+    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593432909453" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1590846308000">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -945,10 +943,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="792" y="146" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586586671397" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1592811488732">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1593254235327">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592811488732" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593254235327" />
     <state x="762" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592890623382">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -961,9 +959,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591713536724" />
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup" timestamp="1593253066906">
+    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup" timestamp="1593432353901">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="173" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593253066906" />
+    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593432353901" />
   </component>
 </project>

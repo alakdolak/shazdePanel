@@ -90,8 +90,7 @@ class PlaceController extends Controller {
                     mkdir($location . '/'. $kindPlace->fileName);
                 $location .= '/' . $kindPlace->fileName;
 
-                if ($place->file == null || $place->file == 'none' || $place->file == '' ||
-                    !is_dir($location . '/' . $place->file)) {
+                if ($place->file == null || $place->file == 'none' || $place->file == '') {
                     $newFileName = rand(1000000, 9999999);
                     while (file_exists($location . '/' . $newFileName))
                         $newFileName = (int)($newFileName - 1);
@@ -107,6 +106,10 @@ class PlaceController extends Controller {
                         echo json_encode(['nok2']);
                         return;
                     }
+                }
+                elseif(!is_dir($location . '/' . $place->file)){
+                    mkdir($location . '/' . $place->file);
+                    $location .= '/' . $place->file;
                 }
                 else
                     $location .= '/' . $place->file;

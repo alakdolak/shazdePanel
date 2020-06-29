@@ -8,6 +8,7 @@ use App\models\Hotel;
 use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\Majara;
+use App\models\Place;
 use App\models\Restaurant;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
@@ -40,41 +41,15 @@ class ReviewsController extends Controller
                 else
                     $item->countPic++;
             }
-
-            switch ($item->kindPlaceId){
-                case 1:
-                    $item->file = 'amaken';
-                    $item->place = Amaken::find($item->placeId);
-                    $item->kindPlace = 'اماکن';
-                    break;
-                case 3:
-                    $item->file = 'restaurant';
-                    $item->place  = Restaurant::find($item->placeId);
-                    $item->kindPlace = 'رستوران';
-                    break;
-                case 4:
-                    $item->file = 'hotels';
-                    $item->place  = Hotel::find($item->placeId);
-                    $item->kindPlace = 'هتل';
-                    break;
-                case 6:
-                    $item->file = 'majara';
-                    $item->place  = Majara::find($item->placeId);
-                    $item->kindPlace = 'ماجرا';
-                    break;
-                case 10:
-                    $item->file = 'sogatsanaie';
-                    $item->place  = SogatSanaie::find($item->placeId);
-                    $item->kindPlace = 'سوغات/صنایع';
-                    break;
-                case 11:
-                    $item->file = 'mahalifood';
-                    $item->place  = MahaliFood::find($item->placeId);
-                    $item->kindPlace = 'غذای محلی';
-                    break;
-            }
+            $kindPlace = Place::find($item->kindPlaceId);
+            $item->file = $kindPlace->fileName;
+            $item->place = \DB::table($kindPlace->tableName)->find($item->placeId);
+            $item->kindPlace = $kindPlace->name;
 
             $item->user = User::find($item->visitorId);
+            $item->name = $item->user->first_name . ' ' . $item->user->last_name;
+            if($item->name == ' ')
+                $item->name = $item->username;
 
             $item->dateTime = gregorianToJalali($item->date)[0] .'/'. gregorianToJalali($item->date)[1] . '/' . gregorianToJalali($item->date)[2] . '  ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
         }
@@ -91,35 +66,10 @@ class ReviewsController extends Controller
                 if($log != null){
                     $location = __DIR__ . '/../../../../assets/userPhoto/';
 
-                    switch ($log->kindPlaceId){
-                        case 1:
-                            $location .= 'amaken/';
-                            $place = Amaken::find($log->placeId);
-                            break;
-                        case 3:
-                            $location .= 'restaurant/';
-                            $place  = Restaurant::find($log->placeId);
-                            break;
-                        case 4:
-                            $location .= 'hotels/';
-                            $place  = Hotel::find($log->placeId);
-                            break;
-                        case 6:
-                            $location .= 'majara/';
-                            $place  = Majara::find($log->placeId);
-                            break;
-                        case 10:
-                            $location .= 'sogatsanaie/';
-                            $place  = SogatSanaie::find($log->placeId);
-                            break;
-                        case 11:
-                            $location .= 'mahalifood/';
-                            $place  = MahaliFood::find($log->placeId);
-                            break;
-                    }
-
-                    $location .= $place->file;
-                    $location .= '/' . $pic->pic;
+                    $kindPlace = Place::find($log->kindPlaceId);
+                    $location .= $kindPlace->fileName . '/';
+                    $place = \DB::table($kindPlace->tableName)->find($log->placeId);
+                    $location .= $place->file .'/'. $pic->pic;
 
                     if(file_exists($location))
                         unlink($location);
@@ -130,7 +80,6 @@ class ReviewsController extends Controller
                 }
             }
         }
-
         return;
     }
 
@@ -161,33 +110,9 @@ class ReviewsController extends Controller
 
                 $location = __DIR__ . '/../../../../assets/userPhoto/';
 
-                switch ($kindPlaceId){
-                    case 1:
-                        $location .= 'amaken/';
-                        $place = Amaken::find($placeId);
-                        break;
-                    case 3:
-                        $location .= 'restaurant/';
-                        $place  = Restaurant::find($placeId);
-                        break;
-                    case 4:
-                        $location .= 'hotels/';
-                        $place  = Hotel::find($placeId);
-                        break;
-                    case 6:
-                        $location .= 'majara/';
-                        $place  = Majara::find($placeId);
-                        break;
-                    case 10:
-                        $location .= 'sogatsanaie/';
-                        $place  = SogatSanaie::find($placeId);
-                        break;
-                    case 11:
-                        $location .= 'mahalifood/';
-                        $place  = MahaliFood::find($placeId);
-                        break;
-                }
-
+                $kindPlace = Place::find($kindPlaceId);
+                $location .= $kindPlace->fileName . '/';
+                $place = \DB::table($kindPlace->tableName)->find($placeId);
                 $location .= $place->file .'/';
 
                 foreach ($reviewPics as $item){
