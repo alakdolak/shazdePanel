@@ -91,6 +91,10 @@ class ReviewsController extends Controller
                 $review->confirm = 1;
                 $review->save();
 
+                $kindPlace = Place::find($review->kindPlaceId);
+                if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '')
+                    \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `seen`= `seen`+1  WHERE `id` = ' . $review->placeId);
+
                 echo 'ok';
             }
         }
