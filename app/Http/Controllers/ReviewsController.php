@@ -93,7 +93,7 @@ class ReviewsController extends Controller
 
                 $kindPlace = Place::find($review->kindPlaceId);
                 if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '')
-                    \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `seen`= `seen`+1  WHERE `id` = ' . $review->placeId);
+                    \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `reviewCount`= `reviewCount`+1  WHERE `id` = ' . $review->placeId);
 
                 echo 'ok';
             }
@@ -128,6 +128,12 @@ class ReviewsController extends Controller
                 }
 
                 ReviewUserAssigned::where('logId', $id)->delete();
+
+                if($review->confirm == 1){
+                    $kindPlace = Place::find($review->kindPlaceId);
+                    if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '')
+                        \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `reviewCount`= `reviewCount`-1  WHERE `id` = ' . $review->placeId);
+                }
 
                 $review->delete();
                 echo 'ok';
