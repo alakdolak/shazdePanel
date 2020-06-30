@@ -2,11 +2,14 @@
 
 use App\models\Adab;
 use App\models\Amaken;
+use App\models\Cities;
 use App\models\Hotel;
 use App\models\MahaliFood;
 use App\models\Majara;
+use App\models\Place;
 use App\models\Restaurant;
 use App\models\SogatSanaie;
+use App\models\State;
 use Illuminate\Support\Facades\URL;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -647,6 +650,46 @@ function resizeImage($pic, $size){
     catch (Exception $exception){
         return 'error';
     }
+}
+
+function getRate($kinPlaceId, $placeId){
+    $kindPlace = Place::find($kinPlaceId);
+    $place = \DB::table($kindPlace->tableName)->find($placeId);
+
+    $city = Cities::find($place->cityId);
+    $state = State::find($city->stateId);
+
+    $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlace->id . ' ) AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
+
+    $questionId = array();
+    foreach ($section as $item)
+        array_push($questionId, $item->questionId);
+
+    if($questionId != null && count($questionId) != 0)
+        $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ') AND ansType = "rate"');
+    else
+        $questions = array();
+
+    $questionId = array();
+    foreach ($questions as $item)
+        array_push($questionId, $item->id);
+
+    $avgRate = 0;
+
+    if($questionId != null && count($questionId) != 0)
+        $rates = \DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $place->id . " and log.kindPlaceId = " . $kindPlace->id . " and  qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
+    else
+        $rates = array();
+
+    foreach ($rates as $rate)
+        $avgRate += $rate->avgRate;
+
+    if(count($rates) != 0)
+        $avgRate /= count($rates);
+    else
+        $avgRate = 2;
+
+    return $avgRate;
 }
 
 

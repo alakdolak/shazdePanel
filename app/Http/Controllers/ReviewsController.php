@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\Amaken;
+use App\models\Cities;
 use App\models\Hotel;
 use App\models\LogModel;
 use App\models\MahaliFood;
@@ -13,6 +14,7 @@ use App\models\Restaurant;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
 use App\models\SogatSanaie;
+use App\models\State;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -92,8 +94,12 @@ class ReviewsController extends Controller
                 $review->save();
 
                 $kindPlace = Place::find($review->kindPlaceId);
-                if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '')
+                if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '') {
                     \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `reviewCount`= `reviewCount`+1  WHERE `id` = ' . $review->placeId);
+
+                    $avgRate = getRate($kindPlace->id, $review->placeId);
+                    \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `fullRate`= ' . $avgRate . '  WHERE `id` = ' . $review->placeId);
+                }
 
                 echo 'ok';
             }
@@ -131,8 +137,12 @@ class ReviewsController extends Controller
 
                 if($review->confirm == 1){
                     $kindPlace = Place::find($review->kindPlaceId);
-                    if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '')
+                    if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '') {
                         \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `reviewCount`= `reviewCount`-1  WHERE `id` = ' . $review->placeId);
+
+                        $avgRate = getRate($kindPlace->id, $review->placeId);
+                        \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `fullRate`= ' . $avgRate . '  WHERE `id` = ' . $review->placeId);
+                    }
                 }
 
                 $review->delete();

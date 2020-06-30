@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Common.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Common.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -522,14 +523,8 @@
       <workItem from="1593415069411" duration="508000" />
       <workItem from="1593427622626" duration="743000" />
       <workItem from="1593432048179" duration="1018000" />
-      <workItem from="1593504924419" duration="747000" />
-    </task>
-    <task id="LOCAL-00023" summary="question">
-      <created>1578382573672</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1578382573672</updated>
+      <workItem from="1593504924419" duration="971000" />
+      <workItem from="1593506709448" duration="2687000" />
     </task>
     <task id="LOCAL-00024" summary="mainslider pic">
       <created>1578758353885</created>
@@ -867,7 +862,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593505491496</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="debug">
+      <created>1593505898627</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1593505898627</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -927,14 +929,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587373166142" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588768256756">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1593509314432">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588768256756" />
-    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1593505490123">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593509314432" />
+    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1593509506587">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593505490123" />
+    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593509506587" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1590846308000">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -959,9 +961,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591713536724" />
-    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup" timestamp="1593432353901">
+    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup" timestamp="1593509293812">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593432353901" />
+    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593509293812" />
   </component>
 </project>
