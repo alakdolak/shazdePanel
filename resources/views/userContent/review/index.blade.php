@@ -78,10 +78,10 @@
                                                                 <td>
                                                                     {{$item->place->name}}
                                                                 </td>
-                                                                <td onclick="showPics({{$item->id}})" style="cursor:pointer;">
+                                                                <td onclick="showPics({{$item->id}}, 'pic')" style="cursor:pointer;">
                                                                     {{$item->countPic}}
                                                                 </td>
-                                                                <td onclick="showVideos({{$item->id}})" style="cursor:pointer;">
+                                                                <td onclick="showPics({{$item->id}}, 'video')" style="cursor:pointer;">
                                                                     {{$item->countVideo}}
                                                                 </td>
                                                                 <td>
@@ -156,7 +156,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">عکس ها</h4>
+                    <h4 id="picModalHeader" class="modal-title"></h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -178,9 +178,7 @@
         var reviews = {!! $newReviews !!};
         var picUrl = '{{URL::asset("userPhoto/")}}';
 
-        console.log(reviews)
-
-        function showPics(_id){
+        function showPics(_id, _kind){
             var rev;
             for(i = 0; i < reviews.length; i++){
                 if(reviews[i]['id'] == _id){
@@ -196,32 +194,39 @@
 
             for(i = 0; i < pics.length; i++){
                 if(pics[i] != null) {
-                    if (pics[i]['is360'] == 0 && pics[i]['isVideo'] == 0) {
-                        var file = location + pics[i]['pic'];
-                        text += '<div id="pic_' + pics[i]['id'] + '" class="col-md-6" style="text-align: center; margin-bottom: 20px">\n' +
-                            '<img src="' + file + '" style="width: 100%;">\n' +
-                            '<button class="btn btn-danger" onclick="deletePic(' + pics[i]['id'] + ', ' + rev['id'] + ')">\n' +
-                            'حذف عکس\n' +
-                            '</button>\n' +
-                            '</div>';
+                    if(_kind == 'pic') {
+                        if (pics[i]['is360'] == 0 && pics[i]['isVideo'] == 0) {
+                            var file = location + pics[i]['pic'];
+                            text += '<div id="pic_' + pics[i]['id'] + '" class="col-md-6" style="text-align: center; margin-bottom: 20px">\n' +
+                                '<img src="' + file + '" style="width: 100%;">\n' +
+                                '<button class="btn btn-danger" onclick="deletePic(' + pics[i]['id'] + ', ' + rev['id'] + ')">\n' +
+                                'حذف عکس\n' +
+                                '</button>\n' +
+                                '</div>';
+                        }
+                    }
+                    else if(_kind == 'video'){
+                        if (pics[i]['isVideo'] == 1) {
+                            var file = location + pics[i]['pic'];
+                            text += '<div id="pic_' + pics[i]['id'] + '" class="col-md-12" style="text-align: center; margin-bottom: 20px">\n' +
+                                '<video src="' + file + '" controls style="width: 100%;"></video>\n' +
+                                '<button class="btn btn-danger" onclick="deletePic(' + pics[i]['id'] + ', ' + rev['id'] + ')">\n' +
+                                'حذف ویدیو\n' +
+                                '</button>\n' +
+                                '</div>';
+                        }
                     }
                 }
             }
 
+            if(_kind == 'pic')
+                $('#picModalHeader').text('عکس ها');
+            else if(_kind == 'video')
+                $('#picModalHeader').text('ویدیو ها');
+
             document.getElementById('picDiv').innerHTML = text;
 
             $('#picModal').modal('show');
-        }
-
-        function showVideos(_id){
-            var rev;
-            for(i = 0; i < reviews.length; i++){
-                if(reviews[i]['id'] == _id){
-                    rev = reviews[i];
-                    break;
-                }
-            }
-
         }
 
         function showText(_id){

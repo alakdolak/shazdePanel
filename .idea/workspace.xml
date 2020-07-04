@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add fullrate and review count">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Common.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -524,14 +523,8 @@
       <workItem from="1593427622626" duration="743000" />
       <workItem from="1593432048179" duration="1018000" />
       <workItem from="1593504924419" duration="971000" />
-      <workItem from="1593506709448" duration="2687000" />
-    </task>
-    <task id="LOCAL-00024" summary="mainslider pic">
-      <created>1578758353885</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1578758353885</updated>
+      <workItem from="1593506709448" duration="2803000" />
+      <workItem from="1593862594086" duration="505000" />
     </task>
     <task id="LOCAL-00025" summary="post">
       <created>1580132024518</created>
@@ -869,7 +862,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593505898627</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="add fullrate and review count">
+      <created>1593509508373</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1593509508373</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -897,7 +897,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="new edit for content" />
     <MESSAGE value="contentPic" />
     <MESSAGE value="question" />
     <MESSAGE value="mainslider pic" />
@@ -922,7 +921,8 @@
     <MESSAGE value="debug addPlace by user" />
     <MESSAGE value="backup" />
     <MESSAGE value="debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug" />
+    <MESSAGE value="add fullrate and review count" />
+    <option name="LAST_COMMIT_MESSAGE" value="add fullrate and review count" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587373166142">
@@ -961,9 +961,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591713536724" />
-    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup" timestamp="1593509293812">
+    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup" timestamp="1593862652220">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593509293812" />
+    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593862652220" />
   </component>
 </project>
