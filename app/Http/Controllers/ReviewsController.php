@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Activity;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\Hotel;
@@ -76,6 +77,18 @@ class ReviewsController extends Controller
                     if(file_exists($location))
                         unlink($location);
 
+                    $newAlert = new Alert();
+                    if($pic->isVideo == 1)
+                        $newAlert->subject = 'deleteReviewVideo';
+                    else
+                        $newAlert->subject = 'deleteReviewPic';
+                    $newAlert->referenceTable = 'log';
+                    $newAlert->referenceId = $log->id;
+                    $newAlert->userId = $log->visitorId;
+                    $newAlert->seen = 0;
+                    $newAlert->click = 0;
+                    $newAlert->save();
+
                     $pic->delete();
 
                     echo 'ok';
@@ -91,7 +104,17 @@ class ReviewsController extends Controller
             $review = LogModel::find($request->id);
             if($review != null){
                 $review->confirm = 1;
+                $review->seen = 0;
                 $review->save();
+
+                $newAlert = new Alert();
+                $newAlert->subject = 'confirmReview';
+                $newAlert->referenceTable = 'log';
+                $newAlert->referenceId = $review->id;
+                $newAlert->userId = $review->visitorId;
+                $newAlert->seen = 0;
+                $newAlert->click = 0;
+                $newAlert->save();
 
                 $kindPlace = Place::find($review->kindPlaceId);
                 if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '') {
@@ -144,6 +167,15 @@ class ReviewsController extends Controller
                         \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `fullRate`= ' . $avgRate . '  WHERE `id` = ' . $review->placeId);
                     }
                 }
+
+                $newAlert = new Alert();
+                $newAlert->subject = 'deleteReview';
+                $newAlert->referenceTable = Place::find($review->kindPlaceId)->tableName;
+                $newAlert->referenceId = $review->placeId;
+                $newAlert->userId = $review->visitorId;
+                $newAlert->seen = 0;
+                $newAlert->click = 0;
+                $newAlert->save();
 
                 $review->delete();
                 echo 'ok';

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add fullrate and review count">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="show video in accept review">
+      <change afterPath="$PROJECT_DIR$/app/models/Alert.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,19 +192,19 @@
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel\boomgardy" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel" />
-      <recent name="C:\xampp\htdocs\shazdePanel\app\Http\Controllers" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\shazdePanel\app\Console" />
       <recent name="C:\xampp\htdocs\shazdePanel\app\Console\Commands" />
       <recent name="C:\xampp\htdocs\shazdePanel\resources\views\config" />
       <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
       <recent name="C:\xampp\htdocs\shazdePanel\app\Http\Controllers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel\boomgardy" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\tagExcel" />
+      <recent name="C:\xampp\htdocs\shazdePanel\app\Http\Controllers" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
     </key>
   </component>
   <component name="RunManager">
@@ -524,14 +526,12 @@
       <workItem from="1593432048179" duration="1018000" />
       <workItem from="1593504924419" duration="971000" />
       <workItem from="1593506709448" duration="2803000" />
-      <workItem from="1593862594086" duration="505000" />
-    </task>
-    <task id="LOCAL-00025" summary="post">
-      <created>1580132024518</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1580132024519</updated>
+      <workItem from="1593862594086" duration="559000" />
+      <workItem from="1593865322973" duration="510000" />
+      <workItem from="1593957075475" duration="1354000" />
+      <workItem from="1593959582686" duration="26000" />
+      <workItem from="1593971472197" duration="225000" />
+      <workItem from="1594038090545" duration="1935000" />
     </task>
     <task id="LOCAL-00026" summary="post">
       <created>1581077472893</created>
@@ -869,7 +869,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593509508373</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="show video in accept review">
+      <created>1593863149293</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1593863149293</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -897,7 +904,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="contentPic" />
     <MESSAGE value="question" />
     <MESSAGE value="mainslider pic" />
     <MESSAGE value="post" />
@@ -922,21 +928,22 @@
     <MESSAGE value="backup" />
     <MESSAGE value="debug" />
     <MESSAGE value="add fullrate and review count" />
-    <option name="LAST_COMMIT_MESSAGE" value="add fullrate and review count" />
+    <MESSAGE value="show video in accept review" />
+    <option name="LAST_COMMIT_MESSAGE" value="show video in accept review" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587373166142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587373166142" />
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1593509314432">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1594038151744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593509314432" />
-    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1593509506587">
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594038151744" />
+    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1593863147626">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593509506587" />
+    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593863147626" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1590846308000">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -961,9 +968,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591713536724" />
-    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup" timestamp="1593862652220">
+    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup" timestamp="1593957082292">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593862652220" />
+    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593957082292" />
   </component>
 </project>

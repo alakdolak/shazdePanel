@@ -110,7 +110,7 @@
                                 <hr>
                                 <form id="form" action="{{$url}}" method="post" enctype="multipart/form-data" autocomplete="off">
                                     @csrf
-
+                                    <input type="hidden" name="userId" value="{{auth()->user()->id}}">
                                     <input type="hidden" name="inputType" value="new">
 
                                     <div class="row">
