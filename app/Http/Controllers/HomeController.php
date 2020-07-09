@@ -36,7 +36,11 @@ class HomeController extends Controller {
         $newCommentCount = $reviewComment + $postComment;
 
         $newVideoComments = VideoComment::where('confirm', 0)->count();
-        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments']));
+
+        $reportsId = Activity::where('name', 'گزارش')->first();
+        $newReports = LogModel::where('activityId', $reportsId->id)->where('confirm', 0)->count();
+
+        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments', 'newReports']));
     }
 
     public function login() {

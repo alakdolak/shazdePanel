@@ -72,6 +72,7 @@
                                 <a href="#" class="dropdown-item">مدیریت پست‌ها</a>
                                 <a href="#" class="dropdown-item">مدیریت سوال‌ها</a>
                                 <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
+                                <a href="{{route('user.report.index')}}" class="dropdown-item">گزارش های کاربران</a>
                                 <a href="#" class="dropdown-item">Recycle Bin</a>
                             </div>
                         </a>

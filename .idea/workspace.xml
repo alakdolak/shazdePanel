@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="show video in accept review">
-      <change afterPath="$PROJECT_DIR$/app/models/Alert.php" afterDir="false" />
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="set alert to reviews">
+      <change afterPath="$PROJECT_DIR$/resources/views/userContent/reports/userReports.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newContent/newContentCore.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/sideNav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/sideNav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -531,14 +534,9 @@
       <workItem from="1593957075475" duration="1354000" />
       <workItem from="1593959582686" duration="26000" />
       <workItem from="1593971472197" duration="225000" />
-      <workItem from="1594038090545" duration="1935000" />
-    </task>
-    <task id="LOCAL-00026" summary="post">
-      <created>1581077472893</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1581077472893</updated>
+      <workItem from="1594038090545" duration="2043000" />
+      <workItem from="1594218099764" duration="2452000" />
+      <workItem from="1594274855936" duration="3317000" />
     </task>
     <task id="LOCAL-00027" summary="debug">
       <created>1581146544727</created>
@@ -876,7 +874,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593863149293</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="set alert to reviews">
+      <created>1594043287202</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1594043287204</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -904,7 +909,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="question" />
     <MESSAGE value="mainslider pic" />
     <MESSAGE value="post" />
     <MESSAGE value="import tags" />
@@ -929,7 +933,8 @@
     <MESSAGE value="debug" />
     <MESSAGE value="add fullrate and review count" />
     <MESSAGE value="show video in accept review" />
-    <option name="LAST_COMMIT_MESSAGE" value="show video in accept review" />
+    <MESSAGE value="set alert to reviews" />
+    <option name="LAST_COMMIT_MESSAGE" value="set alert to reviews" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587373166142">
@@ -940,10 +945,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594038151744" />
-    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1593863147626">
+    <state x="605" y="22" key="CommitChangelistDialog2" timestamp="1594043284900">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593863147626" />
+    <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594043284900" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1590846308000">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -964,13 +969,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="639" y="238" width="665" height="564" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593246182413" />
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1591713536724">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="438" y="168" width="672" height="474" key="run.anything.popup" timestamp="1594220218358">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="438" y="168" width="672" height="474" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1594220218358" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591713536724" />
-    <state x="601" y="110" width="672" height="676" key="search.everywhere.popup" timestamp="1593957082292">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="428" y="77" width="672" height="474" key="search.everywhere.popup" timestamp="1594276646175">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="428" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1594276646175" />
     <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593957082292" />
   </component>
 </project>

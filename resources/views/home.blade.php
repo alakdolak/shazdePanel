@@ -90,6 +90,24 @@
                                                         </a>
                                                     </div>
                                                 @endif
+
+                                                    @if($newReports > 0)
+                                                        <div class="col-lg-3">
+                                                            <a href="{{route('user.report.index')}}">
+                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3>
+                                                                                {{$newReports}}گزارش جدید
+                                                                            </h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 @endif
 
 
