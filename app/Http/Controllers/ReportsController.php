@@ -93,6 +93,7 @@ class ReportsController extends Controller
         $reports = [];
         $activityId = Activity::where('name', 'گزارش')->first()->id;
         $reviewActivityId = Activity::where('name', 'نظر')->first()->id;
+        $questionActivityId = Activity::where('name', 'سوال')->first()->id;
         $logs = LogModel::where('activityId', $activityId)->where('confirm', 0)->get();
         foreach ($logs as $log){
             $refLog = LogModel::find($log->relatedTo);
@@ -139,12 +140,22 @@ class ReportsController extends Controller
                 $log->placeName = $reviewPlace->name;
                 $log->dateTime = gregorianToJalali($log->date)[0] .'/'. gregorianToJalali($log->date)[1] . '/' . gregorianToJalali($log->date)[2] . '  ' . substr($log->time, 0, 2) . ':' . substr($log->time, 2, 2);
             }
+            else if($refLog->activityId == $questionActivityId){
+                $log->ref = 'question';
+                $log->refName = 'سوال';
+                $log->logTxt = $refLog->text;
+                $reviewKindPlaceId = Place::find($refLog->kindPlaceId);
+                $reviewPlace = \DB::table($reviewKindPlaceId->tableName)->find($refLog->placeId);
+                $log->placeName = $reviewPlace->name;
+                $log->reviewUser = User::find($refLog->visitorId)->username;
+                $log->dateTime = gregorianToJalali($log->date)[0] .'/'. gregorianToJalali($log->date)[1] . '/' . gregorianToJalali($log->date)[2] . '  ' . substr($log->time, 0, 2) . ':' . substr($log->time, 2, 2);
+            }
 
             $log->username = User::find($log->visitorId)->username;
 
             array_push($reports, $log);
         }
-//dd($reports);
+
         return view('userContent.reports.userReports', compact(['reports']));
     }
 

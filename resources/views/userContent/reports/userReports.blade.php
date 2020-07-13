@@ -181,17 +181,18 @@
                 $('#textText').text(rep.logTxt);
 
                 let pics = null;
-                if(rep.pics.length > 0){
-                    rep.pics.forEach(p => {
-                        pics += '<img src="' + p + '" style="max-height: 100%; max-width: 100%;">';
-                    });
+                if(rep.pics) {
+                    if (rep.pics.length > 0) {
+                        rep.pics.forEach(p => {
+                            pics += '<img src="' + p + '" style="max-height: 100%; max-width: 100%;">';
+                        });
+                    }
+                    if (rep.Video.length > 0) {
+                        rep.Video.forEach(p => {
+                            pics += '<video src="' + p + '" controls style="max-height: 100%; max-width: 100%;"></video>';
+                        });
+                    }
                 }
-                if(rep.Video.length > 0){
-                    rep.Video.forEach(p => {
-                        pics += '<video src="' + p + '" controls style="max-height: 100%; max-width: 100%;"></video>';
-                    });
-                }
-
                 $('#textPics').html(pics);
 
                 $('#textModal').modal('show');

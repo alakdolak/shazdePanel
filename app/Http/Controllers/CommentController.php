@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\Activity;
 use App\models\Adab;
 use App\models\AdminLog;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\Comment;
@@ -148,6 +149,13 @@ class CommentController extends Controller {
                 $com = LogModel::find($request->id);
                 $com->confirm = 1;
                 $com->save();
+
+                $alertText = new Alert();
+                $alertText->referenceTable = 'log';
+                $alertText->referenceId = $com->id;
+                $alertText->userId = LogModel::find($com->relatedTo)->visitorId;
+                $alertText->subject = 'ansAns';
+                $alertText->save();
             }
             else
                 echo json_encode(['status' => 'nok1']);

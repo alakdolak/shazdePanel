@@ -70,7 +70,7 @@
                                 <a href="{{route('userAddPlace.list')}}" class="dropdown-item">مدیریت مکان های افزوده شدها</a>
                                 <a href="{{route('comments.list')}}" class="dropdown-item">مدیریت کامنت ها</a>
                                 <a href="#" class="dropdown-item">مدیریت پست‌ها</a>
-                                <a href="#" class="dropdown-item">مدیریت سوال‌ها</a>
+                                <a href="{{route('user.quesAns.index')}}" class="dropdown-item">مدیریت پرسش و پاسخ ها</a>
                                 <a href="{{route('photographer.index')}}" class="dropdown-item">عکس های عکاسان</a>
                                 <a href="{{route('user.report.index')}}" class="dropdown-item">گزارش های کاربران</a>
                                 <a href="#" class="dropdown-item">Recycle Bin</a>

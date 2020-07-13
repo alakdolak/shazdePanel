@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Activity;
+use App\models\Alert;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\Hotel;
+use App\models\LogFeedBack;
+use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\PhotographersLog;
@@ -15,6 +19,7 @@ use App\models\SogatSanaie;
 use App\models\State;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 
 class UserContentController extends Controller
@@ -108,6 +113,150 @@ class UserContentController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function quesAnsIndex()
+    {
+        $questionAct = Activity::where('name', 'سوال')->first();
+        $ansActivity = Activity::where('name', 'پاسخ')->first();
+
+        $confirmQuestions = [];
+        $newQuestions = [];
+        $questionsLog = LogModel::where('activityId', $questionAct->id)->get();
+        foreach ($questionsLog as $question) {
+            $kindPlace = Place::find($question->kindPlaceId);
+            if(isset($kindPlace->tableName)) {
+                $place = \DB::table($kindPlace->tableName)->find($question->placeId);
+                $uQ = User::find($question->visitorId);
+
+                if ($place != null && $uQ != null) {
+                    $question->kindPlaceName = $kindPlace->name;
+                    $question->placeName = $place->name;
+                    $question->username = $uQ->username;
+
+                    $date = gregorianToJalali($question->date);
+                    $question->date = $date[0] . '/' . $date[1] . '/' . $date[2];
+
+                    if($question->confirm == 1)
+                        array_push($confirmQuestions, $question);
+                    else
+                        array_push($newQuestions, $question);
+                } else
+                    $question->delete();
+            }
+            else
+                $question->delete();
+        }
+
+        $confirmAnswer = [];
+        $newAnswer = [];
+        $answerLog = LogModel::where('activityId', $ansActivity->id)->get();
+        foreach ($answerLog as $ans){
+            $topAct = LogModel::find($ans->relatedTo);
+            while($topAct != null && $topAct->activityId == $ansActivity->id)
+                $topAct = LogModel::find($topAct->relatedTo);
+
+
+            if($topAct == null)
+                continue;
+
+            if($topAct->activityId == $questionAct->id){
+                $kindPlace = Place::find($ans->kindPlaceId);
+                if(isset($kindPlace->tableName)) {
+                    $place = \DB::table($kindPlace->tableName)->find($ans->placeId);
+                    $uQ = User::find($ans->visitorId);
+
+                    if ($place != null && $uQ != null) {
+                        $ans->kindPlaceName = $kindPlace->name;
+                        $ans->placeName = $place->name;
+                        $ans->username = $uQ->username;
+
+                        $date = gregorianToJalali($ans->date);
+                        $ans->date = $date[0] . '/' . $date[1] . '/' . $date[2];
+
+                        if($ans->confirm == 1)
+                            array_push($confirmAnswer, $ans);
+                        else
+                            array_push($newAnswer, $ans);
+                    }
+                    else
+                        $ans->delete();
+                }
+                else
+                    $ans->delete();
+            }
+        }
+
+        return view('userContent.quesAns', compact(['confirmQuestions', 'newQuestions', 'confirmAnswer', 'newAnswer']));
+    }
+
+    public function quesAnsSubmit(Request $request)
+    {
+        if(isset($request->id)){
+            $log = LogModel::find($request->id);
+            $log->confirm = 1;
+            $log->save();
+
+            $relatedLog = LogModel::find($log->relatedTo);
+
+            $ansAct = Activity::where('name', 'پاسخ')->first();
+            if($log->activityId == $ansAct->id) {
+                $alert = new Alert();
+                $alert->userId = $relatedLog->visitorId;
+                $alert->subject = 'ansAns';
+                $alert->referenceTable = 'log';
+                $alert->referenceId = $log->id;
+                $alert->save();
+            }
+
+            echo  json_encode(['status' => 'ok']);
+        }
+        else
+            echo  json_encode(['status' => 'nok']);
+    }
+
+    public function quesAnsDelete(Request $request)
+    {
+        if(isset($request->id)){
+            $log = LogModel::find($request->id);
+            if($log != null) {
+                $kindPlace = Place::find($log->kindPlaceId);
+
+                $act = Activity::find($log->activityId);
+                if($act->name == 'سوال')
+                    $subject = 'deleteQues';
+                else if($act->name == 'پاسخ')
+                    $subject = 'deleteAns';
+
+                $alert = new Alert();
+                $alert->subject = $subject;
+                $alert->referenceTable = $kindPlace->tableName;
+                $alert->referenceId = $log->placeId;
+                $alert->userId = $log->visitorId;
+                $alert->save();
+
+                $this->deleteRelated($request->id);
+                echo  json_encode(['status' => 'ok']);
+            }
+            else
+                echo  json_encode(['status' => 'nok1']);
+        }
+        else
+            echo  json_encode(['status' => 'nok']);
+    }
+
+    private function deleteRelated($id){
+        $log = LogModel::find($id);
+        if($log != null){
+            LogFeedBack::where('logId', $log->id)->delete();
+            $logRelated = LogModel::where('relatedTo', $log->id)->get();
+            foreach ($logRelated as $item)
+                $this->deleteRelated($item->id);
+
+            $log->delete();
+        }
+
+        return;
     }
 
 }

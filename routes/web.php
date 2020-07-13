@@ -487,6 +487,12 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), fun
     Route::get('user/report', 'ReportsController@userReport')->name('user.report.index');
 
     Route::post('user/report/confirm', 'ReportsController@userConfirmReport')->name('user.report.confirm');
+
+    Route::get('user/quesAns', 'UserContentController@quesAnsIndex')->name('user.quesAns.index');
+
+    Route::post('user/quesAns/submit', 'UserContentController@quesAnsSubmit')->name('user.quesAns.submit');
+
+    Route::post('user/quesAns/delete', 'UserContentController@quesAnsDelete')->name('user.quesAns.delete');
 });
 
 Route::get('vodBoomb', function(){
