@@ -106,7 +106,7 @@
                                         <div class="row">
                                             <h2>پاسخ ها</h2>
 
-                                            <div style="max-height: 80vh; overflow-y: auto">
+                                            <div>
                                                 <table class="table table-striped  table-bordered" dir="rtl" data-toggle="table" data-pagination="true" data-search="true">
                                                     <thead>
                                                     <tr>
@@ -197,7 +197,7 @@
                                         <hr>
                                         <div class="row">
                                             <h2>پاسخ های تایید شده</h2>
-                                            <div style="max-height: 80vh; overflow-y: auto">
+                                            <div>
                                                 <table class="table table-striped  table-bordered" dir="rtl" data-toggle="table" data-pagination="true" data-search="true">
                                                     <thead>
                                                     <tr>

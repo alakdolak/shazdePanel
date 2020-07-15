@@ -40,7 +40,21 @@ class HomeController extends Controller {
         $reportsId = Activity::where('name', 'گزارش')->first();
         $newReports = LogModel::where('activityId', $reportsId->id)->where('confirm', 0)->count();
 
-        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments', 'newReports']));
+        $questionId = Activity::where('name', 'سوال')->first();
+        $newQuestions = LogModel::where('activityId', $questionId->id)->where('confirm', 0)->count();
+
+        $ansActivity = Activity::where('name', 'پاسخ')->first();
+        $newA = LogModel::where('activityId', $ansActivity->id)->where('confirm', 0)->get();
+        foreach ($newA as $item) {
+            $relLog = LogModel::find($item->relatedTo);
+            while ($relLog->activityId == $ansActivity->id)
+                $relLog = LogModel::find($relLog->relatedTo);
+
+            if($relLog->activityId == $questionId->id)
+                $newQuestions++;
+        }
+
+        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments', 'newReports', 'newQuestions']));
     }
 
     public function login() {

@@ -108,9 +108,25 @@
                                                             </a>
                                                         </div>
                                                     @endif
+
+                                                    @if($newQuestions > 0)
+                                                        <div class="col-lg-3">
+                                                            <a href="{{route('user.quesAns.index')}}">
+                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                    <div class="income-dashone-pro">
+                                                                        <div class="income-rate-total">
+                                                                            <div class="price-adminpro-rate">
+                                                                                <h3>
+                                                                                    {{$newQuestions}}سوال و جواب جدید
+                                                                                </h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 @endif
-
-
 
                                                 @if(isset($userACL) && $userACL->vod == 1 && $newVideoComments > 0)
 
