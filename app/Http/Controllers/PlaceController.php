@@ -72,6 +72,7 @@ class PlaceController extends Controller {
                     break;
                 case 10:
                     $place = SogatSanaie::find($placeId);
+                    break;
                 case 11:
                     $place = MahaliFood::find($placeId);
                     break;
@@ -334,6 +335,7 @@ class PlaceController extends Controller {
                     break;
                 case 10:
                     $place = SogatSanaie::find($pic->placeId);
+                    break;
                 case 11:
                     $place = MahaliFood::find($pic->placeId);
                     break;

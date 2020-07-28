@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="question section">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="question section home noti">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/userContent/quesAns.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/userContent/quesAns.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/uploadImg.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newContent/uploadImg.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -539,14 +539,9 @@
       <workItem from="1594551781557" duration="2152000" />
       <workItem from="1594562820016" duration="96000" />
       <workItem from="1594625552794" duration="11428000" />
-      <workItem from="1594817577267" duration="1318000" />
-    </task>
-    <task id="LOCAL-00029" summary="debug">
-      <created>1582028575789</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1582028575789</updated>
+      <workItem from="1594817577267" duration="1347000" />
+      <workItem from="1595411387516" duration="364000" />
+      <workItem from="1595918282035" duration="2402000" />
     </task>
     <task id="LOCAL-00030" summary="debug">
       <created>1582118459573</created>
@@ -884,7 +879,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594652230094</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="question section home noti">
+      <created>1594819169266</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1594819169266</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -912,7 +914,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="import tags" />
     <MESSAGE value="comment pages" />
     <MESSAGE value="alt image citypage" />
     <MESSAGE value="add vilage" />
@@ -937,7 +938,8 @@
     <MESSAGE value="set alert to reviews" />
     <MESSAGE value="set reports" />
     <MESSAGE value="question section" />
-    <option name="LAST_COMMIT_MESSAGE" value="question section" />
+    <MESSAGE value="question section home noti" />
+    <option name="LAST_COMMIT_MESSAGE" value="question section home noti" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587373166142">
@@ -948,42 +950,39 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594038151744" />
-    <state x="430" y="0" key="CommitChangelistDialog2" timestamp="1594817580925">
+    <state x="430" y="0" key="CommitChangelistDialog2" timestamp="1594819167551">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="430" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1594817580925" />
+    <state x="430" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1594819167551" />
     <state x="605" y="22" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594043284900" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1590846308000">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590846308000" />
-    <state x="792" y="146" key="RollbackChangesDialog" timestamp="1586586671397">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="792" y="146" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586586671397" />
-    <state x="393" y="174" key="Vcs.Push.Dialog.v2" timestamp="1594652232923">
+    <state x="393" y="174" key="Vcs.Push.Dialog.v2" timestamp="1594819172544">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="393" y="174" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1594652232923" />
+    <state x="393" y="174" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1594819172544" />
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593505501682" />
     <state x="542" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594278370475">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="542" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1594278370475" />
     <state x="762" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593505494403" />
-    <state x="639" y="238" width="665" height="564" key="find.popup" timestamp="1593246182413">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="455" y="164" width="665" height="564" key="find.popup" timestamp="1595918284191">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="455" y="164" width="665" height="564" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1595918284191" />
     <state x="639" y="238" width="665" height="564" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593246182413" />
     <state x="438" y="168" width="672" height="474" key="run.anything.popup" timestamp="1594626718549">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="438" y="168" width="672" height="474" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1594626718549" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591713536724" />
-    <state x="428" y="77" width="672" height="474" key="search.everywhere.popup" timestamp="1594817871634">
+    <state x="428" y="77" width="672" height="474" key="search.everywhere.popup" timestamp="1595923296428">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="428" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1594817871634" />
+    <state x="428" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1595923296428" />
     <state x="601" y="110" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593957082292" />
   </component>
 </project>

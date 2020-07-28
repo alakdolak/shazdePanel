@@ -47,11 +47,15 @@ class HomeController extends Controller {
         $newA = LogModel::where('activityId', $ansActivity->id)->where('confirm', 0)->get();
         foreach ($newA as $item) {
             $relLog = LogModel::find($item->relatedTo);
-            while ($relLog->activityId == $ansActivity->id)
-                $relLog = LogModel::find($relLog->relatedTo);
+            if($relLog != null){
+                while ($relLog->activityId == $ansActivity->id)
+                    $relLog = LogModel::find($relLog->relatedTo);
 
-            if($relLog->activityId == $questionId->id)
-                $newQuestions++;
+                if ($relLog->activityId == $questionId->id)
+                    $newQuestions++;
+            }
+            else
+                $item->delete();
         }
 
         return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments', 'newReports', 'newQuestions']));

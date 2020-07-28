@@ -409,7 +409,6 @@
         }
 
         function showPic(input, id, kind) {
-
             formData = new FormData();
             formData.append('kind', kind);
             formData.append('picNumber', id);
