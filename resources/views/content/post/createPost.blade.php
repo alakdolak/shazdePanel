@@ -9,8 +9,7 @@
     <script src="{{URL::asset('js/ckeditor/ckeditor.js')}}"></script>
     <script src="{{URL::asset('js/ckeditor/sample.js')}}"></script>
     <script src="{{URL::asset('js/jalali.js')}}"></script>
-
-
+    
     <link rel="stylesheet" href="{{URL::asset('css/calendar/persian-datepicker.css')}}"/>
     <script src="{{URL::asset('js/calendar/persian-date.min.js')}}"></script>
     <script src="{{URL::asset('js/calendar/persian-datepicker.js')}}"></script>

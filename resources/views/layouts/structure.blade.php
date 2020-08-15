@@ -139,8 +139,35 @@
                 margin: 0 20px;
                 cursor: pointer;
             }
+            .allPageDiv{
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                display: flex;
+                align-items:center;
+                background: #4dc7bc;
+                background: #fcc156;
+                background: #15b3ac;
+                direction: rtl;
+            }
+            .sideNavs{
+                width: 235px;
+                height: 100%;
+                padding: 10px;
+            }
+            .mainContentDiv{
+                width: 95%;
+                height: 98vh;
+                margin-left: 15px;
+                background: white;
+                border-radius: 30px;
+                padding: 10px 0px;
+                overflow-y: auto;
+            }
         </style>
-
         <script>
             function validateNumber(evt) {
                 var theEvent = evt || window.event;
@@ -160,9 +187,7 @@
                 }
             }
         </script>
-
     @show
-
         <style>
             /*scrollbar*/
             ::-webkit-scrollbar {
@@ -187,25 +212,31 @@
                 background: darkgray !important;
             }
         </style>
-
 </head>
 
 <body class="materialdesign">
     <div class="loaderDiv" id="loader" style="display: none">
         <img src="{{URL::asset('img/loading.gif')}}" >
     </div>
-    <!--[if lt IE 8]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <!-- Header top area start-->
-    <div class="wrapper-pro">
-        <div class="left-sidebar-pro">
-            @include('layouts.sideNav')
-        </div>
 
-        <div class="content-inner-all">
+    <div class="allPageDiv">
+        <div class="sideNavs">
+            @include('layouts.nsideNav')
+        </div>
+        <div class="mainContentDiv">
             @yield('content')
         </div>
+    </div>
+
+    <div class="wrapper-pro">
+
+{{--        <div class="left-sidebar-pro">--}}
+{{--            @include('layouts.sideNav')--}}
+{{--        </div>--}}
+
+{{--        <div class="content-inner-all">--}}
+{{--            @yield('content')--}}
+{{--        </div>--}}
 
 
         @section('reminder')
