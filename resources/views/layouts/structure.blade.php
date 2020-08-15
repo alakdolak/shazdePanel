@@ -162,10 +162,69 @@
                 width: 95%;
                 height: 98vh;
                 margin-left: 15px;
-                background: white;
+                background: #f9f9f9;
                 border-radius: 30px;
                 padding: 10px 0px;
                 overflow-y: auto;
+            }
+            .modal.fade, .modal.in{
+                background-color: rgba(0, 0, 0, 0.64);
+            }
+            .modal-backdrop.fade.in{
+                display: none;
+            }
+            .modal-backdrop.in{
+                display: none;
+            }
+
+            .mobileHeader{
+                display: none;
+            }
+            .mobileHeader .mobileMenuButton{
+                position: absolute;
+                right: 20px;
+                color: white;
+                font-size: 30px;
+                cursor: pointer;
+            }
+            .mobileHeader img{
+                height: 35px;
+            }
+            .shadow-reset{
+                border-radius: 20px;
+                overflow: hidden;
+            }
+
+            @media (max-width: 991px) {
+                .allPageDiv{
+                    flex-direction: column;
+                }
+                .mobileHeader{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 10px 0px;
+
+                }
+                .sideNavs{
+                    position: fixed;
+                    right: 0px;
+                    z-index: 99;
+                    background-color: #15b3ac;
+                    margin-right: -240px;
+                    transition: .4s;
+                    border-radius: 25px 0px 0px 25px;
+                    box-shadow: 0 0 17px 2px #00504f;
+                }
+                .sideNavs.activeMenu{
+                    margin-right: 0px;
+                }
+                .mainContentDiv{
+                    width: 98%;
+                    height: calc(100vh - 65px);
+                    margin: 0px auto;
+                    overflow-x: hidden;
+                }
             }
         </style>
         <script>
@@ -220,7 +279,13 @@
     </div>
 
     <div class="allPageDiv">
-        <div class="sideNavs">
+        <div class="mobileHeader">
+            <img src="{{URL::asset('img/mainLogo.png')}}">
+            <div class="mobileMenuButton" onclick="openMenuSide()">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div id="sideNav" class="sideNavs">
             @include('layouts.nsideNav')
         </div>
         <div class="mainContentDiv">
@@ -317,6 +382,9 @@
         $('#loader').css('display', 'none');
     }
 
+    function openMenuSide(){
+        $('#sideNav').toggleClass('activeMenu')
+    }
 </script>
 @yield('script')
 

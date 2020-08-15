@@ -20,7 +20,8 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="logo">
-                                    <a href="#"><img src="{{URL::asset('img/logo.png')}}" alt="" />
+                                    <a href="#">
+                                        <img src="{{URL::asset('img/mainLogo.png')}}" alt="" />
                                     </a>
                                 </div>
                             </div>
