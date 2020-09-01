@@ -74,22 +74,22 @@
                                                     @endif
 
                                                     @if($newReviews > 0)
-                                                    <div class="col-lg-3">
-                                                        <a href="{{route('reviews.index')}}">
-                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                            <div class="income-dashone-pro">
-                                                                <div class="income-rate-total">
-                                                                    <div class="price-adminpro-rate">
-                                                                        <h3>
-                                                                            {{$newReviews}} نقد جدید
-                                                                        </h3>
+                                                        <div class="col-lg-3">
+                                                            <a href="{{route('reviews.index')}}">
+                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3>
+                                                                                {{$newReviews}} نقد جدید
+                                                                            </h3>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            </a>
                                                         </div>
-                                                        </a>
-                                                    </div>
-                                                @endif
+                                                    @endif
 
                                                     @if($newReports > 0)
                                                         <div class="col-lg-3">
@@ -118,6 +118,24 @@
                                                                             <div class="price-adminpro-rate">
                                                                                 <h3>
                                                                                     {{$newQuestions}}سوال و جواب جدید
+                                                                                </h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
+
+                                                    @if($newMsg > 0)
+                                                        <div class="col-lg-3">
+                                                            <a href="{{route('user.message.index')}}">
+                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                    <div class="income-dashone-pro">
+                                                                        <div class="income-rate-total">
+                                                                            <div class="price-adminpro-rate">
+                                                                                <h3>
+                                                                                    {{$newMsg}} پیام کاربر جدید
                                                                                 </h3>
                                                                             </div>
                                                                         </div>

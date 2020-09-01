@@ -9,16 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property integer $id
  * @property integer $senderId
- * @property string $message
- * @property string $subject
- * @property string $date
  * @property integer $receiverId
- * @property boolean $seenSender
- * @property boolean $seenReceiver
- * @method static \Illuminate\Database\Query\Builder|\App\models\Message whereSeenSender($value)
- * @method static \Illuminate\Database\Query\Builder|\App\models\Message whereSeenReceiver($value)
- * @method static \Illuminate\Database\Query\Builder|\App\models\Message whereSenderId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\models\Message whereReceiverId($value)
+ * @property boolean $seen
  */
 
 class Message extends Model {

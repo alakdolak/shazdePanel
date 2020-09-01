@@ -493,6 +493,14 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), fun
     Route::post('user/quesAns/submit', 'UserContentController@quesAnsSubmit')->name('user.quesAns.submit');
 
     Route::post('user/quesAns/delete', 'UserContentController@quesAnsDelete')->name('user.quesAns.delete');
+
+    Route::get('user/message', 'MessageController@msgPage')->name('user.message.index');
+
+    Route::post('user/get', 'MessageController@getMessages')->name('user.message.get');
+
+    Route::post('user/send', 'MessageController@sendMessages')->name('user.message.send');
+
+    Route::post('user/update', 'MessageController@updateMessages')->name('user.message.update');
 });
 
 Route::get('vodBoomb', function(){

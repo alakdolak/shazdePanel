@@ -173,11 +173,12 @@
             <div class="navs" onclick="openSubMenu(this)">
                 <div class="header">
                     <i class="fa fa-comments icon"></i>
-                    <span class="text">پیام های کاربران پنل</span>
+                    <span class="text">پیام های کاربران</span>
                 </div>
                 <div class="subMenu">
-                    <a href="{{route('sendMsg')}}" class="subNavs">ارسال پیام</a>
-                    <a href="{{route('msgs')}}" class="subNavs">پیام های ارسال شده</a>
+                    <a href="{{route('user.message.index')}}" class="subNavs">پیام رسان کوچیتا</a>
+{{--                    <a href="{{route('sendMsg')}}" class="subNavs">ارسال پیام</a>--}}
+{{--                    <a href="{{route('msgs')}}" class="subNavs">پیام های ارسال شده</a>--}}
                 </div>
             </div>
 

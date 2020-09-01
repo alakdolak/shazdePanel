@@ -3,6 +3,7 @@
 use App\models\Adab;
 use App\models\Amaken;
 use App\models\Cities;
+use App\models\DefaultPic;
 use App\models\Hotel;
 use App\models\MahaliFood;
 use App\models\Majara;
@@ -10,6 +11,7 @@ use App\models\Place;
 use App\models\Restaurant;
 use App\models\SogatSanaie;
 use App\models\State;
+use App\models\User;
 use Illuminate\Support\Facades\URL;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -650,6 +652,31 @@ function resizeImage($pic, $size){
     catch (Exception $exception){
         return 'error';
     }
+}
+
+function getUserPic($id = 0){
+
+    $user = User::find($id);
+    if($user != null){
+        if(strpos($user->picture, 'http') !== false)
+            return $user->picture;
+        else{
+            if($user->uploadPhoto == 0){
+                $deffPic = DefaultPic::find($user->picture);
+
+                if($deffPic != null)
+                    $uPic = URL::asset('defaultPic/' . $deffPic->name);
+                else
+                    $uPic = URL::asset('_images/nopic/blank.jpg');
+            }
+            else
+                $uPic = URL::asset('userProfile/' . $user->picture);
+        }
+    }
+    else
+        $uPic = URL::asset('_images/nopic/blank.jpg');
+
+    return $uPic;
 }
 
 function getRate($kinPlaceId, $placeId){

@@ -1,0 +1,446 @@
+body{
+    min-width: 0px;
+}
+.Scroll{
+    scrollbar-color: var(--koochita-green) #f1f1f1;
+    scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--koochita-green);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--koochita-dark-green);
+}
+footer{
+    display: none;
+}
+.mainMsgBody{
+    display: flex;
+    background-position: center;
+    background-size: cover;
+    padding: 2px 0px;
+}
+.msgBody{
+    width: 75%;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    border-radius: 20px;
+    height: calc(100vh - 65px);
+    margin: 5px;
+    margin-right: 20px;
+    position: relative;
+}
+.sideContacts{
+    position: relative;
+    width: 25%;
+    overflow: hidden;
+    background: white;
+    border-radius: 20px;
+    height: calc(100vh - 65px);
+    margin: 5px;
+}
+.userSideSection{
+    height: calc(100% - 60px);
+    overflow-y: auto;
+    margin-top: 60px;
+}
+.userRow{
+    cursor: pointer;
+    display: flex;
+    padding: 10px;
+    border-bottom: solid #e0e0e0 1px;
+}
+.userRow.active{
+    background-color: #fcc15675;
+}
+.userPic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.userPic img{
+
+}
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    width: calc(100% - 70px);
+}
+.userName{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.userLastMsg{
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: gray;
+}
+.userLastMsg .newMsg {
+    background: var(--koochita-blue);
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.userName .time{
+    font-size: 12px;
+}
+.userSearchSec{
+    position: absolute;
+    background: var(--koochita-blue);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+}
+.userSearchSec .leftBigArrowIcon{
+    color: white;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid .1px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.userInfoMSg{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px;
+}
+.userInfoMSg .leftBigArrowIcon{
+    color: white;
+    font-size: 30px;
+    line-height: 30px;
+    width: 30px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    border: solid .1px;
+    border-radius: 50%;
+}
+.msgHeader{
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--koochita-blue);
+    position: relative;
+    width: 100%;
+    color: white;
+}
+.userSetting{
+    margin-right: 20px;
+    position: relative;
+}
+.userSetting .threeDotIconVertical{
+    font-size: 35px;
+    cursor: pointer;
+}
+.userSettingMenu{
+    background: #f1f1f1;
+    border-radius: 10px;
+    position: absolute;
+    width: 155px;
+    right: 0;
+    text-align: right;
+    direction: rtl;
+    transition: .3s;
+    max-height: 0px;
+    overflow: hidden;
+}
+.userSettingMenu.open{
+    padding: 10px;
+    max-height: 100px;
+}
+.userSettingMenu .nav{
+    margin: 5px 0px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .3s;
+}
+.userSettingMenu .nav:hover{
+    background: var(--koochita-red);
+    color: white;
+}
+.msgContent{
+    padding: 10px 15px;
+    height: calc(100% - 110px);
+    overflow: auto;
+    position: relative;
+}
+.msgContent > div{
+    max-width: 90%;
+    width: fit-content;
+    padding: 10px;
+    margin: 3px 0px;
+    border-radius: 15px;
+    position: relative;
+    direction: rtl;
+}
+.msgContent .myText{
+    margin-left: auto;
+    text-align: right;
+    background: #dcf8c6;
+}
+.msgContent .otherText{
+    background: white;
+}
+.msgContent .otherText .time{
+    text-align: right;
+    color: gray;
+    font-size: 13px;
+    margin-top: 10px;
+}
+.msgContent .myText .time{
+    text-align: left;
+    color: gray;
+    font-size: 13px;
+    margin-top: 10px;
+}
+.msgContent .myText.corner{
+    margin-top: 25px;
+    border-radius: 15px 0px 15px 15px;
+}
+.msgContent .otherText.corner{
+    margin-top: 25px;
+    border-radius: 0px 15px 15px 15px;
+}
+.msgContent .otherText.corner:before{
+    content: "";
+    width: 10px;
+    height: 15px;
+    left: -10px;
+    top: 0px;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+}
+.msgContent .myText.corner:before{
+    content: "";
+    width: 10px;
+    height: 15px;
+    right: -10px;
+    top: 0px;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+}
+.msgContent .Date{
+    color: white;
+    margin: 0px auto;
+    background: var(--koochita-yellow);
+    padding: 10px 20px;
+    border-radius: 35px;
+    margin-top: 20px;
+}
+.msgContent .Date.fixed{
+    position: fixed;
+    top: 130px;
+    left: 58%;
+    z-index: 9;
+    margin-top: 0px;
+}
+.searchInp{
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 85%;
+    cursor: pointer;
+}
+.searchInp .searchIcon, .searchInp .iconClose{
+    padding: 0px 5px;
+    font-size: 25px;
+    color: var(--koochita-blue);
+}
+.searchInp input {
+    border: none;
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+}
+.msgFooter{
+    width: 100%;
+    min-height: 50px;
+    background: var(--koochita-blue);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10px 0px;
+}
+.inputMsgSec{
+    display: flex;
+    background: white;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    width: 90%;
+    margin-bottom: 10px;
+}
+.msgFooter .sendIcon{
+    /*color: var(--koochita-blue);*/
+    color: white;
+    font-size: 35px;
+    line-height: 25px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transform: rotate(225deg);
+}
+.inputMsgSec textarea{
+    border: none;
+    font-size: 14px;
+    width: 99%;
+    resize: none;
+    max-height: 150px;
+    text-align: right;
+    direction: rtl;
+}
+.showThis{
+    display: block !important;
+}
+.hideThis{
+    display: block;
+}
+.notMsg{
+    position: absolute !important;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+}
+.notMsg .content{
+    color: white;
+    margin: 0px auto;
+    background: gray;
+    padding: 10px 20px;
+    border-radius: 35px;
+    direction: rtl;
+    text-align: center;
+}
+.msgContent .loading{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000cf;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    border-radius: 0;
+}
+.lastMsgCotacts{
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90%;
+    direction: rtl;
+    text-align: left;
+}
+@media (max-width: 1200px) {
+    .msgBody{
+        width: 70%;
+    }
+    .sideContacts{
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .msgContent{
+        height: calc(100% - 190px);
+        position: fixed;
+        top: 60px;
+        right: 0px;
+        width: 100%;
+    }
+
+    .msgBody{
+        display: none;
+        width: 100%;
+        margin: 0;
+        border-radius: 0px;
+        height: calc(100vh - 70px);
+    }
+    .mobileHeader{
+        display: none !important;
+    }
+    .showThis{
+        display: block !important;
+    }
+    .hideThis{
+        display: none !important;
+    }
+    html{
+        overflow: hidden;
+    }
+    .sideContacts{
+        width: 100%;
+        height: 75vh;
+        margin: 0px;
+        border-radius: 0px;
+    }
+    .userSideSection{
+        height: calc(100vh - 130px);
+    }
+    .msgFooter{
+        position: fixed;
+        bottom: 70px;
+    }
+    footer{
+        display: flex;
+    }
+    .msgContent .Date.fixed{
+        top: 70px;
+        left: 38%;
+    }
+    .mainMsgBody{
+        padding: 0;
+    }
+    .inputMsgSec textarea{
+        max-height: 100px;
+    }
+    .userInfoMSg .leftBigArrowIcon {
+        display: flex;
+    }
+    .userRow.active{
+        background-color: inherit;
+    }
+    .msgHeader{
+        position: fixed;
+        top: 0px;
+    }
+}

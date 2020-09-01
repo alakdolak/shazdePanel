@@ -1,0 +1,514 @@
+.icons {
+    font-family: 'Shazde_Regular2' !important;
+}
+
+/*....................*/
+.emptyCameraIcon:before{
+    content: '\E010';
+    font-family: 'Shazde_Regular2' !important;
+}
+.fullCameraIcon:before{
+    content: '\E0A4';
+    font-family: 'Shazde_Regular2' !important;
+}
+.hotel:before {
+    content: '\E000';
+}
+.ticket:before {
+    content: '\E004';
+}
+.atraction:before {
+    content: '\E002';
+    font-family: 'Shazde_Regular2' !important;
+}
+.restaurant:before {
+    content: '\E001';
+}
+.soghat:before {
+    content: '\E005';
+}
+.ghazamahali:before {
+    content: '\E006';
+}
+.majara:before {
+    content: '\E009';
+}
+.majaraIcon:before {
+    content: '\E009';
+    font-family: Shazde_Regular2 !important;
+}
+.moreInfoIcon{
+    font-family: monospace;
+}
+.sanaye:before {
+    content: '\E00A';
+}
+.lebas:before {
+    content: '\E05A';
+}
+.boom:before {
+    content: '\E05B';
+}
+.boomIcon:before {
+    content: '\E05B';
+    font-family: 'Shazde_Regular2' !important;
+
+}
+
+.estelah:before {
+    content: '\E06C';
+}
+.location:before {
+    content: '\E019';
+}
+.downArrow {
+    font-size: 40px;
+}
+.downArrow:before {
+    content: '\E04A';
+    color: #30b4a6;
+}
+.plus:before {
+    content: '\E031';
+    font-family: 'Shazde_Regular' !important
+}
+.plus2:before {
+    content: '\E02F';
+    font-family: 'Shazde_Regular' !important
+}
+.calendarIcon:before{
+    content: "\e015";
+    font-family: 'Shazde_Regular' !important
+}
+.minus:before {
+    content: '\E034';
+}
+.trashIcon:before{
+    content: '\E073';
+    font-family: 'Shazde_Regular' !important
+}
+.editIcon:before{
+    content: '\E00E';
+    font-family: 'Shazde_Regular' !important
+}
+.close:before {
+    content: '\E02C';
+    font-family: 'Shazde_Regular' !important;
+}
+.iconClose:before {
+    font-family: 'Shazde_Regular' !important;
+    content: '\E02C';
+}
+.sendIcon:before{
+    content: "\E01B";
+    font-family: 'Shazde_Regular' !important;
+}
+.redStar:before {
+    content: '\E00B';
+}
+.iconFamily:before{
+    font-family: 'Shazde_Regular' !important;
+}
+.searchIcon:before{
+    content: "\e056";
+    font-family: "Shazde_Regular"!important;
+}
+
+
+.hotelIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E000';
+}
+
+.restaurantIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E001';
+}
+
+.touristAttractions::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E002';
+}
+
+.souvenirIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E005';
+}
+
+.traditionalFood::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E006';
+}
+
+.adventure::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E009';
+}
+
+.adventureIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E009';
+}
+
+/*..........city page Icons..........*/
+.cityPageIcon {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 35px;
+    color: #30b4a6;
+}
+
+/*..........phone popUp Icons..........*/
+.phoneIcons {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 40px;
+    direction: rtl;
+    line-height: 40px;
+    color: #30b4a6;
+    margin: 2% 5% 2% 0;
+}
+.phoneIcon {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 50px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.textIcon {
+    color: black;
+    font-size: 19px;
+    margin-top: -1%;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+}
+.mirorIcon{
+    display: inline-block;
+    transform: rotate(90deg);
+}
+
+.LikeIcon:before{
+    content: '\E057' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.DisLikeIcon:before{
+    content: '\E058' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.LikeIconEmpty:before{
+    content: '\E1F9';
+    font-family: Shazde_Regular2 !important;
+}
+.DisLikeIconEmpty:before{
+    content: '\E1F8';
+    font-family: Shazde_Regular2 !important;
+}
+
+.CommentIcon:before{
+    content: '\E06C';
+    font-family: Shazde_Regular2 !important;
+}
+.EmptyCommentIcon:before{
+    content: '\E06B';
+    font-family: Shazde_Regular2 !important;
+}
+.ShareIcon:before{
+    content: '\E1F6';
+    font-family: Shazde_Regular2 !important;
+}
+.emptyShareIcon:before{
+    content: '\e1f5' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.HeartIcon:before{
+    content: '\e012' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.empty-heart:before{
+    content: '\e011' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.fill-heart:before{
+    content: '\e012' !important;
+    font-family: Shazde_Regular2 !important;
+}
+
+.BookMarkIcon:before{
+    content: "\E0DE" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.BookMarkIconEmpty:before{
+    content: "\e0dd" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.safarnameIcon:before{
+    content: '\E0D9' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.settingIcon:before{
+    content: "\E090" !important;
+    font-family: Shazde_Regular2 !important;
+}
+.MyTripsIcon:before{
+    content: "\e0c5" !important;
+}
+.MsgIcon:before{
+    content: "\e05f" !important;
+}
+.UserIcon:before{
+    content: "\e0aa" !important;
+}
+.leftBigArrowIcon:before{
+    content: '\E080';
+    font-family: Shazde_Regular2 !important;
+}
+.downArrowIcon:before{
+    content: '\E04A';
+    font-family: Shazde_Regular2 !important;
+}
+.leftArrowFullIcon:before{
+    content: '\E043';
+    font-family: Shazde_Regular2 !important;
+}
+.leftArrowIcon:before{
+    content: '\E041';
+    font-family: Shazde_Regular2 !important;
+}
+.upArrowIcon{
+    display: inline-block;
+    transform: rotate(180deg);
+}
+.upArrowIcon:before{
+    content: '\E04A';
+    font-family: Shazde_Regular2 !important;
+}
+.threeDotIcon:before{
+    content: '\E091';
+    font-family: Shazde_Regular2 !important;
+}
+.threeDotIconVertical:before{
+    content: '\E092';
+    font-family: Shazde_Regular2 !important;
+}
+.threeLineIcon:before{
+    content: '\E035';
+    font-family: Shazde_Regular2 !important;
+}
+.starRatingGreen::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: var(--koochita-light-green);
+    font-size: 25px;
+}
+
+.starRating::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: white;
+    font-size: 25px;
+}
+
+.starRatingGold::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: var(--koochita-yellow);
+    font-size: 25px;
+}
+
+.starRatingGrey::before {
+    content: '\E00B';
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
+    color: #e5e5e5;
+    font-size: 25px;
+}
+
+.ui_bubble_rating {
+    display: inline-block;
+    position: relative;
+}
+.ui_bubble_rating:before,
+.ui_bubble_rating:after {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: inherit;
+    line-height: 1;
+    font-family: "Shazde_Regular"!important;
+    -ms-transform: rotate(-0.001deg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+}
+.ui_bubble_rating:before {
+    color: transparent;
+    display: block;
+    content: "\e00a\e00a\e00a\e00a\e00a";
+}
+.ui_bubble_rating:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--koochita-light-green);
+}
+.ui_bubble_rating.bubble_0:after,
+.ui_bubble_rating.bubble_00:after {
+    content: "\e00d\e00d\e00d\e00d\e00d";
+}
+.ui_bubble_rating.bubble_05:after {
+    content: "\e00c\e00d\e00d\e00d\e00d";
+}
+.ui_bubble_rating.bubble_1:after,
+.ui_bubble_rating.bubble_10:after {
+    content: "\e00b\e00d\e00d\e00d\e00d";
+}
+.ui_bubble_rating.bubble_15:after {
+    content: "\e00b\e00c\e00d\e00d\e00d";
+}
+.ui_bubble_rating.bubble_2:after,
+.ui_bubble_rating.bubble_20:after {
+    content: "\e00b\e00b\e00d\e00d\e00d";
+}
+.ui_bubble_rating.bubble_25:after {
+    content: "\e00b\e00b\e00c\e00d\e00d";
+}
+.ui_bubble_rating.bubble_3:after,
+.ui_bubble_rating.bubble_30:after {
+    content: "\e00b\e00b\e00b\e00d\e00d";
+}
+.ui_bubble_rating.bubble_35:after {
+    content: "\e00b\e00b\e00b\e00c\e00d";
+}
+.ui_bubble_rating.bubble_4:after,
+.ui_bubble_rating.bubble_40:after {
+    content: "\e00b\e00b\e00b\e00b\e00d";
+}
+.ui_bubble_rating.bubble_45:after {
+    content: "\e00b\e00b\e00b\e00b\e00c";
+}
+.ui_bubble_rating.bubble_5:after,
+.ui_bubble_rating.bubble_50:after {
+    content: "\e00b\e00b\e00b\e00b\e00b";
+}
+.rtl .ui_bubble_rating:before,
+.rtl .ui_bubble_rating:after {
+    -webkit-transform: scale(-1, 1);
+    -moz-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0,mirror=1)";
+    transform: scale(-1, 1);
+}
+
+
+.bubble_40:after {
+    content: "\e00d\e00b\e00b\e00b\e00b" !important;
+}
+
+.bubble_30:after {
+    content: "\e00d\e00d\e00b\e00b\e00b" !important;
+}
+
+.bubble_20:after {
+    content: "\e00d\e00d\e00d\e00b\e00b" !important;
+}
+
+.bubble_10:after {
+    content: "\e00d\e00d\e00d\e00d\e00b" !important;
+}
+
+
+.ui_star_rating {
+    display: inline-block;
+    position: relative;
+}
+.ui_star_rating:before,
+.ui_star_rating:after {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: inherit;
+    line-height: 1;
+    font-family: "Shazde_Regular"!important;
+    -ms-transform: rotate(-0.001deg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+}
+.ui_star_rating:before {
+    content: "\e088\e088\e088\e088\e088";
+    color: #C4C4C4;
+    display: block;
+}
+.ui_star_rating:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #636363;
+}
+.ui_star_rating.star_05:after {
+    content: "\e089";
+}
+.ui_star_rating.star_1:after,
+.ui_star_rating.star_10:after {
+    content: "\e088";
+}
+.ui_star_rating.star_15:after {
+    content: "\e088\e089";
+}
+.ui_star_rating.star_2:after,
+.ui_star_rating.star_20:after {
+    content: "\e088\e088";
+}
+.ui_star_rating.star_25:after {
+    content: "\e088\e088\e089";
+}
+.ui_star_rating.star_3:after,
+.ui_star_rating.star_30:after {
+    content: "\e088\e088\e088";
+}
+.ui_star_rating.star_35:after {
+    content: "\e088\e088\e088\e089";
+}
+.ui_star_rating.star_4:after,
+.ui_star_rating.star_40:after {
+    content: "\e088\e088\e088\e088";
+}
+.ui_star_rating.star_45:after {
+    content: "\e088\e088\e088\e088\e089";
+}
+.ui_star_rating.star_5:after,
+.ui_star_rating.star_50:after {
+    content: "\e088\e088\e088\e088\e088";
+}
+
+@media print {
+    .ui_bubble_rating:before {
+        color: transparent;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .phoneIcon {
+        font-size: 40px;
+    }
+
+    .textIcon {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .phoneIcon {
+        font-size: 30px;
+    }
+
+    .textIcon {
+        font-size: 12px;
+    }
+}

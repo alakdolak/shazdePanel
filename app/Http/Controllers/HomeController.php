@@ -9,6 +9,7 @@ use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\LogModel;
+use App\models\Message;
 use App\models\PhotographersPic;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
@@ -58,7 +59,9 @@ class HomeController extends Controller {
                 $item->delete();
         }
 
-        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments', 'newReports', 'newQuestions']));
+        $newMsg = Message::where('receiverId', 0)->where('seen', 0)->count();
+
+        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments', 'newReports', 'newQuestions', 'newMsg']));
     }
 
     public function login() {
