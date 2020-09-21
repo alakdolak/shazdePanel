@@ -119,7 +119,6 @@ function showErrorDivOrsubmit(error_text, error){
         error_text += '<li>5 تگ اول باید پر شوند</li>';
     }
 
-
     var name = document.getElementById('name').value;
     if (name == '' || name == null || name == ' ') {
         error = true;
@@ -128,13 +127,6 @@ function showErrorDivOrsubmit(error_text, error){
     }
     else
         document.getElementById('name').classList.remove('error');
-
-    var C = document.getElementById('lat').value;
-    var D = document.getElementById('lng').value;
-    if(C == 0 || D == 0){
-        error = true;
-        error_text += '<li>محل مکان را از روی نقشه انتخاب کنید.</li>';
-    }
 
     var cityId = document.getElementById('cityId').value;
     var city = document.getElementById('city').value;

@@ -394,14 +394,22 @@
             var error_text = '';
             var error = false;
 
-            // var address = document.getElementById('address').value;
-            // if(address == '' || address == null || address == ' '){
-            //     error = true;
-            //     error_text += '<li>ادرس را کامل کنید.</li>';
-            //     document.getElementById('address').classList.add('error');
-            // }
-            // else
-            //     document.getElementById('address').classList.remove('error');
+            var address = document.getElementById('address').value;
+
+            if(address.trim().length < 5){
+                error = true;
+                error_text += '<li>ادرس را کامل کنید.</li>';
+                document.getElementById('address').classList.add('error');
+            }
+            else
+                document.getElementById('address').classList.remove('error');
+
+            var C = document.getElementById('lat').value;
+            var D = document.getElementById('lng').value;
+            if (C == 0 || D == 0) {
+                error = true;
+                error_text += '<li>محل مکان را از روی نقشه انتخاب کنید.</li>';
+            }
 
             showErrorDivOrsubmit(error_text, error);
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActivityLogEvent;
 use App\models\Adab;
 use App\models\Amaken;
 use App\models\Boomgardy;
@@ -763,6 +764,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
+            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(1, $amaken->id, $request->tag);
@@ -868,6 +870,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
+            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(4, $hotel->id, $request->tag);
@@ -942,6 +945,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
+            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(3, $restaurant->id, $request->tag);
@@ -1126,6 +1130,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
+            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(11, $newMahali->id, $request->tag);
@@ -1255,6 +1260,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
+            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(10, $newSogat->id, $request->tag);
@@ -1322,6 +1328,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
+            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(12, $boomgardy->id, $request->tag);

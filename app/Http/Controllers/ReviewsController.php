@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActivityLogEvent;
 use App\models\Activity;
 use App\models\Alert;
 use App\models\Amaken;
@@ -11,6 +12,7 @@ use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\Place;
+use App\models\QuestionUserAns;
 use App\models\Restaurant;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
@@ -106,6 +108,21 @@ class ReviewsController extends Controller
                 $review->confirm = 1;
                 $review->seen = 0;
                 $review->save();
+
+                event(new ActivityLogEvent($review->visitorId, $review->id,'نقد', $review->kindPlaceId));
+
+                if(QuestionUserAns::where('logId', $review->id)->first() != null)
+                    event(new ActivityLogEvent($review->visitorId, $review->id,'placeQA', $review->kindPlaceId));
+
+                $reviewPics = ReviewPic::where('logId', $review->id)->get();
+                foreach ($reviewPics as $pic) {
+                    if($pic->is360 == 1)
+                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewVideo360', $review->kindPlaceId));
+                    elseif($pic->isVideo == 1)
+                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewVideo', $review->kindPlaceId));
+                    else
+                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewPic', $review->kindPlaceId));
+                }
 
                 $newAlert = new Alert();
                 $newAlert->subject = 'confirmReview';

@@ -272,24 +272,18 @@
         var city = {!! $cities !!};
     </script>
 
-    <script src="{{URL::asset('js/editContentPage.js')}}"></script>
-
+    <script src="{{URL::asset('js/editContentPage.js?v=1')}}"></script>
 
     {{--map--}}
     <div class="modal fade" id="mapModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body" style="direction: rtl">
-                    <div id="map" style="width: 100%; height: 500px; background-color: red">
-
-                    </div>
+                    <div id="map" style="width: 100%; height: 500px; background-color: red"></div>
                 </div>
-
-                <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
                     <button class="btn nextStepBtnTourCreation" data-dismiss="modal">تایید</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -484,7 +478,8 @@
                         return;
                     }
                     else
-                        showErrorDivOrsubmit();
+                        checkForm();
+                        // showErrorDivOrsubmit();
                 }
             }
         }

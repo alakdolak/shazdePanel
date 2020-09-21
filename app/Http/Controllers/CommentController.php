@@ -134,7 +134,6 @@ class CommentController extends Controller {
         }
 
         return view('/userContent/comments/newComments', compact(['nPostComment', 'nLogsComment', 'logsComment', 'postComment']));
-
     }
 
     public function submitComment(Request $request)

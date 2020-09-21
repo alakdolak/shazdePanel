@@ -627,7 +627,7 @@
                 error_text += '<li>فیلدهای کالری باید پر شود.</li>';
             }
 
-            showErrorDivOrsubmit(error_text, error);
+            showErrorDivOrsubmit(error_text, error, false);
         }
 
         function fitFor(num) {

@@ -61,7 +61,9 @@ class HomeController extends Controller {
 
         $newMsg = Message::where('receiverId', 0)->where('seen', 0)->count();
 
-        return view('home', compact(['photographerNotAgree', 'newReviews', 'newCommentCount', 'newVideoComments', 'newReports', 'newQuestions', 'newMsg']));
+        return view('home', compact(['photographerNotAgree', 'newReviews',
+                                            'newCommentCount', 'newVideoComments',
+                                            'newReports', 'newQuestions', 'newMsg']));
     }
 
     public function login() {

@@ -298,6 +298,13 @@
         else
             document.getElementById('nazdik').classList.remove('error');
 
+        var C = document.getElementById('lat').value;
+        var D = document.getElementById('lng').value;
+        if (C == 0 || D == 0) {
+            error = true;
+            error_text += '<li>محل مکان را از روی نقشه انتخاب کنید.</li>';
+        }
+
         showErrorDivOrsubmit(error_text, error);
     }
 </script>

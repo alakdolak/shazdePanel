@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActivityLogEvent;
 use App\models\Activity;
 use App\models\Alert;
 use App\models\Amaken;
@@ -110,6 +111,8 @@ class UserContentController extends Controller
             $photo = PhotographersPic::find($request->id);
             $photo->status = 1;
             $photo->save();
+
+            event(new ActivityLogEvent($photo->userId, $photo->id, 'photographerPic', $photo->kindPlaceId));
         }
 
         return redirect()->back();
