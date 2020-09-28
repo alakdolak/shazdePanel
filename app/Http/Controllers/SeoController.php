@@ -10,8 +10,8 @@ use App\models\ConfigModel;
 use App\models\Hotel;
 use App\models\Majara;
 use App\models\Place;
-use App\models\Post;
-use App\models\PostTag;
+use App\models\Safarnameh;
+use App\models\SafarnamehTags;
 use App\models\Restaurant;
 use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
@@ -406,7 +406,7 @@ class SeoController extends Controller {
 
 
 
-    public function seoTesterPostContent(Request $request)
+    public function seoTesterSafarnamehContent(Request $request)
     {
         $text = $request->desc;
         $meta = $request->meta;
@@ -1023,7 +1023,7 @@ class SeoController extends Controller {
 
     private function keywordInDataBase($keyword, $id)
     {
-        $allKey = Post::select(['keyword', 'id'])->whereNotNull('keyword')->get();
+        $allKey = Safarnameh::select(['keyword', 'id'])->whereNotNull('keyword')->get();
         $same = 0;
         $similar = array();
         foreach ($allKey as $item){
@@ -1057,7 +1057,7 @@ class SeoController extends Controller {
 
     private function seoInDataBase($seoTitle, $id)
     {
-        $seo = Post::where('seoTitle', $seoTitle)->where('id', '!=', $id)->first();
+        $seo = Safarnameh::where('seoTitle', $seoTitle)->where('id', '!=', $id)->first();
 
         if($seo == null)
             return true;
@@ -1082,7 +1082,7 @@ class SeoController extends Controller {
 
     private function slugInDataBase($slug, $id)
     {
-        $s = Post::where('slug', $slug)->where('id', '!=', $id)->first();
+        $s = Safarnameh::where('slug', $slug)->where('id', '!=', $id)->first();
 
         if($s == null)
             return true;
@@ -1271,7 +1271,7 @@ class SeoController extends Controller {
     }
 
     private function titleInDataBase($title, $id){
-        $s = Post::where('title', $title)->where('id', '!=', $id)->first();
+        $s = Safarnameh::where('title', $title)->where('id', '!=', $id)->first();
 
         if($s == null)
             return true;

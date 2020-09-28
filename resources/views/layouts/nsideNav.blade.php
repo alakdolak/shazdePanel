@@ -145,7 +145,7 @@
                         <a href="{{route('city.index')}}" class="subNavs">اطلاعات شهرها</a>
                         <a href="{{url('topInCity')}}" class="subNavs">پیشنهاد ویژه شهر</a>
                         <a href="{{route('newChangeContent', ['cityId' => 0, 'mode' => 1, 'cityMode' => 'country'])}}" class="subNavs">تغییر محتوای صفحات</a>
-                        <a href="{{route('posts')}}" class="subNavs">مدیریت مقاله ها</a>
+                        <a href="{{route('safarnameh.index')}}" class="subNavs">مدیریت سفرنامه ها</a>
                         <a href="{{route('gardeshNameList')}}" class="subNavs">مقاله‌های گردشنامه</a>
                         <a href="{{route('seoTester')}}" class="subNavs">تست  سئو صفحات</a>
                     </div>
@@ -164,6 +164,7 @@
                         <a href="#" class="subNavs">مدیریت پست‌ها</a>
                         <a href="{{route('user.quesAns.index')}}" class="subNavs">مدیریت پرسش و پاسخ ها</a>
                         <a href="{{route('photographer.index')}}" class="subNavs">عکس های عکاسان</a>
+                        <a href="#" class="subNavs">سفرنامه ها</a>
                         <a href="{{route('user.report.index')}}" class="subNavs">گزارش های کاربران</a>
                         <a href="#" class="subNavs">Recycle Bin</a>
                     </div>

@@ -4,8 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostPlaceRelation extends Model
+class SafarnamehCommentLikes extends Model
 {
-    protected $table = 'postPlaceRelations';
+    protected $table = 'safarnamehCommentLikes';
     public $timestamps = false;
 }

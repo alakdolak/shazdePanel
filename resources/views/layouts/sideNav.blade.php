@@ -49,7 +49,7 @@
                                 <a href="{{route('city.index')}}" class="dropdown-item">اطلاعات شهرها</a>
                                 <a href="{{url('topInCity')}}" class="dropdown-item">پیشنهاد ویژه شهر</a>
                                 <a href="{{route('newChangeContent', ['cityId' => 0, 'mode' => 1, 'cityMode' => 'country'])}}" class="dropdown-item">تغییر محتوای صفحات</a>
-                                <a href="{{route('posts')}}" class="dropdown-item">مدیریت مقاله ها</a>
+                                <a href="{{route('safarnameh.index')}}" class="dropdown-item">مدیریت سفرنامه ها</a>
                                 <a href="{{route('gardeshNameList')}}" class="dropdown-item">مقاله‌های گردشنامه</a>
 
                                 <a href="{{route('seoTester')}}" class="dropdown-item">تست  سئو صفحات</a>

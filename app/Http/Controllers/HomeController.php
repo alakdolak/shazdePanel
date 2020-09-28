@@ -14,6 +14,7 @@ use App\models\PhotographersPic;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
 use App\models\PostComment;
+use App\models\SafarnamehComments;
 use App\models\State;
 use App\models\VideoComment;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class HomeController extends Controller {
 
         $activity = Activity::where('name', 'پاسخ')->first();
         $reviewComment = LogModel::where('confirm', 0)->where('activityId', $activity->id)->count();
-        $postComment = PostComment::where('status', 0)->count();
+        $postComment = SafarnamehComments::where('confirm', 0)->count();
 
         $newCommentCount = $reviewComment + $postComment;
 

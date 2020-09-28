@@ -9,7 +9,7 @@
     <script src="{{URL::asset('js/ckeditor/ckeditor.js')}}"></script>
     <script src="{{URL::asset('js/ckeditor/sample.js')}}"></script>
     <script src="{{URL::asset('js/jalali.js')}}"></script>
-    
+
     <link rel="stylesheet" href="{{URL::asset('css/calendar/persian-datepicker.css')}}"/>
     <script src="{{URL::asset('js/calendar/persian-date.min.js')}}"></script>
     <script src="{{URL::asset('js/calendar/persian-datepicker.js')}}"></script>
@@ -196,8 +196,8 @@
 
 @section('content')
 
-    <input type="hidden" id="postId" value="{{isset($post) ? $post->id : '0'}}">
-        <input type="hidden" id="gardeshName" value="{{isset($post) && isset($post->gardeshName) ? $post->gardeshName : '0'}}">
+    <input type="hidden" id="safarnamehId" value="{{isset($safarnameh) ? $safarnameh->id : '0'}}">
+        <input type="hidden" id="gardeshName" value="{{isset($safarnameh) && isset($safarnameh->gardeshName) ? $safarnameh->gardeshName : '0'}}">
 
     <div class="col-md-3 leftSection">
         <div class="sparkline8-list shadow-reset mg-tb-30">
@@ -211,20 +211,20 @@
                 <div class="form-group">
                     <label for="releaseType">انتشار</label>
                     <select class="form-control" id="releaseType" name="release" onchange="changeRelease(this.value)">
-                        <option value="released" {{isset($post) ? ($post->release == 'released' ? 'selected' : '')  : ''}}>منتشرشده</option>
-                        <option value="draft" {{isset($post) ? ($post->release == 'draft' ? 'selected' : '')  : 'selected'}}>پیش نویس</option>
-                        <option value="future" {{isset($post) ? ($post->release == 'future' ? 'selected' : '')  : ''}}>آینده</option>
+                        <option value="released" {{isset($safarnameh) ? ($safarnameh->release == 'released' ? 'selected' : '')  : ''}}>منتشرشده</option>
+                        <option value="draft" {{isset($safarnameh) ? ($safarnameh->release == 'draft' ? 'selected' : '')  : 'selected'}}>پیش نویس</option>
+                        <option value="future" {{isset($safarnameh) ? ($safarnameh->release == 'future' ? 'selected' : '')  : ''}}>آینده</option>
                     </select>
                 </div>
 
-                <div id="futureDiv" style="display: {{isset($post) && $post->release == 'future' ? '' : 'none'}}">
+                <div id="futureDiv" style="display: {{isset($safarnameh) && $safarnameh->release == 'future' ? '' : 'none'}}">
                     <div class="form-group" style="display: flex">
                         <label for="date" style="font-size: 10px;">تاریخ انتشار</label>
-                        <input name="date" id="date" class="observer-example inputBoxInput" value="{{isset($post) ? $post->date : ''}}" readonly/>
+                        <input name="date" id="date" class="observer-example inputBoxInput" value="{{isset($safarnameh) ? $safarnameh->date : ''}}" readonly/>
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="time" style="font-size: 10px;">ساعت انتشار</label>
-                        <input name="time" id="time" class="inputBoxInput" style="width: 73%;" value="{{isset($post) ? $post->time : ''}}" readonly/>
+                        <input name="time" id="time" class="inputBoxInput" style="width: 73%;" value="{{isset($safarnameh) ? $safarnameh->time : ''}}" readonly/>
                     </div>
                 </div>
             </div>
@@ -244,7 +244,7 @@
                                         <input type="checkbox" id="category{{$item->id}}" name="category[]" value="{{$item->id}}" class="form-control checkbox">
                                         <span class="checkmark"></span>
                                         <span class="labelName">{{$item->name}}</span>
-                                        @if(auth()->user()->level == 1)
+                                        @if($acl == 1)
                                             <i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory({{$item->id}}, this)"></i>
                                         @endif
                                     </label>
@@ -261,7 +261,7 @@
                                                 <span class="labelName">
                                                     {{$item2->name}}
                                                 </span>
-                                                @if(auth()->user()->level == 1)
+                                                @if($acl == 1)
                                                     <i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory({{$item2->id}}, this)"></i>
                                                 @endif
                                             </label>
@@ -275,7 +275,7 @@
                         </div>
                     </div>
                 </div>
-                @if(auth()->user()->level == 1)
+                @if($acl == 1)
                     <div class="row" style="margin-top: 20px; margin-right: 10px;">
                         <a onclick="showNewCategory(this)" style="cursor: pointer;">
                             +افزودن دسته بندی جدید
@@ -343,7 +343,7 @@
             <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
                 <div class="row">
                     <div class="showImg">
-                        <img id="mainPicShow" src="{{isset($post)? $post->pic : ''}}" style="width: 100%;">
+                        <img id="mainPicShow" src="{{isset($safarnameh)? $safarnameh->pic : ''}}" style="width: 100%;">
 
                         <label for="imgInput" class="btn btn-success" style="width: 100%; text-align: center; margin-top: 10px">
                             انتخاب عکس
@@ -362,10 +362,10 @@
             <div class="sparkline8-list shadow-reset mg-tb-30">
                 <div class="sparkline8-hd">
                     <div class="main-sparkline8-hd">
-                        @if(isset($post))
-                            <h1>ویرایش پست</h1>
+                        @if(isset($safarnameh))
+                            <h1>ویرایش سفرنامه</h1>
                         @else
-                            <h1>افزودن پست جدید</h1>
+                            <h1>افزودن سفرنامه جدید</h1>
                         @endif
                     </div>
                 </div>
@@ -375,8 +375,8 @@
 
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label for="title">عنوان پست</label>
-                                <input class="form-control" type="text" name="title" id="title" value="{{(isset($post) ? $post->title : '')}}">
+                                <label for="title">عنوان سفرنامه</label>
+                                <input class="form-control" type="text" name="title" id="title" value="{{(isset($safarnameh) ? $safarnameh->title : '')}}">
                             </div>
                         </div>
 
@@ -385,8 +385,8 @@
                                 <div class="grid-container">
                                     <div class="grid-width-100">
                                     <textarea id="editor" name="text">
-                                        @if(isset($post))
-                                            {!! html_entity_decode($post->description) !!}
+                                        @if(isset($safarnameh))
+                                            {!! html_entity_decode($safarnameh->description) !!}
                                         @endif
                                     </textarea>
                                     </div>
@@ -435,8 +435,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div id="selectedCity" class="row">
-                                        @if(isset($post))
-                                            @foreach($post->city as $item)
+                                        @if(isset($safarnameh))
+                                            @foreach($safarnameh->city as $item)
                                                 <div class="inTag">
                                                     <input type="text" value="{{$item->name}}" style="border: none; width: 100%; font-size: 12px;" readonly>
                                                     <input type="hidden" name="cities[]" id="cities" value="{{$item->validId}}" style="border: none; width: 100%; font-size: 12px;" readonly>
@@ -462,8 +462,8 @@
                                 </div>
                             </div>
                             <div id="selectedPlace" class="row">
-                                @if(isset($post))
-                                    @foreach($post->place as $item)
+                                @if(isset($safarnameh))
+                                    @foreach($safarnameh->place as $item)
                                         <div class="col-md-6 floR">
                                             <div class="inTag">
                                                 <input type="text" value="{{$item->name}}" style="border: none; width: 100%; font-size: 12px;" readonly>
@@ -490,26 +490,26 @@
                         <div class="col-md-12 floR">
                             <div class="form-group">
                                 <label for="keyword">کلمه کلیدی</label>
-                                <input class="form-control" type="text" id="keyword" name="keyword" value="{{isset($post)? $post->keyword: ''}}">
+                                <input class="form-control" type="text" id="keyword" name="keyword" value="{{isset($safarnameh)? $safarnameh->keyword: ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 floR">
                             <div class="form-group">
                                 <label for="seoTitle">عنوان سئو: <span id="seoTitleNumber" style="font-weight: 200;"></span> </label>
-                                <input class="form-control" type="text" id="seoTitle" name="seoTitle" onkeyup="changeSeoTitle(this.value)" value="{{isset($post)? $post->seoTitle: ''}}">
+                                <input class="form-control" type="text" id="seoTitle" name="seoTitle" onkeyup="changeSeoTitle(this.value)" value="{{isset($safarnameh)? $safarnameh->seoTitle: ''}}">
 
                             </div>
                         </div>
                         <div class="col-md-12 floR">
                             <div class="form-group">
                                 <label for="slug">نامک</label>
-                                <input class="form-control" type="text" id="slug" name="slug" value="{{isset($post)? $post->slug: ''}}">
+                                <input class="form-control" type="text" id="slug" name="slug" value="{{isset($safarnameh)? $safarnameh->slug: ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 floR">
                             <div class="form-group">
                                 <label for="meta">متا: <span id="metaNumber" style="font-weight: 200;"></span></label>
-                                <textarea class="form-control" type="text" id="meta" name="meta" onkeyup="changeMeta(this.value)" rows="3">{{isset($post)? $post->meta: ''}}</textarea>
+                                <textarea class="form-control" type="text" id="meta" name="meta" onkeyup="changeMeta(this.value)" rows="3">{{isset($safarnameh)? $safarnameh->meta: ''}}</textarea>
                             </div>
                         </div>
 
@@ -527,7 +527,7 @@
 
                 <center style="padding: 10px; text-align: center; width: 100%;">
                     <input type="button" onclick="checkSeo(1)"  value="ثبت" class="btn btn-success">
-                    <input type="button" onclick="window.location.href='{{route("posts")}}'"  value="بازگشت" class="btn btn-secondry">
+                    <input type="button" onclick="window.location.href='{{route("safarnameh.index")}}'"  value="بازگشت" class="btn btn-secondry">
                 </center>
 
             </div>
@@ -548,7 +548,7 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div style="font-size: 18px; margin-bottom: 20px;">
-                        در پست شما اخطارهای زیر موجود است . ایا از ثبت پست خود اطمینان دارید؟
+                        در سفرنامه شما اخطارهای زیر موجود است . ایا از ثبت سفرنامه خود اطمینان دارید؟
                     </div>
 
                     <div id="warningContentModal" style="padding-right: 5px;"></div>
@@ -557,7 +557,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">خیر اصلاح می کنم.</button>
-                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="storePost()">بله پست ثبت شود</button>
+                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="storePost()">بله سفرنامه ثبت شود</button>
                 </div>
 
             </div>
@@ -568,14 +568,14 @@
     <img id="beforeSaveImg" src="" style="display: none;">
 
     <script>
-        var mainCategory = {{isset($post) ? $post->mainCategory : 0}};
+        var mainCategory = {{isset($safarnameh) ? $safarnameh->mainCategory : 0}};
         var tagsName = [];
         var placeId = [];
         var city = [];
         var cityId = [];
         var selectedOstanId = 0;
         var selectedOstanName = 0;
-        var postId;
+        var safarnamehId;
         var mainDataForm = new FormData();
         var warningCount = 0;
         var errorCount = 0;
@@ -583,16 +583,16 @@
         var uniqueTitle;
         var uniqueSeoTitle;
         var uniqueSlug;
-        var post = null;
+        var safarname = null;
 
         //ckeditor function
         initSample();
 
-        @if(isset($post))
-            post = {!! $postJson !!};
+        @if(isset($safarnameh))
+            safarname = {!! $safarnamehJson !!};
 
             function init(){
-                var cat = post['category'];
+                var cat = safarname['category'];
                 for(var i = 0; i < cat.length; i++) {
                         $('#category' + cat[i]['categoryId']).prop('checked', true);
                     element = $('#category' + cat[i]['categoryId']).parent();
@@ -601,7 +601,7 @@
                 if(mainCategory != 0)
                     changeMainCategory(mainCategory);
 
-                var tags = post['tags'];
+                var tags = safarname['tags'];
                 if(tags.length > 0){
                     element = $('#newTagButton');
                     showNewTag(element);
@@ -611,11 +611,11 @@
                     }
                 }
 
-                for(var i = 0; i < post['city'].length; i++)
-                    cityId[cityId.length] = post['city'][i]['validId'];
+                for(var i = 0; i < safarname['city'].length; i++)
+                    cityId[cityId.length] = safarname['city'][i]['validId'];
 
-                for(var i = 0; i < post['place'].length; i++)
-                    placeId[placeId.length] = post['place'][i]['validId'];
+                for(var i = 0; i < safarname['place'].length; i++)
+                    placeId[placeId.length] = safarname['place'][i]['validId'];
             }
             init();
 
@@ -644,7 +644,7 @@
 
             $.ajax({
                 type: 'post',
-                url: '{{route("postTagSearch")}}',
+                url: '{{route("safarnamehTagSearch")}}',
                 data:{
                     _token: '{{csrf_token()}}',
                     text: value
@@ -750,7 +750,7 @@
             if(value.trim().length != 0){
                 $.ajax({
                     type: 'post',
-                    url: '{{route("newPostCategory")}}',
+                    url: '{{route("newSafarnamehCategory")}}',
                     data: {
                         _token: '{{csrf_token()}}',
                         value: value,
@@ -913,7 +913,7 @@
             var name = document.getElementById('cityNameSearch').value;
 
             if(selectedOstanId == 0){
-                alert('استان و شهر را مشخص کنید...')
+                alert('استان و شهر را مشخص کنید...');
                 return;
             }
 
@@ -975,7 +975,7 @@
                 var eee = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 
                 data.append('pic', eee);
-                data.append('id', postId);
+                data.append('id', safarnamehId);
 
                 $.ajax({
                     type: 'post',
@@ -1011,7 +1011,7 @@
 
         function storePost(){
 
-            var id = document.getElementById('postId').value;
+            var id = document.getElementById('safarnamehId').value;
             var gardeshName = document.getElementById('gardeshName').value;
             var title = document.getElementById('title').value;
             var description = ' ';
@@ -1112,15 +1112,15 @@
             document.getElementById('loader').style.display = 'flex';
             $.ajax({
                 type: 'post',
-                url: '{{route("storePost")}}',
+                url: '{{route("safarnameh.store")}}',
                 data: mainDataForm,
                 processData: false,
                 contentType: false,
                 success: function(response){
                     response = JSON.parse(response);
                     if(response[0] == 'ok'){
-                        postId = response[1];
-                        document.getElementById('postId').value = response[1];
+                        safarnamehId = response[1];
+                        document.getElementById('safarnamehId').value = response[1];
                         findSrc(0);
                     }
                 }
@@ -1134,10 +1134,10 @@
 
             $.ajax({
                 type: 'post',
-                url: '{{route("storeDescriptionPost")}}',
+                url: '{{route("safarnameh.description.store")}}',
                 data: {
                     _token: '{{csrf_token()}}',
-                    id: postId,
+                    id: safarnamehId,
                     description : desc
                 },
                 success: function(response){
@@ -1146,7 +1146,7 @@
                     var location = window.location.href;
 
                     if(location.includes('createPost') || location.includes('gardeshEdit'))
-                        window.location.href = '{{url("editPost")}}/' + postId;
+                        window.location.href = '{{url("safarnameh.edit")}}/' + safarnamehId;
                     else
                         document.getElementById('loader').style.display = 'none';
                 }
@@ -1160,12 +1160,12 @@
             var slug = document.getElementById('slug').value;
             var meta = document.getElementById('meta').value;
             var title = document.getElementById('title').value;
-            var postId = document.getElementById('postId').value;
+            var safarnamehId = document.getElementById('safarnamehId').value;
             var desc = CKEDITOR.instances['editor'].getData();
 
             $.ajax({
                 type: 'post',
-                url : '{{route("seoTesterPostContent")}}',
+                url : '{{route("seoTesterSafarnamehContent")}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     keyword: value,
@@ -1173,7 +1173,7 @@
                     seoTitle: seoTitle,
                     slug: slug,
                     title: title,
-                    id: postId,
+                    id: safarnamehId,
                     desc: desc
                 },
                 success: function(response){
@@ -1252,7 +1252,7 @@
 
             var inputMainPic = document.getElementById('imgInput');
 
-            if(!(inputMainPic.files && inputMainPic.files[0]) && (post == null || post['pic'] == null)){
+            if(!(inputMainPic.files && inputMainPic.files[0]) && (safarname == null || safarname['pic'] == null)){
                 errorCount++;
                 text = '<div style="color: red;">مقاله باید حتما دارای عکس اصلی باشد.</div>';
                 $('#errorResult').append(text);
@@ -1265,7 +1265,7 @@
             if(kind == 1) {
                 var release = document.getElementById('releaseType').value;
                 if (release != 'draft' && errorCount > 0) {
-                    alert('برای ثبت پست باید ارورها رابرطرف کرده و یا انتشار را به حالت پیش نویس دراوردی.')
+                    alert('برای ثبت سفرنامه باید ارورها رابرطرف کرده و یا انتشار را به حالت پیش نویس دراوردی.');
                     return;
                 }
                 if(!uniqueTitle){
@@ -1323,7 +1323,7 @@
         function deleteCategory(_id, _element){
             $.ajax({
                 type: 'post',
-                url: '{{route("post.category.delete")}}',
+                url: '{{route("safarnameh.category.delete")}}',
                 data:{
                     _token: '{{csrf_token()}}',
                     id: _id

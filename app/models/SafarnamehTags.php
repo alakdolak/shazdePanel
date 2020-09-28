@@ -4,8 +4,9 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostCategoryRelation extends Model
+class SafarnamehTags extends Model
 {
-    protected $table = 'postCategoryRelations';
+    protected $guarded = [];
+    protected $table = 'safarnamehTags';
     public $timestamps = false;
 }

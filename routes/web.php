@@ -205,103 +205,42 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'publicityAccess']), f
 Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), function () {
 
     Route::group(array('middleware' => ['auth', 'superAdminLevel']), function (){
-        Route::post('/post/category/delete', 'PostController@deleteCategory')->name('post.category.delete');
+        Route::post('/safarnameh/category/delete', 'SafarnamehController@deleteSafarnamehCategory')->name('safarnameh.category.delete');
 
-        Route::post('newPostCategory', 'PostController@newPostCategory')->name('newPostCategory');
+        Route::post('newSafarnamehCategory', 'SafarnamehController@newSafarnamehCategory')->name('newSafarnamehCategory');
     });
 
-    Route::get('/gardeshNameList', 'PostController@gardeshNameList')->name('gardeshNameList');
+    Route::get('/gardeshNameList', 'SafarnamehController@gardeshNameList')->name('gardeshNameList');
 
-    Route::get('posts', ['as' => 'posts', 'uses' => 'PostController@posts']);
+    Route::get('safarnamehPage', 'SafarnamehController@safarnamehPage')->name('safarnameh.index');
 
-    Route::get('createPost', ['as' => 'createPost', 'uses' => 'PostController@createPost']);
+    Route::get('safarnamehNew', 'SafarnamehController@newSafarnameh')->name('safarnameh.new');
 
-    Route::get('editPost/{id}', ['as' => 'editPost', 'uses' => 'PostController@editPost']);
+    Route::get('safarnameh/edit/{id}', 'SafarnamehController@editSafarnameh')->name('safarnameh.edit');
 
-    Route::post('/uploadCKEditor', function (Request $request) {
+    Route::post('/uploadCKEditor', 'SafarnamehController@uploadSafarnamehPic')->name('uploadCKEditor');
 
-        try {
+    Route::post('deleteSafarnameh', 'SafarnamehController@deleteSafarnameh')->name('safarnameh.delete');
 
-            if ($this->request->hasFiles() == true) {
-                $errors = []; // Store all foreseen and unforseen errors here
-                $fileExtensions = ['jpeg','jpg','png','gif','svg'];
-                $uploadDirectory = __DIR__ . '/../../Uploads/';
-                $Y = date("Y");
-                $M = date("m");
+    Route::post('addToFavoriteSafarnameh', 'SafarnamehController@addToFavoriteSafarnameh')->name('addToFavoriteSafarnameh');
 
-                foreach ($this->request->getUploadedFiles() as $file) {
+    Route::post('addToBannerSafarnameh', 'SafarnamehController@addToBannerSafarnameh')->name('addToBannerSafarnameh');
 
-                    if (in_array($file->getExtension(),$fileExtensions)) {
+    Route::post('deleteGardesh', 'SafarnamehController@deleteGardesh')->name('deleteGardesh');
 
-                        if($file->getSize() < 2000000)  {
-                            if (!file_exists($uploadDirectory . $Y)) {
-                                mkdir($uploadDirectory.$Y, 0777, true);
-                            }
-                            if (!file_exists($uploadDirectory.$Y.'/'.$M)) {
-                                mkdir($uploadDirectory.$Y.'/'.$M, 0777, true);
-                            }
+    Route::post('deleteFromFavoriteSafarnameh', 'SafarnamehController@deleteFromFavoritePosts')->name('deleteFromFavoriteSafarnameh');
 
-                            $namenew = md5($file->getName().time()).'.'.$file->getExtension();
-                            $uploadDirectory .= $Y.'/'.$M.'/';
-                            $file->moveTo($uploadDirectory.$namenew);
-                        }
-                        else {
-                            $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
-                        }
-                    }
-                    else{$errors[] = "This file extension is not allowed. Please upload a JPEG ,svg,gif,,jpg,PNG file";}
+    Route::post('deleteFromBannerSafarnameh', 'SafarnamehController@deleteFromBannerSafarnameh')->name('deleteFromBannerSafarnameh');
 
-                    if(empty($errors))  {
-                        echo '{
-                        "uploaded": true,
-                        "url": "http://localhost/cms/public/Uploads/'.$Y.'/'.$M.'/'.$namenew.'"}';
-                    }
-                    else{
-                        echo '{
-                        "uploaded": false,
-                        "error": {
-                            "message": "could not upload this image1"
-                    }';
-                    }
-                }
-            }
-            else {
-                echo '{
-                "uploaded": false,
-                "error": {
-                    "message": "could not upload this image1"
-                }';
-            }
-        }
+    Route::post('safarnamehTagSearch', 'SafarnamehController@safarnamehTagSearch')->name('safarnamehTagSearch');
 
-        catch (\Exception $e) {
-            echo '{
-            "uploaded": false,
-            "error": {
-                "message": "could not upload this image0"
-            }';
-        }
-    })->name('uploadCKEditor');
+    Route::post('safarnameh/store', 'SafarnamehController@storeSafarnameh')->name('safarnameh.store');
 
-    Route::post('deletePost', ['as' => 'deletePost', 'uses' => 'PostController@deletePost']);
+    Route::post('safarnameh/store/description', 'SafarnamehController@storeDescriptionSafarnameh')->name('safarnameh.description.store');
 
-    Route::post('addToFavoritePosts', ['as' => 'addToFavoritePosts', 'uses' => 'PostController@addToFavoritePosts']);
+    Route::post('imageUploadCKeditor4', 'SafarnamehController@imageUploadCKeditor4')->name('imageUploadCKeditor4');
 
-    Route::post('addToBannerPosts', ['as' => 'addToBannerPosts', 'uses' => 'PostController@addToBannerPosts']);
-
-    Route::post('deleteFromFavoritePosts', ['as' => 'deleteFromFavoritePosts', 'uses' => 'PostController@deleteFromFavoritePosts']);
-
-    Route::post('deleteFromBannerPosts', ['as' => 'deleteFromBannerPosts', 'uses' => 'PostController@deleteFromBannerPosts']);
-
-    Route::post('postTagSearch', 'PostController@postTagSearch')->name('postTagSearch');
-
-    Route::post('storePost', 'PostController@storePost')->name('storePost');
-
-    Route::post('storeDescriptionPost', 'PostController@storeDescriptionPost')->name('storeDescriptionPost');
-
-    Route::post('imageUploadCKeditor4', 'PostController@imageUploadCKeditor4')->name('imageUploadCKeditor4');
-
-    Route::post('seoTesterPostContent', 'SeoController@seoTesterPostContent')->name('seoTesterPostContent');
+    Route::post('seoTesterSafarnamehContent', 'SeoController@seoTesterSafarnamehContent')->name('seoTesterSafarnamehContent');
 
 });
 
@@ -551,11 +490,9 @@ Route::group(array('middleware' => ['auth']), function(){
 });
 
 
-Route::get('gardeshEdit/{id}', 'PostController@gardeshNameEdit');
+Route::get('gardeshEdit/{id}', 'SafarnamehController@gardeshNameEdit');
 
-Route::post('deleteGardesh', 'PostController@deleteGardesh')->name('deleteGardesh');
-
-Route::get('addGardeshNameTags', 'PostController@addGardeshNameTags')->name('addGardeshNameTags');
+Route::get('addGardeshNameTags', 'SafarnamehController@addGardeshNameTags')->name('addGardeshNameTags');
 
 Route::get('myWordsCount', 'SeoController@myWordsCount')->name('myWordsCount');
 
