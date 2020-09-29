@@ -389,14 +389,17 @@ class SafarnamehController extends Controller
 
         if($safarnamehId != 0){
             $safarnameh = Safarnameh::find($safarnamehId);
-            if($safarnameh == null)
+            if($safarnameh == null) {
                 $safarnameh = new Safarnameh();
+                $safarnameh->userId = \auth()->user()->id;
+            }
         }
-        else
+        else {
             $safarnameh = new Safarnameh();
+            $safarnameh->userId = \auth()->user()->id;
+        }
 
         $safarnameh->title = $request->title;
-        $safarnameh->userId = \auth()->user()->id;
         $safarnameh->description = ' ';
         $safarnameh->seoCheck = $request->warningCount;
         $safarnameh->release = $request->releaseType;

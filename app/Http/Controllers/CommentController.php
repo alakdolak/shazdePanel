@@ -17,9 +17,9 @@ use App\models\Place;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
 use App\models\PlaceStyle;
-use App\models\Post;
-use App\models\PostComment;
 use App\models\Restaurant;
+use App\models\Safarnameh;
+use App\models\SafarnamehComments;
 use App\models\State;
 use App\models\User;
 use App\models\UserAddPlace;
@@ -63,7 +63,7 @@ class CommentController extends Controller {
             }
         }
 
-        $nPostComment = PostComment::where('status', 0)->get();
+        $nPostComment = SafarnamehComments::where('confirm', 0)->get();
         foreach ($nPostComment as $item) {
             $date = explode(' ', $item->created_at)[0];
             $date = gregorianToJalali($date);
@@ -77,7 +77,7 @@ class CommentController extends Controller {
             else
                 $item->username = $u->username;
 
-            $post = Post::find($item->postId);
+            $post = Safarnameh::find($item->postId);
             if($post == null)
                 $item->delete();
             else
@@ -112,7 +112,7 @@ class CommentController extends Controller {
             }
         }
 
-        $postComment = PostComment::where('status', 1)->get();
+        $postComment = SafarnamehComments::where('confirm', 1)->get();
         foreach ($postComment as $item) {
             $date = explode(' ', $item->created_at)[0];
             $date = gregorianToJalali($date);
@@ -126,7 +126,7 @@ class CommentController extends Controller {
             else
                 $item->username = $u->username;
 
-            $post = Post::find($item->postId);
+            $post = Safarnameh::find($item->postId);
             if($post == null)
                 $item->delete();
             else
@@ -140,7 +140,7 @@ class CommentController extends Controller {
     {
         if(isset($request->kind) && isset($request->id)){
             if($request->kind == 'article'){
-                $com = PostComment::find($request->id);
+                $com = SafarnamehComments::find($request->id);
                 $com->status = 1;
                 $com->save();
             }
@@ -162,7 +162,7 @@ class CommentController extends Controller {
             $activityId = Activity::where('name', 'پاسخ')->first();
             $sum = 0;
             $sum += LogModel::where('confirm', 0)->where('activityId', $activityId->id)->count();
-            $sum += PostComment::where('status', 0)->count();
+            $sum += SafarnamehComments::where('confirm', 0)->count();
             echo json_encode(['status' => 'ok', 'result' => $sum]);
         }
         else
@@ -175,7 +175,7 @@ class CommentController extends Controller {
     {
         if(isset($request->kind) && isset($request->id)){
             if($request->kind == 'article'){
-                $com = PostComment::find($request->id);
+                $com = SafarnamehComments::find($request->id);
                 if($com->haveAns == 1)
                     $this->deleteRelatedComment('article', $com->id);
                 $com->delete();
@@ -192,7 +192,7 @@ class CommentController extends Controller {
             $activityId = Activity::where('name', 'پاسخ')->first();
             $sum = 0;
             $sum += LogModel::where('confirm', 0)->where('activityId', $activityId->id)->count();
-            $sum += PostComment::where('status', 0)->count();
+            $sum += SafarnamehComments::where('confirm', 0)->count();
             echo json_encode(['status' => 'ok', 'result' => $sum]);
         }
         else
@@ -203,7 +203,7 @@ class CommentController extends Controller {
     private function deleteRelatedComment($type, $id){
 
         if($type == 'article'){
-            $coms = PostComment::where('ansTo', $id)->get();
+            $coms = SafarnamehComments::where('ansTo', $id)->get();
             foreach ($coms as $com){
                 if($com->haveAns == 1)
                     $this->deleteRelatedComment($type, $com->id);
@@ -231,7 +231,7 @@ class CommentController extends Controller {
 
         $confirm = ($confirm) ? "1" : "0";
 
-        $posts = DB::select('select pc.id, p.title, pc.msg, u.username, pc.created_at, pc.status from users u, post p, postComment pc WHERE u.id = pc.userId and p.id = pc.postId and pc.status = ' . $confirm . ' ORDER by created_at DESC');
+        $posts = DB::select('select sc.id, s.title, sc.text, u.username, sc.created_at, sc.confirm from users u, safarnameh s, safarnamehComments sc WHERE u.id = sc.userId and s.id = sc.postId and sc.confirm = ' . $confirm . ' ORDER by created_at DESC');
         $dates = [];
         $counter = 0;
 
@@ -263,25 +263,8 @@ class CommentController extends Controller {
 
             $log->visitorId = User::whereId($log->visitorId)->username;
 
-            switch ($log->kindPlaceId) {
-                case getValueInfo('amaken'):
-                default:
-                    $place = Amaken::whereId($log->placeId);
-                    break;
-                case getValueInfo('restaurant'):
-                    $place = Restaurant::whereId($log->placeId);
-                    break;
-                case getValueInfo('hotel'):
-                    $place = Hotel::whereId($log->placeId);
-                    break;
-                case getValueInfo('majara'):
-                    $place = Majara::whereId($log->placeId);
-                    break;
-                case getValueInfo('adab'):
-                    $place = Adab::whereId($log->placeId);
-                    break;
-            }
-
+            $kindPlace = Place::find($log->kindPlaceId);
+            $place = \DB::table($kindPlace->tableName)->find($log->placeId);
             $log->name = $place->name;
             $log->date = convertDate($log->date);
 
@@ -303,35 +286,10 @@ class CommentController extends Controller {
                 }
             }
             else if($activity->name == "عکس") {
-                switch ($log->kindPlaceId) {
-                    case getValueInfo('amaken'):
-                    default:
-                        $log->userPic = URL::asset('userPhoto/amaken/l-' . $log->text);
-                        if(!file_exists(__DIR__ . '/../../../../assets/userPhoto/amaken/l-' . $log->text))
-                            $delete = true;
-                        break;
-                    case getValueInfo('restaurant'):
-                        $log->userPic = URL::asset('userPhoto/restaurant/l-' . $log->text);
-                        if(!file_exists(__DIR__ . '/../../../../assets/userPhoto/restaurant/l-' . $log->text))
-                            $delete = true;
-                        break;
-                    case getValueInfo('hotel'):
-                        $log->userPic = URL::asset('userPhoto/hotels/l-' . $log->text);
-                        if(!file_exists(__DIR__ . '/../../../../assets/userPhoto/hotels/l-' . $log->text))
-                            $delete = true;
-                        break;
-                    case getValueInfo('majara'):
-                        $log->userPic = URL::asset('userPhoto/majara/l-' . $log->text);
-                        if(!file_exists(__DIR__ . '/../../../../assets/userPhoto/majara/l-' . $log->text))
-                            $delete = true;
-                        break;
-                    case getValueInfo('adab'):
-                        $log->userPic = URL::asset('userPhoto/adab/l-' . $log->text);
-                        if(!file_exists(__DIR__ . '/../../../../assets/userPhoto/adab/l-' . $log->text))
-                            $delete = true;
-                        break;
-                }
-
+                $kindPlace = Place::find($log->kindPlaceId);
+                $log->userPic = URL::asset('userPhoto/' . $kindPlace->fileName . '/l-' . $log->text);
+                if(!file_exists(__DIR__ . '/../../../../assets/userPhoto/' . $kindPlace->fileName . '/l-' . $log->text))
+                    $delete = true;
                 $log->photoCategory = PicItem::find($log->pic)->name;
             }
 
@@ -357,12 +315,12 @@ class CommentController extends Controller {
                     DB::transaction(function () use ($logs) {
                         foreach ($logs as $log) {
 
-                            $tmp = PostComment::whereId(makeValidInput($log));
+                            $tmp = SafarnamehComments::find(makeValidInput($log));
 
                             if ($tmp == null)
                                 continue;
 
-                            $tmp->status = 0;
+                            $tmp->confirm = 0;
                             $tmp->save();
 
                             $tmp2 = new AdminLog();
@@ -416,12 +374,12 @@ class CommentController extends Controller {
                     DB::transaction(function () use ($logs) {
                         foreach ($logs as $log) {
 
-                            $tmp = PostComment::whereId(makeValidInput($log));
+                            $tmp = SafarnamehComments::find(makeValidInput($log));
 
                             if ($tmp == null)
                                 continue;
 
-                            $tmp->status = 1;
+                            $tmp->confirm = 1;
                             $tmp->save();
 
                             $tmp2 = new AdminLog();
@@ -498,24 +456,8 @@ class CommentController extends Controller {
                             continue;
                         switch ($tmp->activitiId) {
                             case "عکس":
-                                switch ($tmp->kindPlaceId) {
-                                    case getValueInfo('amaken'):
-                                    default:
-                                        $userPic = URL::asset('userPhoto/amaken/l-' . $tmp->text);
-                                        break;
-                                    case getValueInfo('restaurant'):
-                                        $userPic = URL::asset('userPhoto/restaurant/l-' . $tmp->text);
-                                        break;
-                                    case getValueInfo('hotel'):
-                                        $userPic = URL::asset('userPhoto/hotels/l-' . $tmp->text);
-                                        break;
-                                    case getValueInfo('majara'):
-                                        $userPic = URL::asset('userPhoto/majara/l-' . $tmp->text);
-                                        break;
-                                    case getValueInfo('adab'):
-                                        $userPic = URL::asset('userPhoto/adab/l-' . $tmp->text);
-                                        break;
-                                }
+                                $kindPlace = Place::find($tmp->kindPlaceId);
+                                $userPic = URL::asset('userPhoto/'.$kindPlace->fileName.'/l-' . $tmp->text);
                                 if(file_exists($userPic))
                                     unlink($userPic);
                                 break;
