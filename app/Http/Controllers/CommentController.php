@@ -77,7 +77,7 @@ class CommentController extends Controller {
             else
                 $item->username = $u->username;
 
-            $post = Safarnameh::find($item->postId);
+            $post = Safarnameh::find($item->safarnamehId);
             if($post == null)
                 $item->delete();
             else
@@ -126,14 +126,14 @@ class CommentController extends Controller {
             else
                 $item->username = $u->username;
 
-            $post = Safarnameh::find($item->postId);
+            $post = Safarnameh::find($item->safarnamehId);
             if($post == null)
                 $item->delete();
             else
                 $item->post = $post->slug;
         }
 
-        return view('/userContent/comments/newComments', compact(['nPostComment', 'nLogsComment', 'logsComment', 'postComment']));
+        return view('userContent.comments.newComments', compact(['nPostComment', 'nLogsComment', 'logsComment', 'postComment']));
     }
 
     public function submitComment(Request $request)
@@ -141,7 +141,7 @@ class CommentController extends Controller {
         if(isset($request->kind) && isset($request->id)){
             if($request->kind == 'article'){
                 $com = SafarnamehComments::find($request->id);
-                $com->status = 1;
+                $com->confirm = 1;
                 $com->save();
             }
             else if($request->kind == 'log'){

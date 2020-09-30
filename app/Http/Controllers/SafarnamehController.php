@@ -201,6 +201,15 @@ class SafarnamehController extends Controller
         if($safarnameh == null)
             return Redirect::route('home');
 
+        if($safarnameh->slug == null || $safarnameh->slug == '')
+            $safarnameh->slug = makeSlug($safarnameh->title);
+
+        if($safarnameh->seoTitle == null || $safarnameh->seoTitle == '')
+            $safarnameh->seoTitle = $safarnameh->title;
+
+        if($safarnameh->meta == null || $safarnameh->meta == '')
+            $safarnameh->meta = $safarnameh->summery;
+
         if($safarnameh->pic !=  null)
             $safarnameh->pic = URL::asset('_images/posts/' . $safarnameh->id . '/' . $safarnameh->pic);
         if($safarnameh->time !=  null) {
@@ -441,7 +450,7 @@ class SafarnamehController extends Controller
             array_push($tagId, $tag->id);
             array_push($existTag, $ex->id);
         }
-        SafarnamehTagRelations::whereNotIn('id', $ex)->where('safarnamehId', $safarnamehId)->delete();
+        SafarnamehTagRelations::whereNotIn('id', $existTag)->where('safarnamehId', $safarnamehId)->delete();
 
         $category = json_decode($request->category);
         $categoryRelation = SafarnamehCategoryRelations::where('safarnamehId', $safarnameh->id)->get();
@@ -538,11 +547,11 @@ class SafarnamehController extends Controller
 
         $place = json_decode($request->placeId);
         if(count($place) != 0) {
-            SafarnamehPlaceRelations::where('safarnameId', $safarnamehId)
+            SafarnamehPlaceRelations::where('safarnamehId', $safarnamehId)
                                     ->where('kindPlaceId', 0)
                                     ->where('placeId', 0)
                                     ->delete();
-            $placeRelations = SafarnamehPlaceRelations::where('safarnameId', $safarnamehId)->get();
+            $placeRelations = SafarnamehPlaceRelations::where('safarnamehId', $safarnamehId)->get();
             $existPlace = array();
 
             for ($i = 0; $i < count($placeRelations); $i++) {
@@ -564,7 +573,7 @@ class SafarnamehController extends Controller
                         $newPlace = new SafarnamehPlaceRelations();
                         $newPlace->kindPlaceId = $kindPlaceId;
                         $newPlace->placeId = $placeId;
-                        $newPlace->safarnameId = $safarnamehId;
+                        $newPlace->safarnamehId = $safarnamehId;
                         $newPlace->save();
                     }
                     else
@@ -573,7 +582,7 @@ class SafarnamehController extends Controller
             }
 
             if(count($place) == $count){
-                $allPlace = SafarnamehPlaceRelations::where('safarnameId', $safarnamehId)
+                $allPlace = SafarnamehPlaceRelations::where('safarnamehId', $safarnamehId)
                                                     ->where('kindPlaceId', 0)
                                                     ->where('placeId', 0)
                                                     ->first();
@@ -581,7 +590,7 @@ class SafarnamehController extends Controller
                     $newPlace = new SafarnamehPlaceRelations();
                     $newPlace->kindPlaceId = 0;
                     $newPlace->placeId = 0;
-                    $newPlace->safarnameId = $safarnamehId;
+                    $newPlace->safarnamehId = $safarnamehId;
                     $newPlace->save();
                 }
             }

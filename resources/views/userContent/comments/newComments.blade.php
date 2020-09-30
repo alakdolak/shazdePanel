@@ -58,7 +58,7 @@
                                     <div class="container-fluid">
                                         <div class="row">
 
-                                            <h2>کامنت های مقالات</h2>
+                                            <h2>کامنت های سفرنامه ها</h2>
                                             <div style="max-height: 80vh; overflow-y: auto">
                                                 <table class="table table-striped  table-bordered" dir="rtl" data-toggle="table" data-pagination="true" data-search="true">
                                                     <thead>
@@ -80,7 +80,7 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                {{$item->msg}}
+                                                                {{$item->text}}
                                                             </td>
                                                             <td>
                                                                 {{$item->date}}
@@ -154,7 +154,7 @@
                                     <br>
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <h2>کامنت های تایید شده مقالات</h2>
+                                            <h2>کامنت های تایید شده سفرنامه ها</h2>
                                             <div style="max-height: 80vh; overflow-y: auto">
                                                 <table class="table table-striped  table-bordered" dir="rtl" data-toggle="table" data-pagination="true" data-search="true">
                                                     <thead>
@@ -176,7 +176,7 @@
                                                                 </a>
                                                             </td>
                                                             <td>
-                                                                {{$item->msg}}
+                                                                {{$item->text}}
                                                             </td>
                                                             <td>
                                                                 {{$item->date}}

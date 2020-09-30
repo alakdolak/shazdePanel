@@ -361,9 +361,10 @@
         <div class="col-md-12">
             <div class="sparkline8-list shadow-reset mg-tb-30">
                 <div class="sparkline8-hd">
-                    <div class="main-sparkline8-hd">
+                    <div class="main-sparkline8-hd" STYLE="display: flex; justify-content: space-between">
                         @if(isset($safarnameh))
                             <h1>ویرایش سفرنامه</h1>
+                            <button class="btn btn-success" onclick="storePost(false)">ثبت بدون تست سئو</button>
                         @else
                             <h1>افزودن سفرنامه جدید</h1>
                         @endif
@@ -495,9 +496,14 @@
                         </div>
                         <div class="col-md-12 floR">
                             <div class="form-group">
-                                <label for="seoTitle">عنوان سئو: <span id="seoTitleNumber" style="font-weight: 200;"></span> </label>
-                                <input class="form-control" type="text" id="seoTitle" name="seoTitle" onkeyup="changeSeoTitle(this.value)" value="{{isset($safarnameh)? $safarnameh->seoTitle: ''}}">
-
+                                <label for="seoTitle">عنوان سئو:
+                                    <span id="seoTitleNumber" style="font-weight: 200;"></span>
+                                </label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="seoTitle"
+                                       name="seoTitle"
+                                       onkeyup="changeSeoTitle(this.value)" value="{{isset($safarnameh)? $safarnameh->seoTitle: ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 floR">
@@ -584,6 +590,7 @@
         var uniqueSeoTitle;
         var uniqueSlug;
         var safarname = null;
+        var errorInUploadImage = false;
 
         //ckeditor function
         initSample();
@@ -949,7 +956,6 @@
             $(element).parent().remove();
         }
 
-        var errorInUploadImage = false;
         function findSrc(startPos){
             var desc = CKEDITOR.instances['editor'].getData();
             var index1 = desc.indexOf('blob', startPos);
@@ -1009,7 +1015,7 @@
             }
         }
 
-        function storePost(){
+        function storePost(_checkSeo = true){
 
             var id = document.getElementById('safarnamehId').value;
             var gardeshName = document.getElementById('gardeshName').value;
@@ -1041,33 +1047,26 @@
             }
 
             if(release != 'draft'){
+                let errInIf = '';
+                if(mainCategory == 0)
+                    errInIf += 'لطفا دسته بندی اصلی را مشخص کنید.';
 
-                if(mainCategory == 0){
-                    alert('لطفا دسته بندی اصلی را مشخص کنید.');
-                    return;
+                if(_checkSeo) {
+                    if (keyword.trim().length < 2)
+                        errInIf += 'کلمه کلیدی مقاله را مشخص کنید';
+                    if (meta.trim().length < 2)
+                        errInIf += 'متا مقاله را مشخص کنید';
+                    if (seoTitle.trim().length < 2)
+                        errInIf += 'عنوان سئو مقاله را مشخص کنید';
+                    if (slug.trim().length < 2)
+                        errInIf += 'نامک مقاله را مشخص کنید';
                 }
 
-                if(keyword.trim().length < 2){
-                    alert('کلمه کلیدی مقاله را مشخص کنید');
-                    return;
-                }
-
-                if(meta.trim().length < 2){
-                    alert('متا مقاله را مشخص کنید');
-                    return;
-                }
-
-                if(seoTitle.trim().length < 2){
-                    alert('عنوان سئو مقاله را مشخص کنید');
-                    return;
-                }
-
-                if(slug.trim().length < 2){
-                    alert('نامک مقاله را مشخص کنید');
+                if(errInIf != ''){
+                    alert(errInIf);
                     return;
                 }
             }
-
 
             mainDataForm.append('title', title);
             mainDataForm.append('keyword', keyword);
@@ -1302,7 +1301,7 @@
 
         function changeSeoTitle(_value){
             var text = _value.length + ' حرف';
-            $('#seoTitleNumber').text(text)
+            $('#seoTitleNumber').text(text);;
             if(_value.length > 60 && _value.length <= 85)
                 $('#seoTitleNumber').css('color', 'green')
             else
