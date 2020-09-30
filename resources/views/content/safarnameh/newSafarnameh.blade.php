@@ -1054,13 +1054,13 @@
                 if(_checkSeo) {
                     if (keyword.trim().length < 2)
                         errInIf += 'کلمه کلیدی مقاله را مشخص کنید';
-                    if (meta.trim().length < 2)
-                        errInIf += 'متا مقاله را مشخص کنید';
-                    if (seoTitle.trim().length < 2)
-                        errInIf += 'عنوان سئو مقاله را مشخص کنید';
-                    if (slug.trim().length < 2)
-                        errInIf += 'نامک مقاله را مشخص کنید';
                 }
+                if (meta.trim().length < 2)
+                    errInIf += 'متا مقاله را مشخص کنید';
+                if (seoTitle.trim().length < 2)
+                    errInIf += 'عنوان سئو مقاله را مشخص کنید';
+                if (slug.trim().length < 2)
+                    errInIf += 'نامک مقاله را مشخص کنید';
 
                 if(errInIf != ''){
                     alert(errInIf);
@@ -1145,7 +1145,7 @@
                     var location = window.location.href;
 
                     if(location.includes('createPost') || location.includes('gardeshEdit'))
-                        window.location.href = '{{url("safarnameh.edit")}}/' + safarnamehId;
+                        window.location.href = '{{url("safarnameh/edit")}}/' + safarnamehId;
                     else
                         document.getElementById('loader').style.display = 'none';
                 }
@@ -1153,7 +1153,6 @@
         }
 
         function checkSeo(kind){
-
             var value = document.getElementById('keyword').value;
             var seoTitle = document.getElementById('seoTitle').value;
             var slug = document.getElementById('slug').value;

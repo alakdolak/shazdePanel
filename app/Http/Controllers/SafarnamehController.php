@@ -306,9 +306,8 @@ class SafarnamehController extends Controller
                             if (!file_exists($uploadDirectory . $Y)) {
                                 mkdir($uploadDirectory.$Y, 0777, true);
                             }
-                            if (!file_exists($uploadDirectory.$Y.'/'.$M)) {
+                            if (!file_exists($uploadDirectory.$Y.'/'.$M))
                                 mkdir($uploadDirectory.$Y.'/'.$M, 0777, true);
-                            }
 
                             $namenew = md5($file->getName().time()).'.'.$file->getExtension();
                             $uploadDirectory .= $Y.'/'.$M.'/';
@@ -698,9 +697,8 @@ class SafarnamehController extends Controller
         }
 
         foreach ($tags as $item){
-            if(count($item->taxonomy) != 0){
+            if(count($item->taxonomy) != 0)
                 $item->tag = $item->term[0]->name;
-            }
         }
         $safarnameh->tags = $tags;
         $safarnameh->id = 0;
@@ -714,7 +712,7 @@ class SafarnamehController extends Controller
         $safarnameh->slug = null;
         $safarnameh->meta = null;
         $safarnameh->title = $safarnameh->post_title;
-        $safarnameh->description = $safarnameh->post_content;
+        $safarnameh->description = str_replace("gardeshname.shazdemosafer.com/wp-content","static.koochita.com",$safarnameh->post_content);
         $safarnameh->release = 'draft';
         $safarnameh->place = array();
         $safarnameh->city = array();
@@ -728,7 +726,15 @@ class SafarnamehController extends Controller
 
         $safarnamehJson = json_encode($safarnameh);
 
-        return view('content.safarnameh.newSafarnameh', compact(['safarnameh', 'category', 'ostan', 'safarnamehJson']));
+        str_replace("world","Peter","Hello world!");
+
+        $acl = ACL::where('userId', auth()->user()->id)->first();
+        if($acl != null && $acl->adminAccess == 1)
+            $acl = 1;
+        else
+            $acl = 0;
+
+        return view('content.safarnameh.newSafarnameh', compact(['safarnameh', 'category', 'ostan', 'safarnamehJson', 'acl']));
 
     }
 
@@ -761,17 +767,5 @@ class SafarnamehController extends Controller
         $gardeshname = \DB::select('SELECT post_title, post_status, post_parent, ID FROM wp_posts WHERE post_parent = 0 AND post_status = "publish"');
 
         return view('content.safarnameh.gardeshNameList', ['gardeshname' => $gardeshname]);
-    }
-
-    public function transferCategories()
-    {
-        $categes = VideoCategory::where('parent', 0)->get();
-        foreach ($categes as $item) {
-            $subs = VideoCategory::where('parent', $item->id)->pluck('name')->toArray();
-            $safarCateg = SafarnamehCategories::firstOrCreate(['name' => $item->name, 'parent' => 0]);
-            foreach ($subs as $sub)
-                SafarnamehCategories::firstOrCreate(['name' => $sub, 'parent' => $safarCateg->id]);
-        }
-        dd('done');
     }
 }
