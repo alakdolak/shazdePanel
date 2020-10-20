@@ -436,14 +436,14 @@
             else
                 document.getElementById('room_num').classList.remove('error');
 
-            // var address = document.getElementById('address').value;
-            // if(address == '' || address == null || address == ' '){
-            //     error = true;
-            //     error_text += '<li>ادرس را کامل کنید.</li>';
-            //     document.getElementById('address').classList.add('error');
-            // }
-            // else
-            //     document.getElementById('address').classList.remove('error');
+            var address = document.getElementById('address').value;
+            if(address == '' || address == null || address == ' '){
+                error = true;
+                error_text += '<li>ادرس را کامل کنید.</li>';
+                document.getElementById('address').classList.add('error');
+            }
+            else
+                document.getElementById('address').classList.remove('error');
 
             var C = document.getElementById('lat').value;
             var D = document.getElementById('lng').value;
@@ -452,6 +452,7 @@
                 error_text += '<li>محل مکان را از روی نقشه انتخاب کنید.</li>';
             }
 
+            showErrorDivOrsubmit(error_text, error);
         }
 
         function vabastegiFunc(){
@@ -473,7 +474,6 @@
             document.getElementById('vabastegiInput').style.display = 'inline-block';
             vabas = 0
         }
-
 
         function checkSeo(kind){
 
@@ -659,6 +659,7 @@
             document.getElementById('lat').value = marker.getPosition().lat();
             document.getElementById('lng').value = marker.getPosition().lng();
         }
+
         function setNewMarker(){
             marker.setMap(null);
             var lat = document.getElementById('lat').value;
@@ -669,8 +670,6 @@
                 map: map,
             });
         }
-
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
 

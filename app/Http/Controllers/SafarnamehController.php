@@ -399,12 +399,24 @@ class SafarnamehController extends Controller
             $safarnameh = Safarnameh::find($safarnamehId);
             if($safarnameh == null) {
                 $safarnameh = new Safarnameh();
-                $safarnameh->userId = \auth()->user()->id;
+                if($request->gardeshName != 0){
+                    $uAdmin = User::where('username', 'koochita')->first();
+                    if($uAdmin != null)
+                        $safarnameh->userId = $uAdmin->id;
+                }
+                else
+                    $safarnameh->userId = \auth()->user()->id;
             }
         }
         else {
             $safarnameh = new Safarnameh();
-            $safarnameh->userId = \auth()->user()->id;
+            if($request->gardeshName != 0){
+                $uAdmin = User::where('username', 'koochita')->first();
+                if($uAdmin != null)
+                    $safarnameh->userId = $uAdmin->id;
+            }
+            else
+                $safarnameh->userId = \auth()->user()->id;
         }
 
         $safarnameh->title = $request->title;
@@ -598,6 +610,12 @@ class SafarnamehController extends Controller
         if($request->gardeshName != 0){
             \DB::select('DELETE FROM wp_posts WHERE ID = ' . $request->gardeshName);
             \DB::select('DELETE FROM wp_term_relationships WHERE object_id = ' . $request->gardeshName);
+
+            $uAdmin = User::where('username', 'koochita')->first();
+            if($uAdmin != null){
+                $safarnameh->userId = $uAdmin->id;
+                $safarnameh->save();
+            }
         }
 
         echo json_encode(['ok', $safarnameh->id]);
