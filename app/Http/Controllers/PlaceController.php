@@ -8,6 +8,8 @@ use App\models\Amaken;
 use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\CityPic;
+use App\models\FoodMaterial;
+use App\models\FoodMaterialRelation;
 use App\models\Hotel;
 use App\models\MahaliFood;
 use App\models\Majara;
@@ -610,11 +612,11 @@ class PlaceController extends Controller {
             case 1:
                 return view('content.editContent.editAmaken', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
                 break;
-            case 4:
-                return view('content.editContent.editHotels', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
-                break;
             case 3:
                 return view('content.editContent.editRestaurant', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
+                break;
+            case 4:
+                return view('content.editContent.editHotels', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
                 break;
             case 6:
                 return view('content.editContent.editMajara', compact(['place', 'kind', 'state', 'mode', 'cities', 'allState', 'features', 'placeFeatures']));
@@ -623,7 +625,10 @@ class PlaceController extends Controller {
                 return view('content.editContent.editSogatSanaie', compact(['place', 'kind', 'state', 'allState', 'mode', 'cities', 'city', 'features', 'placeFeatures']));
                 break;
             case 11:
-                $place->material = json_decode($place->material);
+                $place->material = MahaliFood::find($place->id)->materials;
+                foreach($place->material as $mat)
+                    $mat->volume = $mat->pivot->volume;
+
                 $place->recipes = trueShowForTextArea($place->recipes);
                 return view('content.editContent.editMahaliFood', compact(['place', 'kind', 'state', 'allState', 'mode', 'cities', 'city', 'features', 'placeFeatures']));
                 break;
@@ -1063,68 +1068,39 @@ class PlaceController extends Controller {
         $newMahali->meta = $request->meta;
         $newMahali->description = nl2br($request->description);
         $newMahali->alt = $request->keyword;
-        if($request->slug == null || $request->slug == '')
-            $newMahali->slug = makeSlug($request->keyword);
-        else
-            $newMahali->slug = makeSlug($request->slug);
-
-        if(isset($request->diabet) && $request->diabet == 'on')
-            $newMahali->diabet = 1;
-        else
-            $newMahali->diabet = 0;
-
-        if(isset($request->vegan) && $request->vegan == 'on')
-            $newMahali->vegan = 1;
-        else
-            $newMahali->vegan = 0;
-
-        if(isset($request->vegetarian) && $request->vegetarian == 'on')
-            $newMahali->vegetarian = 1;
-        else
-            $newMahali->vegetarian = 0;
+        $newMahali->energy = $request->energy;
+        $newMahali->volume = $request->volume;
+        $newMahali->slug = $request->slug == null || $request->slug == '' ? makeSlug($request->keyword) : makeSlug($request->slug);
+        $newMahali->diabet = isset($request->diabet) && $request->diabet == 'on' ? 1 : 0;
+        $newMahali->vegan = isset($request->vegan) && $request->vegan == 'on' ? 1 : 0;
+        $newMahali->vegetarian = isset($request->vegetarian) && $request->vegetarian == 'on' ? 1 : 0;
+        $newMahali->recipes = isset($request->recipes) && $request->recipes != null ? nl2br($request->recipes) : null;
+        $newMahali->gram = $request->source == 1 ? 0 : 1;
+        $newMahali->spoon = $request->source == 1 ? 1 : 0;
+        $newMahali->rice = isset($request->rice) && $request->rice == 'on' ? 1 : 0;
+        $newMahali->bread = isset($request->bread) && $request->bread == 'on' ? 1 : 0;
 
         if(isset($request->hotOrCold))
             $newMahali->hotOrCold = $request->hotOrCold;
 
-        if(isset($request->recipes) && $request->recipes != null)
-            $newMahali->recipes = nl2br($request->recipes);
-        else
-            $newMahali->recipes = null;
-
-        $material = array();
+        $newMahali->save();
 
         if(isset($request->matName)) {
-            for ($i = 0; $i < count($request->matName) && $i < count($request->matValue); $i++) {
-                if (isset($request->matName[$i]) && $request->matName[$i] != null && isset($request->matValue[$i]) && $request->matValue[$i] != null) {
-                    $mat = [$request->matName[$i], $request->matValue[$i]];
-                    array_push($material, $mat);
+            $acceptId = [0];
+            foreach ($request->matName as $key => $matName){
+                if($matName != null) {
+                    $mat = FoodMaterial::firstOrCreate(['name' => $matName]);
+                    $relId = FoodMaterialRelation::firstOrCreate([
+                        'foodMaterialId' => $mat->id,
+                        'mahaliFoodId' => $newMahali->id,
+                        'volume' => $request->matValue[$key],
+                    ])->id;
+                    array_push($acceptId, $relId);
                 }
             }
+            FoodMaterialRelation::where('mahaliFoodId', $newMahali->id)
+                                ->whereNotIn('id', $acceptId)->delete();
         }
-        $newMahali->material = json_encode($material);
-
-        $newMahali->energy = $request->energy;
-        $newMahali->volume = $request->volume;
-        if($request->source == 1){
-            $newMahali->gram = 0;
-            $newMahali->spoon = 1;
-        }
-        else{
-            $newMahali->gram = 1;
-            $newMahali->spoon = 0;
-        }
-
-        if(isset($request->rice) && $request->rice == 'on')
-            $newMahali->rice = 1;
-        else
-            $newMahali->rice = 0;
-
-        if(isset($request->bread) && $request->bread == 'on')
-            $newMahali->bread = 1;
-        else
-            $newMahali->bread = 0;
-
-        $newMahali->save();
 
         if(isset($request->addPlaceByUser) && $request->addPlaceByUser == 1){
             $aup = UserAddPlace::find($request->id);

@@ -42,4 +42,9 @@ class MahaliFood extends Model
         return false;
     }
 
+    public function materials(){
+        return $this->belongsToMany(FoodMaterial::class, 'foodMaterialRelations', 'mahaliFoodId', 'foodMaterialId')
+            ->withPivot('volume');
+    }
+
 }

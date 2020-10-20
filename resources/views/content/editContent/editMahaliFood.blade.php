@@ -83,6 +83,29 @@
             margin-bottom: 10px;
             padding-left: 10px;
         }
+
+        .searchBox{
+            position: absolute;
+            top: 100%;
+            background: #f7f7f7;
+            z-index: 9;
+            padding: 10px;
+            border-radius: 10px;
+            width: 75%;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0px 1px 5px 1px #c1c1c1;
+        }
+        .result{
+            cursor: pointer;
+            padding: 5px 0px;
+            margin: 5px 0px;
+            text-align: center;
+            border-radius: 15px;
+        }
+        .result:hover{
+            background: #15b3ac40;
+        }
     </style>
 @stop
 
@@ -299,25 +322,20 @@
                                             مواد مورد نیاز
                                         </div>
                                         <div id="material" class="col-md-12">
-                                            @if(isset($place->material) && is_array($place->material))
-                                                @for($i = 0; $i < count($place->material); $i++)
+                                            @if(isset($place->material))
+                                                @foreach($place->material as $key => $item)
                                                     <div class="row" style="margin-top: 10px;">
-                                                        <div class="col-md-3 f_r">
-                                                            <label>
-                                                                نام مواد
-                                                            </label>
-                                                            <input type="text" name="matName[{{$i}}]"
-                                                                   value="{{$place->material[$i][0]}}">
+                                                        <div class="col-md-3 f_r" style="position: relative;">
+                                                            <label> نام مواد </label>
+                                                            <input type="text" name="matName[{{$key}}]" value="{{$item->name}}" onkeydown="searchForMaterial(this)"  onchange="closeSearchBox(this)">
+                                                            <div class="searchBox hidden"></div>
                                                         </div>
                                                         <div class="col-md-3 f_r">
-                                                            <label>
-                                                                مقدار مواد
-                                                            </label>
-                                                            <input type="text" name="matValue[{{$i}}]"
-                                                                   value="{{$place->material[$i][1]}}">
+                                                            <label> مقدار مواد </label>
+                                                            <input type="text" name="matValue[{{$key}}]" value="{{$item->volume}}">
                                                         </div>
                                                     </div>
-                                                @endfor
+                                                @endforeach
                                             @endif
                                         </div>
                                         <div class="col-md-12" style="margin-top: 20px;">
@@ -469,27 +487,24 @@
     <script src="{{URL::asset('js/editContentPage.js')}}"></script>
 
     <script>
-        @if(isset($place->material) && is_array($place->material))
+        @if(isset($place->material))
             var materialNum = {{count($place->material)}};
         @else
             var materialNum = 0;
         @endif
 
         function addMaterial() {
-            var text = '<div class="row" style="margin-top: 10px;">\n' +
-                '                                                <div class="col-md-3 f_r">\n' +
-                '                                                    <label>\n' +
-                '                                                        نام مواد\n' +
-                '                                                    </label>\n' +
-                '                                                    <input type="text" name="matName[' + materialNum + ']">\n' +
-                '                                                </div>\n' +
-                '                                                <div class="col-md-3 f_r">\n' +
-                '                                                    <label>\n' +
-                '                                                        مقدار مواد\n' +
-                '                                                    </label>\n' +
-                '                                                    <input type="text" name="matValue[' + materialNum + ']">\n' +
-                '                                                </div>\n' +
-                '                                            </div>';
+            var text =  '<div class="row" style="margin-top: 10px;">\n' +
+                        '   <div class="col-md-3 f_r">\n' +
+                        '       <label>نام مواد</label>\n' +
+                        '       <input type="text" name="matName[' + materialNum + ']" onkeydown="searchForMaterial(this)"  onchange="closeSearchBox(this)">\n' +
+                        '       <div class="searchBox hidden"></div>' +
+                        '   </div>\n' +
+                        '   <div class="col-md-3 f_r">\n' +
+                        '       <label>مقدار مواد</label>\n' +
+                        '       <input type="text" name="matValue[' + materialNum + ']">\n' +
+                        '   </div>\n' +
+                        '</div>';
             $('#material').append(text);
             materialNum++;
         }
@@ -638,6 +653,40 @@
             }
             else
                 document.getElementById('commonEat').checked = false;
+        }
+
+        function searchForMaterial(_element){
+            let value = $(_element).val();
+            if(value.trim().length > 1){
+                $.ajax({
+                    type: 'post',
+                    url: '{{route("search.material")}}',
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        value: value
+                    },
+                    success: function(response){
+                        if(response.length > 0){
+                            $(_element).next().removeClass('hidden');
+                            var results = '';
+                            response.map(item => results += `<div class="result" onclick="chooseThisMaterial(this)">${item}</div>`);
+                            $(_element).next().html(results);
+                        }
+                    }
+                })
+            }
+        }
+
+        function closeSearchBox(_element){
+            setTimeout(() => {
+                $(_element).next().addClass('hidden');
+            }, 100);
+        }
+
+        function chooseThisMaterial(_element){
+            $(_element).parent().prev().val($(_element).text());
+            $(_element).parent().empty();
+            $(_element).parent().addClass('hidden');
         }
 
     </script>

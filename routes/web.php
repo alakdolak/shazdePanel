@@ -29,6 +29,8 @@ Route::get('autoBackup/{id}','BackupController@autoBackup');
 
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
+    Route::post('searchForMaterial', 'AjaxController@searchForMaterialFood')->name('search.material');
+
 //    فعالیت
     Route::get('activities', 'ActivitiesController@index')->name('activities.index');
     Route::post('activities/store', 'ActivitiesController@store')->name('activities.store');

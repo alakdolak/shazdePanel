@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Activity;
 use App\models\Cities;
+use App\models\FoodMaterial;
 use App\models\LogModel;
 use Illuminate\Http\Request;
 
@@ -161,5 +162,12 @@ class AjaxController extends Controller
             echo json_encode(['status' => 'nok1']);
 
         return;
+    }
+
+    public function searchForMaterialFood(Request $request)
+    {
+        $value = $request->value;
+        $material = FoodMaterial::where('name', 'LIKE', '%'.$value.'%')->pluck('name')->toArray();
+        return response()->json($material);
     }
 }
