@@ -439,7 +439,7 @@ class VideoController extends Controller
             $video = VideoLive::find($request->id);
             if($video->isLive == 1) {
                 $video->isLive = 0;
-                VideoLiveChats::where('videoId', $request->id)->delete();
+//                VideoLiveChats::where('roomId', $video->code)->delete();
             }
             else
                 $video->isLive = 1;
