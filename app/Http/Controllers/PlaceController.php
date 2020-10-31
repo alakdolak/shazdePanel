@@ -769,7 +769,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
-            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
+            // event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(1, $amaken->id, $request->tag);
@@ -875,7 +875,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
-            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
+            // event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(4, $hotel->id, $request->tag);
@@ -909,7 +909,6 @@ class PlaceController extends Controller {
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $restaurant = Restaurant::find($request->id);
-
             if($restaurant == null)
                 return \redirect()->back();
         }
@@ -925,32 +924,16 @@ class PlaceController extends Controller {
         $restaurant->description = nl2br($request->description);
         $restaurant->keyword = $request->keyword;
         $restaurant->kind_id = $request->kind_id;
-        if($request->slug == null || $request->slug == '')
-            $restaurant->slug = makeSlug($request->keyword);
-        else
-            $restaurant->slug = makeSlug($request->slug);
-
-        if($request->address != null)
-            $restaurant->address = $request->address;
-        else
-            $restaurant->address = '';
-
-        if($request->phone != null)
-            $restaurant->phone = $request->phone;
-        else
-            $restaurant->phone = '';
-
-        if($request->site != null)
-            $restaurant->site = $request->site;
-        else
-            $restaurant->site = '';
+        $restaurant->slug = $request->slug == null || $request->slug == '' ? makeSlug($request->keyword) : makeSlug($request->slug);
+        $restaurant->address = $request->address != null ? $request->address : '';
+        $restaurant->phone = $request->phone != null ? $request->phone : '';
+        $restaurant->site = $request->site != null ? $request->site : '';
         $restaurant->save();
 
         if(isset($request->addPlaceByUser) && $request->addPlaceByUser == 1){
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
-            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(3, $restaurant->id, $request->tag);
@@ -1106,7 +1089,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
-            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
+            // event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(11, $newMahali->id, $request->tag);
@@ -1236,7 +1219,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
-            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
+            // event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(10, $newSogat->id, $request->tag);
@@ -1304,7 +1287,7 @@ class PlaceController extends Controller {
             $aup = UserAddPlace::find($request->id);
             $aup->archive = 1;
             $aup->save();
-            event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
+            // event(new ActivityLogEvent($aup->userId, $aup->id, 'addPlaceByUser', $aup->kindPlaceId));
         }
 
         $this->storePlaceTags(12, $boomgardy->id, $request->tag);

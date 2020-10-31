@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add material search for food Debug">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="live debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Video.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoComment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoComment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoFeedback.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoFeedback.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoLimbo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoLimbo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoLive.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoLive.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoLiveChats.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoLiveChats.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoLiveGuest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoLiveGuest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoPlaceRelation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoPlaceRelation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/VideoTagRelation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/VideoTagRelation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -563,14 +574,12 @@
       <workItem from="1601469160884" duration="3066000" />
       <workItem from="1603198802448" duration="842000" />
       <workItem from="1603205755306" duration="4537000" />
-      <workItem from="1603635042456" duration="275000" />
-    </task>
-    <task id="LOCAL-00041" summary="debug">
-      <created>1585488634633</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1585488634633</updated>
+      <workItem from="1603635042456" duration="362000" />
+      <workItem from="1603713926052" duration="1169000" />
+      <workItem from="1603794592394" duration="581000" />
+      <workItem from="1603816390207" duration="785000" />
+      <workItem from="1603867660204" duration="227000" />
+      <workItem from="1604126157766" duration="1416000" />
     </task>
     <task id="LOCAL-00042" summary="debug">
       <created>1585552775658</created>
@@ -908,7 +917,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603210324249</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="live debug">
+      <created>1603635404437</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1603635404438</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -939,7 +955,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add boomgardy 2" />
     <MESSAGE value="vod" />
     <MESSAGE value="vod category" />
     <MESSAGE value="Debug" />
@@ -964,7 +979,8 @@
     <MESSAGE value="debug" />
     <MESSAGE value="add material search for food" />
     <MESSAGE value="add material search for food Debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="add material search for food Debug" />
+    <MESSAGE value="live debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="live debug" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3227" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601216420616">
@@ -991,22 +1007,22 @@
     </state>
     <state x="3278" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601460465793" />
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1601386199051" />
-    <state x="3191" y="98" width="811" height="630" key="find.popup" timestamp="1601219371828">
+    <state x="3191" y="98" width="811" height="630" key="find.popup" timestamp="1603816571069">
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="455" y="164" width="665" height="564" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1596262662209" />
-    <state x="3191" y="98" width="811" height="630" key="find.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601219371828" />
+    <state x="3191" y="98" width="811" height="630" key="find.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1603816571069" />
     <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1600505665753" />
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup" timestamp="1598959199410">
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1598959199410" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1603635259735">
-      <screen x="2736" y="0" width="1920" height="1040" />
+    <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup" timestamp="1604129090583">
+      <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="428" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1596266833833" />
     <state x="430" y="93" width="673" height="568" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@0.0.1368.872" timestamp="1596105179739" />
-    <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1603208269390" />
+    <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604129090583" />
     <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1603635259735" />
   </component>
 </project>
