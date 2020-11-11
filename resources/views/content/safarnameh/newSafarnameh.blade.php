@@ -2,196 +2,20 @@
 
 @section('header')
     @parent
-    <script>
-        var UploadURL = '{{url('/uploadCKEditor')}}';
-    </script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="{{URL::asset('js/ckeditor/ckeditor.js')}}"></script>
-    <script src="{{URL::asset('js/ckeditor/sample.js')}}"></script>
+    <script src="{{asset('js/ckeditor5/ckeditorUpload.js')}}"></script>
+    <script src="{{asset('js/ckeditor5/ckeditor.js')}}"></script>
+
     <script src="{{URL::asset('js/jalali.js')}}"></script>
-
-    <link rel="stylesheet" href="{{URL::asset('css/calendar/persian-datepicker.css')}}"/>
     <script src="{{URL::asset('js/calendar/persian-date.min.js')}}"></script>
     <script src="{{URL::asset('js/calendar/persian-datepicker.js')}}"></script>
-
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/clockPicker/clockpicker.css')}}"/>
     <script src= {{URL::asset("js/clockPicker/clockpicker.js") }}></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <style>
-        *{
-            text-align: right;
-            direction: rtl;
-        }
-        .newTag{
-            border: none;
-            border-radius: 0px !important;
-            width: 85%;
-        }
-        .checkIconTag{
-            color: green;
-            border-right: none;
-            padding: 3px 0px;
-            font-size: 22px;
-            border-radius: 10px 0px 0px 10px;
-            cursor: pointer;
-        }
-        .closeIconTag{
-            color: white;
-            background-color: red;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        .searchTagResultDiv{
-            width: 100%;
-            border-top: 0px;
-        }
-        .searchTagResult{
-            position: relative;
-            padding: 0px 10px;
-            background-color: white;
-            cursor: pointer;
-            margin: 6px 0px !important;
-        }
-        .searchTagResult:hover{
-            background-color: #ecebeb;
-        }
-        .inputBorder{
-            border: solid gray;
-            border-radius: 10px;
-        }
-        .inputGroup{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: solid gray;
-            border-radius: 10px
-        }
-        .inTag{
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly
-        }
-        .categoryDiv{
-            height: 300px;
-            border: solid gray;
-            overflow-y: auto;
-        }
-        .mainCategory{
-            margin-top: 10px !important;
-            margin-right: 5px !important;
-        }
-        .subCategory{
-            margin-right: 15px !important;
-            /*border-right: solid 1px;*/
-            width: auto !important;
-            /*padding-top: 10px;*/
-        }
-        .checkbox{
-            width: auto;
-            display: inline-block;
-            outline: none;
-            height: auto;
-            margin: 0 !important;
-        }
-        .labelCategory{
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        .mainLabelCategory{
-            margin-bottom: 0px;
-        }
-        .subLabelCategory{
-            padding-right: 5px;
-            margin-bottom: 0px;
-            margin-top: 3px;
-        }
-        .labelName{
-            margin-right: 5px;
-            font-weight: 400;
-            font-size: 11px;
-        }
-        .mainCatButton{
-            color: #b0ccff;
-            cursor: pointer;
-            /*display: inline-block;*/
-            float: left;
-            display: none;
-        }
-        .mainCatButtonChoose{
-            color: blue;
-            border-bottom: blue 1px solid;
-        }
-        .row{
-            margin: 0;
-            width: 100%;
-        }
-        .floR{
-            float: right;
-        }
-        .labelCategory{
-            position: relative;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        .labelCategory input{
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
-        .checkmark {
-            height: 15px;
-            width: 15px;
-            background-color: #eee;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .labelCategory input:checked ~ .checkmark {
-            background-color: #2196F3;
-        }
-        .labelCategory:hover input ~ .checkmark {
-            background-color: #ccc;
-        }
-        .labelCategory input:checked ~ .checkmark {
-            background-color: #2196F3;
-        }
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-        .labelCategory input:checked ~ .checkmark:after {
-            display: block;
-        }
-        .labelCategory .checkmark:after {
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-        .cke_widget_wrapper_easyimage-side, :not(.cke_widget_wrapper_easyimage):not(.cke_widget_wrapper_easyimage-side) > .easyimage-side, .cke_widget_wrapper_easyimage-align-right, :not(.cke_widget_wrapper_easyimage):not(.cke_widget_wrapper_easyimage-align-right) > .easyimage-align-right{
-            float: left !important;
-            max-width: 50% !important;
-            min-width: 10em !important;
-            margin-right: 1.5em !important;
-            margin-left: 0em !important;
-        }
-    </style>
+
+    <link rel="stylesheet" href="{{URL::asset('css/calendar/persian-datepicker.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/clockPicker/clockpicker.css')}}"/>
+    <link rel="stylesheet" href="{{URL::asset('css/pages/safarnamehPage.css')}}">
+
 @stop
 
 @section('content')
@@ -199,18 +23,16 @@
     <input type="hidden" id="safarnamehId" value="{{isset($safarnameh) ? $safarnameh->id : '0'}}">
         <input type="hidden" id="gardeshName" value="{{isset($safarnameh) && isset($safarnameh->gardeshName) ? $safarnameh->gardeshName : '0'}}">
 
-    <div class="col-md-3 leftSection">
-        <div class="sparkline8-list shadow-reset mg-tb-30">
-
-            <div class="sparkline8-hd" style="padding: 5px 10px">
+    <div class="col-md-3 leftSection" style="padding-right: 0px;">
+        <div class="sparkline8-list shadow-reset mg-tb10">
+            <div class="sparkline8-hd" style="padding: 5px 10px;">
                 <div class="main-sparkline8-hd">
-                    <h4>زمان انتشار</h4>
+                    <h5>زمان انتشار</h5>
                 </div>
             </div>
             <div class="sparkline8-graph dashone-comment  dashtwo-messages">
                 <div class="form-group">
-                    <label for="releaseType">انتشار</label>
-                    <select class="form-control" id="releaseType" name="release" onchange="changeRelease(this.value)">
+                    <select class="form-control botBorderInput" id="releaseType" name="release" onchange="changeRelease(this.value)">
                         <option value="released" {{isset($safarnameh) ? ($safarnameh->release == 'released' ? 'selected' : '')  : ''}}>منتشرشده</option>
                         <option value="draft" {{isset($safarnameh) ? ($safarnameh->release == 'draft' ? 'selected' : '')  : 'selected'}}>پیش نویس</option>
                         <option value="future" {{isset($safarnameh) ? ($safarnameh->release == 'future' ? 'selected' : '')  : ''}}>آینده</option>
@@ -228,101 +50,41 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div class="sparkline8-list shadow-reset mg-tb-10">
             <div class="sparkline8-hd" style="padding: 5px 10px">
                 <div class="main-sparkline8-hd">
-                    <h4>دسته بندی ها</h4>
+                    <h5>دسته بندی ها</h5>
+                </div>
+            </div>
+            <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto; padding-top: 0px;">
+                <div class="row">
+                    <div class="selectCategSec">
+                        <div class="inputSec">
+                            <input type="text" placeholder="نام دسته بندی..." onfocus="openCategoryResult()" onkeyup="searchInSafarnamehCategory(this.value)">
+                            <button class="arrowDonwIcon" onclick="openCategoryResult()"></button>
+                        </div>
+                        <div id="categoryResultDiv" class="resultSec"></div>
+                    </div>
+                    <div id="selectedCategory" class="selectedCategoryDiv"></div>
+                </div>
+            </div>
+        </div>
+        <div class="sparkline8-list shadow-reset mg-tb-10">
+            <div class="sparkline8-hd" style="padding: 5px 10px">
+                <div class="main-sparkline8-hd">
+                    <h5>برچسب ها</h5>
                 </div>
             </div>
             <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
                 <div class="row">
-                    <div class="categoryDiv">
-                        <div id="mainCategoryDiv" style="padding: 5px;">
-                            @foreach($category as $item)
-                                <div class="row mainCategory">
-                                    <label for="category{{$item->id}}" class="labelCategory mainLabelCategory" onclick="chooseCategory(this, {{$item->id}})">
-                                        <input type="checkbox" id="category{{$item->id}}" name="category[]" value="{{$item->id}}" class="form-control checkbox">
-                                        <span class="checkmark"></span>
-                                        <span class="labelName">{{$item->name}}</span>
-                                        @if($acl == 1)
-                                            <i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory({{$item->id}}, this)"></i>
-                                        @endif
-                                    </label>
-                                    <div id="mainCategory{{$item->id}}" class="mainCatButton" onclick="changeMainCategory({{$item->id}})" >
-                                        اصلی
-                                    </div>
-                                </div>
-                                <div id="subCategoryDiv{{$item->id}}">
-                                    @foreach($item->sub as $item2)
-                                        <div class="row subCategory">
-                                            <label for="category{{$item2->id}}" class="labelCategory subLabelCategory" onclick="chooseCategory(this, {{$item2->id}})">
-                                                <input type="checkbox" id="category{{$item2->id}}" name="category[]" value="{{$item2->id}}" class="form-control checkbox">
-                                                <span class="checkmark"></span>
-                                                <span class="labelName">
-                                                    {{$item2->name}}
-                                                </span>
-                                                @if($acl == 1)
-                                                    <i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory({{$item2->id}}, this)"></i>
-                                                @endif
-                                            </label>
-                                            <div id="mainCategory{{$item2->id}}" class="mainCatButton" onclick="changeMainCategory({{$item2->id}})">
-                                                اصلی
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                @if($acl == 1)
-                    <div class="row" style="margin-top: 20px; margin-right: 10px;">
-                        <a onclick="showNewCategory(this)" style="cursor: pointer;">
-                            +افزودن دسته بندی جدید
-                        </a>
-                    </div>
-                @endif
-                <div class="row" style="margin-top: 20px; display: none">
                     <div class="form-group">
-                        <label for="selectCategory" style="font-size: 9px; margin-left: 3px">دسته بندی جدید</label>
-                        <select id="selectCategory" class="form-control">
-                            <option value="0">اصلی...</option>
-                            @foreach($category as $item)
-                                <option value="{{$item->id}}">
-                                    {{$item->name}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <div class="inputBorder">
-                            <div class="inputGroup">
-                                <input type="text" class="newTag" id="newCategory">
-                                <i class="fa fa-check checkIconTag" onclick="submitNewCategory()"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="sparkline8-hd" style="padding: 5px 10px">
-                <div class="main-sparkline8-hd">
-                    <h4>برچسب ها</h4>
-                </div>
-            </div>
-            <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
-                <div class="row">
-                    <div>
-                        <a id="newTagButton" onclick="showNewTag(this)" style="cursor: pointer;">
-                            افزودن برچسب جدید+
-                        </a>
-                    </div>
-                    <div class="form-group" style="display: none">
-                        <label for="newTag">برچسب جدید</label>
-                        <div class="inputBorder">
-                            <div class="inputGroup">
-                                <input type="text" class="newTag" id="newTag" onkeyup="searchTag(this.value)">
+                        <div class="inputBorder newTagSection">
+                            <div class="inputGroup newTagInputDiv">
+                                <input type="text"
+                                       class="newTag"
+                                       id="newTag"
+                                       placeholder="برچسپ جدید...">
                                 <i class="fa fa-check checkIconTag" onclick="selectTag()"></i>
                             </div>
                             <div id="searchTagResultDiv" class="searchTagResultDiv"></div>
@@ -334,16 +96,46 @@
 
                 </div>
             </div>
-
+        </div>
+        <div class="sparkline8-list shadow-reset mg-tb-10">
             <div class="sparkline8-hd" style="padding: 5px 10px">
                 <div class="main-sparkline8-hd">
-                    <h4>عکس اصلی</h4>
+                    <h5>محل های مرتبط</h5>
                 </div>
             </div>
             <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
                 <div class="row">
-                    <div class="showImg">
-                        <img id="mainPicShow" src="{{isset($safarnameh)? $safarnameh->pic : ''}}" style="width: 100%;">
+                    <div class="form-group">
+                        <div class="inputBorder newTagSection">
+                            <div class="inputGroup newTagInputDiv">
+                                <input type="text"
+                                       class="newTag"
+                                       id="newPlace"
+                                       placeholder="نام محل مرتبط با سفرنامه..."
+                                       style="width: 100%; font-size: 12px"
+                                       onkeyup="searchPlaces(this.value)">
+                            </div>
+
+                            <div id="searchPlaceResult" class="searchTagResultDiv"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="selectedPlaces" class="col-md-12"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="sparkline8-list shadow-reset mg-tb-10">
+            <div class="sparkline8-hd" style="padding: 5px 10px">
+                    <div class="main-sparkline8-hd">
+                        <h5>عکس اصلی</h5>
+                    </div>
+                </div>
+            <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
+                <div class="row">
+                    <div class="showImg {{ isset($safarnameh)? 'open' : ''}}">
+                        <img id="mainPicShow" src="{{isset($safarnameh)? $safarnameh->pic : URL::asset('img/uploadPic.png')}}">
 
                         <label for="imgInput" class="btn btn-success" style="width: 100%; text-align: center; margin-top: 10px">
                             انتخاب عکس
@@ -352,21 +144,19 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-9" style="padding-left: 0px;">
         <div class="col-md-12">
-            <div class="sparkline8-list shadow-reset mg-tb-30">
+            <div class="sparkline8-list shadow-reset mg-tb-10">
                 <div class="sparkline8-hd">
-                    <div class="main-sparkline8-hd" STYLE="display: flex; justify-content: space-between">
+                    <div class="main-sparkline8-hd" STYLE="display: flex; justify-content: space-between; color: white">
                         @if(isset($safarnameh))
-                            <h1>ویرایش سفرنامه</h1>
-                            <button class="btn btn-success" onclick="storePost(false)">ثبت بدون تست سئو</button>
+                            <h4>ویرایش سفرنامه</h4>
+                            <button class="btn btn-success noneSeoTestButton" onclick="storePost(false)">ثبت بدون تست سئو</button>
                         @else
-                            <h1>افزودن سفرنامه جدید</h1>
+                            <h4>افزودن سفرنامه جدید</h4>
                         @endif
                     </div>
                 </div>
@@ -376,8 +166,12 @@
 
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label for="title">عنوان سفرنامه</label>
-                                <input class="form-control" type="text" name="title" id="title" value="{{(isset($safarnameh) ? $safarnameh->title : '')}}">
+{{--                                <label for="title" style="margin: 0px">عنوان سفرنامه</label>--}}
+                                <input class="form-control titleInputClass"
+                                       type="text"
+                                       name="title"
+                                       id="title" value="{{(isset($safarnameh) ? $safarnameh->title : '')}}"
+                                        placeholder="عنوان سفرنامه">
                             </div>
                         </div>
 
@@ -385,11 +179,11 @@
                             <div class="adjoined-bottom">
                                 <div class="grid-container">
                                     <div class="grid-width-100">
-                                    <textarea id="editor" name="text">
-                                        @if(isset($safarnameh))
-                                            {!! html_entity_decode($safarnameh->description) !!}
-                                        @endif
-                                    </textarea>
+                                        <div id="safarnamehText" class="textEditor">
+                                            @if(isset($safarnameh))
+                                                {!! html_entity_decode($safarnameh->description) !!}
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -400,98 +194,25 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-top: 10px;">
+
             <div class="sparkline8-list shadow-reset">
-
-                <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
-                    <div class="row" style="text-align: right">
-
-                        <div class="col-xs-6">
-                            <div class="row">
-                                <div class="col-md-6" id="searchCityDiv" style="padding: 0px">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <label for="placeNameSearch">شهر:</label>
-                                            <div class="inputBorder">
-                                                <div class="inputGroup">
-                                                    <input type="text" class="newTag" id="cityNameSearch" onkeyup="findCity(this.value)">
-                                                    <input type="hidden" id="cityIdSearch">
-                                                    <i class="fa fa-check checkIconTag" onclick="chooseCity()"></i>
-                                                </div>
-                                                <div id="searchCityResultDiv" class="searchTagResultDiv"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 floR">
-                                    <div class="form-group">
-                                        <label for="osatn">استان</label>
-                                        <select id="ostan" class="form-control" onchange="changeOstan(this)">
-                                            <option value="0">استان را انتخاب کنید</option>
-                                            @foreach($ostan as $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div id="selectedCity" class="row">
-                                        @if(isset($safarnameh))
-                                            @foreach($safarnameh->city as $item)
-                                                <div class="inTag">
-                                                    <input type="text" value="{{$item->name}}" style="border: none; width: 100%; font-size: 12px;" readonly>
-                                                    <input type="hidden" name="cities[]" id="cities" value="{{$item->validId}}" style="border: none; width: 100%; font-size: 12px;" readonly>
-                                                    <i class="fa fa-close closeIconTag" onclick="deleteCity(this)"></i>
-                                                </div>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6" style="border-left: solid gray">
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="placeNameSearch">با چه مکانی ارتباط دارد:</label>
-                                    <div class="inputBorder">
-                                        <div class="inputGroup">
-                                            <input type="text" class="newTag" id="placeNameSearch" onkeyup="findPlace(this.value)" style="width: 95%;">
-                                        </div>
-                                        <div id="searchPlaceResultDiv" class="searchTagResultDiv"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="selectedPlace" class="row">
-                                @if(isset($safarnameh))
-                                    @foreach($safarnameh->place as $item)
-                                        <div class="col-md-6 floR">
-                                            <div class="inTag">
-                                                <input type="text" value="{{$item->name}}" style="border: none; width: 100%; font-size: 12px;" readonly>
-                                                <input type="hidden" name="places[]" id="places" value="{{$item->validId}}" style="border: none; width: 100%; font-size: 12px;" readonly>
-                                                <i class="fa fa-close closeIconTag" onclick="deletePlace(this)"></i>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-
+                <div class="sparkline8-hd" style="padding: 5px 10px;">
+                    <div class="main-sparkline8-hd">
+                        <h5>سئو</h5>
                     </div>
                 </div>
-
-            </div>
-        </div>
-
-        <div class="col-md-12" style="margin-top: 25px;">
-            <div class="sparkline8-list shadow-reset">
-
                 <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
                     <div class="row" style="text-align: right">
-                        <div class="col-md-12 floR">
+                        <div class="col-md-12 floR mg-tb-10">
                             <div class="form-group">
                                 <label for="keyword">کلمه کلیدی</label>
-                                <input class="form-control" type="text" id="keyword" name="keyword" value="{{isset($safarnameh)? $safarnameh->keyword: ''}}">
+                                <input class="form-control botBorderInput"
+                                       type="text"
+                                       id="keyword"
+                                       name="keyword"
+                                       placeholder="کلمه کلیدی را اینجا بنویسید..."
+                                       value="{{isset($safarnameh)? $safarnameh->keyword: ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 floR">
@@ -500,22 +221,28 @@
                                     <span id="seoTitleNumber" style="font-weight: 200;"></span>
                                 </label>
                                 <input type="text"
-                                       class="form-control"
+                                       class="form-control botBorderInput"
                                        id="seoTitle"
                                        name="seoTitle"
+                                       placeholder="عنوان سئو را اینجا بنویسید (عنوان سئو باید بین 60 حرف تا 85 حرف باشد)"
                                        onkeyup="changeSeoTitle(this.value)" value="{{isset($safarnameh)? $safarnameh->seoTitle: ''}}">
                             </div>
                         </div>
-                        <div class="col-md-12 floR">
+                        <div class="col-md-12 floR mg-tb-10">
                             <div class="form-group">
                                 <label for="slug">نامک</label>
-                                <input class="form-control" type="text" id="slug" name="slug" value="{{isset($safarnameh)? $safarnameh->slug: ''}}">
+                                <input class="form-control botBorderInput"
+                                       type="text"
+                                       id="slug"
+                                       placeholder="نامک را اینجا بنویسید..."
+                                       name="slug"
+                                       value="{{isset($safarnameh)? $safarnameh->slug: ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 floR">
                             <div class="form-group">
                                 <label for="meta">متا: <span id="metaNumber" style="font-weight: 200;"></span></label>
-                                <textarea class="form-control" type="text" id="meta" name="meta" onkeyup="changeMeta(this.value)" rows="3">{{isset($safarnameh)? $safarnameh->meta: ''}}</textarea>
+                                <textarea class="form-control botBorderInput" type="text" id="meta" name="meta" onkeyup="changeMeta(this.value)" rows="3">{{isset($safarnameh)? $safarnameh->meta: ''}}</textarea>
                             </div>
                         </div>
 
@@ -531,10 +258,10 @@
                     </div>
                 </div>
 
-                <center style="padding: 10px; text-align: center; width: 100%;">
+                <div style="padding: 10px; width: 100%; display: flex; justify-content: center; align-items: center;">
                     <input type="button" onclick="checkSeo(1)"  value="ثبت" class="btn btn-success">
                     <input type="button" onclick="window.location.href='{{route("safarnameh.index")}}'"  value="بازگشت" class="btn btn-secondry">
-                </center>
+                </div>
 
             </div>
         </div>
@@ -570,17 +297,10 @@
         </div>
     </div>
 
-
     <img id="beforeSaveImg" src="" style="display: none;">
 
     <script>
-        var mainCategory = {{isset($safarnameh) ? $safarnameh->mainCategory : 0}};
         var tagsName = [];
-        var placeId = [];
-        var city = [];
-        var cityId = [];
-        var selectedOstanId = 0;
-        var selectedOstanName = 0;
         var safarnamehId;
         var mainDataForm = new FormData();
         var warningCount = 0;
@@ -591,42 +311,13 @@
         var uniqueSlug;
         var safarname = null;
         var errorInUploadImage = false;
-
-        //ckeditor function
-        initSample();
-
-        @if(isset($safarnameh))
-            safarname = {!! $safarnamehJson !!};
-
-            function init(){
-                var cat = safarname['category'];
-                for(var i = 0; i < cat.length; i++) {
-                        $('#category' + cat[i]['categoryId']).prop('checked', true);
-                    element = $('#category' + cat[i]['categoryId']).parent();
-                    chooseCategory(element, cat[i]['categoryId']);
-                }
-                if(mainCategory != 0)
-                    changeMainCategory(mainCategory);
-
-                var tags = safarname['tags'];
-                if(tags.length > 0){
-                    element = $('#newTagButton');
-                    showNewTag(element);
-                    for(var i = 0; i < tags.length; i++) {
-                        if(tags[i]['tag'])
-                            chooseTag(tags[i]['tag']);
-                    }
-                }
-
-                for(var i = 0; i < safarname['city'].length; i++)
-                    cityId[cityId.length] = safarname['city'][i]['validId'];
-
-                for(var i = 0; i < safarname['place'].length; i++)
-                    placeId[placeId.length] = safarname['place'][i]['validId'];
-            }
-            init();
-
-        @endif
+        var selectedCat = [];
+        window.limboIds = [];
+        var selectedPlaces = [];
+        var searchPlaceAjax = null;
+        var allSafarnamehCategoryList = [];
+        var selectedSafarnamehCategory = [];
+        var safarnamehCategory = {!! $category !!};
 
         $('.observer-example').persianDatepicker({
             minDate: new Date().getTime(),
@@ -638,6 +329,68 @@
             donetext: 'تایید',
             autoclose: true,
         });
+        BalloonBlockEditor.create( document.querySelector('#safarnamehText'), {
+            placeholder: 'متن سفرنامه خود را اینجا وارد کنید...',
+            toolbar: {
+                items: [
+                    'bold',
+                    'italic',
+                    'link',
+                    'highlight'
+                ]
+            },
+            language: 'fa',
+            blockToolbar: [
+                'blockQuote',
+                'heading',
+                'indent',
+                'outdent',
+                'numberedList',
+                'bulletedList',
+                'insertTable',
+                'imageUpload',
+                'undo',
+                'redo'
+            ],
+            table: {
+                contentToolbar: [
+                    'tableColumn',
+                    'tableRow',
+                    'mergeTableCells'
+                ]
+            },
+            licenseKey: '',
+        } )
+            .then( editor => {
+                window.editor = editor;
+                window.uploaderClass = editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+                    let data = { code: {{$code}} };
+                    data = JSON.stringify(data);
+                    return new MyUploadAdapter( loader, '{{route('safarnameh.uploadDescPic')}}', '{{csrf_token()}}', data);
+                };
+
+
+            } )
+            .catch( error => {
+                console.error( 'Oops, something went wrong!' );
+                console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+                console.warn( 'Build id: wgqoghm20ep6-7otme29let2s' );
+                console.error( error );
+            } );
+
+        @if(isset($safarnameh))
+            safarname = {!! json_encode($safarnameh) !!};
+            safarname['category'].map(item => selectedCat.push({
+                id: item.categoryId,
+                isMain: item.isMain,
+            }));
+
+            $(window).ready(() => {
+                safarname['tags'].map(item => chooseTag(item));
+                safarname.places.map(item => choosePlace(item.id, item.name, item.kind));
+            });
+
+        @endif
 
         function changeRelease(value){
             if(value == 'future')
@@ -646,372 +399,12 @@
                 document.getElementById('futureDiv').style.display = 'none';
         }
 
-        function searchTag(value){
-            document.getElementById('searchTagResultDiv').innerHTML = '';
-
-            $.ajax({
-                type: 'post',
-                url: '{{route("safarnamehTagSearch")}}',
-                data:{
-                    _token: '{{csrf_token()}}',
-                    text: value
-                },
-                success: function (response){
-                    response = JSON.parse(response);
-                    if(response[0] == 'ok'){
-                        var tags = response[1];
-                        var text = '';
-
-                        for(var i = 0; i < tags.length; i++)
-                            text += '<div class="row searchTagResult" onclick="chooseTag(\'' + tags[i]["tag"] + '\')">' + tags[i]["tag"] + '</div>\n';
-
-                        document.getElementById('searchTagResultDiv').innerHTML = text;
-                    }
-                }
-            })
-        }
-
-        function chooseTag(value){
-
-                document.getElementById('searchTagResultDiv').innerHTML = '';
-                document.getElementById('newTag').value = value;
-
-                selectTag();
-        }
-
-        function selectTag() {
-            var value = document.getElementById('newTag').value ;
-            if(tagsName.indexOf(value) == -1) {
-                tagsName[tagsName.length] = value;
-                if (value.trim().length != 0) {
-                    document.getElementById('newTag').value = '';
-                    var text = '<div class="inTag">\n' +
-                        '<input type="text" name="tags[]" id="tags" value="' + value + '" style="border: none; width: 100%; font-size: 12px;" readonly>\n' +
-                        '<i class="fa fa-close closeIconTag" onclick="deleteTag(this)"></i>\n' +
-                        '</div>';
-
-                    $('#selectedTags').append(text);
-                }
-            }
-        }
-
-        function deleteTag(element){
-            value = $(element).prev().val();
-            index = tagsName.indexOf(value);
-            if(index != -1)
-                tagsName[index] = '';
-
-            $(element).parent().remove();
-        }
-
         function changePic(input){
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#mainPicShow').attr('src', e.target.result);
-                };
-
+                $('.showImg').addClass('open');
+                reader.onload = e => $('#mainPicShow').attr('src', e.target.result)
                 reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function chooseCategory(element, id){
-            if($(element).children().first().prop('checked')) {
-                $(element).next().css('display', 'inline-block');
-                if(mainCategory == 0){
-                    mainCategory = id;
-                    document.getElementById('mainCategory' + id).classList.add('mainCatButtonChoose');
-                }
-            }
-            else {
-                $(element).next().css('display', 'none');
-                if(mainCategory == id)
-                    mainCategory = 0;
-            }
-        }
-
-        function changeMainCategory(id){
-            if(mainCategory != 0)
-                document.getElementById('mainCategory' + mainCategory).classList.remove('mainCatButtonChoose');
-
-            mainCategory = id;
-            document.getElementById('mainCategory' + id).classList.add('mainCatButtonChoose');
-
-        }
-
-        function showNewCategory(element){
-            $(element).toggle();
-            $(element).parent().next().toggle();
-        }
-
-        function showNewTag(element){
-            $(element).toggle();
-            $(element).parent().next().toggle();
-        }
-
-        function submitNewCategory(){
-            var value = document.getElementById('newCategory').value;
-            var parent = document.getElementById('selectCategory').value;
-
-            if(value.trim().length != 0){
-                $.ajax({
-                    type: 'post',
-                    url: '{{route("newSafarnamehCategory")}}',
-                    data: {
-                        _token: '{{csrf_token()}}',
-                        value: value,
-                        parent: parent
-                    },
-                    success: function(response){
-                        response = JSON.parse(response);
-                        if(response[0] == 'ok'){
-                            var id = response[1];
-
-                            if(parent == 0){
-                                    var text =  '<div class="row mainCategory">\n' +
-                                            '<label for="category' + id + '" class="labelCategory mainLabelCategory" onclick="chooseCategory(this, ' + id + ')">\n' +
-                                            '<input type="checkbox" id="category' + id + '" name="category[]" value="' + id + '" class="form-control checkbox">\n' +
-                                            '<span class="checkmark"></span>\n' +
-                                            '<span class="labelName">' + value + '</span>\n' +
-                                            '<i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory(' + id + ', this)"></i>\n' +
-                                            '</label>\n' +
-                                            '<div id="mainCategory' + id + '" class="mainCatButton" onclick="changeMainCategory(' + id + ')" >\n' +
-                                            'اصلی\n' +
-                                            '</div>\n' +
-                                            '</div>\n';
-
-                                $('#mainCategoryDiv').append(text);
-                            }
-                            else{
-                                var text =  '<div class="row subCategory">\n' +
-                                            '<label for="category' + id + '" class="labelCategory subLabelCategory" onclick="chooseCategory(this, ' + id + ')">\n' +
-                                            '<input type="checkbox" id="category' + id + '" name="category[]" value="' + id + '" class="form-control checkbox">\n' +
-                                            '<span class="checkmark"></span>\n' +
-                                            '<span class="labelName">\n' +
-                                            value +
-                                            '</span>\n' +
-                                            '<i class="fa fa-close closeIconTag" style="width: 15px; height: 15px; font-size: 10px; margin-right: 15px;" onclick="deleteCategory(' + id + ', this)"></i>\n' +
-                                            '</label>\n' +
-                                            '<div id="mainCategory' + id + '" class="mainCatButton" onclick="changeMainCategory(' + id + ')">\n' +
-                                            'اصلی\n' +
-                                            '</div>\n' +
-                                            '</div>';
-                                $('#subCategoryDiv' + parent).append(text);
-                            }
-
-                            document.getElementById('newCategory').value = '';
-                        }
-                        else if(response[0] == 'nok2')
-                            alert('دسته بندی با این نام موجود است')
-                    }
-                })
-            }
-        }
-
-        function findPlace(value){
-            document.getElementById('searchPlaceResultDiv').innerHTML = '';
-
-            if(value.trim().length > 1){
-                $.ajax({
-                    type: 'post',
-                    url: '{{route("find.place")}}',
-                    data: {
-                        _token: '{{csrf_token()}}',
-                        value: value,
-                        kindPlaceId: 0
-                    },
-                    success: function(response){
-                        response = JSON.parse(response);
-                        var text = '';
-                        for(var i = 0; i < response.length; i++) {
-                            var idKind = response[i]['id'] + '_' + response[i]['kindPlaceId'];
-                            if(placeId.indexOf(idKind) == -1)
-                                text += '<div class="row searchTagResult" onclick="selectPlace(\'' + idKind + '\', \'' + response[i]["targetName"] + '\', this)">' + response[i]["targetName"] + '</div>\n';
-                        }
-                        document.getElementById('searchPlaceResultDiv').innerHTML = text;
-                    }
-                })
-            }
-        }
-
-        function selectPlace(_id, _name, element){
-            if(placeId.indexOf(_id) == -1) {
-                placeId[placeId.length] = _id;
-                $(element).remove();
-                var text = '<div class="col-md-6 floR">\n' +
-                    '<div class="inTag">\n' +
-                    '<input type="text" value="' + _name + '" style="border: none; width: 100%; font-size: 12px;" readonly>\n' +
-                    '<input type="hidden" name="places[]" id="places" value="' + _id + '" style="border: none; width: 100%; font-size: 12px;" readonly>\n' +
-                    '<i class="fa fa-close closeIconTag" onclick="deletePlace(this)"></i>\n' +
-                    '</div>\n' +
-                    '</div>';
-
-                $("#selectedPlace").append(text);
-
-                document.getElementById('searchPlaceResultDiv').innerHTML = '';
-                document.getElementById('placeNameSearch').value = '';
-            }
-        }
-
-        function deletePlace(element){
-            value = $(element).prev().val();
-            index = placeId.indexOf(value);
-            if(index != -1)
-                placeId[index] = '';
-
-            $(element).parent().parent().remove();
-        }
-
-        function changeOstan(_element){
-            var _id = _element.value;
-            var _name = _element.options[_element.selectedIndex].text;
-
-            if(_id != 0){
-                document.getElementById('searchCityResultDiv').innerHTML = '';
-                document.getElementById('cityNameSearch').value = '';
-                document.getElementById('cityIdSearch').value = 0;
-                selectedOstanId = _id;
-                selectedOstanName = _name;
-
-                $.ajax({
-                    type: 'post',
-                    url: '{{route("get.allcity.withState")}}',
-                    data: {
-                        _token: '{{csrf_token()}}',
-                        id: _id,
-                    },
-                    success: function(response){
-                        response = JSON.parse(response);
-                        city = response;
-                    }
-                })
-            }
-        }
-
-        function findCity(value){
-            document.getElementById('searchCityResultDiv').innerHTML = '';
-
-            if(value.trim().length > 1){
-                var text = '';
-                for(i = 0; i < city.length; i++){
-                    if(city[i]['name'].includes(value)){
-                        var val = selectedOstanId + '_' + city[i]['id'];
-                        if(cityId.indexOf(val) == -1)
-                            text += '<div class="row searchTagResult" onclick="selectCity(\'' + val + '\', \'' + city[i]['name'] + '\')">' + city[i]['name'] + '</div>\n';
-                    }
-                }
-
-                document.getElementById('searchCityResultDiv').innerHTML = text;
-            }
-        }
-
-        function selectCity(_id, _name){
-            if(cityId.indexOf(_id) == -1) {
-                document.getElementById('searchCityResultDiv').innerHTML= '';
-                document.getElementById('cityNameSearch').value = _name;
-                document.getElementById('cityIdSearch').value = _id;
-                // chooseCity();
-            }
-        }
-
-        function chooseCity(){
-            var id = document.getElementById('cityIdSearch').value;
-            var name = document.getElementById('cityNameSearch').value;
-
-            if(selectedOstanId == 0){
-                alert('استان و شهر را مشخص کنید...');
-                return;
-            }
-
-            if(id == 0) {
-                var val = 'استان ' + selectedOstanName;
-                id = selectedOstanId + '_0';
-            }
-            else
-                var val = 'شهر ' + name;
-
-            if(cityId.indexOf(id) == -1) {
-                var text = '<div class="inTag">\n' +
-                    '<input type="text" value="' + val + '" style="border: none; width: 100%; font-size: 12px;" readonly="">\n' +
-                    '<input type="hidden" name="cities[]" id="cities" value="' + id + '" style="border: none; width: 100%; font-size: 12px;" readonly="">\n' +
-                    '<i class="fa fa-close closeIconTag" onclick="deleteCity(this)"></i>\n' +
-                    '</div>';
-
-
-                $('#selectedCity').append(text);
-
-                document.getElementById('cityNameSearch').value = '';
-                document.getElementById('cityIdSearch').value = 0;
-                cityId[cityId.length] = id;
-            }
-        }
-
-        function deleteCity(element){
-            value = $(element).prev().val();
-            index = cityId.indexOf(value);
-            if(index != -1)
-                cityId[index] = '';
-
-            $(element).parent().remove();
-        }
-
-        function findSrc(startPos){
-            var desc = CKEDITOR.instances['editor'].getData();
-            var index1 = desc.indexOf('blob', startPos);
-            if(index1 != -1){
-                var index2 = desc.indexOf('"',(index1-2));
-                var index3 = desc.indexOf('"',(index1+2));
-
-                var imageUrl = desc.substring(
-                    index2+1,
-                    index3
-                );
-                document.getElementById('beforeSaveImg').src = imageUrl;
-                var img = document.getElementById('beforeSaveImg');
-                var canvas = document.createElement("canvas");
-                var data = new FormData();
-
-                canvas.width = img.width;
-                canvas.height = img.height;
-
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0);
-                var dataURL = canvas.toDataURL("image/png");
-                var eee = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-
-                data.append('pic', eee);
-                data.append('id', safarnamehId);
-
-                $.ajax({
-                    type: 'post',
-                    url: '{{route("imageUploadCKeditor4")}}',
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    success: function(response){
-                        if(response != 'nok1' && response != 'nok2') {
-                            result = desc.replace(imageUrl, response);
-                            CKEDITOR.instances['editor'].setData(result);
-                            findSrc();
-                        }
-                        else{
-                            errorInUploadImage = true;
-                            findSrc(index3);
-                        }
-
-                    },
-                    error: function(response){
-                        console.log(response)
-                        errorInUploadImage = true;
-                        findSrc(index3);
-                    }
-                })
-            }
-            else {
-                if(errorInUploadImage)
-                    alert('در هنگام اپلود عکس ها مشکلی پیش امد');
-                submitDescription();
             }
         }
 
@@ -1020,12 +413,9 @@
             var id = document.getElementById('safarnamehId').value;
             var gardeshName = document.getElementById('gardeshName').value;
             var title = document.getElementById('title').value;
-            var description = ' ';
             var release = document.getElementById('releaseType').value;
             var date = document.getElementById('date').value;
             var time = document.getElementById('time').value;
-            var tags = $("input[id='tags']").map(function(){return [$(this).val()];}).get();
-            var category = $("input[name='category[]']").map(function(){return [$(this).prop('checked'), $(this).val()]}).get();
             var inputMainPic = document.getElementById('imgInput');
             var keyword = document.getElementById('keyword').value;
             var seoTitle = document.getElementById('seoTitle').value;
@@ -1034,6 +424,22 @@
 
             if(title.trim().length < 2){
                 alert('عنوان مقاله را مشخص کنید');
+                return;
+            }
+
+            if(selectedSafarnamehCategory.length == 0){
+                alert('دسته بندی را مشخص کنید');
+                return;
+            }
+
+            var hasMain = 0;
+            selectedSafarnamehCategory.map(item => {
+                if(item.thisIsMain == 1)
+                    hasMain = 1;
+            });
+
+            if(hasMain == 0){
+                alert('دسته بندی اصلی را مشخص کنید');
                 return;
             }
 
@@ -1048,8 +454,6 @@
 
             if(release != 'draft'){
                 let errInIf = '';
-                if(mainCategory == 0)
-                    errInIf += 'لطفا دسته بندی اصلی را مشخص کنید.';
 
                 if(_checkSeo) {
                     if (keyword.trim().length < 2)
@@ -1068,26 +472,24 @@
                 }
             }
 
+            mainDataForm.append('id', id);
             mainDataForm.append('title', title);
             mainDataForm.append('keyword', keyword);
             mainDataForm.append('seoTitle', seoTitle);
             mainDataForm.append('slug', slug);
             mainDataForm.append('meta', meta);
             mainDataForm.append('gardeshName', gardeshName);
-            mainDataForm.append('description', description);
+            mainDataForm.append('description', window.editor.getData());
+            mainDataForm.append('limboPicIds', window.limboIds);
             mainDataForm.append('releaseType', release);
             mainDataForm.append('date', date);
             mainDataForm.append('time', time);
-            mainDataForm.append('tags', JSON.stringify(tags));
-            mainDataForm.append('mainCategory', mainCategory);
-            mainDataForm.append('category', JSON.stringify(category));
-            mainDataForm.append('id', id);
-            mainDataForm.append('cityId', JSON.stringify(cityId));
-            mainDataForm.append('placeId', JSON.stringify(placeId));
+            mainDataForm.append('tags', JSON.stringify(tagsName));
+            mainDataForm.append('category', JSON.stringify(selectedSafarnamehCategory));
+            mainDataForm.append('places', JSON.stringify(selectedPlaces));
             mainDataForm.append('warningCount', warningCount);
 
             if (id == 0) {
-
                 if(inputMainPic.files && inputMainPic.files[0]){
                     mainDataForm.append('pic', inputMainPic.files[0]);
                     ajaxPost();
@@ -1108,7 +510,7 @@
         }
 
         function ajaxPost(){
-            document.getElementById('loader').style.display = 'flex';
+            openLoading();
             $.ajax({
                 type: 'post',
                 url: '{{route("safarnameh.store")}}',
@@ -1116,38 +518,15 @@
                 processData: false,
                 contentType: false,
                 success: function(response){
-                    response = JSON.parse(response);
-                    if(response[0] == 'ok'){
-                        safarnamehId = response[1];
-                        document.getElementById('safarnamehId').value = response[1];
-                        findSrc(0);
-                    }
-                }
-            });
-        }
-
-        function submitDescription(){
-            var desc = CKEDITOR.instances['editor'].getData();
-            if(desc == '')
-                desc = ' ';
-
-            $.ajax({
-                type: 'post',
-                url: '{{route("safarnameh.description.store")}}',
-                data: {
-                    _token: '{{csrf_token()}}',
-                    id: safarnamehId,
-                    description : desc
-                },
-                success: function(response){
-                    if(response == 'ok')
+                    if(response.status == 'ok'){
                         alert('تغییرات با موفقیت ثبت شد');
-                    var location = window.location.href;
-
-                    if(location.includes('createPost') || location.includes('gardeshEdit'))
-                        window.location.href = '{{url("safarnameh/edit")}}/' + safarnamehId;
-                    else
-                        document.getElementById('loader').style.display = 'none';
+                        safarnamehId = response.result;
+                        var location = window.location.href;
+                        if(location.includes('safarnameh/new') || location.includes('gardeshEdit'))
+                            window.location.href = '{{url("safarnameh/edit")}}/' + safarnamehId;
+                        else
+                            closeLoading();
+                    }
                 }
             });
         }
@@ -1159,7 +538,7 @@
             var meta = document.getElementById('meta').value;
             var title = document.getElementById('title').value;
             var safarnamehId = document.getElementById('safarnamehId').value;
-            var desc = CKEDITOR.instances['editor'].getData();
+            var desc = window.editor.getData();
 
             $.ajax({
                 type: 'post',
@@ -1198,7 +577,7 @@
         }
 
         function inlineSeoCheck(kind){
-            var tags = $("input[id='tags']").map(function(){return [$(this).val()];}).get();
+            var tags = tagsName;
             if(tags.length == 0){
                 errorCount++;
                 text = '<div style="color: red;">شما باید برای متن خود برچسب انتخاب نمایید</div>';
@@ -1214,28 +593,8 @@
                 $('#goodResult').append(text);
             }
 
-            if(mainCategory == 0){
-                errorCount++;
-                text = '<div style="color: red;">حتما یک دسته را به متن ارجاع دهید.</div>';
-                $('#errorResult').append(text);
-            }
-            else{
-                text = '<div style="color: green;">متن دارای دسته می باشد.</div>';
-                $('#goodResult').append(text);
-            }
-
             var cityError = false;
-            if(cityId.length != 0){
-                var ccid = 0;
-                for(i = 0; i < cityId.length; i++){
-                    if(cityId[i] == '')
-                        ccid++;
-                }
-
-                if(ccid == cityId.length)
-                    cityError = true;
-            }
-            else
+            if(selectedPlaces.length == 0)
                 cityError = true;
 
             if(cityError){
@@ -1262,26 +621,17 @@
 
             if(kind == 1) {
                 var release = document.getElementById('releaseType').value;
-                if (release != 'draft' && errorCount > 0) {
+
+                if (release != 'draft' && errorCount > 0)
                     alert('برای ثبت سفرنامه باید ارورها رابرطرف کرده و یا انتشار را به حالت پیش نویس دراوردی.');
-                    return;
-                }
-                if(!uniqueTitle){
+                if(!uniqueTitle)
                     alert('عنوان مقاله یکتا نیست');
-                    return;
-                }
-                else if(!uniqueSlug){
+                else if(!uniqueSlug)
                     alert('نامک مقاله یکتا نیست');
-                    return;
-                }
-                else if(!uniqueKeyword){
+                else if(!uniqueKeyword)
                     alert('کلمه کلیدی مقاله یکتا نیست');
-                    return;
-                }
-                else if(!uniqueSeoTitle){
+                else if(!uniqueSeoTitle)
                     alert('عنوان سئو مقاله یکتا نیست');
-                    return;
-                }
                 else {
                     if (warningCount > 0) {
                         $('#warningContentModal').html('');
@@ -1300,11 +650,11 @@
 
         function changeSeoTitle(_value){
             var text = _value.length + ' حرف';
-            $('#seoTitleNumber').text(text);;
+            $('#seoTitleNumber').text(text);
             if(_value.length > 60 && _value.length <= 85)
-                $('#seoTitleNumber').css('color', 'green')
+                $('#seoTitleNumber').css('color', 'green');
             else
-                $('#seoTitleNumber').css('color', 'red')
+                $('#seoTitleNumber').css('color', 'red');
 
         }
 
@@ -1315,32 +665,197 @@
                 $('#metaNumber').css('color', 'green');
             else
                 $('#metaNumber').css('color', 'red');
-
         }
 
-        function deleteCategory(_id, _element){
-            $.ajax({
-                type: 'post',
-                url: '{{route("safarnameh.category.delete")}}',
-                data:{
-                    _token: '{{csrf_token()}}',
-                    id: _id
-                },
-                success: function(response){
-                    if(response == 'hasArticle')
-                        alert('دسته بندی را به علت وجود مطلب نمی توانید حذف کنید. ابتدا مطلب مرتب را حذف کنید.')
-                    else if(response == 'hasSub')
-                        alert('دسته بندی به علت داشتن زیر دسته نمی تواندی حذف کنید.')
-                    else if(response == 'ok') {
-                        $(_element).parent().parent().remove();
-                        alert('دسته بندی حذف شد')
-                    }
-                },
-                err: function(err){
 
+        safarnamehCategory.map(item => {
+            allSafarnamehCategoryList.push({
+                id: item.id,
+                main: 1,
+                name: item.name,
+                show: 1,
+                selected: 0,
+            });
+            item.sub.map(sub => {
+                allSafarnamehCategoryList.push({
+                    id: sub.id,
+                    main: 0,
+                    name: sub.name,
+                    show: 1,
+                    selected: 0,
+                });
+            });
+        });
+        closeCategoryResult = () => $('#categoryResultDiv').removeClass('open');
+        $(window).on('click', () => setTimeout(() => closeCategoryResult(), 100));
+
+        function openCategoryResult(){
+            if(!$('#categoryResultDiv').hasClass('open'))
+                setTimeout(() => $('#categoryResultDiv').addClass('open'), 200);
+        }
+        function createCategoryResult(_result){
+            var text = '';
+            _result.map((item, index) => {
+                if(item.show)
+                    text += `<div class="resRow ${item.main == 1 ? 'mainCat' : 'sideCat'} ${item.selected == 1 ? 'selected' : ''}" onclick="selectedThisSafarnamehCategory(${index})">${item.name}</div>`;
+            });
+            $('#categoryResultDiv').html(text);
+        }
+        function searchInSafarnamehCategory(_value){
+            allSafarnamehCategoryList.map(item => item.show = item.name.search(_value) > -1 ? 1 : 0);
+            createCategoryResult(allSafarnamehCategoryList);
+        }
+        function selectedThisSafarnamehCategory(_index){
+            allSafarnamehCategoryList.map(item => item.show = 1);
+            if(allSafarnamehCategoryList[_index].selected == 1)
+                return;
+
+            allSafarnamehCategoryList[_index].selected = 1;
+            selectedSafarnamehCategory.push(allSafarnamehCategoryList[_index]);
+            selectedSafarnamehCategory[selectedSafarnamehCategory.length - 1].thisIsMain = 0;
+            selectedSafarnamehCategory[selectedSafarnamehCategory.length - 1].indexList = _index;
+
+            if(selectedSafarnamehCategory.length == 1)
+                selectedSafarnamehCategory[0].thisIsMain = 1;
+
+            createSelectedCategoryRow();
+            createCategoryResult(allSafarnamehCategoryList);
+        }
+        function createSelectedCategoryRow(){
+            var text = '';
+            selectedSafarnamehCategory.map((item, index) => {
+                text += `<div class="scRow">
+                            <div class="name">${item.name}</div>
+                            <div class="isMain ${item.thisIsMain == 1 ? 'selected' : ''}" onclick="chooseThisForMainCat(${index})" >اصلی</div>
+                            <span class="closeWithCircleIcon" onclick="deleteFromSelectedCategory(${index})"></span>
+                        </div>`;
+            });
+
+            $('#selectedCategory').html(text);
+        }
+        function chooseThisForMainCat(_index){
+            selectedSafarnamehCategory.map(item => item.thisIsMain = 0);
+            selectedSafarnamehCategory[_index].thisIsMain = 1;
+            createSelectedCategoryRow();
+        }
+        function deleteFromSelectedCategory(_index){
+            allSafarnamehCategoryList[selectedSafarnamehCategory[_index].indexList].selected = 0;
+            selectedSafarnamehCategory.splice(_index, 1);
+            allSafarnamehCategoryList.map(item => item.show = 1);
+            createSelectedCategoryRow();
+            createCategoryResult(allSafarnamehCategoryList);
+        }
+        createCategoryResult(allSafarnamehCategoryList);
+
+        selectedCat.map(item => {
+            allSafarnamehCategoryList.map((ascl, index) => {
+                if(item.id == ascl.id) {
+                    selectedThisSafarnamehCategory(index);
+                    if(item.isMain == 1)
+                        chooseThisForMainCat(selectedSafarnamehCategory.length-1);
                 }
-            })
+            });
+        });
+    </script>
+
+    <script>
+        $('#newTag').on('keyup', e => e.keyCode == 13 ? selectTag() : searchTag(e.target.value));
+        function searchTag(value){
+            if(value.trim().length > 1) {
+                $('#searchTagResultDiv').empty();
+                $.ajax({
+                    type: 'get',
+                    url: '{{route("safarnameh.tag.search")}}?text=' + value,
+                    success: function (response) {
+                        if (response.status == 'ok') {
+                            var text = '';
+                            if(value.trim().length  == 0){
+                                $('#searchTagResultDiv').empty();
+                                return;
+                            }
+
+                            if (response.value == value) {
+                                response.result.map(item => text += `<div class="row searchTagResult" onclick="chooseTag(this.innerText)">${item}</div>`);
+                                $('#searchTagResultDiv').html(text);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        function chooseTag(_value){
+            $('#searchTagResultDiv').empty();
+            $('#newTag').val(_value);
+            selectTag();
+        }
+        function selectTag() {
+            var value = $('#newTag').val();
+            if(tagsName.indexOf(value) == -1) {
+                tagsName.push(value);
+                if (value.trim().length != 0) {
+                    $('#newTag').val('');
+                    var text = `<div class="scRow">
+                                <div class="name tagNameInputs">${value}</div>
+                                <span class="closeWithCircleIcon" onclick="deleteTag(this)"></span>
+                                </div>`;
+
+                    $('#selectedTags').append(text);
+                }
+            }
+        }
+        function deleteTag(element){
+            var value = $(element).prev().text();
+            var index = tagsName.indexOf(value);
+            if(index != -1)
+                tagsName.splice(index, 1);
+
+            $(element).parent().remove();
+        }
+
+        function searchPlaces(_value){
+            if(_value.trim().length > 1){
+                if(searchPlaceAjax != null)
+                    searchPlaceAjax.abort();
+
+                $('#searchPlaceResult').empty();
+
+                searchPlaceAjax = $.ajax({
+                    type: 'get',
+                    url: '{{route("search.placesAndCity")}}?text='+_value,
+                    success: response => {
+                        if(response.status == 'ok')
+                            createPlaceSearchResult(response.result);
+                    },
+                })
+            }
+            else
+                $('#searchPlaceResult').empty();
+        }
+        function createPlaceSearchResult(_result){
+            var text = '';
+            _result.map(item => text += `<div class="row searchTagResult" onclick="choosePlace(${item.id}, '${item.name}', '${item.kind}')">${item.name}</div>`);
+            $('#searchPlaceResult').html(text);
+        }
+        function choosePlace(_id, _name, _kind){
+            var index = selectedPlaces.push({
+                id: _id,
+                name: _name,
+                kind: _kind
+            });
+            var text = `<div class="scRow">
+                                                    <div class="name tagNameInputs">${_name}</div>
+                                                    <span class="closeWithCircleIcon" onclick="deletePlace(${index}, this)"></span>
+                                                </div>`;
+
+            $('#newPlace').val('');
+            $('#searchPlaceResult').empty();
+            $('#selectedPlaces').append(text);
+        }
+        function deletePlace(_index, _element){
+            $(_element).parent().remove();
+            selectedPlaces.splice(_index, 1);
         }
     </script>
+
 
 @stop

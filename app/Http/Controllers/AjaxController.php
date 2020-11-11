@@ -6,7 +6,10 @@ use App\models\Activity;
 use App\models\Cities;
 use App\models\FoodMaterial;
 use App\models\LogModel;
+use App\models\Place;
+use App\models\State;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AjaxController extends Controller
 {
@@ -169,5 +172,35 @@ class AjaxController extends Controller
         $value = $request->value;
         $material = FoodMaterial::where('name', 'LIKE', '%'.$value.'%')->pluck('name')->toArray();
         return response()->json($material);
+    }
+
+    public function searchPlacesAndCity()
+    {
+        $result = [];
+        $text = $_GET['text'];
+        $kindPlace = Place::whereNotNull('tableName')
+                            ->where('mainSearch', 1)
+                            ->get();
+
+        $states = State::where('name','LIKE', '%'.$text.'%')->select(['id', 'name'])->get();
+        foreach ($states as $item)
+            array_push($result, ['id' => $item->id, 'name' => 'استان '.$item->name, 'kind' => 'state']);
+
+        $cities = Cities::where('name','LIKE', '%'.$text.'%')->where('isVillage', 0)->select(['id', 'name'])->get();
+        foreach ($cities as $item)
+            array_push($result, ['id' => $item->id, 'name' => 'شهر '.$item->name, 'kind' => 'city']);
+
+        foreach ($kindPlace as $kp){
+            $pls = DB::table($kp->tableName)
+                        ->where('name','LIKE', '%'.$text.'%')
+                        ->select(['id', 'name'])
+                        ->get();
+            foreach ($pls as $item){
+                $item->kind = $kp->id;
+                array_push($result, $item);
+            }
+        }
+
+        return response()->json(['status' => 'ok', 'result' => $result]);
     }
 }

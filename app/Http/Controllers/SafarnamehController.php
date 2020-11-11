@@ -18,11 +18,13 @@ use App\models\SafarnamehCategoryRelations;
 use App\models\SafarnamehCityRelations;
 use App\models\SafarnamehComments;
 use App\models\SafarnamehLike;
+use App\models\SafarnamehLimboPics;
 use App\models\SafarnamehPlaceRelations;
 use App\models\SafarnamehTagRelations;
 use App\models\SafarnamehTags;
 use App\models\SogatSanaie;
 use App\models\State;
+use App\models\Tag;
 use App\models\VideoCategory;
 use App\User;
 use Carbon\Carbon;
@@ -191,11 +193,13 @@ class SafarnamehController extends Controller
         else
             $acl = 0;
 
-        return view('content.safarnameh.newSafarnameh', compact(['category', 'ostan', 'acl']));
+        $code = random_int(10000, 99999);
+        return view('content.safarnameh.newSafarnameh', compact(['category', 'ostan', 'acl', 'code']));
     }
 
     public function editSafarnameh($id) {
 
+        $code = random_int(10000, 99999);
         $safarnameh = Safarnameh::find($id);
 
         if($safarnameh == null)
@@ -223,143 +227,123 @@ class SafarnamehController extends Controller
 
         $safarnameh->category = SafarnamehCategoryRelations::where('safarnamehId', $safarnameh->id)->get();
         $mainCategory = SafarnamehCategoryRelations::where('safarnamehId', $safarnameh->id)->where('isMain', 1)->first();
-        if($mainCategory != null)
-            $safarnameh->mainCategory = $mainCategory->categoryId;
-        else
-            $safarnameh->mainCategory = 0;
+        $safarnameh->mainCategory = $mainCategory != null ? $mainCategory->categoryId : 0;
 
-        $safarnameh->tags = SafarnamehTagRelations::where('safarnamehId', $safarnameh->id)->get();
-        foreach($safarnameh->tags as $item)
-            $item->tag = SafarnamehTags::find($item->tagId)->tag;
+        $safarnameh->tags = $safarnameh->getTags->pluck('tag')->toArray();
 
         $category = SafarnamehCategories::where('parent', 0)->get();
         foreach ($category as $item)
             $item->sub = SafarnamehCategories::where('parent', $item->id)->get();
 
-        $allCity = SafarnamehCityRelations::where('safarnamehId', $safarnameh->id)->where('cityId', 0)->where('stateId', 0)->first();
-        if($allCity == null){
-            $cityRelation = SafarnamehCityRelations::where('safarnamehId', $safarnameh->id)->get();
-            foreach ($cityRelation as $item){
-                if($item->cityId == 0){
-                    $name = 'استان ';
-                    $state = State::find($item->stateId);
-                    $item->name = $name . $state->name;
-                }
-                else{
-                    $name = 'شهر ';
-                    $Ctiy = Cities::find($item->cityId);
-                    $item->name = $name . $Ctiy->name;
-                }
-                $item->validId = $item->stateId .'_'.$item->cityId;
+        $safarPlaces = [];
+        $citySafar = SafarnamehCityRelations::where('safarnamehId', $safarnameh->id)->get();
+        foreach ($citySafar as $item){
+            if($item->cityId == 0){
+                $state = State::find($item->stateId);
+                array_push($safarPlaces, ['id' => $state->id, 'name' => 'استان '.$state->name, 'kind' => 'state']);
             }
-            $safarnameh->city = $cityRelation;
-        }
-        else
-            $safarnameh->city = array();
-
-
-        $allPlace = SafarnamehPlaceRelations::where('safarnamehId', $safarnameh->id)
-                                            ->where('placeId', 0)
-                                            ->where('kindPlaceId', 0)
-                                            ->first();
-        if($allPlace == null){
-            $placeRelation = SafarnamehPlaceRelations::where('safarnamehId', $safarnameh->id)->get();
-            foreach ($placeRelation as $item){
-                $kindPlace = Place::find($item->kindPlaceId);
-                $place = \DB::table($kindPlace->tableName)->find($item->placeId);
-
-                $item->name = $place->name;
-                $item->validId = $item->placeId .'_'.$item->kindPlaceId;
+            else{
+                $city = Cities::find($item->cityId);
+                array_push($safarPlaces, ['id' => $city->id, 'name' => 'شهر '.$city->name, 'kind' => 'city']);
             }
-            $safarnameh->place = $placeRelation;
         }
-        else
-            $safarnameh->place = [];
 
-        $ostan = State::all();
-        $safarnamehJson = json_encode($safarnameh);
+        $placeSafar = SafarnamehPlaceRelations::where('safarnamehId', $safarnameh->id)->get();
+        foreach ($placeSafar as $item){
+            $kindPlace = Place::find($item->kindPlaceId);
+            $place = DB::table($kindPlace->tableName)->find($item->placeId);
+            if($place == null)
+                $item->delete();
+            else
+                array_push($safarPlaces, ['id' => $place->id, 'name' => $place->name, 'kind' => $kindPlace->id]);
+        }
 
-        $acl = ACL::where('userId', auth()->user()->id)->first();
-        if($acl != null && $acl->adminAccess == 1)
-            $acl = 1;
-        else
-            $acl = 0;
+        $safarnameh->places = $safarPlaces;
 
-        return view('content.safarnameh.newSafarnameh', compact(['safarnameh', 'category', 'ostan', 'safarnamehJson', 'acl']));
+        return view('content.safarnameh.newSafarnameh', compact(['safarnameh', 'category', 'code']));
     }
 
     public function uploadSafarnamehPic(Request $request)
     {
-        try {
-            if ($this->request->hasFiles() == true) {
-                $errors = []; // Store all foreseen and unforseen errors here
-                $fileExtensions = ['jpeg','jpg','png','gif','svg'];
-                $uploadDirectory = __DIR__ . '/../../Uploads/';
-                $Y = date("Y");
-                $M = date("m");
+        $user = auth()->user();
+        $data = json_decode($request->data);
+        if(isset($data->code)){
+            if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+                $mainFileName = $user->id.'_'.time().'.webp';
+                $nLocation = __DIR__ . '/../../../../assets/_images/posts/limbo';
 
-                foreach ($this->request->getUploadedFiles() as $file) {
+                $size = [[
+                    'width' => 900,
+                    'height' => null,
+                    'name' => $user->id.'_',
+                    'destination' => $nLocation
+                ]];
 
-                    if (in_array($file->getExtension(),$fileExtensions)) {
-
-                        if($file->getSize() < 2000000)  {
-                            if (!file_exists($uploadDirectory . $Y)) {
-                                mkdir($uploadDirectory.$Y, 0777, true);
-                            }
-                            if (!file_exists($uploadDirectory.$Y.'/'.$M))
-                                mkdir($uploadDirectory.$Y.'/'.$M, 0777, true);
-
-                            $namenew = md5($file->getName().time()).'.'.$file->getExtension();
-                            $uploadDirectory .= $Y.'/'.$M.'/';
-                            $file->moveTo($uploadDirectory.$namenew);
-                        }
-                        else {
-                            $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
-                        }
-                    }
-                    else{$errors[] = "This file extension is not allowed. Please upload a JPEG ,svg,gif,,jpg,PNG file";}
-
-                    if(empty($errors))  {
-                        echo '{
-                        "uploaded": true,
-                        "url": "http://localhost/cms/public/Uploads/'.$Y.'/'.$M.'/'.$namenew.'"}';
-                    }
-                    else{
-                        echo '{
-                        "uploaded": false,
-                        "error": {
-                            "message": "could not upload this image1"
-                    }';
-                    }
+                $image = $request->file('file');
+                $nFileName = resizeImage($image, $size);
+                if($nFileName == 'error'){
+                    $response = [ 'uploaded' => false, 'error' => [ 'message' => 'error in resize image'] ];
+                    return response()->json($response);
                 }
-            }
-            else {
-                echo '{
-                "uploaded": false,
-                "error": {
-                    "message": "could not upload this image1"
-                }';
-            }
-        }
-        catch (\Exception $e) {
-            echo '{
-            "uploaded": false,
-            "error": {
-                "message": "could not upload this image0"
-            }';
-        }
-    }
 
-    public function safarnamehTagSearch(Request $request)
-    {
-        if(isset($request->text)){
-            $tags = SafarnamehTags::where('tag', 'LIKE', '%'.$request->text.'%');
-            echo json_encode(['ok', $tags]);
+                $nFileName = $user->id.'_'.$nFileName;
+                $resizeLocation = $nLocation.'/'.$nFileName;
+                $destinationLocation = $nLocation.'/'.$mainFileName;
+
+                $fileType = explode('.', $nFileName);
+                $fileType = end($fileType);
+                $needToConvert = true;
+                if($fileType == 'png')
+                    $img = imagecreatefrompng($resizeLocation);
+                else if($fileType == 'jpg' || $fileType == 'jpeg')
+                    $img = imagecreatefromjpeg($resizeLocation);
+                else if($fileType == 'gif')
+                    $img = imagecreatefromgif($resizeLocation);
+                else if($fileType == 'webp')
+                    $needToConvert = false;
+                else{
+                    if(is_file($resizeLocation))
+                        unlink($resizeLocation);
+                    $response = [ 'uploaded' => false, 'error' => [ 'message' => 'file type error'] ];
+                    return response()->json($response);
+                }
+
+                if($needToConvert)
+                    $image = imagewebp($img, $destinationLocation, 80);
+                if($image || !$needToConvert){
+                    $limbo =SafarnamehLimboPics::create([
+                        'userId' => $user->id,
+                        'code' => $data->code,
+                        'pic' => $mainFileName,
+                    ]);
+
+                    if(is_file($resizeLocation) && $needToConvert)
+                        unlink($resizeLocation);
+
+                    $response = [ 'uploaded' => true,
+                                  'url' => URL::asset('_images/posts/limbo/'.$mainFileName),
+                                  'limboId' => $limbo->id ];
+                }
+                else
+                    $response = [ 'uploaded' => false, 'error' => [ 'message' => 'error in convert'] ];
+            }
+            else
+                $response = [ 'uploaded' => false, 'error' => [ 'message' => 'could not upload this image1'] ];
         }
         else
-            echo json_encode(['nok']);
+            $response = [ 'uploaded' => false, 'error' => [ 'message' => 'less data'] ];
 
-        return;
+        return response()->json($response);
+    }
+
+    public function safarnamehTagSearch()
+    {
+        if(isset($_GET['text'])){
+            $tags = SafarnamehTags::where('tag', 'LIKE', '%'.$_GET['text'].'%')->get()->pluck('tag')->toArray();
+            return response()->json(['status' => 'ok', 'result' => $tags, 'value' => $_GET['text']]);
+        }
+        else
+            return response()->json(['status' => 'nok']);
     }
 
     public function newSafarnamehCategory(Request $request)
@@ -390,7 +374,6 @@ class SafarnamehController extends Controller
             'id' => 'required',
             'title' => 'required',
             'releaseType' => 'required',
-            'mainCategory' => 'required',
             'category' => 'required',
         ]);
         $safarnamehId = $request->id;
@@ -439,59 +422,64 @@ class SafarnamehController extends Controller
             $safarnameh->keyword = $request->keyword;
         if($request->seoTitle != null)
             $safarnameh->seoTitle = $request->seoTitle;
-        if($request->slug != null){
-            $slug = makeSlug($request->slug);
-            $safarnameh->slug = $slug;
-        }
-        else if($request->keword != null){
-            $slug = makeSlug($request->keyword);
-            $safarnameh->slug = $slug;
-        }
+        if($request->slug != null)
+            $safarnameh->slug = makeSlug($request->slug);
+        else if($request->keword != null)
+            $safarnameh->slug = makeSlug($request->keyword);
 
         $safarnameh->confirm = 1;
         $safarnameh->save();
+
         $safarnamehId = $safarnameh->id;
 
-        $tags = json_decode($request->tags);
+        $loca = __DIR__.'/../../../../assets/_images/posts';
+        $limboDestination = $loca.'/limbo';
+        $newDestination = $loca.'/'.$safarnamehId;
+        if(!is_dir($newDestination))
+            mkdir($newDestination);
+
+        $description = $request->description;
+        $limbos = explode(',', $request->limboPicIds);
+        $limboPics = SafarnamehLimboPics::whereIn('id', $limbos)->where('userId', auth()->user()->id)->get();
+        foreach ($limboPics as $item){
+            rename($limboDestination.'/'.$item->pic, $newDestination.'/'.$item->pic);
+            $url = URL::asset('_images/posts/limbo/'.$item->pic);
+            $newUrl = URL::asset('_images/posts/'.$safarnamehId.'/'.$item->pic);
+            $description = str_replace($url, $newUrl, $description);
+            $item->delete();
+        }
+        $safarnameh->description = $description;
+        $safarnameh->save();
+
         $tagId = [];
-        $existTag = [];
+        $tags = json_decode($request->tags);
         foreach ($tags as $item){
-            $tag = SafarnamehTags::where('tag', $item)->firstOrCreate(['tag' => $item]);
-            $ex = SafarnamehTagRelations::firstOrCreate(['tagId' => $tag->id, 'safarnamehId' => $safarnamehId]);
-            array_push($tagId, $tag->id);
-            array_push($existTag, $ex->id);
+            $tt = SafarnamehTags::firstOrCreate(['tag' => $item]);
+            array_push($tagId, $tt->id);
         }
-        SafarnamehTagRelations::whereNotIn('id', $existTag)->where('safarnamehId', $safarnamehId)->delete();
+        SafarnamehTagRelations::where('safarnamehId', $safarnamehId)
+                                ->whereNotIn('tagId', $tagId)
+                                ->delete();
+        foreach ($tagId as $id){
+            SafarnamehTagRelations::firstOrCreate(['safarnamehId' => $safarnamehId, 'tagId' => $id]);
+        }
 
-        $category = json_decode($request->category);
-        $categoryRelation = SafarnamehCategoryRelations::where('safarnamehId', $safarnameh->id)->get();
+        $categories = json_decode($request->category);
         $categoryId = [];
-        for($i = 0; $i < count($category); $i += 2){
-            if($category[$i] == 'true')
-                array_push($categoryId, $category[$i+1]);
+        $mainCategoryId = 0;
+        foreach ($categories as $item){
+            array_push($categoryId, $item->id);
+            if($item->thisIsMain == 1)
+                $mainCategoryId = $item->id;
         }
-        foreach ($categoryRelation as $item){
-            if(in_array($item->categoryId, $categoryId))
-                array_push($existTag, $item->categoryId);
-            else
-                SafarnamehCategoryRelations::find($item->id)->delete();
-        }
+        SafarnamehCategoryRelations::where('safarnamehId', $safarnameh->id)
+                                    ->whereNotIn('categoryId', $categoryId)
+                                    ->delete();
         foreach ($categoryId as $item){
-            if(!in_array($item, $existTag)){
-                $safarnamehCategory = new SafarnamehCategoryRelations();
-                $safarnamehCategory->safarnamehId = $safarnameh->id;
-                $safarnamehCategory->categoryId = $item;
-                $safarnamehCategory->isMain = 0;
-                $safarnamehCategory->save();
-            }
-        }
-
-        if($request->mainCategory != 0) {
-            $mainCategory = $request->mainCategory;
-            $condition = ['safarnamehId' => $safarnameh->id, 'categoryId' => $mainCategory];
-            $main = SafarnamehCategoryRelations::where($condition)->first();
-            $main->isMain = 1;
-            $main->save();
+            $safCatId = SafarnamehCategoryRelations::firstOrCreate(['safarnamehId' => $safarnameh->id,'categoryId' => $item]);
+            $safCatId->update(['isMain' => 0]);
+            if($safCatId->categoryId == $mainCategoryId)
+                $safCatId->update(['isMain' => 1]);
         }
 
         if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
@@ -517,95 +505,29 @@ class SafarnamehController extends Controller
             compressImage($_FILES['pic']['tmp_name'], $location, 80);
         }
 
-        $city = json_decode($request->cityId);
-        if(count($city) != 0) {
-            $cityRelations = SafarnamehCityRelations::where('safarnamehId', $safarnamehId)->get();
-            $existCity = array();
-
-            for ($i = 0; $i < count($cityRelations); $i++) {
-                $val = $cityRelations[$i]->stateId . '_' . $cityRelations[$i]->cityId;
-                if (in_array($val, $city))
-                    array_push($existCity, $val);
-                else
-                    $cityRelations[$i]->delete();
-            }
-
-            $count = 0;
-            for ($i = 0; $i < count($city); $i++) {
-                if (!in_array($city[$i], $existCity)) {
-                    $ex = explode('_', $city[$i]);
-                    if(count($ex) == 2) {
-                        $stateId = $ex[0];
-                        $cityId = $ex[1];
-
-                        $newCity = new SafarnamehCityRelations();
-                        $newCity->stateId = $stateId;
-                        $newCity->cityId = $cityId;
-                        $newCity->safarnamehId = $safarnamehId;
-                        $newCity->save();
-                    }
-                    else
-                        $count++;
+        $stateCityIds = [0];
+        $placeSafarIds = [0];
+        $places = json_decode($request->places);
+        foreach ($places as $place){
+            if($place->kind == 'city' || $place->kind == 'state'){
+                if($place->kind == 'state'){
+                    $city = 0;
+                    $state = $place->id;
                 }
-            }
-            if($count == count($city))
-                SafarnamehCityRelations::where('safarnamehId', $safarnamehId)
-                                                    ->where('stateId', 0)
-                                                    ->where('cityId', 0)
-                                                    ->firstOrCreate(['safarnamehId' => $safarnamehId,
-                                                                     'stateId' => 0, 'cityId' => 0]);
-        }
-
-        $place = json_decode($request->placeId);
-        if(count($place) != 0) {
-            SafarnamehPlaceRelations::where('safarnamehId', $safarnamehId)
-                                    ->where('kindPlaceId', 0)
-                                    ->where('placeId', 0)
-                                    ->delete();
-            $placeRelations = SafarnamehPlaceRelations::where('safarnamehId', $safarnamehId)->get();
-            $existPlace = array();
-
-            for ($i = 0; $i < count($placeRelations); $i++) {
-                $val = $placeRelations[$i]->placeId . '_' . $placeRelations[$i]->kindPlaceId;
-                if (in_array($val, $place))
-                    array_push($existPlace, $val);
-                else
-                    $placeRelations[$i]->delete();
-            }
-
-            $count = 0;
-            for ($i = 0; $i < count($place); $i++) {
-                if (!in_array($place[$i], $existPlace)) {
-                    $ex = explode('_', $place[$i]);
-                    if(count($ex) == 2) {
-                        $kindPlaceId = $ex[1];
-                        $placeId = $ex[0];
-
-                        $newPlace = new SafarnamehPlaceRelations();
-                        $newPlace->kindPlaceId = $kindPlaceId;
-                        $newPlace->placeId = $placeId;
-                        $newPlace->safarnamehId = $safarnamehId;
-                        $newPlace->save();
-                    }
-                    else
-                        $count++;
+                else{
+                    $city = $place->id;
+                    $state = Cities::find($city)->getState->id;
                 }
+                $tt = SafarnamehCityRelations::firstOrCreate(['safarnamehId' => $safarnamehId, 'stateId' => $state, 'cityId' => $city]);
+                array_push($stateCityIds, $tt->id);
             }
-
-            if(count($place) == $count){
-                $allPlace = SafarnamehPlaceRelations::where('safarnamehId', $safarnamehId)
-                                                    ->where('kindPlaceId', 0)
-                                                    ->where('placeId', 0)
-                                                    ->first();
-                if($allPlace == null){
-                    $newPlace = new SafarnamehPlaceRelations();
-                    $newPlace->kindPlaceId = 0;
-                    $newPlace->placeId = 0;
-                    $newPlace->safarnamehId = $safarnamehId;
-                    $newPlace->save();
-                }
+            else{
+                $tt = SafarnamehPlaceRelations::firstOrCreate(['safarnamehId' => $safarnamehId, 'kindPlaceId' => $place->kind, 'placeId' => $place->id]);
+                array_push($placeSafarIds, $tt->id);
             }
         }
+        SafarnamehCityRelations::whereNotIn('id', $stateCityIds)->where('safarnamehId', $safarnamehId)->delete();
+        SafarnamehPlaceRelations::whereNotIn('id', $placeSafarIds)->where('safarnamehId', $safarnamehId)->delete();
 
         if($request->gardeshName != 0){
             \DB::select('DELETE FROM wp_posts WHERE ID = ' . $request->gardeshName);
@@ -618,30 +540,7 @@ class SafarnamehController extends Controller
             }
         }
 
-        echo json_encode(['ok', $safarnameh->id]);
-        return;
-    }
-
-    public function storeDescriptionSafarnameh(Request $request)
-    {
-        if(isset($request->id)){
-            $safarnameh = Safarnameh::find($request->id);
-            if($safarnameh != null){
-                if($request->description == null)
-                    $safarnameh->description = ' ';
-                else
-                    $safarnameh->description = $request->description;
-                $safarnameh->save();
-
-                echo 'ok';
-            }
-            else
-                echo 'nok2';
-        }
-        else
-            echo 'nok1';
-
-        return;
+        return response()->json(['status' => 'ok', 'result' => $safarnameh->id]);
     }
 
     public function deleteSafarnamehCategory(Request $request)
@@ -666,40 +565,6 @@ class SafarnamehController extends Controller
                 }
             }
         }
-
-        return;
-    }
-
-    public function imageUploadCKeditor4(Request $request)
-    {
-        if(isset($request->id)) {
-            $post = Safarnameh::find($request->id);
-            if($post != null){
-                $img = $_POST['pic'];
-                $img = str_replace('data:image/png;base64,', '', $img);
-                $img = str_replace(' ', '+', $img);
-                $data = base64_decode($img);
-                $location = __DIR__ . '/../../../../assets/_images/posts/'. $post->id ;
-
-                while(true){
-                    $randomNum = rand(10000, 99999);
-                    $fileName = $randomNum . '.jpg';
-
-                    $location .= '/' . $fileName;
-                    if(!file_exists($location))
-                        break;
-                }
-
-                file_put_contents($location, $data);
-
-                $url = URL::asset('_images/posts/' . $post->id . '/' . $fileName);
-                echo $url;
-            }
-            else
-                echo 'nok2';
-        }
-        else
-            echo 'nok1';
 
         return;
     }
@@ -736,23 +601,14 @@ class SafarnamehController extends Controller
         $safarnameh->city = array();
         $safarnameh->category = array();
 
-        $ostan = State::all();
-
         $category = SafarnamehCategories::where('parent', 0)->get();
         foreach ($category as $item)
             $item->sub = SafarnamehCategories::where('parent', $item->id)->get();
 
-        $safarnamehJson = json_encode($safarnameh);
-
         str_replace("world","Peter","Hello world!");
 
-        $acl = ACL::where('userId', auth()->user()->id)->first();
-        if($acl != null && $acl->adminAccess == 1)
-            $acl = 1;
-        else
-            $acl = 0;
 
-        return view('content.safarnameh.newSafarnameh', compact(['safarnameh', 'category', 'ostan', 'safarnamehJson', 'acl']));
+        return view('content.safarnameh.newSafarnameh', compact(['safarnameh', 'category']));
 
     }
 

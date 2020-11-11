@@ -29,6 +29,8 @@ Route::get('autoBackup/{id}','BackupController@autoBackup');
 
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
+    Route::get('search/placesAndCity', 'AjaxController@searchPlacesAndCity')->name('search.placesAndCity');
+
     Route::post('searchForMaterial', 'AjaxController@searchForMaterialFood')->name('search.material');
 
 //    فعالیت
@@ -214,15 +216,19 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
 
     Route::get('/gardeshNameList', 'SafarnamehController@gardeshNameList')->name('gardeshNameList');
 
-    Route::get('safarnamehPage', 'SafarnamehController@safarnamehPage')->name('safarnameh.index');
+    Route::get('safarnameh/lists', 'SafarnamehController@safarnamehPage')->name('safarnameh.index');
 
-    Route::get('safarnamehNew', 'SafarnamehController@newSafarnameh')->name('safarnameh.new');
+    Route::get('safarnameh/new', 'SafarnamehController@newSafarnameh')->name('safarnameh.new');
 
     Route::get('safarnameh/edit/{id}', 'SafarnamehController@editSafarnameh')->name('safarnameh.edit');
 
-    Route::post('/uploadCKEditor', 'SafarnamehController@uploadSafarnamehPic')->name('uploadCKEditor');
+    Route::post('safarnameh/uploadDescriptionPic', 'SafarnamehController@uploadSafarnamehPic')->name('safarnameh.uploadDescPic');
 
-    Route::post('deleteSafarnameh', 'SafarnamehController@deleteSafarnameh')->name('safarnameh.delete');
+    Route::post('safarnameh/store', 'SafarnamehController@storeSafarnameh')->name('safarnameh.store');
+
+    Route::post('safarnameh/delete', 'SafarnamehController@deleteSafarnameh')->name('safarnameh.delete');
+
+    Route::get('safarnameh/searchTag', 'SafarnamehController@safarnamehTagSearch')->name('safarnameh.tag.search');
 
     Route::post('addToFavoriteSafarnameh', 'SafarnamehController@addToFavoriteSafarnameh')->name('addToFavoriteSafarnameh');
 
@@ -233,14 +239,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
     Route::post('deleteFromFavoriteSafarnameh', 'SafarnamehController@deleteFromFavoritePosts')->name('deleteFromFavoriteSafarnameh');
 
     Route::post('deleteFromBannerSafarnameh', 'SafarnamehController@deleteFromBannerSafarnameh')->name('deleteFromBannerSafarnameh');
-
-    Route::post('safarnamehTagSearch', 'SafarnamehController@safarnamehTagSearch')->name('safarnamehTagSearch');
-
-    Route::post('safarnameh/store', 'SafarnamehController@storeSafarnameh')->name('safarnameh.store');
-
-    Route::post('safarnameh/store/description', 'SafarnamehController@storeDescriptionSafarnameh')->name('safarnameh.description.store');
-
-    Route::post('imageUploadCKeditor4', 'SafarnamehController@imageUploadCKeditor4')->name('imageUploadCKeditor4');
 
     Route::post('seoTesterSafarnamehContent', 'SeoController@seoTesterSafarnamehContent')->name('seoTesterSafarnamehContent');
 

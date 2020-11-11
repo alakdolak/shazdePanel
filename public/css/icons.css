@@ -3,6 +3,22 @@
 }
 
 /*....................*/
+.closeWithCircleIcon:before{
+    content: '\E02E';
+    font-family: 'Shazde_Regular2' !important;
+}
+.closeWithCircleIconAfter:after{
+    content: '\E02E';
+    font-family: 'Shazde_Regular2' !important;
+}
+.arrowDonwIcon:before{
+    content: '\E03E';
+    font-family: 'Shazde_Regular2' !important;
+}
+.arrowDonwIconAfter:after{
+    content: '\E03E';
+    font-family: 'Shazde_Regular2' !important;
+}
 .emptyCameraIcon:before{
     content: '\E010';
     font-family: 'Shazde_Regular2' !important;

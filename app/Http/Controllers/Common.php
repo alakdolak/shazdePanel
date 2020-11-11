@@ -615,6 +615,7 @@ function resizeImage($pic, $size){
     try {
         $image = $pic;
         $fileName = time() . '.' . $image->getClientOriginalExtension();
+
         foreach ($size as $item){
             $input['imagename'] = $item['name'] .  $fileName ;
             $destinationPath = $item['destination'];
