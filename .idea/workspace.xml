@@ -2,83 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="new safarnmaeh create">
-      <change afterPath="$PROJECT_DIR$/app/models/SafarnamehLimboPics.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/pages/safarnamehPage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/uploadPic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/ckeditor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/ckeditor.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/ckeditorUpload.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/af.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ast.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/az.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/bg.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ca.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/cs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/da.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/de-ch.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/de.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/el.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/en-au.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/en-gb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/en.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/eo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/es.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/et.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/eu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/fi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/fr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/gl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/gu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/he.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/hi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/hr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/hu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/id.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/it.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ja.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/km.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/kn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ko.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ku.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/lt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/lv.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/nb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ne.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/nl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/no.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/oc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/pl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/pt-br.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/pt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ro.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ru.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/si.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/sk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/sl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/sq.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/sr-latn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/sr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/sv.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/th.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/tk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/tr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/tt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/ug.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/uk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/vi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/zh-cn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/ckeditor5/translations/zh.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AjaxController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AjaxController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Common.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Common.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SafarnamehController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SafarnamehController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Cities.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Cities.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Safarnameh.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Safarnameh.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/icons.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/icons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/content/safarnameh/newSafarnameh.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/safarnameh/newSafarnameh.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -648,14 +574,7 @@
       <workItem from="1604915121140" duration="8047000" />
       <workItem from="1604990704131" duration="17227000" />
       <workItem from="1605013570550" duration="10590000" />
-      <workItem from="1605076625151" duration="6250000" />
-    </task>
-    <task id="LOCAL-00043" summary="import tags">
-      <created>1586592267047</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1586592267047</updated>
+      <workItem from="1605076625151" duration="6921000" />
     </task>
     <task id="LOCAL-00044" summary="comment pages">
       <created>1586613074766</created>
@@ -993,7 +912,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604129549029</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="new safarnmaeh create">
+      <created>1605088280950</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1605088280950</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1024,7 +950,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="vod category" />
     <MESSAGE value="Debug" />
     <MESSAGE value="video category banner" />
     <MESSAGE value="vod comments" />
@@ -1049,17 +974,18 @@
     <MESSAGE value="add material search for food Debug" />
     <MESSAGE value="live debug" />
     <MESSAGE value="add koochita tv database setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="add koochita tv database setting" />
+    <MESSAGE value="new safarnmaeh create" />
+    <option name="LAST_COMMIT_MESSAGE" value="new safarnmaeh create" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3227" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601216420616">
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="3227" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601216420616" />
-    <state x="3166" y="0" key="CommitChangelistDialog2" timestamp="1605086873327">
+    <state x="3166" y="0" key="CommitChangelistDialog2" timestamp="1605088275818">
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
-    <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605086873327" />
+    <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088275818" />
     <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1603635401870" />
     <state x="2966" y="0" key="DiffContextDialog" timestamp="1603199504271">
       <screen x="2736" y="0" width="1366" height="728" />
@@ -1073,10 +999,10 @@
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="2920" y="6" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604915331998" />
-    <state x="3129" y="174" key="Vcs.Push.Dialog.v2" timestamp="1604129551547">
+    <state x="3129" y="174" key="Vcs.Push.Dialog.v2" timestamp="1605088288443">
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
-    <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604129551547" />
+    <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088288443" />
     <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1601386207031" />
     <state x="3278" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601460465793">
       <screen x="2736" y="0" width="1366" height="728" />

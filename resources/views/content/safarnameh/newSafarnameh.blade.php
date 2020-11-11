@@ -473,6 +473,7 @@
             }
 
             mainDataForm.append('id', id);
+            mainDataForm.append('code', {{$code}});
             mainDataForm.append('title', title);
             mainDataForm.append('keyword', keyword);
             mainDataForm.append('seoTitle', seoTitle);

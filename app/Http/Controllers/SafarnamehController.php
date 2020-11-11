@@ -36,6 +36,17 @@ use Illuminate\Support\Facades\URL;
 class SafarnamehController extends Controller
 {
 
+    public function __construct()
+    {
+        $location = __DIR__.'/../../../../assets/_images/posts/limbo/';
+        $limbos = SafarnamehLimboPics::where("created_at", "<", Carbon::now()->subDay())->get();
+        foreach ($limbos as $item){
+            if(is_file($location.$item->pic))
+                unlink($location.$item->pic);
+            $item->delete();
+        }
+    }
+
     public function addToFavoriteSafarnameh() {
 
         if(isset($_POST["safarnamehId"])) {
@@ -446,6 +457,13 @@ class SafarnamehController extends Controller
             $url = URL::asset('_images/posts/limbo/'.$item->pic);
             $newUrl = URL::asset('_images/posts/'.$safarnamehId.'/'.$item->pic);
             $description = str_replace($url, $newUrl, $description);
+            $item->delete();
+        }
+        $notUseLimboPics = SafarnamehLimboPics::where('code', $request->code)->where('userId', auth()->user()->id)->get();
+        foreach ($notUseLimboPics as $item){
+            $locationss = __DIR__.'/../../../../assets/_images/posts/limbo/';
+            if(is_file($locationss.$item->pic))
+                unlink($locationss.$item->pic);
             $item->delete();
         }
         $safarnameh->description = $description;
