@@ -70,7 +70,8 @@ class Kernel extends HttpKernel
         'configAccess' => \App\Http\Middleware\ConfigAccess::class,
         'offCodeAccess' => \App\Http\Middleware\OffCodeAccess::class,
         'publicityAccess' => \App\Http\Middleware\PublicityAccess::class,
-        'msgAccess' => \App\Http\Middleware\MsgAccess::class
+        'msgAccess' => \App\Http\Middleware\MsgAccess::class,
+        'aclCheck' => \App\Http\Middleware\ACL::class,
     ];
 
     /**

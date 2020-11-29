@@ -2183,4 +2183,31 @@ class PlaceController extends Controller {
 //        return $msg;
     }
 
+    public function addLocalShopCateg()
+    {
+        $inputFileName = __DIR__ . '/../../../public/tmp/localShopCategory.xlsx';
+        $excelReader = PHPExcel_IOFactory::createReaderForFile($inputFileName);
+        $excelObj = $excelReader->load($inputFileName);
+        $workSheet = $excelObj->getSheet(0);
+        $cols = ['B', 'C', 'D', 'E', 'F', 'G', 'h', 'I', 'J', 'K'];
+        $categories = [];
+        foreach ($cols as $col){
+            $subCategories = [];
+            for($i = 3; $i < 42; $i++) {
+                $value = $workSheet->getCell($col . $i)->getValue();
+
+                if($value != null)
+                    array_push($subCategories, $value);
+            }
+            echo $col;
+//            dd($col);
+            array_push($categories, [
+                'name' => $workSheet->getCell($col.'2')->getValue(),
+                'subs' => $subCategories
+            ]);
+        }
+
+        dd($categories);
+    }
+
 }

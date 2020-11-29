@@ -167,6 +167,19 @@
                 overflow: hidden;
             }
 
+            .mainBody{
+                margin: 0px 20px;
+            }
+            .mainBody .header{
+                font-size: 22px;
+                font-weight: normal;
+                display: flex;
+                border-bottom: solid 1px #e0e0e0;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+                align-items: center
+            }
+
             @media (max-width: 991px) {
                 .allPageDiv{
                     flex-direction: column;

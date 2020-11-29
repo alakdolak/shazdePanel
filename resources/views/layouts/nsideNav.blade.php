@@ -183,8 +183,16 @@
                 </div>
             </div>
 
-            @if(isset($userACL) && $userACL->config == 1)
+            @can('userAclGate', 'festival')
+                <a class="navs" href="{{route('festivals')}}">
+                    <div class="header">
+                        <i class="fa big-icon fa-home icon"></i>
+                        <span class="text">فستیوال</span>
+                    </div>
+                </a>
+            @endcan
 
+            @can('superAdminAccess')
                 <div class="navs" onclick="openSubMenu(this)">
                     <div class="header">
                         <i class="fa fa-newspaper-o icon"></i>
@@ -253,8 +261,7 @@
                         <a href="{{route('uiFeatures')}}" class="subNavs">UI Features</a>
                     </div>
                 </div>
-
-            @endif
+            @endcan
 
 
             <a href="{{route('logout')}}"  role="button" class="navs">

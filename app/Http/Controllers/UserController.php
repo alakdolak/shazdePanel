@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\models\ACL;
+use App\models\acl\AclList;
+use App\models\acl\AclUserRelations;
 use App\models\AdminLog;
 use App\models\Cities;
 use App\models\DefaultPic;
@@ -39,16 +41,13 @@ class UserController extends Controller {
                 }
                 $user->pic = URL::asset('defaultPic/' . $tmpPic->name);
             }
-
-            $user->status = ($user->status) ? 'فعال' : 'غیر فعال';
-
         }
 
         return view('users.users', ['users' => $users]);
     }
 
     public function changePass() {
-        
+
         if(isset($_POST["password"]) && isset($_POST["confirmPass"]) && isset($_POST["userId"])) {
 
             $pass = makeValidInput($_POST["password"]);
@@ -68,9 +67,9 @@ class UserController extends Controller {
             }
 
         }
-        
+
     }
-    
+
     public function toggleStatusUser() {
 
         if(isset($_POST["userId"])) {
@@ -129,70 +128,50 @@ class UserController extends Controller {
         $tmp->save();
 
         return Redirect::route('manageAccess', ['userId' => $user->id]);
-        
+
     }
 
     public function manageAccess($userId) {
 
-        $access = ACL::whereUserId($userId)->first();
+        $accessList = AclList::all();
+        foreach ($accessList as $item){
+            $userAclRel = AclUserRelations::where('userId', $userId)
+                                            ->where('aclId', $item->id)
+                                            ->first();
+            $item->userAccess = $userAclRel != null;
+        }
 
-        if($access == null)
-            return Redirect::route('home');
-
-        return view('users.manageAccess', ['access' => $access, 'userId' => $userId]);
+        $user = User::select(['id', 'username'])->find($userId);
+        return view('users.manageAccess', compact(['user', 'accessList']));
     }
 
-    public function changeAccess() {
+    public function changeAccess(Request $request) {
+        if(isset($request->userId) && isset($request->aclId)){
+            $acl = AclList::find($request->aclId);
+            if($acl != null){
+                $aclRel = AclUserRelations::where('aclId', $acl->id)->where('userId', $request->userId)->first();
+                if($aclRel == null){
+                    $aclRel = new AclUserRelations();
+                    $aclRel->userId = $request->userId;
+                    $aclRel->aclId = $acl->id;
+                    $aclRel->save();
+                }
+                else
+                    $aclRel->delete();
 
-        if(isset($_POST["userId"]) && isset($_POST["val"])) {
-            
-            $acl = ACL::whereUserId(makeValidInput($_POST["userId"]))->first();
+                $userAclCount = AclUserRelations::where('userId', $request->userId)->count();
+                if($userAclCount > 0)
+                    User::where('id', $request->userId)->update(['level' => getValueInfo('adminLevel')]);
+                else
+                    User::where('id', $request->userId)->update(['level' => 0]);
 
-            if($acl == null)
-                return;
-
-            switch (makeValidInput($_POST["val"])) {
-
-                case "seo":
-                    $acl->seo = !$acl->seo;
-                    break;
-
-                case "content":
-                    $acl->content = !$acl->content;
-                    break;
-
-                case "offCode":
-                    $acl->offCode = !$acl->offCode;
-                    break;
-
-                case "alt":
-                    $acl->alt = !$acl->alt;
-                    break;
-
-                case "post":
-                    $acl->post = !$acl->post;
-                    break;
-
-                case "comment":
-                    $acl->comment = !$acl->comment;
-                    break;
-
-                case "config":
-                    $acl->config = !$acl->config;
-                    break;
-
-                case "publicity":
-                    $acl->publicity = !$acl->publicity;
-                    break;
-
-                case "msg":
-                    $acl->msg = !$acl->msg;
-                    break;
+                return response('ok');
             }
-
-            $acl->save();
+            else
+                return response('error2');
         }
-        
+        else
+            return response('error1');
     }
 
 }

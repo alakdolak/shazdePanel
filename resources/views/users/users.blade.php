@@ -21,6 +21,28 @@
             margin-top: 15px;
         }
 
+        .userPic{
+            border-radius: 50%;
+            overflow: hidden;
+            width: 35px;
+            height: 35px;
+        }
+        .userPic img{
+            width: 100%;
+        }
+        .status{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 50% auto;
+        }
+        .status.green{
+            background: green;
+        }
+        .status.red{
+            background: red;
+        }
+
     </style>
 
 @stop
@@ -44,16 +66,13 @@
                                 <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                     <thead>
                                         <tr>
-                                            <th>آی دی</th>
+                                            <th>وضعیت</th>
+                                            <th>#</th>
                                             <th>نام و نام خانوادگی</th>
                                             <th>نام کاربری</th>
                                             <th>ایمیل</th>
                                             <th>شماره همراه</th>
-                                            <th>شهر</th>
-                                            <th>استان</th>
-                                            <th>تصویر</th>
                                             <th>سطح دسترسی</th>
-                                            <th>وضعیت اکانت</th>
                                             <th>عملیات</th>
                                         </tr>
                                         </thead>
@@ -62,27 +81,24 @@
                                         @foreach($users as $user)
 
                                             <tr>
-                                                <td>{{$user->id}}</td>
+                                                <td>
+                                                    <div id="status_{{$user->id}}" data-status="{{$user->status}}" class="status {{$user->status == 1 ? 'green' : 'red'}}"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="userPic">
+                                                        <img src="{{$user->pic}}">
+                                                    </div>
+                                                </td>
                                                 <td>{{$user->first_name . ' ' . $user->last_name}}</td>
                                                 <td>{{$user->username}}</td>
                                                 <td>{{$user->email}}</td>
                                                 <td>{{$user->phone}}</td>
-                                                <td>{{$user->cityName}}</td>
-                                                <td>{{$user->stateName}}</td>
-                                                <td><img width="50px" src="{{$user->pic}}"></td>
                                                 <td>{{$user->level}}</td>
-                                                <td id="status_{{$user->id}}" data-status="{{($user->status == 'فعال') ? 1 : 0}}">{{$user->status}}</td>
                                                 <td>
-                                                    @if($user->level == 'کاربر عادی')
-                                                        <a href="{{route('manageAccess', ['userId' => $user->id])}}" class="btn btn-default">فعالیت ها</a>
-                                                    @elseif($user->level == 'ادمین')
-                                                        <a href="{{route('manageAccess', ['userId' => $user->id])}}" class="btn btn-default">مدیریت سطح دسترسی</a>
-                                                    @endif
-
+                                                    <a href="{{route('manageAccess', ['userId' => $user->id])}}" class="btn btn-default">مدیریت سطح دسترسی</a>
                                                     @if($user->level != 'ادمین کل')
                                                         <button class="btn btn-danger" onclick="toggleStatus('{{$user->id}}')">تغییر وضعیت اکانت</button>
                                                     @endif
-
                                                     <button onclick="createAjaxModal('{{route('changePass')}}', [{'name': 'password', 'class': [], 'type': 'password', 'label': 'رمز جدید', 'value': ''}, {'name': 'confirmPass', 'class': [], 'type': 'password', 'label': 'تکرار رمزعبور جدید', 'value': ''}, {'name': 'userId', 'class': ['hidden'], 'type': 'hidden', 'label': '', 'value': '{{$user->id}}'}], 'تغییر رمزعبور', '')" style="display: block; margin: 7px" class="btn btn-warning" data-toggle="modal" data-target="#InformationproModalalertAjax">تغییر رمزعبور</button>
                                                 </td>
                                             </tr>
@@ -105,7 +121,7 @@
 
             $.ajax({
                 type: 'post',
-                url: '{{route('toggleStatusUser')}}',
+                url: '{{route('user.toggleStatus')}}',
                 data: {
                     'userId': userId
                 }
@@ -115,12 +131,10 @@
 
             var currStatus = parseInt(elem.attr('data-status'));
 
-            if(currStatus == 1) {
-                elem.attr('data-status', 0).html('غیر فعال');
-            }
-            else {
-                elem.attr('data-status', 1).html('فعال');
-            }
+            if(currStatus == 1)
+                elem.attr('data-status', 0).addClass('red').removeClass('green');
+            else
+                elem.attr('data-status', 1).addClass('green').removeClass('red');
 
         }
 

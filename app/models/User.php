@@ -53,6 +53,8 @@ class User extends Authenticatable{
         'username', 'password'
     ];
 
+    protected $guarded = [];
+
     protected $hidden = array('password', 'remember_token');
 
     public function getRememberToken()

@@ -667,9 +667,15 @@ class CommentController extends Controller {
                 elseif($item == 'diabet')
                     $place->diabet = 1;
             }
-
-            $place->material = json_decode($place->feat->material);
-
+            $material = json_decode($place->feat->material);
+            $nMat = [];
+            foreach ($material as $mats){
+                array_push($nMat, (object)[
+                    'name' => $mats[0],
+                    'volume' => $mats[1],
+                ]);
+            }
+            $place->material = $nMat;
             return view('content.editContent.editMahaliFood', compact(['place', 'mode', 'state', 'cities', 'allState', 'features', 'placeFeatures']));
         }
         elseif($kindPlace->id == 12) {

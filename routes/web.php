@@ -27,6 +27,44 @@ Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 
 Route::get('autoBackup/{id}','BackupController@autoBackup');
 
+Route::group(['middleware' => ['auth', 'aclCheck:festival']], function() {
+
+    Route::get('festivals', 'FestivalController@festivalList')->name('festivals');
+
+    Route::get('festivals/edit/{id}', 'FestivalController@festivalEdit')->name('festivals.edit');
+
+    Route::get('festivals/content/{id}', 'FestivalController@festivalContent')->name('festivals.content');
+
+    Route::post('festival/content/updateConfirmed', 'FestivalController@festivalUpdateConfirmed')->name('festival.content.updateConfirmed');
+
+    Route::post('festival/cook/content/updateConfirmed', 'FestivalController@festivalCookUpdateFood')->name('festival.cook.content.updateFood');
+
+    Route::post('festival/update', 'FestivalController@festivalUpdate')->name('festival.update');
+
+    Route::post('festival/update/status', 'FestivalController@festivalStatus')->name('festival.update.stats');
+});
+
+Route::group(array('middleware' => ['auth', 'superAdminLevel']), function () {
+
+//    Route::get('user')
+    Route::get('manageAccess/{userId}', 'UserController@manageAccess')->name('manageAccess');
+    Route::post('changeAccess', 'UserController@changeAccess')->name('manageAccess.change');
+
+    Route::get('users', 'UserController@users')->name('users');
+    Route::post('toggleStatusUser', 'UserController@toggleStatusUser')->name('user.toggleStatus');
+
+    Route::get('register', ['as' => 'register', 'uses' => 'UserController@register']);
+
+    Route::post('addAdmin', ['as' => 'addAdmin', 'uses' => 'UserController@addAdmin']);
+
+    Route::post('changePass', ['as' => 'changePass', 'uses' => 'UserController@changePass']);
+
+    Route::get('systemLastActivities', ['as' => 'systemLastActivities', 'uses' => 'LastActivityController@lastActivities']);
+
+    Route::post('deleteSystemLogs', ['as' => 'deleteSystemLogs', 'uses' => 'LastActivityController@deleteLogs']);
+});
+
+
 Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
     Route::get('search/placesAndCity', 'AjaxController@searchPlacesAndCity')->name('search.placesAndCity');
@@ -306,27 +344,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'configAccess']), func
 
 });
 
-Route::group(array('middleware' => ['auth', 'superAdminLevel']), function () {
-
-    Route::get('users', ['as' => 'users', 'uses' => 'UserController@users']);
-
-    Route::get('register', ['as' => 'register', 'uses' => 'UserController@register']);
-
-    Route::get('manageAccess/{userId}', ['as' => 'manageAccess', 'uses' => 'UserController@manageAccess']);
-
-    Route::post('changeAccess', ['as' => 'changeAccess', 'uses' => 'UserController@changeAccess']);
-
-    Route::post('toggleStatusUser', ['as' => 'toggleStatusUser', 'uses' => 'UserController@toggleStatusUser']);
-
-    Route::post('addAdmin', ['as' => 'addAdmin', 'uses' => 'UserController@addAdmin']);
-
-    Route::post('changePass', ['as' => 'changePass', 'uses' => 'UserController@changePass']);
-
-    Route::get('systemLastActivities', ['as' => 'systemLastActivities', 'uses' => 'LastActivityController@lastActivities']);
-
-    Route::post('deleteSystemLogs', ['as' => 'deleteSystemLogs', 'uses' => 'LastActivityController@deleteLogs']);
-});
-
 Route::group(array('middleware' => ['auth']), function () {
 
     Route::get('/', ['as' => 'root', 'uses' => 'HomeController@home']);
@@ -360,6 +377,10 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('/reviews/confirm', 'ReviewsController@confirmReview')->name('reviews.confirm');
 
     Route::post('/reviews/delete', 'ReviewsController@deleteReview')->name('reviews.delete');
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('localShops/list', 'LocalShopController@localshopList')->name('localShop.list');
 });
 
 //mainPage slider setting
@@ -442,17 +463,6 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'commentAccess']), fun
     Route::post('user/update', 'MessageController@updateMessages')->name('user.message.update');
 });
 
-Route::get('vodBoomb', function(){
-    $parCat = \App\models\VideoCategory::where('parent', 0)->pluck('id')->toArray();
-    $catagory = \App\models\VideoCategory::where('parent', '!=', 0)->pluck('id')->toArray();
-    $video = \App\models\Video::whereIn('categoryId', $parCat)->get();
-    foreach ($video as $item) {
-        $item->categoryId = $catagory[rand(0, count($catagory))];
-        $item->save();
-    }
-    dd(count($video));
-});
-
 Route::group(array('middleware' => ['auth']), function() {
     Route::get('/vod/index', 'VideoController@vodIndex')->name('vod.index');
     Route::post('/vode/confrim', 'VideoController@vodConfirm')->name('vod.confirm');
@@ -489,7 +499,6 @@ Route::group(array('middleware' => ['auth']), function(){
     Route::post('findPlace', 'AjaxController@findPlace')->name('find.place');
 });
 
-
 Route::get('gardeshEdit/{id}', 'SafarnamehController@gardeshNameEdit');
 
 Route::get('addGardeshNameTags', 'SafarnamehController@addGardeshNameTags')->name('addGardeshNameTags');
@@ -503,6 +512,8 @@ Route::get('uiFeatures', function(){
 Route::get('latCountry', 'PlaceController@latCountry');
 
 Route::get('insertTagsToDB/{num1?}/{num2?}', 'PlaceController@insertTagsToDB');
+
+Route::get('addLocalShopCateg', 'PlaceController@addLocalShopCateg');
 
 Route::get('/addBoomgardyDB', 'PlaceController@addBoomgardyDB');
 
