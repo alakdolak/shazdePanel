@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Activity;
 use App\models\festival\Festival;
 use App\models\festival\FestivalContent;
 use App\models\festival\FestivalCookImage;
+use App\models\LogModel;
 use App\models\MahaliFood;
+use App\models\Message;
 use App\models\Place;
+use App\models\ReviewPic;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 
 class FestivalController extends Controller
@@ -96,10 +102,6 @@ class FestivalController extends Controller
 
     public function festivalContent($id)
     {
-        $confirmed = [];
-        $newContent = [];
-        $notConfirmed = [];
-
         $festival = Festival::find($id);
         if($festival == null)
             return redirect(route('festival'));
@@ -136,15 +138,9 @@ class FestivalController extends Controller
                         $item->newFood = true;
                 }
 
-                if($item->confirm == 0)
-                    array_push($newContent, $item);
-                else if($item->confirm == 1)
-                    array_push($confirmed, $item);
-                else
-                    array_push($notConfirmed, $item);
             }
 
-            return view('festivals.cookFestivalContent', compact(['confirmed', 'notConfirmed', 'newContent', 'festival']));
+            return view('festivals.cookFestivalContent', compact(['content', 'festival']));
         }
 
         return view('festivals.festivalContent', compact(['confirmed', 'notConfirmed', 'newContent', 'festival']));
@@ -153,12 +149,80 @@ class FestivalController extends Controller
     public function festivalUpdateConfirmed(Request $request)
     {
         if(isset($request->id) && isset($request->confirm) && isset($request->festivalId)){
-            if($request->festivalId == 4)
-                $content = FestivalCookImage::find($request->id);
+            $festival = Festival::find($request->festivalId);
+            $content = \DB::table($festival->tableName)->find($request->id);
 
             if($content != null){
-                $content->confirm = $request->confirm;
-                $content->save();
+                if($content->foodId == null && $request->confirm == 1)
+                    return response()->json(['status' => 'error2']);
+
+                $kindPlace = Place::find($content->kindPlaceId);
+                $place = \DB::table($kindPlace->tableName)->find($content->foodId);
+                if($place == null)
+                    return response()->json(['status' => 'error2']);
+
+                $failedReason = $request->confirm == -1 ? $request->failedReason : null;
+                \DB::table($festival->tableName)
+                    ->where('id', $content->id)
+                    ->update(['confirm' => $request->confirm, 'failedReason' => $failedReason]);
+
+                if($request->confirm == -1){
+                    $newMsg = new Message();
+                    $newMsg->senderId = 0;
+                    $newMsg->receiverId = $content->userId;
+                    $newMsg->message = "اثر شما برای فستیوال ".$festival->name." به دلیل: ".$failedReason." رد شد.";
+                    $newMsg->date = verta()->format('Y-m-d');
+                    $newMsg->time = verta()->format('H:i');
+                    $newMsg->save();
+                }
+                else if($request->confirm == 1){
+                    $reviewId = Activity::where('name', 'نظر')->first();
+                    $review = LogModel::where('activityId', $reviewId->id)
+                        ->where('kindPlaceId', $kindPlace->id)
+                        ->where('placeId', $place->id)
+                        ->where('visitorId', $content->userId)
+                        ->where('subject', 'festival_'.$festival->id)
+                        ->first();
+
+                    if ($review == null) {
+                        $review = new LogModel();
+                        $review->placeId = $place->id;
+                        $review->kindPlaceId = $kindPlace->id;
+                        $review->activityId = $reviewId->id;
+                        $review->visitorId = $content->userId;
+                        $review->text = 'شرکت در فستیوال آشپزی';
+                        $review->subject = 'festival_'.$festival->id;
+                        $review->relatedTo = 0;
+                        $review->confirm = 1;
+                    }
+                    $review->date = Carbon::now()->format('Y-m-d');
+                    $review->time = getToday()['time'];
+                    $review->save();
+
+                    $source = __DIR__ . "/../../../../assets/_images/festival/$festival->folderName";
+                    $location = __DIR__ . "/../../../../assets/userPhoto/$kindPlace->fileName";
+                    if (!file_exists($location))
+                        mkdir($location);
+
+                    $location .= '/' . $place->file;
+                    if (!file_exists($location))
+                        mkdir($location);
+
+                    if(is_file($source.'/'.$content->file))
+                        copy($source.'/'.$content->file, $location.'/'.$content->file);
+                    if($content->thumbnail != null && is_file($source.'/'.$content->thumbnail))
+                        copy($source.'/'.$content->thumbnail, $location.'/'.$content->thumbnail);
+
+                    $newPic = new ReviewPic();
+                    $newPic->logId = $review->id;
+                    $newPic->code = $content->userId.'_'.rand(10, 100);
+                    $newPic->is360 = 0;
+                    $newPic->isVideo = $content->type == 'image' ? 0 : 1;
+                    $newPic->pic = $content->file;
+                    $newPic->thumbnail = $content->thumbnail;
+                    $newPic->save();
+                }
+
                 return response()->json(['status' => 'ok']);
             }
         }

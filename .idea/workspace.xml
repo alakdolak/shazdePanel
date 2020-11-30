@@ -1,41 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="safarnameh delete limbo files">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/FestivalController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/LocalShopController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/ACL.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/acl/AclList.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/acl/AclUserRelations.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/festival/Festival.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/festival/FestivalContent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/festival/FestivalCookImage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/festival/FestivalLimboContent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/festival/FestivalSurvey.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/localShops/LocalShops.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/localShops/LocalShopsCategory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/localShops/LocalShopsPictures.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_29_094140_createAclListsTable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_29_094920_createAclUserRelationsTable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/tmp/localShopCategory.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/festivals/cookFestivalContent.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/festivals/createEditFestival.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/festivals/festivalContent.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/festivals/festivalList.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/userContent/addLocalShops/localShopList.blade.php" afterDir="false" />
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="cook festival confirmed content">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/nsideNav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/nsideNav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/sideNav.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/manageAccess.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/manageAccess.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FestivalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FestivalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/LogModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/LogModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/festivals/cookFestivalContent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/festivals/cookFestivalContent.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -611,14 +581,8 @@
       <workItem from="1606131675170" duration="711000" />
       <workItem from="1606137031981" duration="1232000" />
       <workItem from="1606550629829" duration="1272000" />
-      <workItem from="1606629203946" duration="22074000" />
-    </task>
-    <task id="LOCAL-00045" summary="comment pages">
-      <created>1586701044757</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1586701044757</updated>
+      <workItem from="1606629203946" duration="22404000" />
+      <workItem from="1606748468575" duration="4129000" />
     </task>
     <task id="LOCAL-00046" summary="alt image citypage">
       <created>1587306048225</created>
@@ -956,7 +920,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605089157539</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="cook festival confirmed content">
+      <created>1606656705613</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1606656705634</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -987,7 +958,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="video category banner" />
     <MESSAGE value="vod comments" />
     <MESSAGE value="vod live guests" />
     <MESSAGE value="vod live guests edit and delete" />
@@ -1012,19 +982,20 @@
     <MESSAGE value="add koochita tv database setting" />
     <MESSAGE value="new safarnmaeh create" />
     <MESSAGE value="safarnameh delete limbo files" />
-    <option name="LAST_COMMIT_MESSAGE" value="safarnameh delete limbo files" />
+    <MESSAGE value="cook festival confirmed content" />
+    <option name="LAST_COMMIT_MESSAGE" value="cook festival confirmed content" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606631521825">
+    <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606750884471">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3227" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601216420616" />
-    <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606631521825" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1606656701043">
+    <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606750884471" />
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1606752639428">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606656701043" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606752639428" />
     <state x="2966" y="0" key="DiffContextDialog" timestamp="1603199504271">
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
@@ -1037,33 +1008,33 @@
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="2920" y="6" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604915331998" />
-    <state x="3129" y="174" key="Vcs.Push.Dialog.v2" timestamp="1605088288443">
-      <screen x="2736" y="0" width="1366" height="728" />
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1606656758114">
+      <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088288443" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1601386207031" />
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606656758114" />
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606651327963">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3278" y="302" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601460465793" />
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606651327963" />
-    <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1606635088847">
+    <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1606750402848">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3191" y="98" width="811" height="630" key="find.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043501855" />
     <state x="456" y="117" width="813" height="755" key="find.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550791544" />
-    <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606635088847" />
+    <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606750402848" />
     <state x="3352" y="240" width="945" height="678" key="run.anything.popup" timestamp="1606634399706">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605081690378" />
     <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606634399706" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1606652136563">
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1606752391878">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043595406" />
     <state x="429" y="92" width="674" height="569" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550948318" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606652136563" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606752391878" />
     <state x="602" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606137128166" />
   </component>
 </project>

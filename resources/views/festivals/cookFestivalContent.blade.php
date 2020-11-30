@@ -71,16 +71,16 @@
         </div>
         <div class="selectTab">
             <div class="tab selected" onclick="changeTab('new', this)">
-                <span id="newContentCount" class="badge badge-success" style="background: green">{{count($newContent)}}</span>
+                <span id="newContentCount" class="badge badge-success" style="background: green"></span>
                 آثار جدید
             </div>
             <div class="tab" onclick="changeTab('confirmed', this)">
                 آثار تاییدشده
-                <span id="confirmedCount">{{count($confirmed)}}</span>
+                <span id="confirmedCount"></span>
             </div>
             <div class="tab" onclick="changeTab('notAllowed', this)">
                 آثار رد شده
-                <span id="notConfirmedCount">{{count($notConfirmed)}}</span>
+                <span id="notConfirmedCount"></span>
             </div>
         </div>
         <table class="table table-striped">
@@ -124,11 +124,27 @@
         </div>
     </div>
 
+    <div class="modal" id="failedReasonModal">
+        <div class="modal-dialog" style="width: 95%; display: flex; justify-content: center; align-items: center;">
+            <div class="modal-content" style="width: 100%; max-width: 700px">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <textarea id="failedReasonInput" rows="5" class="form-control" placeholder="دلیل رد کردن این محتوا را بنویسید..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="failedContentIndex">
+                    <button type="button" class="btn btn-danger" onclick="submitFailedContent()">رد کردن این محتوا</button>
+                    <button type="button" class="btn btn-secondery" onclick="closeShowModal('failedReasonModal')">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        var confirmedContent = {!! json_encode($confirmed) !!};
-        var notConfirmedContent = {!! json_encode($notConfirmed) !!};
-        var newContent = {!! json_encode($newContent) !!};
+        var allContents = {!! json_encode($content) !!};
         var kindShowContent;
+        var foodSearchAjax = false;
         var contentFoodSearchId = 0;
 
         function changeTab(_kind, _element) {
@@ -140,83 +156,80 @@
         }
 
         function showContents(_kind){
-            kindShowContent = _kind;
-
             var showContent;
             var tableRows = '';
             var buttons = '';
-            var hasFood = '';
+            var newContentCount = 0;
+            var failedContentCount = 0;
+            var successContentCount = 0;
+
+            kindShowContent = _kind;
 
             if(kindShowContent == 'new')
-                showContent = newContent;
+                showContent = 0;
             else if(kindShowContent == 'confirmed')
-                showContent = confirmedContent;
+                showContent = 1;
             else
-                showContent = notConfirmedContent;
+                showContent = -1;
 
-            showContent.map((item, index) => {
-                if(_kind == 'new')
-                    buttons = `<button class="btn btn-success" onclick="changePicConfirm(1, ${index}, this)">تایید</button>
-                                <button class="btn btn-danger" onclick="changePicConfirm(-1, ${index}, this)">رد کردن</button>`;
-                else if(_kind == 'confirmed')
-                    buttons = `<button class="btn btn-danger" onclick="changePicConfirm(-1, ${index}, this)">رد کردن</button>`;
-                else
-                    buttons = `<button class="btn btn-success" onclick="changePicConfirm(1, ${index}, this)">تایید</button>`;
+            allContents.map((item, index) => {
+                if(item.confirm == showContent){
+                    if(_kind == 'new')
+                        buttons = `<button class="btn btn-success" onclick="changePicConfirm(1, ${index})">تایید</button>
+                                <button class="btn btn-danger" onclick="changePicConfirmToFailed(${index})">رد کردن</button>`;
+                    else if(_kind == 'confirmed')
+                        buttons = `<button class="btn btn-danger" onclick="changePicConfirmToFailed(${index})">رد کردن</button>`;
+                    else
+                        buttons = `<button class="btn btn-success" onclick="changePicConfirm(1, ${index})">تایید</button>`;
 
-                hasFood = item.newFood ? 'newFood' : 'hasFood';
+                    var hasFood = item.newFood ? 'newFood' : 'hasFood';
 
-                tableRows += `<tr>
+                    tableRows += `<tr id="row_${index}">
                                 <td>${item.id}</td>
                                 <td>${item.user.username}</td>
                                 <td><img src="${item.showPic}" style="height: 100px; width: auto; cursor: pointer;" onclick="showThisFile(${index})"></td>
                                 <td><div class="${hasFood}" onclick="openFindFoodModal(${index}, ${item.id})">${item.foodName}</div></td>
                                 <td>${buttons}</td>
                               </tr>`;
+                }
+
+                if(item.confirm == 1)
+                    successContentCount++;
+                else if(item.confirm == 0)
+                    newContentCount++ ;
+                else
+                    failedContentCount++;
             });
+
+
+            $("#newContentCount").text(newContentCount);
+            $("#confirmedCount").text(successContentCount);
+            $("#notConfirmedCount").text(failedContentCount);
             $("#tableBody").html(tableRows);
         }
 
-        function changePicConfirm(_confirmed, _index, _element){
-            var content;
-            if(kindShowContent == 'new')
-                content = newContent[_index];
-            else if(kindShowContent == 'confirmed')
-                content = confirmedContent[_index];
-            else
-                content = notConfirmedContent[_index];
-
+        function changePicConfirm(_confirmed, _index, _failedReason = ''){
             openLoading();
             $.ajax({
                 type: 'post',
                 url: '{{route("festival.content.updateConfirmed")}}',
                 data: {
                     _token: '{{csrf_token()}}',
-                    id: content.id,
+                    id: allContents[_index].id,
                     confirm: _confirmed,
+                    failedReason: _failedReason,
                     festivalId: '{{$festival->id}}'
                 },
                 success: response => {
                     closeLoading();
                     if(response.status == 'ok'){
-
-                        if(kindShowContent == 'new')
-                            newContent.splice(_index, 1);
-                        else if(kindShowContent == 'confirmed')
-                            confirmedContent.splice(_index, 1);
-                        else
-                            notConfirmedContent.splice(_index, 1);
-
-                        if(_confirmed == 1)
-                            confirmedContent.unshift(content);
-                        else
-                            notConfirmedContent.unshift(content);
-
-                        $("#newContentCount").text(newContent.length);
-                        $("#confirmedCount").text(confirmedContent.length);
-                        $("#notConfirmedCount").text(notConfirmedContent.length);
-
+                        allContents[_index].confirm = _confirmed;
                         showContents(kindShowContent);
                     }
+                    else if(response.status == 'error2')
+                        alert('برای تایید غذا ابتدا باید غذا را از سایت انتخاب کنید');
+                    else
+                        alert('Error');
                 },
                 error: err => {
                     closeLoading();
@@ -226,14 +239,23 @@
             });
         }
 
+        function changePicConfirmToFailed(_index){
+            $('#failedContentIndex').val(_index);
+            $('#failedReasonModal').modal('show');
+        }
+
+        function submitFailedContent() {
+            var index = $('#failedContentIndex').val();
+            var reason = $('#failedReasonInput').val();
+            $('#failedReasonModal').modal('hide');
+
+            changePicConfirm(-1, index, reason);
+        }
+
         function showThisFile(_index){
             var html = '';
-            if(kindShowContent == 'new')
-                var content = newContent[_index];
-            else if(kindShowContent == 'confirmed')
-                var content = confirmedContent[_index];
-            else
-                var content = notConfirmedContent[_index];
+            var content = allContents[_index];
+
             if(content.type == 'image')
                 html = `<img src="${content.file}" class="mainFile">`;
             else
@@ -252,6 +274,8 @@
                 id: 0,
                 index: 0,
             };
+            $('#failedContentIndex').val(0)
+            $('#failedReasonInput').val('');
             $('#contentModalBody').html('');
             $('#foodSearchResult').html('');
             $(`#${_id}`).modal('hide');
@@ -262,7 +286,6 @@
             $("#foodModal").modal({ backdrop: 'static', keyboard: false });
         }
 
-        var foodSearchAjax = false;
         function searchInFood(_element){
             var value = $(_element).val();
 
@@ -284,9 +307,7 @@
                             $('#foodSearchResult').html(html);
                         }
                     },
-                    error: err => {
-                        console.log(err);
-                    }
+                    error: err => console.log(err)
                 })
             }
             else
@@ -306,22 +327,10 @@
                 success: response => {
                     closeLoading();
                     if(response.status == 'ok'){
-                        if(kindShowContent == 'new'){
-                            newContent[contentFoodSearchId.index].foodId = response.result.id;
-                            newContent[contentFoodSearchId.index].foodName = response.result.name;
-                            newContent[contentFoodSearchId.index].newFood = false;
-                        }
-                        else if(kindShowContent == 'confirmed'){
-                            confirmedContent[contentFoodSearchId.index].foodId = response.result.id;
-                            confirmedContent[contentFoodSearchId.index].foodName = response.result.name;
-                            confirmedContent[contentFoodSearchId.index].newFood = false;
-                        }
-                        else{
-                            notConfirmedContent[contentFoodSearchId.index].foodId = response.result.id;
-                            notConfirmedContent[contentFoodSearchId.index].foodName = response.result.name;
-                            notConfirmedContent[contentFoodSearchId.index].newFood = false;
-                            showCntents(kindShowContent);
-                        }
+                        allContents[contentFoodSearchId.index].foodId = response.result.id;
+                        allContents[contentFoodSearchId.index].foodName = response.result.name;
+                        allContents[contentFoodSearchId.index].newFood = false;
+
                         closeShowModal('foodModal');
                         showContents(kindShowContent);
                     }

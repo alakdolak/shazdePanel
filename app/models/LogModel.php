@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\Model;
 class LogModel extends Model {
 
     protected $table = 'log';
-    public $timestamps = false;
 
     public static function whereId($value) {
         return LogModel::find($value);
