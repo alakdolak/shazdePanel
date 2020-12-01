@@ -190,7 +190,7 @@ class FestivalController extends Controller
                         $review->kindPlaceId = $kindPlace->id;
                         $review->activityId = $reviewId->id;
                         $review->visitorId = $content->userId;
-                        $review->text = 'شرکت در فستیوال آشپزی';
+                        $review->text = 'شرکت کننده در مسابقه آشپزی کوچیتا';
                         $review->subject = 'festival_'.$festival->id;
                         $review->relatedTo = 0;
                         $review->confirm = 1;

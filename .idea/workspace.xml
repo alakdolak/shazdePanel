@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="cook festival confirmed content">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="cook festival confirmed content debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FestivalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FestivalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/LogModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/LogModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/festivals/cookFestivalContent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/festivals/cookFestivalContent.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,19 +190,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\shazdePanel\app\models\festival" />
-      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
-      <recent name="C:\xampp\htdocs\shazdePanel\resources\views\content\safarnameh" />
-      <recent name="C:\xampp\htdocs\shazdePanel\app\Console" />
-      <recent name="C:\xampp\htdocs\shazdePanel\app\Console\Commands" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
       <recent name="C:\xampp\htdocs\shazdePanel\public\tmp" />
       <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
       <recent name="C:\xampp\htdocs\shazdePanel\public\js\ckeditor5" />
       <recent name="C:\xampp\htdocs\shazdePanel\public\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\shazdePanel\app\models\festival" />
+      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
+      <recent name="C:\xampp\htdocs\shazdePanel\resources\views\content\safarnameh" />
+      <recent name="C:\xampp\htdocs\shazdePanel\app\Console" />
+      <recent name="C:\xampp\htdocs\shazdePanel\app\Console\Commands" />
     </key>
   </component>
   <component name="RunManager">
@@ -582,14 +580,8 @@
       <workItem from="1606137031981" duration="1232000" />
       <workItem from="1606550629829" duration="1272000" />
       <workItem from="1606629203946" duration="22404000" />
-      <workItem from="1606748468575" duration="4129000" />
-    </task>
-    <task id="LOCAL-00046" summary="alt image citypage">
-      <created>1587306048225</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1587306048225</updated>
+      <workItem from="1606748468575" duration="4201000" />
+      <workItem from="1606824906049" duration="136000" />
     </task>
     <task id="LOCAL-00047" summary="add vilage">
       <created>1587378922962</created>
@@ -927,7 +919,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606656705634</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="cook festival confirmed content debug">
+      <created>1606752674031</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1606752674031</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -958,7 +957,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="vod comments" />
     <MESSAGE value="vod live guests" />
     <MESSAGE value="vod live guests edit and delete" />
     <MESSAGE value="delete live chats" />
@@ -983,7 +981,8 @@
     <MESSAGE value="new safarnmaeh create" />
     <MESSAGE value="safarnameh delete limbo files" />
     <MESSAGE value="cook festival confirmed content" />
-    <option name="LAST_COMMIT_MESSAGE" value="cook festival confirmed content" />
+    <MESSAGE value="cook festival confirmed content debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="cook festival confirmed content debug" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606750884471">
@@ -991,11 +990,11 @@
     </state>
     <state x="3227" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601216420616" />
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606750884471" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1606752639428">
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1606825098985">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606752639428" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606825098985" />
     <state x="2966" y="0" key="DiffContextDialog" timestamp="1603199504271">
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
@@ -1008,11 +1007,11 @@
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="2920" y="6" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604915331998" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1606656758114">
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1606752676970">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088288443" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606656758114" />
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606752676970" />
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606651327963">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
