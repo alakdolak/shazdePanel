@@ -519,3 +519,4 @@ include_once __DIR__.'/../app/Http/Controllers/Common.php';
 Route::get('/testEmail/{email}', function ($email){
     sendMail('hello', 'test', $email);
 });
+

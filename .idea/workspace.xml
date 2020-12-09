@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="cook festival confirmed content debug">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -588,14 +586,7 @@
       <workItem from="1606905272333" duration="1016000" />
       <workItem from="1607155245156" duration="2024000" />
       <workItem from="1607164517220" duration="1275000" />
-      <workItem from="1607501778832" duration="808000" />
-    </task>
-    <task id="LOCAL-00048" summary="add boomgardy">
-      <created>1588077595952</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1588077595952</updated>
+      <workItem from="1607501778832" duration="7440000" />
     </task>
     <task id="LOCAL-00049" summary="add boomgardy">
       <created>1588105553174</created>
@@ -933,7 +924,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606825104508</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="debug">
+      <created>1607502713536</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1607502713536</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -980,7 +978,6 @@
     <MESSAGE value="new side nav ui" />
     <MESSAGE value="messenger" />
     <MESSAGE value="debug safarnameh and Comments" />
-    <MESSAGE value="debug" />
     <MESSAGE value="add material search for food" />
     <MESSAGE value="add material search for food Debug" />
     <MESSAGE value="live debug" />
@@ -989,7 +986,8 @@
     <MESSAGE value="safarnameh delete limbo files" />
     <MESSAGE value="cook festival confirmed content" />
     <MESSAGE value="cook festival confirmed content debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="cook festival confirmed content debug" />
+    <MESSAGE value="debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606750884471">
@@ -997,11 +995,11 @@
     </state>
     <state x="3227" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601216420616" />
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606750884471" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1607502629071">
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1607502712163">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607502629071" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607502712163" />
     <state x="3059" y="0" key="DiffContextDialog" timestamp="1607502627918">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1015,11 +1013,11 @@
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="2920" y="6" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604915331998" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1606752676970">
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607502746511">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088288443" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606752676970" />
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607502746511" />
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606651327963">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1036,12 +1034,12 @@
     </state>
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605081690378" />
     <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606634399706" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1607502393230">
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1607509015037">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043595406" />
     <state x="429" y="92" width="674" height="569" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550948318" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607502393230" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607509015037" />
     <state x="602" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606137128166" />
   </component>
 </project>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ActivityLogEvent;
+use App\models\Activity;
 use App\models\Adab;
 use App\models\Amaken;
 use App\models\Boomgardy;
@@ -11,8 +12,10 @@ use App\models\CityPic;
 use App\models\FoodMaterial;
 use App\models\FoodMaterialRelation;
 use App\models\Hotel;
+use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\Majara;
+use App\models\PhotographersPic;
 use App\models\Place;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
@@ -21,6 +24,7 @@ use App\models\PlaceTag;
 use App\models\PostCityRelation;
 use App\models\QuestionSection;
 use App\models\Restaurant;
+use App\models\ReviewPic;
 use App\models\SogatSanaie;
 use App\models\SpecialAdvice;
 use App\models\State;
@@ -211,7 +215,7 @@ class PlaceController extends Controller {
                         !file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $place->file)) {
 
                         $newFileName = rand(1000000, 9999999);
-                        while (file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $newFileName))
+                        while (is_dir(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $newFileName))
                             $newFileName = (int)($newFileName - 1);
 
                         $location = __DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $newFileName;
@@ -712,8 +716,9 @@ class PlaceController extends Controller {
             $location .= '/' . $kindPlace->fileName;
 
             $newFileName = rand(1000000, 9999999);
-            while (file_exists("$location/$newFileName"))
+            while (is_dir($location."/".$newFileName))
                 $newFileName = rand(1000000, 9999999);
+            mkdir($location."/".$newFileName);
 
             $amaken->file = $newFileName;
             $amaken->author = $request->userId;
@@ -792,8 +797,9 @@ class PlaceController extends Controller {
             $kindPlace = Place::find(4);
             $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
             $newFileName = rand(1000000, 9999999);
-            while (file_exists("$location/$newFileName"))
+            while (is_dir($location."/".$newFileName))
                 $newFileName = rand(1000000, 9999999);
+            mkdir($location."/".$newFileName);
 
             $hotel->file = $newFileName;
             $hotel->author = $request->userId;
@@ -904,8 +910,9 @@ class PlaceController extends Controller {
             $kindPlace = Place::find(3);
             $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
             $newFileName = rand(1000000, 9999999);
-            while (file_exists("$location/$newFileName"))
+            while (is_dir($location."/".$newFileName))
                 $newFileName = rand(1000000, 9999999);
+            mkdir($location."/".$newFileName);
 
             $restaurant = new Restaurant();
             $restaurant->file = $newFileName;
@@ -968,8 +975,9 @@ class PlaceController extends Controller {
             $kindPlace = Place::find(6);
             $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
             $newFileName = rand(1000000, 9999999);
-            while (file_exists("$location/$newFileName"))
+            while (is_dir($location."/".$newFileName))
                 $newFileName = rand(1000000, 9999999);
+            mkdir($location."/".$newFileName);
 
             $majara = new Majara();
             $majara->file = $newFileName;
@@ -1040,8 +1048,10 @@ class PlaceController extends Controller {
             $kindPlace = Place::find(11);
             $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
             $newFileName = rand(1000000, 9999999);
-            while (file_exists("$location/$newFileName"))
+            while (is_dir($location."/".$newFileName))
                 $newFileName = rand(1000000, 9999999);
+            mkdir($location."/".$newFileName);
+
 
             $newMahali = new MahaliFood();
             $newMahali->file = $newFileName;
@@ -1126,8 +1136,9 @@ class PlaceController extends Controller {
             $kindPlace = Place::find(10);
             $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
             $newFileName = rand(1000000, 9999999);
-            while (file_exists("$location/$newFileName"))
+            while (is_dir($location."/".$newFileName))
                 $newFileName = rand(1000000, 9999999);
+            mkdir($location."/".$newFileName);
 
             $newSogat = new SogatSanaie();
             $newSogat->file = $newFileName;
@@ -1266,8 +1277,10 @@ class PlaceController extends Controller {
             $kindPlace = Place::find(12);
             $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
             $newFileName = rand(1000000, 9999999);
-            while (file_exists("$location/$newFileName"))
+            while (is_dir($location."/".$newFileName))
                 $newFileName = rand(1000000, 9999999);
+
+            mkdir($location."/".$newFileName);
 
             $boomgardy = new Boomgardy();
             $boomgardy->file = $newFileName;
@@ -2057,5 +2070,4 @@ class PlaceController extends Controller {
 
         dd($categories);
     }
-
 }
