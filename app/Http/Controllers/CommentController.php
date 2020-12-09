@@ -557,7 +557,7 @@ class CommentController extends Controller {
 
         $place->site = $place->website;
         $place->mobile = $place->phone;
-        $place->phone = $place->fixPhone;
+        $place->phone = $place->fixPhone.'-'.$place->phone;
         $place->C = $place->lat;
         $place->D = $place->lng;
 

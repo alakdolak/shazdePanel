@@ -41,7 +41,6 @@ class CityController extends Controller
     {
         $place = Place::all();
         return view('content.city.indexCity', compact(['place']));
-
     }
 
     public function addCity()

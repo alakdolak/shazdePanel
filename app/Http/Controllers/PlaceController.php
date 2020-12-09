@@ -111,6 +111,7 @@ class PlaceController extends Controller {
                         return;
                     }
                 }
+
                 elseif(!is_dir($location . '/' . $place->file)){
                     mkdir($location . '/' . $place->file);
                     $location .= '/' . $place->file;
@@ -322,35 +323,10 @@ class PlaceController extends Controller {
         $pic = PlacePic::find($request->id);
         if($pic != null){
             $kindPlace = Place::find($pic->kindPlaceId);
-            $folderName = $kindPlace->fileName;
-            switch ($pic->kindPlaceId){
-                case 1:
-                    $place = Amaken::find($pic->placeId);
-                    break;
-                case 3:
-                    $place = Restaurant::find($pic->placeId);
-                    break;
-                case 4:
-                    $place = Hotel::find($pic->placeId);
-                    break;
-                case 6:
-                    $place = Majara::find($pic->placeId);
-                    break;
-                case 10:
-                    $place = SogatSanaie::find($pic->placeId);
-                    break;
-                case 11:
-                    $place = MahaliFood::find($pic->placeId);
-                    break;
-                case 12:
-                    $place = Boomgardy::find($pic->placeId);
-                    break;
-                default:
-                    echo 'nok';
-                    return;
-            }
+            $place = \DB::table($kindPlace->tableName)->find($pic->placeId);
+
             if($place != null) {
-                $location = __DIR__ . '/../../../../assets/_images/' . $folderName . '/' . $place->file;
+                $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName/$place->file";
 
                 $this->deletePlacePicFiles($location, $pic->picNumber);
 
@@ -436,31 +412,36 @@ class PlaceController extends Controller {
     {
         $id = $request->id;
         $kindPlaceId  = $request->kindPlaceId;
+        $kindPlace = Place::find($kindPlaceId);
 
         switch ($kindPlaceId){
             case 1:
                 $place = Amaken::find($id);
-                $folderKind = 'amaken';
+                $folderKind = $kindPlace->fileName;
                 break;
             case 3:
                 $place = Restaurant::find($id);
-                $folderKind = 'restaurant';
+                $folderKind = $kindPlace->fileName;
                 break;
             case 4:
                 $place = Hotel::find($id);
-                $folderKind = 'hotels';
+                $folderKind = $kindPlace->fileName;
                 break;
             case 6:
                 $place = Majara::find($id);
-                $folderKind = 'majara';
+                $folderKind = $kindPlace->fileName;
                 break;
             case 10:
                 $place = SogatSanaie::find($id);
-                $folderKind = 'sogatsanaie';
+                $folderKind = $kindPlace->fileName;
                 break;
             case 11:
                 $place = MahaliFood::find($id);
-                $folderKind = 'mahalifood';
+                $folderKind = $kindPlace->fileName;
+                break;
+            case 12:
+                $place = Boomgardy::find($id);
+                $folderKind = $kindPlace->fileName;
                 break;
         }
 
@@ -723,12 +704,22 @@ class PlaceController extends Controller {
 
         if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
             $amaken = new Amaken();
-            $amaken->file = 'none';
+
+            $kindPlace = Place::find(1);
+            $location = __DIR__ . '/../../../../assets/_images';
+            if(!is_dir($location . '/'. $kindPlace->fileName))
+                mkdir($location . '/'. $kindPlace->fileName);
+            $location .= '/' . $kindPlace->fileName;
+
+            $newFileName = rand(1000000, 9999999);
+            while (file_exists("$location/$newFileName"))
+                $newFileName = rand(1000000, 9999999);
+
+            $amaken->file = $newFileName;
             $amaken->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $amaken = Amaken::find($request->id);
-
             if($amaken == null)
                 return \redirect()->back();
         }
@@ -797,7 +788,14 @@ class PlaceController extends Controller {
 
         if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
             $hotel = new Hotel();
-            $hotel->file = 'none';
+
+            $kindPlace = Place::find(4);
+            $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
+            $newFileName = rand(1000000, 9999999);
+            while (file_exists("$location/$newFileName"))
+                $newFileName = rand(1000000, 9999999);
+
+            $hotel->file = $newFileName;
             $hotel->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
@@ -903,8 +901,14 @@ class PlaceController extends Controller {
         ]);
 
         if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
+            $kindPlace = Place::find(3);
+            $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
+            $newFileName = rand(1000000, 9999999);
+            while (file_exists("$location/$newFileName"))
+                $newFileName = rand(1000000, 9999999);
+
             $restaurant = new Restaurant();
-            $restaurant->file = 'none';
+            $restaurant->file = $newFileName;
             $restaurant->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
@@ -961,12 +965,14 @@ class PlaceController extends Controller {
 
 
         if(isset($request->inputType) && $request->inputType == 'new'){
+            $kindPlace = Place::find(6);
+            $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
+            $newFileName = rand(1000000, 9999999);
+            while (file_exists("$location/$newFileName"))
+                $newFileName = rand(1000000, 9999999);
+
             $majara = new Majara();
-
-//            $majara->manategh = 0;
-//            $majara->class = 0;
-            $majara->file = 'none';
-
+            $majara->file = $newFileName;
             $majara->pic_1 = 0;
             $majara->pic_2 = 0;
             $majara->pic_3 = 0;
@@ -1031,7 +1037,14 @@ class PlaceController extends Controller {
         ]);
 
         if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
+            $kindPlace = Place::find(11);
+            $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
+            $newFileName = rand(1000000, 9999999);
+            while (file_exists("$location/$newFileName"))
+                $newFileName = rand(1000000, 9999999);
+
             $newMahali = new MahaliFood();
+            $newMahali->file = $newFileName;
             $newMahali->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
@@ -1110,7 +1123,14 @@ class PlaceController extends Controller {
         ]);
 
         if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
+            $kindPlace = Place::find(10);
+            $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
+            $newFileName = rand(1000000, 9999999);
+            while (file_exists("$location/$newFileName"))
+                $newFileName = rand(1000000, 9999999);
+
             $newSogat = new SogatSanaie();
+            $newSogat->file = $newFileName;
             $newSogat->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
@@ -1243,8 +1263,14 @@ class PlaceController extends Controller {
         ]);
 
         if((isset($request->inputType) && $request->inputType == 'new') || (isset($request->addPlaceByUser) && $request->addPlaceByUser == 1)){
+            $kindPlace = Place::find(12);
+            $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
+            $newFileName = rand(1000000, 9999999);
+            while (file_exists("$location/$newFileName"))
+                $newFileName = rand(1000000, 9999999);
+
             $boomgardy = new Boomgardy();
-            $boomgardy->file = 'none';
+            $boomgardy->file = $newFileName;
             $boomgardy->author = $request->userId;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
@@ -2003,184 +2029,6 @@ class PlaceController extends Controller {
             DB::select($sqlQuery . $val);
 
         return $msg;
-    }
-
-    public function addBoomgardyDB()
-    {
-        dd('addBoomgardyDB');
-        $inputFileName = __DIR__ . '/../../../public/tagExcel/boomgardy/boomgardy9.xlsx';
-        $kindPlace = Place::find(12);
-        $placeFeatures = PlaceFeatures::where('parent', '!=', 0)->where('kindPlaceId', 12)->get();
-//dd('6');
-        $excelReader = PHPExcel_IOFactory::createReaderForFile($inputFileName);
-        $excelObj = $excelReader->load($inputFileName);
-        $workSheet = $excelObj->getSheet(0);
-        $lastRow = $workSheet->getHighestRow();
-        $cols = $workSheet->getHighestColumn();
-
-        $rowCount = 0;
-        $tagCount = 0;
-        $contents = [];
-        $char = 'A';
-        $charArr = [];
-        $alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-        $cols = [];
-        for($i = 0; $i < count($alpha); $i++){
-            if($i == 0)
-                $cols = $alpha;
-            for($j = 0; $j < count($alpha); $j++)
-                array_push($cols, $alpha[$i].''.$alpha[$j]);
-
-            if($i == 1)
-                break;
-        }
-
-        $execlHeader = [
-            'پارکینگ غیر مسقف',
-            'توالت مشترک',
-            'توالت فرنگی',
-            'توالت ایرانی',
-            'آشپزخانه',
-            'حمام مستقل',
-            'حمام مشترک',
-            'صبحانه',
-            'مرکز',
-            'حومه',
-            'شلوغ',
-            'خلوت',
-            'مدرن',
-            'سنتی',
-            'قدیمی',
-            'معمولی',
-            'رستوران',
-            'جکوزی',
-            'تلویزیون',
-            'تلفن',
-            'یخچال',
-            'کافی شاپ',
-            'امکانات سرمایشی و گرمایشی',
-            'اینترنت',
-            'پرسنل مسلط به انگلیسی',
-            'تاکسی سرویس',
-            'راهنمای تور',
-            'لاندری',
-        ];
-
-//        'امکانات سرمایشی و گرمایشی',
-//            'اینترنت',
-//            'پرسنل مسلط به انگلیسی',
-
-        $resultPlaceFeatures = [];
-        for($i = 0; $i < count($execlHeader); $i++){
-            for($j = 0; $j < count($placeFeatures); $j++){
-                if($placeFeatures[$j]->name == $execlHeader[$i]){
-                    $tmp = [
-                        'name' => $execlHeader[$i],
-                        'id' => $placeFeatures[$j]->id
-                    ];
-                    array_push($resultPlaceFeatures, $tmp);
-                }
-            }
-        }
-        $cityError = [];
-        $con = 0;
-
-        $contents = [];
-        for ($j = 0; $j < count($cols); $j++) {
-            $tmp = $workSheet->getCell($cols[$j] . 1)->getValue();
-            $contents[count($contents)] = $tmp;
-        }
-
-        for($i = 13; $i < 41; $i++){
-            $check = PlaceFeatures::where('name', $contents[$i])->where('kindPlaceId', 12)->first();
-            if($check == null)
-                dd($contents[$i]);
-        }
-//        dd($contents);
-
-        for ($row = 2; $row <= $lastRow; $row++) {
-            try {
-                $contents = [];
-                for ($j = 0; $j < count($cols); $j++) {
-                    $tmp = $workSheet->getCell($cols[$j] . $row)->getValue();
-                    $contents[count($contents)] = $tmp;
-                }
-                if(isset($contents[1]) && $contents[1] == null)
-                    continue;
-
-//                dd($contents);
-                $boomgardy = new Boomgardy();
-                $boomgardy->name = $contents[1];
-
-                $boomgardy->address = $contents[4];
-                if ($boomgardy->address == '' || $boomgardy->address == null)
-                    $boomgardy->address = '0';
-
-                $cityEx = $contents[3];
-                $city = Cities::where('name', $cityEx)->where('isVillage', 0)->first();
-                if($city == null){
-                    array_push($cityError, $contents[3]);
-                    $boomgardy->cityId = 0;
-                }
-                else
-                    $boomgardy->cityId = $city->id;
-
-                $boomgardy->phone = $contents[5];
-                if ($boomgardy->phone == '' || $boomgardy->phone == null)
-                    $boomgardy->phone = '0';
-
-                $boomgardy->room_num = (int)explode(' واحد', $contents[6])[0];
-                $boomgardy->keyword = $contents[7];
-                $boomgardy->seoTitle = $contents[8];
-                $boomgardy->slug = $contents[9];
-                if($contents[10] == null || $contents[10] == '')
-                    $boomgardy->description = '';
-                else
-                    $boomgardy->description = $contents[10];
-
-                $boomgardy->meta = $contents[11];
-
-                $map = explode(',', $contents[12]);
-                $boomgardy->C = $map[0];
-                $boomgardy->D = $map[1];
-                $boomgardy->file = 'none';
-                $boomgardy->alt = $boomgardy->keyword;
-                $boomgardy->save();
-                $con++;
-
-                $sqlQuery = 'INSERT INTO `placeFeatureRelations` (`id`, `kindPlaceId`, `placeId`, `featureId`) VALUES ';
-                $value = '';
-                for ($i = 13; $i < 41; $i++) {
-                    if ($contents[$i] > 0) {
-                        if ($value != '')
-                            $value .= ' ,';
-                        $value .= ' (NULL, 12, ' . $boomgardy->id . ', ' . $resultPlaceFeatures[$i - 13]['id'] . ')';
-                    }
-                }
-                if($value != '')
-                    DB::select($sqlQuery . $value);
-
-                $sqlQuery = 'INSERT INTO `placeTags` (`id`, `kindPlaceId`, `placeId`, `tag`) VALUES ';
-                $value = '';
-                for ($i = 42; $i < 73; $i++) {
-                    if ($contents[$i] != null) {
-                        if ($value != '')
-                            $value .= ' ,';
-                        $value .= ' (NULL, 12, ' . $boomgardy->id . ', "' . $contents[$i] . '")';
-                    }
-                }
-
-                if($value != '')
-                    DB::select($sqlQuery . $value);
-            }
-            catch(\Exception $exception){
-                dd($exception, $contents);
-            }
-        }
-
-
-        dd($con, $cityError);
-//        return $msg;
     }
 
     public function addLocalShopCateg()
