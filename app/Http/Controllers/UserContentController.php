@@ -52,11 +52,7 @@ class UserContentController extends Controller
             $item->uploadDate = convertDate($item->created_at);
 
             $user = User::find($item->userId);
-            $item->userName = '';
-            $item->userName = $user->first_name . ' ' . $user->last_name;
-            if($item->userName == '')
-                $item->userName = $user->username;
-
+            $item->userName = $user->username;
         }
 
         $oldPhoto = PhotographersPic::where('status', 1)->orderBy('created_at', 'DESC')->get();
@@ -86,10 +82,7 @@ class UserContentController extends Controller
 
 
             $user = User::find($item->userId);
-            $item->userName = '';
-            $item->userName = $user->first_name . ' ' . $user->last_name;
-            if($item->userName == ' ')
-                $item->userName = $user->username;
+            $item->userName = $user->username;
         }
 
         return view('userContent.photographer.photographer', compact(['photo', 'oldPhoto']));

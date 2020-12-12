@@ -73,7 +73,7 @@
                                                             @if($item->place != null)
                                                                 <tr id="row_{{$item->id}}">
                                                                 <td>
-                                                                    {{$item->user->first_name}} {{$item->user->last_name}}
+                                                                    {{$item->username}}
                                                                 </td>
                                                                 <td>
                                                                     {{$item->place->name}}

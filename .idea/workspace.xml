@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReviewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,19 +192,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\tmp" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\js\ckeditor5" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\shazdePanel\app\models\festival" />
       <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
       <recent name="C:\xampp\htdocs\shazdePanel\resources\views\content\safarnameh" />
       <recent name="C:\xampp\htdocs\shazdePanel\app\Console" />
       <recent name="C:\xampp\htdocs\shazdePanel\app\Console\Commands" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\tmp" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js\ckeditor5" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -586,14 +587,8 @@
       <workItem from="1606905272333" duration="1016000" />
       <workItem from="1607155245156" duration="2024000" />
       <workItem from="1607164517220" duration="1275000" />
-      <workItem from="1607501778832" duration="7440000" />
-    </task>
-    <task id="LOCAL-00049" summary="add boomgardy">
-      <created>1588105553174</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1588105553174</updated>
+      <workItem from="1607501778832" duration="8071000" />
+      <workItem from="1607778081006" duration="408000" />
     </task>
     <task id="LOCAL-00050" summary="add boomgardy">
       <created>1588192924432</created>
@@ -931,7 +926,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607502713536</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="debug">
+      <created>1607519531758</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1607519531758</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -995,11 +997,11 @@
     </state>
     <state x="3227" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601216420616" />
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606750884471" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1607502712163">
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1607519530323">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607502712163" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607519530323" />
     <state x="3059" y="0" key="DiffContextDialog" timestamp="1607502627918">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1034,12 +1036,12 @@
     </state>
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605081690378" />
     <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606634399706" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1607509015037">
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1607778367836">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043595406" />
     <state x="429" y="92" width="674" height="569" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550948318" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607509015037" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607778367836" />
     <state x="602" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606137128166" />
   </component>
 </project>

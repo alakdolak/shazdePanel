@@ -52,9 +52,7 @@ class ReviewsController extends Controller
             $item->kindPlace = $kindPlace->name;
 
             $item->user = User::find($item->visitorId);
-            $item->name = $item->user->first_name . ' ' . $item->user->last_name;
-            if($item->name == ' ')
-                $item->name = $item->username;
+            $item->username = $item->user->username;
 
             $item->dateTime = gregorianToJalali($item->date)[0] .'/'. gregorianToJalali($item->date)[1] . '/' . gregorianToJalali($item->date)[2] . '  ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
         }
