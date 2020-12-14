@@ -405,9 +405,10 @@ class SafarnamehController extends Controller
         else {
             $safarnameh = new Safarnameh();
             if($request->gardeshName != 0){
-                $uAdmin = User::where('username', 'koochita')->first();
-                if($uAdmin != null)
-                    $safarnameh->userId = $uAdmin->id;
+//                $uAdmin = User::where('username', 'koochita')->first();
+//                if($uAdmin != null)
+//                    $safarnameh->userId = $uAdmin->id;
+                    $safarnameh->userId = 3;
             }
             else
                 $safarnameh->userId = \auth()->user()->id;
@@ -591,6 +592,7 @@ class SafarnamehController extends Controller
     {
         $safars = \DB::select('SELECT post_title, post_status, post_parent, ID, post_content FROM wp_posts WHERE ID ='. $id);
         $safarnameh = $safars[0];
+        $confirmTag = [];
         $tags = \DB::select('SELECT * FROM wp_term_relationships WHERE object_id = ' . $id);
         foreach ($tags as $item){
             $item->taxonomy = \DB::select('SELECT * FROM wp_term_taxonomy WHERE taxonomy = "post_tag" AND term_taxonomy_id = ' . $item->term_taxonomy_id);
@@ -598,10 +600,10 @@ class SafarnamehController extends Controller
         }
 
         foreach ($tags as $item){
-            if(count($item->taxonomy) != 0)
-                $item->tag = $item->term[0]->name;
+            if(count($item->term) != 0)
+                array_push($confirmTag, $item->term[0]->name);
         }
-        $safarnameh->tags = $tags;
+        $safarnameh->tags = $confirmTag;
         $safarnameh->id = 0;
         $safarnameh->mainCategory = 0;
         $safarnameh->gardeshName = $safarnameh->ID;
@@ -615,19 +617,17 @@ class SafarnamehController extends Controller
         $safarnameh->title = $safarnameh->post_title;
         $safarnameh->description = str_replace("gardeshname.shazdemosafer.com/wp-content","static.koochita.com",$safarnameh->post_content);
         $safarnameh->release = 'draft';
-        $safarnameh->place = array();
-        $safarnameh->city = array();
-        $safarnameh->category = array();
+        $safarnameh->place = [];
+        $safarnameh->city = [];
+        $safarnameh->category = [];
 
         $category = SafarnamehCategories::where('parent', 0)->get();
         foreach ($category as $item)
             $item->sub = SafarnamehCategories::where('parent', $item->id)->get();
 
-        str_replace("world","Peter","Hello world!");
+        $code = random_int(10000, 99999);
 
-
-        return view('content.safarnameh.newSafarnameh', compact(['safarnameh', 'category']));
-
+        return view('content.safarnameh.newSafarnameh', compact(['safarnameh', 'category', 'code']));
     }
 
     public function deleteGardesh(Request $request)

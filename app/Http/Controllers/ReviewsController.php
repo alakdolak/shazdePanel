@@ -132,12 +132,8 @@ class ReviewsController extends Controller
                 $newAlert->save();
 
                 $kindPlace = Place::find($review->kindPlaceId);
-                if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '') {
-                    \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `reviewCount`= `reviewCount`+1  WHERE `id` = ' . $review->placeId);
-
-                    $avgRate = getRate($kindPlace->id, $review->placeId);
-                    \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `fullRate`= ' . $avgRate . '  WHERE `id` = ' . $review->placeId);
-                }
+                if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '')
+                    \DB::select('UPDATE `'.$kindPlace->tableName.'` SET `reviewCount`= `reviewCount`+1  WHERE `id` = '.$review->placeId);
 
                 echo 'ok';
             }

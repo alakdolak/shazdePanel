@@ -458,13 +458,13 @@
                 if(_checkSeo) {
                     if (keyword.trim().length < 2)
                         errInIf += 'کلمه کلیدی مقاله را مشخص کنید';
+                    if (meta.trim().length < 2)
+                        errInIf += 'متا مقاله را مشخص کنید';
+                    if (seoTitle.trim().length < 2)
+                        errInIf += 'عنوان سئو مقاله را مشخص کنید';
+                    if (slug.trim().length < 2)
+                        errInIf += 'نامک مقاله را مشخص کنید';
                 }
-                if (meta.trim().length < 2)
-                    errInIf += 'متا مقاله را مشخص کنید';
-                if (seoTitle.trim().length < 2)
-                    errInIf += 'عنوان سئو مقاله را مشخص کنید';
-                if (slug.trim().length < 2)
-                    errInIf += 'نامک مقاله را مشخص کنید';
 
                 if(errInIf != ''){
                     alert(errInIf);
