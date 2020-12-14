@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug gardeshnameh">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SafarnamehController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SafarnamehController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -588,13 +588,7 @@
       <workItem from="1607778081006" duration="574000" />
       <workItem from="1607858434102" duration="135000" />
       <workItem from="1607936121629" duration="2589000" />
-    </task>
-    <task id="LOCAL-00052" summary="add boomgardy 2">
-      <created>1588200568724</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1588200568724</updated>
+      <workItem from="1607940948524" duration="68000" />
     </task>
     <task id="LOCAL-00053" summary="vod">
       <created>1588878836782</created>
@@ -932,7 +926,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607937552545</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="debug gardeshnameh">
+      <created>1607941002082</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1607941002082</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -996,11 +997,11 @@
     </state>
     <state x="3227" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1601216420616" />
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606750884471" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1607937549341">
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1607941029040">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607937549341" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1607941029040" />
     <state x="3059" y="0" key="DiffContextDialog" timestamp="1607502627918">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>

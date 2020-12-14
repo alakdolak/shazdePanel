@@ -408,6 +408,8 @@ class SafarnamehController extends Controller
                 $uAdmin = User::where('username', 'koochita')->first();
                 if($uAdmin != null)
                     $safarnameh->userId = $uAdmin->id;
+                else
+                    $safarnameh->userId = \auth()->user()->id;
             }
             else
                 $safarnameh->userId = \auth()->user()->id;
