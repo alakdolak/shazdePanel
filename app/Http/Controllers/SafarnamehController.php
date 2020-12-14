@@ -405,10 +405,9 @@ class SafarnamehController extends Controller
         else {
             $safarnameh = new Safarnameh();
             if($request->gardeshName != 0){
-//                $uAdmin = User::where('username', 'koochita')->first();
-//                if($uAdmin != null)
-//                    $safarnameh->userId = $uAdmin->id;
-                    $safarnameh->userId = 3;
+                $uAdmin = User::where('username', 'koochita')->first();
+                if($uAdmin != null)
+                    $safarnameh->userId = $uAdmin->id;
             }
             else
                 $safarnameh->userId = \auth()->user()->id;
