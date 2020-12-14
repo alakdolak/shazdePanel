@@ -132,8 +132,10 @@ class ReviewsController extends Controller
                 $newAlert->save();
 
                 $kindPlace = Place::find($review->kindPlaceId);
-                if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '')
-                    \DB::select('UPDATE `'.$kindPlace->tableName.'` SET `reviewCount`= `reviewCount`+1  WHERE `id` = '.$review->placeId);
+                if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != ''){
+                    $place = \DB::table($kindPlace->tableName)->find($review->placeId);
+                    \DB::table($kindPlace->tableName)->where('id', $review->placeId)->update(['reviewCount' => $place->reviewCount+1]);
+                }
 
                 echo 'ok';
             }
