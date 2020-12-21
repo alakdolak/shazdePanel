@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PlaceTag extends Model
 {
+    protected $guarded = [];
     protected $table = 'placeTags';
     public $timestamps = false;
 

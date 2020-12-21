@@ -69,6 +69,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Amaken extends Model {
 
+    protected $guarded = [];
     protected $table = 'amaken';
 
     public static function whereId($value) {
@@ -77,6 +78,7 @@ class Amaken extends Model {
 
     public static function fullDelete($id)
     {
+        return;
         $kindPlaceId = 1;
         $kindPlace = Place::find($kindPlaceId);
         $place = Amaken::find($id);

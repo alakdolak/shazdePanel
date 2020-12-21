@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Majara extends Model {
 
+    protected $guarded = [];
     protected $table = 'majara';
 
     public static function whereId($value) {
@@ -23,6 +24,7 @@ class Majara extends Model {
 
     public static function fullDelete($id)
     {
+        return;
         $kindPlaceId = 6;
         $kindPlace = Place::find($kindPlaceId);
         $place = Majara::find($id);

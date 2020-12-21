@@ -211,6 +211,24 @@
                     overflow-x: hidden;
                 }
             }
+            .selectTab{
+                display: flex;
+                justify-content: space-around;
+                border-bottom: solid 1px gray;
+                margin-bottom: 15px;
+                padding-bottom: 5px;
+            }
+            .selectTab .tab{
+                width: 30%;
+                text-align: center;
+                padding: 5px 0px;
+                cursor: pointer;
+            }
+            .selectTab .tab.selected{
+                background: #15b3ac;
+                color: white;
+                border-radius: 30px;
+            }
         </style>
         <script>
             function validateNumber(evt) {

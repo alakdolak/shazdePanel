@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class MahaliFood extends Model
 {
+    protected $guarded = [];
     protected $table = 'mahaliFood';
 
     public static function fullDelete($id)
     {
+        return;
         $kindPlaceId = 11;
         $kindPlace = Place::find($kindPlaceId);
         $place = MahaliFood::find($id);

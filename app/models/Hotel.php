@@ -84,6 +84,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model {
 
+    protected $guarded = [];
     protected $table = 'hotels';
 
     public static function whereId($value) {
@@ -92,6 +93,7 @@ class Hotel extends Model {
 
     public static function fullDelete($id)
     {
+        return;
         $kindPlaceId = 4;
         $kindPlace = Place::find($kindPlaceId);
         $place = Hotel::find($id);

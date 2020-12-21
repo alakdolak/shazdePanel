@@ -8,6 +8,8 @@ use App\models\FoodMaterial;
 use App\models\LogModel;
 use App\models\Place;
 use App\models\State;
+use App\models\Tag;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -202,5 +204,20 @@ class AjaxController extends Controller
         }
 
         return response()->json(['status' => 'ok', 'result' => $result]);
+    }
+
+    public function searchUser()
+    {
+        $value = $_GET['username'];
+        $users = User::where('username', 'LIKE', '%'.$value.'%')->select(['id', 'username', 'first_name', 'last_name'])->get();
+
+        return response()->json(['status' => 'ok', 'result' => $users]);
+    }
+
+    public function searchTag()
+    {
+        $value = $_GET['value'];
+        $tags = Tag::where('name', 'LIKE','%'.$value.'%')->get();
+        return response()->json(['status' => 'ok', 'result' => $tags]);
     }
 }

@@ -28,6 +28,7 @@ use App\models\Tag;
 use App\models\VideoCategory;
 use App\User;
 use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -387,45 +388,37 @@ class SafarnamehController extends Controller
             'releaseType' => 'required',
             'category' => 'required',
         ]);
-        $safarnamehId = $request->id;
 
-        if($safarnamehId != 0){
-            $safarnameh = Safarnameh::find($safarnamehId);
-            if($safarnameh == null) {
-                $safarnameh = new Safarnameh();
-                if($request->gardeshName != 0){
-                    $uAdmin = User::where('username', 'koochita')->first();
-                    if($uAdmin != null)
-                        $safarnameh->userId = $uAdmin->id;
-                }
-                else
-                    $safarnameh->userId = \auth()->user()->id;
-            }
-        }
-        else {
+        $safarnameh = null;
+
+        if($request->id != 0)
+            $safarnameh = Safarnameh::find($request->id);
+
+        if($safarnameh == null){
             $safarnameh = new Safarnameh();
             if($request->gardeshName != 0){
                 $uAdmin = User::where('username', 'koochita')->first();
-                if($uAdmin != null)
-                    $safarnameh->userId = $uAdmin->id;
-                else
-                    $safarnameh->userId = \auth()->user()->id;
+                $safarnameh->userId = $uAdmin != null ? $uAdmin->id : \auth()->user()->id;
             }
             else
                 $safarnameh->userId = \auth()->user()->id;
+
+            $safarnameh->date = verta()->now()->format('Ymd');
         }
 
         $safarnameh->title = $request->title;
         $safarnameh->description = ' ';
         $safarnameh->seoCheck = $request->warningCount;
-        $safarnameh->release = $request->releaseType;
-        $date = convertNumber('en', $request->date);
-        $date = convertDateToString($date);
-        $safarnameh->date = $date;
         if($request->releaseType == 'future'){
             $time = str_replace(':', '', $request->time);
             $safarnameh->time = $time;
+            $date = convertNumber('en', $request->date);
+            $date = convertDateToString($date);
+            $safarnameh->date = $date;
         }
+        else if($request->releaseType == 'release' && $safarnameh->release != 'release')
+            $safarnameh->date = verta()->now()->format('Ymd');
+
         if($request->releaseType != 'future')
             $safarnameh->time = '0000';
 
@@ -441,6 +434,7 @@ class SafarnamehController extends Controller
             $safarnameh->slug = makeSlug($request->keyword);
 
         $safarnameh->confirm = 1;
+        $safarnameh->release = $request->releaseType;
         $safarnameh->save();
 
         $safarnamehId = $safarnameh->id;

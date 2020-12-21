@@ -84,21 +84,16 @@
                     <div class="sparkline13-list shadow-reset">
                         <div class="sparkline13-hd">
                             <div style="direction: rtl" class="main-sparkline13-hd">
-                                <div class="sparkline13-outline-icon">
-                                </div>
+                                <div class="sparkline13-outline-icon"></div>
                             </div>
                         </div>
                         <div class="sparkline13-graph">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div style="display: inline-block">
-                                        <h2>
-                                            بارگذاری عکس‌های {{$place->name}}
-                                        </h2>
-                                    </div>
-                                    <a href="{{url('editContent/' . $kindPlaceId . '/' . $place->id)}}">
-                                        <button class="btn btn-primary" style="float: left">بازگشت</button>
-                                    </a>
+                                    <h2 style="display: inline-block">
+                                        بارگذاری عکس‌های {{$place->name}}
+                                    </h2>
+                                    <a href="{{$backUrl}}" class="btn btn-primary" style="float: left">بازگشت</a>
                                 </div>
 
                                 <input type="hidden" id="placeId" value="{{$place->id}}">
@@ -110,68 +105,49 @@
                                         <div class="row">
                                             <div class="col-md-2 f_r" >
                                                 <div class="form-group">
-                                                    <label for="picInput0" class="btn btn-primary">
-                                                        عکس اصلی
-{{--                                                        <input type="file" name="picInput0" id="picInput0" style="display: none;" onchange="showPic(this, 0, '{{$place->picNumber != null ? "edit" : "new"}}')">--}}
-                                                    </label>
+                                                    <label for="picInput0" class="btn btn-primary">عکس اصلی</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-10" style="display: flex; justify-content: space-evenly">
                                                 <div class="topPics" style="width: 250px; height: 167px;">
-                                                    @if($place->picNumber != null)
-                                                        <img id="mainPicShowReq0" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/f-'. $place->picNumber)}}" style="height: 100%; width: auto; max-width: 100000px">
-                                                    @else
-                                                        <img id="mainPicShowReq0" src="" style="height: 100%; width: auto; max-width: 100000px display: none;">
-                                                    @endif
+                                                    <img id="mainPicShowReq0" src="{{$place->mainPicF}}" style="height: 100%; width: auto; max-width: 100000px">
                                                 </div>
                                                 <div class="topPics" style="width: 160px; height: 160px;">
-                                                    @if($place->picNumber != null)
-                                                        <img id="mainPicShowSqa0" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/l-'. $place->picNumber)}}" style="height: 100%; width: auto; max-width: 100000px">
-                                                    @else
-                                                        <img id="mainPicShowSqa0" src="" style="height: 100%; width: auto; max-width: 100000px display: none;">
-                                                    @endif
+                                                    <img id="mainPicShowSqa0" src="{{$place->mainPicL}}" style="height: 100%; width: auto; max-width: 100000px">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        @for($i = 0; $i < count($place->pics); $i++)
+                                        @foreach($place->pics as $pic)
                                             <hr>
-                                            <div id="divPic{{$place->pics[$i]->id}}" class="row">
+                                            <div id="divPic{{$pic->id}}" class="row">
                                                 <div class="col-md-4 f_r" >
                                                     <div class="form-group" style="display: flex; flex-direction: column">
                                                         <div>
-                                                            <label for="picInput{{$place->pics[$i]->id}}" class="btn btn-primary">
+                                                            <label for="picInput{{$pic->id}}" class="btn btn-primary">
                                                                 تغییر عکس
-                                                                <input type="file" name="picInput{{$place->pics[$i]->id}}" id="picInput{{$place->pics[$i]->id}}" style="display: none;" onchange="uploadNewPic(this, {{$place->pics[$i]->id}})">
+                                                                <input type="file" name="picInput{{$pic->id}}" id="picInput{{$pic->id}}" style="display: none;" onchange="uploadNewPic(this, {{$pic->id}})">
                                                             </label>
-                                                            <button class="btn btn-success" onclick="setMainPic({{$place->pics[$i]->id}})">
-                                                                انتخاب به عنوان عکس اصلی
-                                                            </button>
-                                                            <button class="btn btn-danger" onclick="deletePicAns({{$place->pics[$i]->id}})">
-                                                                حذف
-                                                            </button>
+                                                            <button class="btn btn-success" onclick="setMainPic({{$pic->id}})"> انتخاب به عنوان عکس اصلی </button>
+                                                            <button class="btn btn-danger" onclick="deletePicAns({{$pic->id}})">حذف</button>
                                                         </div>
                                                         <div style="margin-top: 20px;">
-                                                            <label>
-                                                                alt عکس
-                                                            </label>
-                                                            <input type="text" class="form-control" id="alt{{$place->pics[$i]->id}}" value="{{$place->pics[$i]->alt}}">
-                                                            <button class="btn btn-warning" onclick="changeAlt({{$place->pics[$i]->id}})">
-                                                                تغییر alt
-                                                            </button>
+                                                            <label>alt عکس</label>
+                                                            <input type="text" class="form-control" id="alt{{$pic->id}}" value="{{$pic->alt}}">
+                                                            <button class="btn btn-warning" onclick="changeAlt({{$pic->id}})"> تغییر alt</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8" style="display: flex; justify-content: space-evenly">
                                                     <div class="topPics" style="width: 250px; height: 167px;">
-                                                        <img id="mainPicShowReq{{$place->pics[$i]->id}}" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/f-'. $place->pics[$i]->picNumber)}}" style="height: 100%; width: auto; max-width: 100000px">
+                                                        <img id="mainPicShowReq{{$pic->id}}" src="{{$pic->picF}}" style="height: 100%; width: auto; max-width: 100000px">
                                                     </div>
                                                     <div class="topPics" style="width: 160px; height: 160px;">
-                                                        <img id="mainPicShowSqa{{$place->pics[$i]->id}}" src="{{URL::asset('_images/' . $kindPlaceName . '/' . $place->file . '/l-'. $place->pics[$i]->picNumber)}}" style="height: 100%; width: auto; max-width: 100000px">
+                                                        <img id="mainPicShowSqa{{$pic->id}}" src="{{$pic->picL}}" style="height: 100%; width: auto; max-width: 100000px">
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endfor
+                                        @endforeach
                                     </div>
 
 
@@ -180,9 +156,7 @@
                                         <div class="col-md-12 f_r" >
                                             <div class="form-group" style="display: flex; flex-direction: column">
                                                 <div>
-                                                    <label for="picInput1000" class="btn btn-success" onclick="$('#dropzoneModal').modal('show')">
-                                                        عکس جدید
-                                                    </label>
+                                                    <label for="picInput1000" class="btn btn-success" onclick="$('#dropzoneModal').modal('show')"> عکس جدید</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -192,7 +166,7 @@
                                         <div class="col-md-12 f_r" >
                                             <div class="form-group" style="display: flex; flex-direction: column">
                                                 <div>
-                                                    <button type="button" class="btn" onclick="window.location.href = '{{url('newChangeContent/0/' . $kindPlaceId . '/country')}}'">خروج</button>
+                                                    <a href="{{$backUrl}}" class="btn">خروج</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,19 +192,14 @@
                                 <div class="aspect11">
                                     <img id="squarePic" class="cropedImg aspect11Img">
                                 </div>
-
-                                <button class="btn btn-primary" onclick="cropSquarePic()">
-                                    ویرایش حالت مربع
-                                </button>
+                                <button class="btn btn-primary" onclick="cropSquarePic()"> ویرایش حالت مربع </button>
                             </div>
                             <div class="col-md-6" style="display: flex; justify-content: center;flex-direction: column;">
                                 <div class="aspect32">
                                     <img id="rectanglePic" class="cropedImg aspect32Img">
                                 </div>
 
-                                <button class="btn btn-primary" onclick="cropRectanglePic()">
-                                    ویرایش حالت مستطیلی
-                                </button>
+                                <button class="btn btn-primary" onclick="cropRectanglePic()"> ویرایش حالت مستطیلی</button>
                             </div>
                         </div>
                     </div>
@@ -331,10 +300,7 @@
                 _formData.append('kind', 'new');
             }
 
-        }).on('success', function(file, response){
-            response = JSON.parse(response);
-            createNewRow(response.result);
-        });
+        }).on('success', (file, response) => createNewRow(response.result));
 
         function createNewRow(_result){
             let text = '<hr><div id="divPi' + _result.id + '" class="row">\n' +
@@ -390,9 +356,7 @@
                     processData: false,
                     contentType: false,
                     success: function(response){
-                        console.log(response);
-                        response = JSON.parse(response);
-                        if(response['status'] == 'ok')
+                        if(response.status == 'ok')
                             location.reload();
                         else{
                             alert('parse error');
@@ -701,8 +665,9 @@
                 type: 'post',
                 url : '{{route('deletePlacePic')}}',
                 data: {
-                    '_token' : '{{csrf_token()}}',
-                    'id' : id,
+                    _token : '{{csrf_token()}}',
+                    id : id,
+                    kindPlaceId: kindPlaceId,
                 },
                 success: function(response){
                     if(response == 'ok')
@@ -718,9 +683,10 @@
                 type: 'post',
                 url : '{{route('changeAltPic')}}',
                 data: {
-                    '_token' : '{{csrf_token()}}',
-                    'id' : _id,
-                    'alt' : value,
+                    _token : '{{csrf_token()}}',
+                    id : _id,
+                    kindPlaceId: kindPlaceId,
+                    alt : value,
                 },
                 success: function(response){
                     if(response == 'ok')
@@ -735,8 +701,9 @@
                 type: 'post',
                 url : '{{route('setMainPic')}}',
                 data: {
-                    '_token' : '{{csrf_token()}}',
-                    'id' : _id,
+                    _token : '{{csrf_token()}}',
+                    id : _id,
+                    kindPlaceId: kindPlaceId
                 },
                 success: function(response){
                     if(response == 'ok')

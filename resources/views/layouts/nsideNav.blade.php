@@ -183,6 +183,15 @@
                 </div>
             </div>
 
+            @can('userAclGate', 'localShop')
+                <a class="navs" href="{{route('localShop.list')}}">
+                    <div class="header">
+                        <i class="fa big-icon fa-home icon"></i>
+                        <span class="text">کسب و کار</span>
+                    </div>
+                </a>
+            @endcan
+
             @can('userAclGate', 'festival')
                 <a class="navs" href="{{route('festivals')}}">
                     <div class="header">

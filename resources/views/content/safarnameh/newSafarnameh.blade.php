@@ -443,7 +443,7 @@
                 return;
             }
 
-            if(release == 'future' && (date == null || date == null || time == null || time == '')){
+            if(release == 'future' && (date == null || date == '' || time == null || time == '')){
                 alert('تاریخ و ساعت انتشار را مشخص کنید.');
                 return;
             }

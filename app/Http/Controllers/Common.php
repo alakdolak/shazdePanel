@@ -529,12 +529,12 @@ function compressImage($source, $destination, $quality){
     }
 }
 
-function deletePlacePicFiles($location, $picNumber){
-    $locationF = $location . '/f-' . $picNumber;
-    $locationS = $location .  '/s-' . $picNumber;
-    $locationL = $location .  '/l-' . $picNumber;
-    $locationT = $location .  '/t-' . $picNumber ;
-    $locationMain = $location .  '/' . $picNumber ;
+function deletePlacePicFiles($location, $pic){
+    $locationF = $location . '/f-' . $pic;
+    $locationS = $location .  '/s-' . $pic;
+    $locationL = $location .  '/l-' . $pic;
+    $locationT = $location .  '/t-' . $pic ;
+    $locationMain = $location .  '/' . $pic ;
 
     if (file_exists($locationF))
         unlink($locationF);
@@ -622,16 +622,16 @@ function resizeImage($pic, $size){
             $img = \Image::make($image->getRealPath());
             $width = $img->width();
             $height = $img->height();
+            $ration = $width/$height;
 
             if($item['height'] != null && $item['width'] != null){
-                $ration = $width/$height;
                 $nWidth = $ration * $item['height'];
                 $nHeight = $item['width'] / $ration;
-                if($nWidth < $item['width']) {
+                if($nWidth <= $item['width']) {
                     $height = $nHeight;
                     $width = $item['width'];
                 }
-                else if($nHeight < $item['height']) {
+                else if($nHeight <= $item['height']) {
                     $width = $nWidth;
                     $height = $item['height'];
                 }

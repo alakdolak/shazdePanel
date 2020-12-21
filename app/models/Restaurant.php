@@ -80,6 +80,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model {
 
+    protected $guarded = [];
     protected $table = 'restaurant';
 
     public static function whereId($value) {
@@ -88,6 +89,7 @@ class Restaurant extends Model {
 
     public static function fullDelete($id)
     {
+        return;
         $kindPlaceId = 3;
         $kindPlace = Place::find($kindPlaceId);
         $place = Restaurant::find($id);

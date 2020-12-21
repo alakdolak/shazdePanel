@@ -12,6 +12,8 @@ use App\models\CityPic;
 use App\models\FoodMaterial;
 use App\models\FoodMaterialRelation;
 use App\models\Hotel;
+use App\models\localShops\LocalShopsCategory;
+use App\models\localShops\LocalShopsPictures;
 use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\Majara;
@@ -44,376 +46,9 @@ use function GuzzleHttp\Promise\all;
 
 class PlaceController extends Controller {
 
-    public function uploadImgPage($kindPlaceId, $id)
-    {
-        $kindPlace = Place::find($kindPlaceId);
-        $place = DB::table($kindPlace->tableName)->select(['id', 'name', 'file', 'picNumber', 'alt', 'cityId'])->find($id);
-        $kindPlaceName = $kindPlace->fileName;
-
-        $place->pics = PlacePic::where('placeId', $place->id)->where('kindPlaceId', $kindPlaceId)->get();
-
-        foreach ($place->pics as $item)
-            $item->number = explode('.', $item->picNumber)[0];
-
-        return view('content.newContent.uploadImg', compact(['kindPlaceId', 'place', 'kindPlaceName']));
-    }
-
-    public function storeImg(Request $request)
-    {
-        if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->kind)){
-            $kindPlaceId = $request->kindPlaceId;
-            $placeId = $request->placeId;
-            $kindPlace = Place::find($kindPlaceId);
-            switch ($kindPlaceId){
-                case 1:
-                    $place = Amaken::find($placeId);
-                    break;
-                case 3:
-                    $place = Restaurant::find($placeId);
-                    break;
-                case 4:
-                    $place = Hotel::find($placeId);
-                    break;
-                case 6:
-                    $place = Majara::find($placeId);
-                    break;
-                case 10:
-                    $place = SogatSanaie::find($placeId);
-                    break;
-                case 11:
-                    $place = MahaliFood::find($placeId);
-                    break;
-                case 12:
-                    $place = Boomgardy::find($placeId);
-                    break;
-                default:
-                    echo 'nok';
-                    return;
-            }
-            if($place != null){
-
-                $location = __DIR__ . '/../../../../assets/_images';
-
-                if(!is_dir($location . '/'. $kindPlace->fileName))
-                    mkdir($location . '/'. $kindPlace->fileName);
-                $location .= '/' . $kindPlace->fileName;
-
-                if ($place->file == null || $place->file == 'none' || $place->file == '') {
-                    $newFileName = rand(1000000, 9999999);
-                    while (file_exists($location . '/' . $newFileName))
-                        $newFileName = (int)($newFileName - 1);
-
-                    $location .= '/' . $newFileName;
-
-                    mkdir($location);
-                    if(is_dir($location)){
-                        $place->file = $newFileName;
-                        $place->save();
-                    }
-                    else {
-                        echo json_encode(['nok2']);
-                        return;
-                    }
-                }
-
-                elseif(!is_dir($location . '/' . $place->file)){
-                    mkdir($location . '/' . $place->file);
-                    $location .= '/' . $place->file;
-                }
-                else
-                    $location .= '/' . $place->file;
-
-                $picNumber = null;
-
-                $image = $request->file('pic');
-                $size = [
-                    [
-                        'width' => 350,
-                        'height' => 250,
-                        'name' => 'f-',
-                        'destination' => $location
-                    ],
-                    [
-                        'width' => 150,
-                        'height' => 150,
-                        'name' => 't-',
-                        'destination' => $location
-                    ],
-                    [
-                        'width' => 200,
-                        'height' => 200,
-                        'name' => 'l-',
-                        'destination' => $location
-                    ],
-                    [
-                        'width' => 600,
-                        'height' => 400,
-                        'name' => 's-',
-                        'destination' => $location
-                    ]
-                ];
-
-                if($request->kind == 'new') {
-                    $fileName = resizeImage($image, $size);
-                    move_uploaded_file($_FILES['pic']['tmp_name'], $location.'/'.$fileName);
-
-                    $newPic = new PlacePic();
-                    $newPic->picNumber = $fileName;
-                    $newPic->placeId = $place->id;
-                    $newPic->kindPlaceId = $kindPlaceId;
-                    $newPic->save();
-
-                    $newPic->pic = \URL::asset('_images/'.$kindPlace->fileName.'/'.$place->file.'/'.$newPic->picNumber);
-                    echo json_encode(['status' => 'ok', 'result' => $newPic]);
-                }
-                else{
-                    $pic = PlacePic::find($request->id);
-                    $fileName = resizeImage($image, $size);
-                    move_uploaded_file($_FILES['pic']['tmp_name'], $location.'/'.$fileName);
-                    $this->deletePlacePicFiles($location, $pic->picNumber);
-                    $pic->picNumber = $fileName;
-                    $pic->save();
-
-                    echo json_encode(['status' => 'ok']);
-                }
-            }
-            else
-                echo json_encode(['nok1']);
-        }
-        else
-            echo json_encode(['nok']);
-
-        return;
-    }
-
-    public function getCrop(Request $request)
-    {
-        if( isset($_FILES["l-1"]) && $_FILES["l-1"]['error'] == 0 &&
-            isset($_FILES["t-1"]) && $_FILES["t-1"]['error'] == 0 &&
-            isset($_FILES["s-1"]) && $_FILES["s-1"]['error'] == 0 &&
-            isset($_FILES["f-1"]) && $_FILES["f-1"]['error'] == 0 &&
-            isset($_FILES["mainPic"]) && $_FILES["mainPic"]['error'] == 0 &&
-            isset($request->picNumber) && isset($request->placeId) && isset($request->kindPlaceId)) {
-
-            $valid_ext = array('image/jpeg','image/png');
-            if(in_array($_FILES['mainPic']['type'], $valid_ext) && in_array($_FILES['s-1']['type'], $valid_ext) &&
-                in_array($_FILES['f-1']['type'], $valid_ext) && in_array($_FILES['l-1']['type'], $valid_ext) &&
-                in_array($_FILES['t-1']['type'], $valid_ext)){
-
-                $id = $request->placeId;
-                $kindPlaceId = $request->kindPlaceId;
-                $kindPlace = Place::find($kindPlaceId);
-                $kindPlaceName = $kindPlace->fileName;
-                $place = DB::table($kindPlace->tableName)->find($id);
-
-                if(!file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName))
-                    mkdir(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName);
-
-                if($place != null) {
-
-                    if ($place->file == null || $place->file == 'none' || $place->file == '' ||
-                        !file_exists(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $place->file)) {
-
-                        $newFileName = rand(1000000, 9999999);
-                        while (is_dir(__DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $newFileName))
-                            $newFileName = (int)($newFileName - 1);
-
-                        $location = __DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $newFileName;
-
-                        mkdir($location);
-                        if(file_exists($location)){
-                            $place->file = $newFileName;
-                            $place->save();
-                        }
-                        else {
-                            echo 'error';
-                            return;
-                        }
-                    }
-
-                    $location = __DIR__ . '/../../../../assets/_images/' . $kindPlaceName . '/' . $place->file;
-                    $picNumber = null;
-
-                    if ($request->kind == 'edit'){
-                        $picNumber = $request->picNumber;
-                        if ($picNumber == 0)
-                            $picNumber = $place->picNumber;
-                        else
-                            $picNumber .= '.jpg';
-
-                        if ($picNumber != null) {
-                            if (file_exists($location . '/f-' . $picNumber))
-                                unlink($location . '/f-' . $picNumber);
-                            if (file_exists($location . '/s-' . $picNumber))
-                                unlink($location . '/s-' . $picNumber);
-                            if (file_exists($location . '/t-' . $picNumber))
-                                unlink($location . '/t-' . $picNumber);
-                            if (file_exists($location . '/l-' . $picNumber))
-                                unlink($location . '/l-' . $picNumber);
-                            if (file_exists($location . '/' . $picNumber))
-                                unlink($location . '/' . $picNumber);
-                        }
-
-                    }
-                    else {
-                        $allPicNumber = PlacePic::where('placeId', $place->id)->where('kindPlaceId', $kindPlaceId)->pluck('picNumber')->toArray();
-                        array_push($allPicNumber, $place->picNumber);
-
-                        for($i = 1; $i < 1000; $i++) {
-                            $picNumber = $i . '.jpg';
-                            if (!in_array($picNumber, $allPicNumber)) {
-                                $check = true;
-                                if (file_exists($location . '/f-' . $picNumber))
-                                    $check = false;
-                                if (file_exists($location . '/s-' . $picNumber))
-                                    $check = false;
-                                if (file_exists($location . '/t-' . $picNumber))
-                                    $check = false;
-                                if (file_exists($location . '/l-' . $picNumber))
-                                    $check = false;
-                                if (file_exists($location . '/' . $picNumber))
-                                    $check = false;
-
-                                if($check){
-                                    if($request->picNumber == 0){
-                                        $place->picNumber = $picNumber;
-                                        $place->save();
-                                    }
-                                    else {
-                                        $newPic = new PlacePic();
-                                        $newPic->picNumber = $picNumber;
-                                        $newPic->placeId = $place->id;
-                                        $newPic->kindPlaceId = $kindPlaceId;
-                                        $newPic->save();
-                                    }
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if($picNumber != null) {
-                        $destinationT = $location . '/t-' . $picNumber;
-                        $destinationF = $location . '/f-' . $picNumber;
-                        $destinationS = $location . '/s-' . $picNumber;
-                        $destinationL = $location . '/l-' . $picNumber;
-                        $destinationMainPic = $location . '/' . $picNumber;
-
-                        compressImage($_FILES['f-1']['tmp_name'], $destinationF, 80);
-                        compressImage($_FILES['t-1']['tmp_name'], $destinationT, 80);
-                        compressImage($_FILES['s-1']['tmp_name'], $destinationS, 80);
-                        compressImage($_FILES['l-1']['tmp_name'], $destinationL, 80);
-                        compressImage($_FILES['mainPic']['tmp_name'], $destinationMainPic, 80);
-
-                        echo 'ok';
-                    }
-                    else
-                        echo 'nok4';
-                }
-                else
-                    echo 'nok3';
-            }
-            else
-                echo 'nok2';
-        }
-        else
-            echo 'nok1';
-        return ;
-    }
-
-    public function deletePlacePic(Request $request)
-    {
-        $pic = PlacePic::find($request->id);
-        if($pic != null){
-            $kindPlace = Place::find($pic->kindPlaceId);
-            $place = \DB::table($kindPlace->tableName)->find($pic->placeId);
-
-            if($place != null) {
-                $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName/$place->file";
-
-                $this->deletePlacePicFiles($location, $pic->picNumber);
-
-                $pic->delete();
-                echo 'ok';
-            }
-            else
-                echo 'nok';
-        }
-        else
-            echo 'nok';
-
-        return;
-    }
-
-    public function changeAltPic(Request $request)
-    {
-        $pic = PlacePic::find($request->id);
-        if($pic != null){
-            $pic->alt = $request->alt;
-            $pic->save();
-
-            echo 'ok';
-        }
-        else
-            echo 'nok';
-        return;
-    }
-
-    public function setMainPic(Request $request)
-    {
-        $pic = PlacePic::find($request->id);
-
-        if($pic != null){
-            switch ($pic->kindPlaceId){
-                case 1:
-                    $place = Amaken::find($pic->placeId);
-                    break;
-                case 3:
-                    $place = Restaurant::find($pic->placeId);
-                    break;
-                case 4:
-                    $place = Hotel::find($pic->placeId);
-                    break;
-                case 6:
-                    $place = Majara::find($pic->placeId);
-                    break;
-                case 10:
-                    $place = SogatSanaie::find($pic->placeId);
-                    break;
-                case 11:
-                    $place = MahaliFood::find($pic->placeId);
-                    break;
-                case 12:
-                    $place = Boomgardy::find($pic->placeId);
-                    break;
-                default:
-                    echo 'nok';
-                    return;
-            }
-            if($place != null){
-                $mainPicNum = $pic->picNumber;
-                $sidePic = $place->picNumber;
-
-                $place->picNumber = $mainPicNum;
-                $place->save();
-
-                if($sidePic != null) {
-                    $pic->picNumber =$sidePic;
-                    $pic->save();
-                }
-                else
-                    $pic->delete();
-
-                echo 'ok';
-            }
-        }
-
-        return;
-    }
-
     public function deletePlace(Request $request)
     {
+        return;
         $id = $request->id;
         $kindPlaceId  = $request->kindPlaceId;
         $kindPlace = Place::find($kindPlaceId);
@@ -1617,7 +1252,7 @@ class PlaceController extends Controller {
 
     public function searchForCity() {
         $key = makeValidInput($_POST["key"]);
-        $cities = DB::select("SELECT cities.id, cities.name as cityName, state.name as stateName FROM cities, state WHERE cities.stateId = state.id and  cities.name LIKE '%$key%' ");
+        $cities = DB::select("SELECT cities.id, cities.name as cityName, cities.isVillage as isVillage, state.name as stateName, state.id as stateId FROM cities, state WHERE cities.stateId = state.id and  cities.name LIKE '%$key%' ");
         echo json_encode($cities);
     }
 
@@ -1969,6 +1604,7 @@ class PlaceController extends Controller {
                 dd('end');
         }
     }
+
     private function storeTagExcel($kindPlaceId, $inputFileName, $file){
 
         $kindPlace = Place::find($kindPlaceId);
@@ -2050,24 +1686,36 @@ class PlaceController extends Controller {
         $excelReader = PHPExcel_IOFactory::createReaderForFile($inputFileName);
         $excelObj = $excelReader->load($inputFileName);
         $workSheet = $excelObj->getSheet(0);
-        $cols = ['B', 'C', 'D', 'E', 'F', 'G', 'h', 'I', 'J', 'K'];
+        $cols = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
         $categories = [];
         foreach ($cols as $col){
             $subCategories = [];
             for($i = 3; $i < 42; $i++) {
-                $value = $workSheet->getCell($col . $i)->getValue();
-
+                $value = $workSheet->getCell($col.$i)->getValue();
                 if($value != null)
                     array_push($subCategories, $value);
             }
-            echo $col;
-//            dd($col);
+
             array_push($categories, [
                 'name' => $workSheet->getCell($col.'2')->getValue(),
                 'subs' => $subCategories
             ]);
         }
 
-        dd($categories);
+        foreach ($categories as $item){
+            $mainCategory = new LocalShopsCategory();
+            $mainCategory->name = $item['name'];
+            $mainCategory->parentId = 0;
+            $mainCategory->save();
+
+            foreach ($item['subs'] as $sub){
+                $category = new LocalShopsCategory();
+                $category->name = $sub;
+                $category->parentId = $mainCategory->id;
+                $category->save();
+            }
+        }
+
+        dd('done');
     }
 }

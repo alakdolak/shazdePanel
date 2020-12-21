@@ -44,6 +44,19 @@ Route::group(['middleware' => ['auth', 'aclCheck:festival']], function() {
     Route::post('festival/update/status', 'FestivalController@festivalStatus')->name('festival.update.stats');
 });
 
+Route::group(['middleware' => ['auth', 'aclCheck:localShop']], function() {
+
+    Route::get('localShops/list', 'LocalShopController@localshopList')->name('localShop.list');
+    Route::get('localShops/editPage/{id?}', 'LocalShopController@localShopEditPage')->name('localShop.edit.page');
+    Route::get('localShops/editPics/{id?}', 'LocalShopController@localShopEditPics')->name('localShop.edit.pics');
+
+    Route::get('localShops/getAll', 'LocalShopController@getAllLocalShops')->name('localShop.getAll');
+
+    Route::post('localShops/changeConfirm', 'LocalShopController@changeConfirmLocalShop')->name('localShop.edit.confirm');
+    Route::post('localShops/edit/content', 'LocalShopController@doEditLocalShop')->name('localShop.edit.doEdit');
+
+});
+
 Route::group(array('middleware' => ['auth', 'superAdminLevel']), function () {
 
 //    Route::get('user')
@@ -176,36 +189,27 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), functio
 Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), function () {
 
     Route::get('changeContent/{city}/{mode}/{cityMode}/{wantedKey?}/{filter?}', ['as' => 'changeContent', 'uses' => 'PlaceController@changeContent']);
-
     Route::get('newChangeContent/{cityId}/{mode}/{cityMode}', 'PlaceController@newChangeContent')->name('newChangeContent');
-
     Route::get('editContent/{mode}/{id}', 'PlaceController@editContent')->name('editContent');
-
     Route::get('newContent/{cityMode}/{cityId}/{mode}', 'PlaceController@newContent')->name('newContent');
-
     Route::get('editPlace/{kindPlaceId}/{placeId?}', 'PlaceController@editPlace')->name('editPlace');
 
     Route::post('storeAmaken', 'PlaceController@storeAmaken')->name('storeAmaken');
-
     Route::post('storeHotel', 'PlaceController@storeHotel')->name('storeHotel');
-
     Route::post('storeRestaurant', 'PlaceController@storeRestaurant')->name('storeRestaurant');
-
     Route::post('storeMajara', 'PlaceController@storeMajara')->name('storeMajara');
-
     Route::post('storeMahaliFood', 'PlaceController@storeMahaliFood')->name('storeMahaliFood');
-
     Route::post('storeSogatSanaie', 'PlaceController@storeSogatSanaie')->name('storeSogatSanaie');
-
     Route::post('storeBoomgardy', 'PlaceController@storeBoomgardy')->name('storeBoomgardy');
-
-    Route::get('uploadImgPage/{kindPlaceId}/{id}', 'PlaceController@uploadImgPage')->name('uploadImgPage');
-    Route::post('place/storeImg', 'PlaceController@storeImg')->name('place.storeImg');
-    Route::post('getCrop', 'PlaceController@getCrop') ->name('getCrop');
-    Route::post('deletePlacePic', 'PlaceController@deletePlacePic') ->name('deletePlacePic');
-    Route::post('changeAltPic', 'PlaceController@changeAltPic') ->name('changeAltPic');
-    Route::post('setMainPic', 'PlaceController@setMainPic') ->name('setMainPic');
     Route::post('deletePlace', 'PlaceController@deletePlace')->name('deletePlace');
+
+
+    Route::get('uploadImgPage/{kindPlaceId}/{id}', 'PlacePictureController@uploadImgPage')->name('uploadImgPage');
+    Route::post('place/storeImg', 'PlacePictureController@storeImg')->name('place.storeImg');
+    Route::post('getCrop', 'PlacePictureController@getCrop') ->name('getCrop');
+    Route::post('deletePlacePic', 'PlacePictureController@deletePlacePic') ->name('deletePlacePic');
+    Route::post('changeAltPic', 'PlacePictureController@changeAltPic') ->name('changeAltPic');
+    Route::post('setMainPic', 'PlacePictureController@setMainPic') ->name('setMainPic');
 
     Route::post('doChangePlace', ['as' => 'doChangePlace', 'uses' => 'PlaceController@doChangePlace']);
 
@@ -379,10 +383,6 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('/reviews/delete', 'ReviewsController@deleteReview')->name('reviews.delete');
 });
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('localShops/list', 'LocalShopController@localshopList')->name('localShop.list');
-});
-
 //mainPage slider setting
 Route::group(array('middleware' => ['auth']), function(){
 
@@ -497,6 +497,10 @@ Route::group(array('middleware' => ['auth']), function(){
     Route::post('getCityWithState', 'AjaxController@getCityWithState')->name('get.allcity.withState');
 
     Route::post('findPlace', 'AjaxController@findPlace')->name('find.place');
+
+    Route::get('searchUser', 'AjaxController@searchUser')->name('search.users');
+
+    Route::get('searchTag', 'AjaxController@searchTag')->name('search.tag');
 });
 
 Route::get('gardeshEdit/{id}', 'SafarnamehController@gardeshNameEdit');

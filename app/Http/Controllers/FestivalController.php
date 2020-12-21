@@ -170,7 +170,7 @@ class FestivalController extends Controller
                     $newMsg = new Message();
                     $newMsg->senderId = 0;
                     $newMsg->receiverId = $content->userId;
-                    $newMsg->message = "اثر شما برای فستیوال ".$festival->name." به دلیل: ".$failedReason." رد شد.";
+                    $newMsg->message = "اثر شما برای ".$festival->name." به دلیل: ".$failedReason." رد شد.";
                     $newMsg->date = verta()->format('Y-m-d');
                     $newMsg->time = verta()->format('H:i');
                     $newMsg->save();
