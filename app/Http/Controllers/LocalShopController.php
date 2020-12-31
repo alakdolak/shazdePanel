@@ -155,7 +155,7 @@ class LocalShopController extends Controller
         $localShop->save();
 
         $tagTableId = [];
-        $tags = $data['tags'];
+        $tags = isset($data['tags']) ? $data['tags'] : [];
         foreach ($tags as $item){
             $exTag = Tag::firstOrCreate(['name' => $item['name']]);
             $tagRel = PlaceTag::firstOrCreate([

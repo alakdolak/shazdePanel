@@ -152,7 +152,7 @@
             <div class="row">
                 <div class="col-md-12 form-group">
                     <label for="description">توضیحات</label>
-                    <textarea type="text" id="description" rows="5" class="form-control">{{$localShop->address}}</textarea>
+                    <textarea type="text" id="description" rows="5" class="form-control">{{$localShop->description}}</textarea>
                 </div>
             </div>
 
