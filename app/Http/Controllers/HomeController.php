@@ -14,8 +14,10 @@ use App\models\PhotographersPic;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
 use App\models\PostComment;
+use App\models\Safarnameh;
 use App\models\SafarnamehComments;
 use App\models\State;
+use App\models\UserAddPlace;
 use App\models\VideoComment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -60,9 +62,12 @@ class HomeController extends Controller {
                 $item->delete();
         }
 
+        $newSafarnameh = Safarnameh::where('confirm', 0)->count();
+        $newAddPlaces = UserAddPlace::where('archive', 0)->count();
+
         $newMsg = Message::where('receiverId', 0)->where('seen', 0)->count();
 
-        return view('home', compact(['photographerNotAgree', 'newReviews',
+        return view('home', compact(['photographerNotAgree', 'newReviews', 'newSafarnameh', 'newAddPlaces',
                                             'newCommentCount', 'newVideoComments',
                                             'newReports', 'newQuestions', 'newMsg']));
     }

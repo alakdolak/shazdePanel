@@ -449,10 +449,12 @@ class SafarnamehController extends Controller
         $limbos = explode(',', $request->limboPicIds);
         $limboPics = SafarnamehLimboPics::whereIn('id', $limbos)->where('userId', auth()->user()->id)->get();
         foreach ($limboPics as $item){
-            rename($limboDestination.'/'.$item->pic, $newDestination.'/'.$item->pic);
-            $url = URL::asset('_images/posts/limbo/'.$item->pic);
-            $newUrl = URL::asset('_images/posts/'.$safarnamehId.'/'.$item->pic);
-            $description = str_replace($url, $newUrl, $description);
+            if(is_file($limboDestination.'/'.$item->pic)) {
+                rename($limboDestination . '/' . $item->pic, $newDestination . '/' . $item->pic);
+                $url = URL::asset('_images/posts/limbo/' . $item->pic);
+                $newUrl = URL::asset('_images/posts/' . $safarnamehId . '/' . $item->pic);
+                $description = str_replace($url, $newUrl, $description);
+            }
             $item->delete();
         }
         $notUseLimboPics = SafarnamehLimboPics::where('code', $request->code)->where('userId', auth()->user()->id)->get();
