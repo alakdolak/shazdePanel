@@ -177,8 +177,15 @@ class LocalShopController extends Controller
         $place = LocalShops::find($id);
 
         $mainPic = LocalShopsPictures::where('localShopId', $place->id)->where('isMain', 1)->first();
-        $place->mainPicF = \URL::asset('_images/'.$kindPlace->fileName.'/'.$place->file.'/f-'.$mainPic->pic);
-        $place->mainPicL = \URL::asset('_images/'.$kindPlace->fileName.'/'.$place->file.'/l-'.$mainPic->pic);
+        if($mainPic != null) {
+            $place->mainPicF = \URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $mainPic->pic);
+            $place->mainPicL = \URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/l-' . $mainPic->pic);
+        }
+        else{
+            $place->mainPicF = '';
+            $place->mainPicL = '';
+        }
+
         $place->pics = LocalShopsPictures::where('localShopId', $place->id)->where('isMain', 0)->get();
         foreach($place->pics as $pic){
             $pic->picF = \URL::asset('_images/'.$kindPlace->fileName.'/'.$place->file.'/f-'.$pic->pic);
