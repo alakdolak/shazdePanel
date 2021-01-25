@@ -25,8 +25,9 @@ use SeoAnalyzer\Page;
 
 class SeoController extends Controller {
 
-    public function changeSeo($city, $mode, $wantedKey = -1, $selectedMode = -1) {
+    public $type;
 
+    public function changeSeo($city, $mode, $wantedKey = -1, $selectedMode = -1) {
         $out = [];
         $counter = 0;
 
@@ -406,7 +407,7 @@ class SeoController extends Controller {
 
 
 
-    public function seoTesterSafarnamehContent(Request $request)
+    public function seoTesterContent(Request $request)
     {
         $text = $request->desc;
         $meta = $request->meta;
@@ -414,6 +415,8 @@ class SeoController extends Controller {
         $seoTitle = $request->seoTitle;
         $title = $request->title;
         $slug= $request->slug;
+
+        $this->type = $request->database;
 
         $goodResultCount = 0;
         $badResultCount = 0;
@@ -1023,7 +1026,7 @@ class SeoController extends Controller {
 
     private function keywordInDataBase($keyword, $id)
     {
-        $allKey = Safarnameh::select(['keyword', 'id'])->whereNotNull('keyword')->get();
+        $allKey = DB::table($this->type)->select(['keyword', 'id'])->whereNotNull('keyword')->get();
         $same = 0;
         $similar = array();
         foreach ($allKey as $item){
@@ -1057,12 +1060,8 @@ class SeoController extends Controller {
 
     private function seoInDataBase($seoTitle, $id)
     {
-        $seo = Safarnameh::where('seoTitle', $seoTitle)->where('id', '!=', $id)->first();
-
-        if($seo == null)
-            return true;
-        else
-            return false;
+        $seo = DB::table($this->type)->where('seoTitle', $seoTitle)->where('id', '!=', $id)->first();
+        return $seo == null;
     }
 
     private function seoInPlaceDataBase($seoTitle, $id, $kindPlaceId)
@@ -1082,12 +1081,8 @@ class SeoController extends Controller {
 
     private function slugInDataBase($slug, $id)
     {
-        $s = Safarnameh::where('slug', $slug)->where('id', '!=', $id)->first();
-
-        if($s == null)
-            return true;
-        else
-            return false;
+        $s = DB::table($this->type)->where('slug', $slug)->where('id', '!=', $id)->first();
+        return $s == null;
     }
 
     private function slugInPlaceDataBase($slug, $id, $kindPlaceId)
@@ -1271,12 +1266,8 @@ class SeoController extends Controller {
     }
 
     private function titleInDataBase($title, $id){
-        $s = Safarnameh::where('title', $title)->where('id', '!=', $id)->first();
-
-        if($s == null)
-            return true;
-        else
-            return false;
+        $s = DB::table($this->type)->where('title', $title)->where('id', '!=', $id)->first();
+        return $s == null;
     }
 
 }

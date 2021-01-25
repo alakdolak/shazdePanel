@@ -282,8 +282,7 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'postAccess']), functi
 
     Route::post('deleteFromBannerSafarnameh', 'SafarnamehController@deleteFromBannerSafarnameh')->name('deleteFromBannerSafarnameh');
 
-    Route::post('seoTesterSafarnamehContent', 'SeoController@seoTesterSafarnamehContent')->name('seoTesterSafarnamehContent');
-
+    Route::post('seoTesterContent', 'SeoController@seoTesterContent')->name('seoTesterContent');
 });
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'msgAccess']), function () {

@@ -20,8 +20,7 @@
 
 @section('content')
 
-    <input type="hidden" id="safarnamehId" value="{{isset($safarnameh) ? $safarnameh->id : '0'}}">
-        <input type="hidden" id="gardeshName" value="{{isset($safarnameh) && isset($safarnameh->gardeshName) ? $safarnameh->gardeshName : '0'}}">
+    <input type="hidden" id="newsId" value="{{isset($news) ? $news->id : '0'}}">
 
     <div class="col-md-3 leftSection" style="padding-right: 0px;">
         <div class="sparkline8-list shadow-reset mg-tb10">
@@ -33,20 +32,20 @@
             <div class="sparkline8-graph dashone-comment  dashtwo-messages">
                 <div class="form-group">
                     <select class="form-control botBorderInput" id="releaseType" name="release" onchange="changeRelease(this.value)">
-                        <option value="released" {{isset($safarnameh) ? ($safarnameh->release == 'released' ? 'selected' : '')  : ''}}>منتشرشده</option>
-                        <option value="draft" {{isset($safarnameh) ? ($safarnameh->release == 'draft' ? 'selected' : '')  : 'selected'}}>پیش نویس</option>
-                        <option value="future" {{isset($safarnameh) ? ($safarnameh->release == 'future' ? 'selected' : '')  : ''}}>آینده</option>
+                        <option value="released" {{isset($news) ? ($news->release == 'released' ? 'selected' : '')  : ''}}>منتشرشده</option>
+                        <option value="draft" {{isset($news) ? ($news->release == 'draft' ? 'selected' : '')  : 'selected'}}>پیش نویس</option>
+                        <option value="future" {{isset($news) ? ($news->release == 'future' ? 'selected' : '')  : ''}}>آینده</option>
                     </select>
                 </div>
 
-                <div id="futureDiv" style="display: {{isset($safarnameh) && $safarnameh->release == 'future' ? '' : 'none'}}">
+                <div id="futureDiv" style="display: {{isset($news) && $news->release == 'future' ? '' : 'none'}}">
                     <div class="form-group" style="display: flex">
                         <label for="date" style="font-size: 10px;">تاریخ انتشار</label>
-                        <input name="date" id="date" class="observer-example inputBoxInput" value="{{isset($safarnameh) ? $safarnameh->date : ''}}" readonly/>
+                        <input name="date" id="date" class="observer-example inputBoxInput" value="{{isset($news) ? $news->date : ''}}" readonly/>
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="time" style="font-size: 10px;">ساعت انتشار</label>
-                        <input name="time" id="time" class="inputBoxInput" style="width: 73%;" value="{{isset($safarnameh) ? $safarnameh->time : ''}}" readonly/>
+                        <input name="time" id="time" class="inputBoxInput" style="width: 73%;" value="{{isset($news) ? $news->time : ''}}" readonly/>
                     </div>
                 </div>
             </div>
@@ -61,7 +60,7 @@
                 <div class="row">
                     <div class="selectCategSec">
                         <div class="inputSec">
-                            <input type="text" placeholder="نام دسته بندی..." onfocus="openCategoryResult()" onkeyup="searchInSafarnamehCategory(this.value)">
+                            <input type="text" placeholder="نام دسته بندی..." onfocus="openCategoryResult()" onkeyup="searchInNewsCategory(this.value)">
                             <button class="arrowDonwIcon" onclick="openCategoryResult()"></button>
                         </div>
                         <div id="categoryResultDiv" class="resultSec"></div>
@@ -97,35 +96,7 @@
                 </div>
             </div>
         </div>
-        <div class="sparkline8-list shadow-reset mg-tb-10">
-            <div class="sparkline8-hd" style="padding: 5px 10px">
-                <div class="main-sparkline8-hd">
-                    <h5>محل های مرتبط</h5>
-                </div>
-            </div>
-            <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
-                <div class="row">
-                    <div class="form-group">
-                        <div class="inputBorder newTagSection">
-                            <div class="inputGroup newTagInputDiv">
-                                <input type="text"
-                                       class="newTag"
-                                       id="newPlace"
-                                       placeholder="نام محل مرتبط با سفرنامه..."
-                                       style="width: 100%; font-size: 12px"
-                                       onkeyup="searchPlaces(this.value)">
-                            </div>
 
-                            <div id="searchPlaceResult" class="searchTagResultDiv"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div id="selectedPlaces" class="col-md-12"></div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
         <div class="sparkline8-list shadow-reset mg-tb-10">
             <div class="sparkline8-hd" style="padding: 5px 10px">
                     <div class="main-sparkline8-hd">
@@ -134,8 +105,8 @@
                 </div>
             <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
                 <div class="row">
-                    <div class="showImg {{ isset($safarnameh)? 'open' : ''}}">
-                        <img id="mainPicShow" src="{{isset($safarnameh)? $safarnameh->pic : URL::asset('img/uploadPic.png')}}">
+                    <div class="showImg {{ isset($news)? 'open' : ''}}">
+                        <img id="mainPicShow" src="{{isset($news)? $news->pic : URL::asset('img/uploadPic.png')}}">
 
                         <label for="imgInput" class="btn btn-success" style="width: 100%; text-align: center; margin-top: 10px">
                             انتخاب عکس
@@ -152,11 +123,11 @@
             <div class="sparkline8-list shadow-reset mg-tb-10">
                 <div class="sparkline8-hd">
                     <div class="main-sparkline8-hd" STYLE="display: flex; justify-content: space-between; color: white">
-                        @if(isset($safarnameh))
-                            <h4>ویرایش سفرنامه</h4>
+                        @if(isset($news))
+                            <h4>ویرایش خبر</h4>
                             <button class="btn btn-success noneSeoTestButton" onclick="storePost(false)">ثبت بدون تست سئو</button>
                         @else
-                            <h4>افزودن سفرنامه جدید</h4>
+                            <h4>ثبت خبر جدید</h4>
                         @endif
                     </div>
                 </div>
@@ -170,8 +141,8 @@
                                 <input class="form-control titleInputClass"
                                        type="text"
                                        name="title"
-                                       id="title" value="{{(isset($safarnameh) ? $safarnameh->title : '')}}"
-                                        placeholder="عنوان سفرنامه">
+                                       id="title" value="{{(isset($news) ? $news->title : '')}}"
+                                        placeholder="عنوان خبر">
                             </div>
                         </div>
 
@@ -179,9 +150,9 @@
                             <div class="adjoined-bottom">
                                 <div class="grid-container">
                                     <div class="grid-width-100">
-                                        <div id="safarnamehText" class="textEditor">
-                                            @if(isset($safarnameh))
-                                                {!! html_entity_decode($safarnameh->description) !!}
+                                        <div id="newsText" class="textEditor">
+                                            @if(isset($news))
+                                                {!! html_entity_decode($news->text) !!}
                                             @endif
                                         </div>
                                     </div>
@@ -212,7 +183,7 @@
                                        id="keyword"
                                        name="keyword"
                                        placeholder="کلمه کلیدی را اینجا بنویسید..."
-                                       value="{{isset($safarnameh)? $safarnameh->keyword: ''}}">
+                                       value="{{isset($news)? $news->keyword: ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 floR">
@@ -225,7 +196,7 @@
                                        id="seoTitle"
                                        name="seoTitle"
                                        placeholder="عنوان سئو را اینجا بنویسید (عنوان سئو باید بین 60 حرف تا 85 حرف باشد)"
-                                       onkeyup="changeSeoTitle(this.value)" value="{{isset($safarnameh)? $safarnameh->seoTitle: ''}}">
+                                       onkeyup="changeSeoTitle(this.value)" value="{{isset($news)? $news->seoTitle: ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 floR mg-tb-10">
@@ -236,13 +207,13 @@
                                        id="slug"
                                        placeholder="نامک را اینجا بنویسید..."
                                        name="slug"
-                                       value="{{isset($safarnameh)? $safarnameh->slug: ''}}">
+                                       value="{{isset($news)? $news->slug: ''}}">
                             </div>
                         </div>
                         <div class="col-md-12 floR">
                             <div class="form-group">
                                 <label for="meta">متا: <span id="metaNumber" style="font-weight: 200;"></span></label>
-                                <textarea class="form-control botBorderInput" type="text" id="meta" name="meta" onkeyup="changeMeta(this.value)" rows="3">{{isset($safarnameh)? $safarnameh->meta: ''}}</textarea>
+                                <textarea class="form-control botBorderInput" type="text" id="meta" name="meta" onkeyup="changeMeta(this.value)" rows="3">{{isset($news)? $news->meta: ''}}</textarea>
                             </div>
                         </div>
 
@@ -260,7 +231,7 @@
 
                 <div style="padding: 10px; width: 100%; display: flex; justify-content: center; align-items: center;">
                     <input type="button" onclick="checkSeo(1)"  value="ثبت" class="btn btn-success">
-                    <input type="button" onclick="window.location.href='{{route("safarnameh.index")}}'"  value="بازگشت" class="btn btn-secondry">
+                    <input type="button" onclick="window.location.href='{{route("news.list")}}'"  value="بازگشت" class="btn btn-secondry">
                 </div>
 
             </div>
@@ -280,17 +251,14 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div style="font-size: 18px; margin-bottom: 20px;">
-                        در سفرنامه شما اخطارهای زیر موجود است . ایا از ثبت سفرنامه خود اطمینان دارید؟
-                    </div>
-
+                    <div style="font-size: 18px; margin-bottom: 20px;"> در خبر شما اخطارهای زیر موجود است . ایا از ثبت سفرنامه خود اطمینان دارید؟</div>
                     <div id="warningContentModal" style="padding-right: 5px;"></div>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">خیر اصلاح می کنم.</button>
-                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="storePost()">بله سفرنامه ثبت شود</button>
+                    <button type="button" class="btn btn-success"  data-dismiss="modal" onclick="storePost()">بله خبر ثبت شود</button>
                 </div>
 
             </div>
@@ -301,7 +269,7 @@
 
     <script>
         var tagsName = [];
-        var safarnamehId;
+        var newsId;
         var mainDataForm = new FormData();
         var warningCount = 0;
         var errorCount = 0;
@@ -309,15 +277,15 @@
         var uniqueTitle;
         var uniqueSeoTitle;
         var uniqueSlug;
-        var safarname = null;
+        var news = null;
         var errorInUploadImage = false;
         var selectedCat = [];
         window.limboIds = [];
         var selectedPlaces = [];
         var searchPlaceAjax = null;
-        var allSafarnamehCategoryList = [];
-        var selectedSafarnamehCategory = [];
-        var safarnamehCategory = {!! $category !!};
+        var allNewsCategoryList = [];
+        var selectedNewsCategory = [];
+        var newsCategory = {!! $category !!};
 
         $('.observer-example').persianDatepicker({
             minDate: new Date().getTime(),
@@ -329,8 +297,9 @@
             donetext: 'تایید',
             autoclose: true,
         });
-        BalloonBlockEditor.create( document.querySelector('#safarnamehText'), {
-            placeholder: 'متن سفرنامه خود را اینجا وارد کنید...',
+
+        BalloonBlockEditor.create( document.querySelector('#newsText'), {
+            placeholder: 'متن خبر خود را اینجا وارد کنید...',
             toolbar: {
                 items: [
                     'bold',
@@ -366,11 +335,9 @@
                 window.uploaderClass = editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
                     let data = { code: {{$code}} };
                     data = JSON.stringify(data);
-                    return new MyUploadAdapter( loader, '{{route('safarnameh.uploadDescPic')}}', '{{csrf_token()}}', data);
+                    return new MyUploadAdapter( loader, '{{route('news.uploadDescPic')}}', '{{csrf_token()}}', data);
                 };
-
-
-            } )
+            })
             .catch( error => {
                 console.error( 'Oops, something went wrong!' );
                 console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
@@ -378,40 +345,35 @@
                 console.error( error );
             } );
 
-        @if(isset($safarnameh))
-            safarname = {!! json_encode($safarnameh) !!};
-            safarname['category'].map(item => selectedCat.push({
+        @if(isset($news))
+            news = {!! json_encode($news) !!};
+            news['category'].map(item => selectedCat.push({
                 id: item.categoryId,
                 isMain: item.isMain,
             }));
 
             $(window).ready(() => {
-                safarname['tags'].map(item => chooseTag(item));
-                safarname.places.map(item => choosePlace(item.id, item.name, item.kind));
+                news['tags'].map(item => chooseTag(item));
             });
 
         @endif
 
         function changeRelease(value){
-            if(value == 'future')
-                document.getElementById('futureDiv').style.display = 'block';
-            else
-                document.getElementById('futureDiv').style.display = 'none';
+            document.getElementById('futureDiv').style.display = value == 'future' ? 'block' : 'none';
         }
 
         function changePic(input){
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 $('.showImg').addClass('open');
-                reader.onload = e => $('#mainPicShow').attr('src', e.target.result)
+                reader.onload = e => $('#mainPicShow').attr('src', e.target.result);
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
         function storePost(_checkSeo = true){
 
-            var id = document.getElementById('safarnamehId').value;
-            var gardeshName = document.getElementById('gardeshName').value;
+            var id = document.getElementById('newsId').value;
             var title = document.getElementById('title').value;
             var release = document.getElementById('releaseType').value;
             var date = document.getElementById('date').value;
@@ -427,13 +389,13 @@
                 return;
             }
 
-            if(selectedSafarnamehCategory.length == 0){
+            if(selectedNewsCategory.length == 0){
                 alert('دسته بندی را مشخص کنید');
                 return;
             }
 
             var hasMain = 0;
-            selectedSafarnamehCategory.map(item => {
+            selectedNewsCategory.map(item => {
                 if(item.thisIsMain == 1)
                     hasMain = 1;
             });
@@ -479,14 +441,13 @@
             mainDataForm.append('seoTitle', seoTitle);
             mainDataForm.append('slug', slug);
             mainDataForm.append('meta', meta);
-            mainDataForm.append('gardeshName', gardeshName);
             mainDataForm.append('description', window.editor.getData());
             mainDataForm.append('limboPicIds', window.limboIds);
             mainDataForm.append('releaseType', release);
             mainDataForm.append('date', date);
             mainDataForm.append('time', time);
             mainDataForm.append('tags', JSON.stringify(tagsName));
-            mainDataForm.append('category', JSON.stringify(selectedSafarnamehCategory));
+            mainDataForm.append('category', JSON.stringify(selectedNewsCategory));
             mainDataForm.append('places', JSON.stringify(selectedPlaces));
             mainDataForm.append('warningCount', warningCount);
 
@@ -514,17 +475,17 @@
             openLoading();
             $.ajax({
                 type: 'post',
-                url: '{{route("safarnameh.store")}}',
+                url: '{{route("news.store")}}',
                 data: mainDataForm,
                 processData: false,
                 contentType: false,
                 success: function(response){
                     if(response.status == 'ok'){
                         alert('تغییرات با موفقیت ثبت شد');
-                        safarnamehId = response.result;
+                        newsId = response.result;
                         var location = window.location.href;
-                        if(location.includes('safarnameh/new') || location.includes('gardeshEdit'))
-                            window.location.href = '{{url("safarnameh/edit")}}/' + safarnamehId;
+                        if(location.includes('news/new'))
+                            window.location.href = '{{url("news/edit")}}/' + newsId;
                         else
                             closeLoading();
                     }
@@ -538,11 +499,11 @@
             var slug = document.getElementById('slug').value;
             var meta = document.getElementById('meta').value;
             var title = document.getElementById('title').value;
-            var safarnamehId = document.getElementById('safarnamehId').value;
+            var newsId = document.getElementById('newsId').value;
             var desc = window.editor.getData();
 
             $.ajax({
-                type: 'post',
+                type: 'POST',
                 url : '{{route("seoTesterContent")}}',
                 data: {
                     _token: '{{csrf_token()}}',
@@ -551,8 +512,8 @@
                     seoTitle: seoTitle,
                     slug: slug,
                     title: title,
-                    id: safarnamehId,
-                    database: 'safarnameh',
+                    id: newsId,
+                    database: 'news',
                     desc: desc
                 },
                 success: function(response){
@@ -580,6 +541,7 @@
 
         function inlineSeoCheck(kind){
             var tags = tagsName;
+            var text;
             if(tags.length == 0){
                 errorCount++;
                 text = '<div style="color: red;">شما باید برای متن خود برچسب انتخاب نمایید</div>';
@@ -611,7 +573,7 @@
 
             var inputMainPic = document.getElementById('imgInput');
 
-            if(!(inputMainPic.files && inputMainPic.files[0]) && (safarname == null || safarname['pic'] == null)){
+            if(!(inputMainPic.files && inputMainPic.files[0]) && (news == null || news['pic'] == null)){
                 errorCount++;
                 text = '<div style="color: red;">مقاله باید حتما دارای عکس اصلی باشد.</div>';
                 $('#errorResult').append(text);
@@ -625,15 +587,15 @@
                 var release = document.getElementById('releaseType').value;
 
                 if (release != 'draft' && errorCount > 0)
-                    alert('برای ثبت سفرنامه باید ارورها رابرطرف کرده و یا انتشار را به حالت پیش نویس دراوردی.');
+                    alert('برای ثبت خبر باید ارورها رابرطرف کرده و یا انتشار را به حالت پیش نویس دراوردی.');
                 if(!uniqueTitle)
-                    alert('عنوان مقاله یکتا نیست');
+                    alert('عنوان خبر یکتا نیست');
                 else if(!uniqueSlug)
-                    alert('نامک مقاله یکتا نیست');
+                    alert('نامک خبر یکتا نیست');
                 else if(!uniqueKeyword)
-                    alert('کلمه کلیدی مقاله یکتا نیست');
+                    alert('کلمه کلیدی خبر یکتا نیست');
                 else if(!uniqueSeoTitle)
-                    alert('عنوان سئو مقاله یکتا نیست');
+                    alert('عنوان سئو خبر یکتا نیست');
                 else {
                     if (warningCount > 0) {
                         $('#warningContentModal').html('');
@@ -642,7 +604,6 @@
                             $('#warningContentModal').append(text);
                         });
                         $('#warningModal').modal('show');
-                        return;
                     }
                     else
                         storePost();
@@ -670,8 +631,8 @@
         }
 
 
-        safarnamehCategory.map(item => {
-            allSafarnamehCategoryList.push({
+        newsCategory.map(item => {
+            allNewsCategoryList.push({
                 id: item.id,
                 main: 1,
                 name: item.name,
@@ -679,7 +640,7 @@
                 selected: 0,
             });
             item.sub.map(sub => {
-                allSafarnamehCategoryList.push({
+                allNewsCategoryList.push({
                     id: sub.id,
                     main: 0,
                     name: sub.name,
@@ -699,33 +660,33 @@
             var text = '';
             _result.map((item, index) => {
                 if(item.show)
-                    text += `<div class="resRow ${item.main == 1 ? 'mainCat' : 'sideCat'} ${item.selected == 1 ? 'selected' : ''}" onclick="selectedThisSafarnamehCategory(${index})">${item.name}</div>`;
+                    text += `<div class="resRow ${item.main == 1 ? 'mainCat' : 'sideCat'} ${item.selected == 1 ? 'selected' : ''}" onclick="selectedThisNewsCategory(${index})">${item.name}</div>`;
             });
             $('#categoryResultDiv').html(text);
         }
-        function searchInSafarnamehCategory(_value){
-            allSafarnamehCategoryList.map(item => item.show = item.name.search(_value) > -1 ? 1 : 0);
-            createCategoryResult(allSafarnamehCategoryList);
+        function searchInNewsCategory(_value){
+            allNewsCategoryList.map(item => item.show = item.name.search(_value) > -1 ? 1 : 0);
+            createCategoryResult(allNewsCategoryList);
         }
-        function selectedThisSafarnamehCategory(_index){
-            allSafarnamehCategoryList.map(item => item.show = 1);
-            if(allSafarnamehCategoryList[_index].selected == 1)
+        function selectedThisNewsCategory(_index){
+            allNewsCategoryList.map(item => item.show = 1);
+            if(allNewsCategoryList[_index].selected == 1)
                 return;
 
-            allSafarnamehCategoryList[_index].selected = 1;
-            selectedSafarnamehCategory.push(allSafarnamehCategoryList[_index]);
-            selectedSafarnamehCategory[selectedSafarnamehCategory.length - 1].thisIsMain = 0;
-            selectedSafarnamehCategory[selectedSafarnamehCategory.length - 1].indexList = _index;
+            allNewsCategoryList[_index].selected = 1;
+            selectedNewsCategory.push(allNewsCategoryList[_index]);
+            selectedNewsCategory[selectedNewsCategory.length - 1].thisIsMain = 0;
+            selectedNewsCategory[selectedNewsCategory.length - 1].indexList = _index;
 
-            if(selectedSafarnamehCategory.length == 1)
-                selectedSafarnamehCategory[0].thisIsMain = 1;
+            if(selectedNewsCategory.length == 1)
+                selectedNewsCategory[0].thisIsMain = 1;
 
             createSelectedCategoryRow();
-            createCategoryResult(allSafarnamehCategoryList);
+            createCategoryResult(allNewsCategoryList);
         }
         function createSelectedCategoryRow(){
             var text = '';
-            selectedSafarnamehCategory.map((item, index) => {
+            selectedNewsCategory.map((item, index) => {
                 text += `<div class="scRow">
                             <div class="name">${item.name}</div>
                             <div class="isMain ${item.thisIsMain == 1 ? 'selected' : ''}" onclick="chooseThisForMainCat(${index})" >اصلی</div>
@@ -736,38 +697,36 @@
             $('#selectedCategory').html(text);
         }
         function chooseThisForMainCat(_index){
-            selectedSafarnamehCategory.map(item => item.thisIsMain = 0);
-            selectedSafarnamehCategory[_index].thisIsMain = 1;
+            selectedNewsCategory.map(item => item.thisIsMain = 0);
+            selectedNewsCategory[_index].thisIsMain = 1;
             createSelectedCategoryRow();
         }
         function deleteFromSelectedCategory(_index){
-            allSafarnamehCategoryList[selectedSafarnamehCategory[_index].indexList].selected = 0;
-            selectedSafarnamehCategory.splice(_index, 1);
-            allSafarnamehCategoryList.map(item => item.show = 1);
+            allNewsCategoryList[selectedNewsCategory[_index].indexList].selected = 0;
+            selectedNewsCategory.splice(_index, 1);
+            allNewsCategoryList.map(item => item.show = 1);
             createSelectedCategoryRow();
-            createCategoryResult(allSafarnamehCategoryList);
+            createCategoryResult(allNewsCategoryList);
         }
-        createCategoryResult(allSafarnamehCategoryList);
+        createCategoryResult(allNewsCategoryList);
 
         selectedCat.map(item => {
-            allSafarnamehCategoryList.map((ascl, index) => {
+            allNewsCategoryList.map((ascl, index) => {
                 if(item.id == ascl.id) {
-                    selectedThisSafarnamehCategory(index);
+                    selectedThisNewsCategory(index);
                     if(item.isMain == 1)
-                        chooseThisForMainCat(selectedSafarnamehCategory.length-1);
+                        chooseThisForMainCat(selectedNewsCategory.length-1);
                 }
             });
         });
-    </script>
 
-    <script>
         $('#newTag').on('keyup', e => e.keyCode == 13 ? selectTag() : searchTag(e.target.value));
         function searchTag(value){
             if(value.trim().length > 1) {
                 $('#searchTagResultDiv').empty();
                 $.ajax({
-                    type: 'get',
-                    url: '{{route("safarnameh.tag.search")}}?text=' + value,
+                    type: 'GET',
+                    url: '{{route("news.tagSearch")}}?text=' + value,
                     success: function (response) {
                         if (response.status == 'ok') {
                             var text = '';
@@ -813,51 +772,5 @@
 
             $(element).parent().remove();
         }
-
-        function searchPlaces(_value){
-            if(_value.trim().length > 1){
-                if(searchPlaceAjax != null)
-                    searchPlaceAjax.abort();
-
-                $('#searchPlaceResult').empty();
-
-                searchPlaceAjax = $.ajax({
-                    type: 'get',
-                    url: '{{route("search.placesAndCity")}}?text='+_value,
-                    success: response => {
-                        if(response.status == 'ok')
-                            createPlaceSearchResult(response.result);
-                    },
-                })
-            }
-            else
-                $('#searchPlaceResult').empty();
-        }
-        function createPlaceSearchResult(_result){
-            var text = '';
-            _result.map(item => text += `<div class="row searchTagResult" onclick="choosePlace(${item.id}, '${item.name}', '${item.kind}')">${item.name}</div>`);
-            $('#searchPlaceResult').html(text);
-        }
-        function choosePlace(_id, _name, _kind){
-            var index = selectedPlaces.push({
-                id: _id,
-                name: _name,
-                kind: _kind
-            });
-            var text = `<div class="scRow">
-                                                    <div class="name tagNameInputs">${_name}</div>
-                                                    <span class="closeWithCircleIcon" onclick="deletePlace(${index}, this)"></span>
-                                                </div>`;
-
-            $('#newPlace').val('');
-            $('#searchPlaceResult').empty();
-            $('#selectedPlaces').append(text);
-        }
-        function deletePlace(_index, _element){
-            $(_element).parent().remove();
-            selectedPlaces.splice(_index, 1);
-        }
     </script>
-
-
 @stop

@@ -37,9 +37,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
+        $this->mapNewsRoutes();
 
-        //
+        $this->mapWebRoutes();
     }
 
     /**
@@ -54,6 +54,12 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+    }
+
+    protected function mapNewsRoutes(){
+        Route::middleware(['web', 'aclCheck:news'])
+            ->namespace($this->namespace.'\News')
+            ->group(base_path('routes\newsRoutes.php'));
     }
 
     /**

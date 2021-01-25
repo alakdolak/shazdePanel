@@ -5,6 +5,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="{{URL::asset('js/DataTable/jquery.dataTables.js')}}" defer></script>
+
 @stop
 
 @section('content')
@@ -14,11 +15,10 @@
         <div class="sparkline8-list shadow-reset mg-tb-30">
             <div class="sparkline8-hd">
                 <div class="main-sparkline8-hd" style=" width: 100%; display: flex; justify-content: space-between;">
-                    <h1>سفرنامه ها</h1>
+                    <h1>اخبار</h1>
                     <div>
                         <button onclick="$('#filtersDiv').slideToggle()" class="btn btn-success">فیلترها</button>
-                        <button onclick="document.location.href = '{{route('safarnameh.new')}}'" class="btn btn-primary">افزودن سفرنامه جدید</button>
-                        {{--<button class="btn btn-primary">افزودن دسته ای سفرنامه</button>--}}
+                        <button onclick="document.location.href = '{{route('news.new')}}'" class="btn btn-primary">افزودن خبر جدید</button>
                     </div>
                 </div>
             </div>
@@ -39,14 +39,14 @@
 
                 </div>
 
-                <center class="col-xs-12" style="direction: rtl;">
+                <div class="col-xs-12" style="direction: rtl;">
 
                     <div class="row SafarnamehTabs">
                         <div class="tabs active" onclick="showThisTabs(this, 'new')">تازه ها</div>
                         <div class="tabs" onclick="showThisTabs(this, 'old')">تایید شده ها</div>
                     </div>
-                    @if(count($safarnameh) == 0)
-                        <p>سفرنامهی موجود نیست</p>
+                    @if(count($news) == 0)
+                        <p>خبری موجود نیست</p>
                     @else
                         <div id="confirmedTable" style="display: none">
                             <table id="mainTable" class="table">
@@ -56,14 +56,12 @@
                                     <th style="text-align: right">نویسنده </th>
                                     <th style="text-align: right; min-width: 150px">وضعیت </th>
                                     <th style="text-align: right">اخرین ویرایش </th>
-                                    <th style="text-align: right"> سفرنامه داغ </th>
-                                    <th style="text-align: right"> سفرنامه بنر</th>
                                     <th style="min-width: 100px"></th>
                                 </tr>
                                 </thead>
                                 <tbody id="tBody">
-                                @foreach($safarnameh as $item)
-                                    <tr id="safarnameh_{{$item->id}}">
+                                @foreach($news as $item)
+                                    <tr id="news_{{$item->id}}" style="text-align: right">
                                         <td>{{$item->title}}</td>
                                         <td>{{$item->user->username}}</td>
                                         <td style="color: {{$item->confirm == 1 ? 'green' : 'red'}}">
@@ -71,25 +69,13 @@
                                             {{isset($item->futureDate) ? $item->futureDate : ''}}
                                         </td>
                                         <td>{{$item->lastUpdate}}</td>
-                                        <td style="width: 100px">
-                                            <label class="checkBoxTd">
-                                                <input type="checkbox" onchange="changeFav({{$item->id}}, this)" {{($item->favorited) ? 'checked' : ''}}>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <label class="checkBoxTd">
-                                                <input type="checkbox" onchange="changeBanner({{$item->id}}, this)" {{($item->bannered) ? 'checked' : ''}}>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </td>
                                         <td style="display: flex">
-                                            <a href='{{route('safarnameh.edit', ['id' => $item->id])}}'>
+                                            <a href='{{route('news.edit', ['id' => $item->id])}}'>
                                                 <button class="btn btn-primary">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
                                             </a>
-                                            <button onclick="deleteSafarnameh('{{$item->id}}')" class="btn btn-danger">
+                                            <button onclick="deleteNews('{{$item->id}}')" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
@@ -98,20 +84,10 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th style="text-align: right">
-                                        عنوان
-                                    </th>
-                                    <th style="text-align: right">
-                                        نویسنده
-                                    </th>
-                                    <th style="text-align: right; min-width: 150px">
-                                        وضعیت
-                                    </th>
-                                    <th style="text-align: right">
-                                        اخرین ویرایش
-                                    </th>
-                                    <th></th>
-                                    <th></th>
+                                    <th style="text-align: right">عنوان</th>
+                                    <th style="text-align: right">نویسنده</th>
+                                    <th style="text-align: right; min-width: 150px">وضعیت</th>
+                                    <th style="text-align: right">اخرین ویرایش</th>
                                     <th></th>
                                 </tr>
                                 </tfoot>
@@ -126,14 +102,12 @@
                                     <th style="text-align: right">نویسنده </th>
                                     <th style="text-align: right; min-width: 150px">وضعیت </th>
                                     <th style="text-align: right">اخرین ویرایش </th>
-                                    <th style="text-align: right"> سفرنامه داغ </th>
-                                    <th style="text-align: right"> سفرنامه بنر</th>
                                     <th style="min-width: 100px"></th>
                                 </tr>
                                 </thead>
                                 <tbody id="tBody">
-                                @foreach($noneConfirmSafar as $item)
-                                    <tr id="safarnameh_{{$item->id}}">
+                                @foreach($noneConfirmNews as $item)
+                                    <tr id="news_{{$item->id}}">
                                         <td>{{$item->title}}</td>
                                         <td>{{$item->user->username}}</td>
                                         <td style="color: {{$item->confirm == 1 ? 'green' : 'red'}}">
@@ -141,25 +115,13 @@
                                             {{isset($item->futureDate) ? $item->futureDate : ''}}
                                         </td>
                                         <td>{{$item->lastUpdate}}</td>
-                                        <td style="width: 100px">
-                                            <label class="checkBoxTd">
-                                                <input type="checkbox" onchange="changeFav({{$item->id}}, this)" {{($item->favorited) ? 'checked' : ''}}>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <label class="checkBoxTd">
-                                                <input type="checkbox" onchange="changeBanner({{$item->id}}, this)" {{($item->bannered) ? 'checked' : ''}}>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </td>
                                         <td style="display: flex">
-                                            <a href='{{route('safarnameh.edit', ['id' => $item->id])}}'>
+                                            <a href='{{route('news.edit', ['id' => $item->id])}}'>
                                                 <button class="btn btn-primary">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
                                             </a>
-                                            <button onclick="deleteSafarnameh('{{$item->id}}')" class="btn btn-danger">
+                                            <button onclick="deleteNews('{{$item->id}}')" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
@@ -167,29 +129,19 @@
                                 @endforeach
                                 </tbody>
                                 <tfoot>
-                                <tr>
-                                    <th style="text-align: right">
-                                        عنوان
-                                    </th>
-                                    <th style="text-align: right">
-                                        نویسنده
-                                    </th>
-                                    <th style="text-align: right; min-width: 150px">
-                                        وضعیت
-                                    </th>
-                                    <th style="text-align: right">
-                                        اخرین ویرایش
-                                    </th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
+                                    <tr>
+                                        <th style="text-align: right">عنوان</th>
+                                        <th style="text-align: right">نویسنده</th>
+                                        <th style="text-align: right; min-width: 150px">وضعیت</th>
+                                        <th style="text-align: right">اخرین ویرایش</th>
+                                        <th></th>
+                                    </tr>
                                 </tfoot>
                             </table>
                         </div>
                     @endif
 
-                </center>
+                </div>
 
             </div>
         </div>
@@ -197,7 +149,7 @@
     </div>
 
     <script>
-        var safarnameh = {!! $safarnameh !!}
+        var news = {!! $news !!}
 
         function showThisTabs(_element, _kind){
             $(_element).parent().find('.active').removeClass('active');
@@ -211,110 +163,19 @@
                 $('#confirmedTable').show();
                 $('#noneConfirmedTable').hide();
             }
-        }
+        };
 
-        function deleteSafarnameh(safarnamehId) {
+        function deleteNews(_newsId) {
             $.ajax({
-                type: 'post',
-                url: '{{route('safarnameh.delete')}}',
-                data: { 'safarnamehId': safarnamehId },
-                success: function (res) {
-                    if(res == "ok")
-                        $("#safarnameh_" + safarnamehId).remove();
+                type: 'DELETE',
+                url: '{{route('news.delete')}}',
+                data: { 'newsId': _newsId },
+                success: res => {
+                    if(res.status == "ok")
+                        $("#news_" + _newsId).remove();
                 }
             });
         };
-
-        function deleteFromFavoriteSafarnameh(safarnamehId) {
-
-            $.ajax({
-                type: 'post',
-                url: '{{route('deleteFromFavoriteSafarnameh')}}',
-                data: {
-                    'safarnamehId': safarnamehId
-                },
-                success: function (res) {
-                    if(res == "ok")
-                        alert('از سفرنامه ‌های منتخب حذف شد')
-                }
-            });
-        }
-
-        function deleteFromBannerSafarnameh(safarnamehId) {
-
-            $.ajax({
-                type: 'post',
-                url: '{{route('deleteFromBannerSafarnameh')}}',
-                data: {
-                    'safarnamehId': safarnamehId
-                },
-                success: function (res) {
-                    if(res == "ok")
-                        alert('از سفرنامه ‌های بنر حذف شد')
-                }
-            });
-        }
-
-        function addToBannerSafarnameh(safarnamehId) {
-
-            $.ajax({
-                type: 'post',
-                url: '{{route('addToBannerSafarnameh')}}',
-                data: {
-                    'safarnamehId': safarnamehId
-                },
-                success: function (res) {
-                    if(res == "ok")
-                        alert('به سفرنامه ‌های بنر افزوده شد')
-                }
-            });
-
-        }
-
-        function addToFavoriteSafarnameh(safarnamehId) {
-
-            $.ajax({
-                type: 'post',
-                url: '{{route('addToFavoriteSafarnameh')}}',
-                data: {
-                    'safarnamehId': safarnamehId
-                },
-                success: function (res) {
-                    if(res == "ok")
-                        alert('به سفرنامه ‌های منتخب افزوده شد')
-                }
-            });
-
-        }
-
-        function changeFav(id, element){
-            if($(element).prop('checked'))
-                addToFavoriteSafarnameh(id);
-            else
-                deleteFromFavoriteSafarnameh(id);
-        }
-
-        function changeBanner(id, element){
-            if($(element).prop('checked'))
-                addToBannerSafarnameh(id);
-            else
-                deleteFromBannerSafarnameh(id);
-        }
-
-        function deleteGardesh(id, element){
-            $.ajax({
-                type: 'post',
-                url: '{{route('deleteGardesh')}}',
-                data:{
-                    _token: '{{csrf_token()}}',
-                    id: id
-                },
-                success: function (response){
-                    if(response == 'ok')
-                        $(element).parent().parent().remove();
-                }
-            })
-        }
 
         $(document).ready(function() {
             tables = ['noneConfirmMainTable', 'mainTable'];
@@ -327,10 +188,9 @@
                             $('#titleSearch').html( '<label for="titleSearchInput">عنوان</label><input id="titleSearchInput" type="text" style="color: black; width: 150px"/>' );
                             $('#titleSearchInput').on( 'keyup change', function () {
                                 if ( table.column(i).search() !== this.value ) {
-                                    table
-                                        .column(i)
-                                        .search( this.value )
-                                        .draw();
+                                    table.column(i)
+                                         .search( this.value )
+                                         .draw();
                                 }
                             } );
                             break;
@@ -338,10 +198,9 @@
                             $('#creatorSearch').html( '<label for="creatorSearchInput">نویسنده</label><input id="creatorSearchInput" type="text" style="color: black; width: 150px"/>' );
                             $('#creatorSearchInput').on( 'keyup change', function () {
                                 if ( table.column(i).search() !== this.value ) {
-                                    table
-                                        .column(i)
-                                        .search( this.value )
-                                        .draw();
+                                    table.column(i)
+                                         .search( this.value )
+                                         .draw();
                                 }
                             } );
                             break;

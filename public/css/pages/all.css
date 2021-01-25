@@ -1,0 +1,310 @@
+
+:root {
+    --koochita-blue: #0076a3;
+    --koochita-light-green: #4dc7bc;
+    --koochita-dark-green: #053a3e;
+    --koochita-green: #0d6650;
+    --koochita-red: #720d19;
+    --koochita-yellow: #fcc156;
+}
+
+
+/*scrollbar*/
+::-webkit-scrollbar {
+    width: 7px !important;
+    height: 7px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey !important;
+    border-radius: 10px !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: gray !important;
+    border-radius: 10px !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: darkgray !important;
+}
+
+.row{
+    width: 100%;
+    margin: 0px;
+}
+.loaderDiv{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000c7;
+}
+.loader {
+}
+
+.dropdown-item {
+    text-align: right;
+}
+
+.main-sparkline8-hd {
+    direction: rtl;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.calendar > table {
+    width: 100%;
+}
+
+input{
+    border-color: gray !important;
+    border-radius: 10px !important;
+    border: solid;
+    outline: none;
+    padding: 3px 10px;
+}
+select{
+    border-color: gray !important;
+    border-radius: 10px !important;
+    border: solid;
+}
+.left-menu-dropdown{
+    width: 100% !important;
+}
+.form-control{
+    border-color: gray !important;
+    border-radius: 5px;
+}
+
+.addIcon{
+    font-size: 20px;
+    color: white;
+    background: green;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 0 20px;
+    cursor: pointer;
+}
+.allPageDiv{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items:center;
+    background: #4dc7bc;
+    background: #fcc156;
+    background: #15b3ac;
+    direction: rtl;
+}
+.sideNavs{
+    width: 235px;
+    height: 100%;
+    padding: 10px;
+}
+.mainContentDiv{
+    width: 95%;
+    height: 98vh;
+    margin-left: 15px;
+    background: #f9f9f9;
+    border-radius: 30px;
+    padding: 10px 0px;
+    overflow-y: auto;
+}
+.modal.fade, .modal.in{
+    background-color: rgba(0, 0, 0, 0.64);
+}
+.modal-backdrop.fade.in{
+    display: none;
+}
+.modal-backdrop.in{
+    display: none;
+}
+
+.mobileHeader{
+    display: none;
+}
+.mobileHeader .mobileMenuButton{
+    position: absolute;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+.mobileHeader img{
+    height: 35px;
+}
+.shadow-reset{
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.mainBody{
+    margin: 0px 20px;
+}
+.mainBody .header{
+    font-size: 22px;
+    font-weight: normal;
+    display: flex;
+    border-bottom: solid 1px #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    align-items: center
+}
+
+.selectTab{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: solid 1px gray;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+.selectTab .tab{
+    width: 30%;
+    text-align: center;
+    padding: 5px 0px;
+    cursor: pointer;
+}
+.selectTab .tab.selected{
+    background: #15b3ac;
+    color: white;
+    border-radius: 30px;
+}
+
+
+th{
+    text-align: right;
+    min-width: 100px;
+}
+.col-xs-6 {
+    float: right;
+}
+.checkBoxTd {
+    position: relative;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.checkBoxTd input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkmark {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+.checkBoxTd:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+.checkBoxTd input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkBoxTd input:checked ~ .checkmark:after {
+    display: block;
+}
+.checkBoxTd .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.SafarnamehTabs{
+    display: flex;
+    justify-content: center;
+    border-bottom: solid 2px #15b3ac;
+    margin-bottom: 15px;
+}
+.SafarnamehTabs .tabs{
+    ont-size: 23px;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+.SafarnamehTabs .tabs.active{
+    color: white;
+    background: #15b3ac;
+    border-radius: 10px 10px 0px 0px;
+}
+.dataTables_scrollHeadInner{
+    width: 100% !important;
+}
+.dataTables_scrollFootInner{
+    width: 100% !important;
+}
+
+@media (max-width: 991px) {
+    .allPageDiv{
+        flex-direction: column;
+    }
+    .mobileHeader{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0px;
+
+    }
+    .sideNavs{
+        position: fixed;
+        right: 0px;
+        z-index: 99;
+        background-color: #15b3ac;
+        margin-right: -240px;
+        transition: .4s;
+        border-radius: 25px 0px 0px 25px;
+        box-shadow: 0 0 17px 2px #00504f;
+    }
+    .sideNavs.activeMenu{
+        margin-right: 0px;
+    }
+    .mainContentDiv{
+        width: 98%;
+        height: calc(100vh - 65px);
+        margin: 0px auto;
+        overflow-x: hidden;
+    }
+}

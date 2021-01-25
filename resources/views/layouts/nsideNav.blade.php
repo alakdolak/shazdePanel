@@ -183,6 +183,19 @@
                 </div>
             </div>
 
+            @can('userAclGate', 'news')
+                <div class="navs" onclick="openSubMenu(this)">
+                    <div class="header">
+                        <i class="fa big-icon fa-home icon"></i>
+                        <span class="text">اخبار</span>
+                    </div>
+                    <div class="subMenu">
+                        <a href="{{route('news.list')}}" class="subNavs">لیست اخبار</a>
+                        <a href="{{route('news.advertisement')}}" class="subNavs">تبلیغ بخش اخبار</a>
+                    </div>
+                </div>
+            @endcan
+
             @can('userAclGate', 'localShop')
                 <a class="navs" href="{{route('localShop.list')}}">
                     <div class="header">

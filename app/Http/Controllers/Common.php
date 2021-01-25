@@ -458,7 +458,7 @@ function getCurrentYear() {
     return $subStr[0];
 }
 
-function convertDateToString($date) {
+function convertDateToString($date, $between = '') {
     $subStrD = explode('/', $date);
     if(count($subStrD) == 1)
         $subStrD = explode(',', $date);
@@ -469,7 +469,7 @@ function convertDateToString($date) {
     if(strlen($subStrD[2]) == 1)
         $subStrD[2] = "0" . $subStrD[2];
 
-    return $subStrD[0] . $subStrD[1] . $subStrD[2];
+    return $subStrD[0] .$between. $subStrD[1] .$between. $subStrD[2];
 }
 
 function convertTimeToString($time) {
@@ -623,6 +623,7 @@ function resizeImage($pic, $size){
             $width = $img->width();
             $height = $img->height();
             $ration = $width/$height;
+
 
             if($item['height'] != null && $item['width'] != null){
                 $nWidth = $ration * $item['height'];
