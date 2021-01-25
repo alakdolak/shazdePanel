@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add news">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AdvertisementController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/Advertisement/Advertisement.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/Advertisement/AdvertisementSizes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/Advertisement/advertisementPage.blade.php" afterDir="false" />
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="Add advertisement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/News/NewsAdvertisementController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/News/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/News/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/News/newsAdvertisementPage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Advertisement/advertisementNewPage.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/nsideNav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/nsideNav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/News/newsList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/News/newsList.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/newsRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/newsRoutes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -617,14 +609,8 @@
       <workItem from="1610448346419" duration="97000" />
       <workItem from="1611472050179" duration="7366000" />
       <workItem from="1611499139096" duration="1775000" />
-      <workItem from="1611561830786" duration="13267000" />
-    </task>
-    <task id="LOCAL-00059" summary="video category banner">
-      <created>1590823794685</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1590823794685</updated>
+      <workItem from="1611561830786" duration="13432000" />
+      <workItem from="1611590505016" duration="872000" />
     </task>
     <task id="LOCAL-00060" summary="vod comments">
       <created>1590842629765</created>
@@ -962,7 +948,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611563741875</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Add advertisement">
+      <created>1611579205372</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1611579205373</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -993,7 +986,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="submit userAddPlace" />
     <MESSAGE value="debug addPlace by user" />
     <MESSAGE value="backup" />
     <MESSAGE value="add fullrate and review count" />
@@ -1018,18 +1010,19 @@
     <MESSAGE value="debug" />
     <MESSAGE value="add safarnameh and useraddplace notificatoin to home" />
     <MESSAGE value="add news" />
-    <option name="LAST_COMMIT_MESSAGE" value="add news" />
+    <MESSAGE value="Add advertisement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add advertisement" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611567920900">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611567920900" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1611578986464">
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1611591444228">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611578986464" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611591444228" />
     <state x="3059" y="0" key="DiffContextDialog" timestamp="1608552194917">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1051,32 +1044,32 @@
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="2920" y="6" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604915331998" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1611563750438">
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1611579208666">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088288443" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611563750438" />
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611579208666" />
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606651327963">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606651327963" />
-    <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1611575095855">
+    <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1611590870004">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3191" y="98" width="811" height="630" key="find.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043501855" />
     <state x="456" y="117" width="813" height="755" key="find.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550791544" />
-    <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611575095855" />
+    <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611590870004" />
     <state x="3352" y="240" width="945" height="678" key="run.anything.popup" timestamp="1611575809630">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605081690378" />
     <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611575809630" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1611575034632">
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1611590791911">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043595406" />
     <state x="429" y="92" width="674" height="569" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550948318" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611575034632" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611590791911" />
     <state x="602" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606137128166" />
   </component>
 </project>

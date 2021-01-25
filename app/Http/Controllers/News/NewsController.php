@@ -32,7 +32,7 @@ class NewsController extends Controller
     }
 
     public function newsList(){
-        $selectCols = ['id', 'title', 'userId', 'release', 'updated_at', 'confirm', 'date', 'time'];
+        $selectCols = ['id', 'title', 'userId', 'release', 'updated_at', 'topNews', 'confirm', 'date', 'time'];
 
         $news = News::where('confirm', 1)->select($selectCols)->orderBy('created_at', 'desc')->get();
         $noneConfirmNews = News::where('confirm', 0)->select($selectCols)->orderBy('updated_at', 'desc')->get();
@@ -362,4 +362,18 @@ class NewsController extends Controller
             return response()->json(["status" => "nok1"]);
     }
 
+    public function addToTopNews(Request $request)
+    {
+        $news = News::find($request->id);
+        $news->topNews = $news->topNews == 1 ? 0 : 1;
+        $news->save();
+
+        return response()->json(['status' => 'ok']);
+    }
+
+    public function removeAllTopNews()
+    {
+        News::where('topNews', 1)->update(['topNews' => 0]);
+        return response()->json(['status' => 'ok']);
+    }
 }

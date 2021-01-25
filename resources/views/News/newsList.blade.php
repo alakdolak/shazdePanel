@@ -17,6 +17,7 @@
                 <div class="main-sparkline8-hd" style=" width: 100%; display: flex; justify-content: space-between;">
                     <h1>اخبار</h1>
                     <div>
+                        <button onclick="deleteAllTops()" class="btn btn-danger">پاک کردن تمامی برگزیده ها</button>
                         <button onclick="$('#filtersDiv').slideToggle()" class="btn btn-success">فیلترها</button>
                         <button onclick="document.location.href = '{{route('news.new')}}'" class="btn btn-primary">افزودن خبر جدید</button>
                     </div>
@@ -56,6 +57,7 @@
                                     <th style="text-align: right">نویسنده </th>
                                     <th style="text-align: right; min-width: 150px">وضعیت </th>
                                     <th style="text-align: right">اخرین ویرایش </th>
+                                    <th style="text-align: right">برگزیده</th>
                                     <th style="min-width: 100px"></th>
                                 </tr>
                                 </thead>
@@ -69,6 +71,12 @@
                                             {{isset($item->futureDate) ? $item->futureDate : ''}}
                                         </td>
                                         <td>{{$item->lastUpdate}}</td>
+                                        <td>
+                                            <label class="checkBoxTd">
+                                                <input type="checkbox" onchange="changeInTop({{$item->id}}, this)" {{$item->topNews == 1 ? 'checked' : ''}}>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </td>
                                         <td style="display: flex">
                                             <a href='{{route('news.edit', ['id' => $item->id])}}'>
                                                 <button class="btn btn-primary">
@@ -148,6 +156,26 @@
 
     </div>
 
+        <!-- The Modal -->
+        <div class="modal" id="deleteAllTops">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">حذف تمامی برگزیده ها</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        آیا از پاک کردن تمامی برگزیده ها اطمینان دارید؟
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondery" data-dismiss="modal">بستن</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="doDeleteAllTops()">بله پاک شوند</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     <script>
         var news = {!! $news !!}
 
@@ -164,6 +192,56 @@
                 $('#noneConfirmedTable').hide();
             }
         };
+
+        function changeInTop(_id, _element){
+            openLoading();
+            $.ajax({
+                type: 'POST',
+                url: '{{route("news.addToTopNews")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    id: _id
+                },
+                complete: closeLoading,
+                success: response =>{
+                    if(response.status == 'ok'){
+                        alert('تغییر با موفقیت اعمال شد');
+                    }
+                    else
+                        alert('خطا');
+                },
+                error: err =>{
+                    alert('خطا');
+                }
+            })
+        }
+
+        function deleteAllTops(){
+            $('#deleteAllTops').modal('show');
+        }
+
+        function doDeleteAllTops(){
+            openLoading();
+            $.ajax({
+                type: 'POST',
+                url: '{{route("news.removeAllTopNews")}}',
+                data: {
+                    _token: '{{csrf_token()}}'
+                },
+                complete: closeLoading,
+                success: response =>{
+                    if(response.status == 'ok'){
+                        location.reload();
+                        alert('تغییر با موفقیت اعمال شد');
+                    }
+                    else
+                        alert('خطا');
+                },
+                error: err =>{
+                    alert('خطا');
+                }
+            })
+        }
 
         function deleteNews(_newsId) {
             $.ajax({
@@ -254,5 +332,6 @@
                 } );
             }
         });
+
     </script>
 @stop
