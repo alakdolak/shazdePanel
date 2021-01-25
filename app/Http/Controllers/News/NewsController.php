@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\News;
 
-use App\models\news\News;
-use App\models\news\NewsCategory;
-use App\models\news\NewsCategoryRelations;
+use App\models\Advertisement\Advertisement;
+use App\models\News\News;
+use App\models\News\NewsCategory;
+use App\models\News\NewsCategoryRelations;
 use App\models\News\NewsLimboPics;
 use App\models\News\NewsTags;
 use App\models\News\NewsTagsRelation;
@@ -217,7 +218,7 @@ class NewsController extends Controller
         if($news == null){
             $news = new News();
             $news->userId = \auth()->user()->id;
-            $news->date = verta()->now()->format('Ymd');
+            $news->date = verta()->now()->format('Y/m/d');
         }
 
         $news->title = $request->title;
@@ -226,11 +227,11 @@ class NewsController extends Controller
             $time = str_replace(':', '', $request->time);
             $news->time = $time;
             $date = convertNumber('en', $request->date);
-            $date = convertDateToString($date);
+            $date = convertDateToString($date,'/');
             $news->date = $date;
         }
         else if($request->releaseType == 'release' && $news->release != 'release')
-            $news->date = verta()->now()->format('Ymd');
+            $news->date = verta()->now()->format('Y/m/d');
 
         if($request->releaseType != 'future')
             $news->time = strftime('%H:%M');
@@ -360,4 +361,5 @@ class NewsController extends Controller
         else
             return response()->json(["status" => "nok1"]);
     }
+
 }

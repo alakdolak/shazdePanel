@@ -27,6 +27,17 @@ Route::post('doLogin', ['as' => 'doLogin', 'uses' => 'HomeController@doLogin']);
 
 Route::get('autoBackup/{id}','BackupController@autoBackup');
 
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/advertise/page/{kind}', 'AdvertisementController@advertisePage')->name('advertisement');
+    Route::get('/advertise/new/page/{kind?}', 'AdvertisementController@advertiseNewPage')->name('advertisement.new');
+    Route::get('/advertise/edit/{id}', 'AdvertisementController@advertiseEditPage')->name('advertisement.edit');
+
+    Route::post('/advertise/store', 'AdvertisementController@advertiseStore')->name('advertisement.store');
+    Route::delete('/advertise/delete', 'AdvertisementController@advertiseDelete')->name('advertisement.delete');
+
+});
+
 Route::group(['middleware' => ['auth', 'aclCheck:festival']], function() {
 
     Route::get('festivals', 'FestivalController@festivalList')->name('festivals');

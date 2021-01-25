@@ -191,7 +191,7 @@
                     </div>
                     <div class="subMenu">
                         <a href="{{route('news.list')}}" class="subNavs">لیست اخبار</a>
-                        <a href="{{route('news.advertisement')}}" class="subNavs">تبلیغ بخش اخبار</a>
+                        <a href="{{route('advertisement', ['kind' => 'news'])}}" class="subNavs">تبلیغ بخش اخبار</a>
                     </div>
                 </div>
             @endcan

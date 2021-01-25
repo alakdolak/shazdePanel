@@ -59,7 +59,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapNewsRoutes(){
         Route::middleware(['web', 'aclCheck:news'])
             ->namespace($this->namespace.'\News')
-            ->group(base_path('routes\newsRoutes.php'));
+            ->group(base_path('routes/newsRoutes.php'));
     }
 
     /**
