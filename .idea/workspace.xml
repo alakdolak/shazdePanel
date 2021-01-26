@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add topNews button">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add video to news">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/News/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/News/NewsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/News/newNews.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/News/newNews.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/restaurant.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newContent/restaurant.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/newsRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/newsRoutes.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -614,14 +611,8 @@
       <workItem from="1611561830786" duration="13432000" />
       <workItem from="1611590505016" duration="1047000" />
       <workItem from="1611646810260" duration="104000" />
-      <workItem from="1611651165304" duration="5581000" />
-    </task>
-    <task id="LOCAL-00061" summary="vod live guests">
-      <created>1590849046241</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1590849046241</updated>
+      <workItem from="1611651165304" duration="5780000" />
+      <workItem from="1611662966312" duration="1937000" />
     </task>
     <task id="LOCAL-00062" summary="vod live guests edit and delete">
       <created>1590907471674</created>
@@ -959,7 +950,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611591506519</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="add video to news">
+      <created>1611661424076</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1611661424078</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -990,7 +988,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="backup" />
     <MESSAGE value="add fullrate and review count" />
     <MESSAGE value="show video in accept review" />
     <MESSAGE value="set alert to reviews" />
@@ -1015,18 +1012,19 @@
     <MESSAGE value="add news" />
     <MESSAGE value="Add advertisement" />
     <MESSAGE value="add topNews button" />
-    <option name="LAST_COMMIT_MESSAGE" value="add topNews button" />
+    <MESSAGE value="add video to news" />
+    <option name="LAST_COMMIT_MESSAGE" value="add video to news" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611567920900">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611567920900" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1611591504198">
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1611664735188">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611591504198" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611664735188" />
     <state x="3059" y="0" key="DiffContextDialog" timestamp="1608552194917">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1048,11 +1046,11 @@
       <screen x="2736" y="0" width="1366" height="728" />
     </state>
     <state x="2920" y="6" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604915331998" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1611579208666">
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1611661538817">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088288443" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611579208666" />
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611661538817" />
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606651327963">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1068,12 +1066,12 @@
     </state>
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605081690378" />
     <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611654776492" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1611660704199">
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1611663255823">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043595406" />
     <state x="429" y="92" width="674" height="569" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550948318" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611660704199" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611663255823" />
     <state x="602" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606137128166" />
   </component>
 </project>

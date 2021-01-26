@@ -320,9 +320,11 @@
         var selectedNewsCategory = [];
         var newsCategory = {!! $category !!};
 
+
         $('.observer-example').persianDatepicker({
             minDate: new Date().getTime(),
             format: 'YYYY/MM/DD',
+            initialValueType: 'persian',
             autoClose: true,
         });
 
@@ -409,7 +411,7 @@
             var id = document.getElementById('newsId').value;
             var title = document.getElementById('title').value;
             var release = document.getElementById('releaseType').value;
-            var date = document.getElementById('date').value;
+            var date = $('#date').val();
             var time = document.getElementById('time').value;
             var inputMainPic = document.getElementById('imgInput');
             var keyword = document.getElementById('keyword').value;
@@ -451,7 +453,7 @@
                 alert('تاریخ و ساعت انتشار را مشخص کنید.');
                 return;
             }
-            else if(release != 'release'){
+            else if(release != 'release' && release != 'future'){
                 var d = new Date();
                 date = d.getJalaliFullYear() + '/' + (d.getJalaliMonth() + 1) + '/' + d.getJalaliDate();
             }

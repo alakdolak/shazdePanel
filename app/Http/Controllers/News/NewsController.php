@@ -11,6 +11,7 @@ use App\models\News\NewsTags;
 use App\models\News\NewsTagsRelation;
 use App\models\User;
 use Carbon\Carbon;
+use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,7 @@ class NewsController extends Controller
     }
 
     public function newsList(){
-        $selectCols = ['id', 'title', 'userId', 'release', 'updated_at', 'topNews', 'confirm', 'date', 'time'];
+        $selectCols = ['id', 'title', 'userId', 'release', 'updated_at', 'topNews', 'confirm', 'dateAndTime'];
 
         $news = News::where('confirm', 1)->select($selectCols)->orderBy('created_at', 'desc')->get();
         $noneConfirmNews = News::where('confirm', 0)->select($selectCols)->orderBy('updated_at', 'desc')->get();
@@ -63,7 +64,7 @@ class NewsController extends Controller
                             break;
                         case 'future':
                             $item->status = 'در آینده منتشر می شود';
-                            $item->futureDate = substr($item->date, 0, 4) . '/' . substr($item->date, 4, 2) . '/' . substr($item->date, 6, 1) . ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
+                            $item->futureDate = $item->dateAndTime;
                             break;
                     }
             }
@@ -111,6 +112,11 @@ class NewsController extends Controller
         $category = NewsCategory::where('parentId', 0)->get();
         foreach ($category as $item)
             $item->sub = NewsCategory::where('parentId', $item->id)->get();
+
+        $dateAndTime = explode(' ', $news->dateAndTime);
+        $news->time = $dateAndTime[1];
+        $news->date = str_replace('/', '-', $dateAndTime[0]);
+        $news->date = convertNumber('fa', $news->date);
 
         return view('News.newNews', compact(['news', 'category', 'code']));
     }
@@ -214,36 +220,33 @@ class NewsController extends Controller
         if($news == null){
             $news = new News();
             $news->userId = \auth()->user()->id;
-            $news->date = verta()->now()->format('Y/m/d');
+            $news->dateAndTime = verta()->now()->format('Y/m/d H:i');
         }
 
-        $news->title = $request->title;
-        $news->text = ' ';
         if($request->releaseType == 'future'){
-            $time = str_replace(':', '', $request->time);
-            $news->time = $time;
             $date = convertNumber('en', $request->date);
             $date = convertDateToString($date,'/');
-            $news->date = $date;
+            $news->dateAndTime = $date . ' '. $request->time;
         }
-        else if($request->releaseType == 'release' && $news->release != 'release')
-            $news->date = verta()->now()->format('Y/m/d');
+        else if($request->releaseType == 'released' && $news->release != 'released')
+            $news->dateAndTime = verta()->now()->format('Y/m/d H:i');
+        else if($request->releaseType == 'draft')
+            $news->dateAndTime = verta()->now()->format('Y/m/d H:i');
 
-        if($request->releaseType != 'future')
-            $news->time = strftime('%H:%M');
-
+        $news->text = ' ';
+        $news->confirm = 1;
+        $news->title = $request->title;
         $news->meta = $request->meta;
         $news->keyword = $request->keyword;
         $news->seoTitle = $request->seoTitle;
         $news->slug = makeSlug($request->slug);
+        $news->release = $request->releaseType;
 
         if($request->slug != null)
             $news->slug = makeSlug($request->slug);
         else if($request->keword != null)
             $news->slug = makeSlug($request->keyword);
 
-        $news->confirm = 1;
-        $news->release = $request->releaseType;
         $news->save();
 
         $newsId = $news->id;
