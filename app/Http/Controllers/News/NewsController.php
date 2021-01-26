@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\URL;
 
 class NewsController extends Controller
 {
+    public $newsDir =  __DIR__ .'/../../../../../assets/_images/news';
 
     public function __construct()
     {
@@ -97,14 +98,9 @@ class NewsController extends Controller
 
         if($news->pic !=  null)
             $news->pic = URL::asset("_images/news/{$news->id}/{$news->pic}");
-        if($news->time !=  null) {
-            $time = $news->time[0];
-            $time .= $news->time[1];
-            $time .= ':';
-            $time .= $news->time[2];
-            $time .= $news->time[3];
-            $news->time = $time;
-        }
+
+        if($news->video != null)
+            $news->video = URL::asset("_images/news/{$news->id}/{$news->video}");
 
         $news->category = NewsCategoryRelations::where('newsId', $news->id)->get();
         $mainCategory = NewsCategoryRelations::where('newsId', $news->id)->where('isMain', 1)->first();
@@ -330,9 +326,41 @@ class NewsController extends Controller
                 $news->save();
                 $location .= '/' . $news->pic;
             }
-            compressImage($_FILES['pic']['tmp_name'], $location, 80);
+
+            move_uploaded_file($_FILES['pic']['tmp_name'], $location);
         }
         return response()->json(['status' => 'ok', 'result' => $news->id]);
+    }
+
+    public function storeNewsVideo(Request $request){
+        if(isset($_FILES['video']) && $_FILES['video']['error'] == 0 && isset($request->newsId)){
+            $news = News::find($request->newsId);
+            if($news == null)
+                return response()->json(['status' => 'error2']);
+
+            $newsDir = __DIR__.'/../../../../../assets/_images/news/'.$news->id;
+            if(!is_dir($newsDir))
+                mkdir($newsDir);
+
+            $fileType = explode('.', $_FILES['video']['name']);
+            $videoFileName = time().'_'.rand(100,999).'.'.end($fileType);
+            $checkUpload = move_uploaded_file($_FILES['video']['tmp_name'], $newsDir.'/'.$videoFileName);
+            if($checkUpload){
+                if($news->video != null){
+                    if(is_file($newsDir.'/'.$news->video))
+                        unlink($newsDir.'/'.$news->video);
+                }
+
+                $news->video = $videoFileName;
+                $news->save();
+
+                return response()->json(['status' => 'ok']);
+            }
+            else
+                return response()->json(['status' => 'error3']);
+        }
+        else
+            return response()->json(['status' => 'error1']);
     }
 
     public function deleteNews(Request $request)
@@ -360,6 +388,25 @@ class NewsController extends Controller
         }
         else
             return response()->json(["status" => "nok1"]);
+    }
+
+    public function deleteVideoNews(Request $request)
+    {
+        if(isset($request->newsId)){
+            $news = News::find($request->newsId);
+            if($news == null)
+                return response()->json(['status' => 'error2']);
+
+            if($news->video != null && is_file($this->newsDir.'/'.$news->id.'/'.$news->video))
+                unlink($this->newsDir.'/'.$news->id.'/'.$news->video);
+
+            $news->video = null;
+            $news->save();
+
+            return response()->json(['status' => 'ok']);
+        }
+        else
+            return response()->json(['status' => 'error1']);
     }
 
     public function addToTopNews(Request $request)

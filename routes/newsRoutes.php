@@ -14,9 +14,10 @@ Route::prefix('news')->group(function(){
 
     Route::post('/uploadPic','NewsController@uploadNewsPic')->name('news.uploadDescPic');
     Route::post('/store','NewsController@storeNews')->name('news.store');
-
+    Route::post('/storeVideo','NewsController@storeNewsVideo')->name('news.store.video');
 
     Route::post('/addToTopNews', 'NewsController@addToTopNews')->name('news.addToTopNews');
     Route::post('/removeAllTops', 'NewsController@removeAllTopNews')->name('news.removeAllTopNews');
     Route::delete('/delete', 'NewsController@deleteNews')->name('news.delete');
+    Route::delete('/delete/video', 'NewsController@deleteVideoNews')->name('news.delete.video');
 });

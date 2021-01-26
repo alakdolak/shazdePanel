@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="Add advertisement">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add topNews button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/News/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/News/NewsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/News/newsList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/News/newsList.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/News/newNews.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/News/newNews.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/restaurant.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newContent/restaurant.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/structure.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/newsRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/newsRoutes.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -192,19 +194,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
-      <recent name="C:\xampp\htdocs\shazdePanel\app\models\News" />
-      <recent name="C:\xampp\htdocs\shazdePanel\resources\views\News" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\tmp" />
-      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\shazdePanel\resources\views\Advertisement" />
       <recent name="C:\xampp\htdocs\shazdePanel\resources\views\News\advertisement" />
       <recent name="C:\xampp\htdocs\shazdePanel\app\models\festival" />
       <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
       <recent name="C:\xampp\htdocs\shazdePanel\resources\views\content\safarnameh" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\shazdePanel\app\models" />
+      <recent name="C:\xampp\htdocs\shazdePanel\app\models\News" />
+      <recent name="C:\xampp\htdocs\shazdePanel\resources\views\News" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\tmp" />
+      <recent name="C:\xampp\htdocs\shazdePanel\public\img" />
     </key>
   </component>
   <component name="RunManager">
@@ -610,14 +612,9 @@
       <workItem from="1611472050179" duration="7366000" />
       <workItem from="1611499139096" duration="1775000" />
       <workItem from="1611561830786" duration="13432000" />
-      <workItem from="1611590505016" duration="872000" />
-    </task>
-    <task id="LOCAL-00060" summary="vod comments">
-      <created>1590842629765</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1590842629765</updated>
+      <workItem from="1611590505016" duration="1047000" />
+      <workItem from="1611646810260" duration="104000" />
+      <workItem from="1611651165304" duration="5581000" />
     </task>
     <task id="LOCAL-00061" summary="vod live guests">
       <created>1590849046241</created>
@@ -955,7 +952,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611579205373</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="add topNews button">
+      <created>1611591506519</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1611591506519</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -986,7 +990,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="debug addPlace by user" />
     <MESSAGE value="backup" />
     <MESSAGE value="add fullrate and review count" />
     <MESSAGE value="show video in accept review" />
@@ -1011,18 +1014,19 @@
     <MESSAGE value="add safarnameh and useraddplace notificatoin to home" />
     <MESSAGE value="add news" />
     <MESSAGE value="Add advertisement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add advertisement" />
+    <MESSAGE value="add topNews button" />
+    <option name="LAST_COMMIT_MESSAGE" value="add topNews button" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611567920900">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611567920900" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1611591444228">
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1611591504198">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611591444228" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611591504198" />
     <state x="3059" y="0" key="DiffContextDialog" timestamp="1608552194917">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1053,23 +1057,23 @@
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1606651327963" />
-    <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1611590870004">
+    <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1611658763336">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3191" y="98" width="811" height="630" key="find.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043501855" />
     <state x="456" y="117" width="813" height="755" key="find.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550791544" />
-    <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611590870004" />
-    <state x="3352" y="240" width="945" height="678" key="run.anything.popup" timestamp="1611575809630">
+    <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611658763336" />
+    <state x="3352" y="240" width="945" height="678" key="run.anything.popup" timestamp="1611654776492">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605081690378" />
-    <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611575809630" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1611590791911">
+    <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611654776492" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1611660704199">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043595406" />
     <state x="429" y="92" width="674" height="569" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550948318" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611590791911" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611660704199" />
     <state x="602" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606137128166" />
   </component>
 </project>

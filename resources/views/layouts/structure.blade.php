@@ -54,11 +54,66 @@
             }
         </script>
     @show
+
+        <style>
+            .loaderDiv{
+                flex-direction: column;
+            }
+            .loaderDiv .logo{
+
+            }
+            .loaderDiv .logo img{
+
+            }
+            .loaderDiv .uploadProcessInLoading{
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .loaderDiv .uploadProcessInLoading .procBack{
+                width: 100%;
+                background: white;
+                border-radius: 10px;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                overflow: hidden;
+            }
+            .loaderDiv .uploadProcessInLoading .procBack .procBar{
+                position: absolute;
+                left: 0px;
+                width: 20%;
+                background: var(--koochita-yellow);
+                height: 100%;
+                border-radius: 10px;
+            }
+            .loaderDiv .uploadProcessInLoading .procBack .procText{
+
+            }
+            .loaderDiv .uploadProcessInLoading .text{
+                color: white;
+                margin-top: 13px;
+                font-size: 25px;
+            }
+        </style>
 </head>
 
 <body class="materialdesign">
-    <div class="loaderDiv" id="loader" style="display: none">
-        <img src="{{URL::asset('img/loading.gif')}}" >
+    <div id="loader" class="loaderDiv" style="display: none">
+        <div class="logo">
+            <img src="{{URL::asset('img/loading.gif')}}">
+        </div>
+        <div id="loaderProcessSection" class="uploadProcessInLoading">
+            <div class="procBack">
+                <div id="loaderProcessBar" class="procBar"></div>
+                <div id="loaderProcessNumber" class="procText">10%</div>
+            </div>
+            <div id="loaderProcessText" class="text">در حال بارگزاری ویدیو</div>
+        </div>
     </div>
 
     <div class="allPageDiv">
@@ -157,8 +212,21 @@
 </body>
 
 <script>
-    function openLoading(){
+    function openLoading(_hasProcess = false, _text = ''){
         $('#loader').css('display', 'flex');
+        if(_hasProcess){
+            $('#loaderProcessSection').removeClass('hidden');
+            $('#loaderProcessBar').css('width', '0px');
+            $('#loaderProcessNumber').text('0%');
+            $('#loaderProcessText').text(_text);
+        }
+        else
+            $('#loaderProcessSection').addClass('hidden');
+    }
+
+    function updateLoadingProcess(_percent) {
+        $('#loaderProcessBar').css('width', _percent+'%');
+        $('#loaderProcessNumber').text(_percent+'%');
     }
 
     function closeLoading(){

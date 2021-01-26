@@ -100,7 +100,7 @@
         <div class="sparkline8-list shadow-reset mg-tb-10">
             <div class="sparkline8-hd" style="padding: 5px 10px">
                     <div class="main-sparkline8-hd">
-                        <h5>عکس اصلی</h5>
+                        <h5 id="mainPicHeader">عکس اصلی</h5>
                     </div>
                 </div>
             <div class="sparkline8-graph dashone-comment  dashtwo-messages" style="height: auto">
@@ -137,12 +137,7 @@
 
                         <div class="col-xs-12">
                             <div class="form-group">
-{{--                                <label for="title" style="margin: 0px">عنوان سفرنامه</label>--}}
-                                <input class="form-control titleInputClass"
-                                       type="text"
-                                       name="title"
-                                       id="title" value="{{(isset($news) ? $news->title : '')}}"
-                                        placeholder="عنوان خبر">
+                                <input class="form-control titleInputClass" type="text" name="title" id="title" value="{{(isset($news) ? $news->title : '')}}" placeholder="عنوان خبر">
                             </div>
                         </div>
 
@@ -165,8 +160,47 @@
             </div>
         </div>
 
-        <div class="col-md-12" style="margin-top: 10px;">
 
+        <div class="col-md-12" style="margin-top: 10px;">
+            <div class="sparkline8-list shadow-reset">
+                <div class="sparkline8-hd" style="padding: 5px 10px;">
+                    <div class="main-sparkline8-hd">
+                        <h5>ویدیو</h5>
+                    </div>
+                </div>
+                <div style="height: auto !important;" class="sparkline8-graph dashone-comment  dashtwo-messages">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label for="noVideo">خیر</label>
+                                <input type="radio" id="noVideo" name="videoQuestion" value="0" checked onchange="changeVideoQuestion(this.value)">
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label for="yesVideo">بله</label>
+                                <input type="radio" id="yesVideo" name="videoQuestion" value="1" onchange="changeVideoQuestion(this.value)"}>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">ایا خبر شما، خبر ویدیویی است؟</div>
+                    </div>
+
+                    <div id="uploadVideoSection" class="row" style="display: none">
+                        <div class="col-xs-8">
+                            <video id="previewVideo" src="{{isset($news->video) ? $news->video : '#'}}" controls></video>
+                        </div>
+                        <div class="col-xs-4">
+                            <div>
+                                <label for="videoInput">ویدیو</label>
+                                <input type="file" accept="video/*" id="videoInput" class="form-control" onchange="changeVideoFile(this)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top: 10px;">
             <div class="sparkline8-list shadow-reset">
                 <div class="sparkline8-hd" style="padding: 5px 10px;">
                     <div class="main-sparkline8-hd">
@@ -281,7 +315,6 @@
         var errorInUploadImage = false;
         var selectedCat = [];
         window.limboIds = [];
-        var selectedPlaces = [];
         var searchPlaceAjax = null;
         var allNewsCategoryList = [];
         var selectedNewsCategory = [];
@@ -384,8 +417,17 @@
             var slug = document.getElementById('slug').value;
             var meta = document.getElementById('meta').value;
 
+            var hasVideo = $('input[name="videoQuestion"]:checked').val();
+            if(hasVideo == 1){
+                var hasVideoFile = document.getElementById('videoInput').files[0];
+                if((hasVideoFile == null || hasVideoFile == undefined) && id == 0){
+                    alert('ویدیو خبر را مشخص کنید');
+                    return;
+                }
+            }
+
             if(title.trim().length < 2){
-                alert('عنوان مقاله را مشخص کنید');
+                alert('عنوان خبر را مشخص کنید');
                 return;
             }
 
@@ -419,13 +461,13 @@
 
                 if(_checkSeo) {
                     if (keyword.trim().length < 2)
-                        errInIf += 'کلمه کلیدی مقاله را مشخص کنید';
+                        errInIf += 'کلمه کلیدی خبر را مشخص کنید';
                     if (meta.trim().length < 2)
-                        errInIf += 'متا مقاله را مشخص کنید';
+                        errInIf += 'متا خبر را مشخص کنید';
                     if (seoTitle.trim().length < 2)
-                        errInIf += 'عنوان سئو مقاله را مشخص کنید';
+                        errInIf += 'عنوان سئو خبر را مشخص کنید';
                     if (slug.trim().length < 2)
-                        errInIf += 'نامک مقاله را مشخص کنید';
+                        errInIf += 'نامک خبر را مشخص کنید';
                 }
 
                 if(errInIf != ''){
@@ -448,7 +490,6 @@
             mainDataForm.append('time', time);
             mainDataForm.append('tags', JSON.stringify(tagsName));
             mainDataForm.append('category', JSON.stringify(selectedNewsCategory));
-            mainDataForm.append('places', JSON.stringify(selectedPlaces));
             mainDataForm.append('warningCount', warningCount);
 
             if (id == 0) {
@@ -473,6 +514,7 @@
 
         function ajaxPost(){
             openLoading();
+
             $.ajax({
                 type: 'post',
                 url: '{{route("news.store")}}',
@@ -481,16 +523,26 @@
                 contentType: false,
                 success: function(response){
                     if(response.status == 'ok'){
-                        alert('تغییرات با موفقیت ثبت شد');
                         newsId = response.result;
-                        var location = window.location.href;
-                        if(location.includes('news/new'))
-                            window.location.href = '{{url("news/edit")}}/' + newsId;
+                        var hasVideo = $('input[name="videoQuestion"]:checked').val();
+
+                        if(hasVideo == 1)
+                            uploadVideo(afterSuccessUpload);
                         else
-                            closeLoading();
+                            deleteVideoRequest(afterSuccessUpload);
                     }
                 }
             });
+        }
+
+        function afterSuccessUpload(_result, _response){
+            alert('تغییرات با موفقیت ثبت شد');
+
+            var location = window.location.href;
+            if(location.includes('news/new'))
+                window.location.href = '{{url("news/edit")}}/' + newsId;
+            else
+                closeLoading();
         }
 
         function checkSeo(kind){
@@ -557,25 +609,11 @@
                 $('#goodResult').append(text);
             }
 
-            var cityError = false;
-            if(selectedPlaces.length == 0)
-                cityError = true;
-
-            if(cityError){
-                warningCount++;
-                text = '<div style="color: #dec300;">آیا مطمئن هستید متن شما به شهر یا استان خاصی اختصاص ندارد.</div>';
-                $('#warningResult').append(text);
-            }
-            else{
-                text = '<div style="color: green;">متن شما دارای دسته بندی جغرافیایی می باشد.</div>';
-                $('#goodResult').append(text);
-            }
-
             var inputMainPic = document.getElementById('imgInput');
 
             if(!(inputMainPic.files && inputMainPic.files[0]) && (news == null || news['pic'] == null)){
                 errorCount++;
-                text = '<div style="color: red;">مقاله باید حتما دارای عکس اصلی باشد.</div>';
+                text = '<div style="color: red;">خبر باید حتما دارای عکس اصلی باشد.</div>';
                 $('#errorResult').append(text);
             }
             else{
@@ -629,7 +667,6 @@
             else
                 $('#metaNumber').css('color', 'red');
         }
-
 
         newsCategory.map(item => {
             allNewsCategoryList.push({
@@ -772,5 +809,76 @@
 
             $(element).parent().remove();
         }
+
+        function changeVideoQuestion(_value){
+            if(_value == 1){
+                $('#mainPicHeader').text('عکس شاخص ویدیو');
+                $('#uploadVideoSection').show();
+            }
+            else{
+                $('#mainPicHeader').text('عکس اصلی');
+                $('#uploadVideoSection').hide();
+            }
+        }
+        function changeVideoFile(_input){
+            if(_input.files[0]['type'].includes('video/'))
+                $('#previewVideo').attr('src', URL.createObjectURL(_input.files[0]));
+        }
+
+        function uploadVideo(_callBack){
+            var formData = new FormData();
+            formData.append('video', document.getElementById('videoInput').files[0]);
+            formData.append('newsId', newsId);
+            closeLoading();
+            openLoading(true, 'درحال بارگزاری ویدیو');
+            $.ajax({
+                type: 'POST',
+                url: '{{route("news.store.video")}}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                xhr: function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.upload.onprogress = function (e) {
+                        var percent = '0';
+                        var percentage = '0%';
+
+                        if (e.lengthComputable) {
+                            percent = Math.round((e.loaded / e.total) * 100);
+                            percentage = percent + '%';
+                            updateLoadingProcess(percentage);
+                        }
+                    };
+
+                    return xhr;
+                },
+                success: response => _callBack(1, response),
+                error: err => _callBack(0, err)
+            })
+        }
+
+        function deleteVideoRequest(_callBack){
+            $.ajax({
+                type: 'DELETE',
+                url: '{{route("news.delete.video")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    newsId: newsId
+                },
+                success: response => _callBack(1, response),
+                error: err => _callBack(0, err)
+            })
+        }
+
+
+
+        $(window).ready(() => {
+            @if(isset($news) && $news->video != null)
+                $('input[name="videoQuestion"][value="1"]').prop('checked', true);
+                changeVideoQuestion(1);
+            @else
+                changeVideoQuestion(0);
+            @endif
+        })
     </script>
 @stop
