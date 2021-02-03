@@ -161,7 +161,7 @@
                     <div class="subMenu">
                         <a href="{{route('userAddPlace.list')}}" class="subNavs">مدیریت مکان های افزوده شدها</a>
                         <a href="{{route('comments.list')}}" class="subNavs">مدیریت کامنت ها</a>
-                        <a href="#" class="subNavs">مدیریت پست‌ها</a>
+                        <a href="{{route('reviews.index')}}" class="subNavs">مدیریت پست‌ها</a>
                         <a href="{{route('user.quesAns.index')}}" class="subNavs">مدیریت پرسش و پاسخ ها</a>
                         <a href="{{route('photographer.index')}}" class="subNavs">عکس های عکاسان</a>
                         <a href="#" class="subNavs">سفرنامه ها</a>

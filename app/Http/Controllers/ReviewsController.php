@@ -33,23 +33,34 @@ class ReviewsController extends Controller
 
             $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
 
+            if($item->kindPlaceId != 0 && $item->placeId != 0) {
+                $kindPlace = Place::find($item->kindPlaceId);
+                $item->file = $kindPlace->fileName;
+                $item->place = \DB::table($kindPlace->tableName)->find($item->placeId);
+                $item->kindPlace = $kindPlace->name;
+
+                $item->placeName = $item->place->name;
+
+                $item->fileName = "{$kindPlace->fileName}/{$item->place->file}";
+            }
+            else{
+                $item->placeName = 'آزاد';
+                $item->fileName = 'nonePlaces';
+            }
+
             $item->pics = ReviewPic::where('logId', $item->id)->get();
             $item->countPic = 0;
             $item->countVideo = 0;
             $item->count360 = 0;
 
             foreach ($item->pics as $item2){
-                if($item2->is360 == 1)
-                    $item->count360++;
-                else if($item2->isVideo == 1)
-                    $item->countVideo++;
-                else
-                    $item->countPic++;
+                if($item2->is360 == 1) $item->count360++;
+                else if($item2->isVideo == 1) $item->countVideo++;
+                else $item->countPic++;
+
+                $item2->url = \URL::asset("userPhoto/{$item->fileName}/{$item2->pic}");
             }
-            $kindPlace = Place::find($item->kindPlaceId);
-            $item->file = $kindPlace->fileName;
-            $item->place = \DB::table($kindPlace->tableName)->find($item->placeId);
-            $item->kindPlace = $kindPlace->name;
+
 
             $item->user = User::find($item->visitorId);
             $item->username = $item->user->username;
@@ -155,23 +166,23 @@ class ReviewsController extends Controller
                 $placeId = $review->placeId;
 
                 $location = __DIR__ . '/../../../../assets/userPhoto/';
-
-                $kindPlace = Place::find($kindPlaceId);
-                $location .= $kindPlace->fileName . '/';
-                $place = \DB::table($kindPlace->tableName)->find($placeId);
-                $location .= $place->file .'/';
+                if($kindPlaceId != 0 && $placeId != 0) {
+                    $kindPlace = Place::find($kindPlaceId);
+                    $place = \DB::table($kindPlace->tableName)->find($placeId);
+                    $location .= "{$kindPlace->fileName}/{$place->file}/";
+                }
+                else
+                    $location .= "nonePlaces/";
 
                 foreach ($reviewPics as $item){
-                    $file = $location;
-                    $file .= $item->pic;
-                    if(file_exists($file))
-                        unlink($file);
+                    if(file_exists($location.$item->pic))
+                        unlink($location.$item->pic);
                     $item->delete();
                 }
 
                 ReviewUserAssigned::where('logId', $id)->delete();
 
-                if($review->confirm == 1){
+                if($review->confirm == 1 && $kindPlaceId != 0 && $placeId != 0){
                     $kindPlace = Place::find($review->kindPlaceId);
                     if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '') {
                         \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `reviewCount`= `reviewCount`-1  WHERE `id` = ' . $review->placeId);
@@ -183,8 +194,8 @@ class ReviewsController extends Controller
 
                 $newAlert = new Alert();
                 $newAlert->subject = 'deleteReview';
-                $newAlert->referenceTable = Place::find($review->kindPlaceId)->tableName;
-                $newAlert->referenceId = $review->placeId;
+                $newAlert->referenceTable = 'free';
+                $newAlert->referenceId = 0;
                 $newAlert->userId = $review->visitorId;
                 $newAlert->seen = 0;
                 $newAlert->click = 0;

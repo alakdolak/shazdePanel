@@ -36,151 +36,148 @@
                                                         $userACL = \App\models\ACL::where('userId', auth()->user()->id)->first();
                                                 ?>
 
-                                                @if(isset($userACL) && $userACL->comment == 1)
-                                                    @if(count($photographerNotAgree) > 0)
-                                                        <div class="col-lg-3">
-                                                            <a href="{{route('photographer.index')}}">
-                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                                <div class="income-dashone-pro">
-                                                                    <div class="income-rate-total">
-                                                                        <div class="price-adminpro-rate">
-                                                                            <h3>
-                                                                                {{count($photographerNotAgree)}} عکس تایید نشده عکاسان
-                                                                            </h3>
-                                                                        </div>
+                                                @if(count($photographerNotAgree) > 0)
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('photographer.index')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                            <div class="income-dashone-pro">
+                                                                <div class="income-rate-total">
+                                                                    <div class="price-adminpro-rate">
+                                                                        <h3>
+                                                                            {{count($photographerNotAgree)}} عکس تایید نشده عکاسان
+                                                                        </h3>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            </a>
                                                         </div>
-                                                    @endif
-
-                                                    @if($newCommentCount > 0)
-                                                        <div class="col-lg-3">
-                                                            <a href="{{route('comments.list')}}">
-                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                                <div class="income-dashone-pro">
-                                                                    <div class="income-rate-total">
-                                                                        <div class="price-adminpro-rate">
-                                                                            <h3>
-                                                                                {{$newCommentCount}} کامنت جدید
-                                                                            </h3>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-
-                                                    @if($newReviews > 0)
-                                                        <div class="col-lg-3">
-                                                            <a href="{{route('reviews.index')}}">
-                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                                <div class="income-dashone-pro">
-                                                                    <div class="income-rate-total">
-                                                                        <div class="price-adminpro-rate">
-                                                                            <h3>
-                                                                                {{$newReviews}} نقد جدید
-                                                                            </h3>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-
-                                                    @if($newReports > 0)
-                                                        <div class="col-lg-3">
-                                                            <a href="{{route('user.report.index')}}">
-                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                                <div class="income-dashone-pro">
-                                                                    <div class="income-rate-total">
-                                                                        <div class="price-adminpro-rate">
-                                                                            <h3>
-                                                                                {{$newReports}}گزارش جدید
-                                                                            </h3>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-
-                                                    @if($newQuestions > 0)
-                                                        <div class="col-lg-3">
-                                                            <a href="{{route('user.quesAns.index')}}">
-                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                                    <div class="income-dashone-pro">
-                                                                        <div class="income-rate-total">
-                                                                            <div class="price-adminpro-rate">
-                                                                                <h3>
-                                                                                    {{$newQuestions}}سوال و جواب جدید
-                                                                                </h3>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-
-                                                    @if($newMsg > 0)
-                                                        <div class="col-lg-3">
-                                                            <a href="{{route('user.message.index')}}">
-                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                                    <div class="income-dashone-pro">
-                                                                        <div class="income-rate-total">
-                                                                            <div class="price-adminpro-rate">
-                                                                                <h3>
-                                                                                    {{$newMsg}} پیام کاربر جدید
-                                                                                </h3>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-
-                                                    @if($newSafarnameh > 0)
-                                                        <div class="col-lg-3">
-                                                            <a href="{{route('safarnameh.index')}}">
-                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                                    <div class="income-dashone-pro">
-                                                                        <div class="income-rate-total">
-                                                                            <div class="price-adminpro-rate">
-                                                                                <h3> {{$newMsg}} سفرنامه جدید</h3>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-
-                                                    @if($newAddPlaces > 0)
-                                                        <div class="col-lg-3">
-                                                            <a href="{{route('userAddPlace.list')}}">
-                                                                <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
-                                                                    <div class="income-dashone-pro">
-                                                                        <div class="income-rate-total">
-                                                                            <div class="price-adminpro-rate">
-                                                                                <h3> {{$newAddPlaces}} محل جدید</h3>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-
+                                                        </a>
+                                                    </div>
                                                 @endif
 
-                                                @if(isset($userACL) && $userACL->vod == 1 && $newVideoComments > 0)
+                                                @if($newCommentCount > 0)
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('comments.list')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                            <div class="income-dashone-pro">
+                                                                <div class="income-rate-total">
+                                                                    <div class="price-adminpro-rate">
+                                                                        <h3>
+                                                                            {{$newCommentCount}} کامنت جدید
+                                                                        </h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
 
+                                                @if($newReviews > 0)
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('reviews.index')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                            <div class="income-dashone-pro">
+                                                                <div class="income-rate-total">
+                                                                    <div class="price-adminpro-rate">
+                                                                        <h3>
+                                                                            {{$newReviews}} نقد جدید
+                                                                        </h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+                                                @if($newReports > 0)
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('user.report.index')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                            <div class="income-dashone-pro">
+                                                                <div class="income-rate-total">
+                                                                    <div class="price-adminpro-rate">
+                                                                        <h3>
+                                                                            {{$newReports}}گزارش جدید
+                                                                        </h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+                                                @if($newQuestions > 0)
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('user.quesAns.index')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3>
+                                                                                {{$newQuestions}}سوال و جواب جدید
+                                                                            </h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+                                                @if($newMsg > 0)
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('user.message.index')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3>
+                                                                                {{$newMsg}} پیام کاربر جدید
+                                                                            </h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+                                                @if($newSafarnameh > 0)
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('safarnameh.index')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3> {{$newSafarnameh}} سفرنامه جدید</h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+                                                @if($newAddPlaces > 0)
+                                                    <div class="col-lg-3">
+                                                        <a href="{{route('userAddPlace.list')}}">
+                                                            <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">
+                                                                <div class="income-dashone-pro">
+                                                                    <div class="income-rate-total">
+                                                                        <div class="price-adminpro-rate">
+                                                                            <h3> {{$newAddPlaces}} محل جدید</h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+
+                                                @if(isset($userACL) && $userACL->vod == 1 && $newVideoComments > 0)
                                                     <div class="col-lg-3">
                                                         <a href="{{route('vod.video.comments')}}">
                                                             <div class="income-dashone-total income-monthly shadow-reset nt-mg-b-30">

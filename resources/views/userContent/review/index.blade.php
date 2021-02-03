@@ -42,71 +42,38 @@
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <th>
-                                                                کاربر
-                                                            </th>
-                                                            <th>
-                                                                نام مکان
-                                                            </th>
-                                                            <th>
-                                                                عکس
-                                                            </th>
-                                                            <th>
-                                                                فیلم
-                                                            </th>
-                                                            <th>
-                                                                متن نقد
-                                                            </th>
-                                                            <th>
-                                                                زمان
-                                                            </th>
-                                                            {{--<th>--}}
-                                                                {{--پاسخ به سئوالات--}}
-                                                            {{--</th>--}}
-                                                            <th>
-                                                            </th>
+                                                            <th> کاربر </th>
+                                                            <th> نام مکان </th>
+                                                            <th> عکس </th>
+                                                            <th> فیلم </th>
+                                                            <th> متن نقد </th>
+                                                            <th> زمان </th>
+{{--                                                            <th>پاسخ به سئوالات</th>--}}
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
                                                         @foreach($newReviews as $item)
-                                                            @if($item->place != null)
-                                                                <tr id="row_{{$item->id}}">
+                                                            <tr id="row_{{$item->id}}">
+                                                                <td>{{$item->username}}</td>
+                                                                <td>{{$item->placeName}}</td>
+                                                                <td onclick="showPics({{$item->id}}, 'pic')" style="cursor:pointer;">{{$item->countPic}}</td>
+                                                                <td onclick="showPics({{$item->id}}, 'video')" style="cursor:pointer;">{{$item->countVideo}}</td>
                                                                 <td>
-                                                                    {{$item->username}}
+                                                                    <button class="btn btn-primary" onclick="showText({{$item->id}})">نمایش متن</button>
                                                                 </td>
-                                                                <td>
-                                                                    {{$item->place->name}}
-                                                                </td>
-                                                                <td onclick="showPics({{$item->id}}, 'pic')" style="cursor:pointer;">
-                                                                    {{$item->countPic}}
-                                                                </td>
-                                                                <td onclick="showPics({{$item->id}}, 'video')" style="cursor:pointer;">
-                                                                    {{$item->countVideo}}
-                                                                </td>
-                                                                <td>
-                                                                    <button class="btn btn-primary" onclick="showText({{$item->id}})">
-                                                                        نمایش متن
-                                                                    </button>
-                                                                </td>
-                                                                <td>
-                                                                    {{$item->dateTime}}
-                                                                </td>
+                                                                <td>{{$item->dateTime}}</td>
                                                                 {{--<td>--}}
                                                                     {{--<button class="btn btn-primary" onclick="showAns({{$item->id}})">--}}
                                                                         {{--نمایش پاسخ ها--}}
                                                                     {{--</button>--}}
                                                                 {{--</td>--}}
                                                                 <td>
-                                                                    <button class="btn btn-warning" onclick="confirmReview({{$item->id}})">
-                                                                        تایید نقد
-                                                                    </button>
-                                                                    <button class="btn btn-danger" onclick="deleteReview({{$item->id}})">
-                                                                        حذف نقد
-                                                                    </button>
+                                                                    <button class="btn btn-warning" onclick="confirmReview({{$item->id}})">تایید نقد</button>
+                                                                    <button class="btn btn-danger" onclick="deleteReview({{$item->id}})">حذف نقد</button>
                                                                 </td>
                                                             </tr>
-                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -127,25 +94,16 @@
     <div class="modal" id="textModal">
         <div class="modal-dialog">
             <div class="modal-content">
-
-                <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">متن نقد</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal"></button>
                 </div>
-
-                <!-- Modal body -->
                 <div class="modal-body">
-                    <p id="textP">
-
-                    </p>
+                    <p id="textP"></p>
                 </div>
-
-                <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -153,23 +111,16 @@
     <div class="modal" id="picModal">
         <div class="modal-dialog">
             <div class="modal-content">
-
-                <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 id="picModalHeader" class="modal-title"></h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-
-                <!-- Modal body -->
                 <div class="modal-body">
                     <div id="picDiv" class="row"></div>
                 </div>
-
-                <!-- Modal footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -180,51 +131,34 @@
 
         function showPics(_id, _kind){
             var rev;
-            for(i = 0; i < reviews.length; i++){
-                if(reviews[i]['id'] == _id){
-                    rev = reviews[i];
-                    break;
+            var html = '';
+            var pics;
+
+            reviews.map(item => {
+                if(item.id == _id) rev = item;
+            });
+
+            pics = rev.pics;
+
+            pics.map(item => {
+                console.log(item);
+                if(_kind == 'pic' && item.is360 == 0 && item.isVideo == 0) {
+                    html += `<div id="pic_${item.id}" class="col-md-6" style="text-align: center; margin-bottom: 20px">
+                                <img src="${item.url}" style="width: 100%;">
+                                <button onclick="deletePic(${item.id}, ${rev.id})" class="btn btn-danger"> حذف </button>
+                            </div>`;
                 }
-            }
-
-            var text = '';
-            var pics = rev['pics'];
-
-            var location = picUrl + rev['file'] + '/' + rev['place']['file'] + '/';
-
-            for(i = 0; i < pics.length; i++){
-                if(pics[i] != null) {
-                    if(_kind == 'pic') {
-                        if (pics[i]['is360'] == 0 && pics[i]['isVideo'] == 0) {
-                            var file = location + pics[i]['pic'];
-                            text += '<div id="pic_' + pics[i]['id'] + '" class="col-md-6" style="text-align: center; margin-bottom: 20px">\n' +
-                                '<img src="' + file + '" style="width: 100%;">\n' +
-                                '<button class="btn btn-danger" onclick="deletePic(' + pics[i]['id'] + ', ' + rev['id'] + ')">\n' +
-                                'حذف عکس\n' +
-                                '</button>\n' +
-                                '</div>';
-                        }
-                    }
-                    else if(_kind == 'video'){
-                        if (pics[i]['isVideo'] == 1) {
-                            var file = location + pics[i]['pic'];
-                            text += '<div id="pic_' + pics[i]['id'] + '" class="col-md-12" style="text-align: center; margin-bottom: 20px">\n' +
-                                '<video src="' + file + '" controls style="width: 100%;"></video>\n' +
-                                '<button class="btn btn-danger" onclick="deletePic(' + pics[i]['id'] + ', ' + rev['id'] + ')">\n' +
-                                'حذف ویدیو\n' +
-                                '</button>\n' +
-                                '</div>';
-                        }
-                    }
+                else if(_kind == 'video' && item.isVideo == 1){
+                    html += `<div id="pic_${item.id}" class="col-md-12" style="text-align: center; margin-bottom: 20px">
+                                <video src="${item.url}" controls style="width: 100%;"></video>
+                                <button onclick="deletePic(${item.id}, ${rev.id})" class="btn btn-danger"> حذف </button>
+                            </div>`;
                 }
-            }
+            });
 
-            if(_kind == 'pic')
-                $('#picModalHeader').text('عکس ها');
-            else if(_kind == 'video')
-                $('#picModalHeader').text('ویدیو ها');
+            $('#picModalHeader').text(_kind == 'pic' ? 'عکس ها' : 'ویدیو ها');
 
-            document.getElementById('picDiv').innerHTML = text;
+            document.getElementById('picDiv').innerHTML = html;
 
             $('#picModal').modal('show');
         }
