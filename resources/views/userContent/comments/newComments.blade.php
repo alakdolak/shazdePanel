@@ -39,9 +39,7 @@
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active">
                                     <a class="nav-link active" href="#home">
-                                        <span id="newCommentCount"  class="label label-success">
-                                            {{count($nLogsComment) + count($nPostComment)}}
-                                        </span>
+                                        <span id="newCommentCount"  class="label label-success"> {{count($nLogsComment) + count($nPostComment)}} </span>
                                         کامنت های جدید
                                     </a>
                                 </li>

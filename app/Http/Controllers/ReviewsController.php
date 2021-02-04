@@ -27,48 +27,50 @@ class ReviewsController extends Controller
     public function index()
     {
         $acitvity = Activity::where('name', 'نظر')->first();
-        $newReviews = LogModel::where('activityId', $acitvity->id)->where('confirm', 0)->get();
 
-        foreach ($newReviews as $item){
+        $newReviews = LogModel::where('activityId', $acitvity->id)->where('confirm', 0)->orderBy('created_at', 'asc')->get();
+        $confirmedReviews = LogModel::where('activityId', $acitvity->id)->where('confirm', 1)->orderBy('created_at', 'Desc')->get();
+        foreach([$newReviews, $confirmedReviews] as $reviews){
+            foreach ($reviews as $item){
+                $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
+                if($item->kindPlaceId != 0 && $item->placeId != 0) {
+                    $kindPlace = Place::find($item->kindPlaceId);
+                    $item->file = $kindPlace->fileName;
+                    $item->place = \DB::table($kindPlace->tableName)->find($item->placeId);
+                    $item->kindPlace = $kindPlace->name;
 
-            $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
+                    $item->placeName = $item->place->name;
 
-            if($item->kindPlaceId != 0 && $item->placeId != 0) {
-                $kindPlace = Place::find($item->kindPlaceId);
-                $item->file = $kindPlace->fileName;
-                $item->place = \DB::table($kindPlace->tableName)->find($item->placeId);
-                $item->kindPlace = $kindPlace->name;
+                    $item->fileName = "{$kindPlace->fileName}/{$item->place->file}";
+                }
+                else{
+                    $item->placeName = 'آزاد';
+                    $item->fileName = 'nonePlaces';
+                }
 
-                $item->placeName = $item->place->name;
+                $item->pics = ReviewPic::where('logId', $item->id)->get();
+                $item->countPic = 0;
+                $item->countVideo = 0;
+                $item->count360 = 0;
 
-                $item->fileName = "{$kindPlace->fileName}/{$item->place->file}";
+                foreach ($item->pics as $item2){
+                    if($item2->is360 == 1) $item->count360++;
+                    else if($item2->isVideo == 1) $item->countVideo++;
+                    else $item->countPic++;
+
+                    $item2->url = \URL::asset("userPhoto/{$item->fileName}/{$item2->pic}");
+                }
+
+
+                $item->user = User::find($item->visitorId);
+                $item->username = $item->user->username;
+
+                $item->dateTime = gregorianToJalali($item->date)[0] .'/'. gregorianToJalali($item->date)[1] . '/' . gregorianToJalali($item->date)[2] . '  ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
             }
-            else{
-                $item->placeName = 'آزاد';
-                $item->fileName = 'nonePlaces';
-            }
-
-            $item->pics = ReviewPic::where('logId', $item->id)->get();
-            $item->countPic = 0;
-            $item->countVideo = 0;
-            $item->count360 = 0;
-
-            foreach ($item->pics as $item2){
-                if($item2->is360 == 1) $item->count360++;
-                else if($item2->isVideo == 1) $item->countVideo++;
-                else $item->countPic++;
-
-                $item2->url = \URL::asset("userPhoto/{$item->fileName}/{$item2->pic}");
-            }
-
-
-            $item->user = User::find($item->visitorId);
-            $item->username = $item->user->username;
-
-            $item->dateTime = gregorianToJalali($item->date)[0] .'/'. gregorianToJalali($item->date)[1] . '/' . gregorianToJalali($item->date)[2] . '  ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
         }
 
-        return view('userContent.review.index', compact(['newReviews']));
+
+        return view('userContent.review.index', compact(['newReviews', 'confirmedReviews']));
     }
 
     public function deleteReviewPic(Request $request)
@@ -114,24 +116,9 @@ class ReviewsController extends Controller
         if(isset($request->id)){
             $review = LogModel::find($request->id);
             if($review != null){
-                $review->confirm = 1;
-                $review->seen = 0;
+                $review->confirm = $review->confirm == 1 ? 0 : 1;
+                $review->seen =  0;
                 $review->save();
-
-                event(new ActivityLogEvent($review->visitorId, $review->id,'نقد', $review->kindPlaceId));
-
-                if(QuestionUserAns::where('logId', $review->id)->first() != null)
-                    event(new ActivityLogEvent($review->visitorId, $review->id,'placeQA', $review->kindPlaceId));
-
-                $reviewPics = ReviewPic::where('logId', $review->id)->get();
-                foreach ($reviewPics as $pic) {
-                    if($pic->is360 == 1)
-                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewVideo360', $review->kindPlaceId));
-                    elseif($pic->isVideo == 1)
-                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewVideo', $review->kindPlaceId));
-                    else
-                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewPic', $review->kindPlaceId));
-                }
 
                 $newAlert = new Alert();
                 $newAlert->subject = 'confirmReview';
@@ -145,8 +132,24 @@ class ReviewsController extends Controller
                 $kindPlace = Place::find($review->kindPlaceId);
                 if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != ''){
                     $place = \DB::table($kindPlace->tableName)->find($review->placeId);
-                    \DB::table($kindPlace->tableName)->where('id', $review->placeId)->update(['reviewCount' => $place->reviewCount+1]);
+                    $plus = $review->confirm == 1 ? 1 : -1;
+                    \DB::table($kindPlace->tableName)->where('id', $review->placeId)->update(['reviewCount' => $place->reviewCount + $plus]);
                 }
+
+//                event(new ActivityLogEvent($review->visitorId, $review->id,'نقد', $review->kindPlaceId));
+//
+//                if(QuestionUserAns::where('logId', $review->id)->first() != null)
+//                    event(new ActivityLogEvent($review->visitorId, $review->id,'placeQA', $review->kindPlaceId));
+
+//                $reviewPics = ReviewPic::where('logId', $review->id)->get();
+//                foreach ($reviewPics as $pic) {
+//                    if($pic->is360 == 1)
+//                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewVideo360', $review->kindPlaceId));
+//                    elseif($pic->isVideo == 1)
+//                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewVideo', $review->kindPlaceId));
+//                    else
+//                        event(new ActivityLogEvent($review->visitorId, $pic->id, 'reviewPic', $review->kindPlaceId));
+//                }
 
                 echo 'ok';
             }

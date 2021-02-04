@@ -36,101 +36,61 @@ class CommentController extends Controller {
     {
         $activityId = Activity::where('name', 'پاسخ')->first();
 
-        $nLogsComment = LogModel::where('confirm', 0)->where('activityId', $activityId->id)->orderBy('date', 'DESC')->get();
-        foreach ($nLogsComment as $item){
-            $date = gregorianToJalali($item->date);
-            $item->date = $date[0] . '/' . $date[1] . '/' . $date[2];
-            $u = User::find($item->visitorId);
-            if($u == null) {
-                $item->delete();
-                continue;
-            }
-            else
-                $item->username = $u->username;
+        $nLogsComment = LogModel::where('confirm', 0)->where('activityId', $activityId->id)->orderBy('created_at', 'DESC')->get();
+        $logsComment = LogModel::where('confirm', 1)->where('activityId', $activityId->id)->orderBy('date', 'DESC')->get();
 
-            $kindPlace = Place::find($item->kindPlaceId);
-            $place = DB::table($kindPlace->tableName)->find($item->placeId);
+        foreach ([$nLogsComment, $logsComment] as $comments){
+            foreach ($comments as $item){
+                $date = gregorianToJalali($item->date);
+                $item->date = $date[0] . '/' . $date[1] . '/' . $date[2];
+                $u = User::find($item->visitorId);
+                if($u == null) {
+                    $item->delete();
+                    continue;
+                }
+                else
+                    $item->username = $u->username;
 
-            if($kindPlace == null || $place == null){
-                $item->delete();
-                continue;
-            }
-            else {
-                $item->show = true;
-                $item->kindName = $kindPlace->name;
-                $item->place = $place->name;
-                $item->url = 'https://koochita.com/show-place-details/' . $kindPlace->fileName . '/' . $place->slug;
+                if($item->kindPlaceId != 0 && $item->placeId != 0){
+                    $kindPlace = Place::find($item->kindPlaceId);
+                    $place = DB::table($kindPlace->tableName)->find($item->placeId);
+
+                    $item->show = true;
+                    $item->kindName = $kindPlace->name;
+                    $item->place = $place->name;
+                    $item->url = 'https://koochita.com/show-place-details/' . $kindPlace->fileName . '/' . $place->slug;
+                }
+                else{
+                    $item->show = true;
+                    $item->kindName = 'آزاد';
+                    $item->place = '';
+                    $item->url = '#';
+                }
             }
         }
 
         $nPostComment = SafarnamehComments::where('confirm', 0)->get();
-        foreach ($nPostComment as $item) {
-            $date = explode(' ', $item->created_at)[0];
-            $date = gregorianToJalali($date);
-            $item->date = $date[0] . '/' . $date[1] . '/' . $date[2];
-
-            $u = User::find($item->userId);
-            if($u == null) {
-                $item->delete();
-                continue;
-            }
-            else
-                $item->username = $u->username;
-
-            $post = Safarnameh::find($item->safarnamehId);
-            if($post == null)
-                $item->delete();
-            else
-                $item->post = $post->slug;
-        }
-
-
-        $logsComment = LogModel::where('confirm', 1)->where('activityId', $activityId->id)->orderBy('date', 'DESC')->get();
-        foreach ($logsComment as $item){
-            $date = gregorianToJalali($item->date);
-            $item->date = $date[0] . '/' . $date[1] . '/' . $date[2];
-            $u = User::find($item->visitorId);
-            if($u == null) {
-                $item->delete();
-                continue;
-            }
-            else
-                $item->username = $u->username;
-
-            $kindPlace = Place::find($item->kindPlaceId);
-            $place = DB::table($kindPlace->tableName)->find($item->placeId);
-
-            if($kindPlace == null || $place == null){
-                $item->delete();
-                continue;
-            }
-            else {
-                $item->show = true;
-                $item->kindName = $kindPlace->name;
-                $item->place = $place->name;
-                $item->url = 'https://koochita.com/show-place-details/' . $kindPlace->fileName . '/' . $place->slug;
-            }
-        }
-
         $postComment = SafarnamehComments::where('confirm', 1)->get();
-        foreach ($postComment as $item) {
-            $date = explode(' ', $item->created_at)[0];
-            $date = gregorianToJalali($date);
-            $item->date = $date[0] . '/' . $date[1] . '/' . $date[2];
+        foreach ([$nPostComment, $postComment] as $comments){
+            foreach ($comments as $item) {
+                $date = explode(' ', $item->created_at)[0];
+                $date = gregorianToJalali($date);
+                $item->date = $date[0] . '/' . $date[1] . '/' . $date[2];
 
-            $u = User::find($item->userId);
-            if($u == null) {
-                $item->delete();
-                continue;
+                $u = User::find($item->userId);
+                if($u == null) {
+                    $item->delete();
+                    continue;
+                }
+                else
+                    $item->username = $u->username;
+
+                $post = Safarnameh::find($item->safarnamehId);
+                if($post == null)
+                    $item->delete();
+                else
+                    $item->post = $post->slug;
             }
-            else
-                $item->username = $u->username;
-
-            $post = Safarnameh::find($item->safarnamehId);
-            if($post == null)
-                $item->delete();
-            else
-                $item->post = $post->slug;
         }
 
         return view('userContent.comments.newComments', compact(['nPostComment', 'nLogsComment', 'logsComment', 'postComment']));
