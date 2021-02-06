@@ -78,26 +78,28 @@ class ReviewsController extends Controller
         if(isset($request->id)){
             $pic = ReviewPic::find($request->id);
             if($pic !=  null){
-                $log = LogModel::find($pic->logId);
-                if($log != null){
+                $review = LogModel::find($pic->logId);
+                if($review != null){
                     $location = __DIR__ . '/../../../../assets/userPhoto/';
 
-                    $kindPlace = Place::find($log->kindPlaceId);
-                    $location .= $kindPlace->fileName . '/';
-                    $place = \DB::table($kindPlace->tableName)->find($log->placeId);
-                    $location .= $place->file .'/'. $pic->pic;
+                    if($review->kindPlaceId != 0 && $review->placeId != 0) {
+                        $kindPlace = Place::find($review->kindPlaceId);
+                        $place = \DB::table($kindPlace->tableName)->find($review->placeId);
+                        $fileName = $kindPlace->fileName . '/' . $place->file;
+                    }
+                    else
+                        $fileName = 'nonePlaces';
 
-                    if(file_exists($location))
-                        unlink($location);
+                    $fileName .= '/' . $pic->pic;
+
+                    if(file_exists($location.'/'.$fileName))
+                        unlink($location.'/'.$fileName);
 
                     $newAlert = new Alert();
-                    if($pic->isVideo == 1)
-                        $newAlert->subject = 'deleteReviewVideo';
-                    else
-                        $newAlert->subject = 'deleteReviewPic';
+                    $newAlert->subject = $pic->isVideo == 1 ? 'deleteReviewVideo' : 'deleteReviewPic';
                     $newAlert->referenceTable = 'log';
-                    $newAlert->referenceId = $log->id;
-                    $newAlert->userId = $log->visitorId;
+                    $newAlert->referenceId = $review->id;
+                    $newAlert->userId = $review->visitorId;
                     $newAlert->seen = 0;
                     $newAlert->click = 0;
                     $newAlert->save();
