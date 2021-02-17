@@ -67,9 +67,7 @@
                                 <div class="row">
                                     <div class="col-md-4" style="text-align: left">
                                         <a href="{{url('newContent/' . $cityMode . '/' . $id . '/' . $mode)}}">
-                                            <button class="btn btn-primary">
-                                                جدید
-                                            </button>
+                                            <button class="btn btn-primary">جدید</button>
                                         </a>
                                     </div>
                                     <div class="col-md-4">
@@ -134,13 +132,10 @@
 
                                     <table class="table" data-toggle="table" data-pagination="true" data-search="true">
                                         <thead style="background: black; color: white;">
-                                        <tr>
-                                            <th style="text-align: right">
-                                                عنوان
-                                            </th>
-                                            <th>
-                                            </th>
-                                        </tr>
+                                            <tr>
+                                                <th style="text-align: right">عنوان</th>
+                                                <th></th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($places as $item)

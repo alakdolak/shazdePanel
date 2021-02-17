@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="debug delete pic and video from reviews">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add button to photographer to add to slider">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserContentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/newChangeContent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newChangeContent.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/userContent/photographer/photographer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/userContent/photographer/photographer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/userContent/review/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +188,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/models" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -241,7 +239,7 @@
     <option name="ACTIVE_ACTIONS" value=",Show Includes" />
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\kiavash\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -619,14 +617,7 @@
       <workItem from="1612443654562" duration="2485000" />
       <workItem from="1612596928300" duration="1869000" />
       <workItem from="1612865936455" duration="911000" />
-      <workItem from="1613549602431" duration="1074000" />
-    </task>
-    <task id="LOCAL-00066" summary="submit userAddPlace">
-      <created>1591714345531</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1591714345532</updated>
+      <workItem from="1613549602431" duration="3740000" />
     </task>
     <task id="LOCAL-00067" summary="debug addPlace by user">
       <created>1591714771018</created>
@@ -964,7 +955,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612599472095</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="add button to photographer to add to slider">
+      <created>1613550798496</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1613550798496</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -995,7 +993,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="question section" />
     <MESSAGE value="question section home noti" />
     <MESSAGE value="new side nav ui" />
     <MESSAGE value="messenger" />
@@ -1020,18 +1017,19 @@
     <MESSAGE value="debug review without any places" />
     <MESSAGE value="debug in confirm comments and new reviews. show all reviews" />
     <MESSAGE value="debug delete pic and video from reviews" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug delete pic and video from reviews" />
+    <MESSAGE value="add button to photographer to add to slider" />
+    <option name="LAST_COMMIT_MESSAGE" value="add button to photographer to add to slider" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611567920900">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611567920900" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1612599468995">
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1613551092238">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1612599468995" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613551092238" />
     <state x="3059" y="0" key="DiffContextDialog" timestamp="1608552194917">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1048,19 +1046,20 @@
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3513" y="439" key="NewPhpFileDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611472226453" />
-    <state x="2920" y="6" key="SettingsEditor" timestamp="1604915331998">
-      <screen x="2736" y="0" width="1366" height="728" />
+    <state x="2990" y="179" key="SettingsEditor" timestamp="1613551307976">
+      <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="2920" y="6" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604915331998" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1612599475145">
+    <state x="2990" y="179" key="SettingsEditor/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613551307976" />
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1613554533612">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088288443" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1612599475145" />
-    <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1612445979403">
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613554533612" />
+    <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1613551094356">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
-    <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1612445979403" />
+    <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613551094356" />
     <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1613550469643">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1072,12 +1071,12 @@
     </state>
     <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605081690378" />
     <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611654776492" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1613550436866">
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1613556067329">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043595406" />
     <state x="429" y="92" width="674" height="569" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550948318" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613550436866" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613556067329" />
     <state x="602" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606137128166" />
   </component>
 </project>

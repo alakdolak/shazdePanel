@@ -26,7 +26,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <h3>عکس های تایید نشده</h3>
-                                    <table class="table table-striped  table-bordered" dir="rtl">
+                                    <table class="table table-striped  table-bordered" data-toggle="table" data-pagination="true" data-search="true" dir="rtl">
                                         <thead>
                                             <tr>
                                                 <th>نام کاربری</th>
@@ -77,7 +77,7 @@
 
                                 <div class="row">
                                     <h3>عکس های تایید شده</h3>
-                                    <table class="table table-striped  table-bordered" dir="rtl">
+                                    <table class="table table-striped  table-bordered" data-toggle="table" data-pagination="true" data-search="true" dir="rtl">
                                         <thead>
                                             <tr>
                                                 <th>نام کاربری</th>
