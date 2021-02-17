@@ -38,6 +38,8 @@
                                                 <th>توضیح عکس</th>
                                                 <th>alt عکس</th>
                                                 <th>تاریخ بارگزاری</th>
+                                                <th>نمایش در slider</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -52,14 +54,15 @@
                                                     </td>
                                                     <td>استان {{$photo[$i]->state->name}} شهر {{$photo[$i]->city->name}}</td>
                                                     <td>
-                                                        <a onclick="showPics(0, {{$i}})">
-                                                            مشاهده عکس
-                                                        </a>
+                                                        <a onclick="showPics(0, {{$i}})"> مشاهده عکس </a>
                                                     </td>
                                                     <td>{{$photo[$i]->name}}</td>
                                                     <td style="max-width: 200px;">{{$photo[$i]->description}}</td>
                                                     <td>{{$photo[$i]->alt}}</td>
                                                     <td>{{$photo[$i]->uploadDate}}</td>
+                                                    <td>
+                                                        <input type="checkbox" onclick="showInSliderCheckBox({{$photo[$i]->id}}, this)" {{$photo[$i]->isSitePic == 1 ? 'checked' : ''}}>
+                                                    </td>
                                                     <td>
                                                         <button class="btn btn-success" onclick="submitPic(0, {{$i}})">تایید</button>
                                                         <button class="btn btn-danger" onclick="deletePic(0, {{$i}})">حذف</button>
@@ -86,6 +89,8 @@
                                                 <th>توضیح عکس</th>
                                                 <th>alt عکس</th>
                                                 <th>تاریخ بارگزاری</th>
+                                                <th>نمایش در slider</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -109,7 +114,9 @@
                                                     <td>{{$oldPhoto[$i]->alt}}</td>
                                                     <td>{{$oldPhoto[$i]->uploadDate}}</td>
                                                     <td>
-                                                        {{--<button class="btn btn-success" onclick="submitPic(1, {{$i}})">تایید</button>--}}
+                                                        <input type="checkbox" onclick="showInSliderCheckBox({{$oldPhoto[$i]->id}}, this)" {{$oldPhoto[$i]->isSitePic == 1 ? 'checked' : ''}}>
+                                                    </td>
+                                                    <td>
                                                         <button class="btn btn-danger" onclick="deletePic(1, {{$i}})">حذف</button>
                                                     </td>
                                                 </tr>
@@ -219,6 +226,30 @@
                 p = photos[_index];
             document.getElementById('submitId').value = p['id'];
             $('#submitForm').submit();
+        }
+
+        function showInSliderCheckBox(_id, _element){
+            openLoading();
+
+            $.ajax({
+                type: "POST",
+                url: '{{route("photographer.showInSlider")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    id: _id
+                },
+                complete: closeLoading,
+                success: response =>{
+                    if(response.status !== "ok") {
+                        $(_element).prop('checked', !$(_element).prop('checked'));
+                        alert('خطا در ویرایش');
+                    }
+                },
+                error: err =>{
+                    $(_element).prop('checked', !$(_element).prop('checked'));
+                    alert('خطا در ویرایش')
+                }
+            })
         }
     </script>
 

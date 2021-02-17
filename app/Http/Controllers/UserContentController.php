@@ -88,6 +88,19 @@ class UserContentController extends Controller
         return view('userContent.photographer.photographer', compact(['photo', 'oldPhoto']));
     }
 
+    public function photographerShowInSlider(Request $request){
+        if(isset($request->id)){
+            $pic = PhotographersPic::find($request->id);
+            if($pic == null)
+                return response()->json(["status" => "notFound"]);
+
+            $pic->isSitePic = $pic->isSitePic == 1 ? 0 : 1;
+            $pic->save();
+
+            return response()->json(["status" => "ok"]);
+        }
+    }
+
     public function photographerDelete(Request $request)
     {
         if(isset($request->id)){

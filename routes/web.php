@@ -379,9 +379,8 @@ Route::group(array('middleware' => ['auth']), function () {
     Route::post('doChangePass', ['as' => 'doChangePass', 'uses' => 'HomeController@doChangePass']);
 
     Route::get('/photographer/Index', 'UserContentController@photographerIndex')->name('photographer.index');
-
+    Route::post('/photographer/showInSlider', 'UserContentController@photographerShowInSlider')->name('photographer.showInSlider');
     Route::post('/photographer/submit', 'UserContentController@photographerSubmit')->name('photographer.submit');
-
     Route::post('/photographer/delete', 'UserContentController@photographerDelete')->name('photographer.delete');
 
     Route::get('/reviews/index', 'ReviewsController@index')->name('reviews.index');

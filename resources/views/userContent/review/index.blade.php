@@ -238,7 +238,7 @@
                     break;
                 }
             }
-            $('#textP').text(rev.text);
+            $('#textP').html(rev.text);
             $("#textModal").modal('show');
         }
 
