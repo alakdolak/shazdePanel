@@ -133,12 +133,19 @@ class NewsController extends Controller
     public function uploadNewsPic(Request $request)
     {
         $user = auth()->user();
+        $news = null;
         $data = json_decode($request->data);
         if(isset($data->code)){
             if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
                 $mainFileName = $user->id.'_'.time().'.png';
-                $nLocation = __DIR__ . '/../../../../../assets/_images/news/limbo';
 
+                $nLocation = __DIR__ . '/../../../../../assets/_images/news/limbo';
+                if($data->newsId != 0) {
+                    $news = News::find($data->newsId);
+                    if($news != null) {
+                        $nLocation = __DIR__ . "/../../../../../assets/_images/news/{$news->id}";
+                    }
+                }
                 $size = [[
                     'width' => 900,
                     'height' => null,
@@ -178,18 +185,29 @@ class NewsController extends Controller
                 if($needToConvert)
                     $image = imagepng($img, $destinationLocation, 9);
                 if($image || !$needToConvert){
-                    $limbo = NewsLimboPics::create([
-                                'userId' => $user->id,
-                                'code' => $data->code,
-                                'pic' => $mainFileName,
-                            ]);
+
+                    if($news == null) {
+                        $limbo = NewsLimboPics::create([
+                            'userId' => $user->id,
+                            'code' => $data->code,
+                            'pic' => $mainFileName,
+                        ]);
+
+                        $url = URL::asset('_images/news/limbo/'.$mainFileName);
+                        $limboId =  $limbo->id;
+                    }
+                    else {
+                        $url = URL::asset("_images/news/{$news->id}/{$mainFileName}");
+                        $limboId =  0;
+                    }
 
                     if(is_file($resizeLocation) && $needToConvert)
                         unlink($resizeLocation);
 
                     $response = [ 'uploaded' => true,
-                        'url' => URL::asset('_images/news/limbo/'.$mainFileName),
-                        'limboId' => $limbo->id ];
+                        'url' => $url,
+                        'limboId' => $limboId
+                    ];
                 }
                 else
                     $response = [ 'uploaded' => false, 'error' => [ 'message' => 'error in convert'] ];

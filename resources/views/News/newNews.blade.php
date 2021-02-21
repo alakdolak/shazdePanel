@@ -320,6 +320,18 @@
         var selectedNewsCategory = [];
         var newsCategory = {!! $category !!};
 
+        @if(isset($news))
+            news = {!! json_encode($news) !!};
+            newsId = news.id;
+            news['category'].map(item => selectedCat.push({
+                id: item.categoryId,
+                isMain: item.isMain,
+            }));
+
+            $(window).ready(() => {
+            news['tags'].map(item => chooseTag(item));
+        });
+        @endif
 
         $('.observer-example').persianDatepicker({
             minDate: new Date().getTime(),
@@ -368,7 +380,7 @@
             .then( editor => {
                 window.editor = editor;
                 window.uploaderClass = editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-                    let data = { code: {{$code}} };
+                    let data = { code: {{$code}}, newsId: newsId };
                     data = JSON.stringify(data);
                     return new MyUploadAdapter( loader, '{{route('news.uploadDescPic')}}', '{{csrf_token()}}', data);
                 };
@@ -379,19 +391,6 @@
                 console.warn( 'Build id: wgqoghm20ep6-7otme29let2s' );
                 console.error( error );
             } );
-
-        @if(isset($news))
-            news = {!! json_encode($news) !!};
-            news['category'].map(item => selectedCat.push({
-                id: item.categoryId,
-                isMain: item.isMain,
-            }));
-
-            $(window).ready(() => {
-                news['tags'].map(item => chooseTag(item));
-            });
-
-        @endif
 
         function changeRelease(value){
             document.getElementById('futureDiv').style.display = value == 'future' ? 'block' : 'none';
