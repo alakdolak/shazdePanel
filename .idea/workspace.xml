@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add button to photographer to add to slider">
+    <list default="true" id="0b7ccc7a-3351-4b22-a60a-baed2aaa9a4c" name="Default" comment="add">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/NotUseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/content/newChangeContent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newChangeContent.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/userContent/photographer/photographer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/userContent/photographer/photographer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlaceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/packages/imageUploader/imageUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/packages/imageUploader/imageUploader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/city/add_editCity.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/city/add_editCity.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/city/indexCity.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/city/indexCity.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/content/newContent/majara.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/content/newContent/majara.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/nsideNav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/nsideNav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -617,14 +624,8 @@
       <workItem from="1612443654562" duration="2485000" />
       <workItem from="1612596928300" duration="1869000" />
       <workItem from="1612865936455" duration="911000" />
-      <workItem from="1613549602431" duration="3740000" />
-    </task>
-    <task id="LOCAL-00067" summary="debug addPlace by user">
-      <created>1591714771018</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1591714771018</updated>
+      <workItem from="1613549602431" duration="4516000" />
+      <workItem from="1613890100113" duration="13512000" />
     </task>
     <task id="LOCAL-00068" summary="debug">
       <created>1592811487182</created>
@@ -962,7 +963,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613550798496</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="add pagination to photographer tables">
+      <created>1613556223525</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1613556223525</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -993,7 +1001,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="question section home noti" />
     <MESSAGE value="new side nav ui" />
     <MESSAGE value="messenger" />
     <MESSAGE value="debug safarnameh and Comments" />
@@ -1018,18 +1025,18 @@
     <MESSAGE value="debug in confirm comments and new reviews. show all reviews" />
     <MESSAGE value="debug delete pic and video from reviews" />
     <MESSAGE value="add button to photographer to add to slider" />
-    <option name="LAST_COMMIT_MESSAGE" value="add button to photographer to add to slider" />
+    <MESSAGE value="add pagination to photographer tables" />
+    <option name="LAST_COMMIT_MESSAGE" value="add pagination to photographer tables" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1611567920900">
+    <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613891164454">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
-    <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611567920900" />
-    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1613551092238">
+    <state x="3426" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613891164454" />
+    <state x="3340" y="0" key="CommitChangelistDialog2" timestamp="1613908001911">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
-    <state x="3166" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605089155700" />
-    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613551092238" />
+    <state x="3340" y="0" key="CommitChangelistDialog2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613908001911" />
     <state x="3059" y="0" key="DiffContextDialog" timestamp="1608552194917">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1038,10 +1045,6 @@
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3476" y="275" key="FileChooserDialogImpl/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1608538300612" />
-    <state x="3161" y="163" key="NewPhpClassDialog" timestamp="1605013823908">
-      <screen x="2736" y="0" width="1366" height="728" />
-    </state>
-    <state x="3161" y="163" key="NewPhpClassDialog/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605013823908" />
     <state x="3513" y="439" key="NewPhpFileDialog" timestamp="1611472226453">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
@@ -1049,34 +1052,31 @@
     <state x="2990" y="179" key="SettingsEditor" timestamp="1613551307976">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
-    <state x="2920" y="6" key="SettingsEditor/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1604915331998" />
     <state x="2990" y="179" key="SettingsEditor/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613551307976" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1613554533612">
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2" timestamp="1613556231199">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
-    <state x="3129" y="174" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605088288443" />
-    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613554533612" />
+    <state x="3288" y="249" key="Vcs.Push.Dialog.v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613556231199" />
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1613551094356">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3498" y="431" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613551094356" />
-    <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1613550469643">
+    <state x="3376" y="234" width="935" height="806" key="find.popup" timestamp="1613901544362">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3191" y="98" width="811" height="630" key="find.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043501855" />
     <state x="456" y="117" width="813" height="755" key="find.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550791544" />
-    <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613550469643" />
-    <state x="3352" y="240" width="945" height="678" key="run.anything.popup" timestamp="1611654776492">
+    <state x="3376" y="234" width="935" height="806" key="find.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613901544362" />
+    <state x="3352" y="240" width="945" height="678" key="run.anything.popup" timestamp="1613906033199">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
-    <state x="3174" y="168" width="672" height="474" key="run.anything.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1605081690378" />
-    <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1611654776492" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1613556067329">
+    <state x="3352" y="240" width="945" height="678" key="run.anything.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613906033199" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup" timestamp="1613905065661">
       <screen x="2736" y="0" width="1920" height="1040" />
     </state>
     <state x="3164" y="77" width="672" height="474" key="search.everywhere.popup/0.0.1368.872/2736.0.1366.728@2736.0.1366.728" timestamp="1606043595406" />
     <state x="429" y="92" width="674" height="569" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@0.0.1368.872" timestamp="1606550948318" />
-    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613556067329" />
+    <state x="3338" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1368.872/2736.0.1920.1040@2736.0.1920.1040" timestamp="1613905065661" />
     <state x="602" y="110" width="945" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606137128166" />
   </component>
 </project>

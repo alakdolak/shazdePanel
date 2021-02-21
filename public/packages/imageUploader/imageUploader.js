@@ -19,9 +19,9 @@ function createNewPicSection(_info) {
     let number = dropzoneSettings.length;
     dropzoneSettings.push({});
 
-    let section = $('#' + _info['id']);
-    section.append('<div id="dropzone' + number + '" class="dropzone"></div>');
-    section.append('<div id="uploadedPicUploader' + number + '"></div>');
+    let section = $(`#${_info['id']}`);
+    section.append(`<div id="dropzone${number}" class="dropzone"></div>`);
+    section.append(`<div id="uploadedPicUploader${number}"></div>`);
 
     let Data = JSON.stringify(_info['data']);
 

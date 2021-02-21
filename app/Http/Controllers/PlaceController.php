@@ -608,7 +608,7 @@ class PlaceController extends Controller {
 
         if(isset($request->inputType) && $request->inputType == 'new'){
             $kindPlace = Place::find(6);
-            $location = __DIR__ . "/../../../../assets/_images/$kindPlace->fileName";
+            $location = __DIR__ . "/../../../../assets/_images/{$kindPlace->fileName}";
             $newFileName = rand(1000000, 9999999);
             while (is_dir($location."/".$newFileName))
                 $newFileName = rand(1000000, 9999999);
@@ -616,11 +616,6 @@ class PlaceController extends Controller {
 
             $majara = new Majara();
             $majara->file = $newFileName;
-            $majara->pic_1 = 0;
-            $majara->pic_2 = 0;
-            $majara->pic_3 = 0;
-            $majara->pic_4 = 0;
-            $majara->pic_5 = 0;
         }
         else if(isset($request->id) && $request->inputType == 'edit'){
             $majara = Majara::find($request->id);
@@ -1139,8 +1134,7 @@ class PlaceController extends Controller {
             $citiesOut[$counter++] = ['name' => $state->name, 'nodes' => $tmp];
         }
 
-        return view('content.changeMajara', ['places' => $places, 'cities' => json_encode($citiesOut),
-            'wantedKey' => $wantedKey]);
+        return view('content.changeMajara', ['places' => $places, 'cities' => json_encode($citiesOut), 'wantedKey' => $wantedKey]);
     }
 
     private function changeRestaurantContent($cityId, $wantedKey, $mode) {
@@ -1527,7 +1521,7 @@ class PlaceController extends Controller {
 
     private function storePlaceFeatures($kindPlaceId, $placeId, $features){
         $existFeatures = PlaceFeatureRelation::where(['kindPlaceId' => $kindPlaceId, 'placeId' => $placeId])->get();
-        $has = array();
+        $has = [];
         foreach ($existFeatures as $item) {
             if (in_array($item->featureId, $features))
                 array_push($has, $item->featureId);

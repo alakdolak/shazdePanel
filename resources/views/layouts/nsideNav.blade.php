@@ -142,7 +142,7 @@
                         <span class="text">محتوای کوچیتا</span>
                     </div>
                     <div class="subMenu">
-                        <a href="{{route('city.index')}}" class="subNavs">اطلاعات شهرها</a>
+                        <a href="{{route('city.index')}}" class="subNavs">کشور، استان، شهر، روستا</a>
                         <a href="{{url('topInCity')}}" class="subNavs">پیشنهاد ویژه شهر</a>
                         <a href="{{route('newChangeContent', ['cityId' => 0, 'mode' => 1, 'cityMode' => 'country'])}}" class="subNavs">تغییر محتوای صفحات</a>
                         <a href="{{route('safarnameh.index')}}" class="subNavs">مدیریت سفرنامه ها</a>

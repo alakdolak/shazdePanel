@@ -166,20 +166,38 @@ Route::group(array('middleware' => ['auth', 'adminLevel']), function () {
 
     Route::get('choosePlace/{mode}', ['as' => 'choosePlace', 'uses' => 'PlaceController@choosePlace']);
 
-    Route::get('chooseCity/{mode}', 'CityController@chooseCity')->name('chooseCity');
-    Route::get('city/index', 'CityController@indexCity')->name('city.index');
-    Route::get('city/add', 'CityController@addCity')->name('city.add');
-    Route::get('city/edit/{id}', 'CityController@editCity')->name('city.edit');
-    Route::post('city/store', 'CityController@storeCity')->name('city.store');
-    Route::post('city/chooseMainPic', 'CityController@chooseMainPic')->name('city.chooseMainPic');
-    Route::post('city/storeImage', 'CityController@storeCityImage')->name('city.store.image');
-    Route::post('city/storeAlt', 'CityController@storeCityImageAlt')->name('city.store.alt');
-    Route::post('city/deleteImage', 'CityController@deleteCityImage')->name('city.delete.image');
-    Route::post('city/sizeImage', 'CityController@sizeCityImage')->name('city.size.image');
-    Route::post('city/delete', 'CityController@deleteCity')->name('city.delete');
-
     Route::post('imageUploadTest', 'AjaxController@testUploadPic')->name('image.upload.test');
+
+
+//    city group
+    Route::middleware(['auth'])->group(function () {
+        Route::get('city/index', 'CityController@indexCity')->name('city.index');
+
+        Route::get('city/search', 'CityController@searchForEdit')->name('city.search');
+
+        Route::get('city/add/{type}', 'CityController@addCity')->name('city.add');
+
+        Route::get('city/edit/{id}/{type}', 'CityController@editCity')->name('city.edit');
+
+        Route::post('city/store', 'CityController@storeCity')->name('city.store');
+
+        Route::post('city/store/mainPic', 'CityController@storeMainPicCity')->name('city.store.mainPic');
+
+        Route::post('city/chooseMainPic', 'CityController@chooseMainPic')->name('city.chooseMainPic');
+
+        Route::post('city/storeImage', 'CityController@storeCityImage')->name('city.store.image');
+
+        Route::post('city/storeAlt', 'CityController@storeCityImageAlt')->name('city.store.alt');
+
+        Route::post('city/deleteImage', 'CityController@deleteCityImage')->name('city.delete.image');
+
+        Route::post('city/sizeImage', 'CityController@sizeCityImage')->name('city.size.image');
+
+        Route::post('city/delete', 'CityController@deleteCity')->name('city.delete');
+    });
 });
+
+
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), function () {
 
@@ -199,19 +217,31 @@ Route::group(array('middleware' => ['auth', 'adminLevel', 'seoAccess']), functio
 
 Route::group(array('middleware' => ['auth', 'adminLevel', 'contentAccess']), function () {
 
-    Route::get('changeContent/{city}/{mode}/{cityMode}/{wantedKey?}/{filter?}', ['as' => 'changeContent', 'uses' => 'PlaceController@changeContent']);
+    Route::get('changeContent/{city}/{mode}/{cityMode}/{wantedKey?}/{filter?}', 'PlaceController@changeContent')->name('changeContent');
+
     Route::get('newChangeContent/{cityId}/{mode}/{cityMode}', 'PlaceController@newChangeContent')->name('newChangeContent');
+
     Route::get('editContent/{mode}/{id}', 'PlaceController@editContent')->name('editContent');
+
     Route::get('newContent/{cityMode}/{cityId}/{mode}', 'PlaceController@newContent')->name('newContent');
+
     Route::get('editPlace/{kindPlaceId}/{placeId?}', 'PlaceController@editPlace')->name('editPlace');
 
+
     Route::post('storeAmaken', 'PlaceController@storeAmaken')->name('storeAmaken');
+
     Route::post('storeHotel', 'PlaceController@storeHotel')->name('storeHotel');
+
     Route::post('storeRestaurant', 'PlaceController@storeRestaurant')->name('storeRestaurant');
+
     Route::post('storeMajara', 'PlaceController@storeMajara')->name('storeMajara');
+
     Route::post('storeMahaliFood', 'PlaceController@storeMahaliFood')->name('storeMahaliFood');
+
     Route::post('storeSogatSanaie', 'PlaceController@storeSogatSanaie')->name('storeSogatSanaie');
+
     Route::post('storeBoomgardy', 'PlaceController@storeBoomgardy')->name('storeBoomgardy');
+
     Route::post('deletePlace', 'PlaceController@deletePlace')->name('deletePlace');
 
 
@@ -510,6 +540,13 @@ Route::group(array('middleware' => ['auth']), function(){
     Route::get('searchUser', 'AjaxController@searchUser')->name('search.users');
 
     Route::get('searchTag', 'AjaxController@searchTag')->name('search.tag');
+});
+
+// NotUseController
+Route::group(['middleware' => ['auth']], function(){
+
+    Route::get('chooseCity/{mode}', 'NotUseController@chooseCity')->name('chooseCity');
+
 });
 
 Route::get('gardeshEdit/{id}', 'SafarnamehController@gardeshNameEdit');

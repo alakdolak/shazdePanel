@@ -28,6 +28,38 @@
             overflow: auto;
             margin-top: 20px;
         }
+
+        .suggest{
+            padding: 10px;
+            cursor: pointer;
+        }
+        .suggest:hover{
+            background: #4dc7bc9e;
+            color: white;
+            border-radius: 20px;
+        }
+
+
+        .topTab{
+            display: flex;
+            justify-content: space-around;
+            font-size: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 21px;
+        }
+        .topTab .tab{
+            width: 33%;
+            text-align: center;
+            border-bottom: solid 1px lightgray;
+            padding-bottom: 10px;
+            cursor: pointer;
+        }
+        .topTab .tab.selected{
+            font-weight: bold;
+            border-bottom: solid 3px var(--koochita-light-green);
+            background: #4dc7bc7a;
+            border-radius: 10px 10px 0px 0px;
+        }
     </style>
 @stop
 
@@ -38,32 +70,34 @@
     <div class="col-md-8">
         <div class="sparkline8-list shadow-reset mg-tb-30">
             <div class="sparkline8-hd">
-                <div class="main-sparkline8-hd">
-                    <h1> ویرایش محتوا شهرها</h1>
+                <div class="main-sparkline8-hd" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1> استان، شهر و روستا</h1>
+                    <a id="newButtonCit" href="{{url("city/add/city")}}" class="btn btn-success">
+                        <span class="changeName">شهر</span> جدید
+                    </a>
                 </div>
             </div>
 
             <div class="sparkline8-graph dashone-comment messages-scrollbar dashtwo-messages">
 
-                <center class="row">
+                <div class="topTab">
+                    <div class="tab" onclick="changeKind(this, 'country')">کشور</div>
+                    <div class="tab" onclick="changeKind(this, 'state')">استان</div>
+                    <div class="tab selected" onclick="changeKind(this, 'city')">شهر</div>
+                    <div class="tab" onclick="changeKind(this, 'village')">روستا</div>
+                </div>
 
+                <center class="row">
                     <div class="col-xs-12" id="cityMode">
-                        <label for="placeName">شهر مورد نظر</label>
-                        <input type="text" onkeyup="search(event)" id="placeName">
+                        <label for="placeName">
+                            <span class="changeName">شهر</span>
+                            مورد نظر
+                        </label>
+                        <input type="text" onkeyup="search(this)" id="placeName">
                         <div id="result"></div>
                     </div>
-
-                    {{--<div class="col-xs-12 hidden" id="stateMode">--}}
-                        {{--<label for="placeNameInStateMode">استان مورد نظر</label>--}}
-                        {{--<input type="text" onkeyup="searchInStateMode(event)" id="placeNameInStateMode">--}}
-                        {{--<div id="resultInStateMode"></div>--}}
-                    {{--</div>--}}
-
                     <div class="col-xs-12">
                         <input type="submit" value="تایید" class="btn btn-primary" name="saveChange">
-                    </div>
-                    <div class="col-xs-12">
-                        <input type="submit" value="شهر جدید" class="btn btn-success" name="saveChange" onclick="document.location.href = '{{route("city.add")}}'">
                     </div>
                 </center>
             </div>
@@ -74,223 +108,54 @@
 
     <script>
 
-        var currIdx = 0, suggestions = [];
-        var searchDir = '{{route('searchForCityAndState')}}';
+        var searchInAjax = null;
+        var kindOfPage = 'city';
 
-        function redirect(id, cityMode) {
-            document.location.href = "{{url('/city/edit')}}/" + id;
+        function redirect(id) {
+            document.location.href = `{{url('/city/edit')}}/${id}/${kindOfPage}`;
         }
 
-        function search(e) {
+        function search(_element) {
+            var value = $(_element).val();
+            if(searchInAjax != null)
+                searchInAjax.abort();
 
-            var val = $("#placeName").val();
-            $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
-
-            if (null == val || "" == val || val.length < 2)
-                $("#result").empty();
-            else {
-
-                if (13 == e.keyCode && -1 != currIdx) {
-                    return redirect(suggestions[currIdx].id, suggestions[currIdx].mode);
-                }
-
-                if (13 == e.keyCode && -1 == currIdx && suggestions.length > 0) {
-                    return redirect(suggestions[0].id, suggestions[0].mode);
-                }
-
-                if (40 == e.keyCode) {
-                    if (currIdx + 1 < suggestions.length) {
-                        currIdx++;
-                    }
-                    else {
-                        currIdx = 0;
-                    }
-
-                    if (currIdx >= 0 && currIdx < suggestions.length)
-                        $("#suggest_" + currIdx).css("background-color", "#dcdcdc").css("padding", "10px").css("border-radius", "5px");
-
-                    return;
-                }
-                if (38 == e.keyCode) {
-                    if (currIdx - 1 >= 0) {
-                        currIdx--;
-                    }
-                    else
-                        currIdx = suggestions.length - 1;
-
-                    if (currIdx >= 0 && currIdx < suggestions.length)
-                        $("#suggest_" + currIdx).css("background-color", "#dcdcdc").css("padding", "10px").css("border-radius", "5px");
-                    return;
-                }
-
-                if ("ا" == val[0]) {
-
-                    for (var val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
-
-                    $.ajax({
-                        type: "post",
-                        url: searchDir,
-                        data: {
-                            key: val
-                        },
-                        success: function (response) {
-
-                            var newElement = "";
-
-                            if (response.length == 0) {
-                                newElement = "موردی یافت نشد";
-                                return;
-                            }
-
-                            response = JSON.parse(response);
-
-                            currIdx = -1;
-                            suggestions = response;
-
-                            for (i = 0; i < response.length; i++) {
-
-                                if(response[i].mode == 'city')
-                                    newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ", \"city\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                                // else
-                                //     newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ", \"state\")'>" + " استان " + response[i].name + "</p>";
-                            }
-
-                            $("#result").empty().append(newElement)
-                        }
-                    })
-                }
-                else $.ajax({
-                    type: "post",
-                    url: searchDir,
-                    data: {
-                        key: val
-                    },
-                    success: function (response) {
-
+            if(value.trim().length > 1) {
+                searchInAjax = $.ajax({
+                    type: "GET",
+                    url: `{{route('city.search')}}?kind=${kindOfPage}&value=${value}`,
+                    success: response => {
                         var newElement = "";
-
-                        if (response.length == 0) {
-                            newElement = "موردی یافت نشد";
-                            return;
-                        }
-
-                        response = JSON.parse(response);
-                        currIdx = -1;
-                        suggestions = response;
-
-                        for (i = 0; i < response.length; i++) {
-                            if(response[i].mode == 'city')
-                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ", \"city\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                            // else
-                            //     newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ", \"state\")'>" + " استان " + response[i].name + "</p>";
-                        }
-
-                        $("#result").empty().append(newElement)
+                        response.result.map(item => newElement += `<div class="suggest" onclick='redirect(${item.id})'>${item.text}</div>` );
+                        $("#result").html(newElement);
                     }
-                })
+                });
             }
+            else
+                $("#result").empty()
         }
 
-        function searchInStateMode(e) {
+        function changeKind(_element, _kind){
+            var name = '';
+            _element = $(_element);
 
-            var val = $("#placeNameInStateMode").val();
-            $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
+            kindOfPage = _kind;
+            if(kindOfPage === "country")
+                name = 'کشور';
+            else if(kindOfPage === "state")
+                name = 'استان';
+            else if(kindOfPage === "city")
+                name = 'شهر';
+            else
+                name = 'روستا';
 
-            if (null == val || "" == val || val.length < 2)
-                $("#resultInStateMode").empty();
-            else {
+            _element.parent().find('.selected').removeClass('selected');
+            _element.addClass('selected');
 
-                if (13 == e.keyCode && -1 != currIdx) {
-                    return redirect(suggestions[currIdx].id, "state");
-                }
-
-                if (13 == e.keyCode && -1 == currIdx && suggestions.length > 0) {
-                    return redirect(suggestions[0].id, "state");
-                }
-
-                if (40 == e.keyCode) {
-                    if (currIdx + 1 < suggestions.length) {
-                        currIdx++;
-                    }
-                    else {
-                        currIdx = 0;
-                    }
-
-                    if (currIdx >= 0 && currIdx < suggestions.length)
-                        $("#suggest_" + currIdx).css("background-color", "#dcdcdc").css("padding", "10px").css("border-radius", "5px");
-
-                    return;
-                }
-                if (38 == e.keyCode) {
-                    if (currIdx - 1 >= 0) {
-                        currIdx--;
-                    }
-                    else
-                        currIdx = suggestions.length - 1;
-
-                    if (currIdx >= 0 && currIdx < suggestions.length)
-                        $("#suggest_" + currIdx).css("background-color", "#dcdcdc").css("padding", "10px").css("border-radius", "5px");
-                    return;
-                }
-
-                if ("ا" == val[0]) {
-
-                    for (var val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
-
-                    $.ajax({
-                        type: "post",
-                        url: '{{route('searchForState')}}',
-                        data: {
-                            key: val
-                        },
-                        success: function (response) {
-
-                            var newElement = "";
-
-                            if (response.length == 0) {
-                                newElement = "موردی یافت نشد";
-                                return;
-                            }
-
-                            response = JSON.parse(response);
-                            currIdx = -1;
-                            suggestions = response;
-
-                            for (i = 0; i < response.length; i++)
-                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ", \"state\")'>" + " استان " + response[i].name + "</p>";
-
-                            $("#resultInStateMode").empty().append(newElement)
-                        }
-                    })
-                }
-
-                else $.ajax({
-                    type: "post",
-                    url: '{{route('searchForState')}}',
-                    data: {
-                        key: val
-                    },
-                    success: function (response) {
-
-                        var newElement = "";
-
-                        if (response.length == 0) {
-                            newElement = "موردی یافت نشد";
-                            return;
-                        }
-
-                        response = JSON.parse(response);
-                        currIdx = -1;
-                        suggestions = response;
-
-                        for (i = 0; i < response.length; i++) {
-                            newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='redirect(" + response[i].id + ", \"state\")'>" + " استان " + response[i].name + "</p>";
-                        }
-
-                        $("#resultInStateMode").empty().append(newElement)
-                    }
-                })
-            }
+            $('.changeName').text(name);
+            $('#newButtonCit').attr('href', `{{url("city/add/")}}/${kindOfPage}`);
+            $("#result").empty();
+            $("#placeName").val('');
         }
 
     </script>
